@@ -45,6 +45,13 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 
 ## Latest progress
 
+Submission report checkpoint (2026-10-07): added a prominent public report
+and compact full-project dashboard to [PALOMAR.md](PALOMAR.md), including the
+exact immutable snapshot, compared statement, passing preflight and official
+verification link. The submission API still reports `verifying`; review and
+registration remain pending. Private access credentials and unpublished review
+content are excluded. Source counts were refreshed; no Lean proofs changed.
+
 Palomar submission preparation (2026-10-07): rechecked the live agent protocol,
 confirmed the repository is public with maintainer push access, and passed
 offline structural preflight with zero blockers. Added the official full

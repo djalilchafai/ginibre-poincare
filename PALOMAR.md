@@ -1,4 +1,4 @@
-# Palomar submission preparation
+# Palomar submission and verification
 
 This is the substantive proof repository, licensed under the existing MIT
 [LICENSE](LICENSE). Its mathematical source is
@@ -12,6 +12,44 @@ Requirements were checked against the live
 [metadata standard](https://github.com/mathlib-initiative/formalization.yaml), and
 [mechanical policy](https://github.com/PalomarRegistry/PalomarPolicy/blob/main/CONTRIBUTING.md).
 These requirements can change; recheck them before submitting an immutable snapshot.
+
+## Submission report — 2026-10-07
+
+Palomar accepted submission **`7fh68vzqfjeu`**. Its current API status is
+`verifying`; official mechanical verification is running. Editorial review
+and final registration remain pending.
+
+| Submission field | Recorded value |
+| --- | --- |
+| Public repository | [djalilchafai/ginibre-poincare](https://github.com/djalilchafai/ginibre-poincare) |
+| Immutable submitted commit | [`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`](https://github.com/djalilchafai/ginibre-poincare/tree/fb58b4fd765f19a65c46cb82fb647fb0d94e28ca) |
+| Comparator configuration | `comparator.json` at the repository root |
+| Compared statement | Full symmetric weak-H¹ Theorem 1.1 and exhaustive affine equality classification |
+| Authorization | User-confirmed responsible maintainer of the substantive formalization |
+| Required full mechanical preflight | [Passed](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37679215651), with no errors or warnings; [committed report](palomar-preflight-report.json) |
+| Official verification | [Palomar Actions run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37681934359) — in progress |
+| Ownership proof | Agent tag-and-secret-gist protocol; both temporary artifacts deleted after verification |
+| Registration | Not requested or completed; requires the user's separate decision after reading the review |
+
+This submission compares Theorem 1.1 and its equality classification. The wider
+project coverage is documented in [REPORT.md](REPORT.md) and [STATUS.md](STATUS.md).
+Later documentation commits do not change the immutable submitted snapshot.
+
+The private status-page URL and access token are kept outside the repository.
+They are omitted from this public report, as is any unpublished editorial review.
+
+| Full-project dashboard | Current evidence / next work |
+| --- | --- |
+| Verified scope | Recorded builds and axiom audits cover the asserted paper results on the domains in STATUS.md; the official full preflight passed for the submitted snapshot |
+| Open work | Palomar verification, editorial review and registration; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
+| Latest progress | Submission accepted, ownership proofs removed, public submission report recorded |
+| Lean source counts | 142,364 project lines in 1,315 files; 1,251,826 transitively imported Mathlib lines in 3,794 modules; combined 1,394,190 lines |
+| Next step | Read the verification outcome and editorial review, show the review to the user, then obtain their separate instruction before registration |
+
+Source counts are refreshed with `python3 scripts/count_lean_sources.py`.
+Comments and blank lines are included; imported Mathlib modules are counted
+once in full. No Lean proof changes or new local full build were needed for
+this documentation update.
 
 ## Completed upgrade and local verification
 
@@ -103,15 +141,6 @@ toolchain's actual `lake comparator` with the `nanoda` and `con-ron` independent
 kernels. It fetches no cache and updates no dependency. The Lake default targets
 now include the library, Challenge, and Solution; the all-local audit imports
 each library module and the Solution so private proof bodies remain audited.
-
-Palomar accepted submission `7fh68vzqfjeu` at commit
-`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`, with `comparator.json` and
-the user-confirmed responsible-maintainer declaration. The official full
-mechanical preflight passed; see `palomar-preflight-report.json`. Intake used
-the documented agent tag-and-secret-gist proof, and both temporary artifacts
-were deleted after verification. Official verification and editorial review
-are pending; no final registration has occurred. Private access credentials
-are stored outside the repository.
 
 The Challenge and Solution must remain within the recorded source caps. The
 metadata passes the official v0.4 JSON schema. See [STATUS.md](STATUS.md) for the
