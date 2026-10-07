@@ -1,0 +1,19 @@
+digraph dependencies {
+rankdir=LR;
+graph [bgcolor="transparent", pad="0.3", nodesep="0.3"];
+node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=12, margin="0.18,0.12"];
+edge [color="#64748b", arrowsize=0.7];
+ComplexGaussianHermite [label="Complex Gaussian and Hermite\nanalysis"];
+DeficitsEquality [label="Poincaré deficits and equality"];
+GaussianLSI [label="Gaussian log-Sobolev and\nentropy"];
+GinibreMeasureGeometry [label="Ginibre measure and\nholomorphic geometry"];
+PolynomialRadial [label="Polynomial, radial and\nequilibrium sectors"];
+WeakSobolev [label="Weak Sobolev domains and\ncollision capacity"];
+MatrixLift [label="Matrix lift and eigenvector\noverlaps", fillcolor="#dbeafe", color="#2563eb", penwidth=2];
+ComplexGaussianHermite -> MatrixLift;
+DeficitsEquality -> MatrixLift;
+GaussianLSI -> MatrixLift;
+GinibreMeasureGeometry -> MatrixLift;
+PolynomialRadial -> MatrixLift;
+WeakSobolev -> MatrixLift;
+}

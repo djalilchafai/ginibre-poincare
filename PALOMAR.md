@@ -3,7 +3,7 @@
 This is the substantive proof repository, licensed under the existing MIT
 [LICENSE](LICENSE). Its mathematical source is
 [arXiv:2608.19358v2](https://arxiv.org/abs/2608.19358v2).
-The theorem-numbered inventory is in [FORMALIZATION_REPORT.md](FORMALIZATION_REPORT.md).
+The theorem-numbered inventory is in [REPORT.md](REPORT.md).
 Structured provenance, AI use, review status, classifications, and known scope
 qualifications are in [formalization.yaml](formalization.yaml).
 

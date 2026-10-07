@@ -19,5 +19,5 @@ public import GinibrePoincare.Subprojects.Endgame
 
 The public library is organized into thematic subproject entry points.
 See SUBPROJECTS.md for the exhaustive module inventory and
-FORMALIZATION_REPORT.md for numbered paper coverage and open obligations.
+REPORT.md for numbered paper coverage and open obligations.
 -/

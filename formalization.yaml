@@ -29,7 +29,7 @@ related_formalizations: []
 status:
   scope: >-
     The substantive development is in this repository. The numbered coverage and
-    precise domains are recorded in FORMALIZATION_REPORT.md and STATUS.md.
+    precise domains are recorded in REPORT.md and STATUS.md.
     Theorems 1.9 and 1.10 provide both deficits on the concrete generator domain;
     nonquadratic and matrix-overlap results retain their stated domains.
     Problems 1.11, 1.15, and 1.16 are research questions, not claimed solutions;

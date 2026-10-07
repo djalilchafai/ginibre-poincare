@@ -149,4 +149,4 @@ root audit/compatibility files.
 
 The original analytic main proof, both Hermite deficits and both differential deficits are exported and audited. Generator membership and actual derivative-domain theorems supply the analytic facts; none remains a completion assumption. Corollary 1.5 covers every positive dimension and positive speed. Appendix A.2 includes actual graph-norm comparison and real/complex global versus collision-free core equality.
 
-The user-authorized fresh Git snapshot includes the final proofs, thematic subprojects, reports, pinned dependency manifest and verification logs. Previous Git metadata is preserved at `/tmp/ginibre-git-before-reinit-2026-10-07/repository.git`. No remote publication or additional Mathlib checkout was performed. The final v4.35.0-rc2 build and audits above supersede earlier checkpoints preserved in STATUS.md.
+The user-authorized fresh Git snapshot includes the final proofs, thematic subprojects, reports, pinned dependency manifest and verification logs. No remote publication or additional Mathlib checkout was performed. The final v4.35.0-rc2 build and audits above supersede earlier checkpoints preserved in STATUS.md.

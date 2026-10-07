@@ -10,7 +10,7 @@ inventory. Existing module paths remain available. Every one of the 1,296
 original library modules occurs in exactly one group, plus twelve generated
 facades. The root imports these facades. The proof endpoint entry point is
 [FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean).
-The [full numbered report](FORMALIZATION_REPORT.md) inventories all 27 numbered
+The [full numbered report](REPORT.md) inventories all 27 numbered
 statements: 1.1–1.16, 2.1–2.8 and A.1–A.3.
 
 ## Palomar verification checkpoint
@@ -45,6 +45,17 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 
 ## Latest progress
 
+Documentation checkpoint (2026-10-07): added rendered SVG box-and-arrow dependency
+graphics for all twelve subprojects in [DEPENDENCIES.md](DEPENDENCIES.md), with
+expandable Mermaid sources and reproducible Graphviz sources in `diagrams/`.
+Every cross-group direct import is represented: independent validation matched
+all 76 arrows to the inventory. Generator freshness passes, the paper-assembly
+graphic was visually checked, and Lean source counts are refreshed and unchanged.
+Proof scope, open research questions and prior build/audit evidence below remain
+as recorded. No Lean proofs changed or full build was rerun for this documentation
+change. The next project step remains independent
+statement review or publication when requested.
+
 Agents migrated the existing Lean/Mathlib dependencies together to v4.35.0-rc2 and repaired the changed measure, Lp, polynomial and operator APIs. The full build and both public/private axiom audits pass. Challenge is independent; Solution proves full weak-H¹ Theorem 1.1 and affine equality. Strict Comparator verification and all three kernel checks pass.
 
 Agents completed disjoint modules for the maximal ordinary Schwartz Gaussian derivative domain, compact smooth graph density, full equality space, closed-form solvability, multivariate entire reconstruction and global division. `entire_alternating_vandermonde_factorization` proves the genuine global entire quotient across every collision. `gaussianVolumeClosedForm_canonicalSolvability` adds the unique minimal-norm solution and sharp bound.
@@ -52,6 +63,20 @@ Agents completed disjoint modules for the maximal ordinary Schwartz Gaussian der
 `gaussianHolomorphicDistanceSq_eq_projectionNorm`, `vandermonde_entire_infDist`, `groundStateDistanceIdentityStatement` and `ginibreHalfDistanceStatement` identify the literal entire-representative infima with Hilbert projections, preserving the paper's normalization. `fullMainAnalyticProof` instantiates all five inputs of the original analytic proof with proved concrete facts. `fullTheoremOneTenSchwartz` exports both differential deficits with ordinary first and second distributional derivatives.
 
 ## Build and audit evidence
+
+GitHub upload preparation (2026-10-07): source audit, generated inventory check,
+`git diff --check` and source counts passed. Pending documentation and diagrams
+are being included in the upload snapshot. No GitHub remote is configured;
+repository destination/visibility and GitHub authentication are still required.
+No upload has occurred. The full build and kernel checks below are recorded
+evidence from the verified toolchain checkpoint, not rerun for this upload.
+
+
+Trust-review checkpoint (2026-10-07): reran the local source audit, subproject
+inventory check and source counter; all passed and the counts below are unchanged.
+Reviewed the recorded full-build, all-local axiom audit and Comparator success
+logs. This checkpoint did not rerun the full build or independently review every
+paper-to-Lean statement correspondence; the Comparator covers Theorem 1.1 only.
 
 Fresh `LEAN_NUM_THREADS=1 make check` passed: 5,384 build jobs; 1,296 original modules assigned exactly once to twelve subprojects; all 1,308 library modules publicly imported; only the authorized independent Challenge hole; 5,079 public axiom queries; all-local audit of 11,112 declarations including private helpers. Only `propext`, `Classical.choice` and `Quot.sound` occur in the proof-library/Solution audit closure. Both root compatibility files compile. Actual Comparator passes with empty `definition_names`, so concrete definitions remain recursively compared; con-ron accepts 61,907 exported declarations, and nanoda and Lean’s default kernel also accept.
 
@@ -61,7 +86,7 @@ Fresh `LEAN_NUM_THREADS=1 make check` passed: 5,384 build jobs; 1,296 original m
 - [Actual strict Comparator and three kernel checks](ginibre-upgrade-comparator.log)
 - [Offline Palomar structural preflight](ginibre-upgrade-preflight.log)
 
-Compilation and axiom audits establish source coverage and soundness relative to the permitted axioms. The [numbered report](FORMALIZATION_REPORT.md) separately records statement correspondence and natural domain qualifications.
+Compilation and axiom audits establish source coverage and soundness relative to the permitted axioms. The [numbered report](REPORT.md) separately records statement correspondence and natural domain qualifications.
 
 ## Lean source counts
 

@@ -1,6 +1,6 @@
 # Ginibre Poincaré formalization
 
-The asserted numbered paper results are compiled and audited, including Theorems 1.9 and 1.10, nonquadratic potentials and matrix-lift/eigenvector-overlap inequalities. The ordinary Gaussian derivative domain, canonical dbar solver, global entire Vandermonde factorization and literal representative distance formulas are complete; see [the numbered report](FORMALIZATION_REPORT.md). Open Problems 1.11, 1.15 and 1.16 remain research questions, and numerical experiments are outside theorem certification. The public entry point is [FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean).
+The asserted numbered paper results are compiled and audited, including Theorems 1.9 and 1.10, nonquadratic potentials and matrix-lift/eigenvector-overlap inequalities. The ordinary Gaussian derivative domain, canonical dbar solver, global entire Vandermonde factorization and literal representative distance formulas are complete; see [the numbered report](REPORT.md). Open Problems 1.11, 1.15 and 1.16 remain research questions, and numerical experiments are outside theorem certification. The public entry point is [FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean).
 See [STATUS.md](STATUS.md) for exact domains, the full dashboard and validation.
 
 The library is grouped into 12 thematic [subprojects](SUBPROJECTS.md), including
@@ -8,6 +8,10 @@ complex Gaussian/Hermite analysis, Gaussian LSI, stochastic calculus, stochastic
 dynamics, matrix lifts and nonquadratic potentials. Each has a Lean import entry
 point; the [machine-readable inventory](subprojects.json) assigns every original
 library module to one group. Existing module paths remain available.
+The [dependency diagrams](DEPENDENCIES.md) show each subproject in a box with
+arrows from its direct dependencies; SVG graphics display without Mermaid support,
+and expandable Mermaid sources are included. Regenerate them with the inventory
+using `python3 scripts/group_subprojects.py` (requires Graphviz `dot`).
 
 The development proves both Theorem 1.9 deficits, full weak-domain sharp Poincaré
 and equality classification, radial log-Sobolev, the full symmetric diffusion,
