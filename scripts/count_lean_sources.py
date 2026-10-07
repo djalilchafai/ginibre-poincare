@@ -71,11 +71,12 @@ def lines(paths):
     return sum(len(path.read_text().splitlines()) for path in paths)
 
 
-project = sorted((ROOT / 'GinibrePoincare').rglob('*.lean')) + sorted(ROOT.glob('*.lean'))
+project = (sorted((ROOT / 'GinibrePoincare').rglob('*.lean')) + sorted(ROOT.glob('*.lean'))
+           + sorted((ROOT / 'scripts').rglob('*.lean')))
 used = import_closure(project)
 verified_used = import_closure([ROOT / 'GinibrePoincare.lean'])
 result = {
-    'counting_rule': 'Physical .lean lines, including comments and blank lines. All active project sources including root files and excluded drafts; archives excluded. Used Mathlib is the transitive source-module import closure of those project files, each module counted once in full. Lean and non-Mathlib dependencies excluded. This is module-level usage, not declaration-level proof dependency usage.',
+    'counting_rule': 'Physical .lean lines, including comments and blank lines. All active project sources including root files, generated facades, excluded drafts and Lean tooling under scripts; archives excluded. Used Mathlib is the transitive source-module import closure of those project files, each module counted once in full. Lean and non-Mathlib dependencies excluded. This is module-level usage, not declaration-level proof dependency usage.',
     'project_files': len(project),
     'project_lines': lines(project),
     'used_mathlib_files': len(used),

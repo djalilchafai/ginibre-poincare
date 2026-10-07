@@ -16,7 +16,7 @@ These requirements can change; recheck them before submitting an immutable snaps
 ## Submission report — 2026-10-07
 
 Palomar accepted submission **`7fh68vzqfjeu`**. Its current API status is
-`verifying`; official mechanical verification is running. Editorial review
+`awaiting-review`; official mechanical verification passed. Editorial review
 and final registration remain pending.
 
 | Submission field | Recorded value |
@@ -27,7 +27,7 @@ and final registration remain pending.
 | Compared statement | Full symmetric weak-H¹ Theorem 1.1 and exhaustive affine equality classification |
 | Authorization | User-confirmed responsible maintainer of the substantive formalization |
 | Required full mechanical preflight | [Passed](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37679215651), with no errors or warnings; [committed report](palomar-preflight-report.json) |
-| Official verification | [Palomar Actions run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37681934359) — in progress |
+| Official verification | [Palomar Actions run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37681934359) — passed; [report](palomar-verification-report.json) |
 | Ownership proof | Agent tag-and-secret-gist protocol; both temporary artifacts deleted after verification |
 | Registration | Not requested or completed; requires the user's separate decision after reading the review |
 
@@ -41,10 +41,10 @@ They are omitted from this public report, as is any unpublished editorial review
 | Full-project dashboard | Current evidence / next work |
 | --- | --- |
 | Verified scope | Recorded builds and axiom audits cover the asserted paper results on the domains in STATUS.md; the official full preflight passed for the submitted snapshot |
-| Open work | Palomar verification, editorial review and registration; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
+| Open work | Palomar editorial review and registration; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
 | Latest progress | Submission accepted, ownership proofs removed, public submission report recorded |
-| Lean source counts | 142,364 project lines in 1,315 files; 1,251,826 transitively imported Mathlib lines in 3,794 modules; combined 1,394,190 lines |
-| Next step | Read the verification outcome and editorial review, show the review to the user, then obtain their separate instruction before registration |
+| Lean source counts | 143,778 current project lines in 1,316 files (including Lean graph-export tooling); 1,251,826 transitively imported Mathlib lines in 3,794 modules; combined 1,395,604 lines |
+| Next step | Await editorial review, show it to the user, then obtain their separate instruction before registration |
 
 Source counts are refreshed with `python3 scripts/count_lean_sources.py`.
 Comments and blank lines are included; imported Mathlib modules are counted
@@ -157,5 +157,5 @@ The project is public at https://github.com/djalilchafai/ginibre-poincare.
 GitHub authentication and publication succeeded. The pinned official full
 mechanical preflight is configured in `.github/workflows/palomar-preflight.yml`;
 the full report passed and agent intake accepted submission `7fh68vzqfjeu`.
-Registration remains pending official verification, review and the user's
+Registration remains pending editorial review and the user's
 separate decision after reading that review.

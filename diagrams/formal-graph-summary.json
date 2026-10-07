@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "local_declarations": 11112,
+  "local_theorems": 9645,
+  "compiled_local_modules": 1310,
+  "external_boundary_constants": 8282,
+  "direct_reference_pairs": 928878,
+  "source_modules": 1315,
+  "local_import_edges": 4894,
+  "export_sha256": "e8789e436c066fa9bcb1f4ba0232c6525ec32da93c5de4a97954ebb72d6880d8",
+  "targets": [
+    {
+      "target": "GinibrePoincare.fullTheoremOneNine",
+      "direct_local_dependencies": 23,
+      "direct_external_dependencies": 185
+    },
+    {
+      "target": "GinibrePoincare.fullTheoremOneTenSchwartz",
+      "direct_local_dependencies": 26,
+      "direct_external_dependencies": 187
+    },
+    {
+      "target": "PalomarGinibre.theoremOneOne",
+      "direct_local_dependencies": 35,
+      "direct_external_dependencies": 338
+    }
+  ]
+}

@@ -12,6 +12,9 @@ The [dependency diagrams](DEPENDENCIES.md) show each subproject in a box with
 arrows from its direct dependencies; SVG graphics display without Mermaid support,
 and expandable Mermaid sources are included. Regenerate them with the inventory
 using `python3 scripts/group_subprojects.py` (requires Graphviz `dot`).
+The [formal Lean dependency graph](FORMAL_DEPENDENCIES.md) additionally extracts
+constant references from compiled theorem statements and proof/definition bodies,
+with static SVGs and an [offline interactive explorer](formal-dependencies.html).
 
 The development proves both Theorem 1.9 deficits, full weak-domain sharp Poincaré
 and equality classification, radial log-Sobolev, the full symmetric diffusion,
