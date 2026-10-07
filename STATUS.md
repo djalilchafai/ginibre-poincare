@@ -41,10 +41,20 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 | Projection geometry, Lemma 2.7 / Remark 2.8 | Centered holomorphic/conjugate orthogonality; arbitrary complex L² two-projection bound and actual conjugate closed-subspace projection; arbitrary real centered L² Pythagoras and half-distance; pointwise center and Vandermonde cancellation formulas | Actual entire symmetric L² = Hdiv = closed polynomial space; literal distance infima and paper normalization proved |
 | Supplementary claims / Appendix B | Nonsymmetric counterexample, linear-statistic transfer, nonholomorphic radius, polynomial-sector properness and actual Bochner/commutation formulas | Each result retains its stated domain |
 | Palomar packaging | Module headers, pinned 4.35.0-rc2 dependencies, schema-valid provenance, independent weak-H¹ Theorem 1.1 statement and Solution | Full supported-toolchain build/audits, strict local Comparator and official full preflight pass; GitHub published; Palomar submission accepted, official verification passed, editorial review pending, not registered |
-| Bakry–Émery / Bochner coverage | Concrete pointwise Bochner formulas, Ginibre curvature unbounded below for n ≥ 2, full-generator integrated curvature bound, scalar/radial curvature-to-coercivity and Fisher estimates | No standalone general diffusion theorem deriving Poincaré, LSI and gradient bounds from a pointwise Γ₂ ≥ ρΓ hypothesis is exported |
+| Bakry–Émery / Bochner coverage | Concrete pointwise Bochner formulas, Ginibre curvature unbounded below for n ≥ 2, full-generator integrated curvature bound, scalar/radial curvature-to-coercivity and Fisher estimates | No standalone general diffusion criterion is exported; radial LSI endpoints are proved via Gaussian lift/derived contracting quantile transport, rather than assuming that criterion |
 | Problems 1.11, 1.15, 1.16 / Appendix C | Identified as open research questions / numerical experiments | They are not asserted solved or numerically certified by Lean |
 
 ## Latest progress
+
+Radial LSI proof-route clarification (2026-10-07): the general Bakry–Émery
+criterion is not a missing hypothesis of the proved radial LSI endpoints.
+The quadratic endpoint `radial_core_lsi` uses the proved Gaussian block LSI
+and radial lift. The nonquadratic endpoint `rhoConvex_potential_radial_lsi`
+uses derived Gaussian quantile contraction and product transport. The versioned
+paper, Theorem 1.14 proof and footnote 6, explicitly permits a transport
+alternative to the Bakry–Émery argument. The positive radial curvature bound
+is separately formalized; full-configuration curvature unbounded below does
+not contradict it. No Lean statements or proof dependencies changed.
 
 Repository cleanup and Palomar checkpoint (2026-10-07): removed the unreferenced
 local paper copy `poing.tex` at the user's request; the versioned arXiv reference
