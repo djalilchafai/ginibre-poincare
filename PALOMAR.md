@@ -117,5 +117,8 @@ Git was reinitialized on `main` at the user’s request, with one initial commit
 containing the final source, reports, dependency manifest and verification logs.
 The old Git metadata is preserved at
 `/tmp/ginibre-git-before-reinit-2026-10-07/repository.git`.
-No remote is configured and no push or registry submission was performed.
-Publication still requires a public GitHub snapshot and its full commit SHA.
+The project is public at https://github.com/djalilchafai/ginibre-poincare.
+GitHub authentication and publication succeeded. The pinned official full
+mechanical preflight is configured in `.github/workflows/palomar-preflight.yml`;
+a passing report is required before agent intake. No registry submission has
+yet occurred.

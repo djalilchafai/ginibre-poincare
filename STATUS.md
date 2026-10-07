@@ -45,6 +45,14 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 
 ## Latest progress
 
+Palomar submission preparation (2026-10-07): rechecked the live agent protocol,
+confirmed the repository is public with maintainer push access, and passed
+offline structural preflight with zero blockers. Added the official full
+mechanical GitHub Actions preflight pinned to pipeline commit
+`d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44`, using `palomar-standard-v1`.
+Submission remains pending a passing report and confirmation of the exact
+snapshot and maintainer declaration; no registration is claimed.
+
 Documentation checkpoint (2026-10-07): added rendered SVG box-and-arrow dependency
 graphics for all twelve subprojects in [DEPENDENCIES.md](DEPENDENCIES.md), with
 expandable Mermaid sources and reproducible Graphviz sources in `diagrams/`.
