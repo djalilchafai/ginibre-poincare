@@ -15,7 +15,7 @@ statements: 1.1–1.16, 2.1–2.8 and A.1–A.3.
 
 ## Palomar verification checkpoint
 
-Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The final single-thread full build, source audit, 5,079 public axiom queries, 11,112-declaration all-local audit and both root compatibility checks pass. Actual Comparator passes strict recursive statement comparison and all three kernels: con-ron, nanoda and Lean’s default kernel. The independent Challenge has exactly the user-authorized statement hole; the proof library and Solution remain hole-free and use only the three permitted standard axioms. The comparison covers full symmetric weak-H¹ Theorem 1.1 and exhaustive affine equality, not the whole paper. Offline preflight reports zero blockers and metadata passes the official v0.4 schema. No registry submission has occurred.
+Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The final single-thread full build, source audit, 5,079 public axiom queries, 11,112-declaration all-local audit and both root compatibility checks pass. Actual Comparator passes strict recursive statement comparison and all three kernels: con-ron, nanoda and Lean’s default kernel. The independent Challenge has exactly the user-authorized statement hole; the proof library and Solution remain hole-free and use only the three permitted standard axioms. The comparison covers full symmetric weak-H¹ Theorem 1.1 and exhaustive affine equality, not the whole paper. Offline preflight reports zero blockers and metadata passes the official v0.4 schema. Submission `7fh68vzqfjeu` is accepted; official verification and review are pending, and no registration has occurred.
 
 ## Full-project dashboard
 
@@ -40,7 +40,7 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 | Divisibility, Lemma 2.6 | Arbitrary entire alternating functions factor globally as Vandermonde times an entire symmetric quotient, including all collision hyperplanes | None |
 | Projection geometry, Lemma 2.7 / Remark 2.8 | Centered holomorphic/conjugate orthogonality; arbitrary complex L² two-projection bound and actual conjugate closed-subspace projection; arbitrary real centered L² Pythagoras and half-distance; pointwise center and Vandermonde cancellation formulas | Actual entire symmetric L² = Hdiv = closed polynomial space; literal distance infima and paper normalization proved |
 | Supplementary claims / Appendix B | Nonsymmetric counterexample, linear-statistic transfer, nonholomorphic radius, polynomial-sector properness and actual Bochner/commutation formulas | Each result retains its stated domain |
-| Palomar packaging | Module headers, pinned 4.35.0-rc2 dependencies, schema-valid provenance, independent weak-H¹ Theorem 1.1 statement and Solution | Full supported-toolchain build/audits and strict Comparator verification pass; public snapshot publication remains |
+| Palomar packaging | Module headers, pinned 4.35.0-rc2 dependencies, schema-valid provenance, independent weak-H¹ Theorem 1.1 statement and Solution | Full supported-toolchain build/audits, strict local Comparator and official full preflight pass; GitHub published; Palomar submission accepted, verification/review pending, not registered |
 | Problems 1.11, 1.15, 1.16 / Appendix C | Identified as open research questions / numerical experiments | They are not asserted solved or numerically certified by Lean |
 
 ## Latest progress
@@ -53,9 +53,17 @@ mechanical GitHub Actions preflight pinned to pipeline commit
 The first preflight stopped before compilation: its caller identifier exceeded
 the verifier's twelve-character requirement, and the report finalizer replaced
 that intake error with `palomar.reporting_failed`. The caller identifier is now
-corrected to `ginibre00001`; a new full preflight is required. Submission remains
-pending a passing report and confirmation of the exact snapshot and maintainer
-declaration; no registration is claimed.
+corrected to `ginibre00001`. The corrected full preflight passed at
+https://github.com/djalilchafai/ginibre-poincare/actions/runs/37679215651 for
+`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`; source preparation passed,
+and the official Comparator/provenance verification step passed. The user confirmed that exact snapshot, `comparator.json` and the responsible
+maintainer declaration. Full mechanical preflight passed without errors or warnings;
+see `palomar-preflight-report.json`. Palomar accepted submission `7fh68vzqfjeu`
+for that exact commit and configuration. Both temporary ownership-proof artifacts
+were deleted. Official verification is running at
+https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37681934359.
+Editorial review and final registration remain pending. Private status credentials
+are stored outside the repository and are never included in publication.
 
 Documentation checkpoint (2026-10-07): added rendered SVG box-and-arrow dependency
 graphics for all twelve subprojects in [DEPENDENCIES.md](DEPENDENCIES.md), with
@@ -82,7 +90,7 @@ https://github.com/djalilchafai/ginibre-poincare; its initial MIT license
 commit was merged, preserving both histories and the named copyright holder.
 GitHub browser authentication succeeded and the project was uploaded to
 `origin/main`. The remote retains its initial license commit and the full local
-source history. No Palomar registry submission has occurred. The full build and kernel checks below are recorded
+source history. Palomar submission `7fh68vzqfjeu` is accepted; registration remains pending. The full build and kernel checks below are recorded
 evidence from the verified toolchain checkpoint, not rerun for this upload.
 
 
@@ -120,9 +128,9 @@ audit/compatibility files; its totals therefore differ from the full source coun
 
 ## Open work and next step
 
-No previously listed formalization obligation remains open for the asserted results. Problems 1.11, 1.15 and 1.16 are unsolved research questions in the paper, and Appendix C experiments are outside theorem certification. Alternative proof routes are not each independently exported. The project is published at https://github.com/djalilchafai/ginibre-poincare. The next step is to submit the selected exact commit SHA to Palomar, if requested. No additional analytic completion hypothesis is required.
+No previously listed formalization obligation remains open for the asserted results. Problems 1.11, 1.15 and 1.16 are unsolved research questions in the paper, and Appendix C experiments are outside theorem certification. Alternative proof routes are not each independently exported. The project is published at https://github.com/djalilchafai/ginibre-poincare. The next step is to wait for submission `7fh68vzqfjeu` verification and editorial review, show the review to the user, and obtain their separate instruction before final registration. No additional analytic completion hypothesis is required.
 
-Git was reinitialized on `main` at the user’s request. The previous Git metadata is preserved at `/tmp/ginibre-git-before-reinit-2026-10-07/repository.git`. The fresh initial commit includes the source, dependency manifest, reports and verification evidence. GitHub publication has occurred; no registry submission has occurred. Historical checkpoints below describe earlier states and are superseded by this dashboard.
+Git was reinitialized on `main` at the user’s request. The previous Git metadata is preserved at `/tmp/ginibre-git-before-reinit-2026-10-07/repository.git`. The fresh initial commit includes the source, dependency manifest, reports and verification evidence. GitHub publication and Palomar intake have occurred; no final registration has occurred. Historical checkpoints below describe earlier states and are superseded by this dashboard.
 
 ## Historical checkpoints (superseded)
 

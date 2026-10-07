@@ -104,7 +104,14 @@ kernels. It fetches no cache and updates no dependency. The Lake default targets
 now include the library, Challenge, and Solution; the all-local audit imports
 each library module and the Solution so private proof bodies remain audited.
 
-No Palomar submission or registration has been performed by this preparation.
+Palomar accepted submission `7fh68vzqfjeu` at commit
+`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`, with `comparator.json` and
+the user-confirmed responsible-maintainer declaration. The official full
+mechanical preflight passed; see `palomar-preflight-report.json`. Intake used
+the documented agent tag-and-secret-gist proof, and both temporary artifacts
+were deleted after verification. Official verification and editorial review
+are pending; no final registration has occurred. Private access credentials
+are stored outside the repository.
 
 The Challenge and Solution must remain within the recorded source caps. The
 metadata passes the official v0.4 JSON schema. See [STATUS.md](STATUS.md) for the
@@ -120,5 +127,6 @@ The old Git metadata is preserved at
 The project is public at https://github.com/djalilchafai/ginibre-poincare.
 GitHub authentication and publication succeeded. The pinned official full
 mechanical preflight is configured in `.github/workflows/palomar-preflight.yml`;
-a passing report is required before agent intake. No registry submission has
-yet occurred.
+the full report passed and agent intake accepted submission `7fh68vzqfjeu`.
+Registration remains pending official verification, review and the user's
+separate decision after reading that review.
