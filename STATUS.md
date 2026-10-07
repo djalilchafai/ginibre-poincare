@@ -50,8 +50,12 @@ confirmed the repository is public with maintainer push access, and passed
 offline structural preflight with zero blockers. Added the official full
 mechanical GitHub Actions preflight pinned to pipeline commit
 `d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44`, using `palomar-standard-v1`.
-Submission remains pending a passing report and confirmation of the exact
-snapshot and maintainer declaration; no registration is claimed.
+The first preflight stopped before compilation: its caller identifier exceeded
+the verifier's twelve-character requirement, and the report finalizer replaced
+that intake error with `palomar.reporting_failed`. The caller identifier is now
+corrected to `ginibre00001`; a new full preflight is required. Submission remains
+pending a passing report and confirmation of the exact snapshot and maintainer
+declaration; no registration is claimed.
 
 Documentation checkpoint (2026-10-07): added rendered SVG box-and-arrow dependency
 graphics for all twelve subprojects in [DEPENDENCIES.md](DEPENDENCIES.md), with
