@@ -1,0 +1,17 @@
+.lake/
+*.olean
+*.ilean
+
+# Development logs remain local; retain current verification evidence.
+*.log
+!ginibre-status-refresh-check.log
+!ginibre-status-refresh-compatibility.log
+!ginibre-status-refresh-drafts.log
+__pycache__/
+
+# Evidence for the final supported-toolchain snapshot.
+!ginibre-upgrade-verified-check.log
+!ginibre-upgrade-comparator.log
+!ginibre-upgrade-preflight.log
+!ginibre-upgrade-compatibility.log
+!ginibre-upgrade-drafts.log

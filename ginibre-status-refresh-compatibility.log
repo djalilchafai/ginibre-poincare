@@ -1,0 +1,26 @@
+GinibrePoincare.concrete_theoremOneNine {n : ℕ} (hn : 0 < n) (f : GinibrePoincare.Configuration n → ℝ)
+  (hf : GinibrePoincare.IsTheoremOneNineCore f) :
+  have h :=
+    (↑(GinibrePoincare.ginibreHolomorphicAmbientClosedSpan n hn)).starProjection
+      (GinibrePoincare.centeredObservableL2 hn f hf);
+  have r := GinibrePoincare.centeredObservableL2 hn f hf - h - star h;
+  GinibrePoincare.smoothGinibreEnergy n f - 2 * GinibrePoincare.smoothGinibreVariance n f =
+      2 * ‖r‖ ^ 2 + 4 * GinibrePoincare.modeTail (GinibrePoincare.concretePositiveHermiteModeMass hn f hf) ∧
+    GinibrePoincare.ginibreGeneratorNormSq n f - 2 * GinibrePoincare.smoothGinibreEnergy n f =
+      GinibrePoincare.shiftedGinibreGeneratorNormSq n (GinibrePoincare.centeredObservable n f) + 4 * ‖r‖ ^ 2 +
+        8 * GinibrePoincare.modeTail (GinibrePoincare.concretePositiveHermiteModeMass hn f hf)
+GinibrePoincare.concrete_weightedModeEnergy {n : ℕ} (hn : 0 < n) (f : GinibrePoincare.Configuration n → ℝ)
+  (hf : GinibrePoincare.IsTheoremOneNineCore f) :
+  HasSum (fun k => ↑(k + 1) * GinibrePoincare.concretePositiveHermiteModeMass hn f hf k)
+    (GinibrePoincare.smoothGinibreEnergy n f / 4)
+GinibrePoincare.transformedCenteredObservable_finiteMode_formCore {n : ℕ} (hn : 0 < n)
+  (f : GinibrePoincare.Configuration n → ℝ) (hf : GinibrePoincare.IsTheoremOneNineCore f) :
+  Filter.Tendsto
+      (fun N =>
+        GinibrePoincare.gaussianHermiteModePartialSum hn N (GinibrePoincare.transformedCenteredObservableL2 hn f hf))
+      Filter.atTop (nhds (GinibrePoincare.transformedCenteredObservableL2 hn f hf)) ∧
+    Filter.Tendsto
+      (fun N =>
+        ∑' (k : ℕ), ↑(k + 1) * GinibrePoincare.concretePositiveHermiteModeMass hn f hf k -
+          ∑ k ∈ Finset.range N, ↑(k + 1) * GinibrePoincare.concretePositiveHermiteModeMass hn f hf k)
+      Filter.atTop (nhds 0)

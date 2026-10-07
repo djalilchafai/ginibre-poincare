@@ -1,0 +1,1888 @@
+Scanned 1315 Lean files; 0 blocker(s). Offline structure only; no Lean build, Comparator, or remote verification performed.
+Comparator sandbox: canonicalize symlink mount paths; hide canonical home; restore existing dependency store read-only.
+Resolving dependencies
+Building Challenge
+⚠ [3180/3181] Built Challenge (1.3s)
+warning: Challenge.lean:156:8: declaration uses `sorry`
+Build completed successfully (3181 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, PalomarGinibre.theoremOneOne, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenge
+Building Solution
+⚠ [1408/1942] Replayed GinibrePoincare.Analysis.ComplexHermite
+warning: GinibrePoincare/Analysis/ComplexHermite.lean:4:0: 'Mathlib.Data.Complex.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Complex.Basic
+⚠ [2327/2567] Replayed GinibrePoincare.Concrete.Weights
+warning: GinibrePoincare/Concrete/Weights.lean:6:0: 'Mathlib.Data.NNReal.Defs' has been deprecated: please replace this import by
+
+import Mathlib.Basic.NNReal.Defs
+⚠ [3190/3689] Replayed GinibrePoincare.Concrete.MeasureModel
+warning: GinibrePoincare/Concrete/MeasureModel.lean:8:0: 'Mathlib.Data.ENNReal.Real' has been deprecated: please replace this import by
+
+import Mathlib.Basic.ENNReal.Real
+⚠ [3197/3689] Replayed GinibrePoincare.Analysis.HermiteWirtinger
+warning: GinibrePoincare/Analysis/HermiteWirtinger.lean:345:17: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+⚠ [3198/3689] Replayed GinibrePoincare.Analysis.GaussianPolynomialIntegrability
+warning: GinibrePoincare/Analysis/GaussianPolynomialIntegrability.lean:29:4: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianPolynomialIntegrability.lean:54:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianPolynomialIntegrability.lean:63:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianPolynomialIntegrability.lean:81:8: This simp argument is unused:
+  norm_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [norm_pow, pow_add]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3201/3689] Replayed GinibrePoincare.Analysis.HermiteOrthogonalityCombinatorics
+warning: GinibrePoincare/Analysis/HermiteOrthogonalityCombinatorics.lean:120:27: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/HermiteOrthogonalityCombinatorics.lean:122:53: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/HermiteOrthogonalityCombinatorics.lean:123:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/HermiteOrthogonalityCombinatorics.lean:125:51: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+⚠ [3202/3689] Replayed GinibrePoincare.Analysis.HermiteBinomialIdentity
+warning: GinibrePoincare/Analysis/HermiteBinomialIdentity.lean:213:17: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/HermiteBinomialIdentity.lean:247:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/HermiteBinomialIdentity.lean:297:17: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/HermiteBinomialIdentity.lean:375:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+⚠ [3203/3689] Replayed GinibrePoincare.Analysis.AngularMoments
+warning: GinibrePoincare/Analysis/AngularMoments.lean:38:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+⚠ [3207/3689] Replayed GinibrePoincare.Analysis.FinitePiDensity
+warning: GinibrePoincare/Analysis/FinitePiDensity.lean:101:13: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/FinitePiDensity.lean:108:12: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+⚠ [3210/3689] Replayed GinibrePoincare.Analysis.PolarGaussianMoments
+warning: GinibrePoincare/Analysis/PolarGaussianMoments.lean:111:15: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/PolarGaussianMoments.lean:138:15: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+ℹ [3213/3689] Replayed GinibrePoincare.Analysis.HermiteEnergy
+info: GinibrePoincare/Analysis/HermiteEnergy.lean:400:6: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+⚠ [3217/3689] Replayed GinibrePoincare.Analysis.PolynomialCompactApproximation
+warning: GinibrePoincare/Analysis/PolynomialCompactApproximation.lean:47:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: GinibrePoincare/Analysis/PolynomialCompactApproximation.lean:86:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3220/3689] Replayed GinibrePoincare.Analysis.GaussianPolynomialCompleteness
+warning: GinibrePoincare/Analysis/GaussianPolynomialCompleteness.lean:24:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianPolynomialCompleteness.lean:109:30: This simp argument is unused:
+  zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero, Complex.mul_im]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianPolynomialCompleteness.lean:118:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianPolynomialCompleteness.lean:219:8: This simp argument is unused:
+  norm_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Real.norm_eq_abs]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: GinibrePoincare/Analysis/GaussianPolynomialCompleteness.lean:245:4: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: GinibrePoincare/Analysis/GaussianPolynomialCompleteness.lean:329:17: This simp argument is unused:
+  norm_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [F', B, Real.norm_eq_abs]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianPolynomialCompleteness.lean:381:20: This simp argument is unused:
+  norm_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [F', B, A, Real.norm_eq_abs, pow_succ]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianPolynomialCompleteness.lean:400:10: This simp argument is unused:
+  gaussianL2FourierMomentLine
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [F', A, pow_succ, mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3221/3689] Replayed GinibrePoincare.Analysis.GaussianHermiteMoments
+info: GinibrePoincare/Analysis/GaussianHermiteMoments.lean:83:60: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: GinibrePoincare/Analysis/GaussianHermiteMoments.lean:83:60: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: GinibrePoincare/Analysis/GaussianHermiteMoments.lean:254:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianHermiteMoments.lean:349:41: This simp argument is unused:
+  norm_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gaussianL2FourierSeriesTerm, Real.norm_eq_abs, abs_pow, Nat.cast_ofNat]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianHermiteMoments.lean:350:8: This simp argument is unused:
+  abs_pow
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gaussianL2FourierSeriesTerm, norm_mul, Real.norm_eq_abs, Nat.cast_ofNat]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianHermiteMoments.lean:350:17: This simp argument is unused:
+  Nat.cast_ofNat
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gaussianL2FourierSeriesTerm, norm_mul, Real.norm_eq_abs, abs_pow]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3222/3689] Replayed GinibrePoincare.Analysis.GaussianFourierCoordinates
+warning: GinibrePoincare/Analysis/GaussianFourierCoordinates.lean:21:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3228/3689] Replayed GinibrePoincare.Analysis.GaussianFourierUniqueness
+warning: GinibrePoincare/Analysis/GaussianFourierUniqueness.lean:114:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianFourierUniqueness.lean:137:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianFourierUniqueness.lean:161:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianFourierUniqueness.lean:185:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianFourierUniqueness.lean:216:4: Unused tactic linter: `push_cast` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: GinibrePoincare/Analysis/GaussianFourierUniqueness.lean:247:31: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: GinibrePoincare/Analysis/GaussianFourierUniqueness.lean:279:70: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: GinibrePoincare/Analysis/GaussianFourierUniqueness.lean:345:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianFourierUniqueness.lean:347:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianFourierUniqueness.lean:357:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianFourierUniqueness.lean:359:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3230/3689] Replayed GinibrePoincare.Analysis.CollisionNull
+warning: GinibrePoincare/Analysis/CollisionNull.lean:22:2: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [Set.diagonal]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: GinibrePoincare/Analysis/CollisionNull.lean:68:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3232/3689] Replayed GinibrePoincare.Concrete.GroundState
+warning: GinibrePoincare/Concrete/GroundState.lean:4:0: 'Mathlib.Data.ENNReal.Real' has been deprecated: please replace this import by
+
+import Mathlib.Basic.ENNReal.Real
+⚠ [3248/3689] Replayed GinibrePoincare.Analysis.HolomorphicVandermondeL2Closure
+warning: GinibrePoincare/Analysis/HolomorphicVandermondeL2Closure.lean:74:8: This simp argument is unused:
+  Function.comp_def
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/HolomorphicVandermondeL2Closure.lean:90:2: Unused tactic linter: `change (gaussianPermutationL2 σ (hermiteL2Family n hn (p, q))) z = _` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: GinibrePoincare/Analysis/HolomorphicVandermondeL2Closure.lean:154:10: This simp argument is unused:
+  Function.comp_def
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [permute]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3249/3689] Replayed GinibrePoincare.Analysis.HermiteParsevalModes
+warning: GinibrePoincare/Analysis/HermiteParsevalModes.lean:47:53: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+
+Hint: Replace the deprecated name:
+  S̵e̵t̵.̵m̵e̵m̵_̵s̵e̵t̵O̵f̵_̵e̵q̵S̲e̲t̲.̲m̲e̲m̲_̲o̲f̲P̲r̲e̲d̲_̲e̲q̲
+warning: GinibrePoincare/Analysis/HermiteParsevalModes.lean:280:55: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/HermiteParsevalModes.lean:342:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/HermiteParsevalModes.lean:346:37: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp only [hmap]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [3257/3689] Replayed GinibrePoincare.Analysis.L2RepresentativeBridges
+warning: GinibrePoincare/Analysis/L2RepresentativeBridges.lean:31:4: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/L2RepresentativeBridges.lean:29:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/L2RepresentativeBridges.lean:48:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/L2RepresentativeBridges.lean:54:4: Try this: intro z hz hzero
+
+Note: This linter can be disabled with `set_option linter.tacticAnalysis.introMerge false`
+warning: GinibrePoincare/Analysis/L2RepresentativeBridges.lean:100:6: This simp argument is unused:
+  Complex.ofReal_inj
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [RCLike.inner_apply, Complex.conj_ofReal, ← Complex.ofReal_mul, pow_two]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/L2RepresentativeBridges.lean:107:27: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3258/3689] Replayed GinibrePoincare.Analysis.RealGaussianIntegrationByParts
+warning: GinibrePoincare/Analysis/RealGaussianIntegrationByParts.lean:157:33: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [realCoordinateDensity, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3259/3689] Replayed GinibrePoincare.Analysis.ComplexGaussianIntegrationByParts
+warning: GinibrePoincare/Analysis/ComplexGaussianIntegrationByParts.lean:483:37: This simp argument is unused:
+  μ
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Function.comp_apply, e, MeasurableEquiv.piFinTwo_symm_apply, Complex.measurableEquivPi_symm_apply,
+    Matrix.cons_val_zero, Matrix.cons_val_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/ComplexGaussianIntegrationByParts.lean:486:4: This simp argument is unused:
+  Matrix.cons_val_zero
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Function.comp_apply, e, μ, MeasurableEquiv.piFinTwo_symm_apply,
+    Complex.measurableEquivPi_symm_apply, Matrix.cons_val_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/ComplexGaussianIntegrationByParts.lean:486:26: This simp argument is unused:
+  Matrix.cons_val_one
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Function.comp_apply, e, μ, MeasurableEquiv.piFinTwo_symm_apply,
+    Complex.measurableEquivPi_symm_apply, Matrix.cons_val_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/ComplexGaussianIntegrationByParts.lean:568:61: This simp argument is unused:
+  zero_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Complex.add_re, Complex.ofReal_re, Complex.mul_re, Complex.ofReal_im, Complex.I_re, Complex.I_im,
+    mul_zero, mul_one, sub_zero, add_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/ComplexGaussianIntegrationByParts.lean:749:29: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3260/3689] Replayed GinibrePoincare.Analysis.GinibreIntegrationByParts
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:328:4: Unused tactic linter: `change
+  ContDiff ℝ ∞ (fun z : Configuration n => ∑ i ∈ Finset.univ, ((z i).re * (z i).re + (z i).im * (z i).im))` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:419:16: `ContinuousLinearMap.sub_apply` has been deprecated: Use `sub_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sub_apply` to `sub_apply x`).
+
+Hint: Replace the deprecated name:
+  C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵u̵b̵_̵a̵p̵p̵l̵y̵s̲u̲b̲_̲a̲p̲p̲l̲y̲
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:423:33: This simp argument is unused:
+  hjk
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [coordinateDirection, hji, hik, eq_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:499:8: `dif_neg` has been deprecated: Use `dite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵n̵e̵g̵d̲i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:512:8: `dif_pos` has been deprecated: Use `dite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵p̵o̵s̵d̲i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:533:8: `dif_pos` has been deprecated: Use `dite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵p̵o̵s̵d̲i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:535:8: `dif_neg` has been deprecated: Use `dite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵n̵e̵g̵d̲i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:541:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:541:22: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:619:8: This simp argument is unused:
+  RCLike.inner_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Complex.mul_re]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:759:36: This simp argument is unused:
+  Complex.ext_iff
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [coordinateDirection, realCoordinateDirection, imaginaryCoordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:803:4: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:801:50: This simp argument is unused:
+  true_and
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Finset.mem_erase, Finset.mem_univ, Finset.mem_union, Finset.mem_Iio, Finset.mem_Ioi]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:982:4: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [Complex.mul_re]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:1272:12: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  integral_finset_̵s̵S̲um
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:1292:12: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  integral_finset_̵s̵S̲um
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:1376:10: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+
+Hint: Replace the deprecated name:
+  S̵e̵t̵.̵m̵e̵m̵_̵s̵e̵t̵O̵f̵_̵e̵q̵S̲e̲t̲.̲m̲e̲m̲_̲o̲f̲P̲r̲e̲d̲_̲e̲q̲
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:1393:32: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  integral_finset_̵s̵S̲um
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:1420:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:1428:8: `continuous_finset_sum` has been deprecated: Use `continuous_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  continuous_finset_̵s̵S̲um
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:1457:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreIntegrationByParts.lean:1466:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3261/3689] Replayed GinibrePoincare.Analysis.GinibreGeneratorL2
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:70:19: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:72:23: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:76:19: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:78:23: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:83:14: `continuous_finset_sum` has been deprecated: Use `continuous_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  continuous_finset_̵s̵S̲um
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:86:13: `continuous_finset_sum` has been deprecated: Use `continuous_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  continuous_finset_̵s̵S̲um
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:72:23: This simp argument is unused:
+  if_neg
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [hi]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:78:23: This simp argument is unused:
+  if_neg
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [hi]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:132:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:170:6: This simp argument is unused:
+  Complex.ofReal_inj
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [RCLike.inner_apply, Complex.conj_ofReal, ← Complex.ofReal_mul, pow_two]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:176:12: This simp argument is unused:
+  RCLike.inner_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [← Complex.ofReal_mul, ← Complex.ofReal_pow]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:176:32: This simp argument is unused:
+  ← Complex.ofReal_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [RCLike.inner_apply, ← Complex.ofReal_pow]
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:175:27: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:184:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:192:46: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:192:56: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:226:6: This simp argument is unused:
+  Complex.ofReal_inj
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [RCLike.inner_apply, Complex.conj_ofReal, ← Complex.ofReal_mul, pow_two]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:232:12: This simp argument is unused:
+  RCLike.inner_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [← Complex.ofReal_mul, ← Complex.ofReal_pow, Complex.normSq_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:232:32: This simp argument is unused:
+  ← Complex.ofReal_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [RCLike.inner_apply, ← Complex.ofReal_pow, Complex.normSq_apply]
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:233:8: This simp argument is unused:
+  Complex.normSq_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [RCLike.inner_apply, ← Complex.ofReal_mul, ← Complex.ofReal_pow]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:231:27: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:256:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreGeneratorL2.lean:255:2: Unused tactic linter: `congr 1` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3285/3689] Replayed GinibrePoincare.Analysis.GlobalPhaseAction
+warning: GinibrePoincare/Analysis/GlobalPhaseAction.lean:87:6: This simp argument is unused:
+  Fin.sum_univ_two
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [complexMultiplicationMatrix, Matrix.mulVec, Complex.mul_re, Complex.mul_im]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GlobalPhaseAction.lean:87:56: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: GinibrePoincare/Analysis/GlobalPhaseAction.lean:283:2: Unused tactic linter: `change
+  (gaussianGlobalPhaseL2 hn u hu (ComplexHermite.hermiteL2Family n hn (p, 0))) z = _` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: GinibrePoincare/Analysis/GlobalPhaseAction.lean:548:4: This simp argument is unused:
+  Finset.prod_mul_distrib
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [map_sum, MvPolynomial.eval_monomial, globalPhase_apply, mul_pow]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GlobalPhaseAction.lean:594:4: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [h] at hu
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: GinibrePoincare/Analysis/GlobalPhaseAction.lean:924:13: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3286/3689] Replayed GinibrePoincare.Analysis.GinibreConjugationGeometry
+warning: GinibrePoincare/Analysis/GinibreConjugationGeometry.lean:383:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreConjugationGeometry.lean:438:4: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreConjugationGeometry.lean:444:4: Unused tactic linter: `change (groundStateNormalization n : ℂ) * k = a` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: GinibrePoincare/Analysis/GinibreConjugationGeometry.lean:1044:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreConjugationGeometry.lean:1056:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreConjugationGeometry.lean:1216:4: Unused tactic linter: `change inner ℂ ((star x) z) ((star y) z) = _` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3288/3689] Replayed GinibrePoincare.Analysis.GaussianDbarParseval
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:48:31: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:94:8: `MeasureTheory.integrable_finset_sum` has been deprecated: Use `MeasureTheory.integrable_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  integrable_finset_̵s̵S̲um
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:92:4: This simp argument is unused:
+  Finset.sum_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [map_mul, map_sum, map_pow, MvPolynomial.eval_C]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:168:8: This simp argument is unused:
+  RCLike.conj_ofReal
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:239:4: This simp argument is unused:
+  MvPolynomial.eval_C
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [P, MvPolynomial.eval_mul, MvPolynomial.eval_X]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:407:8: `Finset.prod_eq_mul_prod_diff_singleton` has been deprecated: Use `Finset.prod_eq_mul_prod_sdiff_singleton` instead
+
+Hint: Replace the deprecated name:
+  Finset.prod_eq_mul_prod_s̲diff_singleton
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:410:12: `Finset.prod_eq_mul_prod_diff_singleton` has been deprecated: Use `Finset.prod_eq_mul_prod_sdiff_singleton` instead
+
+Hint: Replace the deprecated name:
+  Finset.prod_eq_mul_prod_s̲diff_singleton
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:411:18: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:421:17: `Finset.prod_eq_mul_prod_diff_singleton` has been deprecated: Use `Finset.prod_eq_mul_prod_sdiff_singleton` instead
+
+Hint: Replace the deprecated name:
+  Finset.prod_eq_mul_prod_s̲diff_singleton
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:427:16: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:419:10: This simp argument is unused:
+  f
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hij]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:435:8: This simp argument is unused:
+  f
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hij]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:494:12: `Finset.prod_eq_mul_prod_diff_singleton` has been deprecated: Use `Finset.prod_eq_mul_prod_sdiff_singleton` instead
+
+Hint: Replace the deprecated name:
+  Finset.prod_eq_mul_prod_s̲diff_singleton
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:529:15: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:547:15: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:518:15: This simp argument is unused:
+  Complex.sq_norm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hij]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:539:24: This simp argument is unused:
+  MvPolynomial.eval_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [P, MvPolynomial.eval_X, Matrix.cons_val_zero, Matrix.cons_val_one, map_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:601:17: Variable name `hs` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hs
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:688:10: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:688:24: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:688:38: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:693:10: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:699:14: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:699:25: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:702:12: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:730:10: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:730:24: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:730:38: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:735:10: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:741:14: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:741:25: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:744:12: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:775:4: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [gaussianHermiteCoefficient, map_smul, map_add, Pi.add_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:775:19: This simp argument is unused:
+  Pi.add_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [gaussianHermiteCoefficient, map_smul, map_add, Pi.smul_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:859:4: This simp argument is unused:
+  Finset.sum_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [map_mul, map_sum, map_pow, MvPolynomial.eval_C, Z, W, MvPolynomial.eval_X, Matrix.cons_val_zero,
+    Matrix.cons_val_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:898:6: `MvPolynomial.monomial_mul` has been deprecated: Use `MvPolynomial.monomial_mul_monomial` instead
+
+Hint: Replace the deprecated name:
+  MvPolynomial.monomial_mul_̲m̲o̲n̲o̲m̲i̲a̲l̲
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:917:8: This simp argument is unused:
+  MvPolynomial.coeff_sum
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [eq_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:1228:6: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  integral_finset_̵s̵S̲um
+warning: GinibrePoincare/Analysis/GaussianDbarParseval.lean:1221:51: Variable name `hn` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hn
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [3289/3689] Replayed GinibrePoincare.Analysis.HermiteWeightedEnergy
+warning: GinibrePoincare/Analysis/HermiteWeightedEnergy.lean:72:51: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/HermiteWeightedEnergy.lean:88:51: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+⚠ [3293/3689] Replayed GinibrePoincare.Endgame.FiniteTheoremOneNine
+warning: GinibrePoincare/Endgame/FiniteTheoremOneNine.lean:46:8: `continuous_finset_sum` has been deprecated: Use `continuous_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  continuous_finset_̵s̵S̲um
+warning: GinibrePoincare/Endgame/FiniteTheoremOneNine.lean:96:6: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+
+Hint: Replace the deprecated name:
+  integral_finset_̵s̵S̲um
+⚠ [3294/3689] Replayed GinibrePoincare.Endgame.ConcreteTheoremOneNine
+warning: GinibrePoincare/Endgame/ConcreteTheoremOneNine.lean:41:37: Variable name `hn` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hn
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: GinibrePoincare/Endgame/ConcreteTheoremOneNine.lean:75:13: This simp argument is unused:
+  Pi.add_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Pi.smul_apply, smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Endgame/ConcreteTheoremOneNine.lean:75:27: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Pi.add_apply, smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3306/3689] Replayed GinibrePoincare.Analysis.KostlanProductLaw
+warning: GinibrePoincare/Analysis/KostlanProductLaw.lean:42:80: `if_true` has been deprecated: Use `ite_true` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵t̵r̵u̵e̵i̲t̲e̲_̲t̲r̲u̲e̲
+⚠ [3312/3689] Replayed GinibrePoincare.Analysis.HomogeneousRadialMeasure
+warning: GinibrePoincare/Analysis/HomogeneousRadialMeasure.lean:99:8: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/HomogeneousRadialMeasure.lean:109:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/HomogeneousRadialMeasure.lean:151:30: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/HomogeneousRadialMeasure.lean:167:33: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/HomogeneousRadialMeasure.lean:179:10: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/HomogeneousRadialMeasure.lean:179:21: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+ℹ [3315/3689] Replayed GinibrePoincare.Analysis.KostlanGammaLaw
+info: GinibrePoincare/Analysis/KostlanGammaLaw.lean:90:4: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+⚠ [3323/3689] Replayed GinibrePoincare.Analysis.RadialSobolevClosure
+warning: GinibrePoincare/Analysis/RadialSobolevClosure.lean:33:19: `if_true` has been deprecated: Use `ite_true` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵t̵r̵u̵e̵i̲t̲e̲_̲t̲r̲u̲e̲
+warning: GinibrePoincare/Analysis/RadialSobolevClosure.lean:35:19: `if_false` has been deprecated: Use `ite_false` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
+⚠ [3386/3689] Replayed GinibrePoincare.Analysis.GinibreWeakGradient
+warning: GinibrePoincare/Analysis/GinibreWeakGradient.lean:169:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreWeakGradient.lean:221:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3387/3689] Replayed GinibrePoincare.Analysis.GinibrePermutationGradient
+warning: GinibrePoincare/Analysis/GinibrePermutationGradient.lean:54:19: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: GinibrePoincare/Analysis/GinibrePermutationGradient.lean:57:19: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GinibrePermutationGradient.lean:58:15: `if_false` has been deprecated: Use `ite_false` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
+warning: GinibrePoincare/Analysis/GinibrePermutationGradient.lean:41:48: This simp argument is unused:
+  LinearEquiv.piCongrLeft
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [P, ContinuousLinearEquiv.piCongrLeft, Equiv.piCongrLeft_apply, permute]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibrePermutationGradient.lean:50:13: This simp argument is unused:
+  Function.comp_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [ContinuousLinearMap.comp_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibrePermutationGradient.lean:57:19: This simp argument is unused:
+  if_neg
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [hk, ginibreCoordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3388/3689] Replayed GinibrePoincare.Analysis.GinibrePermutationAverage
+warning: GinibrePoincare/Analysis/GinibrePermutationAverage.lean:22:40: This simp argument is unused:
+  permute
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [ginibrePermutationAverage]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibrePermutationAverage.lean:98:4: This simp argument is unused:
+  WithLp.toLp
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [ginibreEuclideanGradient, PiLp.smul_apply, smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3390/3689] Replayed GinibrePoincare.Analysis.GinibreDistributionalClosure
+warning: GinibrePoincare/Analysis/GinibreDistributionalClosure.lean:148:52: `dif_pos` has been deprecated: Use `dite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵p̵o̵s̵d̲i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+⚠ [3392/3689] Replayed GinibrePoincare.Analysis.GinibreWeakPermutation
+warning: GinibrePoincare/Analysis/GinibreWeakPermutation.lean:47:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreWeakPermutation.lean:254:13: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+
+Hint: Replace the deprecated name:
+  C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵s̲m̲u̲l̲_̲a̲p̲p̲l̲y̲
+warning: GinibrePoincare/Analysis/GinibreWeakPermutation.lean:254:45: `ContinuousLinearMap.sum_apply` has been deprecated: Use `sum_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sum_apply` to `sum_apply x`).
+
+Hint: Replace the deprecated name:
+  C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵u̵m̵_̵a̵p̵p̵l̵y̵s̲u̲m̲_̲a̲p̲p̲l̲y̲
+warning: GinibrePoincare/Analysis/GinibreWeakPermutation.lean:268:13: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+
+Hint: Replace the deprecated name:
+  C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵s̲m̲u̲l̲_̲a̲p̲p̲l̲y̲
+warning: GinibrePoincare/Analysis/GinibreWeakPermutation.lean:268:45: `ContinuousLinearMap.sum_apply` has been deprecated: Use `sum_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sum_apply` to `sum_apply x`).
+
+Hint: Replace the deprecated name:
+  C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵u̵m̵_̵a̵p̵p̵l̵y̵s̲u̲m̲_̲a̲p̲p̲l̲y̲
+⚠ [3404/3689] Replayed GinibrePoincare.Analysis.LebesgueL2Mollification
+warning: GinibrePoincare/Analysis/LebesgueL2Mollification.lean:71:0: automatically included section variable(s) unused in theorem `GinibrePoincare.norm_lebesgueL2BumpAverage_le`:
+  [CompleteSpace V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3406/3689] Replayed GinibrePoincare.Analysis.LebesgueL2MollificationMaps
+warning: GinibrePoincare/Analysis/LebesgueL2MollificationMaps.lean:22:0: automatically included section variable(s) unused in theorem `GinibrePoincare.lebesgueL2Translate_map`:
+  [CompleteSpace V]
+  [CompleteSpace W]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace V] [CompleteSpace W] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3414/3689] Replayed GinibrePoincare.Analysis.ComplexSquaredGradient
+warning: GinibrePoincare/Analysis/ComplexSquaredGradient.lean:38:13: `ContinuousLinearMap.add_apply` has been deprecated: Use `add_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.add_apply` to `add_apply x`).
+
+Hint: Replace the deprecated name:
+  C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵a̵d̵d̵_̵a̵p̵p̵l̵y̵a̲d̲d̲_̲a̲p̲p̲l̲y̲
+warning: GinibrePoincare/Analysis/ComplexSquaredGradient.lean:38:44: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+
+Hint: Replace the deprecated name:
+  C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵s̲m̲u̲l̲_̲a̲p̲p̲l̲y̲
+⚠ [3417/3689] Replayed GinibrePoincare.Analysis.GinibreDirectionalCoordinates
+warning: GinibrePoincare/Analysis/GinibreDirectionalCoordinates.lean:26:8: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3419/3689] Replayed GinibrePoincare.Analysis.GinibrePhaseCoordinates
+warning: GinibrePoincare/Analysis/GinibrePhaseCoordinates.lean:34:37: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [coordinatePhaseCLM, hne]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibrePhaseCoordinates.lean:39:37: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [coordinatePhaseCLM, hne]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3420/3689] Replayed GinibrePoincare.Analysis.GinibreWeakGradientPhase
+warning: GinibrePoincare/Analysis/GinibreWeakGradientPhase.lean:66:6: Unused tactic linter: `change u (e z) * fderiv ℝ η (e z) (e v) = u z * fderiv ℝ θ z v` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3421/3689] Replayed GinibrePoincare.Analysis.GinibreGradientPhaseNorm
+warning: GinibrePoincare/Analysis/GinibreGradientPhaseNorm.lean:28:85: This simp argument is unused:
+  mul_ite
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [ginibreGradientPhasePullback, Fintype.sum_prod_type, Fin.sum_univ_two, ginibreDirectionCoefficient,
+    coordinatePhase, ginibreCoordinateDirection, realCoordinateDirection, coordinateDirection, Finset.sum_add_distrib,
+    apply_ite, ite_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreGradientPhaseNorm.lean:37:90: This simp argument is unused:
+  mul_ite
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [ginibreGradientPhasePullback, Fintype.sum_prod_type, Fin.sum_univ_two, ginibreDirectionCoefficient,
+    coordinatePhase, ginibreCoordinateDirection, imaginaryCoordinateDirection, coordinateDirection,
+    Finset.sum_add_distrib, apply_ite, ite_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3422/3689] Replayed GinibrePoincare.Analysis.GinibrePhaseSeparation
+warning: GinibrePoincare/Analysis/GinibrePhaseSeparation.lean:32:49: This simp argument is unused:
+  norm_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [a, norm_inv, hb, hc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3432/3689] Replayed GinibrePoincare.Analysis.GinibreCollisionCutoff
+warning: GinibrePoincare/Analysis/GinibreCollisionCutoff.lean:44:2: Unused tactic linter: `change ginibreCollisionCutoff n m (permute σ z) = ginibreCollisionCutoff n m z` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: GinibrePoincare/Analysis/GinibreCollisionCutoff.lean:149:10: This simp argument is unused:
+  hz
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3434/3689] Replayed GinibrePoincare.Analysis.GinibreCollisionCutoffEnergy
+warning: GinibrePoincare/Analysis/GinibreCollisionCutoffEnergy.lean:212:10: This simp argument is unused:
+  φ
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hz]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreCollisionCutoffEnergy.lean:225:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreCollisionCutoffEnergy.lean:269:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3438/3689] Replayed GinibrePoincare.Analysis.GinibreValueTruncationChainLimits
+warning: GinibrePoincare/Analysis/GinibreValueTruncationChainLimits.lean:98:6: Unused tactic linter: `change q j z = _` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3439/3689] Replayed GinibrePoincare.Analysis.RadialMollifierKernels
+warning: GinibrePoincare/Analysis/RadialMollifierKernels.lean:97:13: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+
+Hint: Replace the deprecated name:
+  S̵e̵t̵.̵m̵e̵m̵_̵s̵e̵t̵O̵f̵_̵e̵q̵S̲e̲t̲.̲m̲e̲m̲_̲o̲f̲P̲r̲e̲d̲_̲e̲q̲
+⚠ [3440/3689] Replayed GinibrePoincare.Analysis.RadialL2MollifierAverage
+warning: GinibrePoincare/Analysis/RadialL2MollifierAverage.lean:26:0: automatically included section variable(s) unused in theorem `GinibrePoincare.integrable_radialL2MollifierIntegrand`:
+  [CompleteSpace V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3447/3689] Replayed GinibrePoincare.Analysis.MagnitudeNullSets
+warning: GinibrePoincare/Analysis/MagnitudeNullSets.lean:58:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3450/3689] Replayed GinibrePoincare.Analysis.BlockMagnitudeLift
+warning: GinibrePoincare/Analysis/BlockMagnitudeLift.lean:48:37: `ContinuousLinearMap.lipschitz` has been deprecated: Use `ContinuousLinearMap.lipschitzWith` instead
+⚠ [3552/3689] Replayed GinibrePoincare.Analysis.BernoulliCubeExpectations
+info: GinibrePoincare/Analysis/BernoulliCubeExpectations.lean:69:20: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: GinibrePoincare/Analysis/BernoulliCubeExpectations.lean:74:20: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: GinibrePoincare/Analysis/BernoulliCubeExpectations.lean:69:16: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: GinibrePoincare/Analysis/BernoulliCubeExpectations.lean:74:16: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3553/3689] Replayed GinibrePoincare.Analysis.BernoulliBinomialBridge
+warning: GinibrePoincare/Analysis/BernoulliBinomialBridge.lean:35:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+info: GinibrePoincare/Analysis/BernoulliBinomialBridge.lean:57:4: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: GinibrePoincare/Analysis/BernoulliBinomialBridge.lean:76:17: This simp argument is unused:
+  smul_eq_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Finset.sum_mul, Finset.mul_sum, Finset.sum_add_distrib, sub_eq_add_neg]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/BernoulliBinomialBridge.lean:76:30: This simp argument is unused:
+  Finset.sum_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [smul_eq_mul, Finset.mul_sum, Finset.sum_add_distrib, sub_eq_add_neg]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/BernoulliBinomialBridge.lean:76:46: This simp argument is unused:
+  Finset.mul_sum
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [smul_eq_mul, Finset.sum_mul, Finset.sum_add_distrib, sub_eq_add_neg]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/BernoulliBinomialBridge.lean:76:62: This simp argument is unused:
+  Finset.sum_add_distrib
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [smul_eq_mul, Finset.sum_mul, Finset.mul_sum, sub_eq_add_neg]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+ℹ [3555/3689] Replayed GinibrePoincare.Analysis.GaussianLSIReal
+info: GinibrePoincare/Analysis/GaussianLSIReal.lean:70:16: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: GinibrePoincare/Analysis/GaussianLSIReal.lean:70:16: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+⚠ [3564/3689] Replayed GinibrePoincare.Analysis.GaussianLSIFiniteProduct
+warning: GinibrePoincare/Analysis/GaussianLSIFiniteProduct.lean:33:17: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianLSIFiniteProduct.lean:37:17: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianLSIFiniteProduct.lean:46:17: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianLSIFiniteProduct.lean:261:17: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianLSIFiniteProduct.lean:272:17: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3565/3689] Replayed GinibrePoincare.Analysis.GaussianPiCoordinates
+warning: GinibrePoincare/Analysis/GaussianPiCoordinates.lean:23:31: This simp argument is unused:
+  ContinuousLinearMap.pi_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Fin.cases]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3568/3689] Replayed GinibrePoincare.Analysis.GaussianBlockLSI
+warning: GinibrePoincare/Analysis/GaussianBlockLSI.lean:53:33: This simp argument is unused:
+  imaginaryCoordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gaussianBlockCoordinates, gaussianCurryEquiv, ContinuousLinearEquiv.piCongrRight, LinearEquiv.piCurry,
+    Equiv.piCurry, Sigma.curry, Pi.single_apply, realCoordinateDirection, coordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianBlockLSI.lean:55:57: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gaussianBlockCoordinates, gaussianCurryEquiv, ContinuousLinearEquiv.piCongrRight, LinearEquiv.piCurry,
+    Equiv.piCurry, Sigma.curry, realCoordinateDirection, coordinateDirection, hb]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianBlockLSI.lean:57:55: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gaussianBlockCoordinates, gaussianCurryEquiv, ContinuousLinearEquiv.piCongrRight, LinearEquiv.piCurry,
+    Equiv.piCurry, Sigma.curry, realCoordinateDirection, coordinateDirection, ha]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianBlockLSI.lean:57:97: This simp argument is unused:
+  coordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gaussianBlockCoordinates, gaussianCurryEquiv, ContinuousLinearEquiv.piCongrRight, LinearEquiv.piCurry,
+    Equiv.piCurry, Sigma.curry, Pi.single_apply, realCoordinateDirection, ha]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianBlockLSI.lean:70:8: This simp argument is unused:
+  realCoordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gaussianBlockCoordinates, gaussianCurryEquiv, ContinuousLinearEquiv.piCongrRight, LinearEquiv.piCurry,
+    Equiv.piCurry, Sigma.curry, Pi.single_apply, imaginaryCoordinateDirection, coordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianBlockLSI.lean:72:57: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gaussianBlockCoordinates, gaussianCurryEquiv, ContinuousLinearEquiv.piCongrRight, LinearEquiv.piCurry,
+    Equiv.piCurry, Sigma.curry, imaginaryCoordinateDirection, coordinateDirection, hb]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianBlockLSI.lean:74:55: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gaussianBlockCoordinates, gaussianCurryEquiv, ContinuousLinearEquiv.piCongrRight, LinearEquiv.piCurry,
+    Equiv.piCurry, Sigma.curry, imaginaryCoordinateDirection, coordinateDirection, ha]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianBlockLSI.lean:74:102: This simp argument is unused:
+  coordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gaussianBlockCoordinates, gaussianCurryEquiv, ContinuousLinearEquiv.piCongrRight, LinearEquiv.piCurry,
+    Equiv.piCurry, Sigma.curry, Pi.single_apply, imaginaryCoordinateDirection, ha]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GaussianBlockLSI.lean:95:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3570/3689] Replayed GinibrePoincare.Analysis.RadialSobolevSpace
+warning: GinibrePoincare/Analysis/RadialSobolevSpace.lean:35:37: `dif_pos` has been deprecated: Use `dite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵p̵o̵s̵d̲i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+⚠ [3575/3689] Replayed GinibrePoincare.Analysis.GinibreArbitraryWeakPairApproximation
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairApproximation.lean:141:4: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp only [smul_eq_mul, χ]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairApproximation.lean:119:6: Unused tactic linter: `change (v m : Configuration n → ℝ) =ᵐ[ginibreMeasure n] fun z => χ m z * u z` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairApproximation.lean:123:6: Unused tactic linter: `change (v m) z = _` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairApproximation.lean:130:6: Unused tactic linter: `change
+  ((a m + b m : Lp (EuclideanSpace ℝ (Fin n × Fin 2)) 2 (ginibreMeasure n)) : Configuration n → _) z = _` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairApproximation.lean:139:4: Unused tactic linter: `change (q m).1 z = _` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3578/3689] Replayed GinibrePoincare.Analysis.GinibreCollisionCutoffSobolevApproximation
+warning: GinibrePoincare/Analysis/GinibreCollisionCutoffSobolevApproximation.lean:94:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3579/3689] Replayed GinibrePoincare.Analysis.GinibreArbitraryWeakPairClosure
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairClosure.lean:113:37: This simp argument is unused:
+  mul_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [ginibrePermutationAverage]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairClosure.lean:131:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairClosure.lean:174:81: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairClosure.lean:201:15: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+
+Hint: Replace the deprecated name:
+  C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵s̲m̲u̲l̲_̲a̲p̲p̲l̲y̲
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairClosure.lean:201:47: `ContinuousLinearMap.sum_apply` has been deprecated: Use `sum_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sum_apply` to `sum_apply x`).
+
+Hint: Replace the deprecated name:
+  C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵u̵m̵_̵a̵p̵p̵l̵y̵s̲u̲m̲_̲a̲p̲p̲l̲y̲
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairClosure.lean:223:81: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairClosure.lean:256:15: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+
+Hint: Replace the deprecated name:
+  C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵s̲m̲u̲l̲_̲a̲p̲p̲l̲y̲
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairClosure.lean:256:47: `ContinuousLinearMap.sum_apply` has been deprecated: Use `sum_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sum_apply` to `sum_apply x`).
+
+Hint: Replace the deprecated name:
+  C̵o̵n̵t̵i̵n̵u̵o̵u̵s̵L̵i̵n̵e̵a̵r̵M̵a̵p̵.̵s̵u̵m̵_̵a̵p̵p̵l̵y̵s̲u̲m̲_̲a̲p̲p̲l̲y̲
+warning: GinibrePoincare/Analysis/GinibreArbitraryWeakPairClosure.lean:267:4: Unused tactic linter: `change
+  (Fintype.card (ParticlePermutation n) : ℝ)⁻¹ •
+      (∑ σ : ParticlePermutation n, ginibreEuclideanGradient (fun y => f (permute σ y)) z) =
+    ginibreEuclideanGradient F z` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3581/3689] Replayed GinibrePoincare.Analysis.GinibreSymmetricWeakPoincare
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:29:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:49:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:65:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:105:4: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:194:32: This simp argument is unused:
+  ← hsum
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [centerOfMassReal]
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:347:4: This simp argument is unused:
+  coordinateSum_coordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [ginibreCoordinateDirection, coordinateSumCLM_apply, realCoordinateDirection,
+    imaginaryCoordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:359:8: This simp argument is unused:
+  ginibreCoordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [coordinateSumCLM_apply, coordinateSum_coordinateDirection, realCoordinateDirection,
+    imaginaryCoordinateDirection, coordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:361:34: This simp argument is unused:
+  coordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [ginibreCoordinateDirection, coordinateSumCLM_apply, coordinateSum_coordinateDirection,
+    realCoordinateDirection, imaginaryCoordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:380:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:394:81: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:407:82: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:436:12: This simp argument is unused:
+  imaginaryCoordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [ginibreCoordinateDirection, hk, realCoordinateDirection, coordinateSum_coordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:437:48: This simp argument is unused:
+  realCoordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [ginibreCoordinateDirection, hk, imaginaryCoordinateDirection, coordinateSum_coordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:477:12: Unused tactic linter: `change (u : Configuration n → ℝ) z ^ 2 = _` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:515:32: This simp argument is unused:
+  ← hsum
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [centerOfMassImag]
+
+Note: Simp arguments with `←` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `←` with `-` to only get that effect and silence this warning.
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:552:34: This simp argument is unused:
+  coordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [coordinateSumCLM_apply, realCoordinateDirection, imaginaryCoordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:571:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:585:81: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:598:82: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:627:12: This simp argument is unused:
+  imaginaryCoordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [ginibreCoordinateDirection, hk, realCoordinateDirection, coordinateSum_coordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean:628:48: This simp argument is unused:
+  realCoordinateDirection
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [ginibreCoordinateDirection, hk, imaginaryCoordinateDirection, coordinateSum_coordinateDirection]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3585/3689] Replayed GinibrePoincare.Analysis.GinibreFullGeneratorDensity
+warning: GinibrePoincare/Analysis/GinibreFullGeneratorDensity.lean:60:81: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+warning: GinibrePoincare/Analysis/GinibreFullGeneratorDensity.lean:66:81: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+warning: GinibrePoincare/Analysis/GinibreFullGeneratorDensity.lean:121:79: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+⚠ [3647/3689] Replayed GinibrePoincare.Analysis.GinibreFullGeneratorComplexification
+warning: GinibrePoincare/Analysis/GinibreFullGeneratorComplexification.lean:87:74: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+ℹ [3648/3689] Replayed GinibrePoincare.Analysis.GinibreMixedGreenIdentity
+info: GinibrePoincare/Analysis/GinibreMixedGreenIdentity.lean:109:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+⚠ [3652/3689] Replayed GinibrePoincare.Analysis.GinibreEqualityPolynomial
+warning: GinibrePoincare/Analysis/GinibreEqualityPolynomial.lean:32:56: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GinibreEqualityPolynomial.lean:25:10: This simp argument is unused:
+  MvPolynomial.coeff_sum
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [MvPolynomial.coeff_C_mul, MvPolynomial.coeff_X, Finsupp.single_eq_single_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3653/3689] Replayed GinibrePoincare.Analysis.GinibreEqualityMixedPolynomial
+warning: GinibrePoincare/Analysis/GinibreEqualityMixedPolynomial.lean:92:19: `if_true` has been deprecated: Use `ite_true` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵t̵r̵u̵e̵i̲t̲e̲_̲t̲r̲u̲e̲
+warning: GinibrePoincare/Analysis/GinibreEqualityMixedPolynomial.lean:93:19: `if_false` has been deprecated: Use `ite_false` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
+warning: GinibrePoincare/Analysis/GinibreEqualityMixedPolynomial.lean:131:19: `if_true` has been deprecated: Use `ite_true` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵t̵r̵u̵e̵i̲t̲e̲_̲t̲r̲u̲e̲
+⚠ [3654/3689] Replayed GinibrePoincare.Analysis.GinibreEqualityMixedFactor
+warning: GinibrePoincare/Analysis/GinibreEqualityMixedFactor.lean:39:59: `if_false` has been deprecated: Use `ite_false` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
+⚠ [3655/3689] Replayed GinibrePoincare.Analysis.GinibreEqualityMixedHermite
+warning: GinibrePoincare/Analysis/GinibreEqualityMixedHermite.lean:47:13: `if_true` has been deprecated: Use `ite_true` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵t̵r̵u̵e̵i̲t̲e̲_̲t̲r̲u̲e̲
+warning: GinibrePoincare/Analysis/GinibreEqualityMixedHermite.lean:47:48: `if_false` has been deprecated: Use `ite_false` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵f̵a̵l̵s̵e̵i̲t̲e̲_̲f̲a̲l̲s̲e̲
+⚠ [3658/3689] Replayed GinibrePoincare.Analysis.GaussianHermitePhase
+warning: GinibrePoincare/Analysis/GaussianHermitePhase.lean:153:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianHermitePhase.lean:156:37: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp only [hmap]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [3659/3689] Replayed GinibrePoincare.Analysis.GaussianHermitePhaseSpectrum
+warning: GinibrePoincare/Analysis/GaussianHermitePhaseSpectrum.lean:98:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/GaussianHermitePhaseSpectrum.lean:161:15: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+⚠ [3660/3689] Replayed GinibrePoincare.Analysis.GaussianVandermondePhase
+warning: GinibrePoincare/Analysis/GaussianVandermondePhase.lean:33:2: Unused tactic linter: `change (gaussianGlobalPhaseL2 hn u hu (normalizedVandermondeL2 n hn x)) z = _` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3661/3689] Replayed GinibrePoincare.Analysis.GinibreEqualityConjugateModeDetection
+warning: GinibrePoincare/Analysis/GinibreEqualityConjugateModeDetection.lean:23:6: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+⚠ [3662/3689] Replayed GinibrePoincare.Analysis.HolomorphicQuotientPhaseProjection
+warning: GinibrePoincare/Analysis/HolomorphicQuotientPhaseProjection.lean:38:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: GinibrePoincare/Analysis/HolomorphicQuotientPhaseProjection.lean:41:37: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp only [hmap]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [3663/3689] Replayed GinibrePoincare.Analysis.GinibreEqualityConjugateProjection
+warning: GinibrePoincare/Analysis/GinibreEqualityConjugateProjection.lean:82:4: Try this: intro s f hf
+
+Note: This linter can be disabled with `set_option linter.tacticAnalysis.introMerge false`
+⚠ [3668/3689] Replayed GinibrePoincare.Analysis.GinibreFullGeneratorSymmetry
+warning: GinibrePoincare/Analysis/GinibreFullGeneratorSymmetry.lean:44:74: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+⚠ [3669/3689] Replayed GinibrePoincare.Analysis.GinibreFullSemigroupMultiplier
+warning: GinibrePoincare/Analysis/GinibreFullSemigroupMultiplier.lean:34:36: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GinibreFullSemigroupMultiplier.lean:35:4: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GinibreFullSemigroupMultiplier.lean:42:36: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: GinibrePoincare/Analysis/GinibreFullSemigroupMultiplier.lean:128:84: This simp argument is unused:
+  sub_zero
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [zero_pow (by decide : 2 ≠ 0), mul_zero, sub_self, abs_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: GinibrePoincare/Analysis/GinibreFullSemigroupMultiplier.lean:144:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: GinibrePoincare/Analysis/GinibreFullSemigroupMultiplier.lean:139:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: GinibrePoincare/Analysis/GinibreFullSemigroupMultiplier.lean:144:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3673/3689] Replayed GinibrePoincare.Analysis.GinibreFullSemigroupGenerator
+warning: GinibrePoincare/Analysis/GinibreFullSemigroupGenerator.lean:28:0: automatically included section variable(s) unused in theorem `GinibrePoincare.resolventGeneratorGraph_singleValued`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: GinibrePoincare/Analysis/GinibreFullSemigroupGenerator.lean:44:0: automatically included section variable(s) unused in theorem `GinibrePoincare.resolventGenerator_range_pair`:
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3674/3689] Replayed GinibrePoincare.Analysis.GinibreFullSemigroupInfinitesimal
+warning: GinibrePoincare/Analysis/GinibreFullSemigroupInfinitesimal.lean:164:21: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3683/3689] Replayed GinibrePoincare.Analysis.GinibreFullSemigroupConstants
+warning: GinibrePoincare/Analysis/GinibreFullSemigroupConstants.lean:31:79: `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq` has been deprecated: Use `MeasureTheory.Measure.QuasiMeasurePreserving.ae_eq_comp` instead
+ℹ [3688/3689] Replayed Solution
+info: Solution.lean:87:0: 'PalomarGinibre.theoremOneOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (3689 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, PalomarGinibre.theoremOneOne, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Solution
+Running con-ron kernel on solution
+con-ron: 1 inductive blocks modelled in-process: Lean.Syntax (30 generated records, checked by the fold as declarations and not counted as records of the file)
+con-ron: accepted 61907 declarations (--verified)
+con-ron kernel accepts the solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!

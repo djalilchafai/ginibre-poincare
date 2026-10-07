@@ -1,0 +1,100 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+project:
+  name: "Ginibre Poincaré formalization"
+  description: >-
+    Lean development of the sharp Poincaré inequality for the complex Ginibre
+    log-gas, its two sum-of-squares deficit identities, equality cases,
+    Gaussian Hermite analysis, and the accompanying analytic and stochastic results.
+  authors:
+    - "Djalil Chafaï"
+  license: "MIT"
+  responsible_maintainers:
+    - "Djalil Chafaï"
+classification:
+  arxiv: ["math.PR", "math.FA"]
+  msc2020: ["60E15", "60B20", "60J60", "32W05", "82B21", "82C31"]
+sources:
+  - title: "An optimal Poincaré inequality for the complex Ginibre log-gas"
+    authors: ["Djalil Chafaï"]
+    id: "https://arxiv.org/abs/2608.19358v2"
+    type: "paper"
+    location: "Theorems 1.1–1.14, numbered Section 2 statements, and Appendices A–B"
+    relationship: "formalizes"
+    note: >-
+      Version 2 is the authoritative source for numbering and normalization.
+      Bibliographic authorship is separate from responsibility for this repository.
+      No separate source-author endorsement is asserted by this metadata.
+related_formalizations: []
+status:
+  scope: >-
+    The substantive development is in this repository. The numbered coverage and
+    precise domains are recorded in FORMALIZATION_REPORT.md and STATUS.md.
+    Theorems 1.9 and 1.10 provide both deficits on the concrete generator domain;
+    nonquadratic and matrix-overlap results retain their stated domains.
+    Problems 1.11, 1.15, and 1.16 are research questions, not claimed solutions;
+    Appendix C numerical experiments are not certified. Palomar packaging and
+    Comparator verification are separate from the existing Lean build and audits.
+    The prepared Comparator surface selects the full symmetric weak-H¹ Theorem 1.1
+    and its exhaustive affine equality classification; it does not compare every
+    endpoint in the full-paper report. The user authorized a statement-only
+    Challenge sorry and the supported Lean/Mathlib v4.35.0-rc2 migration on
+    2026-10-07. That hole is excluded from the Solution and proof library; its
+    count refers to the submitted independent Challenge, not an unproved result
+    claimed in the substantive development. PALOMAR.md records verification status.
+  sorry_count: 1
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+automation:
+  methods:
+    - method: "agent"
+      models: ["GPT-6 family (exact historical run variants not fully recorded)"]
+      framework: "OpenAI Codex"
+      tool_setup: >-
+        User-directed cooperating agents assigned disjoint Lean files, local
+        Lean compilation, Mathlib inspection, full builds, source coverage checks,
+        and public and private declaration axiom audits.
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "not tracked"
+        hardware: "local Lean workspace and model API"
+      prompting_notes: >-
+        Formalize the versioned paper without placeholders, preserve its
+        normalization, inspect Mathlib first, and distinguish reductions from
+        unconditional concrete results.
+  spend_usd: "not tracked"
+  notes: >-
+    Human direction supplied the paper, goals, and soundness requirements.
+    Agents wrote and checked proofs and reports. Maintainer attribution follows
+    the repository's Git identity; it does not certify a human mathematical review.
+fidelity:
+  divergences: >-
+    Lean statements use explicit L² representatives, generator graphs, weak
+    derivatives, and domain hypotheses. The weak-domain deficit exports extend
+    the smooth-core formulation through closure. The paper's normalizations and
+    the qualifications of each numbered result are documented in the report.
+    A short independent Palomar Challenge must expose concrete statement content;
+    merely importing the implementation is not a qualifying Challenge.
+review:
+  status: "agent-reviewed"
+  reviewers: ["OpenAI Codex agents"]
+  notes: >-
+    Local Lean builds, source checks, and axiom audits have been performed.
+    No independent human mathematical review or Palomar review is claimed.
+    The supported-toolchain v4.35.0-rc2 build and public/private axiom audits pass.
+    Actual Comparator strictly compares the full weak-H1 Theorem 1.1 and affine
+    equality and passes con-ron, nanoda and Lean default kernels; see PALOMAR.md.
+alignment:
+  namespace: "GinibrePoincare"
+  statements:
+    - source: "Theorem 1.9"
+      lean: "GinibrePoincare.fullTheoremOneNine"
+      module: "GinibrePoincare.Endgame.FullTheoremOneNine"
+      status: "proved"
+      note: "Both deficits and affine equality classification on the actual generator domain."
+    - source: "Theorem 1.10"
+      lean: "GinibrePoincare.fullTheoremOneTenSchwartz"
+      module: "GinibrePoincare.Endgame.FullTheoremOneTen"
+      status: "proved"
+      note: "Vandermonde form with ordinary Schwartz distributional derivatives."
+acknowledgements: "Lean and Mathlib contributors; OpenAI Codex proof-development agents."

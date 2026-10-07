@@ -1,0 +1,50 @@
+module
+
+public import GinibrePoincare.Analysis.GinibreDrivenPathLipschitzStability
+
+@[expose] public section
+
+/-! Noise stability applies to actual paths on their finite existence interval. -/
+open MeasureTheory Set
+open scoped Topology NNReal
+namespace GinibrePoincare
+noncomputable section
+set_option maxHeartbeats 600000
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
+
+theorem drivenVolterra_lipschitz_stability_on (b : E → E) (L : ℝ≥0) (hb : LipschitzWith L b)
+    (x : E) (N M X Y : ℝ → E) (T δ : ℝ) (hT : 0 ≤ T) (hδ : 0 ≤ δ)
+    (hX : ContinuousOn X (Icc 0 T)) (hY : ContinuousOn Y (Icc 0 T))
+    (hEqX : ∀ t ∈ Icc 0 T, X t = x+N t+∫ s in (0 : ℝ)..t, b (X s))
+    (hEqY : ∀ t ∈ Icc 0 T, Y t = x+M t+∫ s in (0 : ℝ)..t, b (Y s))
+    (hNoise : ∀ t ∈ Icc 0 T, ‖N t-M t‖ ≤ δ) :
+    ∀ t ∈ Icc 0 T, ‖X t-Y t‖ ≤ δ*Real.exp ((L : ℝ)*T) := by
+  let p := fun t : ℝ => (Set.projIcc 0 T hT t : ℝ)
+  have hp : Continuous p := continuous_subtype_val.comp continuous_projIcc
+  have hpr (t : ℝ) : p t ∈ Icc 0 T := (Set.projIcc 0 T hT t).property
+  have hpe (t : ℝ) (ht : t ∈ Icc 0 T) : p t = t :=
+    congrArg Subtype.val (Set.projIcc_of_mem hT ht)
+  have hInt (A : ℝ → E) (t : ℝ) (ht : t ∈ Icc 0 T) :
+      (∫ s in (0 : ℝ)..t, b (A (p s))) = (∫ s in (0 : ℝ)..t, b (A s)) := by
+    apply intervalIntegral.integral_congr
+    intro s hs
+    rw [uIcc_of_le ht.1] at hs
+    dsimp only
+    rw [hpe s ⟨hs.1,hs.2.trans ht.2⟩]
+  have hEqXc (t : ℝ) (ht : t ∈ Icc 0 T) :
+      (X ∘ p) t = x+N t+∫ s in (0 : ℝ)..t, b ((X ∘ p) s) := by
+    dsimp only [Function.comp_apply]
+    rw [hpe t ht,hInt X t ht]
+    exact hEqX t ht
+  have hEqYc (t : ℝ) (ht : t ∈ Icc 0 T) :
+      (Y ∘ p) t = x+M t+∫ s in (0 : ℝ)..t, b ((Y ∘ p) s) := by
+    dsimp only [Function.comp_apply]
+    rw [hpe t ht,hInt Y t ht]
+    exact hEqY t ht
+  have h := drivenVolterra_lipschitz_stability_exp b L hb x N M (X ∘ p) (Y ∘ p)
+    (hX.comp_continuous hp hpr) (hY.comp_continuous hp hpr) T δ hT hδ hEqXc hEqYc hNoise
+  intro t ht
+  simpa only [Function.comp_apply,hpe t ht] using h t ht
+
+end
+end GinibrePoincare
