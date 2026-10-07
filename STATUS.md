@@ -68,7 +68,9 @@ GitHub upload preparation (2026-10-07): source audit, generated inventory check,
 `git diff --check` and source counts passed. Documentation and diagrams are committed. The GitHub remote is
 https://github.com/djalilchafai/ginibre-poincare; its initial MIT license
 commit was merged, preserving both histories and the named copyright holder.
-The first push requires GitHub browser authentication; no upload has occurred. The full build and kernel checks below are recorded
+GitHub browser authentication succeeded and the project was uploaded to
+`origin/main`. The remote retains its initial license commit and the full local
+source history. No Palomar registry submission has occurred. The full build and kernel checks below are recorded
 evidence from the verified toolchain checkpoint, not rerun for this upload.
 
 
@@ -106,9 +108,9 @@ audit/compatibility files; its totals therefore differ from the full source coun
 
 ## Open work and next step
 
-No previously listed formalization obligation remains open for the asserted results. Problems 1.11, 1.15 and 1.16 are unsolved research questions in the paper, and Appendix C experiments are outside theorem certification. Alternative proof routes are not each independently exported. The next step is to publish the final committed snapshot to a public GitHub repository and submit its exact commit SHA to Palomar, if requested. No additional analytic completion hypothesis is required.
+No previously listed formalization obligation remains open for the asserted results. Problems 1.11, 1.15 and 1.16 are unsolved research questions in the paper, and Appendix C experiments are outside theorem certification. Alternative proof routes are not each independently exported. The project is published at https://github.com/djalilchafai/ginibre-poincare. The next step is to submit the selected exact commit SHA to Palomar, if requested. No additional analytic completion hypothesis is required.
 
-Git was reinitialized on `main` at the user’s request. The previous Git metadata is preserved at `/tmp/ginibre-git-before-reinit-2026-10-07/repository.git`. The fresh initial commit includes the source, dependency manifest, reports and verification evidence. No remote publication or registry submission has occurred. Historical checkpoints below describe earlier states and are superseded by this dashboard.
+Git was reinitialized on `main` at the user’s request. The previous Git metadata is preserved at `/tmp/ginibre-git-before-reinit-2026-10-07/repository.git`. The fresh initial commit includes the source, dependency manifest, reports and verification evidence. GitHub publication has occurred; no registry submission has occurred. Historical checkpoints below describe earlier states and are superseded by this dashboard.
 
 ## Historical checkpoints (superseded)
 
