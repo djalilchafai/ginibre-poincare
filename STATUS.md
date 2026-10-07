@@ -65,10 +65,10 @@ Agents completed disjoint modules for the maximal ordinary Schwartz Gaussian der
 ## Build and audit evidence
 
 GitHub upload preparation (2026-10-07): source audit, generated inventory check,
-`git diff --check` and source counts passed. Pending documentation and diagrams
-are being included in the upload snapshot. No GitHub remote is configured;
-repository destination/visibility and GitHub authentication are still required.
-No upload has occurred. The full build and kernel checks below are recorded
+`git diff --check` and source counts passed. Documentation and diagrams are committed. The GitHub remote is
+https://github.com/djalilchafai/ginibre-poincare; its initial MIT license
+commit was merged, preserving both histories and the named copyright holder.
+The first push requires GitHub browser authentication; no upload has occurred. The full build and kernel checks below are recorded
 evidence from the verified toolchain checkpoint, not rerun for this upload.
 
 
