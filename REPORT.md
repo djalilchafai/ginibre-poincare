@@ -1,15 +1,16 @@
 # Ginibre Poincaré formalization report
 
 Documentation updated on 2026-10-08. The recorded final full-project build
-and both axiom audits were completed on 2026-10-07; this documentation update
+and both axiom audits were completed at the 2026-10-08 proof-route checkpoint; this review update
 does not rerun them.
 
 Paper: Djalil Chafaï, *An optimal Poincaré inequality for the complex Ginibre log-gas*.
 
 arXiv URL (authoritative version): <https://arxiv.org/abs/2608.19358v2>
 
-The project formalizes the asserted mathematical results of the versioned paper,
-on their documented domains and with their stated hypotheses. Its main result
+The project develops formalizations of the asserted mathematical results of the
+versioned paper. Independent review now identifies unresolved domain bridges and
+auxiliary assertions; full-paper completion is not established. Its main result
 is Theorem 1.1: the sharp symmetric Poincaré inequality, together with the full
 weak-domain equality classification. The scope also includes equilibrium and
 stochastic factorization, polynomial eigenfunctions and spectral points,
@@ -25,6 +26,23 @@ Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C's
 numerical experiments are outside theorem certification. See
 [STATUS.md](STATUS.md) for verification evidence and the dashboard, and
 [FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean) for public endpoints.
+
+## Independent full-paper correspondence review
+
+The [2026-10-08 review](CORRESPONDENCE_REVIEW.md) checks the versioned paper
+against concrete definitions and theorem signatures at commit `0779d08`.
+Independent main and extension reviewers found unresolved correspondence;
+the numbered inventory below must not be read as an exhaustive full-paper pass.
+In particular, the matrix H¹ statement needs a derivative-identification bridge,
+the literal integrated pointwise Γ₂ identity is not located, and contextual GUE,
+explicit polynomial/Slater and unrestricted operator assertions remain open or
+unreviewed. Review files contain item-specific evidence and qualifications.
+The compiled alternative proofs and kernel audits remain valid evidence for
+those exports, separately from statement correspondence.
+
+[Registry checks](verification/registry-publication-check.md) cannot confirm
+publication: authenticated status HTTP 500, public repository record HTTP 404,
+and empty successful searches. Accepted consent does not establish publication.
 
 ## Palomar verification checkpoint
 
@@ -85,7 +103,7 @@ be checked. Open research problems are not completion theorems.
 | [Theorem 1.10](http://arxiv.org/abs/2608.19358v2) | Differential sum-of-squares deficits | Verified on the stated generator graph: `fullTheoremOneTen` in [FullTheoremOneTen](GinibrePoincare/Endgame/FullTheoremOneTen.lean), on the actual real symmetric generator graph. Constructs v = N⁻¹ᐟ² proj(H⊥)(U f̃), derives its first and second weak Wirtinger derivatives from the actual Ginibre weak gradient, and proves both exact identities with coefficients 4/n and 8/n plus full affine equality. `ginibreDifferentialSecondEnergy_eq_integral` expresses the energy as literal Gaussian integrals of squared second derivatives. `fullTheoremOneTenSchwartz` now states the same endpoint with literal ordinary Lebesgue Schwartz distributional first and second derivatives; their equivalence to the independently defined weighted graph is proved. |
 | [Problem 1.11](http://arxiv.org/abs/2608.19358v2) | Best symmetric log-Sobolev constant; is it 1? | Open research question. Radial LSI and matrix-overlap entropy bounds do not resolve unrestricted symmetric LSI. |
 | [Theorem 1.12](http://arxiv.org/abs/2608.19358v2) | Uniform symmetric radial LSI | Verified on the smooth radial core and its Sobolev completion: `logSobolevInequality_instance` in [LogSobolevInequality](GinibrePoincare/Analysis/LogSobolevInequality.lean), `radial_sobolev_lsi` in [FullRadialLSIReduction](GinibrePoincare/Analysis/FullRadialLSIReduction.lean). Ent(f²) ≤ E. An old Lean comment calls this 1.10; arXiv v2 numbering is 1.12. |
-| [Theorem 1.13](http://arxiv.org/abs/2608.19358v2) | Matrix lift and eigenvector-overlap inequalities | Verified: `fullMatrixLift_functional_inequalities` in [FullMatrixLift](GinibrePoincare/Endgame/FullMatrixLift.lean). Symmetric C¹ observable, actual Ginibre L² value and finite actual overlap energy; variance coefficient 2/n and entropy coefficient 4/n. |
+| [Theorem 1.13](http://arxiv.org/abs/2608.19358v2) | Matrix lift and eigenvector-overlap inequalities | Finite-overlap endpoint compiled; literal paper H¹ bridge unresolved: `fullMatrixLift_functional_inequalities` in [FullMatrixLift](GinibrePoincare/Endgame/FullMatrixLift.lean). Symmetric C¹ observable, actual Ginibre L² value and finite actual overlap energy; variance coefficient 2/n and entropy coefficient 4/n. |
 | [Theorem 1.14](http://arxiv.org/abs/2608.19358v2) | Nonquadratic determinantal log-gases | Verified: `fullNonQuadraticPotentialTheorem` in [FullNonQuadraticPotential](GinibrePoincare/Endgame/FullNonQuadraticPotential.lean). Actual C² rotational potential, finite partition and ρ > 0. Smooth compact symmetric Poincaré under ΔV ≥ 2ρ with coefficient 1/(nρ); radial LSI under strong convexity with coefficient 2/(nρ). Bounded Lipschitz radial extension is separately proved. |
 | [Problem 1.15](http://arxiv.org/abs/2608.19358v2) | Arbitrary inverse temperatures | Open research question; the β = 2 determinantal proofs do not solve it. |
 | [Problem 1.16](http://arxiv.org/abs/2608.19358v2) | Higher-dimensional log-gases | Open research question; the planar Ginibre results do not solve it. |
@@ -123,7 +141,7 @@ The [official v2 proof section](https://arxiv.org/html/2608.19358v2#S2) was chec
 
 ## Open work and next step
 
-No listed asserted-result formalization gap remains. Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C experiments are not numerically certified. The four requested proof groups have independent concrete endpoints. Review the completed source and numbered correspondence; no overall completion percentage is assigned.
+Independent review has identified unresolved correspondence items; see CORRESPONDENCE_REVIEW.md. Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C experiments are not numerically certified. The four requested proof groups have independent concrete endpoints. Review the completed source and numbered correspondence; no overall completion percentage is assigned.
 
 ## Proof-route correspondence remarks
 
@@ -168,9 +186,9 @@ inequalities and their proved ingredients.
 
 Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C
 numerical experiments are uncertified. They are not established theorems with
-missing Lean proofs. An independent exhaustive paper-to-Lean correspondence
-review remains outstanding; compilation, axiom audits and the Theorem 1.1
-Palomar comparison do not supply that review. This table summarizes the
+missing Lean proofs. Independent agent correspondence review has identified unresolved items;
+compilation, axiom audits and the Theorem 1.1 Palomar comparison do not resolve
+those findings. Exhaustive full-paper correspondence remains unconfirmed. This table summarizes the
 documented differences, rather than an exhaustive audit of every paper argument.
 
 These remarks compare the proof bodies of the named endpoints with

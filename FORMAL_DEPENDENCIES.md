@@ -125,4 +125,4 @@ produced compiled export. The HTML embeds its declaration data and works offline
 
 The graph is a navigation aid, not a replacement for axiom audits or independent
 review of correspondence with the paper. [STATUS.md](STATUS.md) records verified
-scope and outstanding Palomar review/registration work.
+scope, unresolved correspondence findings and unconfirmed registry publication.

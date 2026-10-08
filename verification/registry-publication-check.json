@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-08T12:14:24.894181+00:00",
+  "submission_id": "7fh68vzqfjeu",
+  "submitted_source_commit": "fb58b4fd765f19a65c46cb82fb647fb0d94e28ca",
+  "current_repository_commit": "0779d080f22fcd93258f0e6e0cb34944bada110c",
+  "publication_confirmed": false,
+  "registry_id": null,
+  "registered_url": null,
+  "conclusion": "Publication could not be confirmed: authenticated submission status fails with HTTP 500; the current public registry contains no matching result. Registration consent acceptance alone does not establish publication.",
+  "checks": [
+    {
+      "method": "GET",
+      "url": "https://submit.palomar-registry.org/api/submission",
+      "authenticated": true,
+      "http_status": 500,
+      "response_kind": "non-JSON",
+      "response_bytes": 1713,
+      "private_response_persisted_in_repository": false
+    },
+    {
+      "method": "GET",
+      "url": "https://data.palomar-registry.org/browse/index.json",
+      "http_status": 200,
+      "summary": {
+        "results": 470,
+        "schema_version": 2,
+        "versions": 534,
+        "year_path": "browse/{year}.json",
+        "years": [
+          {
+            "days": 55,
+            "results": 470,
+            "versions": 534,
+            "year": "2026"
+          }
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "url": "https://data.palomar-registry.org/repositories/djalilchafai/ginibre-poincare.json",
+      "http_status": 404
+    },
+    {
+      "method": "GET",
+      "url": "https://data.palomar-registry.org/api/v1/results?q=ginibre",
+      "http_status": 200,
+      "response": {
+        "schema_version": 1,
+        "revision": 189,
+        "release": "e63a72352d85209728cba6c254282aaddec8d922fb18f974293f2695d28ebbb1",
+        "totals": {
+          "results": 470,
+          "projects": 382
+        },
+        "entries": [],
+        "previous": null,
+        "next": null,
+        "dropped": [],
+        "message": null
+      }
+    },
+    {
+      "method": "GET",
+      "url": "https://data.palomar-registry.org/api/v1/results?q=djalilchafai",
+      "http_status": 200,
+      "response": {
+        "schema_version": 1,
+        "revision": 189,
+        "release": "e63a72352d85209728cba6c254282aaddec8d922fb18f974293f2695d28ebbb1",
+        "totals": {
+          "results": 470,
+          "projects": 382
+        },
+        "entries": [],
+        "previous": null,
+        "next": null,
+        "dropped": [],
+        "message": null
+      }
+    }
+  ],
+  "official_contract": [
+    "https://palomar-registry.org/llms.txt",
+    "https://submit.palomar-registry.org/llms.txt",
+    "https://github.com/PalomarRegistry/PalomarPolicy/blob/main/docs/specification.md",
+    "https://palomar-registry.org/how-to-submit"
+  ],
+  "limitations": [
+    "No registry ID or registered_url can be recovered while the authenticated status endpoint fails.",
+    "An absent active public projection does not prove that a private database pull request has not merged or that registration consent was not recorded.",
+    "No public record exists from which to verify its immutable source-preservation receipt; no archive identity was assumed.",
+    "The immutable submitted commit is older than the current full-paper proof-library snapshot; registry comparison covers Theorem 1.1 only."
+  ],
+  "actions_taken": "Read-only GET requests only. No new submission, registration, withdrawal, external message, or credential publication.",
+  "next_step": "Palomar must restore authenticated status or complete registration/public projection. Recheck registered_url, exact versioned public entry, its submitted source commit and source-archive receipt. Do not duplicate intake or registration to work around HTTP 500."
+}

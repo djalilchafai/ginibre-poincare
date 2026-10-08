@@ -15,9 +15,10 @@ These requirements can change; recheck them before submitting an immutable snaps
 
 ## Submission report — 2026-10-07
 
-Palomar accepted submission **`7fh68vzqfjeu`**. Its current API status is
-`awaiting-review`; official mechanical verification passed. Editorial review
-and final registration remain pending.
+Palomar accepted submission **`7fh68vzqfjeu`**. Official mechanical verification passed. Later recorded editorial readiness and
+accepted registration consent supersede the initial awaiting-review checkpoint.
+The live authenticated status now returns HTTP 500; public publication is not
+confirmed. See [2026-10-08 evidence](verification/registry-publication-check.md).
 
 | Submission field | Recorded value |
 | --- | --- |
@@ -29,7 +30,7 @@ and final registration remain pending.
 | Required full mechanical preflight | [Passed](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37679215651), with no errors or warnings; [committed report](palomar-preflight-report.json) |
 | Official verification | [Palomar Actions run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37681934359) — passed; [report](palomar-verification-report.json) |
 | Ownership proof | Agent tag-and-secret-gist protocol; both temporary artifacts deleted after verification |
-| Registration | Not requested or completed; requires the user's separate decision after reading the review |
+| Registration | Consent previously requested and accepted; completed publication not confirmed |
 
 This submission compares Theorem 1.1 and its equality classification. The wider
 project coverage is documented in [REPORT.md](REPORT.md) and [STATUS.md](STATUS.md).
@@ -40,11 +41,11 @@ They are omitted from this public report, as is any unpublished editorial review
 
 | Full-project dashboard | Current evidence / next work |
 | --- | --- |
-| Verified scope | Recorded builds and axiom audits cover the asserted paper results on the domains in STATUS.md; the official full preflight passed for the submitted snapshot |
-| Open work | Palomar editorial review and registration; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
-| Latest progress | Submission accepted, ownership proofs removed, public submission report recorded |
-| Lean source counts | 143,778 current project lines in 1,316 files (including Lean graph-export tooling); 1,251,826 transitively imported Mathlib lines in 3,794 modules; combined 1,395,604 lines |
-| Next step | Await editorial review, show it to the user, then obtain their separate instruction before registration |
+| Verified scope | Recorded builds and axiom audits certify the exported Lean statements; correspondence gaps are itemized in CORRESPONDENCE_REVIEW.md; the official full preflight passed for the submitted snapshot |
+| Open work | Live registry publication confirmation and correspondence-review findings; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
+| Latest progress | Independent live check: authenticated HTTP 500, canonical public record HTTP 404, empty successful searches |
+| Lean source counts | 159,224 current project lines in 1,433 files; 1,253,370 transitively imported Mathlib lines in 3,801 modules; combined 1,412,594 lines |
+| Next step | Recheck restored authenticated service and verify a versioned public entry and source-preservation receipt |
 
 Source counts are refreshed with `python3 scripts/count_lean_sources.py`.
 Comments and blank lines are included; imported Mathlib modules are counted
@@ -157,5 +158,5 @@ The project is public at https://github.com/djalilchafai/ginibre-poincare.
 GitHub authentication and publication succeeded. The pinned official full
 mechanical preflight is configured in `.github/workflows/palomar-preflight.yml`;
 the full report passed and agent intake accepted submission `7fh68vzqfjeu`.
-Registration remains pending editorial review and the user's
-separate decision after reading that review.
+Registration consent has already been accepted. Live publication remains
+unconfirmed; do not repeat the registration request to resolve a status-service failure.

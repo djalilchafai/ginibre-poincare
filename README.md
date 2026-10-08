@@ -1,6 +1,6 @@
 # Ginibre Poincaré formalization
 
-The asserted numbered paper results are compiled and audited, including Theorems 1.9 and 1.10, nonquadratic potentials and matrix-lift/eigenvector-overlap inequalities. The ordinary Gaussian derivative domain, canonical dbar solver, global entire Vandermonde factorization and literal representative distance formulas are complete; see [the numbered report](REPORT.md). Open Problems 1.11, 1.15 and 1.16 remain research questions, and numerical experiments are outside theorem certification. The public entry point is [FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean).
+The principal numbered endpoints are compiled and audited, including Theorems 1.9 and 1.10, nonquadratic potentials and matrix-lift/eigenvector-overlap inequalities. The ordinary Gaussian derivative domain, canonical dbar solver, global entire Vandermonde factorization and literal representative distance formulas are complete; see [the numbered report](REPORT.md). Open Problems 1.11, 1.15 and 1.16 remain research questions, and numerical experiments are outside theorem certification. The public entry point is [FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean).
 See [STATUS.md](STATUS.md) for exact domains, the full dashboard and validation.
 
 Compiled result coverage does not certify every original or alternative paper
@@ -11,8 +11,10 @@ The nonquadratic endgame now uses the primary Euclidean-lift route, with
 Brownian existence, Gibbs invariance, regularization and radial tensorization
 proved internally. Its independent transport proof remains exported.
 See the [proof-route inventory](REPORT.md#independent-proof-routes-and-remaining-gaps)
-for domains, proof correspondence and audit evidence. An independent exhaustive
-paper-to-Lean correspondence review remains outstanding.
+for domains, proof correspondence and audit evidence. Independent agents have now reviewed the paper correspondence and found unresolved
+domain bridges and auxiliary assertions. Full-paper completion is not established;
+see [the review findings](CORRESPONDENCE_REVIEW.md). Registry publication is not
+confirmed by the [live checks](verification/registry-publication-check.md).
 
 The library is grouped into 12 thematic [subprojects](SUBPROJECTS.md), including
 complex Gaussian/Hermite analysis, Gaussian LSI, stochastic calculus, stochastic
@@ -34,8 +36,8 @@ the full symmetric diffusion,
 and its identification with the original singular Brownian SDE. It includes
 independent center/relative processes, both CIR realizations, Ginibre invariance,
 whole-path stationarity and reversal. Nonquadratic inequalities and actual
-Gaussian matrix spectral laws and overlap inequalities are proved on their
-stated domains. Appendix formulas, curvature, capacity, linear statistics and
+Gaussian matrix spectral laws and finite-overlap inequalities have compiled
+endpoints; the literal matrix H¹ domain bridge remains unresolved. Appendix formulas, curvature, capacity, linear statistics and
 explicit incompleteness/counterexample claims are included.
 
 All library modules are publicly imported. Source and axiom audits reject proof

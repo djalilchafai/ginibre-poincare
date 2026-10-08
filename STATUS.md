@@ -1,7 +1,7 @@
-# Formalization status — asserted endpoints and requested independent routes verified (2026-10-08)
+# Formalization status — correspondence gaps identified (2026-10-08)
 
 The authoritative source is [arXiv:2608.19358v2](https://arxiv.org/abs/2608.19358v2).
-The asserted numbered results and the seventeen required milestones now have compiled concrete endpoints on the stated domains. The original analytic proof of Theorem 1.1, both Theorem 1.9 identities, and the ordinary-distributional Theorem 1.10 endpoint are exported without analytic completion hypotheses. The final global entire Vandermonde factorization, actual entire-space distance formulas and canonical minimal dbar solution are proved. Problems 1.11, 1.15 and 1.16 remain the paper's open research questions; Appendix C numerical experiments are not certified. No overall completion percentage is asserted.
+Compiled endpoints cover the principal numbered results and the seventeen core milestones, but independent correspondence review has identified unresolved statement/domain bridges and auxiliary assertions. Full-paper completion is not established. The original analytic proof of Theorem 1.1, both Theorem 1.9 identities, and the ordinary-distributional Theorem 1.10 endpoint are exported without analytic completion hypotheses. The final global entire Vandermonde factorization, actual entire-space distance formulas and canonical minimal dbar solution are proved. Problems 1.11, 1.15 and 1.16 remain the paper's open research questions; Appendix C numerical experiments are not certified. No overall completion percentage is asserted.
 
 The public library is organized into twelve thematic import subprojects:
 [SUBPROJECTS.md](SUBPROJECTS.md) gives every file, counts, entry points and direct
@@ -32,9 +32,9 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. At 
 | Weak Sobolev domains / Appendix A.1–A.3 | Actual distributional graph, closure, uniqueness, real and complex global/collision-free core equality, positive-speed norm equivalence, zero collision capacity | No remaining A.2 endpoint gap |
 | Gaussian log-Sobolev | Sharp Gaussian product, Lipschitz and finite-energy extensions; entropy integrability and closure | Stated Gaussian domains |
 | Radial Ginibre log-Sobolev, Theorem 1.12 | Sharp radial inequality and weak-H¹ completion, exact paper coefficient | Radial/symmetric restriction; not a solution of Problem 1.11 |
-| Full diffusion generator and analytic semigroup | Actual weak resolvent, full self-adjoint generator, strongly continuous Markov contraction semigroup, heat equation, dissipation, domain regularization, sharp decay and original-SDE identification | Actual symmetric L² space and paper speed normalization |
+| Full diffusion generator and analytic semigroup | Actual weak resolvent, full self-adjoint generator, strongly continuous Markov contraction semigroup, heat equation, dissipation, domain regularization, sharp decay and original-SDE identification | Symmetric analytic L² space; unrestricted complex generator/form correspondence unresolved |
 | Stochastic calculus and dynamics, Theorem 1.3 | Original Brownian singular SDE, adapted global collision-free paths, Itô/Dynkin identities, independent center/relative processes, CIR drivers, transition laws, Ginibre invariance, reversal and stationarity | Joint two-radius CIR realization uses n ≥ 2; deterministic initial states or the proved independent initial projections |
-| Matrix lift / overlaps, Theorem 1.13 | Actual Gaussian matrix law, Schur Jacobian and spectral pushforward; variance/entropy overlap inequalities | Symmetric C¹ observable with actual L² value and finite actual overlap energy |
+| Matrix lift / overlaps, Theorem 1.13 | Actual Gaussian matrix law, Schur Jacobian and spectral pushforward; variance/entropy overlap inequalities | Finite-overlap C¹ route proved; literal H¹ domain needs the derivative-identification bridge identified in the review |
 | Nonquadratic potentials, Theorem 1.14 | Concrete normalized law, symmetric compact-C¹ Poincaré under actual C² rotational potential/Laplacian bound; radial LSI under strong convexity | Stated potential hypotheses; bounded Lipschitz radial extension separately proved |
 | Gaussian gap / Remarks 2.3–2.5 | Arbitrary Gaussian L² ordinary Schwartz graph, coefficient equivalence, compact C∞ graph density, sharp gap and exact mode equality; compact smooth equality iff zero; arbitrary ordinary closed-form solution with sharp bound; actual entire reconstruction of zero mode | Canonical minimal solution, entire kernel and literal distance correspondence proved |
 | Divisibility, Lemma 2.6 | Arbitrary entire alternating functions factor globally as Vandermonde times an entire symmetric quotient, including all collision hyperplanes | None |
@@ -44,6 +44,36 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. At 
 | Bakry–Émery / Bochner coverage | Concrete pointwise Bochner formulas, Ginibre curvature unbounded below for n ≥ 2, full-generator integrated curvature bound, scalar/radial curvature-to-coercivity and Fisher estimates | No standalone arbitrary-diffusion criterion is exported; the primary strongly convex Euclidean Gibbs lift and independent quantile transport routes are both proved internally |
 | Requested independent proof routes | Focused spectral and Hermite–Slater sharp weak-H¹ endpoints and literal complex spectral factorization; independent Bochner–Kodaira graph deficits; actual Gaussian matrix H¹/finite-overlap variance route with coefficient 2/n | All four requested groups have concrete independent endpoints; full build/source/public/private audits and transitive proof-body independence checks pass. Literal Slater eigenfunction/homogeneous quotient calculations and full complex generator spectral support also compile independently |
 | Problems 1.11, 1.15, 1.16 / Appendix C | Identified as open research questions / numerical experiments | They are not asserted solved or numerically certified by Lean |
+
+## Independent correspondence and publication review — 2026-10-08
+
+[CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md) integrates two independent
+source-review agents and a separate read-only registry agent. This review did
+**not** return a full-paper pass. Open correspondence includes the literal matrix
+H¹ derivative bridge, integrated pointwise Γ₂ identity, GUE contextual claims,
+several explicit polynomial/Slater calculations, and unrestricted analytic
+operator/dynamics assertions. Detailed reports distinguish missing endpoints
+from unresolved bridges. Earlier numbered-coverage labels below are inventories
+of compiled exports, not certification that every paper assertion matches.
+
+[Live registry evidence](verification/registry-publication-check.md), checked
+2026-10-08 12:14 UTC: authenticated status HTTP 500, canonical public repository
+record HTTP 404, and successful public searches with no entries. Publication is
+**not confirmed**. Prior accepted registration consent is not a publication receipt.
+
+| Review workstream | Verified scope | Open work / next step |
+| --- | --- | --- |
+| Main theorem, Gaussian and Section 2–4 review | Independent statement/definition inspection recorded in the main review | Resolve listed contextual and explicit-calculation gaps; complete unreviewed assertions |
+| Deficits, radial/nonquadratic and matrix review | Constants and concrete exports inspected independently | Prove/locate literal H¹ and Γ₂ bridges and explicit polynomial examples |
+| Dynamics and full operator | Symmetric analytic identification and concrete stochastic constructions | Trace unrestricted generator/form, invariant-law uniqueness and global CIR bridges |
+| Registry publication | Sanitized live read-only evidence, immutable submitted snapshot retained | Palomar service recovery and versioned public entry/source-preservation receipt |
+
+No Lean proof changes were made in this review. Latest complete proof evidence
+remains 5,508 build jobs, 5,753 public axiom queries and 12,287 all-local declarations;
+only the three permitted standard axioms. The four requested alternative-proof
+groups remain compiled and dependency-audited. Problems 1.11, 1.15 and 1.16 remain
+open; Appendix C remains uncertified. Next mathematical step: close the itemized
+correspondence gaps and repeat the statement review.
 
 ## Latest progress
 
@@ -359,17 +389,23 @@ audit/compatibility files; its totals therefore differ from the full source coun
 
 ## Open work and next step
 
-The four requested independent proof groups have concrete endpoints on their
-stated domains and pass the full build, source and public/private audits.
-The Slater eigenfunction/homogeneous quotient calculations and the literal
-full complex generator spectral-support statement are also compiled. An exhaustive independent full-paper correspondence
-review remains outstanding. Problems 1.11, 1.15 and 1.16 remain open; Appendix C
-is outside certification. Palomar final registration consent was accepted;
-public completion is not yet confirmed. Next step: independently review full-paper correspondence and confirm
-registry publication; the requested independent proof groups are complete.
+Independent agents have completed the scoped correspondence reviews and found
+unresolved items, itemized in [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md).
+The next mathematical step is to close those statement/domain bridges and
+auxiliary assertions, then repeat review. The four requested alternative proof
+groups remain compiled and audited. Full-paper completion is not established.
+Problems 1.11, 1.15 and 1.16 remain open; Appendix C remains uncertified.
 
+Palomar registration consent was accepted, but live authenticated status fails
+with HTTP 500 and public checks find no entry. The next publication step is
+service recovery and verification of the exact versioned public record and
+source-preservation receipt. No duplicate registration request is needed.
 
-Git was reinitialized on `main` at the user’s request. The previous Git metadata is preserved at `/tmp/ginibre-git-before-reinit-2026-10-07/repository.git`. The fresh initial commit includes the source, dependency manifest, reports and verification evidence. GitHub publication and Palomar intake have occurred; no final registration has occurred. Historical checkpoints below describe earlier states and are superseded by this dashboard.
+Git was reinitialized on `main` at the user's request. Previous Git metadata is
+preserved at `/tmp/ginibre-git-before-reinit-2026-10-07/repository.git`. GitHub
+publication and Palomar intake occurred; final registry publication is unconfirmed.
+Historical checkpoints below describe earlier states and are superseded by the
+current dashboard and correspondence findings.
 
 ## Historical checkpoints (superseded)
 
