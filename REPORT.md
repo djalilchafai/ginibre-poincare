@@ -133,6 +133,35 @@ The paper's separate Section 3 spectral and Section 4 Hermite–Slater proofs
 are not each independently exported merely because the Hermite infrastructure
 and the final inequality are available.
 
+### Theorem 1.2: homogeneous-measure scaling for the Gamma radius
+
+The equilibrium independence proof retains the paper's orthogonal decomposition
+and Vandermonde translation invariance. For the Gamma radius law, the
+[paper](https://arxiv.org/html/2608.19358v2#S1.SS6) uses polar coordinates on the
+recentered hyperplane. [GinibreRadialGamma](GinibrePoincare/Analysis/GinibreRadialGamma.lean)
+instead determines the radial pushforward by sublevel-set scaling of a
+homogeneous weighted measure, using
+[HomogeneousRadialMeasure](GinibrePoincare/Analysis/HomogeneousRadialMeasure.lean).
+Gaussian tilting and probability normalization then give the Gamma density.
+The homogeneity principle is the same, but the measure calculation avoids an
+explicit polar-coordinate change of variables.
+
+### Theorem 1.3: Brownian drivers and their independence
+
+The projected SDE identities and Itô calculation of the CIR equations follow
+the [paper's factorization proof](https://arxiv.org/html/2608.19358v2#S1.SS6).
+For the radial drivers, the paper uses joint quadratic variation and Lévy
+characterization. Lean constructs stochastic integrals of adapted unit fields
+and proves their Gaussian increment laws through discrete Brownian sums and
+limits in
+[GinibreStochasticUnitFieldBrownian](GinibrePoincare/Analysis/GinibreStochasticUnitFieldBrownian.lean).
+It then proves independence through measurable Lamperti functionals of the
+independent center and relative paths in
+[GinibreStochasticRadialCenterIndependence](GinibrePoincare/Analysis/GinibreStochasticRadialCenterIndependence.lean)
+and [GinibreStochasticCenterRadialDriverIndependence](GinibrePoincare/Analysis/GinibreStochasticCenterRadialDriverIndependence.lean).
+This replaces the joint Lévy-characterization step; zero initial center and
+zero-speed cases are additional coverage, not alternative CIR formulas.
+
 ### Corollary 1.5: a direct center-power proof
 
 The [paper's corollary](https://arxiv.org/html/2608.19358v2#S1.SS7) follows the
@@ -199,6 +228,20 @@ then give the Gaussian product inequalities. This is an expanded proof of a
 cited ingredient; it is not a Bakry–Émery derivation of that ingredient.
 The matrix spectral pushforward and overlap-gradient calculations remain
 separate obligations; Gaussian LSI alone does not supply them.
+
+### Theorem 1.13: the final overlap Poincaré endpoint uses Theorem 1.1
+
+The [paper's matrix proof](https://arxiv.org/html/2608.19358v2#S1.SS9)
+applies Gaussian matrix Poincaré to the spectral lift. The final finite-overlap
+Poincaré endpoint in
+[MatrixSpectralLiftPoincareFinite](GinibrePoincare/Analysis/MatrixSpectralLiftPoincareFinite.lean)
+instead applies the already proved Ginibre Poincaré inequality to the symmetric
+observable, then bounds its ordinary gradient energy by four times the actual
+matrix overlap energy. Finite overlap energy is proved to imply the necessary
+gradient integrability. This gives the paper's coefficient `2/n`, but the final
+export depends on Theorem 1.1 rather than supplying the paper's Gaussian-matrix
+proof of this variance bound. The entropy endpoint retains the Gaussian matrix
+LSI transfer, with explicit weak-domain membership across collision matrices.
 
 ### Gaussian dbar estimates and Appendix B: explicit spectral foundations
 

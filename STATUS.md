@@ -48,10 +48,12 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 
 Proof-route documentation (2026-10-08): compared the named paper routes with
 actual Lean proof bodies and added result-specific correspondence remarks in
-REPORT.md. These cover the direct center-power spectral proof, explicit curvature
+REPORT.md. These cover the homogeneous-measure Gamma law, radial Brownian-driver
+independence, direct center-power spectral proof, explicit curvature
 witness, Hermite-derived differential deficit, Gaussian LSI foundations,
 Gaussian closed-form solver/core approximation, entire hyperplane division,
-resolvent semigroup identification and nonquadratic transport LSI. The original
+resolvent semigroup identification, the overlap Poincaré reduction to Theorem 1.1,
+and nonquadratic transport LSI. The original
 Section 2 proof of Theorem 1.1 is also exported. Same-route proofs and domain
 extensions are distinguished from alternatives; this is not an exhaustive
 line-by-line fidelity certification. Corrected the quadratic radial LSI wording,
