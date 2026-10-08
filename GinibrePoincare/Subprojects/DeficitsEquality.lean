@@ -1,5 +1,6 @@
 module
 
+public import GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions
 public import GinibrePoincare.Analysis.AlternativeSlaterExpansion
 public import GinibrePoincare.Analysis.AlternativeSlaterLowering
 public import GinibrePoincare.Analysis.AlternativeSlaterOrbits
@@ -8,6 +9,9 @@ public import GinibrePoincare.Analysis.AlternativeSlaterPolynomial
 public import GinibrePoincare.Analysis.AlternativeSpectralDifferentialFactorization
 public import GinibrePoincare.Analysis.AlternativeSpectralNumberPolynomial
 public import GinibrePoincare.Analysis.AlternativeSpectralPoincare
+public import GinibrePoincare.Analysis.AlternativeSpectralSupport
+public import GinibrePoincare.Analysis.AlternativeSpectralSupportCFC
+public import GinibrePoincare.Analysis.AlternativeSpectralSupportComplex
 public import GinibrePoincare.Analysis.FiniteHermiteDeficit
 public import GinibrePoincare.Analysis.GinibreC1WeakPoincare
 public import GinibrePoincare.Analysis.GinibreEqualityConjugateModeDetection

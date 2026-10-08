@@ -12,13 +12,13 @@ See [numbered report](REPORT.md) for proof scope and open work.
 | [Gaussian log-Sobolev and entropy](GinibrePoincare/Subprojects/GaussianLSI.lean) | 23 | 2,850 | Gaussian LSI via discrete approximation, entropy tensorization and analytic closure. |
 | [Ginibre measure and holomorphic geometry](GinibrePoincare/Subprojects/GinibreMeasureGeometry.lean) | 51 | 10,472 | Concrete normalization, Vandermonde isometry, symmetry and holomorphic projection geometry. |
 | [Weak Sobolev domains and collision capacity](GinibrePoincare/Subprojects/WeakSobolev.lean) | 42 | 6,167 | Weak gradients, mollification, core approximation, collision removal and capacity; Appendix A. |
-| [Poincaré deficits and equality](GinibrePoincare/Subprojects/DeficitsEquality.lean) | 34 | 4,808 | Sharp symmetric inequality, Hermite deficits and affine equality; supports Theorems 1.1, 1.9 and 1.10. |
+| [Poincaré deficits and equality](GinibrePoincare/Subprojects/DeficitsEquality.lean) | 38 | 5,349 | Sharp symmetric inequality, Hermite deficits and affine equality; supports Theorems 1.1, 1.9 and 1.10. |
 | [Polynomial, radial and equilibrium sectors](GinibrePoincare/Subprojects/PolynomialRadial.lean) | 61 | 7,213 | Equilibrium factorization, Hermite–Laguerre eigenfunctions, Kostlan laws and radial LSI; Theorems 1.2, 1.4, 1.12. |
 | [Diffusion operators and analytic semigroups](GinibrePoincare/Subprojects/GeneratorSemigroup.lean) | 142 | 14,757 | Generator domains, Bochner identities, curvature, resolvents and transition identification. |
 | [Stochastic calculus foundations](GinibrePoincare/Subprojects/StochasticCalculus.lean) | 231 | 17,411 | Brownian integration, quadratic variation, Girsanov changes of law and finite-dimensional Itô formulas. |
 | [Ginibre stochastic dynamics](GinibrePoincare/Subprojects/StochasticDynamics.lean) | 361 | 27,821 | Singular stochastic equation, Hamiltonian noise constructions, independence, CIR factorization and stationarity; Theorem 1.3. |
 | [Matrix lift and eigenvector overlaps](GinibrePoincare/Subprojects/MatrixLift.lean) | 127 | 11,037 | Schur and spectral charts, matrix Gaussian law and finite-energy overlap inequalities; Theorem 1.13. |
-| [Nonquadratic potentials](GinibrePoincare/Subprojects/NonQuadratic.lean) | 216 | 24,339 | Weighted dbar, general-potential geometry, convex transports and radial LSI; Theorem 1.14. |
+| [Nonquadratic potentials](GinibrePoincare/Subprojects/NonQuadratic.lean) | 240 | 26,667 | Weighted dbar, general-potential geometry, convex transports and radial LSI; Theorem 1.14. |
 | [Paper assembly](GinibrePoincare/Subprojects/Endgame.lean) | 13 | 1,471 | Public completion endpoints and finite or abstract reduction assemblies. |
 
 Counts include comments and blank lines, exclude generated facades and Mathlib. The full project/transitive Mathlib counts are refreshed separately with `python3 scripts/count_lean_sources.py`.
@@ -249,8 +249,9 @@ Entry point: `WeakSobolev`. Direct dependency groups: ComplexGaussianHermite, De
 
 ### Poincaré deficits and equality
 
-Entry point: `DeficitsEquality`. Direct dependency groups: ComplexGaussianHermite, Endgame, GaussianLSI, GeneratorSemigroup, GinibreMeasureGeometry, PolynomialRadial, WeakSobolev.
+Entry point: `DeficitsEquality`. Direct dependency groups: ComplexGaussianHermite, Endgame, GaussianLSI, GeneratorSemigroup, GinibreMeasureGeometry, NonQuadratic, PolynomialRadial, WeakSobolev.
 
+- [AlternativeSlaterEigenfunctions](GinibrePoincare/Analysis/AlternativeSlaterEigenfunctions.lean)
 - [AlternativeSlaterExpansion](GinibrePoincare/Analysis/AlternativeSlaterExpansion.lean)
 - [AlternativeSlaterLowering](GinibrePoincare/Analysis/AlternativeSlaterLowering.lean)
 - [AlternativeSlaterOrbits](GinibrePoincare/Analysis/AlternativeSlaterOrbits.lean)
@@ -259,6 +260,9 @@ Entry point: `DeficitsEquality`. Direct dependency groups: ComplexGaussianHermit
 - [AlternativeSpectralDifferentialFactorization](GinibrePoincare/Analysis/AlternativeSpectralDifferentialFactorization.lean)
 - [AlternativeSpectralNumberPolynomial](GinibrePoincare/Analysis/AlternativeSpectralNumberPolynomial.lean)
 - [AlternativeSpectralPoincare](GinibrePoincare/Analysis/AlternativeSpectralPoincare.lean)
+- [AlternativeSpectralSupport](GinibrePoincare/Analysis/AlternativeSpectralSupport.lean)
+- [AlternativeSpectralSupportCFC](GinibrePoincare/Analysis/AlternativeSpectralSupportCFC.lean)
+- [AlternativeSpectralSupportComplex](GinibrePoincare/Analysis/AlternativeSpectralSupportComplex.lean)
 - [FiniteHermiteDeficit](GinibrePoincare/Analysis/FiniteHermiteDeficit.lean)
 - [GinibreC1WeakPoincare](GinibrePoincare/Analysis/GinibreC1WeakPoincare.lean)
 - [GinibreEqualityConjugateModeDetection](GinibrePoincare/Analysis/GinibreEqualityConjugateModeDetection.lean)
@@ -1237,19 +1241,31 @@ Entry point: `MatrixLift`. Direct dependency groups: ComplexGaussianHermite, Def
 
 Entry point: `NonQuadratic`. Direct dependency groups: ComplexGaussianHermite, DeficitsEquality, Endgame, GaussianLSI, GinibreMeasureGeometry, PolynomialRadial, StochasticCalculus, StochasticDynamics, WeakSobolev.
 
+- [AlternativeBakryEmeryBoundedLSIClosure](GinibrePoincare/Analysis/AlternativeBakryEmeryBoundedLSIClosure.lean)
 - [AlternativeBakryEmeryBrownianDyadicCompleted](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicCompleted.lean)
 - [AlternativeBakryEmeryBrownianDyadicCoordinates](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicCoordinates.lean)
+- [AlternativeBakryEmeryBrownianDyadicCovariance](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicCovariance.lean)
 - [AlternativeBakryEmeryBrownianDyadicGaussianFinite](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianFinite.lean)
 - [AlternativeBakryEmeryBrownianDyadicGaussianLimit](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianLimit.lean)
+- [AlternativeBakryEmeryBrownianDyadicGaussianMoments](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianMoments.lean)
+- [AlternativeBakryEmeryBrownianDyadicGaussianPartial](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianPartial.lean)
+- [AlternativeBakryEmeryBrownianDyadicGaussianProcess](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianProcess.lean)
 - [AlternativeBakryEmeryBrownianDyadicTents](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicTents.lean)
 - [AlternativeBakryEmeryBrownianDyadicUniform](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicUniform.lean)
 - [AlternativeBakryEmeryBrownianEndpoint](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianEndpoint.lean)
+- [AlternativeBakryEmeryBrownianGlobal](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGlobal.lean)
+- [AlternativeBakryEmeryBrownianGlobalCoordinates](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGlobalCoordinates.lean)
+- [AlternativeBakryEmeryBrownianGlobalCovariance](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGlobalCovariance.lean)
+- [AlternativeBakryEmeryBrownianGlobalGaussian](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGlobalGaussian.lean)
+- [AlternativeBakryEmeryBrownianGlobalPath](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGlobalPath.lean)
 - [AlternativeBakryEmeryBrownianGrid](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGrid.lean)
 - [AlternativeBakryEmeryBrownianNoise](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianNoise.lean)
 - [AlternativeBakryEmeryCameronMartin](GinibrePoincare/Analysis/AlternativeBakryEmeryCameronMartin.lean)
+- [AlternativeBakryEmeryConvexGibbsLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryConvexGibbsLSI.lean)
 - [AlternativeBakryEmeryConvexLift](GinibrePoincare/Analysis/AlternativeBakryEmeryConvexLift.lean)
 - [AlternativeBakryEmeryEndpointApproximation](GinibrePoincare/Analysis/AlternativeBakryEmeryEndpointApproximation.lean)
 - [AlternativeBakryEmeryEntropyFlow](GinibrePoincare/Analysis/AlternativeBakryEmeryEntropyFlow.lean)
+- [AlternativeBakryEmeryEntropyPiTensorization](GinibrePoincare/Analysis/AlternativeBakryEmeryEntropyPiTensorization.lean)
 - [AlternativeBakryEmeryFiniteEndpoint](GinibrePoincare/Analysis/AlternativeBakryEmeryFiniteEndpoint.lean)
 - [AlternativeBakryEmeryGaussianNoiseLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryGaussianNoiseLSI.lean)
 - [AlternativeBakryEmeryGaussianResponse](GinibrePoincare/Analysis/AlternativeBakryEmeryGaussianResponse.lean)
@@ -1278,8 +1294,10 @@ Entry point: `NonQuadratic`. Direct dependency groups: ComplexGaussianHermite, D
 - [AlternativeBakryEmeryGibbsReversalSurvival](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalSurvival.lean)
 - [AlternativeBakryEmeryGibbsReversalVolterra](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalVolterra.lean)
 - [AlternativeBakryEmeryGibbsStationaryLaw](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsStationaryLaw.lean)
+- [AlternativeBakryEmeryGradientBasis](GinibrePoincare/Analysis/AlternativeBakryEmeryGradientBasis.lean)
 - [AlternativeBakryEmeryHilbertLift](GinibrePoincare/Analysis/AlternativeBakryEmeryHilbertLift.lean)
 - [AlternativeBakryEmeryIntegrationByParts](GinibrePoincare/Analysis/AlternativeBakryEmeryIntegrationByParts.lean)
+- [AlternativeBakryEmeryIsometricGradient](GinibrePoincare/Analysis/AlternativeBakryEmeryIsometricGradient.lean)
 - [AlternativeBakryEmeryLangevinConfiguration](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinConfiguration.lean)
 - [AlternativeBakryEmeryLangevinContraction](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinContraction.lean)
 - [AlternativeBakryEmeryLangevinCorrectedDriver](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinCorrectedDriver.lean)
@@ -1289,14 +1307,24 @@ Entry point: `NonQuadratic`. Direct dependency groups: ComplexGaussianHermite, D
 - [AlternativeBakryEmeryLangevinGlobalContinuity](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinGlobalContinuity.lean)
 - [AlternativeBakryEmeryLangevinLocal](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinLocal.lean)
 - [AlternativeBakryEmeryLangevinNoiseStability](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinNoiseStability.lean)
+- [AlternativeBakryEmeryLiftBoundedLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryLiftBoundedLSI.lean)
+- [AlternativeBakryEmeryLiftLSILimit](GinibrePoincare/Analysis/AlternativeBakryEmeryLiftLSILimit.lean)
+- [AlternativeBakryEmeryLiftProbability](GinibrePoincare/Analysis/AlternativeBakryEmeryLiftProbability.lean)
 - [AlternativeBakryEmeryLiftTransfer](GinibrePoincare/Analysis/AlternativeBakryEmeryLiftTransfer.lean)
 - [AlternativeBakryEmeryPolygonalApproximation](GinibrePoincare/Analysis/AlternativeBakryEmeryPolygonalApproximation.lean)
 - [AlternativeBakryEmeryPolygonalNoise](GinibrePoincare/Analysis/AlternativeBakryEmeryPolygonalNoise.lean)
 - [AlternativeBakryEmeryPolygonalResponse](GinibrePoincare/Analysis/AlternativeBakryEmeryPolygonalResponse.lean)
+- [AlternativeBakryEmeryPotentialRadialLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryPotentialRadialLSI.lean)
+- [AlternativeBakryEmeryPotentialRadialLipschitzLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryPotentialRadialLipschitzLSI.lean)
 - [AlternativeBakryEmeryProductGradient](GinibrePoincare/Analysis/AlternativeBakryEmeryProductGradient.lean)
 - [AlternativeBakryEmeryRadialDrift](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialDrift.lean)
+- [AlternativeBakryEmeryRadialLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialLSI.lean)
 - [AlternativeBakryEmeryRadialLift](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialLift.lean)
+- [AlternativeBakryEmeryRadialProductAssembly](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialProductAssembly.lean)
+- [AlternativeBakryEmeryRadialProductLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialProductLSI.lean)
+- [AlternativeBakryEmeryRadiusLaw](GinibrePoincare/Analysis/AlternativeBakryEmeryRadiusLaw.lean)
 - [AlternativeBakryEmeryRegularizedEuclidean](GinibrePoincare/Analysis/AlternativeBakryEmeryRegularizedEuclidean.lean)
+- [AlternativeBakryEmeryRegularizedGibbsLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryRegularizedGibbsLSI.lean)
 - [AlternativeBakryEmeryRegularizedLift](GinibrePoincare/Analysis/AlternativeBakryEmeryRegularizedLift.lean)
 - [AlternativeBakryEmeryScalarForm](GinibrePoincare/Analysis/AlternativeBakryEmeryScalarForm.lean)
 - [AlternativeBakryEmeryVolterraContraction](GinibrePoincare/Analysis/AlternativeBakryEmeryVolterraContraction.lean)

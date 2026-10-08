@@ -1,0 +1,30 @@
+digraph formal_dependencies {
+rankdir=TB;
+graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label="Exact direct local declaration references", labelloc=t, fontname="sans-serif"];
+node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];
+edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
+"GinibrePoincare.Configuration" [label="Configuration"];
+"GinibrePoincare.ConfigurationPolynomial" [label="ConfigurationPolynomial"];
+"GinibrePoincare.IsSymmetricConfigurationPolynomial" [label="IsSymmetricConfigurationPolynomial"];
+"GinibrePoincare.slaterDeterminant" [label="slaterDeterminant"];
+"GinibrePoincare.slater_zero_degree_homogeneous_quotient" [label="slater_zero_degree_homogeneous_quotient"];
+"GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact" [label="slater_zero_degree_homogeneous_quotient_exact", fillcolor="#dbeafe", color="#2563eb", penwidth=2];
+"GinibrePoincare.vandermonde" [label="vandermonde"];
+"GinibrePoincare.vandermondeDegree" [label="vandermondeDegree"];
+"_private.GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions.0.GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact._proof_1_1" [label="_private.Analysis.AlternativeSlater\nEigenfunctions.0.slater_zero_degree_homogeneous_quotient_exact._proof_1_1"];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.ConfigurationPolynomial" -> "GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.IsSymmetricConfigurationPolynomial" -> "GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.slaterDeterminant" -> "GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.slater_zero_degree_homogeneous_quotient" -> "GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.vandermonde" -> "GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.vandermondeDegree" -> "GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact" [color="#2563eb", tooltip="value"];
+"_private.GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions.0.GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact._proof_1_1" -> "GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.ConfigurationPolynomial" [style=invis];
+"GinibrePoincare.ConfigurationPolynomial" -> "GinibrePoincare.IsSymmetricConfigurationPolynomial" [style=invis];
+"GinibrePoincare.IsSymmetricConfigurationPolynomial" -> "GinibrePoincare.slaterDeterminant" [style=invis];
+"GinibrePoincare.slaterDeterminant" -> "GinibrePoincare.slater_zero_degree_homogeneous_quotient" [style=invis];
+"GinibrePoincare.slater_zero_degree_homogeneous_quotient" -> "GinibrePoincare.vandermonde" [style=invis];
+"GinibrePoincare.vandermonde" -> "GinibrePoincare.vandermondeDegree" [style=invis];
+"GinibrePoincare.vandermondeDegree" -> "_private.GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions.0.GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact._proof_1_1" [style=invis];
+}

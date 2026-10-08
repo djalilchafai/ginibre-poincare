@@ -123,7 +123,7 @@ The [official v2 proof section](https://arxiv.org/html/2608.19358v2#S2) was chec
 
 ## Open work and next step
 
-No listed asserted-result formalization gap remains. Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C experiments are not numerically certified. Each alternative proof route is not independently exported. Review the completed source and numbered correspondence; no overall completion percentage is assigned.
+No listed asserted-result formalization gap remains. Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C experiments are not numerically certified. The four requested proof groups have independent concrete endpoints. Review the completed source and numbered correspondence; no overall completion percentage is assigned.
 
 ## Proof-route correspondence remarks
 
@@ -138,15 +138,15 @@ records other original arguments replaced at existing endpoints.
 
 | Requested route | Current Lean implementation | Completion restriction |
 | --- | --- | --- |
-| Theorem 1.1, Section 3 spectral route | [AlternativeSpectralPoincare](GinibrePoincare/Analysis/AlternativeSpectralPoincare.lean): concrete number forms, anti-Vandermonde factor, two-sided form identity, independently assembled sharp inequality; [DifferentialFactorization](GinibrePoincare/Analysis/AlternativeSpectralDifferentialFactorization.lean) proves literal complex pregenerator factorization (3.1) and Vandermonde calculations (3.3–3.4) | Full symmetric ordinary weak-H¹ endpoint; full build and public/private audits pass |
-| Theorem 1.1, Section 4 Hermite–Slater route | [AlternativeSlaterExpansion](GinibrePoincare/Analysis/AlternativeSlaterExpansion.lean) and [AlternativeSlaterPoincare](GinibrePoincare/Analysis/AlternativeSlaterPoincare.lean): actual determinant representatives, convergent ordered-frame expansion and factorial-normalized Parseval, degree energy and sharp inequality | Full symmetric ordinary weak-H¹ endpoint; signed orbit pairings, orthogonality, lowering and polynomial quotient proved; full build and public/private audits pass |
+| Theorem 1.1, Section 3 spectral route | [AlternativeSpectralPoincare](GinibrePoincare/Analysis/AlternativeSpectralPoincare.lean): concrete number forms, anti-Vandermonde factor, two-sided form identity, independently assembled sharp inequality; [DifferentialFactorization](GinibrePoincare/Analysis/AlternativeSpectralDifferentialFactorization.lean) proves literal complex pregenerator factorization (3.1) and Vandermonde calculations (3.3–3.4); [SpectralSupport](GinibrePoincare/Analysis/AlternativeSpectralSupport.lean) proves the actual full complex graph-spectrum support | Full symmetric ordinary weak-H¹ endpoint; literal generator spectrum in `{0} ∪ (−∞,−2]`, at paper speed |
+| Theorem 1.1, Section 4 Hermite–Slater route | [AlternativeSlaterExpansion](GinibrePoincare/Analysis/AlternativeSlaterExpansion.lean) and [AlternativeSlaterPoincare](GinibrePoincare/Analysis/AlternativeSlaterPoincare.lean): actual determinant representatives, convergent ordered-frame expansion and factorial-normalized Parseval, degree energy and sharp inequality | Full symmetric ordinary weak-H¹ endpoint; signed orbit pairings, orthogonality, lowering and polynomial quotient proved; [Eigenfunctions](GinibrePoincare/Analysis/AlternativeSlaterEigenfunctions.lean) additionally exports literal (4.2) and homogeneous quotient degree (4.6) |
 | Theorem 1.10, Section 6 integrated Bochner–Kodaira route | [AlternativeBochnerKodairaDifferential](GinibrePoincare/Analysis/AlternativeBochnerKodairaDifferential.lean), [Compact](GinibrePoincare/Analysis/AlternativeBochnerKodairaCompact.lean), [Closure](GinibrePoincare/Analysis/AlternativeBochnerKodairaClosure.lean): actual commutator, Gaussian IBP integrated identity and closed compact-jet extension | Focused compiled full real symmetric generator endpoint in [BochnerKodairaTheoremOneTen](GinibrePoincare/Endgame/BochnerKodairaTheoremOneTen.lean), with actual first/second weak derivatives and both exact deficits; full build and public/private audits pass |
-| Theorem 1.14, primary Bakry–Émery radial LSI route | Exact convex lift and normalized radial product transfers; actual global Langevin construction, finite Gaussian response and Brownian endpoint entropy limit; [GibbsEquilibriumReversal](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsEquilibriumReversal.lean) and [GibbsStationaryLaw](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsStationaryLaw.lean) derive concrete Gibbs invariance; [GibbsLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsLSI.lean) proves sharp `2/κ` compact-C¹ Gibbs LSI from a supplied independent Brownian process | Internal Brownian existence and the final regularization/radial transfer remain open in this route. A theorem retaining a supplied Brownian process is not the completed analytic endpoint; the scalar entropy-flow theorem remains a separate reduction |
+| Theorem 1.14, primary Bakry–Émery radial LSI route | [ConvexGibbsLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryConvexGibbsLSI.lean) constructs Brownian noise and proves actual strongly convex Gibbs LSI; [LiftLSILimit](GinibrePoincare/Analysis/AlternativeBakryEmeryLiftLSILimit.lean), [RadialLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialLSI.lean), [RadialProductLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialProductLSI.lean) and [PotentialRadialLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryPotentialRadialLSI.lean) prove regularization, exact radius laws, entropy tensorization and interacting radial transfer | Exact `2/(nρ)` ordinary gradient coefficient; paper smooth compact radial domain and bounded Lipschitz radial extension. No supplied Brownian process, stationarity or analytic completion input; the endgame invokes this route |
 | Theorem 1.13, Gaussian matrix Poincaré route | [SquareEntropyLinearization](GinibrePoincare/Analysis/SquareEntropyLinearization.lean), [MatrixGaussianPoincare](GinibrePoincare/Analysis/MatrixGaussianPoincare.lean), [AlternativeMatrixPoincare](GinibrePoincare/Analysis/AlternativeMatrixPoincare.lean): actual Gaussian matrix H¹ inequality, spectral pushforward and exact overlap energy, with finite-overlap H¹ membership derived internally | Exact coefficient `2/n`; full build and public/private audits pass. The endgame now invokes this Gaussian route |
 
 | Paper proof argument | Lean route at the recorded endpoint |
 | --- | --- |
-| Theorem 1.14: primary Bakry–Émery radial LSI argument | Contracting Gaussian quantile transport, an alternative permitted by the paper |
+| Theorem 1.14: primary Bakry–Émery radial LSI argument | Original Euclidean-lift route now formalized, with an expanded proof of the cited strongly convex Gibbs ingredient. The independent contracting Gaussian quantile transport proof remains exported |
 | Theorem 1.3: joint quadratic variation and Lévy characterization of radial Brownian drivers | Discrete Brownian sums and limits, followed by independence through measurable functionals of independent paths |
 | Lemma 2.6: Weierstrass division and holomorphic germs | Integral division by successive collision hyperplanes |
 | Remark 2.4: invocation of Hörmander–Berndtsson solvability | Gaussian-specific Hermite spectral solver and projection to the canonical minimal solution |
@@ -206,11 +206,24 @@ proves the corresponding signed inner products, orthogonality and repeated-label
 vanishing. [AlternativeSlaterLowering](GinibrePoincare/Analysis/AlternativeSlaterLowering.lean)
 and [AlternativeSlaterPolynomial](GinibrePoincare/Analysis/AlternativeSlaterPolynomial.lean)
 prove the actual Wirtinger lowering and holomorphic Vandermonde quotient.
+[AlternativeSlaterEigenfunctions](GinibrePoincare/Analysis/AlternativeSlaterEigenfunctions.lean)
+exports the pointwise determinant number-operator equation (4.2) and a literal
+symmetric homogeneous polynomial quotient of degree `∑ aᵢ − n(n−1)/2`, as in
+(4.6), with nonvanishing and degree bounds proved internally.
 Both inequalities extend to the full symmetric ordinary weak-H¹ domain using
 the internally proved weak-domain bridges. This extension is additional domain
 coverage. [AlternativeSpectralDifferentialFactorization](GinibrePoincare/Analysis/AlternativeSpectralDifferentialFactorization.lean)
 separately proves the literal complex pregenerator factorization and the two
-Vandermonde differential expansions on smooth collision-free points. The original Section 2 route remains exported.
+Vandermonde differential expansions on smooth collision-free points.
+[AlternativeSpectralSupport](GinibrePoincare/Analysis/AlternativeSpectralSupport.lean)
+proves the full complex generator's spectrum is contained in `{0} ∪ (−∞,−2]`,
+using the project's actual bounded two-sided graph-resolvent definition. Thus
+`−Aₙ` has spectrum contained in `{0} ∪ [2,∞)`, as required by the paper. Lean expands the spectral-theorem
+step by applying continuous functional calculus to a positive polynomial of the
+actual resolvent, then constructs the literal graph inverse at every excluded
+real or nonreal parameter. This uses the new two-sided number-form gap and
+calls no earlier sharp Poincaré endpoint. The original Section 2 route remains
+exported.
 
 ### Theorem 1.2: homogeneous-measure scaling for the Gamma radius
 
@@ -347,8 +360,8 @@ matrices and membership in the actual H¹ completion are derived internally from
 finite overlap energy. No Ginibre Poincaré theorem or overlap lower-bound
 comparison is invoked. `fullMatrixLift_functional_inequalities` now uses this
 Gaussian route for the variance bound; the entropy proof remains Gaussian LSI
-transfer. Focused compilation and standard-axiom queries pass; full integration
-and compiled dependency-independence checks are pending.
+transfer. Focused and full compilation, public/private standard-axiom audits and
+compiled transitive proof-body independence checks pass for both matrix bounds.
 
 The previous proof in
 [MatrixSpectralLiftPoincareFinite](GinibrePoincare/Analysis/MatrixSpectralLiftPoincareFinite.lean)
@@ -429,28 +442,41 @@ semigroup-identification argument, rather than an invocation of the paper's
 general Hunt-process correspondence. The weak-form and paper-speed
 identifications are proved separately.
 
-### Theorem 1.14: transport instead of the primary Bakry–Émery argument
+### Theorem 1.14: primary Euclidean lift and independent transport proof
 
-The radial LSI proof differs from the paper's primary route as detailed below.
-The paper explicitly permits a transport alternative in footnote 6. This
-remark concerns the radial LSI part, not a replacement of the nonquadratic
-Poincaré argument by a convexity assumption.
+The [versioned paper's proof and footnote 6](https://arxiv.org/html/2608.19358v2#S1.SS10)
+apply the strongly convex Bakry–Émery LSI to a Euclidean lift of each radius
+law, then use the norm map, tensorization and Kostlan gradient transfer. This
+primary route is now formalized by
+[AlternativeBakryEmeryPotentialRadialLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryPotentialRadialLSI.lean),
+and the nonquadratic endgame invokes it. The independent transport proof
+permitted by footnote 6 remains exported in `StrongConvexPotentialRadialLSI`.
 
-The requested primary-route implementation is in progress. Lean expands the
-strongly convex diffusion ingredient through actual Langevin construction,
-Gaussian Cameron–Martin response, and a stationary entropy limit. This is an
-expanded proof of the cited strongly convex LSI ingredient, using concrete
-additive noise; it is not a standalone arbitrary-diffusion `Γ₂` theorem.
-[GibbsEquilibriumReversal](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsEquilibriumReversal.lean)
-derives full path reversal from the internally proved stopped Girsanov identity,
-actual stationary OU reference and compact-ball exhaustion.
-[GibbsInitialLaw](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsInitialLaw.lean)
-identifies the normalized Gaussian relative density with literal Lebesgue Gibbs
-density. [GibbsLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsLSI.lean)
-then proves the sharp compact-C¹ entropy bound from a supplied Brownian process.
-Brownian existence must still be proved internally and the regularized inequality
-transferred to the paper's radial domain before this route is called complete.
-The existing transport endpoint remains exported and verified.
+Lean expands the cited strongly convex Gibbs ingredient: an actual Gaussian
+Faber–Schauder series constructs independent continuous Brownian coordinates;
+the global strongly convex Langevin flow has a proved Cameron–Martin response;
+finite Gaussian noise-grid inequalities pass to the Brownian law and Gibbs
+stationary limit. Stopped Girsanov identities, OU reference reversal and
+compact-ball exhaustion prove Gibbs invariance internally.
+[ConvexGibbsLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryConvexGibbsLSI.lean)
+therefore exports actual normalized Gibbs LSI with coefficient `2/κ`, without
+stochastic or analytic completion inputs. This is an expanded proof of the
+paper's cited ingredient, not a parabolic `Γ₂` entropy-interpolation proof or
+a standalone arbitrary-diffusion curvature theorem.
+
+The smooth positive regularization has exact curvature `κ = nρ`.
+[LiftLSILimit](GinibrePoincare/Analysis/AlternativeBakryEmeryLiftLSILimit.lean)
+passes entropy and actual gradient expectations to the unregularized density
+under proved Gaussian domination. Actual Haar absolute continuity, spatial
+cutoffs and mollification extend the inequality to bounded Lipschitz functions.
+[RadiusLaw](GinibrePoincare/Analysis/AlternativeBakryEmeryRadiusLaw.lean)
+identifies the normalized lift's norm law and its almost-everywhere gradient
+energy exactly. Finite-product entropy tensorization and the actual Kostlan
+transfer finish the paper's smooth compact radial inequality with coefficient
+`2/(nρ)`, and a bounded Lipschitz radial domain extension. This extension does
+not claim an arbitrary unbounded weak-Sobolev LSI domain for nonquadratic laws.
+The generic scalar entropy-flow and factor-assembly lemmas remain explicitly
+labeled reductions; every input used by the concrete endpoint is discharged.
 
 The Poincaré part develops the same weighted-dbar coercivity/duality mechanism
 in a concrete Hilbert-space realization:
@@ -496,29 +522,31 @@ The [versioned paper's Theorem 1.14 proof and footnote 6](https://arxiv.org/html
 use a strongly convex Euclidean lift of each radius law to invoke Bakry–Émery,
 and explicitly allow contraction/transport arguments as alternatives. The
 quadratic Lean endpoint follows the Gaussian-lift route, while the
-nonquadratic endpoint uses a transport alternative:
+nonquadratic endpoint now uses the primary Euclidean-lift route as well:
 
 - **Quadratic Ginibre, Theorem 1.12:** `radial_core_lsi` and
   `radial_sobolev_lsi` in
   [FullRadialLSIReduction](GinibrePoincare/Analysis/FullRadialLSIReduction.lean)
   transfer the proved Gaussian block LSI through the radial lift and complete
   the weak-domain approximation.
-- **Nonquadratic radial extension, Theorem 1.14:** `rhoConvex_radial_lsi` in
-  [StrongConvexRadialLSI](GinibrePoincare/Analysis/StrongConvexRadialLSI.lean)
-  derives the LSI from an internally proved contracting Gaussian quantile map.
-  [StrongConvexRadialProductLSI](GinibrePoincare/Analysis/StrongConvexRadialProductLSI.lean)
-  proves the product inequality, and `rhoConvex_potential_radial_lsi` in
-  [StrongConvexPotentialRadialLSI](GinibrePoincare/Analysis/StrongConvexPotentialRadialLSI.lean)
+- **Nonquadratic radial extension, Theorem 1.14:**
+  `bakryEmery_kostlan_radius_bounded_lsi` in
+  [AlternativeBakryEmeryRadialLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialLSI.lean)
+  follows from the actual strongly convex Euclidean Gibbs lift.
+  [AlternativeBakryEmeryRadialProductLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialProductLSI.lean)
+  proves the product inequality, and `bakryEmery_potential_smooth_radial_lsi` in
+  [AlternativeBakryEmeryPotentialRadialLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryPotentialRadialLSI.lean)
   transfers it to the interacting law, with the paper coefficient `2/(nρ)`
-  multiplying the ordinary Euclidean gradient energy.
+  multiplying the ordinary Euclidean gradient energy. The previously verified
+  `rhoConvex_*` Gaussian quantile proof remains a separate implementation.
 
 Thus the radial LSI endpoints do not assume an unproved Bakry–Émery criterion.
 The library also proves concrete scalar/radial Bochner, coercivity and Fisher
 curvature estimates. It does not export a standalone general diffusion theorem
 that derives Poincaré, LSI and semigroup gradient bounds from `Γ₂ ≥ ρΓ`.
 This limitation concerns reusable general infrastructure, not a missing analytic
-hypothesis in the proved radial LSI statements. Individual alternative paper
-proof routes are not all independently formalized.
+hypothesis in the proved radial LSI statements. The four requested proof groups have independent endpoints; this does not
+claim an exhaustive formal correspondence for every argument in the paper.
 
 ## Scope qualifications
 
@@ -535,13 +563,24 @@ The numbered inventory records statement correspondence; the axiom audits separa
 
 ## Build and audit evidence
 
-Fresh `LEAN_NUM_THREADS=1 make check` passed: 5,384 build jobs; 1,296 original modules assigned exactly once to twelve subprojects; all 1,308 library modules publicly imported; only the authorized independent Challenge hole; 5,079 public axiom queries; all-local audit of 11,112 declarations including private helpers. Only `propext`, `Classical.choice` and `Quot.sound` occur in the proof-library/Solution audit closure. Both root compatibility files compile. Actual Comparator passes with empty `definition_names`, so concrete definitions remain recursively compared; con-ron accepts 61,907 exported declarations, and nanoda and Lean’s default kernel also accept.
+The current `LEAN_NUM_THREADS=1 make check` passes: 5,508 build jobs,
+1,413 original modules assigned exactly once to twelve subprojects, source
+checks, 5,753 public axiom queries and the all-local audit of 12,287 declarations,
+including private helpers. Only `propext`, `Classical.choice` and `Quot.sound`
+occur in the proof-library/Solution closure. The authorized independent
+Challenge statement hole is excluded from that closure. Compiled transitive
+proof-body checks pass for all requested groups, including both the smooth
+and bounded Lipschitz Bakry–Émery endpoints and the matrix entropy bound.
 
-- [Full build, inventory, source and axiom audits](ginibre-upgrade-verified-check.log)
-- [Import compatibility](ginibre-upgrade-compatibility.log)
-- [Draft compatibility](ginibre-upgrade-drafts.log)
-- [Actual strict Comparator and three kernel checks](ginibre-upgrade-comparator.log)
-- [Offline Palomar structural preflight](ginibre-upgrade-preflight.log)
+- [Current full build, inventory, source and axiom audits](verification/alternative-proof-check.txt)
+- [Transitive route-independence results](verification/alternative-route-independence.txt)
+- [Compiled route-independence checker](scripts/check_alternative_routes.py)
+
+The separate supported-toolchain Palomar checkpoint passed strict recursive
+statement comparison and all three kernels (con-ron, nanoda and Lean's default).
+This task changes proof-library routes; it does not claim a new full-paper
+Comparator review or completed registry publication.
+
 
 Compilation and axiom audits establish source coverage and soundness relative to the permitted axioms. The numbered inventory above separately records statement correspondence and natural domain qualifications.
 
@@ -551,9 +590,9 @@ Refreshed using `python3 scripts/count_lean_sources.py` at this checkpoint.
 
 | Source scope | Files/modules | Physical lines |
 | --- | ---: | ---: |
-| Active project Lean sources, including roots, generated facades and Lean tooling | 1,316 | 143,778 |
-| Transitively imported Mathlib | 3,794 | 1,251,826 |
-| Project plus imported Mathlib | 5,110 | 1,395,604 |
+| Active project Lean sources, including roots, generated facades and Lean tooling | 1,433 | 159,224 |
+| Transitively imported Mathlib | 3,801 | 1,253,370 |
+| Project plus imported Mathlib | 5,234 | 1,412,594 |
 
 Comments and blank lines are included. Each imported Mathlib module is counted
 once in full. Archives, Lean core and other dependencies are excluded. This is

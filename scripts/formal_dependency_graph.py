@@ -21,7 +21,12 @@ TARGETS = ['GinibrePoincare.fullMainAnalyticProof',
            'GinibrePoincare.spectral_ginibre_symmetric_weak_poincare',
            'GinibrePoincare.slater_ginibre_symmetric_weak_poincare',
            'GinibrePoincare.matrixSpectralLift_finite_overlap_gaussian_poincare',
-           'GinibrePoincare.bochnerKodairaTheoremOneTen']
+           'GinibrePoincare.bochnerKodairaTheoremOneTen',
+           'GinibrePoincare.bakryEmery_potential_smooth_radial_lsi',
+           'GinibrePoincare.bakryEmery_potential_radial_lsi_lipschitz',
+           'GinibrePoincare.matrixSpectralLift_finite_overlap_lsi',
+           'GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact',
+           'GinibrePoincare.spectral_ginibre_full_generator_spectrum_support']
 
 
 def lean_imports(path):

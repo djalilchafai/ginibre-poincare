@@ -31,6 +31,13 @@ theorem bakryEmeryRegularizedConfigurationPotential_euclidean_contDiff
   rw [bakryEmeryRegularizedConfigurationPotential_euclidean]
   exact bakryEmeryRegularizedLift_contDiff n V ε hV hε
 
+theorem bakryEmeryRegularizedConfigurationPotential_contDiff
+    (n d : ℕ) (V : Potential) (ε : ℝ) (hV : ContDiff ℝ 2 V) (hε : 0 < ε) :
+    ContDiff ℝ 2 (bakryEmeryRegularizedConfigurationPotential n d V ε) := by
+  have h := (bakryEmeryRegularizedConfigurationPotential_euclidean_contDiff n d V ε hV hε).comp
+    (configurationEuclideanEquiv d).contDiff
+  simpa only [Function.comp_def,ContinuousLinearEquiv.symm_apply_apply] using h
+
 theorem bakryEmeryRegularizedConfigurationPotential_euclidean_strongConvex
     (n d : ℕ) (ρ ε : ℝ) (V : Potential)
     (hrot : IsRotationalPotential V) (hc : IsRhoConvexPotential ρ V) :
@@ -60,6 +67,7 @@ def bakryEmeryRealComplexHilbertEquiv (k : ℕ) :
       simp only [configurationNormSq,Complex.normSq_eq_norm_sq]
     exact (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp (hc.trans hr.symm)
 
+#print axioms bakryEmeryRegularizedConfigurationPotential_contDiff
 #print axioms bakryEmeryRealComplexHilbertEquiv
 #print axioms bakryEmeryRegularizedConfigurationPotential_euclidean
 #print axioms bakryEmeryRegularizedConfigurationPotential_euclidean_contDiff

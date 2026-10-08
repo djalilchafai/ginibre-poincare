@@ -1,10 +1,10 @@
 {
   "counting_rule": "Physical .lean lines, including comments and blank lines. All active project sources including root files, generated facades, excluded drafts and Lean tooling under scripts; archives excluded. Used Mathlib is the transitive source-module import closure of those project files, each module counted once in full. Lean and non-Mathlib dependencies excluded. This is module-level usage, not declaration-level proof dependency usage.",
-  "project_files": 1405,
-  "project_lines": 156111,
-  "used_mathlib_files": 3797,
-  "used_mathlib_lines": 1252833,
-  "total_lines_with_used_mathlib": 1408944,
-  "verified_entry_used_mathlib_files": 3797,
-  "verified_entry_used_mathlib_lines": 1252833
+  "project_files": 1433,
+  "project_lines": 159224,
+  "used_mathlib_files": 3801,
+  "used_mathlib_lines": 1253370,
+  "total_lines_with_used_mathlib": 1412594,
+  "verified_entry_used_mathlib_files": 3801,
+  "verified_entry_used_mathlib_lines": 1253370
 }

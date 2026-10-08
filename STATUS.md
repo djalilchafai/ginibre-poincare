@@ -1,4 +1,4 @@
-# Formalization status — asserted endpoints verified; independent proof routes active (2026-10-08)
+# Formalization status — asserted endpoints and requested independent routes verified (2026-10-08)
 
 The authoritative source is [arXiv:2608.19358v2](https://arxiv.org/abs/2608.19358v2).
 The asserted numbered results and the seventeen required milestones now have compiled concrete endpoints on the stated domains. The original analytic proof of Theorem 1.1, both Theorem 1.9 identities, and the ordinary-distributional Theorem 1.10 endpoint are exported without analytic completion hypotheses. The final global entire Vandermonde factorization, actual entire-space distance formulas and canonical minimal dbar solution are proved. Problems 1.11, 1.15 and 1.16 remain the paper's open research questions; Appendix C numerical experiments are not certified. No overall completion percentage is asserted.
@@ -6,7 +6,7 @@ The asserted numbered results and the seventeen required milestones now have com
 The public library is organized into twelve thematic import subprojects:
 [SUBPROJECTS.md](SUBPROJECTS.md) gives every file, counts, entry points and direct
 dependency groups; [subprojects.json](subprojects.json) is the machine-readable
-inventory. Existing module paths remain available. Every one of the 1,385
+inventory. Existing module paths remain available. Every one of the 1,413
 original library modules occurs in exactly one group, plus twelve generated
 facades. The root imports these facades. The proof endpoint entry point is
 [FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean).
@@ -41,8 +41,8 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. At 
 | Projection geometry, Lemma 2.7 / Remark 2.8 | Centered holomorphic/conjugate orthogonality; arbitrary complex L² two-projection bound and actual conjugate closed-subspace projection; arbitrary real centered L² Pythagoras and half-distance; pointwise center and Vandermonde cancellation formulas | Actual entire symmetric L² = Hdiv = closed polynomial space; literal distance infima and paper normalization proved |
 | Supplementary claims / Appendix B | Nonsymmetric counterexample, linear-statistic transfer, nonholomorphic radius, polynomial-sector properness and actual Bochner/commutation formulas | Each result retains its stated domain |
 | Palomar packaging | Module headers, pinned 4.35.0-rc2 dependencies, schema-valid provenance, independent weak-H¹ Theorem 1.1 statement and Solution | Full supported-toolchain build/audits, strict local Comparator and official full preflight pass; GitHub published; Palomar submission accepted, official verification passed; clean editorial review; registration consent accepted, public completion pending |
-| Bakry–Émery / Bochner coverage | Concrete pointwise Bochner formulas, Ginibre curvature unbounded below for n ≥ 2, full-generator integrated curvature bound, scalar/radial curvature-to-coercivity and Fisher estimates | No standalone general diffusion criterion is exported; radial LSI endpoints are proved via Gaussian lift/derived contracting quantile transport, rather than assuming that criterion |
-| Requested independent proof routes | Focused spectral and Hermite–Slater sharp weak-H¹ endpoints and literal complex spectral factorization; independent Bochner–Kodaira graph deficits; actual Gaussian matrix H¹/finite-overlap variance route with coefficient 2/n | Transitive proof-body independence checks pass for all four new endpoints; full build/source/public/private audits pass at this checkpoint. Primary nonquadratic Bakry–Émery diffusion-law entropy remains unproved |
+| Bakry–Émery / Bochner coverage | Concrete pointwise Bochner formulas, Ginibre curvature unbounded below for n ≥ 2, full-generator integrated curvature bound, scalar/radial curvature-to-coercivity and Fisher estimates | No standalone arbitrary-diffusion criterion is exported; the primary strongly convex Euclidean Gibbs lift and independent quantile transport routes are both proved internally |
+| Requested independent proof routes | Focused spectral and Hermite–Slater sharp weak-H¹ endpoints and literal complex spectral factorization; independent Bochner–Kodaira graph deficits; actual Gaussian matrix H¹/finite-overlap variance route with coefficient 2/n | All four requested groups have concrete independent endpoints; full build/source/public/private audits and transitive proof-body independence checks pass. Literal Slater eigenfunction/homogeneous quotient calculations and full complex generator spectral support also compile independently |
 | Problems 1.11, 1.15, 1.16 / Appendix C | Identified as open research questions / numerical experiments | They are not asserted solved or numerically certified by Lean |
 
 ## Latest progress
@@ -58,27 +58,36 @@ checks expand every transitively imported local theorem body and confirm that
 they do not call the earlier Poincaré/deficit endpoints specified by the route audit.
 This checks proof references, not an exhaustive paper correspondence review.
 The single-thread `make check` checkpoint passes: full build, generated inventory
-and source checks, 5,593 public axiom queries and the all-local audit of 12,070
+and source checks, 5,753 public axiom queries and the all-local audit of 12,287
 declarations, with only `propext`, `Classical.choice`, and `Quot.sound`.
 See [checkpoint build/audit log](verification/alternative-proof-check.txt) and
-[compiled route-independence check](scripts/check_alternative_routes.py).
+[compiled route-independence results](verification/alternative-route-independence.txt).
 
 
-The primary Bakry–Émery route remains unfinished. Its focused compiled modules
-now construct the global continuous-noise Langevin path and measurable flow,
-prove the finite Gaussian endpoint inequality and its actual Brownian limit,
-derive stopped Girsanov laws, integrate the Gaussian initial likelihood and
-exhaust compact balls to obtain full path reversal and concrete normalized Gibbs
-invariance. Actual compact-C¹ Gibbs LSI with sharp constant `2/κ` follows from
-a supplied independent Brownian process, with all mass, stationarity and
-entropy/gradient limits proved internally. The internal Brownian existence
-construction and final regularization/radial transfer are still required to
-export the analytic theorem without stochastic completion inputs. The Gaussian
-Faber–Schauder series already has a proved almost-everywhere uniform continuous
-limit; its Gaussian increment laws and global path assembly are in progress.
-The expanded full-project checkpoint passes all build/source/public/private
-audits. No overall completion
-percentage or completion of all four requested groups is claimed.
+The primary Bakry–Émery route now has concrete internally completed endpoints.
+An actual Gaussian Faber–Schauder construction proves continuous Brownian
+existence, Gaussian joint laws, covariance and independent coordinate families.
+The strongly convex Gibbs LSI constructs its global Langevin flow and proves
+Gibbs invariance and entropy limits internally. Exact `nρ` curvature survives
+smooth regularization; Gaussian domination passes entropy and ordinary gradient
+expectations to the unregularized law. Spatial cutoffs, Haar absolute continuity
+and mollification give the bounded Lipschitz lift inequality. Exact norm-law
+identification, finite-product entropy tensorization and actual Kostlan energy
+transfer prove the interacting radial inequality with coefficient `2/(nρ)` on
+the paper's smooth compact radial domain, plus a bounded Lipschitz radial
+extension. The nonquadratic endgame now invokes this primary Euclidean-lift
+route; its independent quantile transport implementation remains exported.
+No arbitrary unbounded weak-Sobolev LSI domain or standalone arbitrary-diffusion
+curvature criterion is claimed by this new route. Focused and full single-thread builds, inventory/source checks and public/private
+axiom audits pass. Transitive compiled proof-body checks also pass for the
+primary smooth and Lipschitz radial endpoints and the matrix entropy endpoint.
+
+The final supplementary check also passes. The literal Slater determinant
+number-operator equation (4.2), homogeneous Vandermonde quotient degree (4.6),
+and full complex generator graph-spectrum support are exported and audited.
+Compiled transitive proof-body checks pass for these calculations and every
+requested concrete route endpoint. The formal dependency views, thematic
+inventory and browser documentation include the new modules.
 
 
 Alternative-proof checkpoint (2026-10-08): confirmed that the report explicitly
@@ -338,9 +347,9 @@ Refreshed with `python3 scripts/count_lean_sources.py`.
 
 | Source scope | Files/modules | Physical lines |
 | --- | ---: | ---: |
-| Active project Lean sources, including roots, generated facades and Lean tooling | 1,405 | 156,111 |
-| Transitively imported Mathlib | 3,797 | 1,252,833 |
-| Project plus imported Mathlib | 5,202 | 1,408,944 |
+| Active project Lean sources, including roots, generated facades and Lean tooling | 1,433 | 159,224 |
+| Transitively imported Mathlib | 3,801 | 1,253,370 |
+| Project plus imported Mathlib | 5,234 | 1,412,594 |
 
 Comments and blank lines are included. Imported Mathlib modules are counted
 once in full, using only `.lake/packages/mathlib`. Archives, Lean core and other
@@ -350,17 +359,14 @@ audit/compatibility files; its totals therefore differ from the full source coun
 
 ## Open work and next step
 
-Asserted-result coverage and independent proof-route completion are separate.
-The requested Section 3/4, Section 6 Bochner–Kodaira and Gaussian matrix variance
-endpoints are now compiled. The primary nonquadratic Bakry–Émery proof is still
-active: complete internal Brownian existence and assemble the radial LSI using
-the proved Gibbs entropy inequality, regularization and exact normalized lift
-transfers. Global Langevin construction, Brownian-noise entropy passage and
-identification of the invariant law with actual Gibbs density are now proved;
-the current Gibbs LSI export still takes an independent Brownian process as input.
-The existing transport proof of Theorem 1.14 remains verified. Problems 1.11,
-1.15 and 1.16 remain open; Appendix C is outside certification. Palomar final
-registration consent was accepted; public completion is not yet confirmed.
+The four requested independent proof groups have concrete endpoints on their
+stated domains and pass the full build, source and public/private audits.
+The Slater eigenfunction/homogeneous quotient calculations and the literal
+full complex generator spectral-support statement are also compiled. An exhaustive independent full-paper correspondence
+review remains outstanding. Problems 1.11, 1.15 and 1.16 remain open; Appendix C
+is outside certification. Palomar final registration consent was accepted;
+public completion is not yet confirmed. Next step: independently review full-paper correspondence and confirm
+registry publication; the requested independent proof groups are complete.
 
 
 Git was reinitialized on `main` at the user’s request. The previous Git metadata is preserved at `/tmp/ginibre-git-before-reinit-2026-10-07/repository.git`. The fresh initial commit includes the source, dependency manifest, reports and verification evidence. GitHub publication and Palomar intake have occurred; no final registration has occurred. Historical checkpoints below describe earlier states and are superseded by this dashboard.

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "local_declarations": 12070,
-  "local_theorems": 10441,
-  "compiled_local_modules": 1399,
-  "external_boundary_constants": 8470,
-  "direct_reference_pairs": 1019726,
-  "source_modules": 1404,
-  "local_import_edges": 5243,
-  "export_sha256": "56990bd119ad6b31cf27f2a0ce7debfa92df5504b9ff487de4404cb683e02e43",
+  "local_declarations": 12287,
+  "local_theorems": 10628,
+  "compiled_local_modules": 1427,
+  "external_boundary_constants": 8556,
+  "direct_reference_pairs": 1040154,
+  "source_modules": 1432,
+  "local_import_edges": 5357,
+  "export_sha256": "fbda3a9edb81139c2d62b1c971bd432c5b5874c1c7ff8bf450bac788af4dd373",
   "targets": [
     {
       "target": "GinibrePoincare.fullMainAnalyticProof",
@@ -58,6 +58,31 @@
       "target": "GinibrePoincare.bochnerKodairaTheoremOneTen",
       "direct_local_dependencies": 27,
       "direct_external_dependencies": 249
+    },
+    {
+      "target": "GinibrePoincare.bakryEmery_potential_smooth_radial_lsi",
+      "direct_local_dependencies": 16,
+      "direct_external_dependencies": 123
+    },
+    {
+      "target": "GinibrePoincare.bakryEmery_potential_radial_lsi_lipschitz",
+      "direct_local_dependencies": 16,
+      "direct_external_dependencies": 77
+    },
+    {
+      "target": "GinibrePoincare.matrixSpectralLift_finite_overlap_lsi",
+      "direct_local_dependencies": 8,
+      "direct_external_dependencies": 107
+    },
+    {
+      "target": "GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact",
+      "direct_local_dependencies": 8,
+      "direct_external_dependencies": 55
+    },
+    {
+      "target": "GinibrePoincare.spectral_ginibre_full_generator_spectrum_support",
+      "direct_local_dependencies": 13,
+      "direct_external_dependencies": 253
     }
   ]
 }

@@ -132,13 +132,15 @@ flowchart TB
   GaussianLSI["Gaussian log-Sobolev and entropy"] --> DeficitsEquality["Poincaré deficits and equality"]
   GeneratorSemigroup["Diffusion operators and analytic semigroups"] --> DeficitsEquality["Poincaré deficits and equality"]
   GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"] --> DeficitsEquality["Poincaré deficits and equality"]
+  NonQuadratic["Nonquadratic potentials"] --> DeficitsEquality["Poincaré deficits and equality"]
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> DeficitsEquality["Poincaré deficits and equality"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> DeficitsEquality["Poincaré deficits and equality"]
   ComplexGaussianHermite ~~~ Endgame
   Endgame ~~~ GaussianLSI
   GaussianLSI ~~~ GeneratorSemigroup
   GeneratorSemigroup ~~~ GinibreMeasureGeometry
-  GinibreMeasureGeometry ~~~ PolynomialRadial
+  GinibreMeasureGeometry ~~~ NonQuadratic
+  NonQuadratic ~~~ PolynomialRadial
   PolynomialRadial ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class DeficitsEquality target;

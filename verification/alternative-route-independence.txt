@@ -1,0 +1,10 @@
+GinibrePoincare.bochnerKodairaTheoremOneTen: independence check passed (1728 local declarations).
+GinibrePoincare.spectral_ginibre_symmetric_weak_poincare: independence check passed (1377 local declarations).
+GinibrePoincare.slater_ginibre_symmetric_weak_poincare: independence check passed (1412 local declarations).
+GinibrePoincare.matrixSpectralLift_finite_overlap_gaussian_poincare: independence check passed (1108 local declarations).
+GinibrePoincare.bakryEmery_potential_smooth_radial_lsi: independence check passed (1733 local declarations).
+GinibrePoincare.bakryEmery_potential_radial_lsi_lipschitz: independence check passed (1748 local declarations).
+GinibrePoincare.matrixSpectralLift_finite_overlap_lsi: independence check passed (1069 local declarations).
+GinibrePoincare.slaterDeterminant_number_eigenfunction: independence check passed (419 local declarations).
+GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact: independence check passed (408 local declarations).
+GinibrePoincare.spectral_ginibre_full_generator_spectrum_support: independence check passed (1563 local declarations).

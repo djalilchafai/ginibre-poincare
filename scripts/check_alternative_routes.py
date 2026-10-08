@@ -36,6 +36,40 @@ TARGETS = {
         'GinibrePoincare.matrixSpectralLift_finite_overlap_poincare',
         'GinibrePoincare.matrixEigenvalueProjector_overlap_ge',
     },
+    'GinibrePoincare.bakryEmery_potential_smooth_radial_lsi': {
+        'GinibrePoincare.rhoConvex_potential_smooth_radial_lsi',
+        'GinibrePoincare.rhoConvex_potential_radial_lsi',
+        'GinibrePoincare.rhoConvex_radiusProduct_lsi',
+        'GinibrePoincare.rhoConvex_kostlan_radius_lsi',
+        'GinibrePoincare.rhoConvex_radial_lsi',
+        'GinibrePoincare.rhoConvex_radial_gaussian_transport',
+        'GinibrePoincare.coordinateGaussianTransport_product_lsi',
+    },
+    'GinibrePoincare.bakryEmery_potential_radial_lsi_lipschitz': {
+        'GinibrePoincare.rhoConvex_potential_radial_lsi_lipschitz',
+        'GinibrePoincare.rhoConvex_radiusProduct_lsi_lipschitz',
+        'GinibrePoincare.rhoConvex_radiusProduct_lsi',
+        'GinibrePoincare.rhoConvex_radial_gaussian_transport',
+    },
+    'GinibrePoincare.matrixSpectralLift_finite_overlap_lsi': {
+        'GinibrePoincare.ginibre_symmetric_weak_poincare',
+        'GinibrePoincare.ginibre_C1_finite_energy_poincare',
+        'GinibrePoincare.matrixSpectralLift_finite_overlap_poincare',
+    },
+    'GinibrePoincare.slaterDeterminant_number_eigenfunction': {
+        'GinibrePoincare.ginibre_symmetric_weak_poincare',
+        'GinibrePoincare.fullTheoremOneNine',
+    },
+    'GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact': {
+        'GinibrePoincare.ginibre_symmetric_weak_poincare',
+        'GinibrePoincare.fullTheoremOneNine',
+    },
+    'GinibrePoincare.spectral_ginibre_full_generator_spectrum_support': {
+        'GinibrePoincare.ginibre_symmetric_weak_poincare',
+        'GinibrePoincare.ginibreFullWeak_first_deficit_identity',
+        'GinibrePoincare.ginibreFullGenerator_integrated_curvature',
+        'GinibrePoincare.fullTheoremOneNine',
+    },
 }
 
 

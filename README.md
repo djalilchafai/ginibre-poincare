@@ -4,14 +4,15 @@ The asserted numbered paper results are compiled and audited, including Theorems
 See [STATUS.md](STATUS.md) for exact domains, the full dashboard and validation.
 
 Compiled result coverage does not certify every original or alternative paper
-proof. Independent Section 3 spectral, Section 4 Hermite–Slater, Section 6
-Bochner–Kodaira and Gaussian matrix Poincaré endpoints now compile. The recorded full-project
-build, source audit and public/private axiom audits pass. The primary nonquadratic Bakry–Émery
-proof remains unfinished: Gibbs invariance and the sharp entropy inequality from
-Brownian noise are proved; internal Brownian existence and the radial assembly
-are in progress. See the [proof-route inventory](REPORT.md#independent-proof-routes-and-remaining-gaps)
-for the inventory. An independent exhaustive paper-to-Lean correspondence
-review remains outstanding.
+argument. The four requested independent proof groups now have concrete
+endpoints: spectral and Hermite–Slater, integrated Bochner–Kodaira,
+strongly convex Bakry–Émery radial LSI, and Gaussian matrix inequalities.
+The nonquadratic endgame now uses the primary Euclidean-lift route, with
+Brownian existence, Gibbs invariance, regularization and radial tensorization
+proved internally. Its independent transport proof remains exported.
+See the [proof-route inventory](REPORT.md#independent-proof-routes-and-remaining-gaps)
+for domains, proof correspondence and audit evidence. An independent exhaustive
+paper-to-Lean correspondence review remains outstanding.
 
 The library is grouped into 12 thematic [subprojects](SUBPROJECTS.md), including
 complex Gaussian/Hermite analysis, Gaussian LSI, stochastic calculus, stochastic

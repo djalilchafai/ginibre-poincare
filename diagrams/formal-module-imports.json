@@ -19,6 +19,10 @@
       "path": "GinibrePoincare.lean"
     },
     {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBoundedLSIClosure",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBoundedLSIClosure.lean"
+    },
+    {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicCompleted",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicCompleted.lean"
     },
@@ -27,12 +31,28 @@
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicCoordinates.lean"
     },
     {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicCovariance",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicCovariance.lean"
+    },
+    {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianFinite",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianFinite.lean"
     },
     {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianLimit",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianLimit.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianMoments",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianMoments.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianPartial",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianPartial.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianProcess",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianProcess.lean"
     },
     {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicTents",
@@ -47,6 +67,26 @@
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianEndpoint.lean"
     },
     {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobal",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGlobal.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalCoordinates",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGlobalCoordinates.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalCovariance",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGlobalCovariance.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalGaussian",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGlobalGaussian.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalPath",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGlobalPath.lean"
+    },
+    {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGrid",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGrid.lean"
     },
@@ -59,6 +99,10 @@
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryCameronMartin.lean"
     },
     {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryConvexGibbsLSI",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryConvexGibbsLSI.lean"
+    },
+    {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryConvexLift",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryConvexLift.lean"
     },
@@ -69,6 +113,10 @@
     {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryEntropyFlow",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryEntropyFlow.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryEntropyPiTensorization",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryEntropyPiTensorization.lean"
     },
     {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryFiniteEndpoint",
@@ -183,12 +231,20 @@
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsStationaryLaw.lean"
     },
     {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryGradientBasis",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryGradientBasis.lean"
+    },
+    {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryHilbertLift",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryHilbertLift.lean"
     },
     {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryIntegrationByParts",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryIntegrationByParts.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryIsometricGradient",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryIsometricGradient.lean"
     },
     {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryLangevinConfiguration",
@@ -227,6 +283,18 @@
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinNoiseStability.lean"
     },
     {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftBoundedLSI",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryLiftBoundedLSI.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftLSILimit",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryLiftLSILimit.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftProbability",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryLiftProbability.lean"
+    },
+    {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftTransfer",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryLiftTransfer.lean"
     },
@@ -243,6 +311,14 @@
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryPolygonalResponse.lean"
     },
     {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLSI",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryPotentialRadialLSI.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLipschitzLSI",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryPotentialRadialLipschitzLSI.lean"
+    },
+    {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryProductGradient",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryProductGradient.lean"
     },
@@ -251,12 +327,32 @@
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryRadialDrift.lean"
     },
     {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialLSI",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryRadialLSI.lean"
+    },
+    {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialLift",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryRadialLift.lean"
     },
     {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductAssembly",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryRadialProductAssembly.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductLSI",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryRadialProductLSI.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryRadiusLaw",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryRadiusLaw.lean"
+    },
+    {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedEuclidean",
       "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryRegularizedEuclidean.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedGibbsLSI",
+      "path": "GinibrePoincare/Analysis/AlternativeBakryEmeryRegularizedGibbsLSI.lean"
     },
     {
       "name": "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedLift",
@@ -307,6 +403,10 @@
       "path": "GinibrePoincare/Analysis/AlternativeMatrixPoincare.lean"
     },
     {
+      "name": "GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions",
+      "path": "GinibrePoincare/Analysis/AlternativeSlaterEigenfunctions.lean"
+    },
+    {
       "name": "GinibrePoincare.Analysis.AlternativeSlaterExpansion",
       "path": "GinibrePoincare/Analysis/AlternativeSlaterExpansion.lean"
     },
@@ -337,6 +437,18 @@
     {
       "name": "GinibrePoincare.Analysis.AlternativeSpectralPoincare",
       "path": "GinibrePoincare/Analysis/AlternativeSpectralPoincare.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeSpectralSupport",
+      "path": "GinibrePoincare/Analysis/AlternativeSpectralSupport.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeSpectralSupportCFC",
+      "path": "GinibrePoincare/Analysis/AlternativeSpectralSupportCFC.lean"
+    },
+    {
+      "name": "GinibrePoincare.Analysis.AlternativeSpectralSupportComplex",
+      "path": "GinibrePoincare/Analysis/AlternativeSpectralSupportComplex.lean"
     },
     {
       "name": "GinibrePoincare.Analysis.AngularMoments",
@@ -5637,8 +5749,24 @@
       "TestImport"
     ],
     [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBoundedLSIClosure",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBoundedLSIClosure",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftBoundedLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBoundedLSIClosure",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicCompleted",
       "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicCompleted",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalPath"
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicCompleted",
@@ -5661,8 +5789,28 @@
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicCovariance",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicCovariance",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianProcess"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicCovariance",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianFinite",
       "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianFinite",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianMoments"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianFinite",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianPartial"
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianFinite",
@@ -5674,6 +5822,46 @@
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianLimit",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianProcess"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianLimit",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianMoments",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianMoments",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianPartial"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianMoments",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianPartial",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianPartial",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianProcess"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianPartial",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianProcess",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianProcess",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobal"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianProcess",
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
@@ -5683,6 +5871,10 @@
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicTents",
       "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicCoordinates"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicTents",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicCovariance"
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicTents",
@@ -5698,6 +5890,10 @@
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicUniform",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicGaussianPartial"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianDyadicUniform",
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
@@ -5710,6 +5906,70 @@
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianEndpoint",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobal",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobal",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryConvexGibbsLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobal",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalCoordinates",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalCoordinates",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobal"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalCoordinates",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalCovariance",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalCovariance",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobal"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalCovariance",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalGaussian",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalGaussian",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalCoordinates"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalGaussian",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalPath",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalPath",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalCovariance"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalPath",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalGaussian"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalPath",
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
@@ -5753,6 +6013,22 @@
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryConvexGibbsLSI",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryConvexGibbsLSI",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftLSILimit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryConvexGibbsLSI",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedGibbsLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryConvexGibbsLSI",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryConvexLift",
       "AllLocalAxiomAudit"
     ],
@@ -5790,6 +6066,18 @@
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryEntropyFlow",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryEntropyPiTensorization",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryEntropyPiTensorization",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductAssembly"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryEntropyPiTensorization",
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
@@ -5882,6 +6170,10 @@
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryGibbsInitialLawHilbert",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadiusLaw"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryGibbsInitialLawHilbert",
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
@@ -5899,6 +6191,10 @@
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryGibbsLSI",
       "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryGibbsLSI",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryConvexGibbsLSI"
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryGibbsLSI",
@@ -6157,6 +6453,18 @@
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryGradientBasis",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryGradientBasis",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBoundedLSIClosure"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryGradientBasis",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryHilbertLift",
       "AllLocalAxiomAudit"
     ],
@@ -6178,6 +6486,14 @@
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryIntegrationByParts",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryIsometricGradient",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryIsometricGradient",
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
@@ -6325,6 +6641,42 @@
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftBoundedLSI",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftBoundedLSI",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftBoundedLSI",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftLSILimit",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftLSILimit",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftBoundedLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftLSILimit",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftProbability",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftProbability",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftBoundedLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftProbability",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftTransfer",
       "AllLocalAxiomAudit"
     ],
@@ -6377,6 +6729,30 @@
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLSI",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLSI",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLipschitzLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLSI",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLipschitzLSI",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLipschitzLSI",
+      "GinibrePoincare.Endgame.FullNonQuadraticPotential"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLipschitzLSI",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryProductGradient",
       "AllLocalAxiomAudit"
     ],
@@ -6390,6 +6766,18 @@
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialDrift",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialLSI",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialLSI",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialLSI",
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
@@ -6409,11 +6797,71 @@
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductAssembly",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductAssembly",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductAssembly",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductLSI",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductLSI",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductLSI",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadiusLaw",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadiusLaw",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadiusLaw",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedEuclidean",
       "AllLocalAxiomAudit"
     ],
     [
       "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedEuclidean",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryIsometricGradient"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedEuclidean",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftLSILimit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedEuclidean",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadiusLaw"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedEuclidean",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedGibbsLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedEuclidean",
+      "GinibrePoincare.Subprojects.NonQuadratic"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedGibbsLSI",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedGibbsLSI",
       "GinibrePoincare.Subprojects.NonQuadratic"
     ],
     [
@@ -6569,6 +7017,14 @@
       "GinibrePoincare.Subprojects.MatrixLift"
     ],
     [
+      "GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions",
+      "GinibrePoincare.Subprojects.DeficitsEquality"
+    ],
+    [
       "GinibrePoincare.Analysis.AlternativeSlaterExpansion",
       "AllLocalAxiomAudit"
     ],
@@ -6583,6 +7039,10 @@
     [
       "GinibrePoincare.Analysis.AlternativeSlaterLowering",
       "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSlaterLowering",
+      "GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions"
     ],
     [
       "GinibrePoincare.Analysis.AlternativeSlaterLowering",
@@ -6658,6 +7118,10 @@
     ],
     [
       "GinibrePoincare.Analysis.AlternativeSpectralNumberPolynomial",
+      "GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSpectralNumberPolynomial",
       "GinibrePoincare.Subprojects.DeficitsEquality"
     ],
     [
@@ -6666,10 +7130,46 @@
     ],
     [
       "GinibrePoincare.Analysis.AlternativeSpectralPoincare",
+      "GinibrePoincare.Analysis.AlternativeSpectralSupport"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSpectralPoincare",
       "GinibrePoincare.Endgame.FullPaper"
     ],
     [
       "GinibrePoincare.Analysis.AlternativeSpectralPoincare",
+      "GinibrePoincare.Subprojects.DeficitsEquality"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSpectralSupport",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSpectralSupport",
+      "GinibrePoincare.Subprojects.DeficitsEquality"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSpectralSupportCFC",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSpectralSupportCFC",
+      "GinibrePoincare.Analysis.AlternativeSpectralSupport"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSpectralSupportCFC",
+      "GinibrePoincare.Subprojects.DeficitsEquality"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSpectralSupportComplex",
+      "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSpectralSupportComplex",
+      "GinibrePoincare.Analysis.AlternativeSpectralSupport"
+    ],
+    [
+      "GinibrePoincare.Analysis.AlternativeSpectralSupportComplex",
       "GinibrePoincare.Subprojects.DeficitsEquality"
     ],
     [
@@ -6739,6 +7239,14 @@
     [
       "GinibrePoincare.Analysis.BakryEmeryRegularizationVolume",
       "GinibrePoincare.Analysis.AlternativeBakryEmeryGibbsMass"
+    ],
+    [
+      "GinibrePoincare.Analysis.BakryEmeryRegularizationVolume",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftLSILimit"
+    ],
+    [
+      "GinibrePoincare.Analysis.BakryEmeryRegularizationVolume",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftProbability"
     ],
     [
       "GinibrePoincare.Analysis.BakryEmeryRegularizationVolume",
@@ -8426,6 +8934,10 @@
     ],
     [
       "GinibrePoincare.Analysis.CompactLipschitzLSIExtension",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryGradientBasis"
+    ],
+    [
+      "GinibrePoincare.Analysis.CompactLipschitzLSIExtension",
       "GinibrePoincare.Analysis.GaussianLSIFiniteProduct"
     ],
     [
@@ -9347,6 +9859,10 @@
     [
       "GinibrePoincare.Analysis.GaussianDbarCompactCore",
       "GinibrePoincare.Analysis.AlternativeBochnerKodairaCutoff"
+    ],
+    [
+      "GinibrePoincare.Analysis.GaussianDbarCompactCore",
+      "GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions"
     ],
     [
       "GinibrePoincare.Analysis.GaussianDbarCompactCore",
@@ -13502,6 +14018,10 @@
     ],
     [
       "GinibrePoincare.Analysis.GinibreFullSemigroupConstants",
+      "GinibrePoincare.Analysis.AlternativeSpectralSupport"
+    ],
+    [
+      "GinibrePoincare.Analysis.GinibreFullSemigroupConstants",
       "GinibrePoincare.Analysis.GinibreFullGeneratorHermiteLowering"
     ],
     [
@@ -14039,6 +14559,10 @@
     [
       "GinibrePoincare.Analysis.GinibreHamiltonianCompletedProductBrownian",
       "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.GinibreHamiltonianCompletedProductBrownian",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBrownianGlobalCoordinates"
     ],
     [
       "GinibrePoincare.Analysis.GinibreHamiltonianCompletedProductBrownian",
@@ -15983,6 +16507,10 @@
     [
       "GinibrePoincare.Analysis.GinibreRadialGamma",
       "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.GinibreRadialGamma",
+      "GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions"
     ],
     [
       "GinibrePoincare.Analysis.GinibreRadialGamma",
@@ -20790,6 +21318,10 @@
     ],
     [
       "GinibrePoincare.Analysis.GlobalPhaseAction",
+      "GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions"
+    ],
+    [
+      "GinibrePoincare.Analysis.GlobalPhaseAction",
       "GinibrePoincare.Analysis.GaussianHermitePhase"
     ],
     [
@@ -21394,6 +21926,10 @@
     ],
     [
       "GinibrePoincare.Analysis.IntegralEntropyTensorization",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryEntropyPiTensorization"
+    ],
+    [
+      "GinibrePoincare.Analysis.IntegralEntropyTensorization",
       "GinibrePoincare.Analysis.GaussianLSIProduct"
     ],
     [
@@ -21491,6 +22027,10 @@
     [
       "GinibrePoincare.Analysis.L2RepresentativeBridges",
       "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.L2RepresentativeBridges",
+      "GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions"
     ],
     [
       "GinibrePoincare.Analysis.L2RepresentativeBridges",
@@ -23854,6 +24394,10 @@
     ],
     [
       "GinibrePoincare.Analysis.NonQuadraticHomogeneousPolynomial",
+      "GinibrePoincare.Analysis.AlternativeSlaterEigenfunctions"
+    ],
+    [
+      "GinibrePoincare.Analysis.NonQuadraticHomogeneousPolynomial",
       "GinibrePoincare.Analysis.NonQuadraticAlternatingPhasePolynomial"
     ],
     [
@@ -24878,6 +25422,10 @@
     ],
     [
       "GinibrePoincare.Analysis.PolynomialGeneratorSpectrum",
+      "GinibrePoincare.Analysis.AlternativeSpectralSupport"
+    ],
+    [
+      "GinibrePoincare.Analysis.PolynomialGeneratorSpectrum",
       "GinibrePoincare.Analysis.GinibreOneParticleSpectrum"
     ],
     [
@@ -25394,6 +25942,10 @@
     ],
     [
       "GinibrePoincare.Analysis.StrongConvexBoundedLipschitzLSIExtension",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryBoundedLSIClosure"
+    ],
+    [
+      "GinibrePoincare.Analysis.StrongConvexBoundedLipschitzLSIExtension",
       "GinibrePoincare.Analysis.AlternativeBakryEmeryGaussianNoiseLSI"
     ],
     [
@@ -25466,6 +26018,10 @@
     ],
     [
       "GinibrePoincare.Analysis.StrongConvexPotentialPartition",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.StrongConvexPotentialPartition",
       "GinibrePoincare.Analysis.StrongConvexPotentialRadialLSI"
     ],
     [
@@ -25490,7 +26046,7 @@
     ],
     [
       "GinibrePoincare.Analysis.StrongConvexPotentialRadialLipschitzLSI",
-      "GinibrePoincare.Endgame.FullNonQuadraticPotential"
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLipschitzLSI"
     ],
     [
       "GinibrePoincare.Analysis.StrongConvexPotentialRadialLipschitzLSI",
@@ -25630,6 +26186,10 @@
     ],
     [
       "GinibrePoincare.Analysis.StrongConvexRadialGradientTransfer",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryPotentialRadialLSI"
+    ],
+    [
+      "GinibrePoincare.Analysis.StrongConvexRadialGradientTransfer",
       "GinibrePoincare.Analysis.StrongConvexPotentialRadialLSI"
     ],
     [
@@ -25686,6 +26246,10 @@
     ],
     [
       "GinibrePoincare.Analysis.StrongConvexRadialProductLSI",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductAssembly"
+    ],
+    [
+      "GinibrePoincare.Analysis.StrongConvexRadialProductLSI",
       "GinibrePoincare.Analysis.StrongConvexRadialEntropyTransfer"
     ],
     [
@@ -25699,6 +26263,10 @@
     [
       "GinibrePoincare.Analysis.StrongConvexRadialProductLipschitzLSI",
       "AllLocalAxiomAudit"
+    ],
+    [
+      "GinibrePoincare.Analysis.StrongConvexRadialProductLipschitzLSI",
+      "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialProductLSI"
     ],
     [
       "GinibrePoincare.Analysis.StrongConvexRadialProductLipschitzLSI",

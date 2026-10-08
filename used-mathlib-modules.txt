@@ -687,6 +687,7 @@ Mathlib.Analysis.Analytic.IsolatedZeros
 Mathlib.Analysis.Analytic.IteratedFDeriv
 Mathlib.Analysis.Analytic.Linear
 Mathlib.Analysis.Analytic.OfScalars
+Mathlib.Analysis.Analytic.Polynomial
 Mathlib.Analysis.Analytic.RadiusLiminf
 Mathlib.Analysis.Analytic.Uniqueness
 Mathlib.Analysis.Analytic.Within
@@ -754,6 +755,7 @@ Mathlib.Analysis.Calculus.ContDiff.Polynomial
 Mathlib.Analysis.Calculus.ContDiff.RCLike
 Mathlib.Analysis.Calculus.ContDiff.WithLp
 Mathlib.Analysis.Calculus.DSlope
+Mathlib.Analysis.Calculus.Deriv.Abs
 Mathlib.Analysis.Calculus.Deriv.Add
 Mathlib.Analysis.Calculus.Deriv.AffineMap
 Mathlib.Analysis.Calculus.Deriv.Basic
@@ -764,6 +766,7 @@ Mathlib.Analysis.Calculus.Deriv.Inverse
 Mathlib.Analysis.Calculus.Deriv.Linear
 Mathlib.Analysis.Calculus.Deriv.MeanValue
 Mathlib.Analysis.Calculus.Deriv.Mul
+Mathlib.Analysis.Calculus.Deriv.Pi
 Mathlib.Analysis.Calculus.Deriv.Polynomial
 Mathlib.Analysis.Calculus.Deriv.Pow
 Mathlib.Analysis.Calculus.Deriv.Prod
@@ -788,6 +791,7 @@ Mathlib.Analysis.Calculus.FDeriv.Extend
 Mathlib.Analysis.Calculus.FDeriv.Linear
 Mathlib.Analysis.Calculus.FDeriv.Measurable
 Mathlib.Analysis.Calculus.FDeriv.Mul
+Mathlib.Analysis.Calculus.FDeriv.Norm
 Mathlib.Analysis.Calculus.FDeriv.OfCompLeft
 Mathlib.Analysis.Calculus.FDeriv.Pi
 Mathlib.Analysis.Calculus.FDeriv.Pow
