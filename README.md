@@ -34,11 +34,13 @@ The development proves full weak-domain sharp Poincaré and equality
 classification (Theorem 1.1), both Theorem 1.9 deficits, radial log-Sobolev,
 the full symmetric diffusion,
 and its identification with the original singular Brownian SDE. It includes
-independent center/relative processes, both CIR realizations, Ginibre invariance,
+independent center/relative processes, stopped two-driver CIR realizations, Ginibre invariance,
 whole-path stationarity and reversal. Nonquadratic inequalities and actual
 Gaussian matrix spectral laws and finite-overlap inequalities have compiled
 endpoints; the literal matrix H¹ domain bridge remains unresolved. Appendix formulas, curvature, capacity, linear statistics and
-explicit incompleteness/counterexample claims are included.
+explicit incompleteness/counterexample claims are included. Literal integrated
+pointwise Γ₂, unrestricted operator/dynamics assertions, GUE contextual claims
+and several explicit polynomial/Slater calculations remain unresolved in the review.
 
 All library modules are publicly imported. Source and axiom audits reject proof
 placeholders and nonstandard axioms, including in private helper declarations.

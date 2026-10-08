@@ -1,6 +1,6 @@
 digraph dependencies {
 rankdir=TB;
-graph [bgcolor="transparent", pad="0.3", nodesep="0.3"];
+graph [bgcolor="transparent", pad="0.3", nodesep="0.3", label="Source imports — paper correspondence unresolved", labelloc=b, fontname="sans-serif", fontsize=11];
 node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=12, margin="0.18,0.12"];
 edge [color="#64748b", arrowsize=0.7];
 DeficitsEquality [label="Poincaré deficits and equality"];

@@ -27,19 +27,19 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. At 
 | Equilibrium factorization, Theorem 1.2 | Independence, Gaussian coordinate sum, recentered Gamma law and radial transfer | None identified in the numbered review |
 | Polynomial spectrum, Theorem 1.4 / Corollary 1.5 / Remark 1.6 | Polynomial sector and properness; full-generator spectral points −2(α/n)k for every n > 0 and α > 0 | Spectrum uses the standard bounded two-sided resolvent definition for the actual unbounded graph operator |
 | Curvature, Lemma 1.7 / Remark 1.8 | Actual unbounded-below pointwise/recentered curvature for n ≥ 2; mean curvature 2 | n = 1 is Gaussian |
-| Hermite deficits, Theorem 1.9 | Both exact identities on the actual real symmetric generator graph; first deficit on full symmetric weak-H¹ | Generator membership for the second deficit |
-| Differential deficits, Theorem 1.10 | Projected inverse square root, literal ordinary Schwartz first/second derivatives, exact second energy/integral formulas, coefficients 4/n and 8/n, affine equality | Actual real symmetric generator graph; independent weighted graph and ordinary distributional graph proved equivalent |
+| Hermite deficits, Theorem 1.9 | Both exact identities on the actual real symmetric generator graph; first deficit on full symmetric weak-H¹ | Generator membership for the second deficit; correspondence with literal integrated pointwise Γ₂ unresolved |
+| Differential deficits, Theorem 1.10 | Projected inverse square root, literal ordinary Schwartz first/second derivatives, exact second energy/integral formulas, coefficients 4/n and 8/n, affine equality | Actual real symmetric generator graph; independent weighted/ordinary derivative graphs equivalent; literal integrated pointwise Γ₂ bridge unresolved |
 | Weak Sobolev domains / Appendix A.1–A.3 | Actual distributional graph, closure, uniqueness, real and complex global/collision-free core equality, positive-speed norm equivalence, zero collision capacity | No remaining A.2 endpoint gap |
 | Gaussian log-Sobolev | Sharp Gaussian product, Lipschitz and finite-energy extensions; entropy integrability and closure | Stated Gaussian domains |
 | Radial Ginibre log-Sobolev, Theorem 1.12 | Sharp radial inequality and weak-H¹ completion, exact paper coefficient | Radial/symmetric restriction; not a solution of Problem 1.11 |
 | Full diffusion generator and analytic semigroup | Actual weak resolvent, full self-adjoint generator, strongly continuous Markov contraction semigroup, heat equation, dissipation, domain regularization, sharp decay and original-SDE identification | Symmetric analytic L² space; unrestricted complex generator/form correspondence unresolved |
-| Stochastic calculus and dynamics, Theorem 1.3 | Original Brownian singular SDE, adapted global collision-free paths, Itô/Dynkin identities, independent center/relative processes, CIR drivers, transition laws, Ginibre invariance, reversal and stationarity | Joint two-radius CIR realization uses n ≥ 2; deterministic initial states or the proved independent initial projections |
+| Stochastic calculus and dynamics, Theorem 1.3 | Original Brownian singular SDE, adapted global collision-free paths, Itô/Dynkin identities, independent center/relative processes, CIR drivers, transition laws, Ginibre invariance, reversal and stationarity | Joint two-radius CIR realization uses n ≥ 2 and stopped equations; global CIR, invariant-law uniqueness and unrestricted operator package need correspondence checks |
 | Matrix lift / overlaps, Theorem 1.13 | Actual Gaussian matrix law, Schur Jacobian and spectral pushforward; variance/entropy overlap inequalities | Finite-overlap C¹ route proved; literal H¹ domain needs the derivative-identification bridge identified in the review |
 | Nonquadratic potentials, Theorem 1.14 | Concrete normalized law, symmetric compact-C¹ Poincaré under actual C² rotational potential/Laplacian bound; radial LSI under strong convexity | Stated potential hypotheses; bounded Lipschitz radial extension separately proved |
-| Gaussian gap / Remarks 2.3–2.5 | Arbitrary Gaussian L² ordinary Schwartz graph, coefficient equivalence, compact C∞ graph density, sharp gap and exact mode equality; compact smooth equality iff zero; arbitrary ordinary closed-form solution with sharp bound; actual entire reconstruction of zero mode | Canonical minimal solution, entire kernel and literal distance correspondence proved |
+| Gaussian gap / Remarks 2.3–2.5 | Arbitrary Gaussian L² ordinary Schwartz graph, coefficient equivalence, compact C∞ graph density, sharp gap and exact mode equality; compact smooth equality iff zero; arbitrary ordinary closed-form solution with sharp bound; actual entire reconstruction of zero mode | Canonical minimal solution, entire kernel and literal distances proved; equality-vector analyticity and arbitrary-weight assertions unconfirmed |
 | Divisibility, Lemma 2.6 | Arbitrary entire alternating functions factor globally as Vandermonde times an entire symmetric quotient, including all collision hyperplanes | None |
 | Projection geometry, Lemma 2.7 / Remark 2.8 | Centered holomorphic/conjugate orthogonality; arbitrary complex L² two-projection bound and actual conjugate closed-subspace projection; arbitrary real centered L² Pythagoras and half-distance; pointwise center and Vandermonde cancellation formulas | Actual entire symmetric L² = Hdiv = closed polynomial space; literal distance infima and paper normalization proved |
-| Supplementary claims / Appendix B | Nonsymmetric counterexample, linear-statistic transfer, nonholomorphic radius, polynomial-sector properness and actual Bochner/commutation formulas | Each result retains its stated domain |
+| Supplementary claims / Appendix B | Nonsymmetric counterexample, linear-statistic transfer, nonholomorphic radius, polynomial-sector properness and actual Bochner/commutation formulas | Explicit low-degree polynomial/Slater calculations and Gram–Schmidt/leading-coefficient assertions remain unresolved; GUE contextual endpoints unconfirmed |
 | Palomar packaging | Module headers, pinned 4.35.0-rc2 dependencies, schema-valid provenance, independent weak-H¹ Theorem 1.1 statement and Solution | Full supported-toolchain build/audits, strict local Comparator and official full preflight pass; GitHub published; Palomar submission accepted, official verification passed; clean editorial review; registration consent accepted, public completion pending |
 | Bakry–Émery / Bochner coverage | Concrete pointwise Bochner formulas, Ginibre curvature unbounded below for n ≥ 2, full-generator integrated curvature bound, scalar/radial curvature-to-coercivity and Fisher estimates | No standalone arbitrary-diffusion criterion is exported; the primary strongly convex Euclidean Gibbs lift and independent quantile transport routes are both proved internally |
 | Requested independent proof routes | Focused spectral and Hermite–Slater sharp weak-H¹ endpoints and literal complex spectral factorization; independent Bochner–Kodaira graph deficits; actual Gaussian matrix H¹/finite-overlap variance route with coefficient 2/n | All four requested groups have concrete independent endpoints; full build/source/public/private audits and transitive proof-body independence checks pass. Literal Slater eigenfunction/homogeneous quotient calculations and full complex generator spectral support also compile independently |
@@ -76,6 +76,17 @@ open; Appendix C remains uncertified. Next mathematical step: close the itemized
 correspondence gaps and repeat the statement review.
 
 ## Latest progress
+
+Documentation synchronization (2026-10-08): all current Markdown scope claims,
+the HTML source browser and dependency explorer, and every generated thematic
+and declaration-reference DOT/SVG diagram now reflect the independent review.
+Historical verification entries retain their original evidence and are labeled
+as superseded. Diagram captions distinguish dependencies from paper coverage.
+Generated inventory/graph freshness checks and offline packaging checks pass;
+no Lean sources changed. Fresh source counts remain 159,224 project lines plus
+1,253,370 imported Mathlib lines, 1,412,594 combined, including comments and
+blank lines and counting each imported Mathlib module once in full.
+
 
 Requested independent-proof work (2026-10-08): disjoint agent modules now give
 independent spectral and Hermite–Slater weak-H¹ inequalities, the literal complex
@@ -119,6 +130,13 @@ Compiled transitive proof-body checks pass for these calculations and every
 requested concrete route endpoint. The formal dependency views, thematic
 inventory and browser documentation include the new modules.
 
+
+### Earlier documentation checkpoints (superseded)
+
+The following dated entries preserve their original evidence and claims. Their
+proof-route omissions, counts, review status and registration instructions are
+superseded by the current dashboard and correspondence review above. They are
+not current next-step instructions.
 
 Alternative-proof checkpoint (2026-10-08): confirmed that the report explicitly
 leaves the separate Section 3 spectral and Section 4 Hermite–Slater routes
@@ -296,13 +314,13 @@ import DAG. The pinned Lean exporter, reference coverage checks, generated-file
 freshness checks and browser navigation checks pass. Source counts are refreshed.
 The source counter now includes the 1,414-line Lean exporter under `scripts`;
 these are tooling lines, not additional mathematical results. No paper theorem
-or submitted Palomar snapshot was changed. The latest Palomar status is `awaiting-review`: official mechanical verification
+or submitted Palomar snapshot was changed. At that checkpoint the Palomar status was `awaiting-review`: official mechanical verification
 passed, with editorial review and registration pending.
 
 Submission report checkpoint (2026-10-07): added a prominent public report
 and compact full-project dashboard to [PALOMAR.md](PALOMAR.md), including the
 exact immutable snapshot, compared statement, passing preflight and official
-verification link. The submission API now reports `awaiting-review`; official verification passed,
+verification link. At that checkpoint the submission API reported `awaiting-review`; official verification passed,
 with editorial review and registration pending. Private access credentials and unpublished review
 content are excluded. Source counts were refreshed; no Lean proofs changed.
 

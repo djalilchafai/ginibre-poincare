@@ -84,7 +84,7 @@ def module_graph():
 
 def graphviz(nodes, edges, title, target=None):
     lines = ['digraph formal_dependencies {', 'rankdir=TB;',
-        'graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label=' + json.dumps(title) + ', labelloc=t, fontname="sans-serif"];',
+        'graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label=' + json.dumps(title + '\nCompiled references; paper correspondence unresolved') + ', labelloc=t, fontname="sans-serif"];',
         'node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];',
         'edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];']
     for name in sorted(nodes):

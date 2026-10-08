@@ -1,5 +1,10 @@
 # Formal Lean dependency graph
 
+Updated after the 2026-10-08 [independent correspondence review](CORRESPONDENCE_REVIEW.md).
+Full-paper completion and registry publication are unconfirmed. These diagrams
+show compiled references, including endpoints with domains narrower than the
+literal paper statement; the matrix preset is the finite-overlap endpoint.
+
 Open [the live interactive explorer](https://djalilchafai.github.io/ginibre-poincare/formal_dependencies.html)
 or download [the offline explorer](formal-dependencies.html) and open it in a browser.
 The standalone HTML embeds the complete database as gzip-compressed base64

@@ -93,11 +93,13 @@ html = f'''<!doctype html>
 <style>{css}\n{formatter.get_style_defs('.highlight')}</style></head>
 <body><header><div class="eyebrow">Mathematical formalization · Lean</div>
 <h1>Ginibre Poincaré</h1><p>Full-paper formalization: project documentation, thematic dependencies, and Lean source.</p>
-<p>Scope: all asserted results of arXiv:2608.19358v2, including Appendices A–B. Open Problems 1.11, 1.15 and 1.16 and Appendix C numerical experiments are outside theorem certification. Checked coverage and remaining work appear below.</p></header>
-<nav aria-label="Contents"><a href="#overview">Overview &amp; build</a><a href="#status">Formalization status</a><a href="#review">Correspondence review</a><a href="#dependencies">Thematic dependency diagrams</a><a href="#sources">Lean sources ({len(files)})</a></nav>
+<p>Objective: all asserted results of arXiv:2608.19358v2, including Appendices A–B. Independent review found unresolved correspondence; full-paper completion and registry publication are unconfirmed. Open Problems 1.11, 1.15 and 1.16 and Appendix C numerical experiments are outside theorem certification. Checked coverage and remaining work appear below.</p></header>
+<nav aria-label="Contents"><a href="#overview">Overview &amp; build</a><a href="#status">Formalization status</a><a href="#review">Correspondence review</a><a href="#report">Numbered report</a><a href="#palomar">Registry status</a><a href="#dependencies">Thematic dependency diagrams</a><a href="#sources">Lean sources ({len(files)})</a></nav>
 <main><section id="overview">{markdown('README.md')}</section>
 <section id="status"><p class="note">The status below reproduces the project's checked-in documentation. This HTML generation does not rerun the Lean build or axiom audit.</p>{markdown('STATUS.md')}</section>
 <section id="review">{markdown('CORRESPONDENCE_REVIEW.md')}</section>
+<section id="report">{markdown('REPORT.md')}</section>
+<section id="palomar">{markdown('PALOMAR.md')}{markdown('verification/registry-publication-check.md')}</section>
 <section id="dependencies"><h2>Thematic dependency diagrams</h2><p>The twelve thematic subprojects cover the full-paper objective. These maps show relationships between subprojects; they do not certify that every paper result is complete. STATUS.md records verified scope and remaining work, and REPORT.md records numbered statement coverage. The complete imports and declarations appear in the source browser below.</p>{diagrams}</section>
 <section id="sources"><h2>Lean source browser</h2><p>Expand a module to read its syntax-highlighted source. Colors distinguish analysis, concrete constructions, and endgame modules.</p>
 <div class="search"><label for="module-search">Filter modules by path or name</label><input id="module-search" type="search" placeholder="For example: Hermite or ConcreteTheoremOneNine" aria-controls="module-list"><p id="count" role="status">{len(files)} modules</p></div>

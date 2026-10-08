@@ -123,3 +123,12 @@ accurately identify coverage, restrictions and evidence.
 Palomar mechanical verification, editorial review and final registration are
 separate publication stages. A Comparator pass for Theorem 1.1 does not establish
 full-paper statement correspondence or complete these publication stages.
+
+## Reviewed checkpoint — 2026-10-08
+
+Independent agent correspondence findings are in `CORRESPONDENCE_REVIEW.md`.
+Full-paper completion is not established: matrix H¹, integrated pointwise Γ₂,
+unrestricted analytic operator and auxiliary-assertion bridges remain unresolved.
+Preserve these qualifications in generated documentation and diagram captions.
+Live registry publication is unconfirmed; accepted consent is not a public receipt.
+This checkpoint does not narrow the authorized objective or permit placeholders.

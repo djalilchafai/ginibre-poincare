@@ -41,7 +41,7 @@ They are omitted from this public report, as is any unpublished editorial review
 
 | Full-project dashboard | Current evidence / next work |
 | --- | --- |
-| Verified scope | Recorded builds and axiom audits certify the exported Lean statements; correspondence gaps are itemized in CORRESPONDENCE_REVIEW.md; the official full preflight passed for the submitted snapshot |
+| Verified scope | Recorded builds and axiom audits certify the exported Lean statements; correspondence gaps are itemized in [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md); the official full preflight passed for the submitted snapshot |
 | Open work | Live registry publication confirmation and correspondence-review findings; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
 | Latest progress | Independent live check: authenticated HTTP 500, canonical public record HTTP 404, empty successful searches |
 | Lean source counts | 159,224 current project lines in 1,433 files; 1,253,370 transitively imported Mathlib lines in 3,801 modules; combined 1,412,594 lines |
@@ -65,7 +65,9 @@ The exception does not permit proof holes in the library or Solution.
 The completed migration pins `leanprover/lean4:v4.35.0-rc2` and matching Mathlib
 commit `065356127b1dc0016f66b7283ce0ce2c4055aa55` in the existing checkout.
 This meets the current [Palomar minimum toolchain policy](https://raw.githubusercontent.com/PalomarRegistry/PalomarSubmission/main/toolchains.json).
-The final full build passes 5,384 jobs. Both public/private axiom audits and root
+The submitted-snapshot upgrade checkpoint passed 5,384 build jobs; this is
+historical evidence, superseded for the current proof library by the 5,508-job
+checkpoint in [STATUS.md](STATUS.md). Both public/private axiom audits and root
 compatibility checks pass; offline preflight reports zero blockers and the
 metadata validates against the official v0.4 schema. Actual Comparator succeeds
 with con-ron, nanoda and Lean’s default kernel. See the committed
