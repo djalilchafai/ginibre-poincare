@@ -1,7 +1,7 @@
 # Formalization status — asserted paper results compiled and audited (2026-10-07)
 
 The authoritative source is [arXiv:2608.19358v2](https://arxiv.org/abs/2608.19358v2).
-The asserted numbered results and the seventeen required milestones now have compiled concrete endpoints on the stated domains. Both Theorem 1.9 identities, the ordinary-distributional Theorem 1.10 endpoint, and the original analytic proof of Theorem 1.1 are exported without analytic completion hypotheses. The final global entire Vandermonde factorization, actual entire-space distance formulas and canonical minimal dbar solution are proved. Problems 1.11, 1.15 and 1.16 remain the paper's open research questions; Appendix C numerical experiments are not certified. No overall completion percentage is asserted.
+The asserted numbered results and the seventeen required milestones now have compiled concrete endpoints on the stated domains. The original analytic proof of Theorem 1.1, both Theorem 1.9 identities, and the ordinary-distributional Theorem 1.10 endpoint are exported without analytic completion hypotheses. The final global entire Vandermonde factorization, actual entire-space distance formulas and canonical minimal dbar solution are proved. Problems 1.11, 1.15 and 1.16 remain the paper's open research questions; Appendix C numerical experiments are not certified. No overall completion percentage is asserted.
 
 The public library is organized into twelve thematic import subprojects:
 [SUBPROJECTS.md](SUBPROJECTS.md) gives every file, counts, entry points and direct
@@ -45,6 +45,19 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 | Problems 1.11, 1.15, 1.16 / Appendix C | Identified as open research questions / numerical experiments | They are not asserted solved or numerically certified by Lean |
 
 ## Latest progress
+
+Diagram scope corrected (2026-10-08): the interactive explorer now opens with
+full-paper assembly and the original Theorem 1.1 proof, with additional matrix
+and nonquadratic endpoint views. Its documentation and generated static views
+are synchronized. The standalone documentation generator describes the full
+paper and embeds all twelve thematic diagrams, replacing its obsolete
+Theorem 1.9 heading and missing SVG reference. README and this dashboard now
+lead with the main inequality. Thematic imports and exact declaration references
+remain explicitly distinguished. Documentation/tooling checks passed; existing
+Lean build and public/private audit evidence is unchanged. No proof edits.
+Source counts refreshed, including comments and blank lines and each imported
+Mathlib module once in full. Next step: independent paper correspondence review
+and pending Palomar editorial review; open research problems remain open.
 
 Report opening revised (2026-10-08): replaced the former deficit-focused
 opening with the full asserted-paper scope, led by the main Theorem 1.1.

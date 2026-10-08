@@ -1,0 +1,21 @@
+digraph formal_dependencies {
+rankdir=BT;
+graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label="Exact direct local declaration references", labelloc=t, fontname="sans-serif"];
+node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];
+edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
+"GinibrePoincare.SmoothGinibrePoincareStatement" [label="SmoothGinibrePoincareStatement"];
+"GinibrePoincare.fullMainAnalyticProof" [label="fullMainAnalyticProof", fillcolor="#dbeafe", color="#2563eb", penwidth=2];
+"GinibrePoincare.gaussianDbarEstimateStatement" [label="gaussianDbarEstimateStatement"];
+"GinibrePoincare.ginibreHalfDistanceStatement" [label="ginibreHalfDistanceStatement"];
+"GinibrePoincare.groundStateAdmissibility" [label="groundStateAdmissibility"];
+"GinibrePoincare.groundStateDistanceIdentityStatement" [label="groundStateDistanceIdentityStatement"];
+"GinibrePoincare.groundStateEnergyIdentity" [label="groundStateEnergyIdentity"];
+"GinibrePoincare.smoothGinibrePoincare_of_main_analytic_statements" [label="smoothGinibrePoincare_of_main_analytic_statements"];
+"GinibrePoincare.SmoothGinibrePoincareStatement" -> "GinibrePoincare.fullMainAnalyticProof" [color="#b45309", tooltip="type"];
+"GinibrePoincare.gaussianDbarEstimateStatement" -> "GinibrePoincare.fullMainAnalyticProof" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.ginibreHalfDistanceStatement" -> "GinibrePoincare.fullMainAnalyticProof" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.groundStateAdmissibility" -> "GinibrePoincare.fullMainAnalyticProof" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.groundStateDistanceIdentityStatement" -> "GinibrePoincare.fullMainAnalyticProof" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.groundStateEnergyIdentity" -> "GinibrePoincare.fullMainAnalyticProof" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.smoothGinibrePoincare_of_main_analytic_statements" -> "GinibrePoincare.fullMainAnalyticProof" [color="#2563eb", tooltip="value"];
+}

@@ -10,6 +10,21 @@
   "export_sha256": "e8789e436c066fa9bcb1f4ba0232c6525ec32da93c5de4a97954ebb72d6880d8",
   "targets": [
     {
+      "target": "GinibrePoincare.fullMainAnalyticProof",
+      "direct_local_dependencies": 7,
+      "direct_external_dependencies": 0
+    },
+    {
+      "target": "GinibrePoincare.fullMatrixLift_functional_inequalities",
+      "direct_local_dependencies": 10,
+      "direct_external_dependencies": 95
+    },
+    {
+      "target": "GinibrePoincare.fullNonQuadraticPotentialTheorem",
+      "direct_local_dependencies": 15,
+      "direct_external_dependencies": 57
+    },
+    {
       "target": "GinibrePoincare.fullTheoremOneNine",
       "direct_local_dependencies": 23,
       "direct_external_dependencies": 185

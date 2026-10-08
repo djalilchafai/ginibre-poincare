@@ -11,7 +11,10 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'diagrams'
-TARGETS = ['GinibrePoincare.fullTheoremOneNine',
+TARGETS = ['GinibrePoincare.fullMainAnalyticProof',
+           'GinibrePoincare.fullMatrixLift_functional_inequalities',
+           'GinibrePoincare.fullNonQuadraticPotentialTheorem',
+           'GinibrePoincare.fullTheoremOneNine',
            'GinibrePoincare.fullTheoremOneTenSchwartz', 'PalomarGinibre.theoremOneOne']
 
 
@@ -150,7 +153,8 @@ def main():
                           'direct_external_dependencies': len((types | values) - declarations.keys())})
     template = (ROOT / 'scripts/formal_graph_template.html').read_text()
     embedded = json.dumps(data, separators=(',', ':')).replace('<', '\\u003c')
-    files[ROOT / 'formal-dependencies.html'] = template.replace('__FORMAL_GRAPH_JSON__', embedded)
+    files[ROOT / 'formal-dependencies.html'] = template.replace('__FORMAL_GRAPH_JSON__', embedded).replace(
+        '__PAPER_OVERVIEW_SVG__', (OUT / 'Endgame.svg').read_text())
     summary = {'schema_version': 1, 'local_declarations': len(declarations),
                'local_theorems': sum(n['kind'] == 'theorem' for n in declarations.values()),
                'compiled_local_modules': len(data['modules']), 'external_boundary_constants': len(external),

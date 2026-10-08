@@ -1,0 +1,27 @@
+digraph formal_dependencies {
+rankdir=BT;
+graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label="Exact direct local declaration references", labelloc=t, fontname="sans-serif"];
+node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];
+edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
+"GinibrePoincare.Configuration" [label="Configuration"];
+"GinibrePoincare.GinibreMatrixCoordinates" [label="GinibreMatrixCoordinates"];
+"GinibrePoincare.fullMatrixLift_functional_inequalities" [label="fullMatrixLift_functional_inequalities", fillcolor="#dbeafe", color="#2563eb", penwidth=2];
+"GinibrePoincare.ginibreMatrixMeasurableSpace" [label="ginibreMatrixMeasurableSpace"];
+"GinibrePoincare.ginibreMeasure" [label="ginibreMeasure"];
+"GinibrePoincare.matrixGaussianMeasure" [label="matrixGaussianMeasure"];
+"GinibrePoincare.matrixSpectralLift_finite_overlap_lsi" [label="matrixSpectralLift_finite_overlap_lsi"];
+"GinibrePoincare.matrixSpectralLift_finite_overlap_poincare" [label="matrixSpectralLift_finite_overlap_poincare"];
+"GinibrePoincare.matrixSpectralOverlapEnergy" [label="matrixSpectralOverlapEnergy"];
+"GinibrePoincare.smoothGinibreVariance" [label="smoothGinibreVariance"];
+"GinibrePoincare.squareEntropy" [label="squareEntropy"];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.GinibreMatrixCoordinates" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.ginibreMatrixMeasurableSpace" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.ginibreMeasure" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.matrixGaussianMeasure" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.matrixSpectralLift_finite_overlap_lsi" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.matrixSpectralLift_finite_overlap_poincare" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.matrixSpectralOverlapEnergy" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.smoothGinibreVariance" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.squareEntropy" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#7e22ce", tooltip="both"];
+}

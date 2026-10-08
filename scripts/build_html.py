@@ -12,6 +12,26 @@ ROOT = Path(__file__).resolve().parents[1]
 formatter = HtmlFormatter(cssclass="highlight", style="friendly")
 lexer = get_lexer_by_name("lean4")
 
+THEMATIC_DIAGRAMS = [
+    ("Endgame", "Paper assembly"),
+    ("ComplexGaussianHermite", "Complex Gaussian and Hermite analysis"),
+    ("GinibreMeasureGeometry", "Ginibre measure and holomorphic geometry"),
+    ("DeficitsEquality", "Poincaré deficits and equality"),
+    ("WeakSobolev", "Weak Sobolev domains and collision capacity"),
+    ("GeneratorSemigroup", "Diffusion operators and analytic semigroups"),
+    ("PolynomialRadial", "Polynomial, radial and equilibrium sectors"),
+    ("GaussianLSI", "Gaussian log-Sobolev and entropy"),
+    ("StochasticCalculus", "Stochastic calculus foundations"),
+    ("StochasticDynamics", "Ginibre stochastic dynamics"),
+    ("MatrixLift", "Matrix lift and eigenvector overlaps"),
+    ("NonQuadratic", "Nonquadratic potentials"),
+]
+diagrams = "".join(
+    f'<details{" open" if name == "Endgame" else ""}><summary>{escape(title)}</summary>'
+    f'<div class="diagram">{(ROOT / "diagrams" / (name + ".svg")).read_text()}</div></details>'
+    for name, title in THEMATIC_DIAGRAMS
+)
+
 
 def markdown(name):
     return subprocess.run(
@@ -72,16 +92,16 @@ html = f'''<!doctype html>
 <title>Ginibre Poincaré — Lean documentation</title>
 <style>{css}\n{formatter.get_style_defs('.highlight')}</style></head>
 <body><header><div class="eyebrow">Mathematical formalization · Lean</div>
-<h1>Ginibre Poincaré</h1><p>Theorem 1.9: project documentation, proof dependencies, and Lean source.</p>
-<p>Scope: the explicit collision-free smooth compact symmetric core.</p></header>
-<nav aria-label="Contents"><a href="#overview">Overview &amp; build</a><a href="#status">Formalization status</a><a href="#dependencies">Dependency diagram</a><a href="#sources">Lean sources ({len(files)})</a></nav>
+<h1>Ginibre Poincaré</h1><p>Full-paper formalization: project documentation, thematic dependencies, and Lean source.</p>
+<p>Scope: all asserted results of arXiv:2608.19358v2, including Appendices A–B. Open Problems 1.11, 1.15 and 1.16 and Appendix C numerical experiments are outside theorem certification. Checked coverage and remaining work appear below.</p></header>
+<nav aria-label="Contents"><a href="#overview">Overview &amp; build</a><a href="#status">Formalization status</a><a href="#dependencies">Thematic dependency diagrams</a><a href="#sources">Lean sources ({len(files)})</a></nav>
 <main><section id="overview">{markdown('README.md')}</section>
 <section id="status"><p class="note">The status below reproduces the project's checked-in documentation. This HTML generation does not rerun the Lean build or axiom audit.</p>{markdown('STATUS.md')}</section>
-<section id="dependencies"><h2>Proof dependencies</h2><p>Major components of the formalization. The complete imports and declarations appear in the source browser below.</p><div class="diagram">{(ROOT / 'theorem_1_9_dependencies.svg').read_text()}</div></section>
+<section id="dependencies"><h2>Thematic dependency diagrams</h2><p>The twelve thematic subprojects cover the full-paper objective. These maps show relationships between subprojects; they do not certify that every paper result is complete. STATUS.md records verified scope and remaining work, and REPORT.md records numbered statement coverage. The complete imports and declarations appear in the source browser below.</p>{diagrams}</section>
 <section id="sources"><h2>Lean source browser</h2><p>Expand a module to read its syntax-highlighted source. Colors distinguish analysis, concrete constructions, and endgame modules.</p>
 <div class="search"><label for="module-search">Filter modules by path or name</label><input id="module-search" type="search" placeholder="For example: Hermite or ConcreteTheoremOneNine" aria-controls="module-list"><p id="count" role="status">{len(files)} modules</p></div>
 <div id="module-list">{''.join(sources)}</div></section></main>
-<footer>Standalone HTML · embedded styles, sources, and diagram · no network connection required</footer>
+<footer>Standalone HTML · embedded styles, sources, and diagrams · no network connection required</footer>
 <script>
 const modules = [...document.querySelectorAll('details.source')];
 document.getElementById('module-search').addEventListener('input', event => {{

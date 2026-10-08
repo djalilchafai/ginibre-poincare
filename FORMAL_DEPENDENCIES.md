@@ -1,8 +1,11 @@
 # Formal Lean dependency graph
 
 Open [the offline interactive explorer](formal-dependencies.html) in a browser.
-It starts at Theorem 1.9 and offers presets for Theorem 1.10 and the Palomar
-Theorem 1.1 statement. Search any local declaration, click a dependency to
+It opens with the full-paper assembly overview and the original analytic proof
+of Theorem 1.1. Presets also cover matrix overlaps (1.13), nonquadratic
+potentials (1.14), both deficits (1.9–1.10), and the Palomar Theorem 1.1 statement.
+The overview links all twelve thematic groups and the numbered coverage report;
+no single theorem graph represents the whole project. Search any local declaration, click a dependency to
 inspect it, or use Back to retrace the exploration. The external-dependency
 checkbox shows Mathlib and Lean boundary nodes. All direct references remain
 listed below the diagram, including references hidden by that checkbox.
@@ -27,6 +30,24 @@ The SVGs show all **direct local** declaration references of each selected
 theorem. External references are available in the interactive view and JSON.
 Click through dependencies in the explorer to follow a transitive proof chain.
 The complete library graph is provided as data rather than one unreadable image.
+
+### Theorem 1.1 — original analytic proof
+
+![Direct local formal dependencies of the original Theorem 1.1 proof](diagrams/formal-fullMainAnalyticProof.svg)
+
+[Graphviz source](diagrams/formal-fullMainAnalyticProof.dot).
+
+### Theorem 1.13 — matrix lift and overlaps
+
+![Direct local formal dependencies of Theorem 1.13](diagrams/formal-fullMatrixLift_functional_inequalities.svg)
+
+[Graphviz source](diagrams/formal-fullMatrixLift_functional_inequalities.dot).
+
+### Theorem 1.14 — nonquadratic potentials
+
+![Direct local formal dependencies of Theorem 1.14](diagrams/formal-fullNonQuadraticPotentialTheorem.svg)
+
+[Graphviz source](diagrams/formal-fullNonQuadraticPotentialTheorem.dot).
 
 ### Theorem 1.9 — both Ginibre deficits
 

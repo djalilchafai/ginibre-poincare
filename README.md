@@ -16,8 +16,9 @@ The [formal Lean dependency graph](FORMAL_DEPENDENCIES.md) additionally extracts
 constant references from compiled theorem statements and proof/definition bodies,
 with static SVGs and an [offline interactive explorer](formal-dependencies.html).
 
-The development proves both Theorem 1.9 deficits, full weak-domain sharp Poincaré
-and equality classification, radial log-Sobolev, the full symmetric diffusion,
+The development proves full weak-domain sharp Poincaré and equality
+classification (Theorem 1.1), both Theorem 1.9 deficits, radial log-Sobolev,
+the full symmetric diffusion,
 and its identification with the original singular Brownian SDE. It includes
 independent center/relative processes, both CIR realizations, Ginibre invariance,
 whole-path stationarity and reversal. Nonquadratic inequalities and actual
