@@ -303,6 +303,7 @@ flowchart TB
   GaussianLSI["Gaussian log-Sobolev and entropy"] --> NonQuadratic["Nonquadratic potentials"]
   GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"] --> NonQuadratic["Nonquadratic potentials"]
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> NonQuadratic["Nonquadratic potentials"]
+  StochasticCalculus["Stochastic calculus foundations"] --> NonQuadratic["Nonquadratic potentials"]
   StochasticDynamics["Ginibre stochastic dynamics"] --> NonQuadratic["Nonquadratic potentials"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> NonQuadratic["Nonquadratic potentials"]
   ComplexGaussianHermite ~~~ DeficitsEquality
@@ -310,7 +311,8 @@ flowchart TB
   Endgame ~~~ GaussianLSI
   GaussianLSI ~~~ GinibreMeasureGeometry
   GinibreMeasureGeometry ~~~ PolynomialRadial
-  PolynomialRadial ~~~ StochasticDynamics
+  PolynomialRadial ~~~ StochasticCalculus
+  StochasticCalculus ~~~ StochasticDynamics
   StochasticDynamics ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class NonQuadratic target;

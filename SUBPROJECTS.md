@@ -18,7 +18,7 @@ See [numbered report](REPORT.md) for proof scope and open work.
 | [Stochastic calculus foundations](GinibrePoincare/Subprojects/StochasticCalculus.lean) | 231 | 17,411 | Brownian integration, quadratic variation, Girsanov changes of law and finite-dimensional Itô formulas. |
 | [Ginibre stochastic dynamics](GinibrePoincare/Subprojects/StochasticDynamics.lean) | 361 | 27,821 | Singular stochastic equation, Hamiltonian noise constructions, independence, CIR factorization and stationarity; Theorem 1.3. |
 | [Matrix lift and eigenvector overlaps](GinibrePoincare/Subprojects/MatrixLift.lean) | 127 | 11,037 | Schur and spectral charts, matrix Gaussian law and finite-energy overlap inequalities; Theorem 1.13. |
-| [Nonquadratic potentials](GinibrePoincare/Subprojects/NonQuadratic.lean) | 176 | 19,332 | Weighted dbar, general-potential geometry, convex transports and radial LSI; Theorem 1.14. |
+| [Nonquadratic potentials](GinibrePoincare/Subprojects/NonQuadratic.lean) | 216 | 24,339 | Weighted dbar, general-potential geometry, convex transports and radial LSI; Theorem 1.14. |
 | [Paper assembly](GinibrePoincare/Subprojects/Endgame.lean) | 13 | 1,471 | Public completion endpoints and finite or abstract reduction assemblies. |
 
 Counts include comments and blank lines, exclude generated facades and Mathlib. The full project/transitive Mathlib counts are refreshed separately with `python3 scripts/count_lean_sources.py`.
@@ -1235,28 +1235,68 @@ Entry point: `MatrixLift`. Direct dependency groups: ComplexGaussianHermite, Def
 
 ### Nonquadratic potentials
 
-Entry point: `NonQuadratic`. Direct dependency groups: ComplexGaussianHermite, DeficitsEquality, Endgame, GaussianLSI, GinibreMeasureGeometry, PolynomialRadial, StochasticDynamics, WeakSobolev.
+Entry point: `NonQuadratic`. Direct dependency groups: ComplexGaussianHermite, DeficitsEquality, Endgame, GaussianLSI, GinibreMeasureGeometry, PolynomialRadial, StochasticCalculus, StochasticDynamics, WeakSobolev.
 
+- [AlternativeBakryEmeryBrownianDyadicCompleted](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicCompleted.lean)
+- [AlternativeBakryEmeryBrownianDyadicCoordinates](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicCoordinates.lean)
+- [AlternativeBakryEmeryBrownianDyadicGaussianFinite](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianFinite.lean)
+- [AlternativeBakryEmeryBrownianDyadicGaussianLimit](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicGaussianLimit.lean)
+- [AlternativeBakryEmeryBrownianDyadicTents](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicTents.lean)
+- [AlternativeBakryEmeryBrownianDyadicUniform](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianDyadicUniform.lean)
+- [AlternativeBakryEmeryBrownianEndpoint](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianEndpoint.lean)
+- [AlternativeBakryEmeryBrownianGrid](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianGrid.lean)
+- [AlternativeBakryEmeryBrownianNoise](GinibrePoincare/Analysis/AlternativeBakryEmeryBrownianNoise.lean)
 - [AlternativeBakryEmeryCameronMartin](GinibrePoincare/Analysis/AlternativeBakryEmeryCameronMartin.lean)
 - [AlternativeBakryEmeryConvexLift](GinibrePoincare/Analysis/AlternativeBakryEmeryConvexLift.lean)
+- [AlternativeBakryEmeryEndpointApproximation](GinibrePoincare/Analysis/AlternativeBakryEmeryEndpointApproximation.lean)
 - [AlternativeBakryEmeryEntropyFlow](GinibrePoincare/Analysis/AlternativeBakryEmeryEntropyFlow.lean)
+- [AlternativeBakryEmeryFiniteEndpoint](GinibrePoincare/Analysis/AlternativeBakryEmeryFiniteEndpoint.lean)
 - [AlternativeBakryEmeryGaussianNoiseLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryGaussianNoiseLSI.lean)
 - [AlternativeBakryEmeryGaussianResponse](GinibrePoincare/Analysis/AlternativeBakryEmeryGaussianResponse.lean)
+- [AlternativeBakryEmeryGibbsEquilibriumReversal](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsEquilibriumReversal.lean)
 - [AlternativeBakryEmeryGibbsGenerator](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsGenerator.lean)
+- [AlternativeBakryEmeryGibbsInitialLaw](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsInitialLaw.lean)
+- [AlternativeBakryEmeryGibbsInitialLawHilbert](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsInitialLawHilbert.lean)
+- [AlternativeBakryEmeryGibbsInitialLawMass](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsInitialLawMass.lean)
+- [AlternativeBakryEmeryGibbsLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsLSI.lean)
+- [AlternativeBakryEmeryGibbsLSIClosure](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsLSIClosure.lean)
+- [AlternativeBakryEmeryGibbsLSIContraction](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsLSIContraction.lean)
+- [AlternativeBakryEmeryGibbsLSICoupling](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsLSICoupling.lean)
+- [AlternativeBakryEmeryGibbsLSIDriverIdentification](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsLSIDriverIdentification.lean)
+- [AlternativeBakryEmeryGibbsLSIObservables](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsLSIObservables.lean)
 - [AlternativeBakryEmeryGibbsMass](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsMass.lean)
 - [AlternativeBakryEmeryGibbsReversalAction](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalAction.lean)
+- [AlternativeBakryEmeryGibbsReversalActionLocality](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalActionLocality.lean)
+- [AlternativeBakryEmeryGibbsReversalCoupling](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalCoupling.lean)
+- [AlternativeBakryEmeryGibbsReversalExhaustion](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalExhaustion.lean)
+- [AlternativeBakryEmeryGibbsReversalInitialPaths](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalInitialPaths.lean)
+- [AlternativeBakryEmeryGibbsReversalKilledLaw](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalKilledLaw.lean)
+- [AlternativeBakryEmeryGibbsReversalMixture](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalMixture.lean)
+- [AlternativeBakryEmeryGibbsReversalPathFactory](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalPathFactory.lean)
+- [AlternativeBakryEmeryGibbsReversalStationaryReference](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalStationaryReference.lean)
+- [AlternativeBakryEmeryGibbsReversalStopped](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalStopped.lean)
+- [AlternativeBakryEmeryGibbsReversalSurvival](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalSurvival.lean)
+- [AlternativeBakryEmeryGibbsReversalVolterra](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsReversalVolterra.lean)
+- [AlternativeBakryEmeryGibbsStationaryLaw](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsStationaryLaw.lean)
 - [AlternativeBakryEmeryHilbertLift](GinibrePoincare/Analysis/AlternativeBakryEmeryHilbertLift.lean)
 - [AlternativeBakryEmeryIntegrationByParts](GinibrePoincare/Analysis/AlternativeBakryEmeryIntegrationByParts.lean)
+- [AlternativeBakryEmeryLangevinConfiguration](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinConfiguration.lean)
 - [AlternativeBakryEmeryLangevinContraction](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinContraction.lean)
+- [AlternativeBakryEmeryLangevinCorrectedDriver](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinCorrectedDriver.lean)
 - [AlternativeBakryEmeryLangevinEnergy](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinEnergy.lean)
+- [AlternativeBakryEmeryLangevinEnergyUniform](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinEnergyUniform.lean)
+- [AlternativeBakryEmeryLangevinGlobal](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinGlobal.lean)
+- [AlternativeBakryEmeryLangevinGlobalContinuity](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinGlobalContinuity.lean)
 - [AlternativeBakryEmeryLangevinLocal](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinLocal.lean)
 - [AlternativeBakryEmeryLangevinNoiseStability](GinibrePoincare/Analysis/AlternativeBakryEmeryLangevinNoiseStability.lean)
 - [AlternativeBakryEmeryLiftTransfer](GinibrePoincare/Analysis/AlternativeBakryEmeryLiftTransfer.lean)
+- [AlternativeBakryEmeryPolygonalApproximation](GinibrePoincare/Analysis/AlternativeBakryEmeryPolygonalApproximation.lean)
 - [AlternativeBakryEmeryPolygonalNoise](GinibrePoincare/Analysis/AlternativeBakryEmeryPolygonalNoise.lean)
 - [AlternativeBakryEmeryPolygonalResponse](GinibrePoincare/Analysis/AlternativeBakryEmeryPolygonalResponse.lean)
 - [AlternativeBakryEmeryProductGradient](GinibrePoincare/Analysis/AlternativeBakryEmeryProductGradient.lean)
 - [AlternativeBakryEmeryRadialDrift](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialDrift.lean)
 - [AlternativeBakryEmeryRadialLift](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialLift.lean)
+- [AlternativeBakryEmeryRegularizedEuclidean](GinibrePoincare/Analysis/AlternativeBakryEmeryRegularizedEuclidean.lean)
 - [AlternativeBakryEmeryRegularizedLift](GinibrePoincare/Analysis/AlternativeBakryEmeryRegularizedLift.lean)
 - [AlternativeBakryEmeryScalarForm](GinibrePoincare/Analysis/AlternativeBakryEmeryScalarForm.lean)
 - [AlternativeBakryEmeryVolterraContraction](GinibrePoincare/Analysis/AlternativeBakryEmeryVolterraContraction.lean)

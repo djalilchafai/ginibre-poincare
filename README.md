@@ -7,7 +7,9 @@ Compiled result coverage does not certify every original or alternative paper
 proof. Independent Section 3 spectral, Section 4 Hermite–Slater, Section 6
 Bochner–Kodaira and Gaussian matrix Poincaré endpoints now compile. The recorded full-project
 build, source audit and public/private axiom audits pass. The primary nonquadratic Bakry–Émery
-proof remains unfinished; concrete diffusion-law entropy work is in progress. See the [proof-route inventory](REPORT.md#independent-proof-routes-and-remaining-gaps)
+proof remains unfinished: Gibbs invariance and the sharp entropy inequality from
+Brownian noise are proved; internal Brownian existence and the radial assembly
+are in progress. See the [proof-route inventory](REPORT.md#independent-proof-routes-and-remaining-gaps)
 for the inventory. An independent exhaustive paper-to-Lean correspondence
 review remains outstanding.
 

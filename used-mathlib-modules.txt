@@ -2145,6 +2145,7 @@ Mathlib.Logic.Small.Set
 Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
 Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
 Mathlib.MeasureTheory.Constructions.BorelSpace.ContinuousLinearMap
+Mathlib.MeasureTheory.Constructions.BorelSpace.ContinuousMap
 Mathlib.MeasureTheory.Constructions.BorelSpace.Metric
 Mathlib.MeasureTheory.Constructions.BorelSpace.Metrizable
 Mathlib.MeasureTheory.Constructions.BorelSpace.Order

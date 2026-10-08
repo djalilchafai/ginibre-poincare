@@ -6,7 +6,7 @@ The asserted numbered results and the seventeen required milestones now have com
 The public library is organized into twelve thematic import subprojects:
 [SUBPROJECTS.md](SUBPROJECTS.md) gives every file, counts, entry points and direct
 dependency groups; [subprojects.json](subprojects.json) is the machine-readable
-inventory. Existing module paths remain available. Every one of the 1,345
+inventory. Existing module paths remain available. Every one of the 1,385
 original library modules occurs in exactly one group, plus twelve generated
 facades. The root imports these facades. The proof endpoint entry point is
 [FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean).
@@ -58,22 +58,27 @@ checks expand every transitively imported local theorem body and confirm that
 they do not call the earlier Poincaré/deficit endpoints specified by the route audit.
 This checks proof references, not an exhaustive paper correspondence review.
 The single-thread `make check` checkpoint passes: full build, generated inventory
-and source checks, 5,384 public axiom queries and the all-local audit of 11,685
+and source checks, 5,593 public axiom queries and the all-local audit of 12,070
 declarations, with only `propext`, `Classical.choice`, and `Quot.sound`.
-See [checkpoint build/audit log](ginibre-alternative-proof-check.log) and
+See [checkpoint build/audit log](verification/alternative-proof-check.txt) and
 [compiled route-independence check](scripts/check_alternative_routes.py).
 
 
-The primary Bakry–Émery route remains unfinished. Verified ingredients include
-exact normalized lift/entropy/gradient transfers, Hilbert strong convexity,
-positive-ε C² regularization, Gaussian domination and actual normalized Gibbs
-entropy convergence; actual local Langevin solutions, confinement, synchronous
-contraction and drift derivative curvature; weighted Gibbs generator/log identities;
-and the exact Cameron–Martin response coefficient. The agents continue the global
-solution, Gaussian finite-noise approximation and invariant Gibbs-law entropy
-argument. Compact-core stationarity and scalar flow reductions are not described
-as a concrete LSI proof. The recorded full-project checkpoint passes all build/source/public/private audits. No overall
-completion percentage or completion of all four requested groups is claimed.
+The primary Bakry–Émery route remains unfinished. Its focused compiled modules
+now construct the global continuous-noise Langevin path and measurable flow,
+prove the finite Gaussian endpoint inequality and its actual Brownian limit,
+derive stopped Girsanov laws, integrate the Gaussian initial likelihood and
+exhaust compact balls to obtain full path reversal and concrete normalized Gibbs
+invariance. Actual compact-C¹ Gibbs LSI with sharp constant `2/κ` follows from
+a supplied independent Brownian process, with all mass, stationarity and
+entropy/gradient limits proved internally. The internal Brownian existence
+construction and final regularization/radial transfer are still required to
+export the analytic theorem without stochastic completion inputs. The Gaussian
+Faber–Schauder series already has a proved almost-everywhere uniform continuous
+limit; its Gaussian increment laws and global path assembly are in progress.
+The expanded full-project checkpoint passes all build/source/public/private
+audits. No overall completion
+percentage or completion of all four requested groups is claimed.
 
 
 Alternative-proof checkpoint (2026-10-08): confirmed that the report explicitly
@@ -333,9 +338,9 @@ Refreshed with `python3 scripts/count_lean_sources.py`.
 
 | Source scope | Files/modules | Physical lines |
 | --- | ---: | ---: |
-| Active project Lean sources, including roots, generated facades and Lean tooling | 1,365 | 150,775 |
-| Transitively imported Mathlib | 3,796 | 1,252,641 |
-| Project plus imported Mathlib | 5,161 | 1,403,416 |
+| Active project Lean sources, including roots, generated facades and Lean tooling | 1,405 | 156,111 |
+| Transitively imported Mathlib | 3,797 | 1,252,833 |
+| Project plus imported Mathlib | 5,202 | 1,408,944 |
 
 Comments and blank lines are included. Imported Mathlib modules are counted
 once in full, using only `.lake/packages/mathlib`. Archives, Lean core and other
@@ -348,9 +353,11 @@ audit/compatibility files; its totals therefore differ from the full source coun
 Asserted-result coverage and independent proof-route completion are separate.
 The requested Section 3/4, Section 6 Bochner–Kodaira and Gaussian matrix variance
 endpoints are now compiled. The primary nonquadratic Bakry–Émery proof is still
-active: complete the global Langevin construction, Gaussian-noise entropy
-passage, and identification of the invariant law with actual Gibbs density,
-then assemble the radial LSI using the exact normalized lift transfers.
+active: complete internal Brownian existence and assemble the radial LSI using
+the proved Gibbs entropy inequality, regularization and exact normalized lift
+transfers. Global Langevin construction, Brownian-noise entropy passage and
+identification of the invariant law with actual Gibbs density are now proved;
+the current Gibbs LSI export still takes an independent Brownian process as input.
 The existing transport proof of Theorem 1.14 remains verified. Problems 1.11,
 1.15 and 1.16 remain open; Appendix C is outside certification. Palomar final
 registration consent was accepted; public completion is not yet confirmed.

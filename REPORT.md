@@ -141,7 +141,7 @@ records other original arguments replaced at existing endpoints.
 | Theorem 1.1, Section 3 spectral route | [AlternativeSpectralPoincare](GinibrePoincare/Analysis/AlternativeSpectralPoincare.lean): concrete number forms, anti-Vandermonde factor, two-sided form identity, independently assembled sharp inequality; [DifferentialFactorization](GinibrePoincare/Analysis/AlternativeSpectralDifferentialFactorization.lean) proves literal complex pregenerator factorization (3.1) and Vandermonde calculations (3.3–3.4) | Full symmetric ordinary weak-H¹ endpoint; full build and public/private audits pass |
 | Theorem 1.1, Section 4 Hermite–Slater route | [AlternativeSlaterExpansion](GinibrePoincare/Analysis/AlternativeSlaterExpansion.lean) and [AlternativeSlaterPoincare](GinibrePoincare/Analysis/AlternativeSlaterPoincare.lean): actual determinant representatives, convergent ordered-frame expansion and factorial-normalized Parseval, degree energy and sharp inequality | Full symmetric ordinary weak-H¹ endpoint; signed orbit pairings, orthogonality, lowering and polynomial quotient proved; full build and public/private audits pass |
 | Theorem 1.10, Section 6 integrated Bochner–Kodaira route | [AlternativeBochnerKodairaDifferential](GinibrePoincare/Analysis/AlternativeBochnerKodairaDifferential.lean), [Compact](GinibrePoincare/Analysis/AlternativeBochnerKodairaCompact.lean), [Closure](GinibrePoincare/Analysis/AlternativeBochnerKodairaClosure.lean): actual commutator, Gaussian IBP integrated identity and closed compact-jet extension | Focused compiled full real symmetric generator endpoint in [BochnerKodairaTheoremOneTen](GinibrePoincare/Endgame/BochnerKodairaTheoremOneTen.lean), with actual first/second weak derivatives and both exact deficits; full build and public/private audits pass |
-| Theorem 1.14, primary Bakry–Émery radial LSI route | [AlternativeBakryEmeryConvexLift](GinibrePoincare/Analysis/AlternativeBakryEmeryConvexLift.lean), [RadialLift](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialLift.lean): exact convex lift, normalized product pushforward, and concrete entropy/gradient transfers; [EntropyFlow](GinibrePoincare/Analysis/AlternativeBakryEmeryEntropyFlow.lean) proves the scalar dissipation implication | General nonquadratic diffusion entropy/Fisher evolution remains unconstructed; the scalar flow theorem is a reduction, not a concrete LSI endpoint |
+| Theorem 1.14, primary Bakry–Émery radial LSI route | Exact convex lift and normalized radial product transfers; actual global Langevin construction, finite Gaussian response and Brownian endpoint entropy limit; [GibbsEquilibriumReversal](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsEquilibriumReversal.lean) and [GibbsStationaryLaw](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsStationaryLaw.lean) derive concrete Gibbs invariance; [GibbsLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsLSI.lean) proves sharp `2/κ` compact-C¹ Gibbs LSI from a supplied independent Brownian process | Internal Brownian existence and the final regularization/radial transfer remain open in this route. A theorem retaining a supplied Brownian process is not the completed analytic endpoint; the scalar entropy-flow theorem remains a separate reduction |
 | Theorem 1.13, Gaussian matrix Poincaré route | [SquareEntropyLinearization](GinibrePoincare/Analysis/SquareEntropyLinearization.lean), [MatrixGaussianPoincare](GinibrePoincare/Analysis/MatrixGaussianPoincare.lean), [AlternativeMatrixPoincare](GinibrePoincare/Analysis/AlternativeMatrixPoincare.lean): actual Gaussian matrix H¹ inequality, spectral pushforward and exact overlap energy, with finite-overlap H¹ membership derived internally | Exact coefficient `2/n`; full build and public/private audits pass. The endgame now invokes this Gaussian route |
 
 | Paper proof argument | Lean route at the recorded endpoint |
@@ -435,6 +435,22 @@ The radial LSI proof differs from the paper's primary route as detailed below.
 The paper explicitly permits a transport alternative in footnote 6. This
 remark concerns the radial LSI part, not a replacement of the nonquadratic
 Poincaré argument by a convexity assumption.
+
+The requested primary-route implementation is in progress. Lean expands the
+strongly convex diffusion ingredient through actual Langevin construction,
+Gaussian Cameron–Martin response, and a stationary entropy limit. This is an
+expanded proof of the cited strongly convex LSI ingredient, using concrete
+additive noise; it is not a standalone arbitrary-diffusion `Γ₂` theorem.
+[GibbsEquilibriumReversal](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsEquilibriumReversal.lean)
+derives full path reversal from the internally proved stopped Girsanov identity,
+actual stationary OU reference and compact-ball exhaustion.
+[GibbsInitialLaw](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsInitialLaw.lean)
+identifies the normalized Gaussian relative density with literal Lebesgue Gibbs
+density. [GibbsLSI](GinibrePoincare/Analysis/AlternativeBakryEmeryGibbsLSI.lean)
+then proves the sharp compact-C¹ entropy bound from a supplied Brownian process.
+Brownian existence must still be proved internally and the regularized inequality
+transferred to the paper's radial domain before this route is called complete.
+The existing transport endpoint remains exported and verified.
 
 The Poincaré part develops the same weighted-dbar coercivity/duality mechanism
 in a concrete Hilbert-space realization:

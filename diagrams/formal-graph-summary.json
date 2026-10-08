@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "local_declarations": 11685,
-  "local_theorems": 10123,
-  "compiled_local_modules": 1359,
-  "external_boundary_constants": 8402,
-  "direct_reference_pairs": 981019,
-  "source_modules": 1364,
-  "local_import_edges": 5080,
-  "export_sha256": "53df277bd5175acaffdb3d195bbb9a2889d656f8805ade5d1d7523e5091a1121",
+  "local_declarations": 12070,
+  "local_theorems": 10441,
+  "compiled_local_modules": 1399,
+  "external_boundary_constants": 8470,
+  "direct_reference_pairs": 1019726,
+  "source_modules": 1404,
+  "local_import_edges": 5243,
+  "export_sha256": "56990bd119ad6b31cf27f2a0ce7debfa92df5504b9ff487de4404cb683e02e43",
   "targets": [
     {
       "target": "GinibrePoincare.fullMainAnalyticProof",
