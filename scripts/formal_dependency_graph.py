@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Render exact compiled declaration references and local Lean source imports."""
 import argparse
+import base64
+import gzip
 from collections import Counter
 import hashlib
 import json
@@ -152,7 +154,8 @@ def main():
         summaries.append({'target': target, 'direct_local_dependencies': len(dependencies),
                           'direct_external_dependencies': len((types | values) - declarations.keys())})
     template = (ROOT / 'scripts/formal_graph_template.html').read_text()
-    embedded = json.dumps(data, separators=(',', ':')).replace('<', '\\u003c')
+    payload = json.dumps(data, separators=(',', ':')).encode()
+    embedded = base64.b64encode(gzip.compress(payload, compresslevel=9, mtime=0)).decode('ascii')
     files[ROOT / 'formal-dependencies.html'] = template.replace('__FORMAL_GRAPH_JSON__', embedded).replace(
         '__PAPER_OVERVIEW_SVG__', (OUT / 'Endgame.svg').read_text())
     summary = {'schema_version': 1, 'local_declarations': len(declarations),

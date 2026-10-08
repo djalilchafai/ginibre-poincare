@@ -14,15 +14,23 @@
 <div class="graph" id="graph"></div><p id="boundary" class="muted"></p>
 </section><section class="details"><div><h2>Statement/type references</h2><ul id="types"></ul></div><div><h2>Proof/definition references</h2><ul id="values"></ul></div></section>
 <section><h2>Interpretation</h2><p>These are direct syntactic constant references in Lean’s elaborated environment. They include private and generated declarations. Selecting dependencies repeatedly explores the local transitive closure. An external node is a boundary, not a claim that it has no further dependencies. Definitions as well as theorems occur in proof terms; this graph does not replace the axiom audit or certify correspondence with the paper.</p><p><a href="FORMAL_DEPENDENCIES.md">Graph documentation</a> · <a href="diagrams/formal-declarations.json">Complete declaration JSON</a> · <a href="diagrams/formal-module-imports.dot">Complete local import DAG (DOT)</a></p></section>
-</main><script type="application/json" id="data">__FORMAL_GRAPH_JSON__</script>
+</main><script type="application/octet-stream" id="data">__FORMAL_GRAPH_JSON__</script>
 <script>
 'use strict';
-const data=JSON.parse(document.getElementById('data').textContent);
+const el=id=>document.getElementById(id);
+el('go').disabled=true;el('back').disabled=true;el('external').disabled=true;
+async function start(){
+el('inventory').textContent='Loading dependency data…';
+if(typeof DecompressionStream==='undefined')throw new Error('This explorer needs a browser with gzip decompression support. Please use a current Chrome, Firefox, Edge or Safari.');
+const bytes=Uint8Array.from(atob(document.getElementById('data').textContent.trim()),c=>c.charCodeAt(0));
+const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+const data=JSON.parse(await new Response(stream).text());
+document.getElementById('data').remove();
 const local=new Map(data.declarations.map(n=>[n.name,n]));
 const boundary=new Map(data.external_constants.map(n=>[n.name,n]));
 const history=[];let current='GinibrePoincare.fullMainAnalyticProof';
 const presets=[['Theorem 1.1 — original analytic proof','GinibrePoincare.fullMainAnalyticProof'],['Theorem 1.13 — matrix overlaps','GinibrePoincare.fullMatrixLift_functional_inequalities'],['Theorem 1.14 — nonquadratic potentials','GinibrePoincare.fullNonQuadraticPotentialTheorem'],['Theorem 1.9','GinibrePoincare.fullTheoremOneNine'],['Theorem 1.10','GinibrePoincare.fullTheoremOneTenSchwartz'],['Palomar Theorem 1.1','PalomarGinibre.theoremOneOne']];
-const el=id=>document.getElementById(id);
+
 for(const [label,name] of presets){const b=document.createElement('button');b.textContent=label;b.onclick=()=>select(name);el('presets').append(b)}
 for(const n of local.keys()){const o=document.createElement('option');o.value=n;el('names').append(o)}
 el('inventory').textContent=`${local.size.toLocaleString()} compiled local declarations in ${data.modules.length} modules; ${boundary.size.toLocaleString()} referenced external boundary constants. Works offline.`;
@@ -39,5 +47,7 @@ for(const [kind,color]of [['type','#b45309'],['value','#2563eb'],['both','#7e22c
 function box(name,x,y,isTarget,kind){const g=svgElement('g',{class:'node',tabindex:0,role:'button','aria-label':name},svg);const color=isTarget?'#163354':kind==='type'?'#b45309':kind==='both'?'#7e22ce':'#2563eb';svgElement('rect',{x,y,width:boxWidth,height:boxHeight,rx:7,fill:isTarget?'#dbeafe':local.has(name)?'#f8fafc':'#fff7ed',stroke:color,'stroke-width':isTarget?2:1},g);const title=svgElement('title',{},g);title.textContent=name;const short=name.replace(/^GinibrePoincare\./,'');const parts=short.length<=44?[short]:[short.slice(0,44),short.slice(44,86)+(short.length>86?'…':'')];parts.forEach((line,i)=>{const t=svgElement('text',{x:x+12,y:y+24+i*20,'font-family':'system-ui,sans-serif','font-size':12,fill:'#172b43'},g);t.textContent=line});g.onclick=()=>select(name);g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(name)}}}
 shown.forEach((name,i)=>{const col=i%columns,row=Math.floor(i/columns),x=20+col*400,y=depY+row*rowHeight;const kind=typeSet.has(name)&&valueSet.has(name)?'both':typeSet.has(name)?'type':'value';const color=kind==='type'?'#b45309':kind==='both'?'#7e22ce':'#2563eb';svgElement('path',{d:`M ${x+boxWidth/2} ${y} C ${x+boxWidth/2} ${y-40}, 600 ${topY+boxHeight+40}, 600 ${topY+boxHeight}`,fill:'none',stroke:color,'stroke-width':1.2,'marker-end':'url(#arrow-'+kind+')'},svg)});
 shown.forEach((name,i)=>box(name,20+(i%columns)*400,depY+Math.floor(i/columns)*rowHeight,false,typeSet.has(name)&&valueSet.has(name)?'both':typeSet.has(name)?'type':'value'));box(current,(width-boxWidth)/2,topY,true,'value');el('graph').replaceChildren(svg)}
-el('go').onclick=()=>select(el('search').value.trim());el('search').onkeydown=e=>{if(e.key==='Enter')select(el('search').value.trim())};el('external').onchange=render;el('back').onclick=()=>{if(history.length)select(history.pop(),false)};render();
+el('go').onclick=()=>select(el('search').value.trim());el('search').onkeydown=e=>{if(e.key==='Enter')select(el('search').value.trim())};el('external').onchange=render;el('back').onclick=()=>{if(history.length)select(history.pop(),false)};el('go').disabled=false;el('external').disabled=false;render();
+}
+start().catch(error=>{el('inventory').textContent='Unable to load dependency data: '+error.message;});
 </script></body></html>

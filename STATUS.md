@@ -46,6 +46,23 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 
 ## Latest progress
 
+Diagram compression (2026-10-08): standalone `formal-dependencies.html` reduced
+from 35,659,613 to 3,409,904 bytes (90.4%) through deterministic gzip/base64
+embedding and native browser decompression. All declaration data is retained;
+exact decoded JSON equality, generated-view consistency and offline Chromium
+rendering passed. Online hosting can serve the single HTML file directly.
+Existing full-project verified scope and restrictions in the dashboard above
+remain unchanged; no Lean proofs were edited and no new Lean build/audit was
+run. Latest existing evidence: single-thread full build, 5,079 public queries,
+11,112-declaration all-local audit and strict Comparator/three kernels pass.
+Editorial review and independent paper correspondence review remain pending;
+Problems 1.11, 1.15, 1.16 and Appendix C remain outside theorem certification.
+Refreshed physical Lean counts: 143,778 project lines; 1,251,826 transitively
+imported Mathlib lines; 1,395,604 combined. Comments and blank lines included;
+each imported Mathlib module counted once in full. Next step: upload the
+compressed HTML to the intended web host; continue pending publication review.
+
+
 Diagram scope corrected (2026-10-08): the interactive explorer now opens with
 full-paper assembly and the original Theorem 1.1 proof, with additional matrix
 and nonquadratic endpoint views. Its documentation and generated static views

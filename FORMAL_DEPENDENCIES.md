@@ -1,6 +1,12 @@
 # Formal Lean dependency graph
 
 Open [the offline interactive explorer](formal-dependencies.html) in a browser.
+The standalone HTML embeds the complete database as gzip-compressed base64
+and decompresses it in the browser, reducing its size from 35.7 MB to 3.4 MB
+without removing declarations or references. It works online and offline in
+browsers supporting `DecompressionStream`; no external script or data fetch is
+required. The full declaration JSON remains available separately.
+
 It opens with the full-paper assembly overview and the original analytic proof
 of Theorem 1.1. Presets also cover matrix overlaps (1.13), nonquadratic
 potentials (1.14), both deficits (1.9–1.10), and the Palomar Theorem 1.1 statement.
