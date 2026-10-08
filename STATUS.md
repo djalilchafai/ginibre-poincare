@@ -15,7 +15,7 @@ statements: 1.1–1.16, 2.1–2.8 and A.1–A.3.
 
 ## Palomar verification checkpoint
 
-Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The final single-thread full build, source audit, 5,079 public axiom queries, 11,112-declaration all-local audit and both root compatibility checks pass. Actual Comparator passes strict recursive statement comparison and all three kernels: con-ron, nanoda and Lean’s default kernel. The independent Challenge has exactly the user-authorized statement hole; the proof library and Solution remain hole-free and use only the three permitted standard axioms. The comparison covers full symmetric weak-H¹ Theorem 1.1 and exhaustive affine equality, not the whole paper. Offline preflight reports zero blockers and metadata passes the official v0.4 schema. Submission `7fh68vzqfjeu` is accepted; official verification passed and review is pending, and no registration has occurred.
+Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The final single-thread full build, source audit, 5,079 public axiom queries, 11,112-declaration all-local audit and both root compatibility checks pass. Actual Comparator passes strict recursive statement comparison and all three kernels: con-ron, nanoda and Lean’s default kernel. The independent Challenge has exactly the user-authorized statement hole; the proof library and Solution remain hole-free and use only the three permitted standard axioms. The comparison covers full symmetric weak-H¹ Theorem 1.1 and exhaustive affine equality, not the whole paper. Offline preflight reports zero blockers and metadata passes the official v0.4 schema. Submission `7fh68vzqfjeu` is accepted; official verification passed and editorial review is ready with no blocking problems, warnings or requested changes; final registration requested and accepted, public completion not yet confirmed.
 
 ## Full-project dashboard
 
@@ -40,11 +40,61 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 | Divisibility, Lemma 2.6 | Arbitrary entire alternating functions factor globally as Vandermonde times an entire symmetric quotient, including all collision hyperplanes | None |
 | Projection geometry, Lemma 2.7 / Remark 2.8 | Centered holomorphic/conjugate orthogonality; arbitrary complex L² two-projection bound and actual conjugate closed-subspace projection; arbitrary real centered L² Pythagoras and half-distance; pointwise center and Vandermonde cancellation formulas | Actual entire symmetric L² = Hdiv = closed polynomial space; literal distance infima and paper normalization proved |
 | Supplementary claims / Appendix B | Nonsymmetric counterexample, linear-statistic transfer, nonholomorphic radius, polynomial-sector properness and actual Bochner/commutation formulas | Each result retains its stated domain |
-| Palomar packaging | Module headers, pinned 4.35.0-rc2 dependencies, schema-valid provenance, independent weak-H¹ Theorem 1.1 statement and Solution | Full supported-toolchain build/audits, strict local Comparator and official full preflight pass; GitHub published; Palomar submission accepted, official verification passed, editorial review pending, not registered |
+| Palomar packaging | Module headers, pinned 4.35.0-rc2 dependencies, schema-valid provenance, independent weak-H¹ Theorem 1.1 statement and Solution | Full supported-toolchain build/audits, strict local Comparator and official full preflight pass; GitHub published; Palomar submission accepted, official verification passed; clean editorial review; registration consent accepted, public completion pending |
 | Bakry–Émery / Bochner coverage | Concrete pointwise Bochner formulas, Ginibre curvature unbounded below for n ≥ 2, full-generator integrated curvature bound, scalar/radial curvature-to-coercivity and Fisher estimates | No standalone general diffusion criterion is exported; radial LSI endpoints are proved via Gaussian lift/derived contracting quantile transport, rather than assuming that criterion |
 | Problems 1.11, 1.15, 1.16 / Appendix C | Identified as open research questions / numerical experiments | They are not asserted solved or numerically certified by Lean |
 
 ## Latest progress
+
+Proof-route limitations made explicit (2026-10-08): REPORT.md now collects the
+nine documented original arguments replaced at the named Lean endpoints,
+distinguishes result coverage from independent alternative-proof coverage, and
+records the unexported general Bakry–Émery criterion and arbitrary-weight
+Hörmander theorem. README.md links this inventory. The full-project dashboard
+above retains the verified concrete scope and domain restrictions; no Lean
+proofs changed. Sections 3–7 are not certified route by route, and independent
+exhaustive paper-to-Lean correspondence review remains outstanding. Problems
+1.11, 1.15 and 1.16 remain open; Appendix C is uncertified. Latest proof evidence
+remains the single-thread full build, 5,079 public axiom queries and the
+11,112-declaration all-local audit; the strict Comparator/three-kernel pass
+concerns Theorem 1.1. Source counts refreshed with
+`python3 scripts/count_lean_sources.py`: 143,778 project Lean lines,
+1,251,826 transitively imported Mathlib lines, 1,395,604 combined. Comments and
+blank lines are included; each imported Mathlib module is counted once in full.
+Next mathematical review step: audit original and alternative proof routes
+against the versioned paper and record their individual correspondence evidence.
+
+Palomar registration request (2026-10-08): user explicitly requested all remaining
+Palomar steps after receiving the clean review outcome. Submitted `POST /register`
+with the delivered `review_sha256`; Palomar answered HTTP 200 with `ok: true`.
+The documented handler durably records consent before dispatching registration.
+Subsequent authenticated status queries repeatedly returned HTTP 500; the public
+repository registry index returned 404. Final registry ID, public entry and source
+preservation are therefore not yet confirmed. Do not describe consent acceptance
+as completed publication. No duplicate intake or registration request was issued.
+Mechanical verification and the clean editorial review remain passed. The pinned
+submission still compares symmetric weak-H¹ Theorem 1.1 and exhaustive affine
+equality, not every proof-library endpoint. Full-project scope and prior build/
+axiom audit evidence remain unchanged; independent full-paper correspondence
+review and the paper's open problems/numerical exclusions remain separate.
+Counts refreshed with `python3 scripts/count_lean_sources.py`: 143,778 project
+Lean lines; 1,251,826 imported Mathlib lines; 1,395,604 combined, including comments
+and blank lines and counting each imported Mathlib module once in full.
+Next step: check Palomar processing/status recovery and confirm the public entry.
+
+
+Palomar live status (2026-10-08): authenticated submission API reports
+`review-ready` for `7fh68vzqfjeu`. Mechanical run `37681934359` completed
+successfully. Review timestamp: 2026-10-08 02:39:44 UTC. Editorial review reports
+no blocking problems, no nonblocking warnings, no comments and no requested
+changes. Its scope is the selected symmetric weak-H¹ Theorem 1.1 and exhaustive
+affine equality statement; this is not a full-paper endorsement or registration.
+`registered_url` is null. The review is stored privately and no final registration
+was requested or performed. Existing full-project proof scope/build/audit evidence
+and restrictions in the dashboard remain unchanged. Independent full-paper
+correspondence review remains separate. Next step: show the review outcome to
+the user; final registration requires their separate instruction.
+
 
 Vertical diagrams and hosting diagnosis (2026-10-08): regenerated twelve thematic
 SVG/Mermaid diagrams and six formal SVGs vertically; the explorer uses one

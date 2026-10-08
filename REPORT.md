@@ -127,6 +127,47 @@ No listed asserted-result formalization gap remains. Problems 1.11, 1.15 and 1.1
 
 ## Proof-route correspondence remarks
 
+### Proof arguments not independently formalized
+
+Result coverage and proof-route coverage are separate claims. The numbered
+inventory records compiled endpoints for the asserted results; it does not mean
+that every argument in the paper has a separate Lean implementation. The
+following original arguments are replaced at the named endpoints. Related
+ingredients may be formalized elsewhere, as explained in the result-specific
+remarks below.
+
+| Paper proof argument | Lean route at the recorded endpoint |
+| --- | --- |
+| Theorem 1.10: integrated Bochner–Kodaira derivation | Theorem 1.9 Hermite deficits, inverse square root and actual weak-derivative identification |
+| Theorem 1.14: primary Bakry–Émery radial LSI argument | Contracting Gaussian quantile transport, an alternative permitted by the paper |
+| Theorem 1.13: Gaussian matrix Poincaré argument for the overlap variance bound | Theorem 1.1 and the ordinary-gradient/overlap-energy comparison; the entropy endpoint retains Gaussian matrix LSI transfer |
+| Theorem 1.3: joint quadratic variation and Lévy characterization of radial Brownian drivers | Discrete Brownian sums and limits, followed by independence through measurable functionals of independent paths |
+| Lemma 2.6: Weierstrass division and holomorphic germs | Integral division by successive collision hyperplanes |
+| Remark 2.4: invocation of Hörmander–Berndtsson solvability | Gaussian-specific Hermite spectral solver and projection to the canonical minimal solution |
+| Theorem 1.2: polar-coordinate calculation of the recentered Gamma law | Sublevel-set scaling of a homogeneous weighted measure |
+| Lemma 1.7: isolated colliding-pair curvature witness | Explicit configurations with all particles approaching one another |
+| Dynamics: general diffusion/Hunt-process correspondence | Riesz resolvent, functional-calculus semigroup and direct original-SDE resolvent comparison |
+
+The separate Section 3 spectral and Section 4 Hermite–Slater proofs of
+Theorem 1.1 are not each independently exported. More generally, coverage of
+the conclusions of Sections 3–7 is not certification of every alternative proof
+route in those sections. The original Section 2 analytic proof of Theorem 1.1
+is exported, and Theorem 1.9 retains the paper's Hermite mechanism.
+
+There is no standalone general diffusion theorem deriving Poincaré, LSI and
+semigroup gradient bounds from `Γ₂ ≥ ρΓ`. Nor does the Gaussian solver export
+the arbitrary-weight Hörmander theorem. These are limitations of general
+infrastructure and original-proof coverage, not unproved completion inputs of
+the concrete endpoints. The Bakry–Émery discussion below details the radial
+inequalities and their proved ingredients.
+
+Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C
+numerical experiments are uncertified. They are not established theorems with
+missing Lean proofs. An independent exhaustive paper-to-Lean correspondence
+review remains outstanding; compilation, axiom audits and the Theorem 1.1
+Palomar comparison do not supply that review. This table summarizes the
+documented differences, rather than an exhaustive audit of every paper argument.
+
 These remarks compare the proof bodies of the named endpoints with
 [arXiv:2608.19358v2](https://arxiv.org/html/2608.19358v2). They supplement the
 statement inventory above: an axiom audit does not establish that a proof follows

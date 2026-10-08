@@ -3,6 +3,13 @@
 The asserted numbered paper results are compiled and audited, including Theorems 1.9 and 1.10, nonquadratic potentials and matrix-lift/eigenvector-overlap inequalities. The ordinary Gaussian derivative domain, canonical dbar solver, global entire Vandermonde factorization and literal representative distance formulas are complete; see [the numbered report](REPORT.md). Open Problems 1.11, 1.15 and 1.16 remain research questions, and numerical experiments are outside theorem certification. The public entry point is [FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean).
 See [STATUS.md](STATUS.md) for exact domains, the full dashboard and validation.
 
+Compiled result coverage does not certify every original or alternative paper
+proof. Several endpoints use different arguments; the separate Section 3 and
+Section 4 proofs and a standalone general Bakry–Émery criterion are not
+independently exported. See the [proof-route limitations](REPORT.md#proof-arguments-not-independently-formalized)
+for the inventory. An independent exhaustive paper-to-Lean correspondence
+review remains outstanding.
+
 The library is grouped into 12 thematic [subprojects](SUBPROJECTS.md), including
 complex Gaussian/Hermite analysis, Gaussian LSI, stochastic calculus, stochastic
 dynamics, matrix lifts and nonquadratic potentials. Each has a Lean import entry
