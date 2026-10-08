@@ -73,6 +73,9 @@ fidelity:
     derivatives, and domain hypotheses. The weak-domain deficit exports extend
     the smooth-core formulation through closure. The paper's normalizations and
     the qualifications of each numbered result are documented in the report.
+    REPORT.md's proof-route correspondence remarks separately document alternative
+    proofs, expanded cited ingredients, and domain extensions, including the
+    Hermite-derived differential deficit and the nonquadratic quantile-transport LSI.
     A short independent Palomar Challenge must expose concrete statement content;
     merely importing the implementation is not a qualifying Challenge.
 review:

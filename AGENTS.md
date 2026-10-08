@@ -62,6 +62,12 @@ Use REPORT.md for numbered coverage and STATUS.md for current verification evide
 - Parallel agents may edit only explicitly assigned, disjoint files.
 - Do not modify another agent's active files.
 - Keep `STATUS.md` synchronized with what has actually been proved.
+- Whenever a formalized result uses a different proof route from the versioned
+  paper, add a result-specific remark in `REPORT.md`: identify the paper route,
+  the Lean route, and the relevant modules. Distinguish alternative proofs,
+  expanded proofs of cited ingredients, and domain extensions. If the original
+  route is also formalized, say so. Do not infer proof fidelity from compilation
+  or claim an exhaustive correspondence review without supporting evidence.
 - At every termination or checkpoint of a partial goal, include the full-project
   status dashboard in the final response and refresh the dashboard in `STATUS.md`.
   Report verified scope, open work, latest progress, build/audit evidence, and

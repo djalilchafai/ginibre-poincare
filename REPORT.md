@@ -109,6 +109,187 @@ The [official v2 proof section](https://arxiv.org/html/2608.19358v2#S2) was chec
 
 No listed asserted-result formalization gap remains. Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C experiments are not numerically certified. Each alternative proof route is not independently exported. Review the completed source and numbered correspondence; no overall completion percentage is assigned.
 
+## Proof-route correspondence remarks
+
+These remarks compare the proof bodies of the named endpoints with
+[arXiv:2608.19358v2](https://arxiv.org/html/2608.19358v2). They supplement the
+statement inventory above: an axiom audit does not establish that a proof follows
+the paper. Each entry identifies a verified difference or explains why an apparent
+difference is only additional infrastructure or a domain extension. This is a
+review of the named routes, not a line-by-line fidelity certification of every
+helper in the library. Future changes of route must receive a corresponding
+remark under the working rule in [AGENTS.md](AGENTS.md).
+
+### Theorem 1.1: the original analytic route is also exported
+
+The weak Poincaré endpoint is supported by Hermite/coefficient estimates and
+closure arguments. It is not the only realization of the main proof:
+[FullMainAnalyticProof](GinibrePoincare/Endgame/FullMainAnalyticProof.lean)
+also assembles the [original Section 2 route](https://arxiv.org/html/2608.19358v2#S2),
+using the proved Vandermonde energy identity, actual entire-space Gaussian
+distance estimate, divisibility and holomorphic–antiholomorphic projection
+geometry. The original route's concrete inputs are theorems, not assumptions.
+The paper's separate Section 3 spectral and Section 4 Hermite–Slater proofs
+are not each independently exported merely because the Hermite infrastructure
+and the final inequality are available.
+
+### Corollary 1.5: a direct center-power proof
+
+The [paper's corollary](https://arxiv.org/html/2608.19358v2#S1.SS7) follows the
+Hermite–Laguerre polynomial eigenfunctions of Theorem 1.4 and their inclusion in
+the generator domain. The all-positive-n Lean endpoint instead proves that
+the coordinate-sum powers `S^k` belong to the actual full generator domain and
+are nonzero eigenvectors. See
+[GinibreOneParticleSpectrum](GinibrePoincare/Analysis/GinibreOneParticleSpectrum.lean).
+These powers are already members of the paper's family for n ≥ 2; the direct
+proof avoids the relative-radius sector and also handles n = 1. Theorem 1.4's
+Hermite–Laguerre construction remains separately formalized. The normalization
+and spectral points are unchanged; including n = 1 is a domain clarification.
+
+### Lemma 1.7: an explicit collapsing configuration
+
+The [paper's proof](https://arxiv.org/html/2608.19358v2#S1.SS8) isolates one
+colliding pair, keeps the other separations bounded away from zero, and uses a
+tangential relative direction. The endpoint in
+[GinibrePointwiseCurvature](GinibrePoincare/Analysis/GinibrePointwiseCurvature.lean)
+instead places all particles at distinct real coordinates `i/L` and lets L grow.
+An imaginary coordinate direction has squared norm one; every relevant
+interaction contribution is nonpositive, so one pair suffices to bound the
+Hessian above by a quantity tending to minus infinity. This is a different
+witness construction for the same curvature obstruction. The separately proved
+recentered obstruction in
+[GinibrePointwiseCurvatureTangent](GinibrePoincare/Analysis/GinibrePointwiseCurvatureTangent.lean)
+uses an actual center-zero direction.
+
+### Theorems 1.9 and 1.10: Hermite identity versus differential derivation
+
+For Theorem 1.9, the Hermite levels, projection geometry and algebraic passage
+to the second deficit follow the mechanism in
+[paper Section 6](https://arxiv.org/html/2608.19358v2#S6).
+[FullTheoremOneNine](GinibrePoincare/Endgame/FullTheoremOneNine.lean)
+extends the result to the actual real symmetric generator graph, with a separate
+weak-H¹ first-deficit endpoint. Those closure results are domain extensions,
+not an alternative proof of the smooth-core identity.
+
+For Theorem 1.10 there is a substantive change of route. The paper develops the
+differential expression through the integrated Bochner–Kodaira identity and
+the number operator. In
+[FullTheoremOneTen](GinibrePoincare/Endgame/FullTheoremOneTen.lean), Lean starts
+from the already proved Theorem 1.9, constructs the inverse square root through
+Hermite coefficients, proves that the synthesized first and second derivatives
+are actual weak derivatives, and identifies their summed squared norms with the
+Hermite tail. Rewriting the Hermite deficit then gives the differential formula.
+Thus this endpoint is not an independent implementation of the paper's
+Bochner–Kodaira proof, even though concrete Bochner identities are proved
+elsewhere. The ordinary Schwartz derivative endpoint and generator-domain
+extension are additional domain bridges, not substitutes for the differential
+statement.
+
+### Theorems 1.12 and 1.13: expanding the Gaussian LSI ingredient
+
+The quadratic radial reduction follows the
+[paper's Kostlan/Gaussian magnitude lift](https://arxiv.org/html/2608.19358v2#S7);
+it should not be described as replacing that proof by a different radial
+argument. The Gaussian LSI used there and in the matrix lift is itself proved
+internally, whereas the paper uses it as a standard ingredient.
+[GaussianLSIReal](GinibrePoincare/Analysis/GaussianLSIReal.lean) derives the
+one-dimensional inequality from the finite Bernoulli-cube LSI, a binomial
+central-limit passage, and Sobolev closure. Scaling and entropy tensorization
+then give the Gaussian product inequalities. This is an expanded proof of a
+cited ingredient; it is not a Bakry–Émery derivation of that ingredient.
+The matrix spectral pushforward and overlap-gradient calculations remain
+separate obligations; Gaussian LSI alone does not supply them.
+
+### Gaussian dbar estimates and Appendix B: explicit spectral foundations
+
+The coefficient proof of Lemma 2.2 uses the paper's Hermite/Parseval mechanism.
+Its foundational completeness input is developed explicitly through Gaussian
+moment/Fourier tests and uniqueness in
+[GaussianPolynomialCompleteness](GinibrePoincare/Analysis/GaussianPolynomialCompleteness.lean)
+and [GaussianFourierUniqueness](GinibrePoincare/Analysis/GaussianFourierUniqueness.lean).
+This expands a standard basis ingredient used by the paper; it does not change
+the deficit argument. Rodrigues and lowering identities remain separately proved.
+
+For Remark 2.4, the paper invokes the Hörmander–Berndtsson solvability theorem.
+Lean provides an explicit Gaussian spectral solver: distributional closedness
+implies compatibility of Hermite coefficients, from which it constructs a
+potential and proves the actual derivative equations. See
+[GaussianClosedFormVolume](GinibrePoincare/Analysis/GaussianClosedFormVolume.lean)
+and [GaussianClosedFormCurl](GinibrePoincare/Analysis/GaussianClosedFormCurl.lean).
+[GaussianCanonicalDbarSolution](GinibrePoincare/Analysis/GaussianCanonicalDbarSolution.lean)
+then projects off the entire kernel to obtain the canonical minimum-norm
+solution. This is a Gaussian-specific construction, not an export of the
+arbitrary-weight Hörmander theorem.
+
+For Remark 2.3's compact-core density, the paper describes cutoff and
+mollification. [GaussianDbarCompactCore](GinibrePoincare/Analysis/GaussianDbarCompactCore.lean)
+uses finite Hermite graph approximation followed by spatial cutoffs instead.
+For Remark 2.5, Lean additionally identifies the actual entire L² space with
+the closed zero-mode span and reconstructs representatives in
+[GaussianEntireSpaceClosure](GinibrePoincare/Analysis/GaussianEntireSpaceClosure.lean).
+The paper's local bounds and locally uniform convergence are also exported;
+the spectral characterization is additional infrastructure.
+
+### Lemma 2.6: integral division rather than holomorphic local algebra
+
+The [paper's divisibility proof](https://arxiv.org/html/2608.19358v2#S2.SS3)
+uses local Weierstrass division and factorization in holomorphic germs.
+[GaussianEntireHyperplaneDivision](GinibrePoincare/Analysis/GaussianEntireHyperplaneDivision.lean)
+instead constructs division by a linear hyperplane through an explicit interval
+integral of a directional derivative.
+[EntireVandermondeFactorization](GinibrePoincare/Analysis/EntireVandermondeFactorization.lean)
+then divides successively by the finite collision factors, preserving vanishing
+on the remaining hyperplanes. The quotient is proved entire and symmetric
+across collisions; restricting it to the collision-free set would not prove
+the paper's statement.
+
+### Theorem 1.4, Remark 1.6 and Appendix A: same mechanisms, domain bridges
+
+The Hermite–Laguerre chain-rule proof and the relative-phase quadratic witness
+follow the paper in
+[PolynomialEigenfunctionGenerator](GinibrePoincare/Analysis/PolynomialEigenfunctionGenerator.lean)
+and [PolynomialSectorIncompleteness](GinibrePoincare/Analysis/PolynomialSectorIncompleteness.lean).
+They are not listed as alternative proofs. Appendix A's core and collision
+arguments likewise acquire additional explicit weak-graph identifications:
+[GinibreRealCoreClosureEquivalence](GinibrePoincare/Analysis/GinibreRealCoreClosureEquivalence.lean)
+proves equality with an independently defined ordinary distributional graph.
+This is a stronger domain characterization, rather than evidence that the
+paper's approximation mechanism has been replaced.
+
+### Generator and semigroup: a resolvent implementation
+
+The [paper's dynamics discussion](https://arxiv.org/html/2608.19358v2#S1.SS5)
+uses the closed Dirichlet form, Friedrichs extension and general diffusion
+correspondence. Lean realizes the same weak form using a Hilbert-space Riesz
+resolvent in
+[GinibreFullGeneratorResolvent](GinibrePoincare/Analysis/GinibreFullGeneratorResolvent.lean)
+and builds the analytic semigroup by bounded continuous functional calculus of
+that resolvent in
+[GinibreFullSemigroup](GinibrePoincare/Analysis/GinibreFullSemigroup.lean).
+The original-SDE transition semigroup is identified through its actual Laplace
+resolvent and semigroup uniqueness in
+[GinibreTransitionAnalyticResolventSemigroupComparison](GinibrePoincare/Analysis/GinibreTransitionAnalyticResolventSemigroupComparison.lean).
+This is a concrete implementation of the operator construction with a different
+semigroup-identification argument, rather than an invocation of the paper's
+general Hunt-process correspondence. The weak-form and paper-speed
+identifications are proved separately.
+
+### Theorem 1.14: transport instead of the primary Bakry–Émery argument
+
+The radial LSI proof differs from the paper's primary route as detailed below.
+The paper explicitly permits a transport alternative in footnote 6. This
+remark concerns the radial LSI part, not a replacement of the nonquadratic
+Poincaré argument by a convexity assumption.
+
+The Poincaré part develops the same weighted-dbar coercivity/duality mechanism
+in a concrete Hilbert-space realization:
+[NonQuadraticDbarL2](GinibrePoincare/Analysis/NonQuadraticDbarL2.lean) derives
+weak solvability from the proved adjoint bound, and
+[GeneralPotentialSharpPoincare](GinibrePoincare/Analysis/GeneralPotentialSharpPoincare.lean)
+combines the quotient gap with centered projection/phase geometry. This expands
+the paper's Hörmander–Berndtsson input and represents its holomorphic geometry
+through actual closed spaces; the analytic bound is proved internally.
+
 ## Bakry–Émery and the radial log-Sobolev proofs
 
 The full configuration law and the radial laws have different curvature
@@ -143,7 +324,8 @@ curvature above: these are different measures and operators.
 The [versioned paper's Theorem 1.14 proof and footnote 6](https://arxiv.org/html/2608.19358v2#S1.SS10)
 use a strongly convex Euclidean lift of each radius law to invoke Bakry–Émery,
 and explicitly allow contraction/transport arguments as alternatives. The
-current Lean LSI endpoints use those alternative proof routes:
+quadratic Lean endpoint follows the Gaussian-lift route, while the
+nonquadratic endpoint uses a transport alternative:
 
 - **Quadratic Ginibre, Theorem 1.12:** `radial_core_lsi` and
   `radial_sobolev_lsi` in
