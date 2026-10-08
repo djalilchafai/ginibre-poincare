@@ -46,6 +46,14 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 
 ## Latest progress
 
+Bakry–Émery report clarification (2026-10-08): added a dedicated section to
+REPORT.md explaining full-configuration versus radial curvature, the actual
+radial curvature bound, the paper's permitted transport alternative, and the
+Gaussian lift/quantile-transport proof routes of the quadratic and nonquadratic
+radial LSI endpoints. Included exact Lean references and the boundary of the
+general criterion coverage. Also refreshed REPORT.md's source counts and stale
+publication statements. No Lean proofs or immutable Palomar snapshot changed.
+
 Scope-instruction correction (2026-10-08): updated AGENTS.md's original
 Theorem 1.9 objective to the full asserted-paper scope, retained its seventeen
 core analytic milestones, and expanded completion criteria to every asserted

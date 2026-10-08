@@ -1,6 +1,8 @@
 # Ginibre Poincaré formalization report
 
-Updated on 2026-10-07 after the final full-project build and both axiom audits.
+Documentation updated on 2026-10-08. The recorded final full-project build
+and both axiom audits were completed on 2026-10-07; this documentation update
+does not rerun them.
 
 Paper: Djalil Chafaï, *An optimal Poincaré inequality for the complex Ginibre log-gas*.
 
@@ -10,7 +12,10 @@ The asserted numbered results of [arXiv:2608.19358v2](https://arxiv.org/abs/2608
 
 ## Palomar verification checkpoint
 
-Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The final single-thread full build, source audit, 5,079 public axiom queries, 11,112-declaration all-local audit and both root compatibility checks pass. Actual Comparator passes strict recursive statement comparison and all three kernels: con-ron, nanoda and Lean’s default kernel. The independent Challenge has exactly the user-authorized statement hole; the proof library and Solution remain hole-free and use only the three permitted standard axioms. The comparison covers full symmetric weak-H¹ Theorem 1.1 and exhaustive affine equality, not the whole paper. Offline preflight reports zero blockers and metadata passes the official v0.4 schema. No registry submission has occurred.
+Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The final single-thread full build, source audit, 5,079 public axiom queries, 11,112-declaration all-local audit and both root compatibility checks pass. Actual Comparator passes strict recursive statement comparison and all three kernels: con-ron, nanoda and Lean’s default kernel. The independent Challenge has exactly the user-authorized statement hole; the proof library and Solution remain hole-free and use only the three permitted standard axioms. The comparison covers full symmetric weak-H¹ Theorem 1.1 and exhaustive affine equality, not the whole paper. Offline preflight reports zero blockers and metadata passes the official v0.4 schema. Palomar accepted submission `7fh68vzqfjeu` at the immutable commit
+`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`; its official mechanical
+verification passed. See [PALOMAR.md](PALOMAR.md) for the recorded editorial
+review and registration status.
 
 ## Subproject organization
 
@@ -104,6 +109,64 @@ The [official v2 proof section](https://arxiv.org/html/2608.19358v2#S2) was chec
 
 No listed asserted-result formalization gap remains. Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C experiments are not numerically certified. Each alternative proof route is not independently exported. Review the completed source and numbered correspondence; no overall completion percentage is assigned.
 
+## Bakry–Émery and the radial log-Sobolev proofs
+
+The full configuration law and the radial laws have different curvature
+properties. For Ginibre with n ≥ 2, the normalized configuration Hessian is
+unbounded below, including on relative directions. This is proved by
+`ginibre_pointwise_bakry_emery_curvature_unbounded_below` in
+[GinibrePointwiseCurvature](GinibrePoincare/Analysis/GinibrePointwiseCurvature.lean)
+and its recentered counterpart. The standard positive pointwise
+Bakry–Émery bound therefore cannot be applied directly to the full Ginibre
+configuration diffusion. The full real symmetric generator nevertheless
+satisfies the integrated curvature inequality `2 * energy ≤ ‖Lf‖²`, proved
+by `ginibreFullGenerator_integrated_curvature` in
+[GinibreFullSemigroupDeficitConsequences](GinibrePoincare/Analysis/GinibreFullSemigroupDeficitConsequences.lean).
+
+After Kostlan reduction, the independent positive-radius laws have densities
+proportional to `r^(2k−1) exp(−nQ(r))`, with paper indexing k = 1, …, n.
+For a rotational ρ-convex potential V(z) = Q(|z|), their effective potentials obey
+
+$$
+W_k(r)=nQ(r)-(2k-1)\log r,\qquad
+W_k''(r)=nQ''(r)+\frac{2k-1}{r^2}\ge n\rho
+\quad (r>0).
+$$
+
+The exact derivative and radial curvature bound are formalized as
+`radialEffectivePotential_second_derivative` and
+`rhoConvexPotential_radial_curvature` in
+[NonQuadraticRadialConfinement](GinibrePoincare/Analysis/NonQuadraticRadialConfinement.lean).
+Positive radial curvature is compatible with the negative configuration
+curvature above: these are different measures and operators.
+
+The [versioned paper's Theorem 1.14 proof and footnote 6](https://arxiv.org/html/2608.19358v2#S1.SS10)
+use a strongly convex Euclidean lift of each radius law to invoke Bakry–Émery,
+and explicitly allow contraction/transport arguments as alternatives. The
+current Lean LSI endpoints use those alternative proof routes:
+
+- **Quadratic Ginibre, Theorem 1.12:** `radial_core_lsi` and
+  `radial_sobolev_lsi` in
+  [FullRadialLSIReduction](GinibrePoincare/Analysis/FullRadialLSIReduction.lean)
+  transfer the proved Gaussian block LSI through the radial lift and complete
+  the weak-domain approximation.
+- **Nonquadratic radial extension, Theorem 1.14:** `rhoConvex_radial_lsi` in
+  [StrongConvexRadialLSI](GinibrePoincare/Analysis/StrongConvexRadialLSI.lean)
+  derives the LSI from an internally proved contracting Gaussian quantile map.
+  [StrongConvexRadialProductLSI](GinibrePoincare/Analysis/StrongConvexRadialProductLSI.lean)
+  proves the product inequality, and `rhoConvex_potential_radial_lsi` in
+  [StrongConvexPotentialRadialLSI](GinibrePoincare/Analysis/StrongConvexPotentialRadialLSI.lean)
+  transfers it to the interacting law, with the paper coefficient `2/(nρ)`
+  multiplying the ordinary Euclidean gradient energy.
+
+Thus the radial LSI endpoints do not assume an unproved Bakry–Émery criterion.
+The library also proves concrete scalar/radial Bochner, coercivity and Fisher
+curvature estimates. It does not export a standalone general diffusion theorem
+that derives Poincaré, LSI and semigroup gradient bounds from `Γ₂ ≥ ρΓ`.
+This limitation concerns reusable general infrastructure, not a missing analytic
+hypothesis in the proved radial LSI statements. Individual alternative paper
+proof routes are not all independently formalized.
+
 ## Scope qualifications
 
 Theorems 1.9 and 1.10 use the actual real symmetric generator graph. The differential theorem now also has a literal ordinary Schwartz distributional endpoint, proved equivalent to the independent weighted compact-test graph. Sharp equality is
@@ -135,9 +198,9 @@ Refreshed using `python3 scripts/count_lean_sources.py` at this checkpoint.
 
 | Source scope | Files/modules | Physical lines |
 | --- | ---: | ---: |
-| Active project Lean sources, including roots and generated facades | 1,315 | 142,364 |
+| Active project Lean sources, including roots, generated facades and Lean tooling | 1,316 | 143,778 |
 | Transitively imported Mathlib | 3,794 | 1,251,826 |
-| Project plus imported Mathlib | 5,109 | 1,394,190 |
+| Project plus imported Mathlib | 5,110 | 1,395,604 |
 
 Comments and blank lines are included. Each imported Mathlib module is counted
 once in full. Archives, Lean core and other dependencies are excluded. This is
@@ -149,4 +212,4 @@ root audit/compatibility files.
 
 The original analytic main proof, both Hermite deficits and both differential deficits are exported and audited. Generator membership and actual derivative-domain theorems supply the analytic facts; none remains a completion assumption. Corollary 1.5 covers every positive dimension and positive speed. Appendix A.2 includes actual graph-norm comparison and real/complex global versus collision-free core equality.
 
-The user-authorized fresh Git snapshot includes the final proofs, thematic subprojects, reports, pinned dependency manifest and verification logs. No remote publication or additional Mathlib checkout was performed. The final v4.35.0-rc2 build and audits above supersede earlier checkpoints preserved in STATUS.md.
+The user-authorized fresh Git snapshot includes the final proofs, thematic subprojects, reports, pinned dependency manifest and verification logs. The project is published at [djalilchafai/ginibre-poincare](https://github.com/djalilchafai/ginibre-poincare), and Palomar intake and official mechanical verification have completed. Later documentation commits do not change the submitted snapshot. No additional Mathlib checkout was created. The final v4.35.0-rc2 build and audits above supersede earlier checkpoints preserved in STATUS.md.
