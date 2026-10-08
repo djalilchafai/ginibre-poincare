@@ -3,8 +3,7 @@
 Open [the live interactive explorer](https://djalilchafai.github.io/ginibre-poincare/formal_dependencies.html)
 or download [the offline explorer](formal-dependencies.html) and open it in a browser.
 The standalone HTML embeds the complete database as gzip-compressed base64
-and decompresses it in the browser, reducing its size from 35.7 MB to 3.4 MB
-without removing declarations or references. When served as HTML, it works online and offline in
+and decompresses it in the browser without removing declarations or references. When served as HTML, it works online and offline in
 browsers supporting `DecompressionStream`; no external script or data fetch is
 required. The full declaration JSON remains available separately.
 
@@ -17,7 +16,11 @@ and do not add mathematical dependencies.
 
 It opens with the full-paper assembly overview and the original analytic proof
 of Theorem 1.1. Presets also cover matrix overlaps (1.13), nonquadratic
-potentials (1.14), both deficits (1.9–1.10), and the Palomar Theorem 1.1 statement.
+potentials (1.14), both deficits (1.9–1.10), and the Palomar Theorem 1.1 statement. Additional presets expose the independent
+spectral and Hermite–Slater inequalities, integrated Bochner–Kodaira deficit
+endpoint, and Gaussian matrix Poincaré route. Their compiled-reference
+independence check is [check_alternative_routes.py](scripts/check_alternative_routes.py);
+proof-route correspondence and remaining work are recorded in [REPORT.md](REPORT.md#independent-proof-routes-and-remaining-gaps).
 The overview links all twelve thematic groups and the numbered coverage report;
 no single theorem graph represents the whole project. Search any local declaration, click a dependency to
 inspect it, or use Back to retrace the exploration. The external-dependency

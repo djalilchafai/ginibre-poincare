@@ -771,6 +771,7 @@ Mathlib.Analysis.Calculus.Deriv.Shift
 Mathlib.Analysis.Calculus.Deriv.Slope
 Mathlib.Analysis.Calculus.Deriv.Support
 Mathlib.Analysis.Calculus.Deriv.ZPow
+Mathlib.Analysis.Calculus.DerivativeTest
 Mathlib.Analysis.Calculus.DiffContOnCl
 Mathlib.Analysis.Calculus.FDeriv.Add
 Mathlib.Analysis.Calculus.FDeriv.Affine
@@ -795,6 +796,7 @@ Mathlib.Analysis.Calculus.FDeriv.RestrictScalars
 Mathlib.Analysis.Calculus.FDeriv.Symmetric
 Mathlib.Analysis.Calculus.FDeriv.WithLp
 Mathlib.Analysis.Calculus.FormalMultilinearSeries
+Mathlib.Analysis.Calculus.Gradient.Basic
 Mathlib.Analysis.Calculus.Implicit
 Mathlib.Analysis.Calculus.ImplicitContDiff
 Mathlib.Analysis.Calculus.ImplicitFunction.ProdDomain

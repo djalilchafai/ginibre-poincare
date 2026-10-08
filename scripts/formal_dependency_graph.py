@@ -17,7 +17,11 @@ TARGETS = ['GinibrePoincare.fullMainAnalyticProof',
            'GinibrePoincare.fullMatrixLift_functional_inequalities',
            'GinibrePoincare.fullNonQuadraticPotentialTheorem',
            'GinibrePoincare.fullTheoremOneNine',
-           'GinibrePoincare.fullTheoremOneTenSchwartz', 'PalomarGinibre.theoremOneOne']
+           'GinibrePoincare.fullTheoremOneTenSchwartz', 'PalomarGinibre.theoremOneOne',
+           'GinibrePoincare.spectral_ginibre_symmetric_weak_poincare',
+           'GinibrePoincare.slater_ginibre_symmetric_weak_poincare',
+           'GinibrePoincare.matrixSpectralLift_finite_overlap_gaussian_poincare',
+           'GinibrePoincare.bochnerKodairaTheoremOneTen']
 
 
 def lean_imports(path):

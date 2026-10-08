@@ -127,20 +127,26 @@ No listed asserted-result formalization gap remains. Problems 1.11, 1.15 and 1.1
 
 ## Proof-route correspondence remarks
 
-### Proof arguments not independently formalized
+### Independent proof routes and remaining gaps
 
 Result coverage and proof-route coverage are separate claims. The numbered
 inventory records compiled endpoints for the asserted results; it does not mean
-that every argument in the paper has a separate Lean implementation. The
-following original arguments are replaced at the named endpoints. Related
-ingredients may be formalized elsewhere, as explained in the result-specific
-remarks below.
+that every argument in the paper has a separate Lean implementation. The user requested independent implementations of four groups of routes on
+2026-10-08. Their current correspondence evidence is recorded below. Compiled
+ingredients are distinguished from complete concrete endpoints. The later table
+records other original arguments replaced at existing endpoints.
+
+| Requested route | Current Lean implementation | Completion restriction |
+| --- | --- | --- |
+| Theorem 1.1, Section 3 spectral route | [AlternativeSpectralPoincare](GinibrePoincare/Analysis/AlternativeSpectralPoincare.lean): concrete number forms, anti-Vandermonde factor, two-sided form identity, independently assembled sharp inequality; [DifferentialFactorization](GinibrePoincare/Analysis/AlternativeSpectralDifferentialFactorization.lean) proves literal complex pregenerator factorization (3.1) and Vandermonde calculations (3.3–3.4) | Full symmetric ordinary weak-H¹ endpoint; full build and public/private audits pass |
+| Theorem 1.1, Section 4 Hermite–Slater route | [AlternativeSlaterExpansion](GinibrePoincare/Analysis/AlternativeSlaterExpansion.lean) and [AlternativeSlaterPoincare](GinibrePoincare/Analysis/AlternativeSlaterPoincare.lean): actual determinant representatives, convergent ordered-frame expansion and factorial-normalized Parseval, degree energy and sharp inequality | Full symmetric ordinary weak-H¹ endpoint; signed orbit pairings, orthogonality, lowering and polynomial quotient proved; full build and public/private audits pass |
+| Theorem 1.10, Section 6 integrated Bochner–Kodaira route | [AlternativeBochnerKodairaDifferential](GinibrePoincare/Analysis/AlternativeBochnerKodairaDifferential.lean), [Compact](GinibrePoincare/Analysis/AlternativeBochnerKodairaCompact.lean), [Closure](GinibrePoincare/Analysis/AlternativeBochnerKodairaClosure.lean): actual commutator, Gaussian IBP integrated identity and closed compact-jet extension | Focused compiled full real symmetric generator endpoint in [BochnerKodairaTheoremOneTen](GinibrePoincare/Endgame/BochnerKodairaTheoremOneTen.lean), with actual first/second weak derivatives and both exact deficits; full build and public/private audits pass |
+| Theorem 1.14, primary Bakry–Émery radial LSI route | [AlternativeBakryEmeryConvexLift](GinibrePoincare/Analysis/AlternativeBakryEmeryConvexLift.lean), [RadialLift](GinibrePoincare/Analysis/AlternativeBakryEmeryRadialLift.lean): exact convex lift, normalized product pushforward, and concrete entropy/gradient transfers; [EntropyFlow](GinibrePoincare/Analysis/AlternativeBakryEmeryEntropyFlow.lean) proves the scalar dissipation implication | General nonquadratic diffusion entropy/Fisher evolution remains unconstructed; the scalar flow theorem is a reduction, not a concrete LSI endpoint |
+| Theorem 1.13, Gaussian matrix Poincaré route | [SquareEntropyLinearization](GinibrePoincare/Analysis/SquareEntropyLinearization.lean), [MatrixGaussianPoincare](GinibrePoincare/Analysis/MatrixGaussianPoincare.lean), [AlternativeMatrixPoincare](GinibrePoincare/Analysis/AlternativeMatrixPoincare.lean): actual Gaussian matrix H¹ inequality, spectral pushforward and exact overlap energy, with finite-overlap H¹ membership derived internally | Exact coefficient `2/n`; full build and public/private audits pass. The endgame now invokes this Gaussian route |
 
 | Paper proof argument | Lean route at the recorded endpoint |
 | --- | --- |
-| Theorem 1.10: integrated Bochner–Kodaira derivation | Theorem 1.9 Hermite deficits, inverse square root and actual weak-derivative identification |
 | Theorem 1.14: primary Bakry–Émery radial LSI argument | Contracting Gaussian quantile transport, an alternative permitted by the paper |
-| Theorem 1.13: Gaussian matrix Poincaré argument for the overlap variance bound | Theorem 1.1 and the ordinary-gradient/overlap-energy comparison; the entropy endpoint retains Gaussian matrix LSI transfer |
 | Theorem 1.3: joint quadratic variation and Lévy characterization of radial Brownian drivers | Discrete Brownian sums and limits, followed by independence through measurable functionals of independent paths |
 | Lemma 2.6: Weierstrass division and holomorphic germs | Integral division by successive collision hyperplanes |
 | Remark 2.4: invocation of Hörmander–Berndtsson solvability | Gaussian-specific Hermite spectral solver and projection to the canonical minimal solution |
@@ -148,10 +154,9 @@ remarks below.
 | Lemma 1.7: isolated colliding-pair curvature witness | Explicit configurations with all particles approaching one another |
 | Dynamics: general diffusion/Hunt-process correspondence | Riesz resolvent, functional-calculus semigroup and direct original-SDE resolvent comparison |
 
-The separate Section 3 spectral and Section 4 Hermite–Slater proofs of
-Theorem 1.1 are not each independently exported. More generally, coverage of
-the conclusions of Sections 3–7 is not certification of every alternative proof
-route in those sections. The original Section 2 analytic proof of Theorem 1.1
+The separate Section 3 spectral and Section 4 Hermite–Slater sharp weak-domain
+endpoints are now implemented as described above; this does not certify every
+calculation or argument in Sections 3–7. The original Section 2 analytic proof of Theorem 1.1
 is exported, and Theorem 1.9 retains the paper's Hermite mechanism.
 
 There is no standalone general diffusion theorem deriving Poincaré, LSI and
@@ -186,9 +191,26 @@ also assembles the [original Section 2 route](https://arxiv.org/html/2608.19358v
 using the proved Vandermonde energy identity, actual entire-space Gaussian
 distance estimate, divisibility and holomorphic–antiholomorphic projection
 geometry. The original route's concrete inputs are theorems, not assumptions.
-The paper's separate Section 3 spectral and Section 4 Hermite–Slater proofs
-are not each independently exported merely because the Hermite infrastructure
-and the final inequality are available.
+The separate Section 3 and Section 4 weak-domain endpoints are now proved in
+[AlternativeSpectralPoincare](GinibrePoincare/Analysis/AlternativeSpectralPoincare.lean)
+and [AlternativeSlaterPoincare](GinibrePoincare/Analysis/AlternativeSlaterPoincare.lean).
+The spectral proof assembles the two normalized Vandermonde number forms,
+the Gaussian number gap and the holomorphic–antiholomorphic projection bound;
+it also exports the gap of the actual complex generator graph. The Hermite–Slater
+proof uses actual normalized determinant representatives, their expansion,
+Parseval and degree energy. Lean indexes all ordered orbital tuples, proving
+that each distinct orbit has size n! and dividing the frame mass by n!;
+this is equivalent to the paper's basis indexed by unordered orbital sets.
+[AlternativeSlaterOrbits](GinibrePoincare/Analysis/AlternativeSlaterOrbits.lean)
+proves the corresponding signed inner products, orthogonality and repeated-label
+vanishing. [AlternativeSlaterLowering](GinibrePoincare/Analysis/AlternativeSlaterLowering.lean)
+and [AlternativeSlaterPolynomial](GinibrePoincare/Analysis/AlternativeSlaterPolynomial.lean)
+prove the actual Wirtinger lowering and holomorphic Vandermonde quotient.
+Both inequalities extend to the full symmetric ordinary weak-H¹ domain using
+the internally proved weak-domain bridges. This extension is additional domain
+coverage. [AlternativeSpectralDifferentialFactorization](GinibrePoincare/Analysis/AlternativeSpectralDifferentialFactorization.lean)
+separately proves the literal complex pregenerator factorization and the two
+Vandermonde differential expansions on smooth collision-free points. The original Section 2 route remains exported.
 
 ### Theorem 1.2: homogeneous-measure scaling for the Gamma radius
 
@@ -257,7 +279,7 @@ extends the result to the actual real symmetric generator graph, with a separate
 weak-H¹ first-deficit endpoint. Those closure results are domain extensions,
 not an alternative proof of the smooth-core identity.
 
-For Theorem 1.10 there is a substantive change of route. The paper develops the
+The previously exported Theorem 1.10 endpoint uses a different route. The paper develops the
 differential expression through the integrated Bochner–Kodaira identity and
 the number operator. In
 [FullTheoremOneTen](GinibrePoincare/Endgame/FullTheoremOneTen.lean), Lean starts
@@ -270,6 +292,29 @@ Bochner–Kodaira proof, even though concrete Bochner identities are proved
 elsewhere. The ordinary Schwartz derivative endpoint and generator-domain
 extension are additional domain bridges, not substitutes for the differential
 statement.
+
+The independent [BochnerKodairaTheoremOneTen](GinibrePoincare/Endgame/BochnerKodairaTheoremOneTen.lean)
+now gives both deficits on the same actual generator graph, with coefficients
+4/n and 8/n and ordinary Schwartz distributional derivatives. Its proof uses
+[AlternativeBochnerKodairaDifferential](GinibrePoincare/Analysis/AlternativeBochnerKodairaDifferential.lean)
+for the literal commutator and
+[AlternativeBochnerKodairaIntegration](GinibrePoincare/Analysis/AlternativeBochnerKodairaIntegration.lean)
+for integration by parts with vanishing radial cutoff boundaries.
+[Identity](GinibrePoincare/Analysis/AlternativeBochnerKodairaIdentity.lean)
+and [Polynomial](GinibrePoincare/Analysis/AlternativeBochnerKodairaPolynomial.lean)
+prove the integrated identity on actual finite Hermite polynomials;
+[AlternativeSpectralNumberPolynomial](GinibrePoincare/Analysis/AlternativeSpectralNumberPolynomial.lean)
+identifies their literal number operator with its multiplier.
+[InverseRoot](GinibrePoincare/Analysis/AlternativeBochnerKodairaInverseRoot.lean)
+then closes the identity through actual bounded derivative-synthesis limits.
+The second deficit follows from generator integration by parts and elementary
+norm algebra in [GinibreGeneratorDeficitAlgebra](GinibrePoincare/Analysis/GinibreGeneratorDeficitAlgebra.lean).
+This expands the paper's spectral calculus and closure step using explicit
+polynomial approximation; it does not assert equality of the compact-jet
+closure with every number-operator domain. Compiled dependency checks on the
+transitive proof bodies confirm that the new endpoint does not invoke the
+old Theorem 1.9/1.10 deficits or Hermite second-energy identities. The existing
+Hermite-derived endpoint remains exported.
 
 ### Theorems 1.12 and 1.13: expanding the Gaussian LSI ingredient
 
@@ -286,19 +331,29 @@ cited ingredient; it is not a Bakry–Émery derivation of that ingredient.
 The matrix spectral pushforward and overlap-gradient calculations remain
 separate obligations; Gaussian LSI alone does not supply them.
 
-### Theorem 1.13: the final overlap Poincaré endpoint uses Theorem 1.1
+### Theorem 1.13: the Gaussian matrix Poincaré route is also implemented
 
 The [paper's matrix proof](https://arxiv.org/html/2608.19358v2#S1.SS9)
-applies Gaussian matrix Poincaré to the spectral lift. The final finite-overlap
-Poincaré endpoint in
+applies Gaussian matrix Poincaré to the spectral lift. This route now has its own
+concrete endpoint `matrixSpectralLift_finite_overlap_gaussian_poincare` in
+[AlternativeMatrixPoincare](GinibrePoincare/Analysis/AlternativeMatrixPoincare.lean).
+The actual matrix Gaussian inequality is proved on the compact C¹ core by
+linearizing the internally proved Gaussian LSI, including two differentiations
+under the actual probability integral, and then extended to the actual matrix
+H¹ closure. This expands a standard Gaussian ingredient cited by the paper.
+Spectral pushforward identifies the variance; the literal matrix gradient energy
+is four times the overlap energy. Ordinary weak derivatives across collision
+matrices and membership in the actual H¹ completion are derived internally from
+finite overlap energy. No Ginibre Poincaré theorem or overlap lower-bound
+comparison is invoked. `fullMatrixLift_functional_inequalities` now uses this
+Gaussian route for the variance bound; the entropy proof remains Gaussian LSI
+transfer. Focused compilation and standard-axiom queries pass; full integration
+and compiled dependency-independence checks are pending.
+
+The previous proof in
 [MatrixSpectralLiftPoincareFinite](GinibrePoincare/Analysis/MatrixSpectralLiftPoincareFinite.lean)
-instead applies the already proved Ginibre Poincaré inequality to the symmetric
-observable, then bounds its ordinary gradient energy by four times the actual
-matrix overlap energy. Finite overlap energy is proved to imply the necessary
-gradient integrability. This gives the paper's coefficient `2/n`, but the final
-export depends on Theorem 1.1 rather than supplying the paper's Gaussian-matrix
-proof of this variance bound. The entropy endpoint retains the Gaussian matrix
-LSI transfer, with explicit weak-domain membership across collision matrices.
+remains available: it uses Theorem 1.1 plus ordinary-gradient/overlap domination.
+Both proofs obtain coefficient `2/n`; their arguments are recorded separately.
 
 ### Gaussian dbar estimates and Appendix B: explicit spectral foundations
 

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "grouping": "Thematic import facades; existing source paths retained. Every original library module has exactly one primary group. Imports may cross groups.",
-  "library_module_count": 1296,
+  "library_module_count": 1345,
   "groups": {
     "ComplexGaussianHermite": {
       "title": "Complex Gaussian and Hermite analysis",
@@ -131,10 +131,11 @@
         "GinibrePoincare.Analysis.GinibreEntropy",
         "GinibrePoincare.Analysis.IntegralEntropyTensorization",
         "GinibrePoincare.Analysis.LipschitzMollification",
+        "GinibrePoincare.Analysis.SquareEntropyLinearization",
         "GinibrePoincare.Analysis.TwoPointLSI"
       ],
-      "module_count": 22,
-      "physical_lines": 2609,
+      "module_count": 23,
+      "physical_lines": 2850,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "GinibreMeasureGeometry",
@@ -274,6 +275,14 @@
       "scope": "Sharp symmetric inequality, Hermite deficits and affine equality; supports Theorems 1.1, 1.9 and 1.10.",
       "entrypoint": "GinibrePoincare/Subprojects/DeficitsEquality.lean",
       "modules": [
+        "GinibrePoincare.Analysis.AlternativeSlaterExpansion",
+        "GinibrePoincare.Analysis.AlternativeSlaterLowering",
+        "GinibrePoincare.Analysis.AlternativeSlaterOrbits",
+        "GinibrePoincare.Analysis.AlternativeSlaterPoincare",
+        "GinibrePoincare.Analysis.AlternativeSlaterPolynomial",
+        "GinibrePoincare.Analysis.AlternativeSpectralDifferentialFactorization",
+        "GinibrePoincare.Analysis.AlternativeSpectralNumberPolynomial",
+        "GinibrePoincare.Analysis.AlternativeSpectralPoincare",
         "GinibrePoincare.Analysis.FiniteHermiteDeficit",
         "GinibrePoincare.Analysis.GinibreC1WeakPoincare",
         "GinibrePoincare.Analysis.GinibreEqualityConjugateModeDetection",
@@ -301,8 +310,8 @@
         "GinibrePoincare.Analysis.GinibreNonsymmetricCounterexampleMoments",
         "GinibrePoincare.Analysis.GinibreSymmetricWeakPoincare"
       ],
-      "module_count": 26,
-      "physical_lines": 3391,
+      "module_count": 34,
+      "physical_lines": 4808,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "Endgame",
@@ -396,6 +405,14 @@
       "scope": "Generator domains, Bochner identities, curvature, resolvents and transition identification.",
       "entrypoint": "GinibrePoincare/Subprojects/GeneratorSemigroup.lean",
       "modules": [
+        "GinibrePoincare.Analysis.AlternativeBochnerKodairaClosure",
+        "GinibrePoincare.Analysis.AlternativeBochnerKodairaCompact",
+        "GinibrePoincare.Analysis.AlternativeBochnerKodairaCutoff",
+        "GinibrePoincare.Analysis.AlternativeBochnerKodairaDifferential",
+        "GinibrePoincare.Analysis.AlternativeBochnerKodairaIdentity",
+        "GinibrePoincare.Analysis.AlternativeBochnerKodairaIntegration",
+        "GinibrePoincare.Analysis.AlternativeBochnerKodairaInverseRoot",
+        "GinibrePoincare.Analysis.AlternativeBochnerKodairaPolynomial",
         "GinibrePoincare.Analysis.ComplexGeneratorCalculus",
         "GinibrePoincare.Analysis.GaussianHermitePhaseSpectrum",
         "GinibrePoincare.Analysis.GinibreEqualityFullGenerator",
@@ -444,6 +461,7 @@
         "GinibrePoincare.Analysis.GinibreFullSemigroupRegularityDynamics",
         "GinibrePoincare.Analysis.GinibreFullSemigroupWeakHeat",
         "GinibrePoincare.Analysis.GinibreFullSemigroupWeakOrder",
+        "GinibrePoincare.Analysis.GinibreGeneratorDeficitAlgebra",
         "GinibrePoincare.Analysis.GinibreGeneratorGradientCommutation",
         "GinibrePoincare.Analysis.GinibreGeneratorL2",
         "GinibrePoincare.Analysis.GinibreOUComplexTransition",
@@ -530,8 +548,8 @@
         "GinibrePoincare.Analysis.SumRadiusGenerator",
         "GinibrePoincare.Concrete.Generator"
       ],
-      "module_count": 133,
-      "physical_lines": 13590,
+      "module_count": 142,
+      "physical_lines": 14757,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "DeficitsEquality",
@@ -1172,6 +1190,7 @@
       "scope": "Schur and spectral charts, matrix Gaussian law and finite-energy overlap inequalities; Theorem 1.13.",
       "entrypoint": "GinibrePoincare/Subprojects/MatrixLift.lean",
       "modules": [
+        "GinibrePoincare.Analysis.AlternativeMatrixPoincare",
         "GinibrePoincare.Analysis.MatrixCayleyChart",
         "GinibrePoincare.Analysis.MatrixDeterminantDerivative",
         "GinibrePoincare.Analysis.MatrixEigenvalueDerivative",
@@ -1180,6 +1199,7 @@
         "GinibrePoincare.Analysis.MatrixGaussianH1LSI",
         "GinibrePoincare.Analysis.MatrixGaussianLSI",
         "GinibrePoincare.Analysis.MatrixGaussianMeasure",
+        "GinibrePoincare.Analysis.MatrixGaussianPoincare",
         "GinibrePoincare.Analysis.MatrixGaussianUnitaryInvariant",
         "GinibrePoincare.Analysis.MatrixGinibreSpectralLaw",
         "GinibrePoincare.Analysis.MatrixGinibreSymmetrizedLaw",
@@ -1298,8 +1318,8 @@
         "GinibrePoincare.Analysis.MatrixUnitaryVolume",
         "GinibrePoincare.Analysis.MatrixVolumeSimpleSpectrum"
       ],
-      "module_count": 125,
-      "physical_lines": 10732,
+      "module_count": 127,
+      "physical_lines": 11037,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "DeficitsEquality",
@@ -1314,6 +1334,34 @@
       "scope": "Weighted dbar, general-potential geometry, convex transports and radial LSI; Theorem 1.14.",
       "entrypoint": "GinibrePoincare/Subprojects/NonQuadratic.lean",
       "modules": [
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryCameronMartin",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryConvexLift",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryEntropyFlow",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryGaussianNoiseLSI",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryGaussianResponse",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryGibbsGenerator",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryGibbsMass",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryGibbsReversalAction",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryHilbertLift",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryIntegrationByParts",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryLangevinContraction",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryLangevinEnergy",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryLangevinLocal",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryLangevinNoiseStability",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryLiftTransfer",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryPolygonalNoise",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryPolygonalResponse",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryProductGradient",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialDrift",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryRadialLift",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryRegularizedLift",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryScalarForm",
+        "GinibrePoincare.Analysis.AlternativeBakryEmeryVolterraContraction",
+        "GinibrePoincare.Analysis.BakryEmeryDirectionalCurvature",
+        "GinibrePoincare.Analysis.BakryEmeryLangevinCurvature",
+        "GinibrePoincare.Analysis.BakryEmeryNormalizedLift",
+        "GinibrePoincare.Analysis.BakryEmeryRegularizationLimit",
+        "GinibrePoincare.Analysis.BakryEmeryRegularizationVolume",
         "GinibrePoincare.Analysis.GeneralPotentialAlternatedPhaseClassification",
         "GinibrePoincare.Analysis.GeneralPotentialCenteredMean",
         "GinibrePoincare.Analysis.GeneralPotentialCenteringDecomposition",
@@ -1463,8 +1511,8 @@
         "GinibrePoincare.Analysis.StrongConvexTransportLSI",
         "GinibrePoincare.Analysis.StrongConvexTransportMeasure"
       ],
-      "module_count": 148,
-      "physical_lines": 16015,
+      "module_count": 176,
+      "physical_lines": 19332,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "DeficitsEquality",
@@ -1472,6 +1520,7 @@
         "GaussianLSI",
         "GinibreMeasureGeometry",
         "PolynomialRadial",
+        "StochasticDynamics",
         "WeakSobolev"
       ]
     },
@@ -1480,6 +1529,7 @@
       "scope": "Public completion endpoints and finite or abstract reduction assemblies.",
       "entrypoint": "GinibrePoincare/Subprojects/Endgame.lean",
       "modules": [
+        "GinibrePoincare.Endgame.BochnerKodairaTheoremOneTen",
         "GinibrePoincare.Endgame.ConcreteTheoremOneNine",
         "GinibrePoincare.Endgame.FiniteTheoremOneNine",
         "GinibrePoincare.Endgame.FullMainAnalyticProof",
@@ -1493,8 +1543,8 @@
         "GinibrePoincare.Endgame.SeriesDeficit",
         "GinibrePoincare.Endgame.TheoremOneNine"
       ],
-      "module_count": 12,
-      "physical_lines": 1377,
+      "module_count": 13,
+      "physical_lines": 1471,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "DeficitsEquality",

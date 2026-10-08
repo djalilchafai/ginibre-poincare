@@ -26,6 +26,11 @@ GROUPS = {
 def classify(p):
  n=p.stem
  if p.parent.name=='Endgame': return 'Endgame'
+ if n.startswith('AlternativeMatrix'): return 'MatrixLift'
+ if n.startswith(('AlternativeBakryEmery', 'BakryEmery')): return 'NonQuadratic'
+ if n.startswith('AlternativeBochnerKodaira'): return 'GeneratorSemigroup'
+ if n.startswith(('AlternativeSpectral','AlternativeSlater')): return 'DeficitsEquality'
+ if n.startswith('SquareEntropyLinearization'): return 'GaussianLSI'
  if n.startswith(('Matrix',)): return 'MatrixLift'
  if n.startswith(('NonQuadratic','GeneralPotential','GeneralRadial','StrongConvex')): return 'NonQuadratic'
  if n.startswith(('Brownian','FiniteDimensionalIto','GinibreBrownianIntegral','GinibreBrownianPredictable','GinibreBrownianFiltration','GinibreStochasticBrownian','GinibreStochasticGaussian')): return 'StochasticCalculus'

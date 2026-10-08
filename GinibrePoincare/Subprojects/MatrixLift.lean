@@ -1,5 +1,6 @@
 module
 
+public import GinibrePoincare.Analysis.AlternativeMatrixPoincare
 public import GinibrePoincare.Analysis.MatrixCayleyChart
 public import GinibrePoincare.Analysis.MatrixDeterminantDerivative
 public import GinibrePoincare.Analysis.MatrixEigenvalueDerivative
@@ -8,6 +9,7 @@ public import GinibrePoincare.Analysis.MatrixGaussianH1Closure
 public import GinibrePoincare.Analysis.MatrixGaussianH1LSI
 public import GinibrePoincare.Analysis.MatrixGaussianLSI
 public import GinibrePoincare.Analysis.MatrixGaussianMeasure
+public import GinibrePoincare.Analysis.MatrixGaussianPoincare
 public import GinibrePoincare.Analysis.MatrixGaussianUnitaryInvariant
 public import GinibrePoincare.Analysis.MatrixGinibreSpectralLaw
 public import GinibrePoincare.Analysis.MatrixGinibreSymmetrizedLaw

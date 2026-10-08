@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "local_declarations": 11112,
-  "local_theorems": 9645,
-  "compiled_local_modules": 1310,
-  "external_boundary_constants": 8282,
-  "direct_reference_pairs": 928878,
-  "source_modules": 1315,
-  "local_import_edges": 4894,
-  "export_sha256": "e8789e436c066fa9bcb1f4ba0232c6525ec32da93c5de4a97954ebb72d6880d8",
+  "local_declarations": 11685,
+  "local_theorems": 10123,
+  "compiled_local_modules": 1359,
+  "external_boundary_constants": 8402,
+  "direct_reference_pairs": 981019,
+  "source_modules": 1364,
+  "local_import_edges": 5080,
+  "export_sha256": "53df277bd5175acaffdb3d195bbb9a2889d656f8805ade5d1d7523e5091a1121",
   "targets": [
     {
       "target": "GinibrePoincare.fullMainAnalyticProof",
@@ -38,6 +38,26 @@
       "target": "PalomarGinibre.theoremOneOne",
       "direct_local_dependencies": 35,
       "direct_external_dependencies": 338
+    },
+    {
+      "target": "GinibrePoincare.spectral_ginibre_symmetric_weak_poincare",
+      "direct_local_dependencies": 44,
+      "direct_external_dependencies": 387
+    },
+    {
+      "target": "GinibrePoincare.slater_ginibre_symmetric_weak_poincare",
+      "direct_local_dependencies": 18,
+      "direct_external_dependencies": 272
+    },
+    {
+      "target": "GinibrePoincare.matrixSpectralLift_finite_overlap_gaussian_poincare",
+      "direct_local_dependencies": 7,
+      "direct_external_dependencies": 100
+    },
+    {
+      "target": "GinibrePoincare.bochnerKodairaTheoremOneTen",
+      "direct_local_dependencies": 27,
+      "direct_external_dependencies": 249
     }
   ]
 }

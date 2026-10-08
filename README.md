@@ -4,9 +4,10 @@ The asserted numbered paper results are compiled and audited, including Theorems
 See [STATUS.md](STATUS.md) for exact domains, the full dashboard and validation.
 
 Compiled result coverage does not certify every original or alternative paper
-proof. Several endpoints use different arguments; the separate Section 3 and
-Section 4 proofs and a standalone general Bakry–Émery criterion are not
-independently exported. See the [proof-route limitations](REPORT.md#proof-arguments-not-independently-formalized)
+proof. Independent Section 3 spectral, Section 4 Hermite–Slater, Section 6
+Bochner–Kodaira and Gaussian matrix Poincaré endpoints now compile. The recorded full-project
+build, source audit and public/private axiom audits pass. The primary nonquadratic Bakry–Émery
+proof remains unfinished; concrete diffusion-law entropy work is in progress. See the [proof-route inventory](REPORT.md#independent-proof-routes-and-remaining-gaps)
 for the inventory. An independent exhaustive paper-to-Lean correspondence
 review remains outstanding.
 

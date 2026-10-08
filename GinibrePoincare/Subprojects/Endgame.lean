@@ -1,5 +1,6 @@
 module
 
+public import GinibrePoincare.Endgame.BochnerKodairaTheoremOneTen
 public import GinibrePoincare.Endgame.ConcreteTheoremOneNine
 public import GinibrePoincare.Endgame.FiniteTheoremOneNine
 public import GinibrePoincare.Endgame.FullMainAnalyticProof

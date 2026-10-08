@@ -21,6 +21,7 @@ public import GinibrePoincare.Analysis.GaussianLSIScaling
 public import GinibrePoincare.Analysis.GinibreEntropy
 public import GinibrePoincare.Analysis.IntegralEntropyTensorization
 public import GinibrePoincare.Analysis.LipschitzMollification
+public import GinibrePoincare.Analysis.SquareEntropyLinearization
 public import GinibrePoincare.Analysis.TwoPointLSI
 
 /-! # Gaussian log-Sobolev and entropy

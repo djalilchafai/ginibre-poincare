@@ -2,6 +2,7 @@ module
 
 public import GinibrePoincare.Analysis.MatrixSpectralLiftLSIFinite
 public import GinibrePoincare.Analysis.MatrixSpectralLiftPoincareFinite
+public import GinibrePoincare.Analysis.AlternativeMatrixPoincare
 
 @[expose] public section
 
@@ -22,7 +23,8 @@ theorem fullMatrixLift_functional_inequalities {n : ℕ} (hn : 0 < n)
         (4 / (n : ℝ)) * ∫ A, matrixSpectralOverlapEnergy n F A ∂matrixGaussianMeasure n := by
   obtain ⟨hi, hlsi⟩ := matrixSpectralLift_finite_overlap_lsi hn F
     (hF.differentiable (by norm_num)) hsym hFL2 hE
-  exact ⟨hi, matrixSpectralLift_finite_overlap_poincare hn F hF hsym hFL2 hE, hlsi⟩
+  exact ⟨hi, matrixSpectralLift_finite_overlap_gaussian_poincare hn F
+    (hF.differentiable (by norm_num)) hsym hFL2 hE, hlsi⟩
 
 end
 end GinibrePoincare

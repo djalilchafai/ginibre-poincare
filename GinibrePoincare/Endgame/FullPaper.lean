@@ -48,6 +48,14 @@ public import GinibrePoincare.Analysis.GinibreRealCoreClosureEquivalence
 public import GinibrePoincare.Analysis.GinibreComplexCoreClosureEquivalence
 public import GinibrePoincare.Analysis.GaussianDbarDistributionalClosure
 
+public import GinibrePoincare.Analysis.AlternativeSpectralDifferentialFactorization
+public import GinibrePoincare.Analysis.AlternativeSpectralPoincare
+public import GinibrePoincare.Analysis.AlternativeSlaterPoincare
+public import GinibrePoincare.Analysis.AlternativeSlaterOrbits
+public import GinibrePoincare.Analysis.AlternativeSlaterLowering
+
+public import GinibrePoincare.Endgame.BochnerKodairaTheoremOneTen
+
 @[expose] public section
 
 /-! # Public full-paper entry point
