@@ -46,6 +46,14 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 
 ## Latest progress
 
+Scope-instruction correction (2026-10-08): updated AGENTS.md's original
+Theorem 1.9 objective to the full asserted-paper scope, retained its seventeen
+core analytic milestones, and expanded completion criteria to every asserted
+endpoint and the public/private audits. Explicitly distinguished the narrower
+Theorem 1.1 Palomar comparison surface from the proof-library scope. Open paper
+problems and numerical experiments remain excluded. No Lean proofs or the
+immutable Palomar submission changed; this is an instruction/documentation edit.
+
 Radial LSI proof-route clarification (2026-10-07): the general Bakry–Émery
 criterion is not a missing hypothesis of the proved radial LSI endpoints.
 The quadratic endpoint `radial_core_lsi` uses the proved Gaussian block LSI

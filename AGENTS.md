@@ -2,8 +2,14 @@
 
 ## Objective
 
-Fully formalize Theorem 1.9 of [arXiv:2608.19358v2](http://arxiv.org/abs/2608.19358v2), including both
-sum-of-squares identities for the concrete Ginibre measure and generator.
+Fully formalize all asserted mathematical results of
+[arXiv:2608.19358v2](https://arxiv.org/abs/2608.19358v2), including the numbered
+theorems, lemmas, corollaries, mathematical claims in remarks, and Appendices A–B,
+on their stated domains and with their stated hypotheses. This includes both
+Theorem 1.9 sum-of-squares identities for the concrete Ginibre measure and
+generator, the nonquadratic extensions, and the matrix-lift/eigenvector-overlap
+results. Problems 1.11, 1.15 and 1.16 are open research questions, and Appendix C
+numerical experiments are outside theorem certification; do not claim these solved.
 Use the versioned arXiv paper as the authoritative source for every paper
 statement, theorem number, normalization and citation; do not use local TeX
 as the paper authority.
@@ -16,6 +22,12 @@ This includes weak-Sobolev domain and equality results, the full diffusion
 operator and semigroup, stochastic dynamical factorization, and all paper
 extensions. The user explicitly requests agents; assign disjoint files.
 Do not mark the broad objective complete at an intermediate analytic milestone.
+
+The Palomar submission's `Challenge.lean`, `Solution.lean`, and `comparator.json`
+select full symmetric weak-H¹ Theorem 1.1 and its exhaustive affine equality
+classification. This is the current registry comparison surface, not a restriction
+of the full proof-library objective or a comparison of every paper endpoint.
+Use REPORT.md for numbered coverage and STATUS.md for current verification evidence.
 
 ## Soundness requirements
 
@@ -61,7 +73,10 @@ Do not mark the broad objective complete at an intermediate analytic milestone.
 - A result whose analytic facts remain theorem arguments is a reduction, not
   a completed concrete theorem.
 
-## Milestones
+## Core analytic milestones
+
+The following milestones organize the original Theorem 1.9 development. They
+are part of the full-paper objective, not an exhaustive list of paper results.
 
 1. Identify the Gaussian product measure with its explicit density.
 2. Prove polynomial Gaussian integrability and Ginibre mass validity.
@@ -79,11 +94,26 @@ Do not mark the broad objective complete at an intermediate analytic milestone.
 14. Prove the concrete Poincaré deficit identity.
 15. Prove the concrete integrated `Γ₂` deficit identity.
 16. Complete the required closure and approximation arguments.
-17. Export and audit the exact final theorem.
+17. Export and audit the exact Theorem 1.9 endpoint.
+
+The wider scope also requires the sharp inequality and equality classification,
+equilibrium and stochastic factorization, polynomial spectrum and curvature,
+ordinary differential deficits, weak-domain/core results, radial log-Sobolev
+inequalities, full diffusion and semigroup identification, matrix-overlap
+inequalities, nonquadratic extensions, and the remaining asserted Section 2
+and Appendix A–B claims. Preserve their individual domains and qualifications.
 
 ## Completion criteria
 
-The project is complete only when every milestone above is represented by
-unconditional compiled Lean theorems, all local modules build, local source
-contains no placeholders except the authorized independent Challenge theorem,
-and `AxiomAudit.lean` audits the final theorem.
+The proof-library objective is complete only when the core milestones and every
+asserted result in the full-paper scope have compiled concrete Lean endpoints on
+the paper's stated domains, with analytic completion inputs proved internally;
+all local modules build; local source contains no placeholders except the
+authorized independent Challenge theorem; and `AxiomAudit.lean` audits every
+public completion endpoint. `AllLocalAxiomAudit.lean` must also cover private
+helpers in the proof-library/Solution closure. REPORT.md and STATUS.md must
+accurately identify coverage, restrictions and evidence.
+
+Palomar mechanical verification, editorial review and final registration are
+separate publication stages. A Comparator pass for Theorem 1.1 does not establish
+full-paper statement correspondence or complete these publication stages.
