@@ -1,0 +1,24 @@
+digraph formal_dependencies {
+rankdir=TB;
+graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label="Exact direct local declaration references\nCompiled references; statement review recorded separately", labelloc=t, fontname="sans-serif"];
+node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];
+edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
+"GinibrePoincare.Configuration" [label="Configuration"];
+"GinibrePoincare.dbarComponent" [label="dbarComponent"];
+"GinibrePoincare.dolbeaultOrdinaryL2" [label="dolbeaultOrdinaryL2"];
+"GinibrePoincare.dolbeaultOrdinaryL2._proof_1" [label="dolbeaultOrdinaryL2._proof_1"];
+"GinibrePoincare.localDolbeault_compactLp_ball" [label="localDolbeault_compactLp_ball"];
+"GinibrePoincare.localDolbeault_indicator_closed" [label="localDolbeault_indicator_closed"];
+"GinibrePoincare.localDolbeault_locallyL2" [label="localDolbeault_locallyL2", fillcolor="#dbeafe", color="#2563eb", penwidth=2];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.localDolbeault_locallyL2" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.dbarComponent" -> "GinibrePoincare.localDolbeault_locallyL2" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.dolbeaultOrdinaryL2" -> "GinibrePoincare.localDolbeault_locallyL2" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.dolbeaultOrdinaryL2._proof_1" -> "GinibrePoincare.localDolbeault_locallyL2" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.localDolbeault_compactLp_ball" -> "GinibrePoincare.localDolbeault_locallyL2" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.localDolbeault_indicator_closed" -> "GinibrePoincare.localDolbeault_locallyL2" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.dbarComponent" [style=invis];
+"GinibrePoincare.dbarComponent" -> "GinibrePoincare.dolbeaultOrdinaryL2" [style=invis];
+"GinibrePoincare.dolbeaultOrdinaryL2" -> "GinibrePoincare.dolbeaultOrdinaryL2._proof_1" [style=invis];
+"GinibrePoincare.dolbeaultOrdinaryL2._proof_1" -> "GinibrePoincare.localDolbeault_compactLp_ball" [style=invis];
+"GinibrePoincare.localDolbeault_compactLp_ball" -> "GinibrePoincare.localDolbeault_indicator_closed" [style=invis];
+}

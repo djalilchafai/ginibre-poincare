@@ -1,0 +1,27 @@
+digraph formal_dependencies {
+rankdir=TB;
+graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label="Exact direct local declaration references\nCompiled references; statement review recorded separately", labelloc=t, fontname="sans-serif"];
+node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];
+edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
+"GinibrePoincare.bakryEmeryGibbsWeight" [label="bakryEmeryGibbsWeight"];
+"GinibrePoincare.correspondenceBrascampLiebCenter" [label="correspondenceBrascampLiebCenter"];
+"GinibrePoincare.correspondenceBrascampLiebHessian" [label="correspondenceBrascampLiebHessian"];
+"GinibrePoincare.correspondenceBrascampLiebInverseEnergy" [label="correspondenceBrascampLiebInverseEnergy"];
+"GinibrePoincare.correspondenceBrascampLiebMean" [label="correspondenceBrascampLiebMean"];
+"GinibrePoincare.correspondenceBrascampLiebMeasure" [label="correspondenceBrascampLiebMeasure"];
+"GinibrePoincare.correspondenceBrascampLieb_localLipschitz_probability_variance" [label="correspondenceBrascampLieb_localLipschitz_probability_variance", fillcolor="#dbeafe", color="#2563eb", penwidth=2];
+"GinibrePoincare.correspondenceBrascampLieb_localLipschitz_variance" [label="correspondenceBrascampLieb_localLipschitz_variance"];
+"GinibrePoincare.bakryEmeryGibbsWeight" -> "GinibrePoincare.correspondenceBrascampLieb_localLipschitz_probability_variance" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.correspondenceBrascampLiebCenter" -> "GinibrePoincare.correspondenceBrascampLieb_localLipschitz_probability_variance" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.correspondenceBrascampLiebHessian" -> "GinibrePoincare.correspondenceBrascampLieb_localLipschitz_probability_variance" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.correspondenceBrascampLiebInverseEnergy" -> "GinibrePoincare.correspondenceBrascampLieb_localLipschitz_probability_variance" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.correspondenceBrascampLiebMean" -> "GinibrePoincare.correspondenceBrascampLieb_localLipschitz_probability_variance" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.correspondenceBrascampLiebMeasure" -> "GinibrePoincare.correspondenceBrascampLieb_localLipschitz_probability_variance" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.correspondenceBrascampLieb_localLipschitz_variance" -> "GinibrePoincare.correspondenceBrascampLieb_localLipschitz_probability_variance" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.bakryEmeryGibbsWeight" -> "GinibrePoincare.correspondenceBrascampLiebCenter" [style=invis];
+"GinibrePoincare.correspondenceBrascampLiebCenter" -> "GinibrePoincare.correspondenceBrascampLiebHessian" [style=invis];
+"GinibrePoincare.correspondenceBrascampLiebHessian" -> "GinibrePoincare.correspondenceBrascampLiebInverseEnergy" [style=invis];
+"GinibrePoincare.correspondenceBrascampLiebInverseEnergy" -> "GinibrePoincare.correspondenceBrascampLiebMean" [style=invis];
+"GinibrePoincare.correspondenceBrascampLiebMean" -> "GinibrePoincare.correspondenceBrascampLiebMeasure" [style=invis];
+"GinibrePoincare.correspondenceBrascampLiebMeasure" -> "GinibrePoincare.correspondenceBrascampLieb_localLipschitz_variance" [style=invis];
+}

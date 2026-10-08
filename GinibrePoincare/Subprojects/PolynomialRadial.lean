@@ -3,6 +3,9 @@ module
 public import GinibrePoincare.Analysis.BlockMagnitudeGradient
 public import GinibrePoincare.Analysis.BlockMagnitudeLift
 public import GinibrePoincare.Analysis.CenterOfMassEigenfunctions
+public import GinibrePoincare.Analysis.CorrespondenceAlgebraCenterCovariance
+public import GinibrePoincare.Analysis.CorrespondenceAlgebraGenerator
+public import GinibrePoincare.Analysis.CorrespondenceAlgebraQuadratic
 public import GinibrePoincare.Analysis.EquilibriumFactorization
 public import GinibrePoincare.Analysis.EquilibriumProbability
 public import GinibrePoincare.Analysis.FullRadialLSIReduction

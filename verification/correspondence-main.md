@@ -1,5 +1,7 @@
 # Independent correspondence review: main inequality, Sections 2–4 and Appendices A–B
 
+> Historical review at proof snapshot `0779d080f22fcd93258f0e6e0cb34944bada110c`. Its findings are retained as evidence, not current unresolved-work labels. See the [current main, auxiliary and contextual follow-up](correspondence-main-followup.md) and [integrated review](../CORRESPONDENCE_REVIEW.md) for item-specific resolutions and remaining qualifications.
+
 Reviewed on 2026-10-08 against source snapshot `0779d080f22fcd93258f0e6e0cb34944bada110c`.
 Authoritative source: [arXiv:2608.19358v2 HTML](https://arxiv.org/html/2608.19358v2), downloaded directly; local TeX was not used. This reviewer freshly read the paper text and the Lean declarations and definitions listed below. REPORT.md served only to locate candidate files, not as evidence of correspondence. The review is independent of the prior coverage inventory, but is an agent review, not independent human certification or a new kernel audit. No Lean file was changed and no new build was run by this reviewer.
 

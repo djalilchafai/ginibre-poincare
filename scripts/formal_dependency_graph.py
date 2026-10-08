@@ -26,7 +26,19 @@ TARGETS = ['GinibrePoincare.fullMainAnalyticProof',
            'GinibrePoincare.bakryEmery_potential_radial_lsi_lipschitz',
            'GinibrePoincare.matrixSpectralLift_finite_overlap_lsi',
            'GinibrePoincare.slater_zero_degree_homogeneous_quotient_exact',
-           'GinibrePoincare.spectral_ginibre_full_generator_spectrum_support']
+           'GinibrePoincare.spectral_ginibre_full_generator_spectrum_support',
+           'GinibrePoincare.fullTheoremOneNinePointwiseGamma',
+           'GinibrePoincare.correspondenceMatrix_theorem_1_13',
+           'GinibrePoincare.correspondenceOperatorNumber_spectrum_iff',
+           'GinibrePoincare.correspondenceOperatorNumber_ginibre_shifted_root_deficit',
+           'GinibrePoincare.correspondenceFriedrichsSquareRoot_domain_ordinary_H1',
+           'GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations',
+           'GinibrePoincare.correspondenceOperator_global_martingale_problem',
+           'GinibrePoincare.correspondenceOperatorEvolution_ergodic',
+           'GinibrePoincare.gueFull_C1_H1_inequalities',
+           'GinibrePoincare.localDolbeault_locallyL2',
+           'GinibrePoincare.correspondence_poincare_iff_integrated_pointwise_curvature',
+           'GinibrePoincare.correspondenceBrascampLieb_localLipschitz_probability_variance']
 
 
 def lean_imports(path):
@@ -84,7 +96,7 @@ def module_graph():
 
 def graphviz(nodes, edges, title, target=None):
     lines = ['digraph formal_dependencies {', 'rankdir=TB;',
-        'graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label=' + json.dumps(title + '\nCompiled references; paper correspondence unresolved') + ', labelloc=t, fontname="sans-serif"];',
+        'graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label=' + json.dumps(title + '\nCompiled references; statement review recorded separately') + ', labelloc=t, fontname="sans-serif"];',
         'node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];',
         'edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];']
     for name in sorted(nodes):

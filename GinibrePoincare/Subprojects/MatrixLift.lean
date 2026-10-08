@@ -1,6 +1,7 @@
 module
 
 public import GinibrePoincare.Analysis.AlternativeMatrixPoincare
+public import GinibrePoincare.Analysis.CorrespondenceMatrixWeakClosure
 public import GinibrePoincare.Analysis.MatrixCayleyChart
 public import GinibrePoincare.Analysis.MatrixDeterminantDerivative
 public import GinibrePoincare.Analysis.MatrixEigenvalueDerivative

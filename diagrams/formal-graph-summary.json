@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "local_declarations": 12287,
-  "local_theorems": 10628,
-  "compiled_local_modules": 1427,
-  "external_boundary_constants": 8556,
-  "direct_reference_pairs": 1040154,
-  "source_modules": 1432,
-  "local_import_edges": 5357,
-  "export_sha256": "fbda3a9edb81139c2d62b1c971bd432c5b5874c1c7ff8bf450bac788af4dd373",
+  "local_declarations": 14499,
+  "local_theorems": 12546,
+  "compiled_local_modules": 1721,
+  "external_boundary_constants": 9091,
+  "direct_reference_pairs": 1240777,
+  "source_modules": 1726,
+  "local_import_edges": 6442,
+  "export_sha256": "907a3a29fcc34eee823a55d2f0c284b6f0ab486ab02ea22e95dd167bdede4aa9",
   "targets": [
     {
       "target": "GinibrePoincare.fullMainAnalyticProof",
@@ -83,6 +83,66 @@
       "target": "GinibrePoincare.spectral_ginibre_full_generator_spectrum_support",
       "direct_local_dependencies": 13,
       "direct_external_dependencies": 253
+    },
+    {
+      "target": "GinibrePoincare.fullTheoremOneNinePointwiseGamma",
+      "direct_local_dependencies": 34,
+      "direct_external_dependencies": 175
+    },
+    {
+      "target": "GinibrePoincare.correspondenceMatrix_theorem_1_13",
+      "direct_local_dependencies": 18,
+      "direct_external_dependencies": 98
+    },
+    {
+      "target": "GinibrePoincare.correspondenceOperatorNumber_spectrum_iff",
+      "direct_local_dependencies": 13,
+      "direct_external_dependencies": 149
+    },
+    {
+      "target": "GinibrePoincare.correspondenceOperatorNumber_ginibre_shifted_root_deficit",
+      "direct_local_dependencies": 45,
+      "direct_external_dependencies": 393
+    },
+    {
+      "target": "GinibrePoincare.correspondenceFriedrichsSquareRoot_domain_ordinary_H1",
+      "direct_local_dependencies": 37,
+      "direct_external_dependencies": 170
+    },
+    {
+      "target": "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations",
+      "direct_local_dependencies": 10,
+      "direct_external_dependencies": 132
+    },
+    {
+      "target": "GinibrePoincare.correspondenceOperator_global_martingale_problem",
+      "direct_local_dependencies": 12,
+      "direct_external_dependencies": 169
+    },
+    {
+      "target": "GinibrePoincare.correspondenceOperatorEvolution_ergodic",
+      "direct_local_dependencies": 16,
+      "direct_external_dependencies": 179
+    },
+    {
+      "target": "GinibrePoincare.gueFull_C1_H1_inequalities",
+      "direct_local_dependencies": 15,
+      "direct_external_dependencies": 130
+    },
+    {
+      "target": "GinibrePoincare.localDolbeault_locallyL2",
+      "direct_local_dependencies": 6,
+      "direct_external_dependencies": 300
+    },
+    {
+      "target": "GinibrePoincare.correspondence_poincare_iff_integrated_pointwise_curvature",
+      "direct_local_dependencies": 13,
+      "direct_external_dependencies": 57
+    },
+    {
+      "target": "GinibrePoincare.correspondenceBrascampLieb_localLipschitz_probability_variance",
+      "direct_local_dependencies": 7,
+      "direct_external_dependencies": 97
     }
   ]
 }

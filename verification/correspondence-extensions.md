@@ -1,5 +1,7 @@
 # Independent correspondence review: factorization, deficits and extensions
 
+> Historical review at proof snapshot `0779d080f22fcd93258f0e6e0cb34944bada110c`. Its findings are retained as evidence, not current unresolved-work labels. See the [current extension follow-up](correspondence-extensions-followup.md) and [integrated review](../CORRESPONDENCE_REVIEW.md) for item-specific resolutions and remaining qualifications.
+
 Reviewed on 2026-10-08 by the independently assigned `review_extensions`
 agent against source snapshot `0779d080f22fcd93258f0e6e0cb34944bada110c`.
 The authority is [arXiv:2608.19358v2](https://arxiv.org/html/2608.19358v2),

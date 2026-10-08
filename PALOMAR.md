@@ -17,8 +17,10 @@ These requirements can change; recheck them before submitting an immutable snaps
 
 Palomar accepted submission **`7fh68vzqfjeu`**. Official mechanical verification passed. Later recorded editorial readiness and
 accepted registration consent supersede the initial awaiting-review checkpoint.
-The live authenticated status now returns HTTP 500; public publication is not
-confirmed. See [2026-10-08 evidence](verification/registry-publication-check.md).
+The earlier authenticated status returned HTTP 500; a subsequent GET at
+`2026-10-08T12:42:55Z` returned HTTP 403, with no cause inferred. Public publication
+is not confirmed: latest public search at 2026-10-08 16:11:40 UTC, HTTP 200 has no Ginibre entries and the
+canonical repository record is HTTP 404. See [2026-10-08 evidence](verification/registry-publication-check.md).
 
 | Submission field | Recorded value |
 | --- | --- |
@@ -41,16 +43,18 @@ They are omitted from this public report, as is any unpublished editorial review
 
 | Full-project dashboard | Current evidence / next work |
 | --- | --- |
-| Verified scope | Recorded builds and axiom audits certify the exported Lean statements; correspondence gaps are itemized in [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md); the official full preflight passed for the submitted snapshot |
-| Open work | Live registry publication confirmation and correspondence-review findings; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
-| Latest progress | Independent live check: authenticated HTTP 500, canonical public record HTTP 404, empty successful searches |
-| Lean source counts | 159,224 current project lines in 1,433 files; 1,253,370 transitively imported Mathlib lines in 3,801 modules; combined 1,412,594 lines |
+| Verified scope | Recorded builds and axiom audits certify the exported Lean statements; current item-specific correspondence and resolved historical findings are recorded in [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md); the official full preflight passed for the submitted snapshot |
+| Open work | Live registry publication confirmation; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
+| Latest progress | New correspondence proofs and affirmative independent main/auxiliary and extension/dynamics follow-ups; latest public registry search empty, canonical record HTTP 404; authenticated GET HTTP 403 |
+| Lean source counts | 185,400 project lines in 1,727 files; 1,256,051 transitively imported Mathlib lines in 3,813 modules; combined 1,441,451 lines |
+| Build / audit evidence | Current single-thread make check: 5,814 jobs; 6,865 public queries; 14,499 all-local declarations; standard axioms only; offline structural preflight: 1,727 Lean files, zero blockers |
 | Next step | Recheck restored authenticated service and verify a versioned public entry and source-preservation receipt |
 
 Source counts are refreshed with `python3 scripts/count_lean_sources.py`.
 Comments and blank lines are included; imported Mathlib modules are counted
-once in full. No Lean proof changes or new local full build were needed for
-this documentation update.
+once in full. The correspondence follow-up adds concrete Lean proofs; the final
+full-tree verification and refreshed counts are recorded in STATUS.md separately
+from the immutable submitted-snapshot evidence.
 
 ## Completed upgrade and local verification
 
@@ -66,7 +70,7 @@ The completed migration pins `leanprover/lean4:v4.35.0-rc2` and matching Mathlib
 commit `065356127b1dc0016f66b7283ce0ce2c4055aa55` in the existing checkout.
 This meets the current [Palomar minimum toolchain policy](https://raw.githubusercontent.com/PalomarRegistry/PalomarSubmission/main/toolchains.json).
 The submitted-snapshot upgrade checkpoint passed 5,384 build jobs; this is
-historical evidence, superseded for the current proof library by the 5,508-job
+historical evidence, superseded for the current proof library by the 5,814-job
 checkpoint in [STATUS.md](STATUS.md). Both public/private axiom audits and root
 compatibility checks pass; offline preflight reports zero blockers and the
 metadata validates against the official v0.4 schema. Actual Comparator succeeds

@@ -1,0 +1,36 @@
+digraph formal_dependencies {
+rankdir=TB;
+graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label="Exact direct local declaration references\nCompiled references; statement review recorded separately", labelloc=t, fontname="sans-serif"];
+node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];
+edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
+"GinibrePoincare.CollisionFree" [label="CollisionFree"];
+"GinibrePoincare.Configuration" [label="Configuration"];
+"GinibrePoincare.brownianUniformLeftSum" [label="brownianUniformLeftSum"];
+"GinibrePoincare.correspondenceCIRIntegral" [label="correspondenceCIRIntegral"];
+"GinibrePoincare.correspondenceCIRIntegral._proof_1" [label="correspondenceCIRIntegral._proof_1"];
+"GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations" [label="correspondence_ginibre_global_independent_CIR_equations", fillcolor="#dbeafe", color="#2563eb", penwidth=2];
+"GinibrePoincare.correspondence_ginibre_global_independent_CIR_integrals" [label="correspondence_ginibre_global_independent_CIR_integrals"];
+"GinibrePoincare.ginibreBrownianMaximalProcess" [label="ginibreBrownianMaximalProcess"];
+"GinibrePoincare.ginibreCenterSquared" [label="ginibreCenterSquared"];
+"GinibrePoincare.pairwiseRadius" [label="pairwiseRadius"];
+"GinibrePoincare.recenteredGammaShape" [label="recenteredGammaShape"];
+"GinibrePoincare.CollisionFree" -> "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.brownianUniformLeftSum" -> "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.correspondenceCIRIntegral" -> "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.correspondenceCIRIntegral._proof_1" -> "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.correspondence_ginibre_global_independent_CIR_integrals" -> "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.ginibreBrownianMaximalProcess" -> "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.ginibreCenterSquared" -> "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.pairwiseRadius" -> "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.recenteredGammaShape" -> "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.CollisionFree" -> "GinibrePoincare.Configuration" [style=invis];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.brownianUniformLeftSum" [style=invis];
+"GinibrePoincare.brownianUniformLeftSum" -> "GinibrePoincare.correspondenceCIRIntegral" [style=invis];
+"GinibrePoincare.correspondenceCIRIntegral" -> "GinibrePoincare.correspondenceCIRIntegral._proof_1" [style=invis];
+"GinibrePoincare.correspondenceCIRIntegral._proof_1" -> "GinibrePoincare.correspondence_ginibre_global_independent_CIR_integrals" [style=invis];
+"GinibrePoincare.correspondence_ginibre_global_independent_CIR_integrals" -> "GinibrePoincare.ginibreBrownianMaximalProcess" [style=invis];
+"GinibrePoincare.ginibreBrownianMaximalProcess" -> "GinibrePoincare.ginibreCenterSquared" [style=invis];
+"GinibrePoincare.ginibreCenterSquared" -> "GinibrePoincare.pairwiseRadius" [style=invis];
+"GinibrePoincare.pairwiseRadius" -> "GinibrePoincare.recenteredGammaShape" [style=invis];
+}

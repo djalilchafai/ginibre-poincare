@@ -1,429 +1,112 @@
-# Formalization status — correspondence gaps identified (2026-10-08)
+# Ginibre Poincaré formalization — current status
 
-The authoritative source is [arXiv:2608.19358v2](https://arxiv.org/abs/2608.19358v2).
-Compiled endpoints cover the principal numbered results and the seventeen core milestones, but independent correspondence review has identified unresolved statement/domain bridges and auxiliary assertions. Full-paper completion is not established. The original analytic proof of Theorem 1.1, both Theorem 1.9 identities, and the ordinary-distributional Theorem 1.10 endpoint are exported without analytic completion hypotheses. The final global entire Vandermonde factorization, actual entire-space distance formulas and canonical minimal dbar solution are proved. Problems 1.11, 1.15 and 1.16 remain the paper's open research questions; Appendix C numerical experiments are not certified. No overall completion percentage is asserted.
-
-The public library is organized into twelve thematic import subprojects:
-[SUBPROJECTS.md](SUBPROJECTS.md) gives every file, counts, entry points and direct
-dependency groups; [subprojects.json](subprojects.json) is the machine-readable
-inventory. Existing module paths remain available. Every one of the 1,413
-original library modules occurs in exactly one group, plus twelve generated
-facades. The root imports these facades. The proof endpoint entry point is
-[FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean).
-The [full numbered report](REPORT.md) inventories all 27 numbered
-statements: 1.1–1.16, 2.1–2.8 and A.1–A.3.
-
-## Palomar verification checkpoint
-
-Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. At the supported-toolchain Palomar checkpoint, the single-thread full build, source audit, 5,079 public axiom queries, 11,112-declaration all-local audit and both root compatibility checks passed. The newer proof-route checkpoint is recorded below. Actual Comparator passes strict recursive statement comparison and all three kernels: con-ron, nanoda and Lean’s default kernel. The independent Challenge has exactly the user-authorized statement hole; the proof library and Solution remain hole-free and use only the three permitted standard axioms. The comparison covers full symmetric weak-H¹ Theorem 1.1 and exhaustive affine equality, not the whole paper. Offline preflight reports zero blockers and metadata passes the official v0.4 schema. Submission `7fh68vzqfjeu` is accepted; official verification passed and editorial review is ready with no blocking problems, warnings or requested changes; final registration requested and accepted, public completion not yet confirmed.
+Updated 2026-10-08 after completing the correspondence proof work. The final
+independent main/auxiliary/Appendix A–B and extension/dynamics reviews found no
+remaining concrete conclusion gap in their combined inventory of
+[arXiv:2608.19358v2](https://arxiv.org/html/2608.19358v2). Actual measures, domains,
+operators and normalizations were inspected independently of the proof authors.
+This statement review is separate from kernel checks and registry publication.
+See [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md) and
+[REPORT.md](REPORT.md) for item-specific evidence and proof routes.
 
 ## Full-project dashboard
 
-| Workstream / paper statement | Verified scope | Open work / restriction |
-| --- | --- | --- |
-| Complex Gaussian measure and Hermite analysis | Actual density, normalization, Gaussian polynomial integrability, orthonormal complete tensor basis, Parseval, Rodrigues and both Wirtinger lowering formulas | Ordinary Schwartz graph and actual entire-representative bridges proved |
-| Ginibre measure and Vandermonde transform | Actual normalized measure, weighted L² spaces and normalized isometry | Global entire divisibility and literal representative distances proved |
-| Sharp Poincaré and equality, Theorem 1.1 | Full symmetric ordinary weak-H¹ inequality and exhaustive real affine center-of-mass equality | Symmetry and stated weak domain required |
-| Equilibrium factorization, Theorem 1.2 | Independence, Gaussian coordinate sum, recentered Gamma law and radial transfer | None identified in the numbered review |
-| Polynomial spectrum, Theorem 1.4 / Corollary 1.5 / Remark 1.6 | Polynomial sector and properness; full-generator spectral points −2(α/n)k for every n > 0 and α > 0 | Spectrum uses the standard bounded two-sided resolvent definition for the actual unbounded graph operator |
-| Curvature, Lemma 1.7 / Remark 1.8 | Actual unbounded-below pointwise/recentered curvature for n ≥ 2; mean curvature 2 | n = 1 is Gaussian |
-| Hermite deficits, Theorem 1.9 | Both exact identities on the actual real symmetric generator graph; first deficit on full symmetric weak-H¹ | Generator membership for the second deficit; correspondence with literal integrated pointwise Γ₂ unresolved |
-| Differential deficits, Theorem 1.10 | Projected inverse square root, literal ordinary Schwartz first/second derivatives, exact second energy/integral formulas, coefficients 4/n and 8/n, affine equality | Actual real symmetric generator graph; independent weighted/ordinary derivative graphs equivalent; literal integrated pointwise Γ₂ bridge unresolved |
-| Weak Sobolev domains / Appendix A.1–A.3 | Actual distributional graph, closure, uniqueness, real and complex global/collision-free core equality, positive-speed norm equivalence, zero collision capacity | No remaining A.2 endpoint gap |
-| Gaussian log-Sobolev | Sharp Gaussian product, Lipschitz and finite-energy extensions; entropy integrability and closure | Stated Gaussian domains |
-| Radial Ginibre log-Sobolev, Theorem 1.12 | Sharp radial inequality and weak-H¹ completion, exact paper coefficient | Radial/symmetric restriction; not a solution of Problem 1.11 |
-| Full diffusion generator and analytic semigroup | Actual weak resolvent, full self-adjoint generator, strongly continuous Markov contraction semigroup, heat equation, dissipation, domain regularization, sharp decay and original-SDE identification | Symmetric analytic L² space; unrestricted complex generator/form correspondence unresolved |
-| Stochastic calculus and dynamics, Theorem 1.3 | Original Brownian singular SDE, adapted global collision-free paths, Itô/Dynkin identities, independent center/relative processes, CIR drivers, transition laws, Ginibre invariance, reversal and stationarity | Joint two-radius CIR realization uses n ≥ 2 and stopped equations; global CIR, invariant-law uniqueness and unrestricted operator package need correspondence checks |
-| Matrix lift / overlaps, Theorem 1.13 | Actual Gaussian matrix law, Schur Jacobian and spectral pushforward; variance/entropy overlap inequalities | Finite-overlap C¹ route proved; literal H¹ domain needs the derivative-identification bridge identified in the review |
-| Nonquadratic potentials, Theorem 1.14 | Concrete normalized law, symmetric compact-C¹ Poincaré under actual C² rotational potential/Laplacian bound; radial LSI under strong convexity | Stated potential hypotheses; bounded Lipschitz radial extension separately proved |
-| Gaussian gap / Remarks 2.3–2.5 | Arbitrary Gaussian L² ordinary Schwartz graph, coefficient equivalence, compact C∞ graph density, sharp gap and exact mode equality; compact smooth equality iff zero; arbitrary ordinary closed-form solution with sharp bound; actual entire reconstruction of zero mode | Canonical minimal solution, entire kernel and literal distances proved; equality-vector analyticity and arbitrary-weight assertions unconfirmed |
-| Divisibility, Lemma 2.6 | Arbitrary entire alternating functions factor globally as Vandermonde times an entire symmetric quotient, including all collision hyperplanes | None |
-| Projection geometry, Lemma 2.7 / Remark 2.8 | Centered holomorphic/conjugate orthogonality; arbitrary complex L² two-projection bound and actual conjugate closed-subspace projection; arbitrary real centered L² Pythagoras and half-distance; pointwise center and Vandermonde cancellation formulas | Actual entire symmetric L² = Hdiv = closed polynomial space; literal distance infima and paper normalization proved |
-| Supplementary claims / Appendix B | Nonsymmetric counterexample, linear-statistic transfer, nonholomorphic radius, polynomial-sector properness and actual Bochner/commutation formulas | Explicit low-degree polynomial/Slater calculations and Gram–Schmidt/leading-coefficient assertions remain unresolved; GUE contextual endpoints unconfirmed |
-| Palomar packaging | Module headers, pinned 4.35.0-rc2 dependencies, schema-valid provenance, independent weak-H¹ Theorem 1.1 statement and Solution | Full supported-toolchain build/audits, strict local Comparator and official full preflight pass; GitHub published; Palomar submission accepted, official verification passed; clean editorial review; registration consent accepted, public completion pending |
-| Bakry–Émery / Bochner coverage | Concrete pointwise Bochner formulas, Ginibre curvature unbounded below for n ≥ 2, full-generator integrated curvature bound, scalar/radial curvature-to-coercivity and Fisher estimates | No standalone arbitrary-diffusion criterion is exported; the primary strongly convex Euclidean Gibbs lift and independent quantile transport routes are both proved internally |
-| Requested independent proof routes | Focused spectral and Hermite–Slater sharp weak-H¹ endpoints and literal complex spectral factorization; independent Bochner–Kodaira graph deficits; actual Gaussian matrix H¹/finite-overlap variance route with coefficient 2/n | All four requested groups have concrete independent endpoints; full build/source/public/private audits and transitive proof-body independence checks pass. Literal Slater eigenfunction/homogeneous quotient calculations and full complex generator spectral support also compile independently |
-| Problems 1.11, 1.15, 1.16 / Appendix C | Identified as open research questions / numerical experiments | They are not asserted solved or numerically certified by Lean |
+| Workstream | Verified scope and domain |
+| --- | --- |
+| Gaussian/Hermite and Ginibre geometry | Explicit measures and normalized Vandermonde isometry/inverse; complete tensor basis, Parseval, lowering, entire division and projection distances |
+| Theorem 1.1 and equality | Full symmetric ordinary weak-H¹ sharp Poincaré and exhaustive affine equality; original analytic, independent spectral and Hermite–Slater proofs |
+| Equilibrium and Theorem 1.3 | Actual center/relative factorization and laws; original singular Brownian diffusion; unstopped independent CIR equations, strong Markov/Hunt paths, stationarity and reversal |
+| Polynomial/spectrum and curvature | All mixed polynomials in unrestricted ordinary H¹/generator domain; exact examples and nonpreservation witness; arbitrary relative phase, actual Hessians, negative compact Γ₂ test |
+| Theorem 1.9 | Both exact deficits on the real symmetric generator graph; first on full symmetric weak-H¹; both literal smooth-core identities with pointwise Γ₂ integral |
+| Theorem 1.10 and Section 6 | Ordinary first/second weak Wirtinger derivatives and deficits; maximal Gaussian number operator, compact C∞ graph core, full-domain Bochner–Kodaira, exact nℕ spectrum, actual spectral/CFC square roots and inverse-root transfer |
+| Full diffusion/operator domain | Unrestricted real/complex form and self-adjoint generator; ordinary weak-H¹ square-root domain; full Brownian/analytic semigroup equality, global martingale problem, ergodicity and arbitrary invariant-probability uniqueness |
+| Radial LSI and nonquadratic potentials | Sharp radial completion and Theorem 1.14 on stated potential/observable hypotheses; original Euclidean-lift Bakry–Émery route and independent transport route |
+| Matrix lift / Theorem 1.13 | Literal Gaussian matrix H¹ hypothesis; internal derivative identification and overlap integrability, exact 2/n Poincaré and 4/n entropy coefficients |
+| Real GUE contextual results | Actual full/chamber normalized law, strong convexity, sharp 1/n PI and 2/n LSI on the paper's symmetric compact smooth H¹ completion; optimal witnesses and C¹ finite-energy extension |
+| Section 2 and auxiliary assertions | Canonical minimal dbar solver; analytic equality representatives; arbitrary positive-local-weight entire closedness and locally uniform convergence; all-dimensional ordinary local L² Dolbeault on arbitrary open sets; Δlog|z|=2πδ₀ |
+| General real Brascamp–Lieb | C² potential with everywhere positive-definite actual Hessian and finite Gibbs mass; locally Lipschitz or ordinary local L² weak gradients, value globally L², finite inverse-Hessian energy; no uniform-curvature/global-gradient-L² assumption |
+| Appendices A–B | Actual weak closure/core/norm equivalence and positive-speed collision capacity; O(ε⁴) cutoff-square and O(ε²) gradient rates; literal leading coefficients, tensor expansion, normalized Gram–Schmidt and Slater ground state |
+| Problems 1.11, 1.15, 1.16; Appendix C | Open research questions and numerical experiments; not solved or theorem-certified |
+| Publication | Prior Palomar Theorem 1.1 comparison passed; live public registration remains unconfirmed |
 
-## Independent correspondence and publication review — 2026-10-08
+## Latest progress and domain qualifications
 
-[CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md) integrates two independent
-source-review agents and a separate read-only registry agent. This review did
-**not** return a full-paper pass. Open correspondence includes the literal matrix
-H¹ derivative bridge, integrated pointwise Γ₂ identity, GUE contextual claims,
-several explicit polynomial/Slater calculations, and unrestricted analytic
-operator/dynamics assertions. Detailed reports distinguish missing endpoints
-from unresolved bridges. Earlier numbered-coverage labels below are inventories
-of compiled exports, not certification that every paper assertion matches.
+Agents completed the formerly missing matrix H¹ derivative bridge, unrestricted
+pointwise Γ₂ identity, full ordinary operator/square-root domains, unstopped CIR,
+strong Markov/martingale/invariant-uniqueness assertions, Section 6 maximal-domain
+calculus and explicit auxiliary statements. The last two proof arguments were
+the generic weighted elliptic Liouville/range-density closure for Brascamp–Lieb
+and bounded local Cauchy–Green homotopy with actual L² mollification for Dolbeault.
+They are now internally proved and independently inspected.
 
-[Live registry evidence](verification/registry-publication-check.md), checked
-2026-10-08 12:14 UTC: authenticated status HTTP 500, canonical public repository
-record HTTP 404, and successful public searches with no entries. Publication is
-**not confirmed**. Prior accepted registration consent is not a publication receipt.
+The real GUE claim uses the paper's smooth-core completion; a stronger maximal
+ordinary distributional GUE-H¹ identification is not claimed. Local Dolbeault
+covers function-valued locally L² forms (including all smooth sources), with an
+actual weak primitive; arbitrary distribution-valued currents are not asserted.
+The contextual Brascamp–Lieb regularity/domain is supported by the primary
+Carlen–Cordero-Erausquin–Lieb (2013) statement; fidelity to the inaccessible 1976
+proof is not claimed. Introductory physical descriptions are represented by
+actual density, antisymmetry and normalized Slater identities rather than
+unspecified external models. Cited universal external theories are expanded or
+replaced where needed for the concrete claims, not advertised as universal
+formalization packages.
 
-| Review workstream | Verified scope | Open work / next step |
-| --- | --- | --- |
-| Main theorem, Gaussian and Section 2–4 review | Independent statement/definition inspection recorded in the main review | Resolve listed contextual and explicit-calculation gaps; complete unreviewed assertions |
-| Deficits, radial/nonquadratic and matrix review | Constants and concrete exports inspected independently | Prove/locate literal H¹ and Γ₂ bridges and explicit polynomial examples |
-| Dynamics and full operator | Symmetric analytic identification and concrete stochastic constructions | Trace unrestricted generator/form, invariant-law uniqueness and global CIR bridges |
-| Registry publication | Sanitized live read-only evidence, immutable submitted snapshot retained | Palomar service recovery and versioned public entry/source-preservation receipt |
-
-No Lean proof changes were made in this review. Latest complete proof evidence
-remains 5,508 build jobs, 5,753 public axiom queries and 12,287 all-local declarations;
-only the three permitted standard axioms. The four requested alternative-proof
-groups remain compiled and dependency-audited. Problems 1.11, 1.15 and 1.16 remain
-open; Appendix C remains uncertified. Next mathematical step: close the itemized
-correspondence gaps and repeat the statement review.
-
-## Latest progress
-
-Documentation synchronization (2026-10-08): all current Markdown scope claims,
-the HTML source browser and dependency explorer, and every generated thematic
-and declaration-reference DOT/SVG diagram now reflect the independent review.
-Historical verification entries retain their original evidence and are labeled
-as superseded. Diagram captions distinguish dependencies from paper coverage.
-Generated inventory/graph freshness checks and offline packaging checks pass;
-no Lean sources changed. Fresh source counts remain 159,224 project lines plus
-1,253,370 imported Mathlib lines, 1,412,594 combined, including comments and
-blank lines and counting each imported Mathlib module once in full.
-
-
-Requested independent-proof work (2026-10-08): disjoint agent modules now give
-independent spectral and Hermite–Slater weak-H¹ inequalities, the literal complex
-collision-free spectral differential factorization, and the integrated
-Bochner–Kodaira proof of both differential deficits on the actual generator graph.
-The root added the Gaussian matrix Poincaré route and integrated it into the matrix
-endgame, with finite-overlap H¹ membership proved internally. All these endpoints
-focused compile with only the three permitted standard axioms. Compiled dependency
-checks expand every transitively imported local theorem body and confirm that
-they do not call the earlier Poincaré/deficit endpoints specified by the route audit.
-This checks proof references, not an exhaustive paper correspondence review.
-The single-thread `make check` checkpoint passes: full build, generated inventory
-and source checks, 5,753 public axiom queries and the all-local audit of 12,287
-declarations, with only `propext`, `Classical.choice`, and `Quot.sound`.
-See [checkpoint build/audit log](verification/alternative-proof-check.txt) and
-[compiled route-independence results](verification/alternative-route-independence.txt).
-
-
-The primary Bakry–Émery route now has concrete internally completed endpoints.
-An actual Gaussian Faber–Schauder construction proves continuous Brownian
-existence, Gaussian joint laws, covariance and independent coordinate families.
-The strongly convex Gibbs LSI constructs its global Langevin flow and proves
-Gibbs invariance and entropy limits internally. Exact `nρ` curvature survives
-smooth regularization; Gaussian domination passes entropy and ordinary gradient
-expectations to the unregularized law. Spatial cutoffs, Haar absolute continuity
-and mollification give the bounded Lipschitz lift inequality. Exact norm-law
-identification, finite-product entropy tensorization and actual Kostlan energy
-transfer prove the interacting radial inequality with coefficient `2/(nρ)` on
-the paper's smooth compact radial domain, plus a bounded Lipschitz radial
-extension. The nonquadratic endgame now invokes this primary Euclidean-lift
-route; its independent quantile transport implementation remains exported.
-No arbitrary unbounded weak-Sobolev LSI domain or standalone arbitrary-diffusion
-curvature criterion is claimed by this new route. Focused and full single-thread builds, inventory/source checks and public/private
-axiom audits pass. Transitive compiled proof-body checks also pass for the
-primary smooth and Lipschitz radial endpoints and the matrix entropy endpoint.
-
-The final supplementary check also passes. The literal Slater determinant
-number-operator equation (4.2), homogeneous Vandermonde quotient degree (4.6),
-and full complex generator graph-spectrum support are exported and audited.
-Compiled transitive proof-body checks pass for these calculations and every
-requested concrete route endpoint. The formal dependency views, thematic
-inventory and browser documentation include the new modules.
-
-
-### Earlier documentation checkpoints (superseded)
-
-The following dated entries preserve their original evidence and claims. Their
-proof-route omissions, counts, review status and registration instructions are
-superseded by the current dashboard and correspondence review above. They are
-not current next-step instructions.
-
-Alternative-proof checkpoint (2026-10-08): confirmed that the report explicitly
-leaves the separate Section 3 spectral and Section 4 Hermite–Slater routes
-without independent exports, alongside the nine documented replaced arguments.
-Asserted-result endpoint coverage must not be read as complete proof-route
-coverage. No Lean proofs or build evidence changed at this checkpoint. The
-dashboard above continues to record the concrete verified scope and restrictions;
-the next step is a route-by-route paper/source review before implementing missing
-routes. Refreshed source counts: 143,778 project Lean lines and 1,251,826
-transitively imported Mathlib lines, 1,395,604 combined; comments and blank lines
-included, each imported Mathlib module counted once in full.
-
-Proof-route limitations made explicit (2026-10-08): REPORT.md now collects the
-nine documented original arguments replaced at the named Lean endpoints,
-distinguishes result coverage from independent alternative-proof coverage, and
-records the unexported general Bakry–Émery criterion and arbitrary-weight
-Hörmander theorem. README.md links this inventory. The full-project dashboard
-above retains the verified concrete scope and domain restrictions; no Lean
-proofs changed. Sections 3–7 are not certified route by route, and independent
-exhaustive paper-to-Lean correspondence review remains outstanding. Problems
-1.11, 1.15 and 1.16 remain open; Appendix C is uncertified. Latest proof evidence
-remains the single-thread full build, 5,079 public axiom queries and the
-11,112-declaration all-local audit; the strict Comparator/three-kernel pass
-concerns Theorem 1.1. Source counts refreshed with
-`python3 scripts/count_lean_sources.py`: 143,778 project Lean lines,
-1,251,826 transitively imported Mathlib lines, 1,395,604 combined. Comments and
-blank lines are included; each imported Mathlib module is counted once in full.
-Next mathematical review step: audit original and alternative proof routes
-against the versioned paper and record their individual correspondence evidence.
-
-Palomar registration request (2026-10-08): user explicitly requested all remaining
-Palomar steps after receiving the clean review outcome. Submitted `POST /register`
-with the delivered `review_sha256`; Palomar answered HTTP 200 with `ok: true`.
-The documented handler durably records consent before dispatching registration.
-Subsequent authenticated status queries repeatedly returned HTTP 500; the public
-repository registry index returned 404. Final registry ID, public entry and source
-preservation are therefore not yet confirmed. Do not describe consent acceptance
-as completed publication. No duplicate intake or registration request was issued.
-Mechanical verification and the clean editorial review remain passed. The pinned
-submission still compares symmetric weak-H¹ Theorem 1.1 and exhaustive affine
-equality, not every proof-library endpoint. Full-project scope and prior build/
-axiom audit evidence remain unchanged; independent full-paper correspondence
-review and the paper's open problems/numerical exclusions remain separate.
-Counts refreshed with `python3 scripts/count_lean_sources.py`: 143,778 project
-Lean lines; 1,251,826 imported Mathlib lines; 1,395,604 combined, including comments
-and blank lines and counting each imported Mathlib module once in full.
-Next step: check Palomar processing/status recovery and confirm the public entry.
-
-
-Palomar live status (2026-10-08): authenticated submission API reports
-`review-ready` for `7fh68vzqfjeu`. Mechanical run `37681934359` completed
-successfully. Review timestamp: 2026-10-08 02:39:44 UTC. Editorial review reports
-no blocking problems, no nonblocking warnings, no comments and no requested
-changes. Its scope is the selected symmetric weak-H¹ Theorem 1.1 and exhaustive
-affine equality statement; this is not a full-paper endorsement or registration.
-`registered_url` is null. The review is stored privately and no final registration
-was requested or performed. Existing full-project proof scope/build/audit evidence
-and restrictions in the dashboard remain unchanged. Independent full-paper
-correspondence review remains separate. Next step: show the review outcome to
-the user; final registration requires their separate instruction.
-
-
-Vertical diagrams and hosting diagnosis (2026-10-08): regenerated twelve thematic
-SVG/Mermaid diagrams and six formal SVGs vertically; the explorer uses one
-column. Invisible layout links position nodes without adding dependencies.
-The project GitHub Pages URL returned HTTP 404. A new Pages workflow serves an
-index and both hyphenated/underscored filenames. Changes pushed as `92a8d34`;
-GitHub Pages enabled with Actions deployment. Run `37745228115` passed. Both
-live explorer URLs were fetched and match the local HTML byte-for-byte. Generated-view consistency and offline Chromium rendering
-pass (11,112 declarations loaded). No Lean sources changed or new proof audits
-ran. Verified scope and restrictions remain in the full dashboard above;
-latest proof evidence remains the single-thread full build, 5,079 public queries,
-11,112-declaration all-local audit and strict Comparator/three kernels pass.
-Editorial and independent paper correspondence review remain pending.
-Refreshed via `python3 scripts/count_lean_sources.py`: 143,778 project lines;
-1,251,826 transitively imported Mathlib lines; 1,395,604 combined. Comments and
-blank lines included; each imported Mathlib module counted once in full.
-Live explorer: https://djalilchafai.github.io/ginibre-poincare/formal_dependencies.html
-Next step: continue pending editorial and independent correspondence review.
-
-
-Diagram compression (2026-10-08): standalone `formal-dependencies.html` reduced
-from 35,659,613 to 3,409,904 bytes (90.4%) through deterministic gzip/base64
-embedding and native browser decompression. All declaration data is retained;
-exact decoded JSON equality, generated-view consistency and offline Chromium
-rendering passed. Online hosting can serve the single HTML file directly.
-Existing full-project verified scope and restrictions in the dashboard above
-remain unchanged; no Lean proofs were edited and no new Lean build/audit was
-run. Latest existing evidence: single-thread full build, 5,079 public queries,
-11,112-declaration all-local audit and strict Comparator/three kernels pass.
-Editorial review and independent paper correspondence review remain pending;
-Problems 1.11, 1.15, 1.16 and Appendix C remain outside theorem certification.
-Refreshed physical Lean counts: 143,778 project lines; 1,251,826 transitively
-imported Mathlib lines; 1,395,604 combined. Comments and blank lines included;
-each imported Mathlib module counted once in full. Next step: upload the
-compressed HTML to the intended web host; continue pending publication review.
-
-
-Diagram scope corrected (2026-10-08): the interactive explorer now opens with
-full-paper assembly and the original Theorem 1.1 proof, with additional matrix
-and nonquadratic endpoint views. Its documentation and generated static views
-are synchronized. The standalone documentation generator describes the full
-paper and embeds all twelve thematic diagrams, replacing its obsolete
-Theorem 1.9 heading and missing SVG reference. README and this dashboard now
-lead with the main inequality. Thematic imports and exact declaration references
-remain explicitly distinguished. Documentation/tooling checks passed; existing
-Lean build and public/private audit evidence is unchanged. No proof edits.
-Source counts refreshed, including comments and blank lines and each imported
-Mathlib module once in full. Next step: independent paper correspondence review
-and pending Palomar editorial review; open research problems remain open.
-
-Report opening revised (2026-10-08): replaced the former deficit-focused
-opening with the full asserted-paper scope, led by the main Theorem 1.1.
-The numbered coverage and proof-route qualifications remain documented below.
-Documentation-only change; existing build/audit evidence is unchanged. Source
-counts refreshed and whitespace checked. Next step: independent correspondence
-review and pending Palomar editorial review.
-
-Proof-route documentation (2026-10-08): compared the named paper routes with
-actual Lean proof bodies and added result-specific correspondence remarks in
-REPORT.md. These cover the homogeneous-measure Gamma law, radial Brownian-driver
-independence, direct center-power spectral proof, explicit curvature
-witness, Hermite-derived differential deficit, Gaussian LSI foundations,
-Gaussian closed-form solver/core approximation, entire hyperplane division,
-resolvent semigroup identification, the overlap Poincaré reduction to Theorem 1.1,
-and nonquadratic transport LSI. The original
-Section 2 proof of Theorem 1.1 is also exported. Same-route proofs and domain
-extensions are distinguished from alternatives; this is not an exhaustive
-line-by-line fidelity certification. Corrected the quadratic radial LSI wording,
-linked the remarks from fidelity metadata, and added a standing AGENTS.md rule
-to document future deviations. Source counts and documentation checks refreshed;
-no Lean proof or immutable Palomar submission changed. Next step: independent
-correspondence review and the pending Palomar editorial review.
-
-Bakry–Émery report clarification (2026-10-08): added a dedicated section to
-REPORT.md explaining full-configuration versus radial curvature, the actual
-radial curvature bound, the paper's permitted transport alternative, and the
-Gaussian lift/quantile-transport proof routes of the quadratic and nonquadratic
-radial LSI endpoints. Included exact Lean references and the boundary of the
-general criterion coverage. Also refreshed REPORT.md's source counts and stale
-publication statements. No Lean proofs or immutable Palomar snapshot changed.
-
-Scope-instruction correction (2026-10-08): updated AGENTS.md's original
-Theorem 1.9 objective to the full asserted-paper scope, retained its seventeen
-core analytic milestones, and expanded completion criteria to every asserted
-endpoint and the public/private audits. Explicitly distinguished the narrower
-Theorem 1.1 Palomar comparison surface from the proof-library scope. Open paper
-problems and numerical experiments remain excluded. No Lean proofs or the
-immutable Palomar submission changed; this is an instruction/documentation edit.
-
-Radial LSI proof-route clarification (2026-10-07): the general Bakry–Émery
-criterion is not a missing hypothesis of the proved radial LSI endpoints.
-The quadratic endpoint `radial_core_lsi` uses the proved Gaussian block LSI
-and radial lift. The nonquadratic endpoint `rhoConvex_potential_radial_lsi`
-uses derived Gaussian quantile contraction and product transport. The versioned
-paper, Theorem 1.14 proof and footnote 6, explicitly permits a transport
-alternative to the Bakry–Émery argument. The positive radial curvature bound
-is separately formalized; full-configuration curvature unbounded below does
-not contradict it. No Lean statements or proof dependencies changed.
-
-Repository cleanup and Palomar checkpoint (2026-10-07): removed the unreferenced
-local paper copy `poing.tex` at the user's request; the versioned arXiv reference
-remains authoritative. Official Palomar verification passed; its public report is saved in
-`palomar-verification-report.json`. The submission is now awaiting editorial review. This cleanup and graph publication do not
-change the immutable submitted commit. No final registration has occurred.
-
-Formal dependency graph checkpoint (2026-10-07): exported the compiled Lean
-statement and proof/definition/recursor-rule references for all 11,112 local
-library/Solution declarations, including 1,699 private declarations. Challenge
-and exporter declarations are excluded; 8,282 external constants are recorded
-as a boundary. Added [FORMAL_DEPENDENCIES.md](FORMAL_DEPENDENCIES.md), an offline
-interactive explorer, direct local-reference SVGs for Theorems 1.9, 1.10 and
-the Palomar Theorem 1.1, plus the complete 1,315-node / 4,894-edge local source
-import DAG. The pinned Lean exporter, reference coverage checks, generated-file
-freshness checks and browser navigation checks pass. Source counts are refreshed.
-The source counter now includes the 1,414-line Lean exporter under `scripts`;
-these are tooling lines, not additional mathematical results. No paper theorem
-or submitted Palomar snapshot was changed. At that checkpoint the Palomar status was `awaiting-review`: official mechanical verification
-passed, with editorial review and registration pending.
-
-Submission report checkpoint (2026-10-07): added a prominent public report
-and compact full-project dashboard to [PALOMAR.md](PALOMAR.md), including the
-exact immutable snapshot, compared statement, passing preflight and official
-verification link. At that checkpoint the submission API reported `awaiting-review`; official verification passed,
-with editorial review and registration pending. Private access credentials and unpublished review
-content are excluded. Source counts were refreshed; no Lean proofs changed.
-
-Palomar submission preparation (2026-10-07): rechecked the live agent protocol,
-confirmed the repository is public with maintainer push access, and passed
-offline structural preflight with zero blockers. Added the official full
-mechanical GitHub Actions preflight pinned to pipeline commit
-`d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44`, using `palomar-standard-v1`.
-The first preflight stopped before compilation: its caller identifier exceeded
-the verifier's twelve-character requirement, and the report finalizer replaced
-that intake error with `palomar.reporting_failed`. The caller identifier is now
-corrected to `ginibre00001`. The corrected full preflight passed at
-https://github.com/djalilchafai/ginibre-poincare/actions/runs/37679215651 for
-`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`; source preparation passed,
-and the official Comparator/provenance verification step passed. The user confirmed that exact snapshot, `comparator.json` and the responsible
-maintainer declaration. Full mechanical preflight passed without errors or warnings;
-see `palomar-preflight-report.json`. Palomar accepted submission `7fh68vzqfjeu`
-for that exact commit and configuration. Both temporary ownership-proof artifacts
-were deleted. Official verification passed at
-https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37681934359.
-Editorial review and final registration remain pending. Private status credentials
-are stored outside the repository and are never included in publication.
-
-Documentation checkpoint (2026-10-07): added rendered SVG box-and-arrow dependency
-graphics for all twelve subprojects in [DEPENDENCIES.md](DEPENDENCIES.md), with
-expandable Mermaid sources and reproducible Graphviz sources in `diagrams/`.
-Every cross-group direct import is represented: independent validation matched
-all 76 arrows to the inventory. Generator freshness passes, the paper-assembly
-graphic was visually checked, and Lean source counts are refreshed and unchanged.
-Proof scope, open research questions and prior build/audit evidence below remain
-as recorded. No Lean proofs changed or full build was rerun for this documentation
-change. The next project step remains independent
-statement review or publication when requested.
-
-Agents migrated the existing Lean/Mathlib dependencies together to v4.35.0-rc2 and repaired the changed measure, Lp, polynomial and operator APIs. The full build and both public/private axiom audits pass. Challenge is independent; Solution proves full weak-H¹ Theorem 1.1 and affine equality. Strict Comparator verification and all three kernel checks pass.
-
-Agents completed disjoint modules for the maximal ordinary Schwartz Gaussian derivative domain, compact smooth graph density, full equality space, closed-form solvability, multivariate entire reconstruction and global division. `entire_alternating_vandermonde_factorization` proves the genuine global entire quotient across every collision. `gaussianVolumeClosedForm_canonicalSolvability` adds the unique minimal-norm solution and sharp bound.
-
-`gaussianHolomorphicDistanceSq_eq_projectionNorm`, `vandermonde_entire_infDist`, `groundStateDistanceIdentityStatement` and `ginibreHalfDistanceStatement` identify the literal entire-representative infima with Hilbert projections, preserving the paper's normalization. `fullMainAnalyticProof` instantiates all five inputs of the original analytic proof with proved concrete facts. `fullTheoremOneTenSchwartz` exports both differential deficits with ordinary first and second distributional derivatives.
+Every changed result's paper route, Lean route and module evidence is recorded
+in REPORT.md. No overall completion percentage is assigned.
 
 ## Build and audit evidence
 
-GitHub upload preparation (2026-10-07): source audit, generated inventory check,
-`git diff --check` and source counts passed. Documentation and diagrams are committed. The GitHub remote is
-https://github.com/djalilchafai/ginibre-poincare; its initial MIT license
-commit was merged, preserving both histories and the named copyright holder.
-GitHub browser authentication succeeded and the project was uploaded to
-`origin/main`. The remote retains its initial license commit and the full local
-source history. Palomar submission `7fh68vzqfjeu` is accepted; registration remains pending. The full build and kernel checks below are recorded
-evidence from the verified toolchain checkpoint, not rerun for this upload.
+`LEAN_NUM_THREADS=1 make check` **passes** on the final proof tree:
 
+- 5,814 build jobs; 1,707 original modules grouped once into 12 subprojects.
+- Source audit: 1,719 library modules all publicly imported; seven root Lean files.
+- 6,865 public axiom queries and 14,499 all-local declarations, including private helpers.
+- Only `propext`, `Classical.choice` and `Quot.sound` occur. The only authorized statement hole is in independent Challenge; it is excluded from Solution/library closure.
+- TestImport passes. Offline Palomar structure scans 1,727 Lean files with zero blockers.
+- Ten route-independence checks pass on the fresh compiled proof-body export.
 
-Trust-review checkpoint (2026-10-07): reran the local source audit, subproject
-inventory check and source counter; all passed and the counts below are unchanged.
-Reviewed the recorded full-build, all-local axiom audit and Comparator success
-logs. This checkpoint did not rerun the full build or independently review every
-paper-to-Lean statement correspondence; the Comparator covers Theorem 1.1 only.
+[Verification record](verification/correspondence-final-check.txt) stores the
+full-check log hash and compiled export hash. The fresh export contains 14,499
+local declarations, 12,546 theorems and 1,721 compiled local modules. Its source
+import DAG has 1,726 nodes and 6,442 edges. All 12 thematic and 27 endpoint SVGs
+and the interactive dependency HTML are regenerated from current sources and
+compiled references; diagram edges are distinct from statement review.
 
-Fresh `LEAN_NUM_THREADS=1 make check` passed: 5,384 build jobs; 1,296 original modules assigned exactly once to twelve subprojects; all 1,308 library modules publicly imported; only the authorized independent Challenge hole; 5,079 public axiom queries; all-local audit of 11,112 declarations including private helpers. Only `propext`, `Classical.choice` and `Quot.sound` occur in the proof-library/Solution audit closure. Both root compatibility files compile. Actual Comparator passes with empty `definition_names`, so concrete definitions remain recursively compared; con-ron accepts 61,907 exported declarations, and nanoda and Lean’s default kernel also accept.
-
-- [Full build, inventory, source and axiom audits](ginibre-upgrade-verified-check.log)
-- [Import compatibility](ginibre-upgrade-compatibility.log)
-- [Draft compatibility](ginibre-upgrade-drafts.log)
-- [Actual strict Comparator and three kernel checks](ginibre-upgrade-comparator.log)
-- [Offline Palomar structural preflight](ginibre-upgrade-preflight.log)
-
-Compilation and axiom audits establish source coverage and soundness relative to the permitted axioms. The [numbered report](REPORT.md) separately records statement correspondence and natural domain qualifications.
+The earlier official Comparator pass at immutable submission commit
+`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca` is historical evidence for full symmetric
+weak-H¹ Theorem 1.1 and exhaustive affine equality only, with all three kernels.
+It is not a full-paper comparison or registry receipt.
 
 ## Lean source counts
 
-Refreshed with `python3 scripts/count_lean_sources.py`.
+Freshly generated with `python3 scripts/count_lean_sources.py`:
 
-| Source scope | Files/modules | Physical lines |
+| Scope | Files/modules | Physical lines |
 | --- | ---: | ---: |
-| Active project Lean sources, including roots, generated facades and Lean tooling | 1,433 | 159,224 |
-| Transitively imported Mathlib | 3,801 | 1,253,370 |
-| Project plus imported Mathlib | 5,234 | 1,412,594 |
+| Project Lean sources, roots, generated facades and Lean tooling | 1,727 | 185,400 |
+| Transitively imported Mathlib | 3,813 | 1,256,051 |
+| Project plus imported Mathlib | 5,540 | 1,441,451 |
 
-Comments and blank lines are included. Imported Mathlib modules are counted
-once in full, using only `.lake/packages/mathlib`. Archives, Lean core and other
-dependencies are excluded. This is module-level usage, not declaration-level
-proof dependency usage. The pure inventory excludes generated facades and root
-audit/compatibility files; its totals therefore differ from the full source count.
+Comments and blank lines are included. Each imported Mathlib module is counted
+once in full. Archives, Lean core and other dependencies are excluded. These
+are module-level physical source counts, not declaration-level proof usage.
 
 ## Open work and next step
 
-Independent agents have completed the scoped correspondence reviews and found
-unresolved items, itemized in [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md).
-The next mathematical step is to close those statement/domain bridges and
-auxiliary assertions, then repeat review. The four requested alternative proof
-groups remain compiled and audited. Full-paper completion is not established.
-Problems 1.11, 1.15 and 1.16 remain open; Appendix C remains uncertified.
+No remaining concrete conclusion gap was found in the combined independent
+paper inventory. The final mathematical build and axiom checks pass. Open
+research Problems and Appendix C retain their exclusions above.
 
-Palomar registration consent was accepted, but live authenticated status fails
-with HTTP 500 and public checks find no entry. The next publication step is
-service recovery and verification of the exact versioned public record and
-source-preservation receipt. No duplicate registration request is needed.
+Registry publication remains unconfirmed: the latest 16:11:40 UTC search is
+HTTP 200 with no matching entry (revision 190); the canonical repository record
+is HTTP 404. The earlier authenticated GET returned HTTP 403; no cause is
+inferred. Accepted consent is not a public receipt. See the sanitized
+[publication evidence](verification/registry-publication-check.md).
 
-Git was reinitialized on `main` at the user's request. Previous Git metadata is
-preserved at `/tmp/ginibre-git-before-reinit-2026-10-07/repository.git`. GitHub
-publication and Palomar intake occurred; final registry publication is unconfirmed.
-Historical checkpoints below describe earlier states and are superseded by the
-current dashboard and correspondence findings.
+The final repository snapshot contains the completed proof/documentation
+integration. The next external publication step is a successful registry status
+or public registration receipt; no duplicate submission or maintainer message
+has been sent.
 
 ## Historical checkpoints (superseded)
 

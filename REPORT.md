@@ -1,50 +1,52 @@
 # Ginibre Poincaré formalization report
 
-Documentation updated on 2026-10-08. The recorded final full-project build
-and both axiom audits were completed at the 2026-10-08 proof-route checkpoint; this review update
-does not rerun them.
+Updated on 2026-10-08 with the correspondence-completion proof additions.
 
-Paper: Djalil Chafaï, *An optimal Poincaré inequality for the complex Ginibre log-gas*.
+Paper authority: Djalil Chafaï, *An optimal Poincaré inequality for the complex
+Ginibre log-gas*, [arXiv:2608.19358v2](https://arxiv.org/html/2608.19358v2).
+Local TeX is not the statement authority.
 
-arXiv URL (authoritative version): <https://arxiv.org/abs/2608.19358v2>
+The original analytic Theorem 1.1 proof, both requested independent spectral
+and Hermite–Slater routes, the integrated Bochner–Kodaira route and the primary
+Bakry–Émery radial route are exported. The new correspondence endpoints close
+the former matrix H¹, literal pointwise Γ₂, unrestricted operator/dynamics,
+Section 6 spectral-calculus and auxiliary-assertion gaps. See
+[FullPaper](GinibrePoincare/Endgame/FullPaper.lean),
+[CorrespondenceEndpoints](GinibrePoincare/Endgame/CorrespondenceEndpoints.lean)
+and [STATUS.md](STATUS.md) for precise verification evidence.
 
-The project develops formalizations of the asserted mathematical results of the
-versioned paper. Independent review now identifies unresolved domain bridges and
-auxiliary assertions; full-paper completion is not established. Its main result
-is Theorem 1.1: the sharp symmetric Poincaré inequality, together with the full
-weak-domain equality classification. The scope also includes equilibrium and
-stochastic factorization, polynomial eigenfunctions and spectral points,
-curvature and both sum-of-squares deficit theorems, radial log-Sobolev
-inequalities, matrix lifts and eigenvector overlaps, nonquadratic extensions,
-and the analytic results of Appendices A–B.
-
-The original main analytic proof is assembled without analytic completion
-hypotheses in [FullMainAnalyticProof](GinibrePoincare/Endgame/FullMainAnalyticProof.lean).
-The numbered inventory below records the concrete endpoints and their domains;
-the proof-route remarks explain differences from the paper's arguments.
-Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C's
-numerical experiments are outside theorem certification. See
-[STATUS.md](STATUS.md) for verification evidence and the dashboard, and
-[FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean) for public endpoints.
+Problems 1.11, 1.15 and 1.16 remain open research questions; Appendix C numerical
+experiments are outside theorem certification. No overall completion percentage
+is assigned.
 
 ## Independent full-paper correspondence review
 
-The [2026-10-08 review](CORRESPONDENCE_REVIEW.md) checks the versioned paper
-against concrete definitions and theorem signatures at commit `0779d08`.
-Independent main and extension reviewers found unresolved correspondence;
-the numbered inventory below must not be read as an exhaustive full-paper pass.
-In particular, the matrix H¹ statement needs a derivative-identification bridge,
-the literal integrated pointwise Γ₂ identity is not located, and contextual GUE,
-explicit polynomial/Slater and unrestricted operator assertions remain open or
-unreviewed. Review files contain item-specific evidence and qualifications.
-The compiled alternative proofs and kernel audits remain valid evidence for
-those exports, separately from statement correspondence.
+The initial review at `0779d08` identified substantive gaps. The independent
+[main follow-up](verification/correspondence-main-followup.md) and
+[extension/dynamics follow-up](verification/correspondence-extensions-followup.md)
+now inspect the actual new measures, domains and operators and find no remaining
+concrete conclusion gap in their combined paper inventory. This statement review
+is separate from the full-tree build/axiom checks and external publication.
+[CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md) records the exact disposition
+of historical findings and the source qualifications.
 
-[Registry checks](verification/registry-publication-check.md) cannot confirm
-publication: authenticated status HTTP 500, public repository record HTTP 404,
-and empty successful searches. Accepted consent does not establish publication.
+Domain qualifications are preserved: real GUE uses the paper's smooth compact
+H¹ completion; local Dolbeault exactness covers ordinary locally L² coefficients
+on arbitrary open sets in every dimension; general real Brascamp–Lieb covers C²
+potentials with everywhere positive-definite Hessian, finite Gibbs mass, and
+locally Lipschitz or ordinary local weak-gradient observables with finite actual
+inverse-Hessian energy. No uniform Hessian lower bound or global gradient-L²
+hypothesis is added. The latter contextual theorem uses the precise classical
+statement in the primary Carlen–Cordero-Erausquin–Lieb (2013) source; an exact
+reconstruction of the inaccessible 1976 proof is not claimed. Introductory
+physical applications are represented by the actual density, antisymmetry and
+normalized Slater identities, without inventing unspecified external models.
 
-## Palomar verification checkpoint
+[Live registry checks](verification/registry-publication-check.md) still cannot
+confirm publication. Accepted consent and Theorem 1.1 mechanical comparison are
+not a public registration receipt and do not certify every paper endpoint.
+
+## Historical Palomar mechanical checkpoint
 
 Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The final single-thread full build, source audit, 5,079 public axiom queries, 11,112-declaration all-local audit and both root compatibility checks pass. Actual Comparator passes strict recursive statement comparison and all three kernels: con-ron, nanoda and Lean’s default kernel. The independent Challenge has exactly the user-authorized statement hole; the proof library and Solution remain hole-free and use only the three permitted standard axioms. The comparison covers full symmetric weak-H¹ Theorem 1.1 and exhaustive affine equality, not the whole paper. Offline preflight reports zero blockers and metadata passes the official v0.4 schema. Palomar accepted submission `7fh68vzqfjeu` at the immutable commit
 `fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`; its official mechanical
@@ -84,9 +86,9 @@ for the complex Ginibre log-gas*, [arXiv:2608.19358v2](http://arxiv.org/abs/2608
 was checked against the official v2 full text linked from that page on 2026-10-07.
 This is a source-to-endpoint inventory, not an independent audit of every proof.
 “Verified” records compiled endpoint coverage on the described domain; the
-2026-10-08 independent review qualifies these labels wherever literal paper
-correspondence remains unresolved. In particular, operator-norm deficit statements
-do not alone identify the pointwise Γ₂ integral. “Support”
+2026-10-08 independent follow-up review checks actual definitions and stated
+domains. The literal pointwise Γ₂ integral is now identified independently of
+the operator-norm encoding. “Support”
 means related proved infrastructure, with the literal paper statement still to
 be checked. Open research problems are not completion theorems.
 
@@ -96,17 +98,17 @@ be checked. Open research problems are not completion theorems.
 | --- | --- | --- |
 | [Theorem 1.1](http://arxiv.org/abs/2608.19358v2) | Optimal symmetric Poincaré inequality | Verified on the full symmetric weak-H¹ domain: `ginibre_symmetric_weak_poincare` in [GinibreSymmetricWeakPoincare](GinibrePoincare/Analysis/GinibreSymmetricWeakPoincare.lean). Center-of-mass attainment and exhaustive affine equality are proved; see [GinibreEqualityWeakAffine](GinibrePoincare/Analysis/GinibreEqualityWeakAffine.lean). Paper normalization is Var ≤ ½ E, E = (1/n)∫‖∇f‖². |
 | [Theorem 1.2](http://arxiv.org/abs/2608.19358v2) | Equilibrium factorization | Verified: `equilibrium_probability_factorization`, `equilibrium_jointLaw`, `coordinateSum_recentered_indepFun` in [EquilibriumProbability](GinibrePoincare/Analysis/EquilibriumProbability.lean), plus the density and Gamma-radius laws. Coordinate sum is standard complex Gaussian and independent of the recentered configuration. |
-| [Theorem 1.3](http://arxiv.org/abs/2608.19358v2) | Dynamical factorization | Compiled factorization and stopped independent-driver CIR equations; unrestricted global CIR correspondence remains unconfirmed. Original Brownian-driven process and independent center/relative processes are constructed. `ginibreBrownian_full_two_radius_independent_CIR_realization` in [GinibreStochasticFullTwoRadiusRealization](GinibrePoincare/Analysis/GinibreStochasticFullTwoRadiusRealization.lean); joint realization requires n ≥ 2 and collision-free deterministic initial state. Random-initial independence uses independent center/relative initial projections. |
+| [Theorem 1.3](http://arxiv.org/abs/2608.19358v2) | Dynamical factorization | Compiled factorization and actual unstopped independent-driver CIR equations in [CorrespondenceDynamicsGlobalCIR](GinibrePoincare/Analysis/CorrespondenceDynamicsGlobalCIR.lean). Original Brownian-driven process and independent center/relative processes are constructed. `ginibreBrownian_full_two_radius_independent_CIR_realization` in [GinibreStochasticFullTwoRadiusRealization](GinibrePoincare/Analysis/GinibreStochasticFullTwoRadiusRealization.lean); joint realization requires n ≥ 2 and collision-free deterministic initial state. Random-initial independence uses independent center/relative initial projections. |
 | [Theorem 1.4](http://arxiv.org/abs/2608.19358v2) | Polynomial eigenfunctions | Verified for n ≥ 2: `polynomialEigenfunction_eigenvalue_equation_atSpeed` in [PolynomialEigenfunctionGenerator](GinibrePoincare/Analysis/PolynomialEigenfunctionGenerator.lean), finite polynomial expansion in [PolynomialEigenfunctionBasis](GinibrePoincare/Analysis/PolynomialEigenfunctionBasis.lean), and equilibrium orthogonality. Full closed-sector basis and generator identification are also proved. |
 | [Corollary 1.5](http://arxiv.org/abs/2608.19358v2) | Spectrum contains {−2αk/n : k ∈ ℕ} | Compiled for every n > 0 and positive paper speed α: `ginibreFullGeneratorAtSpeed_all_positive_n_spectrum_containment` in [GinibreOneParticleSpectrum](GinibrePoincare/Analysis/GinibreOneParticleSpectrum.lean). Actual coordinate-sum powers supply nonzero eigenvectors; their squared norms are k!. Uses the actual full symmetric generator and the ordinary unbounded-operator spectrum, defined as absence of a bounded two-sided resolvent on its exact graph domain. This is not Mathlib’s bounded-operator algebra spectrum. The n = 1 case is included. |
 | [Remark 1.6](http://arxiv.org/abs/2608.19358v2) | Polynomial-sector incompleteness | Verified: `polynomialSector_incomplete` in [PolynomialSectorIncompleteness](GinibrePoincare/Analysis/PolynomialSectorIncompleteness.lean), with a concrete nonzero centered quadratic orthogonal witness. |
 | [Lemma 1.7](http://arxiv.org/abs/2608.19358v2) | Curvature has no lower bound | Verified for n ≥ 2: `ginibre_pointwise_bakry_emery_curvature_unbounded_below` in [GinibrePointwiseCurvature](GinibrePoincare/Analysis/GinibrePointwiseCurvature.lean). This restriction follows the surrounding paper discussion; n = 1 is Gaussian. |
 | [Remark 1.8](http://arxiv.org/abs/2608.19358v2) | Constant mean curvature | Verified: `ginibre_pointwise_mean_curvature` equals 2 for n > 0. The recentered curvature obstruction for n ≥ 2 is in [GinibrePointwiseCurvatureTangent](GinibrePoincare/Analysis/GinibrePointwiseCurvatureTangent.lean). |
-| [Theorem 1.9](http://arxiv.org/abs/2608.19358v2) | Hermite-series Poincaré and integrated Γ₂ deficits | Compiled operator-graph identities; literal integrated pointwise Γ₂ bridge unresolved: `fullTheoremOneNine` in [FullTheoremOneNine](GinibrePoincare/Endgame/FullTheoremOneNine.lean), on the actual real symmetric generator graph. Exact remainder coefficients 2/4 and Hermite-tail coefficients 4/8; actual weak gradient and tail summability follow from graph membership. |
-| [Theorem 1.10](http://arxiv.org/abs/2608.19358v2) | Differential sum-of-squares deficits | Compiled differential identities on the symmetric generator graph; literal integrated pointwise Γ₂ bridge unresolved: `fullTheoremOneTen` in [FullTheoremOneTen](GinibrePoincare/Endgame/FullTheoremOneTen.lean), on the actual real symmetric generator graph. Constructs v = N⁻¹ᐟ² proj(H⊥)(U f̃), derives its first and second weak Wirtinger derivatives from the actual Ginibre weak gradient, and proves both exact identities with coefficients 4/n and 8/n plus full affine equality. `ginibreDifferentialSecondEnergy_eq_integral` expresses the energy as literal Gaussian integrals of squared second derivatives. `fullTheoremOneTenSchwartz` now states the same endpoint with literal ordinary Lebesgue Schwartz distributional first and second derivatives; their equivalence to the independently defined weighted graph is proved. |
+| [Theorem 1.9](http://arxiv.org/abs/2608.19358v2) | Hermite-series Poincaré and integrated Γ₂ deficits | Compiled operator-graph and literal integrated pointwise Γ₂ identities in [FullTheoremOneNinePointwiseGamma](GinibrePoincare/Endgame/FullTheoremOneNinePointwiseGamma.lean): `fullTheoremOneNine` in [FullTheoremOneNine](GinibrePoincare/Endgame/FullTheoremOneNine.lean), on the actual real symmetric generator graph. Exact remainder coefficients 2/4 and Hermite-tail coefficients 4/8; actual weak gradient and tail summability follow from graph membership. |
+| [Theorem 1.10](http://arxiv.org/abs/2608.19358v2) | Differential sum-of-squares deficits | Compiled differential identities on the symmetric generator graph, with the literal pointwise Γ₂ bridge in [CorrespondenceOperatorUnrestrictedGamma](GinibrePoincare/Analysis/CorrespondenceOperatorUnrestrictedGamma.lean): `fullTheoremOneTen` in [FullTheoremOneTen](GinibrePoincare/Endgame/FullTheoremOneTen.lean), on the actual real symmetric generator graph. Constructs v = N⁻¹ᐟ² proj(H⊥)(U f̃), derives its first and second weak Wirtinger derivatives from the actual Ginibre weak gradient, and proves both exact identities with coefficients 4/n and 8/n plus full affine equality. `ginibreDifferentialSecondEnergy_eq_integral` expresses the energy as literal Gaussian integrals of squared second derivatives. `fullTheoremOneTenSchwartz` now states the same endpoint with literal ordinary Lebesgue Schwartz distributional first and second derivatives; their equivalence to the independently defined weighted graph is proved. |
 | [Problem 1.11](http://arxiv.org/abs/2608.19358v2) | Best symmetric log-Sobolev constant; is it 1? | Open research question. Radial LSI and matrix-overlap entropy bounds do not resolve unrestricted symmetric LSI. |
 | [Theorem 1.12](http://arxiv.org/abs/2608.19358v2) | Uniform symmetric radial LSI | Verified on the smooth radial core and its Sobolev completion: `logSobolevInequality_instance` in [LogSobolevInequality](GinibrePoincare/Analysis/LogSobolevInequality.lean), `radial_sobolev_lsi` in [FullRadialLSIReduction](GinibrePoincare/Analysis/FullRadialLSIReduction.lean). Ent(f²) ≤ E. An old Lean comment calls this 1.10; arXiv v2 numbering is 1.12. |
-| [Theorem 1.13](http://arxiv.org/abs/2608.19358v2) | Matrix lift and eigenvector-overlap inequalities | Finite-overlap endpoint compiled; literal paper H¹ bridge unresolved: `fullMatrixLift_functional_inequalities` in [FullMatrixLift](GinibrePoincare/Endgame/FullMatrixLift.lean). Symmetric C¹ observable, actual Ginibre L² value and finite actual overlap energy; variance coefficient 2/n and entropy coefficient 4/n. |
+| [Theorem 1.13](http://arxiv.org/abs/2608.19358v2) | Matrix lift and eigenvector-overlap inequalities | `correspondenceMatrix_theorem_1_13` in [CorrespondenceMatrixWeakClosure](GinibrePoincare/Analysis/CorrespondenceMatrixWeakClosure.lean): symmetric C¹ observable with literal Gaussian matrix H¹ lift. The actual weak spectral derivative and finite overlap energy are proved internally, with variance coefficient 2/n and entropy coefficient 4/n. The earlier finite-overlap endpoint remains exported in [FullMatrixLift](GinibrePoincare/Endgame/FullMatrixLift.lean). |
 | [Theorem 1.14](http://arxiv.org/abs/2608.19358v2) | Nonquadratic determinantal log-gases | Verified: `fullNonQuadraticPotentialTheorem` in [FullNonQuadraticPotential](GinibrePoincare/Endgame/FullNonQuadraticPotential.lean). Actual C² rotational potential, finite partition and ρ > 0. Smooth compact symmetric Poincaré under ΔV ≥ 2ρ with coefficient 1/(nρ); radial LSI under strong convexity with coefficient 2/(nρ). Bounded Lipschitz radial extension is separately proved. |
 | [Problem 1.15](http://arxiv.org/abs/2608.19358v2) | Arbitrary inverse temperatures | Open research question; the β = 2 determinantal proofs do not solve it. |
 | [Problem 1.16](http://arxiv.org/abs/2608.19358v2) | Higher-dimensional log-gases | Open research question; the planar Ginibre results do not solve it. |
@@ -117,9 +119,9 @@ be checked. Open research problems are not completion theorems.
 | --- | --- | --- |
 | [Lemma 2.1](http://arxiv.org/abs/2608.19358v2) | Dirichlet form under Vandermonde transform | Verified normalized identity: `groundStateEnergyIdentity` in [GroundStateDbar](GinibrePoincare/Analysis/GroundStateDbar.lean), preserving the factor 4. |
 | [Lemma 2.2](http://arxiv.org/abs/2608.19358v2) | Gaussian dbar spectral gap | Verified on the actual entire-function space: `gaussianDbarEstimateStatement` and `gaussianHolomorphicDistanceSq_eq_projectionNorm` in [GaussianEntireDistance](GinibrePoincare/Analysis/GaussianEntireDistance.lean), with maximal ordinary Schwartz-domain extensions in [GaussianDbarWeakEquality](GinibrePoincare/Analysis/GaussianDbarWeakEquality.lean). |
-| [Remark 2.3](http://arxiv.org/abs/2608.19358v2) | Weak dbar domain and Gaussian equality cases | Compiled on the maximal ordinary Schwartz Gaussian L² derivative domain. [GaussianDbarCompactCore](GinibrePoincare/Analysis/GaussianDbarCompactCore.lean) proves compact C∞ graph density. [GaussianDbarWeakEquality](GinibrePoincare/Analysis/GaussianDbarWeakEquality.lean) proves the sharp gap, exact mode criterion and compact smooth equality iff zero. [GaussianDbarEqualitySpace](GinibrePoincare/Analysis/GaussianDbarEqualitySpace.lean) proves the closed direct sum of degrees zero and one, convergent coefficient expansions with exact ℓ² norm, and unconditional derivative-domain membership/attainment for each equality-space vector. Real analyticity of every equality vector remains unconfirmed. Exact pointwise creation formula (2.19) is in [GaussianFirstModeCreation](GinibrePoincare/Analysis/GaussianFirstModeCreation.lean). |
+| [Remark 2.3](http://arxiv.org/abs/2608.19358v2) | Weak dbar domain and Gaussian equality cases | Compiled on the maximal ordinary Schwartz Gaussian L² derivative domain. [GaussianDbarCompactCore](GinibrePoincare/Analysis/GaussianDbarCompactCore.lean) proves compact C∞ graph density. [GaussianDbarWeakEquality](GinibrePoincare/Analysis/GaussianDbarWeakEquality.lean) proves the sharp gap, exact mode criterion and compact smooth equality iff zero. [GaussianDbarEqualitySpace](GinibrePoincare/Analysis/GaussianDbarEqualitySpace.lean) proves the closed direct sum of degrees zero and one, convergent coefficient expansions with exact ℓ² norm, and unconditional derivative-domain membership/attainment for each equality-space vector. Real analyticity of every equality vector is proved in [CorrespondenceAuxiliaryEqualityAnalytic](GinibrePoincare/Analysis/CorrespondenceAuxiliaryEqualityAnalytic.lean). Exact pointwise creation formula (2.19) is in [GaussianFirstModeCreation](GinibrePoincare/Analysis/GaussianFirstModeCreation.lean). |
 | [Remark 2.4](http://arxiv.org/abs/2608.19358v2) | Hörmander–Berndtsson closed-form solvability | Compiled literal arbitrary-form existence: `gaussianVolumeClosedFormSolvability` in [GaussianClosedFormVolume](GinibrePoincare/Analysis/GaussianClosedFormVolume.lean). Every ordinary distributionally closed Gaussian L² (0,1)-form has an actual L² solution of each ordinary volume derivative equation, with squared norm ≤ n⁻¹ times the sum of component squared norms. The coefficient candidate and bound are derived from compact tests, not assumed. Canonical solution, uniqueness and minimal norm: `gaussianVolumeClosedForm_canonicalSolvability` in [GaussianCanonicalDbarSolution](GinibrePoincare/Analysis/GaussianCanonicalDbarSolution.lean). |
-| [Remark 2.5](http://arxiv.org/abs/2608.19358v2) | Closedness of the entire-function Bargmann–Fock space | Compiled literal entire L² space identification and closedness: `gaussianEntireL2_eq_zeroModeClosedSpan`, `isClosed_gaussianEntireL2` in [GaussianEntireSpaceClosure](GinibrePoincare/Analysis/GaussianEntireSpaceClosure.lean). The same module proves a local pointwise estimate and `gaussianEntireRepresentative_tendstoLocallyUniformly` for arbitrary L²-convergent actual entire representatives. Multivariate entire regularity and actual infinite-series reconstruction are derived in focused modules, not assumed. The arbitrary positive-on-compacts weight assertion remains unconfirmed. |
+| [Remark 2.5](http://arxiv.org/abs/2608.19358v2) | Closedness of the entire-function Bargmann–Fock space | Compiled literal entire L² space identification and closedness: `gaussianEntireL2_eq_zeroModeClosedSpan`, `isClosed_gaussianEntireL2` in [GaussianEntireSpaceClosure](GinibrePoincare/Analysis/GaussianEntireSpaceClosure.lean). The same module proves a local pointwise estimate and `gaussianEntireRepresentative_tendstoLocallyUniformly` for arbitrary L²-convergent actual entire representatives. Multivariate entire regularity and actual infinite-series reconstruction are derived in focused modules, not assumed. Arbitrary measurable weights bounded positively on each compact are covered by [CorrespondenceAuxiliaryPositiveWeightClosure](GinibrePoincare/Analysis/CorrespondenceAuxiliaryPositiveWeightClosure.lean) and [CorrespondenceAuxiliaryPositiveWeightUniform](GinibrePoincare/Analysis/CorrespondenceAuxiliaryPositiveWeightUniform.lean), including actual locally uniform convergence. |
 | [Lemma 2.6](http://arxiv.org/abs/2608.19358v2) | Alternating holomorphic Vandermonde divisibility | Verified for arbitrary entire functions across all collisions: `entire_alternating_vandermonde_factorization` in [EntireVandermondeFactorization](GinibrePoincare/Analysis/EntireVandermondeFactorization.lean). The quotient is entire and symmetric. Actual Gaussian L² representative counterpart is exported in the same module. |
 | [Lemma 2.7](http://arxiv.org/abs/2608.19358v2) | Holomorphic–antiholomorphic projection geometry | Verified for the actual entire symmetric L² space in [GinibreEntireProjectionGeometry](GinibrePoincare/Analysis/GinibreEntireProjectionGeometry.lean): centered orthogonality, arbitrary complex two-projection bound and real centered Pythagoras/half-distance (2.26–2.28). [GinibreEntireProjectionDistance](GinibrePoincare/Analysis/GinibreEntireProjectionDistance.lean) proves literal representative infima and attainment. [GaussianGinibreProjectionIntertwining](GinibrePoincare/Analysis/GaussianGinibreProjectionIntertwining.lean) proves (2.23) with the exact unnormalized mass factor. |
 | [Remark 2.8](http://arxiv.org/abs/2608.19358v2) | Equality cases in the two estimates | Compiled explicit center decomposition, Vandermonde translation invariance and derivative cancellation in [GinibreCenterProjectionEquality](GinibrePoincare/Analysis/GinibreCenterProjectionEquality.lean). Actual center projection = S/2 and exact half-distance equality in [GinibreCenterProjectionClasses](GinibrePoincare/Analysis/GinibreCenterProjectionClasses.lean). Gaussian zero projection, weak derivatives, exact gap equality and first antiholomorphic Hermite-space membership for the normalized V·conjugate(S) are in [GinibreCenterProjectionGaussian](GinibrePoincare/Analysis/GinibreCenterProjectionGaussian.lean); the pointwise correction sum is stated unnormalized. |
@@ -135,20 +137,24 @@ does not claim every alternative proof has an independently exported Lean route.
 | [Lemma A.1](http://arxiv.org/abs/2608.19358v2) | Domain of the closed gradient | Proved uniqueness and closed weak graph in [GinibreWeakGradient](GinibrePoincare/Analysis/GinibreWeakGradient.lean), plus actual weak-pair core approximation in [GinibreArbitraryWeakPairClosure](GinibrePoincare/Analysis/GinibreArbitraryWeakPairClosure.lean). |
 | [Lemma A.2](http://arxiv.org/abs/2608.19358v2) | Equivalent graph norms and collision-free core closure | Compiled actual positive-speed norm comparison: `ginibre_gradient_graph_norm_equivalence` in [GinibreGraphNormEquivalence](GinibrePoincare/Analysis/GinibreGraphNormEquivalence.lean), with factors √min(1,c) and √max(1,c), c = αₙ/βₙ > 0. Collision cutoff approximation is proved in [GinibreCollisionCutoffSobolevApproximation](GinibrePoincare/Analysis/GinibreCollisionCutoffSobolevApproximation.lean). Actual nonsymmetric real global/interior compact smooth gradient graph closures are now equal to the independently defined distributional graph: `ginibreRealInteriorCore_closure_eq_distributional` and `ginibreRealSmoothCore_closure_equivalence` in [GinibreRealCoreClosureEquivalence](GinibrePoincare/Analysis/GinibreRealCoreClosureEquivalence.lean), compiled and audited. The literal complex-valued global/collision-free smooth-core closure equality is now compiled: `ginibreComplexSmoothCore_closure_equivalence` in [GinibreComplexCoreClosureEquivalence](GinibrePoincare/Analysis/GinibreComplexCoreClosureEquivalence.lean), with actual complex L² values and Euclidean complex gradients defined by the real Fréchet derivative in each coordinate; only standard axioms occur. |
 | [Lemma A.3](http://arxiv.org/abs/2608.19358v2) | Collision set has zero capacity | Verified: `ginibreCollisionSet_capacity_zero` in [GinibreCollisionCapacity](GinibrePoincare/Analysis/GinibreCollisionCapacity.lean), for the literal weighted weak-H¹ capacity, n > 0. |
-| Appendix B | Hermite orthogonal polynomials | No numbered theorem environments. Normalized basis, completeness, Parseval, Rodrigues and both Wirtinger lowering relations are proved; literal Gram–Schmidt and leading-coefficient assertions remain unconfirmed;  [HermiteRodriguesMultivariate](GinibrePoincare/Analysis/HermiteRodriguesMultivariate.lean) and [HermiteRodriguesHolomorphicLowering](GinibrePoincare/Analysis/HermiteRodriguesHolomorphicLowering.lean). |
+| Appendix B | Hermite orthogonal polynomials | No numbered theorem environments. Normalized basis, completeness, Parseval, Rodrigues and both Wirtinger lowering relations are proved; literal Gram–Schmidt and leading-coefficient assertions are proved in [CorrespondenceAuxiliaryTensorGramSchmidt](GinibrePoincare/Analysis/CorrespondenceAuxiliaryTensorGramSchmidt.lean), [Leading](GinibrePoincare/Analysis/CorrespondenceAuxiliaryHermiteLeading.lean) and [TensorExpansion](GinibrePoincare/Analysis/CorrespondenceAuxiliaryTensorExpansion.lean);  [HermiteRodriguesMultivariate](GinibrePoincare/Analysis/HermiteRodriguesMultivariate.lean) and [HermiteRodriguesHolomorphicLowering](GinibrePoincare/Analysis/HermiteRodriguesHolomorphicLowering.lean). |
 | Appendix C | Numerical experiments | No numbered theorem environments or proof obligation. Numerical experiments are not certified by the Lean theorem audits. |
 
 ## Compiled analytic endpoints and correspondence qualifications
 
-The [official v2 proof section](https://arxiv.org/html/2608.19358v2#S2) was used to locate the following compiled endpoints. This is not an exhaustive correspondence pass: equality-vector analyticity, arbitrary-weight closedness and other auxiliary assertions remain unconfirmed in the independent review. Remarks 2.3–2.5 have the full ordinary distributional domain, compact smooth core, equality space, canonical minimal solver and actual entire-space closedness/local uniform convergence. Lemma 2.6 has global entire quotient existence. Lemma 2.7 has actual entire-space geometry and representative distances. Remark 2.8 has exact center projection and Gaussian first-mode/gap equalities. `groundStateDistanceIdentityStatement` and `ginibreHalfDistanceStatement` apply to the full smooth compact symmetric core, including collision points. `fullMainAnalyticProof` supplies all five previously abstract analytic inputs with proved concrete theorems.
+The [official v2 proof section](https://arxiv.org/html/2608.19358v2#S2) was used to locate the following compiled endpoints. The independent follow-up review resolves equality-vector analyticity, arbitrary-weight closedness/local uniform convergence and the identified auxiliary assertions; its exact domains are recorded above. Remarks 2.3–2.5 have the full ordinary distributional domain, compact smooth core, equality space, canonical minimal solver and actual entire-space closedness/local uniform convergence. Lemma 2.6 has global entire quotient existence. Lemma 2.7 has actual entire-space geometry and representative distances. Remark 2.8 has exact center projection and Gaussian first-mode/gap equalities. `groundStateDistanceIdentityStatement` and `ginibreHalfDistanceStatement` apply to the full smooth compact symmetric core, including collision points. `fullMainAnalyticProof` supplies all five previously abstract analytic inputs with proved concrete theorems.
 
 ## Open work and next step
 
-Independent review has identified unresolved correspondence items; see CORRESPONDENCE_REVIEW.md. Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C experiments are not numerically certified. The four requested proof groups have independent concrete endpoints. Close the review’s itemized domain bridges and auxiliary assertions, then repeat correspondence review; no overall completion percentage is assigned.
+No remaining concrete mathematical conclusion gap was located in the combined
+independent follow-up inventory. Full-tree verification and publication have
+separate evidence in STATUS.md and PALOMAR.md. Public registry publication
+remains unconfirmed. The open research Problems and numerical experiments retain
+the exclusions stated above.
 
 ## Proof-route correspondence remarks
 
-### Independent proof routes and remaining gaps
+### Independent proof routes and domain qualifications
 
 Result coverage and proof-route coverage are separate claims. The numbered
 inventory records compiled endpoints for the asserted results; it does not mean
@@ -189,9 +195,9 @@ inequalities and their proved ingredients.
 
 Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C
 numerical experiments are uncertified. They are not established theorems with
-missing Lean proofs. Independent agent correspondence review has identified unresolved items;
-compilation, axiom audits and the Theorem 1.1 Palomar comparison do not resolve
-those findings. Exhaustive full-paper correspondence remains unconfirmed. This table summarizes the
+missing Lean proofs. The combined independent follow-up review now resolves the identified concrete
+items on their stated domains. Compilation and the Theorem 1.1 Palomar comparison
+are separate evidence and do not replace this statement review. This table summarizes the
 documented differences, rather than an exhaustive audit of every paper argument.
 
 These remarks compare the proof bodies of the named endpoints with
@@ -572,8 +578,8 @@ claim an exhaustive formal correspondence for every argument in the paper.
 ## Scope qualifications
 
 Theorems 1.9 and 1.10 use the actual real symmetric generator graph. The differential theorem now also has a literal ordinary Schwartz distributional endpoint, proved equivalent to the independent weighted compact-test graph. Sharp equality is
-classified on the full symmetric weak domain. Matrix inequalities require actual
-L² values and finite overlap energy. Nonquadratic inequalities use the stated
+classified on the full symmetric weak domain. Matrix inequalities include the actual Gaussian matrix H¹ hypothesis; the
+ordinary spectral derivative and finite overlap energy are derived internally. Nonquadratic inequalities use the stated
 potential hypotheses and smooth compact symmetric observables, with a radial
 restriction for log-Sobolev. Joint two-radius CIR realization is for n ≥ 2 and
 deterministic collision-free initial configurations. Stochastic invariance and
@@ -582,47 +588,49 @@ horizon.
 
 The numbered inventory records statement correspondence; the axiom audits separately verify compilation and permitted axiom usage. They are not an independent mathematical peer review of every definition or proof.
 
-## Build and audit evidence
+## Build, audit and source evidence
 
-The current `LEAN_NUM_THREADS=1 make check` passes: 5,508 build jobs,
-1,413 original modules assigned exactly once to twelve subprojects, source
-checks, 5,753 public axiom queries and the all-local audit of 12,287 declarations,
-including private helpers. Only `propext`, `Classical.choice` and `Quot.sound`
-occur in the proof-library/Solution closure. The authorized independent
-Challenge statement hole is excluded from that closure. Compiled transitive
-proof-body checks pass for all requested groups, including both the smooth
-and bounded Lipschitz Bakry–Émery endpoints and the matrix entropy bound.
+The current full-tree evidence and refreshed physical Lean line counts are
+recorded in [STATUS.md](STATUS.md) and [verification/correspondence-final-check.txt](verification/correspondence-final-check.txt).
+The public and all-local audits cover completion exports and private helpers;
+the authorized independent Challenge statement hole is excluded from the
+proof-library/Solution closure. Only the three permitted standard axioms may
+occur. The final compiled declaration export supplies the regenerated endpoint
+graphics and interactive dependency explorer.
 
-- [Current full build, inventory, source and axiom audits](verification/alternative-proof-check.txt)
-- [Transitive route-independence results](verification/alternative-route-independence.txt)
-- [Compiled route-independence checker](scripts/check_alternative_routes.py)
+Source counts are generated by `python3 scripts/count_lean_sources.py`, include
+comments and blank lines, and count each transitively imported Mathlib module
+once in full. Archives, Lean core and other dependencies are excluded.
 
-The separate supported-toolchain Palomar checkpoint passed strict recursive
-statement comparison and all three kernels (con-ron, nanoda and Lean's default).
-This task changes proof-library routes; it does not claim a new full-paper
-Comparator review or completed registry publication.
-
-
-Compilation and axiom audits establish source coverage and soundness relative to the permitted axioms. The numbered inventory above separately records statement correspondence and natural domain qualifications.
-
-## Lean source counts
-
-Refreshed using `python3 scripts/count_lean_sources.py` at this checkpoint.
-
-| Source scope | Files/modules | Physical lines |
-| --- | ---: | ---: |
-| Active project Lean sources, including roots, generated facades and Lean tooling | 1,433 | 159,224 |
-| Transitively imported Mathlib | 3,801 | 1,253,370 |
-| Project plus imported Mathlib | 5,234 | 1,412,594 |
-
-Comments and blank lines are included. Each imported Mathlib module is counted
-once in full. Archives, Lean core and other dependencies are excluded. This is
-module-level usage, not declaration-level proof dependency usage. The subproject
-inventory counts original library files only, excluding its generated facades and
-root audit/compatibility files.
+The earlier supported-toolchain Comparator checkpoint compares full symmetric
+weak-H¹ Theorem 1.1 and exhaustive affine equality only. It passed strict
+recursive statement comparison and all three kernels. This proof-library
+update does not assert a new full-paper Comparator review or a public registry
+registration receipt.
 
 ## Final assembly and repository state
 
-The original analytic main proof, both Hermite deficits and both differential deficits are exported and audited. Generator membership and actual derivative-domain theorems supply the analytic facts required by those formal statements; none remains a completion assumption. The literal integrated pointwise Γ₂ bridge and the other itemized review gaps remain unresolved, so this assembly does not establish full-paper correspondence. Corollary 1.5 covers every positive dimension and positive speed. Appendix A.2 includes actual graph-norm comparison and real/complex global versus collision-free core equality.
+The original analytic main proof, both Hermite deficits and both differential deficits are exported and audited. Generator membership and actual derivative-domain theorems supply the analytic facts required by those formal statements; none remains a completion assumption. The literal integrated pointwise Γ₂ bridge and the itemized review gaps are now closed by the correspondence endpoints, with affirmative independent follow-up findings on their precise domains. Corollary 1.5 covers every positive dimension and positive speed. Appendix A.2 includes actual graph-norm comparison and real/complex global versus collision-free core equality.
 
 The user-authorized fresh Git snapshot includes the final proofs, thematic subprojects, reports, pinned dependency manifest and verification logs. The project is published at [djalilchafai/ginibre-poincare](https://github.com/djalilchafai/ginibre-poincare), and Palomar intake and official mechanical verification have completed. Later documentation commits do not change the submitted snapshot. No additional Mathlib checkout was created. The final v4.35.0-rc2 build and audits above supersede earlier checkpoints preserved in STATUS.md.
+
+## Proof routes for the correspondence-completion additions
+
+| Result | Versioned paper route | Lean route and modules |
+| --- | --- | --- |
+| Literal Theorem 1.9 Γ₂ deficit and (1.42) | Integrated carré-du-champ identity and Hermite sum of squares | The same Hermite mechanism plus unrestricted ordinary Green identities proves the literal integral in `CorrespondenceOperatorUnrestrictedGamma` and `FullTheoremOneNinePointwiseGamma`. `CorrespondenceCurvatureCriterion` states the specific PI/Γ₂ equivalence by independently proving both concrete assertions; no universal external equivalence theorem is claimed. |
+| Theorem 1.13 matrix H¹ domain | Gaussian matrix Sobolev inequality and local spectral differentiation | `CorrespondenceMatrixWeakClosure` expands the Sobolev/local derivative bridge, using simple-spectrum openness and a.e. simple spectrum. Derivative identification and overlap integrability are conclusions. The Gaussian proof route is also formalized. |
+| Section 6 maximal N, compact core, (6.9), spectrum and roots | Gaussian differential number operator, Bochner–Kodaira identity, operator closure and spectral calculus | `CorrespondenceOperatorNumber*` uses the complete Hermite basis for the maximal graph and actual Mathlib resolvent CFC for the roots. The paper's compact C∞ graph core and full-domain ordinary first/second-derivative Bochner–Kodaira identity are also proved. Weak-domain transfer in `NumberTransfer` is a domain extension. |
+| Unrestricted diffusion and square-root domain | Closed Dirichlet form, Friedrichs/Hunt construction and cited martingale/SDE correspondence | `CorrespondenceOperator*` proves the concrete unrestricted form, actual self-adjoint generator and square-root H¹ domain. `CorrespondenceDynamics*` constructs continuous strong Markov paths directly from the original Brownian diffusion, then identifies the martingale problem and actual analytic semigroup. This is an alternative concrete construction, not a universal external correspondence theorem. |
+| Unstopped independent CIR equations | Quadratic variation and Lévy characterization | `CorrespondenceDynamicsGlobalCIR` extends the internally proved discrete Brownian-sum integrals through actual localization limits. Independence follows measurable functionals of independent paths; the global equations now match the paper. |
+| Real GUE contextual PI/LSI | Strong convexity on the ordered chamber and standard convex-measure inequalities | `CorrespondenceGUE*` expands this cited ingredient using explicit log-barrier regularization, actual normalized chamber/full measures and limits. Exact 1/n and 2/n constants and optimal witnesses hold on the paper's smooth compact H¹ completion; the C¹ finite-energy endpoint is an extension. |
+| General real Brascamp–Lieb contextual assertion | Citation to Brascamp–Lieb (1976), Th. 4.1; no displayed hypotheses in this paper | `CorrespondenceBrascampLieb*` proves the classical Hessian-inverse conclusion, with the precise C²/positive-Hessian/locally-Lipschitz hypotheses documented by the primary [Carlen–Cordero-Erausquin–Lieb (2013) statement](https://www.numdam.org/item/AIHPB_2013__49_1_1_0/). `CorrespondenceWeightedElliptic*` proves local regularity, cutoff energy and Liouville internally; dense range and duality close the inequality. Ordinary local weak derivatives give an additional domain extension. Exact fidelity to the inaccessible 1976 proof is not claimed. |
+| Remark 2.5 arbitrary-weight entire closedness and local uniform convergence | Mean-value bounds on compact sets | `CorrespondenceAuxiliaryPositiveWeight*` proves distributional CR reconstruction and joint Weyl regularity, then actual compact mean-value bounds and locally uniform convergence. Closedness uses an alternative distributional route; the paper's local uniform conclusion is also proved. |
+| Remark 2.4 footnote 7 local Dolbeault lemma | Cited local ∂bar exactness | `CorrespondenceAuxiliaryLocalDolbeault*` and `CorrespondenceDolbeaultYoung*` expand the ingredient through actual Cauchy–Green kernels, bounded ordinary L² finite homotopy and genuine mollification/strong limits. Arbitrary open sets and all dimensions are covered; locally L² coefficients extend the smooth source domain. |
+| Δlog|z|=2πδ₀ | Classical planar fundamental solution | `CorrespondenceLog*` expands the distributional calculation via actual regularized kernels, ordinary compact tests and dominated limits, with the exact 2π normalization. |
+| Appendix A cutoff rates | Pair-tube bounds and product cutoffs | `CorrespondenceCollision*` follows this route with explicit density cancellation, O(ε⁴) squared-value error and O(ε²) gradient energy, plus actual collision-free support. |
+| Appendix B triangular expansion and Gram–Schmidt | Repeated Gaussian integration by parts and triangularity | `CorrespondenceAuxiliaryHermiteLeading`, `TensorExpansion` and `TensorGramSchmidt` use the explicit tensor expansion, proved orthonormality and uniqueness of ordinary normalized Gram–Schmidt. Completeness retains the expanded Fourier-uniqueness polynomial-density proof; exact repeated-IBP proof fidelity is not claimed. |
+
+These result-specific remarks distinguish alternative constructions, expanded
+proofs of cited ingredients and domain extensions. The independent reviews
+check statement correspondence, not literal reproduction of every proof line.

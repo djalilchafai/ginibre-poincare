@@ -10,7 +10,7 @@
 <title>formal_dependencies</title>
 <polygon fill="white" stroke="transparent" points="-21.6,21.6 -21.6,-783.6 433.76,-783.6 433.76,21.6 -21.6,21.6"/>
 <text text-anchor="middle" x="206.08" y="-746.8" font-family="sans-serif" font-size="14.00">Exact direct local declaration references</text>
-<text text-anchor="middle" x="206.08" y="-731.8" font-family="sans-serif" font-size="14.00">Compiled references; paper correspondence unresolved</text>
+<text text-anchor="middle" x="206.08" y="-731.8" font-family="sans-serif" font-size="14.00">Compiled references; statement review recorded separately</text>
 <!-- GinibrePoincare.Configuration -->
 <g id="node1" class="node">
 <title>GinibrePoincare.Configuration</title>

@@ -1,0 +1,22 @@
+Correspondence-completion verification — 2026-10-08
+Authority: arXiv:2608.19358v2; Lean/mathlib v4.35.0-rc2, existing checkout only.
+LEAN_NUM_THREADS=1 make check: PASS (exit 0).
+Full build: 5814 jobs.
+Source audit: 1719 library modules; all publicly imported; 7 root Lean files.
+Only the authorized independent Challenge statement hole; excluded from proof-library/Solution closure.
+Public axiom queries: 6865.
+All-local axiom audit: 14499 declarations, including private helpers.
+Permitted axioms only: propext, Classical.choice, Quot.sound.
+TestImport.lean: PASS (exit 0).
+Offline Palomar structure: 1727 Lean files scanned; zero blockers.
+Official formalization.yaml v0.4 schema: PASS.
+Fresh compiled-declaration export: 14499 declarations, 12546 theorems, 1721 compiled modules.
+Source import graph: 1726 nodes, 6442 edges; acyclic.
+Graphics: 27 compiled endpoint SVGs and 12 thematic SVGs.
+Ten compiled proof-route independence checks: PASS.
+Physical Lean sources: 1727 project files, 185400 lines.
+Imported Mathlib: 3813 modules, 1256051 lines, each counted once in full.
+Combined: 5540 files/modules, 1441451 lines; comments and blank lines included.
+Registry publication: unconfirmed; separate from mathematical verification.
+Full-check log SHA256: 903920b5784399dc09a61f01374b4142f7a8f1f1f229080037a5f41c51dfaa17
+Compiled export SHA256: 907a3a29fcc34eee823a55d2f0c284b6f0ab486ab02ea22e95dd167bdede4aa9

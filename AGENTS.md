@@ -127,8 +127,14 @@ full-paper statement correspondence or complete these publication stages.
 ## Reviewed checkpoint — 2026-10-08
 
 Independent agent correspondence findings are in `CORRESPONDENCE_REVIEW.md`.
-Full-paper completion is not established: matrix H¹, integrated pointwise Γ₂,
-unrestricted analytic operator and auxiliary-assertion bridges remain unresolved.
-Preserve these qualifications in generated documentation and diagram captions.
-Live registry publication is unconfirmed; accepted consent is not a public receipt.
+Follow-up proofs and independent review resolve the earlier matrix H¹, integrated
+pointwise Γ₂, unrestricted operator, extension/dynamics and main/auxiliary
+findings, including the classical locally Lipschitz Brascamp–Lieb domain. Current
+source-correspondence qualifications and full-tree build/audit evidence belong
+in REPORT.md and STATUS.md; historical reviews are preserved as snapshot evidence.
+Preserve the stated domains and these distinctions in generated documentation
+and diagram captions.
+The final single-thread build, source and public/all-local axiom audits pass;
+precise evidence and refreshed counts are in STATUS.md. Live registry publication
+is unconfirmed; accepted consent is not a public receipt.
 This checkpoint does not narrow the authorized objective or permit placeholders.

@@ -3,6 +3,7 @@ module
 public import GinibrePoincare.Analysis.MatrixSpectralLiftLSIFinite
 public import GinibrePoincare.Analysis.MatrixSpectralLiftPoincareFinite
 public import GinibrePoincare.Analysis.AlternativeMatrixPoincare
+public import GinibrePoincare.Analysis.CorrespondenceMatrixWeakClosure
 
 @[expose] public section
 

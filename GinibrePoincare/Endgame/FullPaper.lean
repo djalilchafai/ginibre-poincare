@@ -55,6 +55,7 @@ public import GinibrePoincare.Analysis.AlternativeSlaterOrbits
 public import GinibrePoincare.Analysis.AlternativeSlaterLowering
 
 public import GinibrePoincare.Endgame.BochnerKodairaTheoremOneTen
+public import GinibrePoincare.Endgame.CorrespondenceEndpoints
 
 @[expose] public section
 
@@ -64,16 +65,34 @@ The concrete paper results are exported on their stated domains:
 
 * `fullTheoremOneNine`: both exact deficits on the full real generator graph,
   with sharp equality classification on the entire symmetric weak domain.
+* `fullTheoremOneNinePointwiseGamma`: both deficits on the compact smooth
+  collision-free core, with the second written as the literal pointwise Γ₂ integral.
 * `fullTheoremOneTen`: both differential deficits, with the actual projected
   inverse square root and genuine weak second Wirtinger derivatives. Their
   energy is the literal Gaussian integral of the squared derivatives.
 * `fullMatrixLift_functional_inequalities`: variance and entropy bounds under
   the actual Gaussian matrix law and its genuine finite overlap energy.
+* `correspondenceMatrix_theorem_1_13`: the matrix H¹ hypothesis internally
+  identifies the weak derivative and proves finite overlap energy.
 * `fullNonQuadraticPotentialTheorem`: sharp symmetric Poincaré under the
   actual Laplacian bound, and radial log-Sobolev under actual strong convexity.
 * `ginibreBrownian_full_two_radius_independent_CIR_realization`: the original
   singular Brownian process, two independent drivers and both localized CIR
   equations with genuine exhausting stops.
+* `correspondence_ginibre_global_independent_CIR_equations`: both unstopped
+  radius equations with the same independent drivers and actual stochastic integrals.
+* `correspondenceOperator_global_martingale_problem`: the unrestricted compact
+  smooth martingale problem for the original process and completed filtration.
+* `correspondence_ginibre_continuous_strongMarkov`: continuous strong Markov
+  paths, including restart at almost surely finite stopping times.
+* `correspondenceOperatorEvolution_ergodic`: strong L² ergodicity without a
+  symmetry restriction on the observable.
+* `correspondenceFriedrichsSquareRoot_domain_ordinary_H1`: the positive
+  self-adjoint square root of the unrestricted generator has the ordinary weak-H¹ domain.
+* `correspondenceOperatorNumber_spectrum_iff`: the exact spectrum of the
+  maximal Gaussian number operator, using actual bounded two-sided inverses.
+* `correspondenceOperatorNumber_ginibre_shifted_root_deficit`: the literal
+  shifted-square-root deficit on the symmetric ordinary weak-H¹ domain.
 * `ginibreBrownian_equilibrium_original_invariant`: exact Ginibre marginals
   of the literal equilibrium-initialized original Brownian process.
 * `ginibreOriginalStochasticL2Resolvent_eq_analytic`: identification of the

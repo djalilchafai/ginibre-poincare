@@ -306,6 +306,7 @@ Mathlib.Algebra.GroupWithZero.WithZero
 Mathlib.Algebra.IsPrimePow
 Mathlib.Algebra.Module.Basic
 Mathlib.Algebra.Module.BigOperators
+Mathlib.Algebra.Module.Card
 Mathlib.Algebra.Module.Congruence.Defs
 Mathlib.Algebra.Module.Defs
 Mathlib.Algebra.Module.End
@@ -856,6 +857,7 @@ Mathlib.Analysis.Convex.Between
 Mathlib.Analysis.Convex.Combination
 Mathlib.Analysis.Convex.Cone.Extension
 Mathlib.Analysis.Convex.Continuous
+Mathlib.Analysis.Convex.Contractible
 Mathlib.Analysis.Convex.Deriv
 Mathlib.Analysis.Convex.EGauge
 Mathlib.Analysis.Convex.Function
@@ -876,6 +878,7 @@ Mathlib.Analysis.Convex.Star
 Mathlib.Analysis.Convex.StdSimplex
 Mathlib.Analysis.Convex.Strict
 Mathlib.Analysis.Convex.StrictConvexSpace
+Mathlib.Analysis.Convex.Strong
 Mathlib.Analysis.Convex.Topology
 Mathlib.Analysis.Convex.TotallyBounded
 Mathlib.Analysis.Convex.Uniform
@@ -1007,6 +1010,7 @@ Mathlib.Analysis.Normed.Module.Bases
 Mathlib.Analysis.Normed.Module.Basic
 Mathlib.Analysis.Normed.Module.Complemented
 Mathlib.Analysis.Normed.Module.Completion
+Mathlib.Analysis.Normed.Module.Connected
 Mathlib.Analysis.Normed.Module.Convex
 Mathlib.Analysis.Normed.Module.Dual
 Mathlib.Analysis.Normed.Module.FiniteDimension
@@ -2350,6 +2354,7 @@ Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 Mathlib.MeasureTheory.Measure.Lebesgue.Complex
 Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
 Mathlib.MeasureTheory.Measure.Lebesgue.Integral
+Mathlib.MeasureTheory.Measure.Lebesgue.VolumeOfBalls
 Mathlib.MeasureTheory.Measure.LevyConvergence
 Mathlib.MeasureTheory.Measure.LevyProkhorovMetric
 Mathlib.MeasureTheory.Measure.Map
@@ -2984,6 +2989,7 @@ Mathlib.SetTheory.Cardinal.Cofinality.Basic
 Mathlib.SetTheory.Cardinal.Cofinality.Enum
 Mathlib.SetTheory.Cardinal.Cofinality.Ordinal
 Mathlib.SetTheory.Cardinal.Continuum
+Mathlib.SetTheory.Cardinal.CountableCover
 Mathlib.SetTheory.Cardinal.Defs
 Mathlib.SetTheory.Cardinal.ENNReal
 Mathlib.SetTheory.Cardinal.ENat
@@ -3449,6 +3455,7 @@ Mathlib.Topology.Algebra.MetricSpace.Lipschitz
 Mathlib.Topology.Algebra.Module.Alternating.Basic
 Mathlib.Topology.Algebra.Module.Alternating.Topology
 Mathlib.Topology.Algebra.Module.Basic
+Mathlib.Topology.Algebra.Module.Cardinality
 Mathlib.Topology.Algebra.Module.ClosedSubmodule
 Mathlib.Topology.Algebra.Module.Complement
 Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Basic
@@ -3608,6 +3615,10 @@ Mathlib.Topology.Hom.ContinuousEvalConst
 Mathlib.Topology.Homeomorph.Defs
 Mathlib.Topology.Homeomorph.Lemmas
 Mathlib.Topology.Homeomorph.Quotient
+Mathlib.Topology.Homotopy.Basic
+Mathlib.Topology.Homotopy.Contractible
+Mathlib.Topology.Homotopy.Equiv
+Mathlib.Topology.Homotopy.Path
 Mathlib.Topology.IndicatorConstPointwise
 Mathlib.Topology.Inseparable
 Mathlib.Topology.Instances.AddCircle.Defs
@@ -3676,6 +3687,7 @@ Mathlib.Topology.MetricSpace.Thickening
 Mathlib.Topology.MetricSpace.UniformConvergence
 Mathlib.Topology.Metrizable.Basic
 Mathlib.Topology.Metrizable.CompletelyMetrizable
+Mathlib.Topology.Metrizable.ContinuousMap
 Mathlib.Topology.Metrizable.Real
 Mathlib.Topology.Metrizable.Uniformity
 Mathlib.Topology.Metrizable.Urysohn

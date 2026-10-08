@@ -1,5 +1,7 @@
 # Dynamics and operator correspondence review
 
+> Historical review at proof snapshot `0779d080f22fcd93258f0e6e0cb34944bada110c`. Its findings are retained as evidence, not current unresolved-work labels. See the [current dynamics and unrestricted operator follow-up](correspondence-extensions-followup.md) and [integrated review](../CORRESPONDENCE_REVIEW.md) for item-specific resolutions and remaining qualifications.
+
 Reviewed 2026-10-08 against [arXiv:2608.19358v2, Section 1.5](https://arxiv.org/html/2608.19358v2#S1.SS5), at proof-library commit `0779d080f22fcd93258f0e6e0cb34944bada110c`. This is a focused source review by the integrating agent, not independent human certification. The independent agents' reports cover the other sections. No Lean files were changed in this review.
 
 | Paper assertion | Inspected Lean evidence | Assessment |

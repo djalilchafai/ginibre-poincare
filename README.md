@@ -10,11 +10,12 @@ strongly convex Bakry–Émery radial LSI, and Gaussian matrix inequalities.
 The nonquadratic endgame now uses the primary Euclidean-lift route, with
 Brownian existence, Gibbs invariance, regularization and radial tensorization
 proved internally. Its independent transport proof remains exported.
-See the [proof-route inventory](REPORT.md#independent-proof-routes-and-remaining-gaps)
-for domains, proof correspondence and audit evidence. Independent agents have now reviewed the paper correspondence and found unresolved
-domain bridges and auxiliary assertions. Full-paper completion is not established;
-see [the review findings](CORRESPONDENCE_REVIEW.md). Registry publication is not
-confirmed by the [live checks](verification/registry-publication-check.md).
+See the [proof-route inventory](REPORT.md#independent-proof-routes-and-domain-qualifications)
+for domains, proof correspondence and audit evidence. The new correspondence endpoints close the previously identified matrix H¹,
+pointwise Γ₂, unrestricted operator/dynamics and auxiliary bridges. Independent
+follow-up findings and exact domain qualifications are in
+[the correspondence review](CORRESPONDENCE_REVIEW.md). Registry publication
+remains unconfirmed by the [live checks](verification/registry-publication-check.md).
 
 The library is grouped into 12 thematic [subprojects](SUBPROJECTS.md), including
 complex Gaussian/Hermite analysis, Gaussian LSI, stochastic calculus, stochastic
@@ -30,17 +31,21 @@ constant references from compiled theorem statements and proof/definition bodies
 with static SVGs, a [live interactive explorer](https://djalilchafai.github.io/ginibre-poincare/formal_dependencies.html),
 and an [offline copy](formal-dependencies.html).
 
-The development proves full weak-domain sharp Poincaré and equality
-classification (Theorem 1.1), both Theorem 1.9 deficits, radial log-Sobolev,
-the full symmetric diffusion,
-and its identification with the original singular Brownian SDE. It includes
-independent center/relative processes, stopped two-driver CIR realizations, Ginibre invariance,
-whole-path stationarity and reversal. Nonquadratic inequalities and actual
-Gaussian matrix spectral laws and finite-overlap inequalities have compiled
-endpoints; the literal matrix H¹ domain bridge remains unresolved. Appendix formulas, curvature, capacity, linear statistics and
-explicit incompleteness/counterexample claims are included. Literal integrated
-pointwise Γ₂, unrestricted operator/dynamics assertions, GUE contextual claims
-and several explicit polynomial/Slater calculations remain unresolved in the review.
+The development includes sharp symmetric weak-H¹ Poincaré and exhaustive
+affine equality, both literal Theorem 1.9 deficits, differential deficits,
+radial log-Sobolev, nonquadratic potentials and matrix H¹ overlap inequalities.
+The unrestricted diffusion generator, ordinary weak form, square-root domain,
+Brownian semigroup identification, full martingale problem, strong Markov paths,
+unstopped independent CIR equations and uniqueness of invariant probability are
+proved. The maximal Gaussian number operator has an actual compact smooth core,
+full-domain Bochner–Kodaira identity, exact spectrum and literal square roots.
+Auxiliary endpoints include real GUE inequalities on the paper's smooth-core H¹
+completion, arbitrary positive-local-weight entire-space convergence, local L²
+Dolbeault exactness in every dimension, Δlog|z|=2πδ₀, explicit polynomial/Slater
+formulas, Gram–Schmidt and quantitative collision cutoff rates. General real
+Brascamp–Lieb uses C² positive-definite Hessians and locally Lipschitz or ordinary
+local weak-derivative observables with finite inverse-Hessian energy. See the
+report for result-specific proof routes and domain extensions.
 
 All library modules are publicly imported. Source and axiom audits reject proof
 placeholders and nonstandard axioms, including in private helper declarations.

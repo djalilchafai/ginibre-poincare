@@ -31,9 +31,10 @@ status:
     The substantive development is in this repository. The numbered coverage and
     precise domains are recorded in REPORT.md and STATUS.md.
     Theorems 1.9 and 1.10 provide both deficits on the concrete generator domain;
-    nonquadratic exports and matrix finite-overlap results are compiled. Independent
-    correspondence review identifies unresolved literal matrix H¹ and other bridges;
-    full-paper completion is not established. See CORRESPONDENCE_REVIEW.md.
+    nonquadratic exports, literal matrix H¹ overlap inequalities, unrestricted
+    diffusion/operator domains and auxiliary correspondence endpoints are compiled.
+    Independent follow-up reviews identify no remaining concrete conclusion gap
+    in their combined paper inventory; precise domains are in CORRESPONDENCE_REVIEW.md.
     Problems 1.11, 1.15, and 1.16 are research questions, not claimed solutions;
     Appendix C numerical experiments are not certified. Palomar packaging and
     Comparator verification are separate from the existing Lean build and audits.
@@ -87,8 +88,9 @@ review:
   notes: >-
     Local Lean builds, source checks, and axiom audits have been performed.
     Independent main/extension agents reviewed source correspondence on 2026-10-08
-    and reported unresolved items; no full-paper pass or independent human review
-    is claimed. Prior Palomar editorial readiness concerns only the submitted
+    and their final follow-up inspections found no remaining concrete conclusion
+    gap in the combined inventory. This is agent statement correspondence review,
+    not independent human mathematical review or registry publication. Prior Palomar editorial readiness concerns only the submitted
     Theorem 1.1 surface. Live registry publication is not confirmed.
     The supported-toolchain v4.35.0-rc2 build and public/private axiom audits pass.
     Actual Comparator strictly compares the full weak-H1 Theorem 1.1 and affine

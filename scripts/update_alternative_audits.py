@@ -17,14 +17,17 @@ audit = root / "AxiomAudit.lean"
 text = audit.read_text().rstrip()
 existing = set(re.findall(r"^#print axioms (\S+)", text, re.M))
 declarations = re.compile(
-    r"^(?:@\[[^\n]*\]\s*)?(?:noncomputable\s+)?(?:theorem|lemma|def|abbrev)\s+(\w+)", re.M
+    r"^\s*(?:@\[[^\n]*\]\s*)?(?:public\s+)?(?:noncomputable\s+)?(?:theorem|lemma|def|abbrev)\s+(\w+)", re.M
 )
 added = []
 for path in modules:
-    if not path.stem.startswith(("Alternative", "BakryEmery")):
+    if not path.stem.startswith(("Alternative", "BakryEmery", "Correspondence")):
         continue
-    for name in declarations.findall(path.read_text()):
-        qualified = f"GinibrePoincare.{name}"
+    source = path.read_text()
+    namespace = re.search(r"^namespace (GinibrePoincare(?:\.\w+)*)$", source, re.M)
+    prefix = namespace[1] if namespace else "GinibrePoincare"
+    for name in declarations.findall(source):
+        qualified = f"{prefix}.{name}"
         if qualified not in existing:
             existing.add(qualified)
             added.append(f"#print axioms {qualified}")

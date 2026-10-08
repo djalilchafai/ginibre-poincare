@@ -2,12 +2,15 @@ module
 
 public import GinibrePoincare.Endgame.BochnerKodairaTheoremOneTen
 public import GinibrePoincare.Endgame.ConcreteTheoremOneNine
+public import GinibrePoincare.Endgame.CorrespondenceCurvatureCriterion
+public import GinibrePoincare.Endgame.CorrespondenceEndpoints
 public import GinibrePoincare.Endgame.FiniteTheoremOneNine
 public import GinibrePoincare.Endgame.FullMainAnalyticProof
 public import GinibrePoincare.Endgame.FullMatrixLift
 public import GinibrePoincare.Endgame.FullNonQuadraticPotential
 public import GinibrePoincare.Endgame.FullPaper
 public import GinibrePoincare.Endgame.FullTheoremOneNine
+public import GinibrePoincare.Endgame.FullTheoremOneNinePointwiseGamma
 public import GinibrePoincare.Endgame.FullTheoremOneTen
 public import GinibrePoincare.Endgame.GeneratorCompletion
 public import GinibrePoincare.Endgame.HilbertGeometry

@@ -93,7 +93,7 @@ html = f'''<!doctype html>
 <style>{css}\n{formatter.get_style_defs('.highlight')}</style></head>
 <body><header><div class="eyebrow">Mathematical formalization · Lean</div>
 <h1>Ginibre Poincaré</h1><p>Full-paper formalization: project documentation, thematic dependencies, and Lean source.</p>
-<p>Objective: all asserted results of arXiv:2608.19358v2, including Appendices A–B. Independent review found unresolved correspondence; full-paper completion and registry publication are unconfirmed. Open Problems 1.11, 1.15 and 1.16 and Appendix C numerical experiments are outside theorem certification. Checked coverage and remaining work appear below.</p></header>
+<p>Objective: all asserted results of arXiv:2608.19358v2, including Appendices A–B. Independent correspondence findings, current verification evidence and domain qualifications are recorded below. Registry publication is unconfirmed. Open Problems 1.11, 1.15 and 1.16 and Appendix C numerical experiments are outside theorem certification. Checked coverage and remaining work appear below.</p></header>
 <nav aria-label="Contents"><a href="#overview">Overview &amp; build</a><a href="#status">Formalization status</a><a href="#review">Correspondence review</a><a href="#report">Numbered report</a><a href="#palomar">Registry status</a><a href="#dependencies">Thematic dependency diagrams</a><a href="#sources">Lean sources ({len(files)})</a></nav>
 <main><section id="overview">{markdown('README.md')}</section>
 <section id="status"><p class="note">The status below reproduces the project's checked-in documentation. This HTML generation does not rerun the Lean build or axiom audit.</p>{markdown('STATUS.md')}</section>
