@@ -1,5 +1,5 @@
 digraph formal_dependencies {
-rankdir=BT;
+rankdir=TB;
 graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label="Exact direct local declaration references", labelloc=t, fontname="sans-serif"];
 node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];
 edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
@@ -34,4 +34,18 @@ edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
 "GinibrePoincare.rhoConvex_potential_smooth_radial_lsi" -> "GinibrePoincare.fullNonQuadraticPotentialTheorem" [color="#2563eb", tooltip="value"];
 "GinibrePoincare.rhoSubharmonic_potential_smooth_poincare" -> "GinibrePoincare.fullNonQuadraticPotentialTheorem" [color="#2563eb", tooltip="value"];
 "GinibrePoincare.squareEntropy" -> "GinibrePoincare.fullNonQuadraticPotentialTheorem" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.IsRadialFunctionLSI" [style=invis];
+"GinibrePoincare.IsRadialFunctionLSI" -> "GinibrePoincare.IsRhoConvexPotential" [style=invis];
+"GinibrePoincare.IsRhoConvexPotential" -> "GinibrePoincare.IsRhoSubharmonicPotential" [style=invis];
+"GinibrePoincare.IsRhoSubharmonicPotential" -> "GinibrePoincare.IsRotationalPotential" [style=invis];
+"GinibrePoincare.IsRotationalPotential" -> "GinibrePoincare.IsSmoothCompactSymmetric" [style=invis];
+"GinibrePoincare.IsSmoothCompactSymmetric" -> "GinibrePoincare.NonQuadraticPotentialTheorem" [style=invis];
+"GinibrePoincare.NonQuadraticPotentialTheorem" -> "GinibrePoincare.NonQuadraticPotentialTheorem.mk" [style=invis];
+"GinibrePoincare.NonQuadraticPotentialTheorem.mk" -> "GinibrePoincare.Potential" [style=invis];
+"GinibrePoincare.Potential" -> "GinibrePoincare.potentialGradientEnergy" [style=invis];
+"GinibrePoincare.potentialGradientEnergy" -> "GinibrePoincare.potentialMeasure" [style=invis];
+"GinibrePoincare.potentialMeasure" -> "GinibrePoincare.potentialPartition" [style=invis];
+"GinibrePoincare.potentialPartition" -> "GinibrePoincare.rhoConvex_potential_smooth_radial_lsi" [style=invis];
+"GinibrePoincare.rhoConvex_potential_smooth_radial_lsi" -> "GinibrePoincare.rhoSubharmonic_potential_smooth_poincare" [style=invis];
+"GinibrePoincare.rhoSubharmonic_potential_smooth_poincare" -> "GinibrePoincare.squareEntropy" [style=invis];
 }

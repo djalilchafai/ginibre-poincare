@@ -1,5 +1,5 @@
 digraph dependencies {
-rankdir=LR;
+rankdir=TB;
 graph [bgcolor="transparent", pad="0.3", nodesep="0.3"];
 node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=12, margin="0.18,0.12"];
 edge [color="#64748b", arrowsize=0.7];
@@ -16,4 +16,9 @@ GaussianLSI -> MatrixLift;
 GinibreMeasureGeometry -> MatrixLift;
 PolynomialRadial -> MatrixLift;
 WeakSobolev -> MatrixLift;
+ComplexGaussianHermite -> DeficitsEquality [style=invis];
+DeficitsEquality -> GaussianLSI [style=invis];
+GaussianLSI -> GinibreMeasureGeometry [style=invis];
+GinibreMeasureGeometry -> PolynomialRadial [style=invis];
+PolynomialRadial -> WeakSobolev [style=invis];
 }

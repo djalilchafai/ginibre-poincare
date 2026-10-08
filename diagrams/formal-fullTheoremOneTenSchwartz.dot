@@ -1,5 +1,5 @@
 digraph formal_dependencies {
-rankdir=BT;
+rankdir=TB;
 graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label="Exact direct local declaration references", labelloc=t, fontname="sans-serif"];
 node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];
 edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
@@ -56,4 +56,29 @@ edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
 "GinibrePoincare.ginibreMeasure" -> "GinibrePoincare.fullTheoremOneTenSchwartz" [color="#7e22ce", tooltip="both"];
 "GinibrePoincare.ginibreSymmetricL2" -> "GinibrePoincare.fullTheoremOneTenSchwartz" [color="#7e22ce", tooltip="both"];
 "GinibrePoincare.ginibreWeakEnergy" -> "GinibrePoincare.fullTheoremOneTenSchwartz" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.GinibreFullComplexL2" [style=invis];
+"GinibrePoincare.GinibreFullComplexL2" -> "GinibrePoincare.GinibreFullComplexL2._proof_1" [style=invis];
+"GinibrePoincare.GinibreFullComplexL2._proof_1" -> "GinibrePoincare.GinibreFullGradientL2" [style=invis];
+"GinibrePoincare.GinibreFullGradientL2" -> "GinibrePoincare.GinibreFullValueL2" [style=invis];
+"GinibrePoincare.GinibreFullValueL2" -> "GinibrePoincare.GinibreFullValueL2._proof_1" [style=invis];
+"GinibrePoincare.GinibreFullValueL2._proof_1" -> "GinibrePoincare.IsGaussianSchwartzDbar" [style=invis];
+"GinibrePoincare.IsGaussianSchwartzDbar" -> "GinibrePoincare.IsGaussianWeakDbar" [style=invis];
+"GinibrePoincare.IsGaussianWeakDbar" -> "GinibrePoincare.IsGinibreDistributionalGradient" [style=invis];
+"GinibrePoincare.IsGinibreDistributionalGradient" -> "GinibrePoincare.IsGinibreSymmetricWeakPair" [style=invis];
+"GinibrePoincare.IsGinibreSymmetricWeakPair" -> "GinibrePoincare.coordinateSum" [style=invis];
+"GinibrePoincare.coordinateSum" -> "GinibrePoincare.fullTheoremOneTen" [style=invis];
+"GinibrePoincare.fullTheoremOneTen" -> "GinibrePoincare.gaussianSchwartzDbar_iff_weak" [style=invis];
+"GinibrePoincare.gaussianSchwartzDbar_iff_weak" -> "GinibrePoincare.ginibreDifferentialDeficitVector" [style=invis];
+"GinibrePoincare.ginibreDifferentialDeficitVector" -> "GinibrePoincare.ginibreDifferentialFirstDerivative" [style=invis];
+"GinibrePoincare.ginibreDifferentialFirstDerivative" -> "GinibrePoincare.ginibreDifferentialSecondDerivative" [style=invis];
+"GinibrePoincare.ginibreDifferentialSecondDerivative" -> "GinibrePoincare.ginibreDifferentialSecondEnergy" [style=invis];
+"GinibrePoincare.ginibreDifferentialSecondEnergy" -> "GinibrePoincare.ginibreFullCenter" [style=invis];
+"GinibrePoincare.ginibreFullCenter" -> "GinibrePoincare.ginibreFullGenerator" [style=invis];
+"GinibrePoincare.ginibreFullGenerator" -> "GinibrePoincare.ginibreFullHolomorphicRemainder" [style=invis];
+"GinibrePoincare.ginibreFullHolomorphicRemainder" -> "GinibrePoincare.ginibreFullSymmetricOfReal" [style=invis];
+"GinibrePoincare.ginibreFullSymmetricOfReal" -> "GinibrePoincare.ginibreFullSymmetricValues" [style=invis];
+"GinibrePoincare.ginibreFullSymmetricValues" -> "GinibrePoincare.ginibreL2Variance" [style=invis];
+"GinibrePoincare.ginibreL2Variance" -> "GinibrePoincare.ginibreMeasure" [style=invis];
+"GinibrePoincare.ginibreMeasure" -> "GinibrePoincare.ginibreSymmetricL2" [style=invis];
+"GinibrePoincare.ginibreSymmetricL2" -> "GinibrePoincare.ginibreWeakEnergy" [style=invis];
 }

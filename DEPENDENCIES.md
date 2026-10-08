@@ -16,7 +16,7 @@ Each diagram isolates one importing group so its dependencies remain readable. T
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   DeficitsEquality["Poincaré deficits and equality"] --> ComplexGaussianHermite["Complex Gaussian and Hermite analysis"]
   Endgame["Paper assembly"] --> ComplexGaussianHermite["Complex Gaussian and Hermite analysis"]
   GaussianLSI["Gaussian log-Sobolev and entropy"] --> ComplexGaussianHermite["Complex Gaussian and Hermite analysis"]
@@ -24,6 +24,12 @@ flowchart LR
   GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"] --> ComplexGaussianHermite["Complex Gaussian and Hermite analysis"]
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> ComplexGaussianHermite["Complex Gaussian and Hermite analysis"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> ComplexGaussianHermite["Complex Gaussian and Hermite analysis"]
+  DeficitsEquality ~~~ Endgame
+  Endgame ~~~ GaussianLSI
+  GaussianLSI ~~~ GeneratorSemigroup
+  GeneratorSemigroup ~~~ GinibreMeasureGeometry
+  GinibreMeasureGeometry ~~~ PolynomialRadial
+  PolynomialRadial ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class ComplexGaussianHermite target;
 ```
@@ -40,11 +46,14 @@ Entry point: [ComplexGaussianHermite](GinibrePoincare/Subprojects/ComplexGaussia
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   ComplexGaussianHermite["Complex Gaussian and Hermite analysis"] --> GaussianLSI["Gaussian log-Sobolev and entropy"]
   GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"] --> GaussianLSI["Gaussian log-Sobolev and entropy"]
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> GaussianLSI["Gaussian log-Sobolev and entropy"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> GaussianLSI["Gaussian log-Sobolev and entropy"]
+  ComplexGaussianHermite ~~~ GinibreMeasureGeometry
+  GinibreMeasureGeometry ~~~ PolynomialRadial
+  PolynomialRadial ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class GaussianLSI target;
 ```
@@ -61,12 +70,16 @@ Entry point: [GaussianLSI](GinibrePoincare/Subprojects/GaussianLSI.lean).
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   ComplexGaussianHermite["Complex Gaussian and Hermite analysis"] --> GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"]
   Endgame["Paper assembly"] --> GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"]
   GeneratorSemigroup["Diffusion operators and analytic semigroups"] --> GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"]
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"]
+  ComplexGaussianHermite ~~~ Endgame
+  Endgame ~~~ GeneratorSemigroup
+  GeneratorSemigroup ~~~ PolynomialRadial
+  PolynomialRadial ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class GinibreMeasureGeometry target;
 ```
@@ -83,7 +96,7 @@ Entry point: [GinibreMeasureGeometry](GinibrePoincare/Subprojects/GinibreMeasure
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   ComplexGaussianHermite["Complex Gaussian and Hermite analysis"] --> WeakSobolev["Weak Sobolev domains and collision capacity"]
   DeficitsEquality["Poincaré deficits and equality"] --> WeakSobolev["Weak Sobolev domains and collision capacity"]
   GaussianLSI["Gaussian log-Sobolev and entropy"] --> WeakSobolev["Weak Sobolev domains and collision capacity"]
@@ -91,6 +104,12 @@ flowchart LR
   GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"] --> WeakSobolev["Weak Sobolev domains and collision capacity"]
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> WeakSobolev["Weak Sobolev domains and collision capacity"]
   StochasticDynamics["Ginibre stochastic dynamics"] --> WeakSobolev["Weak Sobolev domains and collision capacity"]
+  ComplexGaussianHermite ~~~ DeficitsEquality
+  DeficitsEquality ~~~ GaussianLSI
+  GaussianLSI ~~~ GeneratorSemigroup
+  GeneratorSemigroup ~~~ GinibreMeasureGeometry
+  GinibreMeasureGeometry ~~~ PolynomialRadial
+  PolynomialRadial ~~~ StochasticDynamics
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class WeakSobolev target;
 ```
@@ -107,7 +126,7 @@ Entry point: [WeakSobolev](GinibrePoincare/Subprojects/WeakSobolev.lean).
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   ComplexGaussianHermite["Complex Gaussian and Hermite analysis"] --> DeficitsEquality["Poincaré deficits and equality"]
   Endgame["Paper assembly"] --> DeficitsEquality["Poincaré deficits and equality"]
   GaussianLSI["Gaussian log-Sobolev and entropy"] --> DeficitsEquality["Poincaré deficits and equality"]
@@ -115,6 +134,12 @@ flowchart LR
   GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"] --> DeficitsEquality["Poincaré deficits and equality"]
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> DeficitsEquality["Poincaré deficits and equality"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> DeficitsEquality["Poincaré deficits and equality"]
+  ComplexGaussianHermite ~~~ Endgame
+  Endgame ~~~ GaussianLSI
+  GaussianLSI ~~~ GeneratorSemigroup
+  GeneratorSemigroup ~~~ GinibreMeasureGeometry
+  GinibreMeasureGeometry ~~~ PolynomialRadial
+  PolynomialRadial ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class DeficitsEquality target;
 ```
@@ -131,13 +156,18 @@ Entry point: [DeficitsEquality](GinibrePoincare/Subprojects/DeficitsEquality.lea
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   ComplexGaussianHermite["Complex Gaussian and Hermite analysis"] --> PolynomialRadial["Polynomial, radial and equilibrium sectors"]
   GaussianLSI["Gaussian log-Sobolev and entropy"] --> PolynomialRadial["Polynomial, radial and equilibrium sectors"]
   GeneratorSemigroup["Diffusion operators and analytic semigroups"] --> PolynomialRadial["Polynomial, radial and equilibrium sectors"]
   GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"] --> PolynomialRadial["Polynomial, radial and equilibrium sectors"]
   StochasticDynamics["Ginibre stochastic dynamics"] --> PolynomialRadial["Polynomial, radial and equilibrium sectors"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> PolynomialRadial["Polynomial, radial and equilibrium sectors"]
+  ComplexGaussianHermite ~~~ GaussianLSI
+  GaussianLSI ~~~ GeneratorSemigroup
+  GeneratorSemigroup ~~~ GinibreMeasureGeometry
+  GinibreMeasureGeometry ~~~ StochasticDynamics
+  StochasticDynamics ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class PolynomialRadial target;
 ```
@@ -154,7 +184,7 @@ Entry point: [PolynomialRadial](GinibrePoincare/Subprojects/PolynomialRadial.lea
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   ComplexGaussianHermite["Complex Gaussian and Hermite analysis"] --> GeneratorSemigroup["Diffusion operators and analytic semigroups"]
   DeficitsEquality["Poincaré deficits and equality"] --> GeneratorSemigroup["Diffusion operators and analytic semigroups"]
   GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"] --> GeneratorSemigroup["Diffusion operators and analytic semigroups"]
@@ -162,6 +192,12 @@ flowchart LR
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> GeneratorSemigroup["Diffusion operators and analytic semigroups"]
   StochasticDynamics["Ginibre stochastic dynamics"] --> GeneratorSemigroup["Diffusion operators and analytic semigroups"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> GeneratorSemigroup["Diffusion operators and analytic semigroups"]
+  ComplexGaussianHermite ~~~ DeficitsEquality
+  DeficitsEquality ~~~ GinibreMeasureGeometry
+  GinibreMeasureGeometry ~~~ MatrixLift
+  MatrixLift ~~~ PolynomialRadial
+  PolynomialRadial ~~~ StochasticDynamics
+  StochasticDynamics ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class GeneratorSemigroup target;
 ```
@@ -178,12 +214,16 @@ Entry point: [GeneratorSemigroup](GinibrePoincare/Subprojects/GeneratorSemigroup
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   ComplexGaussianHermite["Complex Gaussian and Hermite analysis"] --> StochasticCalculus["Stochastic calculus foundations"]
   GaussianLSI["Gaussian log-Sobolev and entropy"] --> StochasticCalculus["Stochastic calculus foundations"]
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> StochasticCalculus["Stochastic calculus foundations"]
   StochasticDynamics["Ginibre stochastic dynamics"] --> StochasticCalculus["Stochastic calculus foundations"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> StochasticCalculus["Stochastic calculus foundations"]
+  ComplexGaussianHermite ~~~ GaussianLSI
+  GaussianLSI ~~~ PolynomialRadial
+  PolynomialRadial ~~~ StochasticDynamics
+  StochasticDynamics ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class StochasticCalculus target;
 ```
@@ -200,13 +240,18 @@ Entry point: [StochasticCalculus](GinibrePoincare/Subprojects/StochasticCalculus
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   ComplexGaussianHermite["Complex Gaussian and Hermite analysis"] --> StochasticDynamics["Ginibre stochastic dynamics"]
   GeneratorSemigroup["Diffusion operators and analytic semigroups"] --> StochasticDynamics["Ginibre stochastic dynamics"]
   GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"] --> StochasticDynamics["Ginibre stochastic dynamics"]
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> StochasticDynamics["Ginibre stochastic dynamics"]
   StochasticCalculus["Stochastic calculus foundations"] --> StochasticDynamics["Ginibre stochastic dynamics"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> StochasticDynamics["Ginibre stochastic dynamics"]
+  ComplexGaussianHermite ~~~ GeneratorSemigroup
+  GeneratorSemigroup ~~~ GinibreMeasureGeometry
+  GinibreMeasureGeometry ~~~ PolynomialRadial
+  PolynomialRadial ~~~ StochasticCalculus
+  StochasticCalculus ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class StochasticDynamics target;
 ```
@@ -223,13 +268,18 @@ Entry point: [StochasticDynamics](GinibrePoincare/Subprojects/StochasticDynamics
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   ComplexGaussianHermite["Complex Gaussian and Hermite analysis"] --> MatrixLift["Matrix lift and eigenvector overlaps"]
   DeficitsEquality["Poincaré deficits and equality"] --> MatrixLift["Matrix lift and eigenvector overlaps"]
   GaussianLSI["Gaussian log-Sobolev and entropy"] --> MatrixLift["Matrix lift and eigenvector overlaps"]
   GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"] --> MatrixLift["Matrix lift and eigenvector overlaps"]
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> MatrixLift["Matrix lift and eigenvector overlaps"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> MatrixLift["Matrix lift and eigenvector overlaps"]
+  ComplexGaussianHermite ~~~ DeficitsEquality
+  DeficitsEquality ~~~ GaussianLSI
+  GaussianLSI ~~~ GinibreMeasureGeometry
+  GinibreMeasureGeometry ~~~ PolynomialRadial
+  PolynomialRadial ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class MatrixLift target;
 ```
@@ -246,7 +296,7 @@ Entry point: [MatrixLift](GinibrePoincare/Subprojects/MatrixLift.lean).
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   ComplexGaussianHermite["Complex Gaussian and Hermite analysis"] --> NonQuadratic["Nonquadratic potentials"]
   DeficitsEquality["Poincaré deficits and equality"] --> NonQuadratic["Nonquadratic potentials"]
   Endgame["Paper assembly"] --> NonQuadratic["Nonquadratic potentials"]
@@ -254,6 +304,12 @@ flowchart LR
   GinibreMeasureGeometry["Ginibre measure and holomorphic geometry"] --> NonQuadratic["Nonquadratic potentials"]
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> NonQuadratic["Nonquadratic potentials"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> NonQuadratic["Nonquadratic potentials"]
+  ComplexGaussianHermite ~~~ DeficitsEquality
+  DeficitsEquality ~~~ Endgame
+  Endgame ~~~ GaussianLSI
+  GaussianLSI ~~~ GinibreMeasureGeometry
+  GinibreMeasureGeometry ~~~ PolynomialRadial
+  PolynomialRadial ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class NonQuadratic target;
 ```
@@ -270,7 +326,7 @@ Entry point: [NonQuadratic](GinibrePoincare/Subprojects/NonQuadratic.lean).
 <summary>Mermaid source</summary>
 
 ```mermaid
-flowchart LR
+flowchart TB
   ComplexGaussianHermite["Complex Gaussian and Hermite analysis"] --> Endgame["Paper assembly"]
   DeficitsEquality["Poincaré deficits and equality"] --> Endgame["Paper assembly"]
   GeneratorSemigroup["Diffusion operators and analytic semigroups"] --> Endgame["Paper assembly"]
@@ -280,6 +336,14 @@ flowchart LR
   PolynomialRadial["Polynomial, radial and equilibrium sectors"] --> Endgame["Paper assembly"]
   StochasticDynamics["Ginibre stochastic dynamics"] --> Endgame["Paper assembly"]
   WeakSobolev["Weak Sobolev domains and collision capacity"] --> Endgame["Paper assembly"]
+  ComplexGaussianHermite ~~~ DeficitsEquality
+  DeficitsEquality ~~~ GeneratorSemigroup
+  GeneratorSemigroup ~~~ GinibreMeasureGeometry
+  GinibreMeasureGeometry ~~~ MatrixLift
+  MatrixLift ~~~ NonQuadratic
+  NonQuadratic ~~~ PolynomialRadial
+  PolynomialRadial ~~~ StochasticDynamics
+  StochasticDynamics ~~~ WeakSobolev
   classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;
   class Endgame target;
 ```

@@ -74,7 +74,7 @@ def module_graph():
 
 
 def graphviz(nodes, edges, title, target=None):
-    lines = ['digraph formal_dependencies {', 'rankdir=BT;',
+    lines = ['digraph formal_dependencies {', 'rankdir=TB;',
         'graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label=' + json.dumps(title) + ', labelloc=t, fontname="sans-serif"];',
         'node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];',
         'edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];']
@@ -88,6 +88,10 @@ def graphviz(nodes, edges, title, target=None):
         color = {'type': '#b45309', 'value': '#2563eb', 'both': '#7e22ce', 'import': '#64748b'}[kind]
         lines.append(json.dumps(dependency) + ' -> ' + json.dumps(importer) +
                      ' [color=' + json.dumps(color) + ', tooltip=' + json.dumps(kind) + '];')
+    if target:
+        dependencies = sorted(name for name in nodes if name != target)
+        for first, second in zip(dependencies, dependencies[1:]):
+            lines.append(json.dumps(first) + ' -> ' + json.dumps(second) + ' [style=invis];')
     return '\n'.join(lines) + '\n}\n'
 
 

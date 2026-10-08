@@ -65,7 +65,7 @@ def outputs():
   'Each diagram isolates one importing group so its dependencies remain readable. Together they include every cross-group dependency in [the inventory](subprojects.json). See [subprojects](SUBPROJECTS.md) for module lists and [status](STATUS.md) for proof scope.', '']
  for name,(title,scope) in GROUPS.items():
   # Render the same edges as SVG for Markdown viewers without Mermaid support.
-  graph = ['digraph dependencies {', 'rankdir=LR;',
+  graph = ['digraph dependencies {', 'rankdir=TB;',
    'graph [bgcolor="transparent", pad="0.3", nodesep="0.3"];',
    'node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=12, margin="0.18,0.12"];',
    'edge [color="#64748b", arrowsize=0.7];']
@@ -75,15 +75,20 @@ def outputs():
    graph.append(f'{node} [label={json.dumps(label, ensure_ascii=False)}{attrs}];')
   for dep in result['groups'][name]['direct_dependency_groups']:
    graph.append(f'{dep} -> {name};')
+  deps = result['groups'][name]['direct_dependency_groups']
+  for first, second in zip(deps, deps[1:]):
+   graph.append(f'{first} -> {second} [style=invis];')
   graph.append('}')
   files[ROOT/'diagrams'/f'{name}.dot']='\n'.join(graph)+'\n'
   files[ROOT/'diagrams'/f'{name}.svg']=subprocess.run(
    ['dot', '-Tsvg'], input='\n'.join(graph), text=True,
    capture_output=True, check=True).stdout
   diagrams += [f'## {title}', '', f'![Direct dependencies of {title}](diagrams/{name}.svg)', '',
-   '<details>', '<summary>Mermaid source</summary>', '', '```mermaid', 'flowchart LR']
+   '<details>', '<summary>Mermaid source</summary>', '', '```mermaid', 'flowchart TB']
   for dep in result['groups'][name]['direct_dependency_groups']:
    diagrams.append(f'  {dep}["{GROUPS[dep][0]}"] --> {name}["{title}"]')
+  for first, second in zip(deps, deps[1:]):
+   diagrams.append(f'  {first} ~~~ {second}')
   diagrams += [f'  classDef target fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#172554;', f'  class {name} target;', '```', '', '</details>', '', f'Entry point: [{name}](GinibrePoincare/Subprojects/{name}.lean).', '']
  files[ROOT/'DEPENDENCIES.md']='\n'.join(diagrams)+'\n'
  doc+=['','Counts include comments and blank lines, exclude generated facades and Mathlib. The full project/transitive Mathlib counts are refreshed separately with `python3 scripts/count_lean_sources.py`.','','See [box-and-arrow dependency diagrams](DEPENDENCIES.md) for every group’s direct dependencies.','','## Exhaustive file inventory','']

@@ -1,5 +1,5 @@
 digraph dependencies {
-rankdir=LR;
+rankdir=TB;
 graph [bgcolor="transparent", pad="0.3", nodesep="0.3"];
 node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=12, margin="0.18,0.12"];
 edge [color="#64748b", arrowsize=0.7];
@@ -22,4 +22,12 @@ NonQuadratic -> Endgame;
 PolynomialRadial -> Endgame;
 StochasticDynamics -> Endgame;
 WeakSobolev -> Endgame;
+ComplexGaussianHermite -> DeficitsEquality [style=invis];
+DeficitsEquality -> GeneratorSemigroup [style=invis];
+GeneratorSemigroup -> GinibreMeasureGeometry [style=invis];
+GinibreMeasureGeometry -> MatrixLift [style=invis];
+MatrixLift -> NonQuadratic [style=invis];
+NonQuadratic -> PolynomialRadial [style=invis];
+PolynomialRadial -> StochasticDynamics [style=invis];
+StochasticDynamics -> WeakSobolev [style=invis];
 }

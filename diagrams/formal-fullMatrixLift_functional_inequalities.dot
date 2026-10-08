@@ -1,5 +1,5 @@
 digraph formal_dependencies {
-rankdir=BT;
+rankdir=TB;
 graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label="Exact direct local declaration references", labelloc=t, fontname="sans-serif"];
 node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];
 edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
@@ -24,4 +24,13 @@ edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
 "GinibrePoincare.matrixSpectralOverlapEnergy" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#7e22ce", tooltip="both"];
 "GinibrePoincare.smoothGinibreVariance" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#7e22ce", tooltip="both"];
 "GinibrePoincare.squareEntropy" -> "GinibrePoincare.fullMatrixLift_functional_inequalities" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.GinibreMatrixCoordinates" [style=invis];
+"GinibrePoincare.GinibreMatrixCoordinates" -> "GinibrePoincare.ginibreMatrixMeasurableSpace" [style=invis];
+"GinibrePoincare.ginibreMatrixMeasurableSpace" -> "GinibrePoincare.ginibreMeasure" [style=invis];
+"GinibrePoincare.ginibreMeasure" -> "GinibrePoincare.matrixGaussianMeasure" [style=invis];
+"GinibrePoincare.matrixGaussianMeasure" -> "GinibrePoincare.matrixSpectralLift_finite_overlap_lsi" [style=invis];
+"GinibrePoincare.matrixSpectralLift_finite_overlap_lsi" -> "GinibrePoincare.matrixSpectralLift_finite_overlap_poincare" [style=invis];
+"GinibrePoincare.matrixSpectralLift_finite_overlap_poincare" -> "GinibrePoincare.matrixSpectralOverlapEnergy" [style=invis];
+"GinibrePoincare.matrixSpectralOverlapEnergy" -> "GinibrePoincare.smoothGinibreVariance" [style=invis];
+"GinibrePoincare.smoothGinibreVariance" -> "GinibrePoincare.squareEntropy" [style=invis];
 }

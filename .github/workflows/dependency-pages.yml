@@ -1,0 +1,45 @@
+name: Dependency diagrams website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'formal-dependencies.html'
+      - 'diagrams/**'
+      - '*.md'
+      - '.github/workflows/dependency-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: dependency-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Assemble static website
+        run: |
+          mkdir -p _site/diagrams
+          cp formal-dependencies.html _site/index.html
+          cp formal-dependencies.html _site/formal-dependencies.html
+          cp formal-dependencies.html _site/formal_dependencies.html
+          cp diagrams/*.svg diagrams/*.dot diagrams/*.json _site/diagrams/
+          cp *.md _site/
+          touch _site/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,5 +1,5 @@
 digraph formal_dependencies {
-rankdir=BT;
+rankdir=TB;
 graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label="Exact direct local declaration references", labelloc=t, fontname="sans-serif"];
 node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];
 edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
@@ -18,4 +18,10 @@ edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
 "GinibrePoincare.groundStateDistanceIdentityStatement" -> "GinibrePoincare.fullMainAnalyticProof" [color="#2563eb", tooltip="value"];
 "GinibrePoincare.groundStateEnergyIdentity" -> "GinibrePoincare.fullMainAnalyticProof" [color="#2563eb", tooltip="value"];
 "GinibrePoincare.smoothGinibrePoincare_of_main_analytic_statements" -> "GinibrePoincare.fullMainAnalyticProof" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.SmoothGinibrePoincareStatement" -> "GinibrePoincare.gaussianDbarEstimateStatement" [style=invis];
+"GinibrePoincare.gaussianDbarEstimateStatement" -> "GinibrePoincare.ginibreHalfDistanceStatement" [style=invis];
+"GinibrePoincare.ginibreHalfDistanceStatement" -> "GinibrePoincare.groundStateAdmissibility" [style=invis];
+"GinibrePoincare.groundStateAdmissibility" -> "GinibrePoincare.groundStateDistanceIdentityStatement" [style=invis];
+"GinibrePoincare.groundStateDistanceIdentityStatement" -> "GinibrePoincare.groundStateEnergyIdentity" [style=invis];
+"GinibrePoincare.groundStateEnergyIdentity" -> "GinibrePoincare.smoothGinibrePoincare_of_main_analytic_statements" [style=invis];
 }

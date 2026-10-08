@@ -3,9 +3,16 @@
 Open [the offline interactive explorer](formal-dependencies.html) in a browser.
 The standalone HTML embeds the complete database as gzip-compressed base64
 and decompresses it in the browser, reducing its size from 35.7 MB to 3.4 MB
-without removing declarations or references. It works online and offline in
+without removing declarations or references. When served as HTML, it works online and offline in
 browsers supporting `DecompressionStream`; no external script or data fetch is
 required. The full declaration JSON remains available separately.
+
+GitHub repository file links show source previews rather than execute HTML.
+The `Dependency diagrams website` workflow publishes the explorer through GitHub
+Pages once Pages is configured to use **GitHub Actions** in repository settings.
+It serves both `formal-dependencies.html` and `formal_dependencies.html`.
+The diagrams use vertical layouts; invisible layout links only position nodes
+and do not add mathematical dependencies.
 
 It opens with the full-paper assembly overview and the original analytic proof
 of Theorem 1.1. Presets also cover matrix overlaps (1.13), nonquadratic
