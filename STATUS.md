@@ -50,9 +50,9 @@ Vertical diagrams and hosting diagnosis (2026-10-08): regenerated twelve themati
 SVG/Mermaid diagrams and six formal SVGs vertically; the explorer uses one
 column. Invisible layout links position nodes without adding dependencies.
 The project GitHub Pages URL returned HTTP 404. A new Pages workflow serves an
-index and both hyphenated/underscored filenames. It has not been deployed;
-repository Pages settings must select GitHub Actions. The exact reported URL
-remains unconfirmed. Generated-view consistency and offline Chromium rendering
+index and both hyphenated/underscored filenames. Changes pushed as `92a8d34`;
+GitHub Pages enabled with Actions deployment. Run `37745228115` passed. Both
+live explorer URLs were fetched and match the local HTML byte-for-byte. Generated-view consistency and offline Chromium rendering
 pass (11,112 declarations loaded). No Lean sources changed or new proof audits
 ran. Verified scope and restrictions remain in the full dashboard above;
 latest proof evidence remains the single-thread full build, 5,079 public queries,
@@ -61,7 +61,8 @@ Editorial and independent paper correspondence review remain pending.
 Refreshed via `python3 scripts/count_lean_sources.py`: 143,778 project lines;
 1,251,826 transitively imported Mathlib lines; 1,395,604 combined. Comments and
 blank lines included; each imported Mathlib module counted once in full.
-Next step: publish/run the Pages workflow and verify the live URL.
+Live explorer: https://djalilchafai.github.io/ginibre-poincare/formal_dependencies.html
+Next step: continue pending editorial and independent correspondence review.
 
 
 Diagram compression (2026-10-08): standalone `formal-dependencies.html` reduced

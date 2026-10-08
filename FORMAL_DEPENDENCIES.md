@@ -1,6 +1,7 @@
 # Formal Lean dependency graph
 
-Open [the offline interactive explorer](formal-dependencies.html) in a browser.
+Open [the live interactive explorer](https://djalilchafai.github.io/ginibre-poincare/formal_dependencies.html)
+or download [the offline explorer](formal-dependencies.html) and open it in a browser.
 The standalone HTML embeds the complete database as gzip-compressed base64
 and decompresses it in the browser, reducing its size from 35.7 MB to 3.4 MB
 without removing declarations or references. When served as HTML, it works online and offline in

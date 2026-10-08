@@ -14,7 +14,8 @@ and expandable Mermaid sources are included. Regenerate them with the inventory
 using `python3 scripts/group_subprojects.py` (requires Graphviz `dot`).
 The [formal Lean dependency graph](FORMAL_DEPENDENCIES.md) additionally extracts
 constant references from compiled theorem statements and proof/definition bodies,
-with static SVGs and an [offline interactive explorer](formal-dependencies.html).
+with static SVGs, a [live interactive explorer](https://djalilchafai.github.io/ginibre-poincare/formal_dependencies.html),
+and an [offline copy](formal-dependencies.html).
 
 The development proves full weak-domain sharp Poincaré and equality
 classification (Theorem 1.1), both Theorem 1.9 deficits, radial log-Sobolev,
