@@ -8,7 +8,23 @@ Paper: Djalil Chafaï, *An optimal Poincaré inequality for the complex Ginibre 
 
 arXiv URL (authoritative version): <https://arxiv.org/abs/2608.19358v2>
 
-The asserted numbered results of [arXiv:2608.19358v2](https://arxiv.org/abs/2608.19358v2) now have compiled concrete endpoints, including both Theorem 1.9 identities, Theorem 1.10 with ordinary distributional derivatives, the full weak-domain equality classification, stochastic dynamics, matrix overlaps and nonquadratic extensions. The remaining Gaussian/entire-function obligations are closed: maximal Schwartz domain, canonical minimal dbar solver, global entire Vandermonde division, actual entire-space projection geometry and literal representative distances. The original main analytic proof is also assembled without analytic completion hypotheses in [FullMainAnalyticProof](GinibrePoincare/Endgame/FullMainAnalyticProof.lean). Open research problems and numerical experiments are distinguished below. See [STATUS.md](STATUS.md) for the dashboard and [FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean) for public endpoints.
+The project formalizes the asserted mathematical results of the versioned paper,
+on their documented domains and with their stated hypotheses. Its main result
+is Theorem 1.1: the sharp symmetric Poincaré inequality, together with the full
+weak-domain equality classification. The scope also includes equilibrium and
+stochastic factorization, polynomial eigenfunctions and spectral points,
+curvature and both sum-of-squares deficit theorems, radial log-Sobolev
+inequalities, matrix lifts and eigenvector overlaps, nonquadratic extensions,
+and the analytic results of Appendices A–B.
+
+The original main analytic proof is assembled without analytic completion
+hypotheses in [FullMainAnalyticProof](GinibrePoincare/Endgame/FullMainAnalyticProof.lean).
+The numbered inventory below records the concrete endpoints and their domains;
+the proof-route remarks explain differences from the paper's arguments.
+Problems 1.11, 1.15 and 1.16 remain open research questions, and Appendix C's
+numerical experiments are outside theorem certification. See
+[STATUS.md](STATUS.md) for verification evidence and the dashboard, and
+[FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean) for public endpoints.
 
 ## Palomar verification checkpoint
 

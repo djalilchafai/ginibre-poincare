@@ -46,6 +46,13 @@ Lean and the existing Mathlib checkout are upgraded together to v4.35.0-rc2. The
 
 ## Latest progress
 
+Report opening revised (2026-10-08): replaced the former deficit-focused
+opening with the full asserted-paper scope, led by the main Theorem 1.1.
+The numbered coverage and proof-route qualifications remain documented below.
+Documentation-only change; existing build/audit evidence is unchanged. Source
+counts refreshed and whitespace checked. Next step: independent correspondence
+review and pending Palomar editorial review.
+
 Proof-route documentation (2026-10-08): compared the named paper routes with
 actual Lean proof bodies and added result-specific correspondence remarks in
 REPORT.md. These cover the homogeneous-measure Gamma law, radial Brownian-driver
