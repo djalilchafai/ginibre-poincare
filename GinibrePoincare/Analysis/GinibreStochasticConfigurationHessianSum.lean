@@ -21,7 +21,7 @@ theorem ginibreConfigurationBrownianNoise_increment_coordinate {Ω : Type*} (n :
       (ginibreConfigurationBrownianNoise n B α ω t -
         ginibreConfigurationBrownianNoise n B α ω s) p =
       Real.sqrt (2*α/(n : ℝ)^2)*(B p t ω-B p s ω) := by
-  rcases p with ⟨i,j⟩
+  rcases p with ⟨i, j⟩
   fin_cases j <;> simp [configurationEuclideanLinearEquiv,
     ginibreConfigurationBrownianNoise, Complex.mul_re, Complex.mul_im] <;> ring
 

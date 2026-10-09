@@ -371,7 +371,7 @@ theorem gaussianInverseSquareRoot_weak_derivatives {n : ℕ} (hn : 0 < n)
       (gaussianInverseSquareRootFirstSynthesis hn (D j) j) j) ∧
     (∀ j k, IsGaussianWeakDbar n (gaussianInverseSquareRootFirstSynthesis hn (D j) j)
       (gaussianInverseSquareRootSecondSynthesis hn (D j) j k) k) := by
-  obtain ⟨hg,hD⟩ := gaussianHermiteFiniteCoefficients_tendsto hn g D hcoeff
+  obtain ⟨hg, hD⟩ := gaussianHermiteFiniteCoefficients_tendsto hn g D hcoeff
   let c := gaussianHermiteFiniteCoefficients hn g
   have hv : Tendsto (fun s => gaussianHermiteInverseSquareRoot hn (finiteHermiteCombination n hn (c s)))
       atTop (𝓝 (gaussianHermiteInverseSquareRoot hn g)) :=

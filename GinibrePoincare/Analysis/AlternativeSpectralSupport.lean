@@ -15,7 +15,7 @@ on the graph domain, rather than merely a spectral-measure surrogate. -/
 theorem spectral_graph_resolvent_of_pencil_unit
     {H : Type*} [NormedAddCommGroup H] [NormedSpace ℂ H]
     (L : H →ₗ.[ℂ] H) (R : H →L[ℂ] H)
-    (hgraph : ∀ u v, (u,v) ∈ L.graph ↔ R (u-v) = u)
+    (hgraph : ∀ u v, (u, v) ∈ L.graph ↔ R (u-v) = u)
     (z : ℂ) (hunit : IsUnit (1 + (z-1) • R)) :
     HasBoundedGraphResolvent L z := by
   rcases hunit with ⟨a, ha⟩
@@ -90,7 +90,7 @@ theorem spectral_ginibre_resolvent_gap_quadratic (n : ℕ) (hn : 0 < n)
     change ginibreL2Mean n (ginibreFullSymmetricIm n (ginibreFullComplexResolvent n hn k)).val = 0
     rw [ginibreFullComplexResolvent_im]
     exact (ginibreFullValueResolvent_mean n hn _).trans hki
-  have hg : (u,u-k) ∈ (ginibreFullGenerator n hn).graph := by
+  have hg : (u, u-k) ∈ (ginibreFullGenerator n hn).graph := by
     rw [ginibreFullGenerator_graph_iff]
     simpa only [sub_sub_cancel] using (show R k = u from rfl)
   have hgap := spectral_ginibre_full_generator_gap hn u (u-k) hg
@@ -114,36 +114,36 @@ polynomial positive on the full symmetric complex Hilbert space. -/
 theorem spectral_ginibre_resolvent_polynomial_positive (n : ℕ) (hn : 0 < n) :
     let R := ginibreFullComplexResolvent n hn
     let K := 1-R
-    (star K * R * K - (3:ℂ) • (star (R*K) * (R*K))).IsPositive := by
+    (star K * R * K - (3 : ℂ) • (star (R*K) * (R*K))).IsPositive := by
   let R := ginibreFullComplexResolvent n hn
   let K : ginibreSymmetricL2 n →L[ℂ] ginibreSymmetricL2 n := 1-R
   have hs1 : IsSelfAdjoint (star K * R * K) :=
     (ginibreFullComplexResolvent_isSelfAdjoint n hn).conjugate' K
-  have hs2 : IsSelfAdjoint ((3:ℂ) • (star (R*K) * (R*K))) :=
-    (show IsSelfAdjoint (3:ℂ) by simp [IsSelfAdjoint]).smul
+  have hs2 : IsSelfAdjoint ((3 : ℂ) • (star (R*K) * (R*K))) :=
+    (show IsSelfAdjoint (3 : ℂ) by simp [IsSelfAdjoint]).smul
       (IsSelfAdjoint.star_mul_self (R*K))
   refine ⟨?_, ?_⟩
   · intro x y
-    change inner ℂ ((star K * R * K) x - ((3:ℂ) • (star (R*K)*(R*K))) x) y =
-      inner ℂ x ((star K * R * K) y - ((3:ℂ) • (star (R*K)*(R*K))) y)
+    change inner ℂ ((star K * R * K) x - ((3 : ℂ) • (star (R*K)*(R*K))) x) y =
+      inner ℂ x ((star K * R * K) y - ((3 : ℂ) • (star (R*K)*(R*K))) y)
     have h1 := hs1.isSymmetric x y
     have h2 := hs2.isSymmetric x y
     change inner ℂ ((star K * R * K) x) y = inner ℂ x ((star K * R * K) y) at h1
-    change inner ℂ (((3:ℂ) • (star (R*K)*(R*K))) x) y =
-      inner ℂ x (((3:ℂ) • (star (R*K)*(R*K))) y) at h2
+    change inner ℂ (((3 : ℂ) • (star (R*K)*(R*K))) x) y =
+      inner ℂ x (((3 : ℂ) • (star (R*K)*(R*K))) y) at h2
     rw [inner_sub_left, inner_sub_right, h1, h2]
   intro f
-  change 0 ≤ (inner ℂ ((star K * R * K - (3:ℂ) • (star (R*K) * (R*K))) f) f).re
+  change 0 ≤ (inner ℂ ((star K * R * K - (3 : ℂ) • (star (R*K) * (R*K))) f) f).re
   simp only [sub_apply, smul_apply,
     mul_apply_eq_comp, inner_sub_left,
     ContinuousLinearMap.star_eq_adjoint, ContinuousLinearMap.adjoint_inner_left]
   change 0 ≤ (inner ℂ (R (K f)) (K f)).re -
-    (inner ℂ ((3:ℂ) • ((R*K).adjoint (R (K f)))) f).re
-  have ht : (inner ℂ ((3:ℂ) • ((R*K).adjoint (R (K f)))) f).re =
+    (inner ℂ ((3 : ℂ) • ((R*K).adjoint (R (K f)))) f).re
+  have ht : (inner ℂ ((3 : ℂ) • ((R*K).adjoint (R (K f)))) f).re =
       3 * ‖R (K f)‖^2 := by
     calc
       _ = ((starRingEnd ℂ) 3 * inner ℂ ((R*K).adjoint (R (K f))) f).re :=
-        congrArg Complex.re (inner_smul_left _ _ (3:ℂ))
+        congrArg Complex.re (inner_smul_left _ _ (3 : ℂ))
       _ = ((starRingEnd ℂ) 3 * inner ℂ (R (K f)) ((R*K) f)).re :=
         congrArg (fun z : ℂ => ((starRingEnd ℂ) 3 * z).re)
           (ContinuousLinearMap.adjoint_inner_left (R*K) f (R (K f)))
@@ -162,20 +162,20 @@ theorem spectral_ginibre_resolvent_polynomial_positive (n : ℕ) (hn : 0 < n) :
 point at one and all remaining spectral points at most one third. -/
 theorem spectral_ginibre_resolvent_spectrum_support (n : ℕ) (hn : 0 < n) :
     spectrum ℝ (ginibreFullComplexResolvent n hn) ⊆
-      Set.Icc (0:ℝ) (1/3) ∪ {1} := by
+      Set.Icc (0 : ℝ) (1/3) ∪ {1} := by
   let R := ginibreFullComplexResolvent n hn
   apply spectralSupportCFC_spectrum_gap_of_adjoint_form R
     (ginibreFullComplexResolvent_isSelfAdjoint n hn)
     (ginibreFullComplexResolvent_spectrum n hn)
   have hp := spectral_ginibre_resolvent_polynomial_positive n hn
-  change (star (1-R)*R*(1-R) - (3:ℂ) •
+  change (star (1-R)*R*(1-R) - (3 : ℂ) •
     (star (R*(1-R))*(R*(1-R)))).IsPositive at hp
-  have he : (3:ℝ) • (star (R*(1-R))*(R*(1-R))) =
-      (3:ℂ) • (star (R*(1-R))*(R*(1-R))) := by
+  have he : (3 : ℝ) • (star (R*(1-R))*(R*(1-R))) =
+      (3 : ℂ) • (star (R*(1-R))*(R*(1-R))) := by
     ext1 x
-    change (3:ℝ) • ((star (R*(1-R))*(R*(1-R))) x) =
-      (3:ℂ) • ((star (R*(1-R))*(R*(1-R))) x)
-    exact RCLike.real_smul_eq_coe_smul (K:=ℂ) (3:ℝ)
+    change (3 : ℝ) • ((star (R*(1-R))*(R*(1-R))) x) =
+      (3 : ℂ) • ((star (R*(1-R))*(R*(1-R))) x)
+    exact RCLike.real_smul_eq_coe_smul (K:=ℂ) (3 : ℝ)
       ((star (R*(1-R))*(R*(1-R))) x)
   rw [he]
   exact hp

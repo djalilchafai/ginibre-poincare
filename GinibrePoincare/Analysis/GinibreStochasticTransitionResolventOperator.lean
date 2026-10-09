@@ -43,7 +43,7 @@ theorem ginibreBoundedLp_measurable_version {n : ℕ} (hn : 0<n)
       (measurableSet_le (Lp.stronglyMeasurable f).measurable.norm measurable_const)
       (Lp.stronglyMeasurable f).measurable measurable_const
   have hb' : ∀ᵐ z ∂ginibreMeasure n, ‖f z‖≤max A 0 := hb.mono fun z hz => hz.trans (le_max_left _ _)
-  exact ⟨v,hm,actualBoundedRealVersion_bound f (max A 0) (le_max_right _ _),
+  exact ⟨v, hm, actualBoundedRealVersion_bound f (max A 0) (le_max_right _ _),
     (actualBoundedRealVersion_ae _ f _ hb').symm⟩
 
 /-- Equality on genuinely bounded values extends to the full symmetric L² source,
@@ -58,7 +58,7 @@ theorem ginibreSymmetricSource_operators_eq_of_bounded_values (n : ℕ)
   have ht := ginibreFullSymmetricBoundedTruncation_tendsto n u
   have hh (m : ℕ) : R (ginibreFullSymmetricBoundedTruncation n m u)=
       S (ginibreFullSymmetricBoundedTruncation n m u) :=
-    heq _ ⟨2*((m : ℝ)+1),ginibreFullSymmetricBoundedTruncation_bound n m u⟩
+    heq _ ⟨2*((m : ℝ)+1), ginibreFullSymmetricBoundedTruncation_bound n m u⟩
   have hRt := R.continuous.tendsto u |>.comp ht
   have hSt : Tendsto (fun m => R (ginibreFullSymmetricBoundedTruncation n m u)) atTop (𝓝 (S u)) := by
     convert (S.continuous.tendsto u |>.comp ht) using 1

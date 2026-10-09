@@ -27,7 +27,7 @@ theorem ginibreIndependent_predictable_centered_conditional {Ω β ζ : Type*}
   have hInd := hind.symm.comp hF hφ
   let G : β × ζ → ℝ := fun p => F p.1*φ p.2
   have hG : Measurable G := (hF.comp measurable_fst).mul (hφ.comp measurable_snd)
-  have hGi : Integrable (fun ω => G (Past ω,Z ω)) P := hInd.integrable_mul hFi hφZ
+  have hGi : Integrable (fun ω => G (Past ω, Z ω)) P := hInd.integrable_mul hFi hφZ
   have hCond := ginibreIndependent_condDistrib_general P Past Z hPast ν hZ hind
   have hCondω := ae_of_ae_map hPast.aemeasurable hCond
   have hCE := condExp_prod_ae_eq_integral_condDistrib hPast hZ.aemeasurable hG.stronglyMeasurable hGi

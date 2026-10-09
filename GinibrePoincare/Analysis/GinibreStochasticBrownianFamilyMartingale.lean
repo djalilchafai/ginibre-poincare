@@ -51,7 +51,7 @@ theorem ginibreBrownianFamilyFiltration_coordinate_martingale {Ω ι : Type*}
   rw [hCs] at hSub
   simp only [Pi.sub_def] at hSub
   have hZero := ginibreBrownianFamilyFiltration_increment_conditional B P hB hind i s t hst
-  filter_upwards [hSub,hZero] with ω hω hz
+  filter_upwards [hSub, hZero] with ω hω hz
   change _ = 0 at hz
   linarith
 

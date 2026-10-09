@@ -19,10 +19,10 @@ theorem actualTendsto_of_subsequence_subsequence {E : Type*} [TopologicalSpace E
     (h : ∀ ns : ℕ → ℕ, StrictMono ns → ∃ ms : ℕ → ℕ, StrictMono ms ∧
       Tendsto (fun k => f (ns (ms k))) atTop (𝓝 x)) : Tendsto f atTop (𝓝 x) := by
   by_contra hn
-  obtain ⟨s,hs,hfreq⟩ := not_tendsto_iff_exists_frequently_notMem.mp hn
-  obtain ⟨ns,hns,hnot⟩ := extraction_of_frequently_atTop hfreq
-  obtain ⟨ms,hms,hconv⟩ := h ns hns
-  obtain ⟨k,hk⟩ := (hconv.eventually hs).exists
+  obtain ⟨s, hs, hfreq⟩ := not_tendsto_iff_exists_frequently_notMem.mp hn
+  obtain ⟨ns, hns, hnot⟩ := extraction_of_frequently_atTop hfreq
+  obtain ⟨ms, hms, hconv⟩ := h ns hns
+  obtain ⟨k, hk⟩ := (hconv.eventually hs).exists
   exact hnot (ms k) hk
 
 /-- L¹ density convergence controls actual integrals against arbitrary bounded
@@ -35,17 +35,17 @@ theorem actualDensity_bounded_test_error_tendsto {Ω : Type*} [MeasurableSpace �
     (hb : ∀ n ω, ‖b n ω‖≤C) :
     Tendsto (fun n => ∫ ω, (D n ω-d ω)*b n ω ∂P) atTop (𝓝 0) := by
   have hnorm : Tendsto (fun n => ∫ ω, ‖D n ω-d ω‖ ∂P) atTop (𝓝 0) := by
-    have ht := (ENNReal.continuousAt_toReal (by simp : (0:ℝ≥0∞)≠∞)).tendsto.comp hL
+    have ht := (ENNReal.continuousAt_toReal (by simp : (0 : ℝ≥0∞)≠∞)).tendsto.comp hL
     have he (n : ℕ) : (∫ ω, ‖D n ω-d ω‖ ∂P) = (eLpNorm (D n-d) 1 P).toReal := by
       rw [eLpNorm_one_eq_lintegral_enorm ((hDi n).sub hdi).aestronglyMeasurable]
       simpa only [Pi.sub_apply] using integral_norm_eq_lintegral_enorm ((hDi n).sub hdi).aestronglyMeasurable
-    simpa only [he,Function.comp_def,ENNReal.toReal_zero] using ht
+    simpa only [he, Function.comp_def, ENNReal.toReal_zero] using ht
   have hbound (n : ℕ) : ‖∫ ω, (D n ω-d ω)*b n ω ∂P‖ ≤ C*(∫ ω, ‖D n ω-d ω‖ ∂P) := by
     have hi := ((hDi n).sub hdi).norm.const_mul C
     have hh := norm_integral_le_of_norm_le (f := fun ω => (D n ω-d ω)*b n ω) hi (Eventually.of_forall (fun ω => by
       rw [norm_mul]
       exact (mul_le_mul_of_nonneg_left (hb n ω) (norm_nonneg _)).trans_eq (mul_comm _ _)))
-    simpa only [integral_const_mul,Pi.sub_apply] using hh
+    simpa only [integral_const_mul, Pi.sub_apply] using hh
   apply squeeze_zero_norm (fun n => hbound n)
   simpa only [mul_zero] using hnorm.const_mul C
 
@@ -59,8 +59,8 @@ theorem actualDensity_continuous_test_tendsto {Ω E : Type*} [MeasurableSpace Ω
     Tendsto (fun n => ∫ ω, d ω*b (X n ω) ∂P) atTop (𝓝 (∫ ω, d ω*b (x ω) ∂P)) := by
   apply actualTendsto_of_subsequence_subsequence
   intro ns hns
-  obtain ⟨ms,hms,hae⟩ := (hl.comp hns.tendsto_atTop).exists_seq_tendsto_ae
-  refine ⟨ms,hms,?_⟩
+  obtain ⟨ms, hms, hae⟩ := (hl.comp hns.tendsto_atTop).exists_seq_tendsto_ae
+  refine ⟨ms, hms,?_⟩
   apply tendsto_integral_of_dominated_convergence (fun ω => ‖d ω‖*‖b‖)
   · intro n
     exact (hdi.aestronglyMeasurable.mul

@@ -44,7 +44,7 @@ theorem correspondenceBrascampLieb_weak_variance
     change 0 ≤ G x ⬝ᵥ (correspondenceBrascampLiebHessian W b x)⁻¹ *ᵥ G x
     simpa only [star_trivial] using (hpos x).posSemidef.inv.dotProduct_mulVec_nonneg (G x)
   · exact hv
-  · rintro _ ⟨f,rfl⟩
+  · rintro _ ⟨f, rfl⟩
     exact correspondenceBrascampLieb_weak_centered_core_bound W u G b hW hu hG hw hpos hE f
 
 /-- The classical locally Lipschitz domain, with all actual distributional
@@ -78,7 +78,7 @@ theorem correspondenceBrascampLieb_localLipschitz_probability_variance
       ∂correspondenceBrascampLiebMeasure W) ≤
       ∫ x, correspondenceBrascampLiebInverseEnergy W g b x
       ∂correspondenceBrascampLiebMeasure W := by
-  simpa only [correspondenceBrascampLiebCenter,correspondenceBrascampLiebMean,hMass,div_one] using
+  simpa only [correspondenceBrascampLiebCenter, correspondenceBrascampLiebMean, hMass, div_one] using
     correspondenceBrascampLieb_localLipschitz_variance W g b hW hWi hpos hg hgL2 hgE
 
 /-- Probability-normalized ordinary weak-domain Brascamp–Lieb. -/
@@ -96,7 +96,7 @@ theorem correspondenceBrascampLieb_weak_probability_variance
       ∂correspondenceBrascampLiebMeasure W) ≤
       ∫ x, correspondenceBrascampLiebWeakInverseEnergy W G b x
       ∂correspondenceBrascampLiebMeasure W := by
-  simpa only [correspondenceBrascampLiebCenter,correspondenceBrascampLiebMean,hMass,div_one] using
+  simpa only [correspondenceBrascampLiebCenter, correspondenceBrascampLiebMean, hMass, div_one] using
     correspondenceBrascampLieb_weak_variance W u G b hW hWi hpos hu hG hw hE
 
 #print axioms correspondenceBrascampLieb_weak_probability_variance

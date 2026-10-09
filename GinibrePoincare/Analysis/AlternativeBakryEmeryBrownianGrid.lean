@@ -19,12 +19,12 @@ theorem bakryEmeryGaussianArray_flatten (I J : Type*) [Fintype I] [Fintype J]
   intro s hs
   rw [Measure.map_apply (by fun_prop) (MeasurableSet.univ_pi hs)]
   have heq : (fun x : I → J → ℝ => fun p : I × J => x p.1 p.2) ⁻¹' univ.pi s =
-      univ.pi (fun i => univ.pi (fun j => s (i,j))) := by
+      univ.pi (fun i => univ.pi (fun j => s (i, j))) := by
     ext x
     simp only [mem_preimage, mem_univ_pi]
     constructor
     · intro h i j
-      exact h (i,j)
+      exact h (i, j)
     · intro h p
       exact h p.1 p.2
   rw [heq, Measure.pi_pi]
@@ -38,25 +38,25 @@ theorem bakryEmeryBrownianGrid_increments_hasLaw
     (B : ι → ℝ≥0 → Ω → ℝ) (P : Measure Ω) [IsProbabilityMeasure P] [P.IsComplete]
     (hB : ∀ i, IsPreBrownianReal (B i) P)
     (hind : iIndepFun (fun i ω t => B i t ω) P) (h : ℝ≥0) (m : ℕ) :
-    HasLaw (fun ω (p : Fin m × ι) => B p.2 ((p.1.val+1:ℕ)*h) ω-
-        B p.2 ((p.1.val:ℕ)*h) ω)
+    HasLaw (fun ω (p : Fin m × ι) => B p.2 ((p.1.val+1 : ℕ)*h) ω-
+        B p.2 ((p.1.val : ℕ)*h) ω)
       (Measure.pi (fun _ : Fin m × ι => gaussianReal 0 h)) P := by
-  have hτ : Monotone (fun k : ℕ => (k:ℝ≥0)*h) := by
+  have hτ : Monotone (fun k : ℕ => (k : ℝ≥0)*h) := by
     intro k l hkl
     exact mul_le_mul_of_nonneg_right (by exact_mod_cast hkl) h.2
-  have hstep (k : ℕ) : ((k+1:ℕ):ℝ≥0)*h - (k:ℝ≥0)*h = h := by
+  have hstep (k : ℕ) : ((k+1 : ℕ) : ℝ≥0)*h - (k : ℝ≥0)*h = h := by
     rw [Nat.cast_add, Nat.cast_one, add_mul, one_mul, add_tsub_cancel_left]
   have hl := brownianFamilyGridInnovation_product_law B P hB hind
-    (fun k => (k:ℝ≥0)*h) hτ m
+    (fun k => (k : ℝ≥0)*h) hτ m
   simp_rw [hstep] at hl
   exact HasLaw.comp (bakryEmeryGaussianArray_flatten (Fin m) ι h).hasLaw hl
 
 theorem bakryEmeryGaussian_standardize (h : ℝ≥0) (hh : h ≠ 0) :
-    MeasurePreserving (fun r : ℝ => r/Real.sqrt (h:ℝ)) (gaussianReal 0 h)
+    MeasurePreserving (fun r : ℝ => r/Real.sqrt (h : ℝ)) (gaussianReal 0 h)
       (gaussianReal 0 1) := by
   refine ⟨by fun_prop, ?_⟩
   rw [gaussianReal_map_div_const]
-  have hs : NNReal.mk ((Real.sqrt (h:ℝ))^2) (sq_nonneg _) = h := by
+  have hs : NNReal.mk ((Real.sqrt (h : ℝ))^2) (sq_nonneg _) = h := by
     apply Subtype.ext
     exact Real.sq_sqrt h.2
   rw [hs, div_self hh, zero_div]
@@ -69,7 +69,7 @@ theorem bakryEmeryBrownianGrid_coordinates_hasLaw
     (hB : ∀ i, IsPreBrownianReal (B i) P)
     (hind : iIndepFun (fun i ω t => B i t ω) P) (h : ℝ≥0) (hh : h ≠ 0) (m : ℕ) :
     HasLaw (fun ω (p : Fin m × ι) =>
-      (B p.2 ((p.1.val+1:ℕ)*h) ω-B p.2 ((p.1.val:ℕ)*h) ω)/Real.sqrt (h:ℝ))
+      (B p.2 ((p.1.val+1 : ℕ)*h) ω-B p.2 ((p.1.val : ℕ)*h) ω)/Real.sqrt (h : ℝ))
       (Measure.pi (fun _ : Fin m × ι => gaussianReal 0 1)) P := by
   exact HasLaw.comp (measurePreserving_pi
     (fun _ : Fin m × ι => gaussianReal 0 h)
@@ -84,15 +84,15 @@ theorem bakryEmeryPolygonalNoise_sampled_endpoint
     (u : ℕ → EuclideanSpace ℝ ι) :
     bakryEmeryPolygonalNoise m h
       (fun p : Fin m × ι => (u (p.1.val+1) p.2-u p.1.val p.2)/Real.sqrt h)
-      ((m:ℝ)*h) = u m-u 0 := by
-  have hr (j : Fin m) : bakryEmeryPolygonalRamp h j.val ((m:ℝ)*h) = Real.sqrt h := by
+      ((m : ℝ)*h) = u m-u 0 := by
+  have hr (j : Fin m) : bakryEmeryPolygonalRamp h j.val ((m : ℝ)*h) = Real.sqrt h := by
     apply bakryEmeryPolygonalRamp_after h hh
-    have hj : ((j.val+1:ℕ):ℝ) ≤ (m:ℝ) := by exact_mod_cast j.isLt
+    have hj : ((j.val+1 : ℕ) : ℝ) ≤ (m : ℝ) := by exact_mod_cast j.isLt
     exact mul_le_mul_of_nonneg_right hj hh.le
   have hs : Real.sqrt h ≠ 0 := Real.sqrt_ne_zero'.mpr hh
   apply PiLp.ext
   intro i
-  change (∑ j : Fin m, bakryEmeryPolygonalRamp h j.val ((m:ℝ)*h) *
+  change (∑ j : Fin m, bakryEmeryPolygonalRamp h j.val ((m : ℝ)*h) *
       ((u (j.val+1) i-u j.val i)/Real.sqrt h)) = u m i-u 0 i
   have hf (a : ℝ) : Real.sqrt h*(a/Real.sqrt h)=a := by field_simp
   simp_rw [hr, hf]

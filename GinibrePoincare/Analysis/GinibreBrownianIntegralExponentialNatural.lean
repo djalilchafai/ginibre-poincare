@@ -54,9 +54,9 @@ theorem brownianBoundedVector_exponential_integral_exists_normalized {Ω ι : Ty
   have hd := brownianVectorExponentialIntegralDensity_normalized B P
     (fun i => (hB i).toIsPreBrownianReal) hind F hF C hC hb T hc hs
     (fun i => M i T) hI
-  refine ⟨M,?_,hd.1,hd.2.2.1,hd.2.2.2⟩
+  refine ⟨M,?_, hd.1, hd.2.2.1, hd.2.2.2⟩
   intro i
-  exact ⟨(hM i).1,(hM i).2.1,(hM i).2.2.1,(hM i).2.2.2.1,(hM i).2.2.2.2.2⟩
+  exact ⟨(hM i).1, (hM i).2.1, (hM i).2.2.1, (hM i).2.2.2.1, (hM i).2.2.2.2.2⟩
 
 end
 end GinibrePoincare

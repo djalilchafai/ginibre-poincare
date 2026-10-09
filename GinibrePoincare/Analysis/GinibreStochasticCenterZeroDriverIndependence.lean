@@ -34,12 +34,12 @@ theorem ginibreBrownian_unrestricted_center_driver_eq_recovery
   have hc : 0 < Real.sqrt (2*(α : ℝ)/(n : ℝ)) := Real.sqrt_pos.mpr
     (div_pos (mul_pos (by norm_num) (show 0 < (α : ℝ) from hα)) (by exact_mod_cast (show 0 < n by omega)))
   apply ginibreCenterPuncturedDriver_eq_recovery P n α _ β hβC hβ0
-  filter_upwards [ae_all_iff.mpr hinc,hX,hnz] with ω hinc hx hnz
+  filter_upwards [ae_all_iff.mpr hinc, hX, hnz] with ω hinc hx hnz
   intro k t ht
   have hS : Continuous (fun u : ℝ≥0 => coordinateSum (ginibreBrownianMaximalProcess n α z B u ω)) := by
     have hC : Continuous (fun u : ℝ≥0 => ginibreBrownianMaximalProcess n α z B u ω) := by
-      simpa only [Function.comp_def,Real.toNNReal_coe] using hx.1.comp NNReal.continuous_coe
-    simpa only [Function.comp_def,coordinateSumCLM_apply] using (coordinateSumCLM n).continuous.comp hC
+      simpa only [Function.comp_def, Real.toNNReal_coe] using hx.1.comp NNReal.continuous_coe
+    simpa only [Function.comp_def, coordinateSumCLM_apply] using (coordinateSumCLM n).continuous.comp hC
   have hp (s : ℝ≥0) (hs : 0 < s) : 0 < Complex.normSq (coordinateSum (ginibreBrownianMaximalProcess n α z B s ω)) :=
     lt_of_le_of_ne (Complex.normSq_nonneg _) (Ne.symm (hnz s hs))
   rw [ginibreCenterPositiveStartLamperti_eq_integral n α k _ hS hp t]

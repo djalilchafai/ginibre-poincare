@@ -31,7 +31,7 @@ theorem ginibreLocalWeak_smooth_pair_equation {n : ℕ}
     (hq : q ∈ ginibreInteriorSmoothPair n) :
     ℓ*inner ℝ (hA.toLp _) q.1+c*inner ℝ (hB.toLp _) q.2+
       c*inner ℝ (hH.toLp _) q.1=inner ℝ (hC.toLp _) q.1 := by
-  obtain ⟨φ,hφ,hφc,hφs,hv,hG⟩ := hq
+  obtain ⟨φ, hφ, hφc, hφs, hv, hG⟩ := hq
   have h := heq (η*φ) (hη.mul hφ) hc.mul_right
     (tsupport_mul_subset_left.trans hs)
   have hcoA := hA.coeFn_toLp
@@ -41,23 +41,23 @@ theorem ginibreLocalWeak_smooth_pair_equation {n : ℕ}
   have ha : inner ℝ (hA.toLp _) q.1 = ∫ z, u z*(η*φ) z ∂ginibreMeasure n := by
     rw [L2.inner_def]
     apply integral_congr_ae
-    filter_upwards [hcoA,hv] with z hz hz'
-    simp only [hz,hz',Real.inner_apply,Pi.mul_apply]
+    filter_upwards [hcoA, hv] with z hz hz'
+    simp only [hz, hz', Real.inner_apply, Pi.mul_apply]
     ring
   have hb : inner ℝ (hB.toLp _) q.2+inner ℝ (hH.toLp _) q.1 =
       ∫ z, inner ℝ (g z) (ginibreEuclideanGradient (η*φ) z) ∂ginibreMeasure n := by
-    rw [L2.inner_def,L2.inner_def,← integral_add (L2.integrable_inner (𝕜 := ℝ) (hB.toLp _) q.2)
+    rw [L2.inner_def, L2.inner_def,← integral_add (L2.integrable_inner (𝕜 := ℝ) (hB.toLp _) q.2)
       (L2.integrable_inner (𝕜 := ℝ) (hH.toLp _) q.1)]
     apply integral_congr_ae
-    filter_upwards [hcoB,hcoH,hv,hG] with z hz hz' hv' hG'
-    rw [hz,hz',hv',hG',ginibreEuclideanGradient_mul φ η hφ hη]
-    simp only [inner_add_right,inner_smul_right,real_inner_smul_left,Real.inner_apply]
+    filter_upwards [hcoB, hcoH, hv, hG] with z hz hz' hv' hG'
+    rw [hz, hz', hv', hG', ginibreEuclideanGradient_mul φ η hφ hη]
+    simp only [inner_add_right, inner_smul_right, real_inner_smul_left, Real.inner_apply]
     ring
   have hc' : inner ℝ (hC.toLp _) q.1 = ∫ z, f z*(η*φ) z ∂ginibreMeasure n := by
     rw [L2.inner_def]
     apply integral_congr_ae
-    filter_upwards [hcoC,hv] with z hz hz'
-    simp only [hz,hz',Real.inner_apply,Pi.mul_apply]
+    filter_upwards [hcoC, hv] with z hz hz'
+    simp only [hz, hz', Real.inner_apply, Pi.mul_apply]
     ring
   rw [← ha,← hb,← hc'] at h
   linarith
@@ -84,7 +84,7 @@ theorem ginibreLocalWeak_resolvent_cutoff_identity {n : ℕ} (hn : 0 < n)
       c*(∫ z, ‖η z • g z‖^2 ∂ginibreMeasure n)=
       (∫ z, (η z*f z)*(η z*u z) ∂ginibreMeasure n)-
         2*c*(∫ z, inner ℝ (η z • g z) (u z • ginibreEuclideanGradient η z) ∂ginibreMeasure n) := by
-  obtain ⟨hA,hG⟩ := ginibreLocalWeak_cutoff_pair_memLp hn u g hu η hη hc hg
+  obtain ⟨hA, hG⟩ := ginibreLocalWeak_cutoff_pair_memLp hn u g hu η hη hc hg
   have hB := ginibreLocalWeak_cutoff_gradient_memLp hn g η hη hc hg
   have hH := ginibreLocalWeak_cutoff_inner_memLp hn g η hη hc hg
   have hC : MemLp (fun z => η z*f z) 2 (ginibreMeasure n) := by
@@ -93,47 +93,47 @@ theorem ginibreLocalWeak_resolvent_cutoff_identity {n : ℕ} (hn : 0 < n)
   have hE : MemLp (fun z => u z • ginibreEuclideanGradient η z) 2 (ginibreMeasure n) := by
     apply (hG.sub hB).ae_eq
     exact ae_of_all _ (fun z => by simp)
-  obtain ⟨q,hq,hqt⟩ := ginibreLocalWeak_cutoff_smooth_sequence hn u g huL hgL hw η hη hc hs hA hG
+  obtain ⟨q, hq, hqt⟩ := ginibreLocalWeak_cutoff_smooth_sequence hn u g huL hgL hw η hη hc hs hA hG
   have hh := ginibreLocalWeak_pairing_limit (hA.toLp _) (hC.toLp _) (hH.toLp _) (hB.toLp _)
     ℓ c q (hA.toLp _) (hG.toLp _) hqt
     (fun m => ginibreLocalWeak_smooth_pair_equation u f g η hη hc hs ℓ c heq hA hB hH hC (q m) (hq m))
   have hsum : hG.toLp _ = hB.toLp _ + hE.toLp _ := by
     apply Lp.ext
-    filter_upwards [hG.coeFn_toLp,hB.coeFn_toLp,hE.coeFn_toLp,
+    filter_upwards [hG.coeFn_toLp, hB.coeFn_toLp, hE.coeFn_toLp,
       Lp.coeFn_add (hB.toLp _) (hE.toLp _)] with z h1 h2 h3 h4
-    rw [h1,h4]
-    simp only [Pi.add_apply,h2,h3]
-  rw [hsum,inner_add_right] at hh
+    rw [h1, h4]
+    simp only [Pi.add_apply, h2, h3]
+  rw [hsum, inner_add_right] at hh
   have ha : inner ℝ (hA.toLp _) (hA.toLp _) = ∫ z, (η z*u z)^2 ∂ginibreMeasure n := by
     rw [L2.inner_def]
     apply integral_congr_ae
     filter_upwards [hA.coeFn_toLp] with z hz
-    simp only [hz,Real.inner_apply]
+    simp only [hz, Real.inner_apply]
     ring
   have hb : inner ℝ (hB.toLp _) (hB.toLp _) = ∫ z, ‖η z • g z‖^2 ∂ginibreMeasure n := by
     rw [L2.inner_def]
     apply integral_congr_ae
     filter_upwards [hB.coeFn_toLp] with z hz
-    rw [hz,real_inner_self_eq_norm_sq]
+    rw [hz, real_inner_self_eq_norm_sq]
   have hx : inner ℝ (hB.toLp _) (hE.toLp _) =
       ∫ z, inner ℝ (η z • g z) (u z • ginibreEuclideanGradient η z) ∂ginibreMeasure n := by
     rw [L2.inner_def]
     apply integral_congr_ae
-    filter_upwards [hB.coeFn_toLp,hE.coeFn_toLp] with z hz hz'
-    rw [hz,hz']
+    filter_upwards [hB.coeFn_toLp, hE.coeFn_toLp] with z hz hz'
+    rw [hz, hz']
   have hcross : inner ℝ (hH.toLp _) (hA.toLp _) = inner ℝ (hB.toLp _) (hE.toLp _) := by
-    rw [L2.inner_def,L2.inner_def]
+    rw [L2.inner_def, L2.inner_def]
     apply integral_congr_ae
-    filter_upwards [hH.coeFn_toLp,hA.coeFn_toLp,hB.coeFn_toLp,hE.coeFn_toLp] with z h1 h2 h3 h4
-    rw [h1,h2,h3,h4]
-    simp only [Real.inner_apply,real_inner_smul_left,inner_smul_right] <;> ring
+    filter_upwards [hH.coeFn_toLp, hA.coeFn_toLp, hB.coeFn_toLp, hE.coeFn_toLp] with z h1 h2 h3 h4
+    rw [h1, h2, h3, h4]
+    simp only [Real.inner_apply, real_inner_smul_left, inner_smul_right] <;> ring
   have hf' : inner ℝ (hC.toLp _) (hA.toLp _) =
       ∫ z, (η z*f z)*(η z*u z) ∂ginibreMeasure n := by
     rw [L2.inner_def]
     apply integral_congr_ae
-    filter_upwards [hC.coeFn_toLp,hA.coeFn_toLp] with z hz hz'
-    simp only [hz,hz',Real.inner_apply] <;> ring
-  rw [ha,hb,hcross,hx,hf'] at hh
+    filter_upwards [hC.coeFn_toLp, hA.coeFn_toLp] with z hz hz'
+    simp only [hz, hz', Real.inner_apply] <;> ring
+  rw [ha, hb, hcross, hx, hf'] at hh
   linarith
 
 #print axioms ginibreLocalWeak_resolvent_cutoff_identity

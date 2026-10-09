@@ -128,20 +128,20 @@ theorem configurationComplexMollification_holomorphic (U : Configuration n → �
         (fun w => (R w : ℂ)+Complex.I*(S w : ℂ)) := by funext w; rfl
     rw [hfun] at hh
     change fderiv ℝ (fun w => (R w : ℂ)+Complex.I*(S w : ℂ)) x v = _
-    simpa only [ContinuousLinearMap.add_apply,ContinuousLinearMap.smul_apply,
-      ContinuousLinearMap.comp_apply,Complex.ofRealCLM_apply,smul_eq_mul,Pi.add_apply,Function.comp_def] using hh
+    simpa only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
+      ContinuousLinearMap.comp_apply, Complex.ofRealCLM_apply, smul_eq_mul, Pi.add_apply, Function.comp_def] using hh
   apply (hasFDerivAt_complex_of_coordinate_CR (hF.differentiable (by simp) x).hasFDerivAt ?_).differentiableAt
   intro j
   have hCR := configuration_cauchyRiemann_convolution U hu htest φ hφ hc x j
-  rw [hparts,hparts]
+  rw [hparts, hparts]
   apply Complex.ext
-  · simp only [Complex.add_re,Complex.ofReal_re,Complex.mul_re,Complex.mul_im,
-      Complex.ofReal_im,Complex.I_re,Complex.I_im,Complex.add_im]
-    dsimp [R,S] at *
+  · simp only [Complex.add_re, Complex.ofReal_re, Complex.mul_re, Complex.mul_im,
+      Complex.ofReal_im, Complex.I_re, Complex.I_im, Complex.add_im]
+    dsimp [R, S] at *
     linarith [hCR.2]
-  · simp only [Complex.add_re,Complex.ofReal_re,Complex.mul_re,Complex.mul_im,
-      Complex.ofReal_im,Complex.I_re,Complex.I_im,Complex.add_im]
-    dsimp [R,S] at *
+  · simp only [Complex.add_re, Complex.ofReal_re, Complex.mul_re, Complex.mul_im,
+      Complex.ofReal_im, Complex.I_re, Complex.I_im, Complex.add_im]
+    dsimp [R, S] at *
     linarith [hCR.1]
 
 #print axioms configurationComplexMollification_holomorphic

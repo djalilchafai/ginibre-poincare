@@ -37,14 +37,14 @@ theorem ginibreBrownian_center_driver_eq_Lamperti_functional
   have hc : 0 < Real.sqrt (2*(α : ℝ)/(n : ℝ)) := Real.sqrt_pos.mpr
     (div_pos (mul_pos (by norm_num) (show 0 < (α : ℝ) from hα))
       (by exact_mod_cast (show 0 < n by omega)))
-  filter_upwards [hl,hnz,hx] with ω hl hnz hx
+  filter_upwards [hl, hnz, hx] with ω hl hnz hx
   funext t
   have hX : Continuous (fun s : ℝ≥0 => ginibreBrownianMaximalProcess n α z B s ω) := by
     simpa only [Real.toNNReal_coe] using
       (show Continuous (fun s : ℝ≥0 => ginibreBrownianMaximalProcess n α z B (s : ℝ).toNNReal ω)
         from hx.1.comp NNReal.continuous_coe)
   have hS : Continuous (fun s : ℝ≥0 => coordinateSum (ginibreBrownianMaximalProcess n α z B s ω)) := by
-    simpa only [Function.comp_def,coordinateSumCLM_apply] using
+    simpa only [Function.comp_def, coordinateSumCLM_apply] using
       (coordinateSumCLM n).continuous.comp hX
   have hp (s : ℝ≥0) : 0 < Complex.normSq (coordinateSum (ginibreBrownianMaximalProcess n α z B s ω)) :=
     lt_of_le_of_ne (Complex.normSq_nonneg _) (Ne.symm (hnz s))
@@ -106,11 +106,11 @@ theorem ginibreBrownian_independent_center_radial_drivers_exists
           ginibreSquareRootRadius z = Real.sqrt (2*(α : ℝ)/(n : ℝ))*βR t ω+
             ∫ s in (0 : ℝ)..t, ginibreLampertiRadialDrift n α
               (pairwiseRadius (ginibreBrownianMaximalProcess n α z B s.toNNReal ω))) := by
-  obtain ⟨βS,hβS,hMS,hLS,h0S,hLimS,hShiftS,hPastS⟩ :=
+  obtain ⟨βS, hβS, hMS, hLS, h0S, hLimS, hShiftS, hPastS⟩ :=
     ginibreBrownianMaximalProcess_center_Brownian_exists hn α z hz hcenter B P hB hind
-  obtain ⟨βR,hβR,hMR,hLR,h0R,hLimR,hShiftR,hPastR⟩ :=
+  obtain ⟨βR, hβR, hMR, hLR, h0R, hLimR, hShiftR, hPastR⟩ :=
     ginibreBrownianMaximalProcess_radial_Brownian_exists hn α z hz B P hB hind
-  refine ⟨βS,βR,hβS,hβR,?_,?_,?_⟩
+  refine ⟨βS, βR, hβS, hβR,?_,?_,?_⟩
   · exact ginibreBrownian_center_radial_Brownian_drivers_independent hn α hα z hz hcenter B P hB hind
       _ _ βS βR hβS.cont hLimS hβR.cont hLimR
   · exact ginibreBrownianMaximalProcess_global_center_Lamperti_identity hn α z hz hcenter B P hB hind

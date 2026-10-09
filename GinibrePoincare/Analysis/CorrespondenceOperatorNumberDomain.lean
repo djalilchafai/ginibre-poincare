@@ -3,6 +3,22 @@ public import GinibrePoincare.Analysis.AlternativeSpectralNumberPolynomial
 public import GinibrePoincare.Analysis.HermiteInverseSquareRoot
 public import Mathlib.Topology.Algebra.Module.LinearPMap
 @[expose] public section
+
+/-! # Maximal graph and finite Hermite core
+
+The pair `(u, v)` belongs to the number graph precisely when every Hermite
+coefficient of `v` is `n * totalAntiDegree` times the corresponding coefficient
+of `u`. Completeness of the Hilbert basis gives uniqueness of `v`. Conversely,
+square summability of these multiplied coefficients constructs `v` by the
+inverse Hilbert-basis representation; this proves the exact domain statement.
+
+Closedness follows coefficient by coefficient from continuity of inner products.
+Finite Hermite truncations converge in both components of the graph: the graph
+relation identifies the truncated number image of `u` with the truncation of
+`v`. The ordinary distributional interpretation is established downstream in
+`CorrespondenceOperatorNumberForm`, rather than assumed in this definition.
+-/
+
 open MeasureTheory Filter
 open scoped Topology
 namespace GinibrePoincare
@@ -14,17 +30,17 @@ set_option maxHeartbeats 1200000
 def correspondenceOperatorNumberGraph (n : ℕ) (hn : 0<n) :
     Submodule ℂ (Lp ℂ 2 (complexGaussianMeasure n) × Lp ℂ 2 (complexGaussianMeasure n)) where
   carrier := {p | ∀pq, gaussianHermiteCoefficient hn p.2 pq =
-    (n*totalAntiDegree pq:ℕ)*gaussianHermiteCoefficient hn p.1 pq}
+    (n*totalAntiDegree pq : ℕ)*gaussianHermiteCoefficient hn p.1 pq}
   zero_mem' := by simp [gaussianHermiteCoefficient_eq_inner]
   add_mem' := by
     intro p q hp hq pq
-    simp only [Prod.fst_add,Prod.snd_add,gaussianHermiteCoefficient_eq_inner,inner_add_right] at *
-    rw [hp pq,hq pq,mul_add]
+    simp only [Prod.fst_add, Prod.snd_add, gaussianHermiteCoefficient_eq_inner, inner_add_right] at *
+    rw [hp pq, hq pq, mul_add]
   smul_mem' := by
     intro a p hp pq
     change gaussianHermiteCoefficient hn (a • p.2) pq =
-      (n*totalAntiDegree pq:ℕ)*gaussianHermiteCoefficient hn (a • p.1) pq
-    simp only [gaussianHermiteCoefficient_eq_inner,inner_smul_right] at *
+      (n*totalAntiDegree pq : ℕ)*gaussianHermiteCoefficient hn (a • p.1) pq
+    simp only [gaussianHermiteCoefficient_eq_inner, inner_smul_right] at *
     rw [hp pq]
     ring
 
@@ -33,7 +49,7 @@ theorem correspondenceOperatorNumberGraph_singleValued (n : ℕ) (hn : 0<n)
     (hp : p∈correspondenceOperatorNumberGraph n hn) (hx : p.1=0) : p.2=0 := by
   apply gaussianHermiteCoefficient_ext hn
   intro pq
-  simpa [hx,gaussianHermiteCoefficient_eq_inner] using hp pq
+  simpa [hx, gaussianHermiteCoefficient_eq_inner] using hp pq
 
 /-- The genuine maximal unbounded number operator, rather than a compact-jet norm. -/
 def correspondenceOperatorNumber (n : ℕ) (hn : 0<n) :
@@ -47,17 +63,17 @@ theorem correspondenceOperatorNumber_graph (n : ℕ) (hn : 0<n) :
 /-- Exact maximal graph domain: the n|q| multiplier must be square summable. -/
 theorem correspondenceOperatorNumber_domain_iff (n : ℕ) (hn : 0<n)
     (u : Lp ℂ 2 (complexGaussianMeasure n)) :
-    (∃v,(u,v)∈(correspondenceOperatorNumber n hn).graph) ↔
+    (∃v, (u, v)∈(correspondenceOperatorNumber n hn).graph) ↔
       Summable (fun pq : HermiteMultiIndex n =>
-        ‖(n*totalAntiDegree pq:ℕ)*gaussianHermiteCoefficient hn u pq‖^2) := by
+        ‖(n*totalAntiDegree pq : ℕ)*gaussianHermiteCoefficient hn u pq‖^2) := by
   rw [correspondenceOperatorNumber_graph]
   constructor
-  · rintro ⟨v,hv⟩
+  · rintro ⟨v, hv⟩
     exact (hasSum_norm_sq_gaussianHermiteCoefficient hn v).summable.congr
       (fun pq=>by rw [hv pq])
   · intro hs
     let c : lp (fun _ : HermiteMultiIndex n=>ℂ) 2 :=
-      ⟨fun pq=>(n*totalAntiDegree pq:ℕ)*gaussianHermiteCoefficient hn u pq,
+      ⟨fun pq=>(n*totalAntiDegree pq : ℕ)*gaussianHermiteCoefficient hn u pq,
         memℓp_gen (by simpa using hs)⟩
     refine ⟨(gaussianHermiteHilbertBasis n hn).repr.symm c,?_⟩
     intro pq
@@ -68,11 +84,11 @@ theorem correspondenceOperatorNumber_domain_iff (n : ℕ) (hn : 0<n)
 /-- Literal finite differential number polynomials belong to the maximal graph. -/
 theorem correspondenceOperatorNumber_finite_graph (n : ℕ) (hn : 0<n)
     (c : HermiteMultiIndex n→₀ℂ) :
-    (finiteHermiteCombination n hn c,finiteGaussianNumberL2 n hn c)∈
+    (finiteHermiteCombination n hn c, finiteGaussianNumberL2 n hn c)∈
       (correspondenceOperatorNumber n hn).graph := by
   rw [correspondenceOperatorNumber_graph]
   intro pq
-  simp [finiteGaussianNumberL2,spectralNumberCoefficients,
+  simp [finiteGaussianNumberL2, spectralNumberCoefficients,
     gaussianHermiteCoefficient_finiteHermiteCombination]
 
 /-- The maximal number graph is closed in the literal value/operator L² topology. -/
@@ -80,7 +96,7 @@ theorem correspondenceOperatorNumberGraph_isClosed (n : ℕ) (hn : 0<n) :
     IsClosed (correspondenceOperatorNumberGraph n hn : Set
       (Lp ℂ 2 (complexGaussianMeasure n) × Lp ℂ 2 (complexGaussianMeasure n))) := by
   change IsClosed {p : Lp ℂ 2 (complexGaussianMeasure n) × Lp ℂ 2 (complexGaussianMeasure n) | ∀pq, gaussianHermiteCoefficient hn p.2 pq =
-    (n*totalAntiDegree pq:ℕ)*gaussianHermiteCoefficient hn p.1 pq}
+    (n*totalAntiDegree pq : ℕ)*gaussianHermiteCoefficient hn p.1 pq}
   simp only [Set.ofPred_forall]
   apply isClosed_iInter
   intro pq
@@ -92,7 +108,7 @@ theorem correspondenceOperatorNumberGraph_isClosed (n : ℕ) (hn : 0<n) :
 simultaneously in the genuine value and number-operator norms. -/
 theorem correspondenceOperatorNumber_finite_core (n : ℕ) (hn : 0<n)
     (u v : Lp ℂ 2 (complexGaussianMeasure n))
-    (huv : (u,v)∈(correspondenceOperatorNumber n hn).graph) :
+    (huv : (u, v)∈(correspondenceOperatorNumber n hn).graph) :
     Tendsto (fun s=>finiteHermiteCombination n hn (gaussianHermiteFiniteCoefficients hn u s))
       atTop (𝓝 u) ∧
     Tendsto (fun s=>finiteGaussianNumberL2 n hn (gaussianHermiteFiniteCoefficients hn u s))
@@ -112,12 +128,12 @@ theorem correspondenceOperatorNumber_finite_core (n : ℕ) (hn : 0<n)
         finiteHermiteCombination n hn (gaussianHermiteFiniteCoefficients hn v s) := by
     apply gaussianHermiteCoefficient_ext hn
     intro pq
-    simp only [finiteGaussianNumberL2,gaussianHermiteCoefficient_finiteHermiteCombination,
-      spectralNumberCoefficients,spectralDiagonalCoefficients_apply]
-    change (n*totalAntiDegree pq:ℕ)*((s:Set _).indicator (gaussianHermiteCoefficient hn u) pq)=
-      (s:Set _).indicator (gaussianHermiteCoefficient hn v) pq
+    simp only [finiteGaussianNumberL2, gaussianHermiteCoefficient_finiteHermiteCombination,
+      spectralNumberCoefficients, spectralDiagonalCoefficients_apply]
+    change (n*totalAntiDegree pq : ℕ)*((s : Set _).indicator (gaussianHermiteCoefficient hn u) pq)=
+      (s : Set _).indicator (gaussianHermiteCoefficient hn v) pq
     by_cases hp : pq∈s
-    · simp only [Finset.mem_coe,Set.indicator_of_mem hp]
+    · simp only [Finset.mem_coe, Set.indicator_of_mem hp]
       exact (huv pq).symm
     · simp [hp]
   simpa only [he] using hlim v

@@ -58,7 +58,7 @@ theorem ginibreLocalRegularity_real_tests_complex_equation
     have hl := L.integral_comp_comm hil
     have hr := L.integral_comp_comm hih
     have hfi (i) := L.integral_comp_comm (hiF i)
-    rw [← hl,map_sub,map_sum,← hr]
+    rw [← hl, map_sub, map_sum,← hr]
     simp_rw [← hfi]
     convert he using 1
     · apply integral_congr_ae
@@ -66,7 +66,7 @@ theorem ginibreLocalRegularity_real_tests_complex_equation
         dsimp only
         rw [show (u x : ℂ)*ginibreLocalRegularityLaplacian v θ x = u x • ginibreLocalRegularityLaplacian v θ x by simp]
         rw [map_smul]
-        simp only [ginibreLocalRegularityLaplacian,map_sum,hsecond,smul_eq_mul]
+        simp only [ginibreLocalRegularityLaplacian, map_sum, hsecond, smul_eq_mul]
     · congr 1
       · apply integral_congr_ae
         exact ae_of_all volume fun x => by

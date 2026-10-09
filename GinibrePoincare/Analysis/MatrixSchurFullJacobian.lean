@@ -5,6 +5,18 @@ public import GinibrePoincare.Analysis.MatrixSchurRealJacobian
 
 @[expose] public section
 
+/-! # Full Schur differential in matrix entry coordinates
+
+Split the matrix entries into strict lower and upper coordinates and construct
+the explicit inverse reassembly map. In these coordinates the Schur tangent
+map has blocks `(lowerJacobian, 0; upperTangent, identity)`. The determinant
+of this triangular block map is therefore the lower-block determinant, whose
+real value is the Vandermonde weight. Composing the actual chart derivative
+with the entry equivalence identifies this algebraic determinant with the
+Jacobian of the genuine Schur chart.
+-/
+
+
 open Matrix
 open scoped Matrix Matrix.Norms.Operator
 namespace GinibrePoincare

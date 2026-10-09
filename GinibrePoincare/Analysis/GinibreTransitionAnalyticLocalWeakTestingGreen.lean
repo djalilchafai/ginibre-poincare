@@ -93,8 +93,8 @@ theorem ginibreLocalWeak_generator_green {n : ℕ} (hn : 0 < n)
     apply ((hgk k).integrable_mul (hdf k)).congr
     exact ae_of_all _ (fun z => by
       by_cases hz : z ∈ tsupport f
-      · simp [G,hz]
-      · simp [G,hz,fderiv_of_notMem_tsupport ℝ hz])
+      · simp [G, hz]
+      · simp [G, hz, fderiv_of_notMem_tsupport ℝ hz])
   have hIntδ (k) : Integrable (fun z => u z * δ k z) (ginibreMeasure n) :=
     hu.integrable_mul (hδ k)
   have hpair (k) : (∫ z, g z k * fderiv ℝ f z (ginibreCoordinateDirection k) ∂ginibreMeasure n) =
@@ -133,7 +133,7 @@ theorem ginibreLocalWeak_generator_green {n : ℕ} (hn : 0 < n)
   filter_upwards [ginibreLocalWeak_generator_divergence_ae hn f hf] with z hdiv
   change (1 / (n : ℝ)) * (u z * ∑ k : Fin n × Fin 2, δ k z) = u z * ginibrePregenerator n f z
   change (1 / (n : ℝ)) * (∑ k : Fin n × Fin 2, δ k z) = ginibrePregenerator n f z at hdiv
-  rw [mul_left_comm,hdiv]
+  rw [mul_left_comm, hdiv]
 
 
 theorem ginibreLocalWeak_adjoint_to_gradient_equation {n : ℕ} (hn : 0 < n)

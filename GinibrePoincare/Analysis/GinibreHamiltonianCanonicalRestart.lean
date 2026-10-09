@@ -20,20 +20,20 @@ theorem ginibreDrivenPath_canonical_global {n : ℕ} {α : ℝ}
     ginibreDrivenMaximalLifetime n α N (X 0) = ⊤ ∧
     ∀ t : ℝ≥0, ginibreDrivenMaximalValue n α N (X 0) t = X t := by
   have hSeg (T : ℝ≥0) : GinibreDrivenSegment n α N (X 0) T X :=
-    ⟨hX.continuousOn,rfl,fun t ht => ⟨hFree t ht.1,hEq.1 t ht.1,hEq.2 t ht.1⟩⟩
+    ⟨hX.continuousOn, rfl, fun t ht => ⟨hFree t ht.1, hEq.1 t ht.1, hEq.2 t ht.1⟩⟩
   have hLife : ginibreDrivenMaximalLifetime n α N (X 0) = ⊤ := by
     by_contra hfin
     let L := ginibreDrivenMaximalLifetime n α N (X 0)
     let T := L.toNNReal+1
     have hb := ginibreDrivenHorizons_le_lifetime
-      (show T ∈ ginibreDrivenHorizons n α N (X 0) from ⟨_,hSeg T⟩)
+      (show T ∈ ginibreDrivenHorizons n α N (X 0) from ⟨_, hSeg T⟩)
     change (T : ℝ≥0∞) ≤ L at hb
     have hfinL : L ≠ ⊤ := hfin
     rw [← ENNReal.coe_toNNReal hfinL] at hb
     have hbad := ENNReal.coe_le_coe.mp hb
     change L.toNNReal+1 ≤ L.toNNReal at hbad
     exact (not_le_of_gt (lt_add_of_pos_right L.toNNReal zero_lt_one)) hbad
-  exact ⟨hLife,fun t => ginibreDrivenMaximalValue_eq_segment (hSeg t) t le_rfl (by simp [hLife])⟩
+  exact ⟨hLife, fun t => ginibreDrivenMaximalValue_eq_segment (hSeg t) t le_rfl (by simp [hLife])⟩
 
 theorem ginibreDrivenPath_canonical_restart {n : ℕ} {α : ℝ}
     {N X : ℝ → Configuration n} (hX : Continuous X)

@@ -67,7 +67,7 @@ theorem brownianAggregateUniformSum_punctured_meanSquare_of_horizon_limit
       ∫ ω, (∑ i, (brownianUniformLeftSum (B i) (F i) T (k+1) ω-M i T ω))^2 ∂P := by
     apply integral_congr_ae
     filter_upwards [he] with ω hω
-    rw [← hω,Finset.sum_sub_distrib]
+    rw [← hω, Finset.sum_sub_distrib]
   simp_rw [hEq]
   exact hh
 

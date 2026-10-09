@@ -1,24 +1,22 @@
-# Registry publication check — 2026-10-08
+# Registry publication check — 2026-10-09
 
-**Publication remains unconfirmed.** The latest public search returned HTTP 200
-with no matching entries at 16:11:40 UTC (registry revision 190, 471 results,
-383 projects). The canonical public repository record returned HTTP 404.
-An earlier authenticated submission-status GET at 12:42:55 UTC returned HTTP
-403. Its cause is unknown; no private response or credential is recorded.
-Earlier HTTP 500 observations are historical and are superseded as the latest
-status observation.
+**Version 1 publication is confirmed.** Palomar registered
+[PALOMAR-2026-10-09-000001 v1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-09-000001&version=1)
+at `2026-10-09T00:48:41Z`. The
+[public entry](https://data.palomar-registry.org/entries/PALOMAR-2026-10-09-000001-v1.json),
+repository/version projections and authenticated submission status agree.
 
-Palomar accepted submission `7fh68vzqfjeu`, whose immutable comparison commit is
-`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`. Its official mechanical verification
-and recorded consent concern **full symmetric weak-H¹ Theorem 1.1 and exhaustive
-affine equality**, not the whole proof library. Accepted consent does not provide
-a public registry ID or registered URL. The current proofs and independent
-correspondence reviews are later repository work.
+Submission `7fh68vzqfjeu` fixes source commit
+`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`. Its comparison covers **full symmetric
+weak-H¹ Theorem 1.1 and exhaustive affine equality**, rather than every paper
+endpoint. The current proof and readability revisions postdate that snapshot.
 
-These read-only checks do not prove permanent nonpublication. Final registration
-needs a successful status response or public receipt. No duplicate submission,
-write request or maintainer outreach was performed.
+The unsuccessful 2026-10-08 search and authenticated observations are retained
+as historical observations in the [sanitized evidence](registry-publication-check.json).
+They are superseded by the public receipt; their earlier failure causes remain unknown.
 
-See [sanitized observations](registry-publication-check.json),
-[Palomar history](../PALOMAR.md), and the separate
-[independent correspondence review](../CORRESPONDENCE_REVIEW.md).
+Revised source requires a new verified and reviewed immutable submission using
+`existing_id: PALOMAR-2026-10-09-000001`, according to the
+[official agent protocol](https://submit.palomar-registry.org/llms.txt).
+Version 1 and its source remain preserved. See [Palomar history](../PALOMAR.md)
+and the separate [correspondence review](../CORRESPONDENCE_REVIEW.md).

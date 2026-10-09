@@ -15,12 +15,12 @@ set_option backward.isDefEq.respectTransparency false
 theorem continuousMap_law_eq_of_whole_path_law_eq {Ω E : Type*}
     [MeasurableSpace Ω] [TopologicalSpace E] [SecondCountableTopology E] [T2Space E]
     [MeasurableSpace E] [BorelSpace E]
-    [MeasurableSpace C(ℝ,E)] [BorelSpace C(ℝ,E)] [PolishSpace C(ℝ,E)]
-    (P : Measure Ω) (X Y : Ω → C(ℝ,E)) (hX : Measurable X) (hY : Measurable Y)
+    [MeasurableSpace C(ℝ, E)] [BorelSpace C(ℝ, E)] [PolishSpace C(ℝ, E)]
+    (P : Measure Ω) (X Y : Ω → C(ℝ, E)) (hX : Measurable X) (hY : Measurable Y)
     (hlaw : P.map (fun ω t => X ω t) = P.map (fun ω t => Y ω t)) :
     P.map X = P.map Y := by
   let d := TopologicalSpace.denseSeq ℝ
-  let f : C(ℝ,E) → ℕ → E := fun x k => x (d k)
+  let f : C(ℝ, E) → ℕ → E := fun x k => x (d k)
   have hf : MeasurableEmbedding f :=
     (continuous_pi (fun k => continuous_eval_const (d k))).measurableEmbedding (by
       intro x y h
@@ -40,15 +40,15 @@ theorem continuousMap_law_eq_of_whole_path_law_eq {Ω E : Type*}
     intro k
     exact measurable_pi_apply (d k)
   apply hf.map_injective
-  rw [Measure.map_map hf.measurable hX,Measure.map_map hf.measurable hY]
+  rw [Measure.map_map hf.measurable hX, Measure.map_map hf.measurable hY]
   have hh := congrArg (Measure.map R) hlaw
-  rw [Measure.map_map hR hXm,Measure.map_map hR hYm] at hh
+  rw [Measure.map_map hR hXm, Measure.map_map hR hYm] at hh
   exact hh
 
 def brownianConfigurationNoisePathMap (n : ℕ) (α : ℝ) :
     ((Fin n × Fin 2) → ℝ≥0 → ℝ) → ℝ → Configuration n :=
   fun p t j => Real.sqrt (2*α/(n : ℝ)^2) •
-    ((p (j,0) t.toNNReal : ℂ)+Complex.I*(p (j,1) t.toNNReal : ℂ))
+    ((p (j, 0) t.toNNReal : ℂ)+Complex.I*(p (j, 1) t.toNNReal : ℂ))
 
 theorem brownianConfigurationNoisePathMap_measurable (n : ℕ) (α : ℝ) :
     Measurable (brownianConfigurationNoisePathMap n α) := by
@@ -56,9 +56,9 @@ theorem brownianConfigurationNoisePathMap_measurable (n : ℕ) (α : ℝ) :
   intro t
   apply measurable_pi_lambda
   intro j
-  exact ((((measurable_pi_apply t.toNNReal).comp (measurable_pi_apply (j,0))).complex_ofReal).add
+  exact ((((measurable_pi_apply t.toNNReal).comp (measurable_pi_apply (j, 0))).complex_ofReal).add
     (measurable_const.mul (((measurable_pi_apply t.toNNReal).comp
-      (measurable_pi_apply (j,1))).complex_ofReal))).const_smul (Real.sqrt (2*α/(n : ℝ)^2))
+      (measurable_pi_apply (j, 1))).complex_ofReal))).const_smul (Real.sqrt (2*α/(n : ℝ)^2))
 
 /-- The actual normalized continuous shifted configuration noise has exactly
  the same whole-path law as the original actual noise. -/
@@ -68,8 +68,8 @@ theorem brownianFamily_shift_continuous_noise_law_eq {Ω : Type*} [MeasurableSpa
     (α : ℝ) (s : ℝ≥0) :
     P.map (ginibreBrownianFullContinuousNoise n (brownianFamilyShift B s) α) =
       P.map (ginibreBrownianFullContinuousNoise n B α) := by
-  letI : MeasurableSpace C(ℝ,Configuration n) := borel _
-  letI : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+  letI : MeasurableSpace C(ℝ, Configuration n) := borel _
+  letI : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
   let X := ginibreBrownianFullContinuousNoise n (brownianFamilyShift B s) α
   let Y := ginibreBrownianFullContinuousNoise n B α
   have hshift := (brownianFamilyShift_isBrownian_independent B P hB hind s).1
@@ -101,7 +101,7 @@ theorem brownianFamily_shift_continuous_noise_law_eq {Ω : Type*} [MeasurableSpa
     apply continuousMap_law_eq_of_whole_path_law_eq P (fun ω => (X ω).val) (fun ω => (Y ω).val)
       (hval.measurable.comp hX) (hval.measurable.comp hY)
     exact (Measure.map_congr hXL).symm.trans (hraw.trans (Measure.map_congr hYL))
-  have hclosed : IsClosed {f : C(ℝ,Configuration n) | f 0 = 0} :=
+  have hclosed : IsClosed {f : C(ℝ, Configuration n) | f 0 = 0} :=
     isClosed_eq (continuous_eval_const 0) continuous_const
   have hec : Topology.IsClosedEmbedding (fun f : GinibreContinuousNoise n => f.val) :=
     hclosed.isClosedEmbedding_subtypeVal

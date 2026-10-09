@@ -50,8 +50,8 @@ theorem bakryEmeryGibbs_actual_stopped_coupling {Ω : Type*} {n : ℕ} (hn : 0 <
       ginibreHamiltonianOUReferenceProcess n ((n : ℝ)^2) z B (min t (θ sample)) sample) :
     ∀ sample t (ht : t ≤ θ sample),
       bakryEmeryGibbsPath W hW κ hκ hc T
-        (z,bakryEmeryCorrectedCompactDriver n W hW B T Y hYC sample)
-        ⟨(t : ℝ),⟨t.property,by exact_mod_cast ht.trans (hθ sample)⟩⟩ =
+        (z, bakryEmeryCorrectedCompactDriver n W hW B T Y hYC sample)
+        ⟨(t : ℝ), ⟨t.property, by exact_mod_cast ht.trans (hθ sample)⟩⟩ =
       ginibreHamiltonianOUReferenceProcess n ((n : ℝ)^2) z B t sample := by
   intro sample
   let y : ℝ → Configuration n := fun s => Y s.toNNReal sample
@@ -91,12 +91,12 @@ theorem bakryEmeryGibbs_actual_stopped_coupling {Ω : Type*} {n : ℕ} (hn : 0 <
     have hN : (configurationEuclideanEquiv n).symm (bkWeightedExtension T T.property N t) =
         (ginibreBrownianFullContinuousNoise n B ((n : ℝ)^2) sample).val t -
           ∫ s in (0 : ℝ)..t, bakryEmeryGibbsConfigurationTilt n W (y s) := by
-      have htT : t ∈ Icc (0 : ℝ) (T : ℝ) := ⟨ht.1,ht.2.trans (by exact_mod_cast hθ sample)⟩
-      have hEval : bkWeightedExtension (T : ℝ) T.property N t = N ⟨t,htT⟩ := by
+      have htT : t ∈ Icc (0 : ℝ) (T : ℝ) := ⟨ht.1, ht.2.trans (by exact_mod_cast hθ sample)⟩
+      have hEval : bkWeightedExtension (T : ℝ) T.property N t = N ⟨t, htT⟩ := by
         unfold bkWeightedExtension
         exact congrArg N (projIcc_of_mem T.property htT)
       rw [hEval]
-      simp only [N,bakryEmeryCorrectedCompactDriver,ContinuousMap.coe_mk,bakryEmeryOriginalCompactDriver]
+      simp only [N, bakryEmeryCorrectedCompactDriver, ContinuousMap.coe_mk, bakryEmeryOriginalCompactDriver]
       change (configurationEuclideanEquiv n).symm
         ((configurationEuclideanEquiv n) ((ginibreBrownianFullContinuousNoise n B ((n : ℝ)^2) sample).val t) -
           ∫ s in (0 : ℝ)..t, (configurationEuclideanEquiv n) (bakryEmeryGibbsConfigurationTilt n W (y s))) = _
@@ -114,8 +114,8 @@ theorem bakryEmeryGibbs_actual_stopped_coupling {Ω : Type*} {n : ℕ} (hn : 0 <
   have hId := bakryEmeryGibbsPath_prefix_identification W hW κ hκ hc z T N (θ sample)
     (θ sample).property (by exact_mod_cast hθ sample) y hy.continuousOn hEq
   intro t ht
-  have he := hId t ⟨t.property,by exact_mod_cast ht⟩
-  simpa only [y,Real.toNNReal_coe,hStopped,min_eq_left ht] using he
+  have he := hId t ⟨t.property, by exact_mod_cast ht⟩
+  simpa only [y, Real.toNNReal_coe, hStopped, min_eq_left ht] using he
 
 #print axioms bakryEmeryGibbsOU_normalized_equation
 #print axioms bakryEmeryGibbs_actual_stopped_coupling

@@ -22,7 +22,7 @@ set_option maxHeartbeats 600000
 theorem matrixGaussian_poincare_compactC1 (n : ℕ) (hn : 0 < n)
     (F : MatrixRealSpace n → ℝ) (hF : ContDiff ℝ 1 F) (hc : HasCompactSupport F) :
     (∫ A, F A^2 ∂matrixGaussianMeasure n) - (∫ A, F A ∂matrixGaussianMeasure n)^2 ≤
-      (1/(2*(n:ℝ))) * ∫ A, matrixRealGradientEnergy n F A ∂matrixGaussianMeasure n := by
+      (1/(2*(n : ℝ))) * ∫ A, matrixRealGradientEnergy n F A ∂matrixGaussianMeasure n := by
   let μ := matrixGaussianMeasure n
   letI : IsProbabilityMeasure μ := matrixGaussianMeasure_isProbability n
   have hv : MemLp F 2 μ := hF.continuous.memLp_of_hasCompactSupport hc
@@ -30,14 +30,14 @@ theorem matrixGaussian_poincare_compactC1 (n : ℕ) (hn : 0 < n)
       (fun A => fderiv ℝ F A (matrixRealCoordinates n (Pi.single i 1))) 2 μ :=
     ((hF.continuous_fderiv one_ne_zero).clm_apply continuous_const).memLp_of_hasCompactSupport
       (hc.fderiv_apply (𝕜 := ℝ) _)
-  obtain ⟨M,hM⟩ := hF.continuous.norm.bddAbove_range_of_hasCompactSupport hc.norm
+  obtain ⟨M, hM⟩ := hF.continuous.norm.bddAbove_range_of_hasCompactSupport hc.norm
   have hMb (A : MatrixRealSpace n) : |F A| ≤ M := by simpa [Real.norm_eq_abs] using hM (Set.mem_range_self A)
   have hM0 : 0 ≤ M := (abs_nonneg (F 0)).trans (hMb 0)
   have hlin := squareEntropy_affine_bound_variance μ F hF.continuous.measurable M hM0 hMb
-    ((1/(n:ℝ))*∫ A, matrixRealGradientEnergy n F A ∂μ) (by
+    ((1/(n : ℝ))*∫ A, matrixRealGradientEnergy n F A ∂μ) (by
       intro t
       have hft : ContDiff ℝ 1 (fun A => 1+t*F A) := contDiff_const.add (contDiff_const.mul hF)
-      have hvt : MemLp (fun A => 1+t*F A) 2 μ := (memLp_const (1:ℝ)).add (hv.const_mul t)
+      have hvt : MemLp (fun A => 1+t*F A) 2 μ := (memLp_const (1 : ℝ)).add (hv.const_mul t)
       have hdt (A H : MatrixRealSpace n) :
           fderiv ℝ (fun A => 1+t*F A) A H = t * fderiv ℝ F A H := by
         rw [fderiv_const_add, fderiv_const_mul (hF.differentiable (by norm_num) A)]
@@ -62,12 +62,12 @@ theorem matrixGaussian_poincare_compactC1 (n : ℕ) (hn : 0 < n)
 /-- The normalized constant in the actual matrix Gaussian L² space. -/
 def matrixGaussianOneL2 (n : ℕ) : MatrixGaussianL2 n := by
   letI := matrixGaussianMeasure_isProbability n
-  exact (memLp_const (1:ℝ)).toLp (fun _ => 1)
+  exact (memLp_const (1 : ℝ)).toLp (fun _ => 1)
 
 theorem matrixGaussianOneL2_ae (n : ℕ) :
     (matrixGaussianOneL2 n : MatrixRealSpace n → ℝ) =ᵐ[matrixGaussianMeasure n] fun _ => 1 := by
   letI := matrixGaussianMeasure_isProbability n
-  exact (memLp_const (1:ℝ)).coeFn_toLp
+  exact (memLp_const (1 : ℝ)).coeFn_toLp
 
 /-- Actual matrix Gaussian variance as a continuous quadratic expression in L². -/
 def matrixGaussianL2Variance (n : ℕ) (u : MatrixGaussianL2 n) : ℝ :=
@@ -86,16 +86,16 @@ theorem matrixGaussianL2Variance_integral (n : ℕ) (u : MatrixGaussianL2 n) :
 /-- The sharp Gaussian Poincaré inequality on the full actual matrix H¹ closure. -/
 theorem matrixGaussianH1Completion_poincare (n : ℕ) (hn : 0 < n)
     (p : MatrixGaussianSobolevPair n) (hp : p ∈ matrixGaussianH1Completion n) :
-    matrixGaussianL2Variance n p.1 ≤ (1/(2*(n:ℝ)))*matrixGaussianSobolevEnergy n p := by
+    matrixGaussianL2Variance n p.1 ≤ (1/(2*(n : ℝ)))*matrixGaussianSobolevEnergy n p := by
   have hclosed : IsClosed {p : MatrixGaussianSobolevPair n |
-      matrixGaussianL2Variance n p.1 ≤ (1/(2*(n:ℝ)))*matrixGaussianSobolevEnergy n p} := by
+      matrixGaussianL2Variance n p.1 ≤ (1/(2*(n : ℝ)))*matrixGaussianSobolevEnergy n p} := by
     apply isClosed_le
     · exact continuous_fst.norm.pow 2 |>.sub ((continuous_const.inner continuous_fst).pow 2)
     · exact continuous_const.mul (continuous_finsetSum _ fun i _ =>
         ((continuous_apply i).comp continuous_snd).norm.pow 2)
   apply closure_minimal ?_ hclosed hp
   intro q hq
-  obtain ⟨F,hF,hc,hv,hd⟩ := hq
+  obtain ⟨F, hF, hc, hv, hd⟩ := hq
   have he : matrixGaussianSobolevEnergy n q =
       ∫ A, matrixRealGradientEnergy n F A ∂matrixGaussianMeasure n := by
     unfold matrixGaussianSobolevEnergy matrixRealGradientEnergy directionalEnergy

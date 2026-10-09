@@ -27,7 +27,7 @@ theorem realMartingale_of_actual_L2_limits {Ω τ : Type*} [MeasurableSpace Ω] 
     apply Lp.ext
     have hce := (hs n t).condExpL2_ae_eq_condExp (𝕜 := ℝ) (ℱ.le s)
     have hmart := (hS n).condExp_ae_eq hst
-    filter_upwards [hce,hmart,(hs n s).coeFn_toLp] with ω hc hb hsω
+    filter_upwards [hce, hmart, (hs n s).coeFn_toLp] with ω hc hb hsω
     exact hc.trans (hb.trans hsω.symm)
   have hleft := hA.tendsto ((hm t).toLp (M t)) |>.comp (hlim t)
   have hright : Tendsto (fun n => A ((hs n t).toLp (S n t))) atTop (𝓝 ((hm s).toLp (M s))) := by

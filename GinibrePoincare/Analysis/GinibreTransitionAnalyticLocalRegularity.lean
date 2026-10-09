@@ -33,7 +33,7 @@ theorem ginibreTransitionAnalytic_weighted_resolvent_exists_local_gradient
       (∀ k, MemLp (G k) 2 (volume : Measure (Configuration n))) ∧
       ∀ k (θ : Configuration n → ℝ), ContDiff ℝ ∞ θ → HasCompactSupport θ →
         (∫ z, θ z*G k z) = -(∫ z, fderiv ℝ θ z (ginibreCoordinateDirection k)*(η j z*u z)) := by
-    obtain ⟨hη,hηc,hηs,hηone⟩ := ginibreLocalRegularityExhaustionCutoff_properties n hn j
+    obtain ⟨hη, hηc, hηs, hηone⟩ := ginibreLocalRegularityExhaustionCutoff_properties n hn j
     exact ginibreLocalRegularity_weighted_resolvent_cutoff_gradient n hn ℓ u f hu hf heq
       (tsupport (η j)) hηc hηs (η j) hη hηc Set.Subset.rfl
   choose G hGm hGw using hGex
@@ -50,10 +50,10 @@ theorem ginibreTransitionAnalytic_weighted_resolvent_exists_local_gradient
           (ginibreLocalRegularityOpenSet_subset_compact n j (hs hz))
         change fderiv ℝ θ z (ginibreCoordinateDirection k)*(η j z*u z) = _
         change η j z = 1 at hηz
-        rw [hηz,one_mul]
+        rw [hηz, one_mul]
       · have hd : fderiv ℝ θ z (ginibreCoordinateDirection k) = 0 :=
           congrArg (fun L => L (ginibreCoordinateDirection k)) (fderiv_of_notMem_tsupport (𝕜 := ℝ) hz)
-        simp only [hd,zero_mul]
+        simp only [hd, zero_mul]
   have hex (k : Fin n × Fin 2) : ∃ gk : Configuration n → ℝ, Measurable gk ∧
       (∀ K : Set (Configuration n), IsCompact K → K ⊆ {z | CollisionFree z} →
         MemLp gk 2 (volume.restrict K)) ∧
@@ -73,7 +73,7 @@ theorem ginibreTransitionAnalytic_weighted_resolvent_exists_local_gradient
   choose gk hgkm hgkL hgkw using hex
   let g := fun z => WithLp.toLp 2 (fun k => gk k z)
   have hgm : Measurable g := (WithLp.measurable_toLp 2 _).comp (Measurable.of_eval hgkm)
-  refine ⟨g,hgm,?_,?_⟩
+  refine ⟨g, hgm,?_,?_⟩
   · intro K hK hs
     apply memLp_piLp_iff.mpr
     exact fun k => hgkL k K hK hs

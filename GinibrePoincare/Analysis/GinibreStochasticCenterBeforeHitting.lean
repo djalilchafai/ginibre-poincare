@@ -18,7 +18,7 @@ theorem ginibreCenterSquared_gt_before_small_hitting {Ω : Type*} {n : ℕ}
     δ < ginibreCenterSquared n (X t ω) := by
   have hh := notMem_of_lt_hittingBtwn ht (bot_le : (0 : ℝ≥0) ≤ t)
   change ¬ C-δ ≤ ‖C-ginibreCenterSquared n (X t ω)‖ at hh
-  rw [Real.norm_eq_abs,abs_of_nonneg (sub_nonneg.mpr (hb t ω))] at hh
+  rw [Real.norm_eq_abs, abs_of_nonneg (sub_nonneg.mpr (hb t ω))] at hh
   exact (by linarith [not_le.mp hh])
 
 /-- Continuity includes the stopping endpoint in the actual lower bound. -/
@@ -43,7 +43,7 @@ theorem ginibreCenterSquared_ge_until_small_hitting {Ω : Type*} {n : ℕ}
       have hsub : Iio θ ⊆ S := fun s hs =>
         (ginibreCenterSquared_gt_before_small_hitting X C δ T s ω hb hs).le
       have hmem : θ ∈ closure (Iio θ) := by
-        rw [closure_Iio' (show (Iio θ).Nonempty from ⟨0,hθpos⟩)]
+        rw [closure_Iio' (show (Iio θ).Nonempty from ⟨0, hθpos⟩)]
         exact (show θ ≤ θ from le_rfl)
       exact heq ▸ (hS.closure_subset_iff.mpr hsub hmem)
 

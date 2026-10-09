@@ -48,16 +48,16 @@ theorem ginibreBrownian_center_Lamperti_positive_start_fixed
   filter_upwards [ae_all_iff.mpr hLocal,
     ginibreBrownian_center_positive_interval_lower_bound hn α hα z hz B P hB hind,
     ginibreBrownianHamiltonianBoundedStop_exhausts_ae (by omega) α z hz B P hB hind] with ω hLocal hlow hex
-  obtain ⟨c,hc,hclow⟩ := hlow a (a+r) ha (le_add_of_nonneg_right bot_le)
+  obtain ⟨c, hc, hclow⟩ := hlow a (a+r) ha (le_add_of_nonneg_right bot_le)
   have hsmall : ∀ᶠ k : ℕ in atTop, 1/((k : ℝ)+1) < c :=
     (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)).eventually (gt_mem_nhds hc)
-  obtain ⟨k,hk,hstop⟩ := (hsmall.and (hex (a+r))).exists
+  obtain ⟨k, hk, hstop⟩ := (hsmall.and (hex (a+r))).exists
   have hXeq (u : ℝ≥0) (hu : u ≤ a+r) : X k u ω=ginibreBrownianMaximalProcess n α z B u ω := by
     change ginibreBrownianMaximalProcess n α z B (min u _) ω = _
     rw [min_eq_left (hu.trans hstop)]
   have hcap : a+r ≤ (k : ℝ≥0) := hstop.trans (ginibreDrivenHamiltonianBoundedStop_le n α _ z _ k)
-  have hh := hLocal k hcap ⟨hstop,fun u hu => by rw [hXeq u hu.2]; exact hk.trans_le (hclow u hu)⟩
-  rw [hXeq (a+r) le_rfl,hXeq a (le_add_of_nonneg_right bot_le)] at hh
+  have hh := hLocal k hcap ⟨hstop, fun u hu => by rw [hXeq u hu.2]; exact hk.trans_le (hclow u hu)⟩
+  rw [hXeq (a+r) le_rfl, hXeq a (le_add_of_nonneg_right bot_le)] at hh
   have hInt : (∫ s in (a : ℝ)..(a+r : ℝ≥0), ginibreLampertiCenterDrift n α
       (ginibreCenterSquared n (X k s.toNNReal ω))) =
       ∫ s in (a : ℝ)..(a+r : ℝ≥0), ginibreLampertiCenterDrift n α

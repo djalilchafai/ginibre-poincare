@@ -17,7 +17,7 @@ theorem ginibreLocalRegularity_coordinate_directional (n : ℕ)
       fderiv ℝ θ (configurationEuclideanEquiv n z) v := by
   have h := ((hθ.differentiable (by simp)).differentiableAt.hasFDerivAt).comp z
     (configurationEuclideanEquiv n).hasFDerivAt
-  simpa only [ContinuousLinearMap.comp_apply,ContinuousLinearEquiv.coe_coe,
+  simpa only [ContinuousLinearMap.comp_apply, ContinuousLinearEquiv.coe_coe,
     ContinuousLinearEquiv.apply_symm_apply] using congrArg (fun L => L ((configurationEuclideanEquiv n).symm v)) h.fderiv
 
 theorem ginibreLocalRegularity_coordinate_elliptic_equation
@@ -42,7 +42,7 @@ theorem ginibreLocalRegularity_coordinate_elliptic_equation
     intro z hz
     have hx : e z ∈ tsupport θ := by
       exact (Set.ext_iff.mp (tsupport_comp_eq_preimage θ e.toHomeomorph) z).mp hz
-    obtain ⟨y,hy,he⟩ := hs hx
+    obtain ⟨y, hy, he⟩ := hs hx
     exact e.injective he ▸ hy
   have hd (z) (i) : ginibreLocalRegularityDirectional (e.symm (v i)) ψ z =
       ginibreLocalRegularityDirectional (v i) θ (e z) := ginibreLocalRegularity_coordinate_directional n θ hθ z (v i)
@@ -60,18 +60,18 @@ theorem ginibreLocalRegularity_coordinate_elliptic_equation
   have he := heq ψ hψ hψc hψs
   change (∫ z, u z*ginibreLocalRegularityLaplacian (fun i => e.symm (v i)) ψ z) =
     (∫ z, h z*ψ z)-∑ i, ∫ z, F i z*ginibreLocalRegularityDirectional (e.symm (v i)) ψ z at he
-  simp_rw [hl,hd] at he
-  obtain ⟨c,hcpos,hchange⟩ := ginibreLocalRegularity_coordinate_integral n
+  simp_rw [hl, hd] at he
+  obtain ⟨c, hcpos, hchange⟩ := ginibreLocalRegularity_coordinate_integral n
   have hi (f : Configuration n → ℂ) (q : EuclideanSpace ℝ (Fin n × Fin 2) → ℂ) :
       (∫ z, f z*q (e z)) = (c : ℝ) • (∫ x, f (e.symm x)*q x) := by
     have hh := hchange (fun x => f (e.symm x)*q x)
-    simpa only [e,ContinuousLinearEquiv.symm_apply_apply] using hh
+    simpa only [e, ContinuousLinearEquiv.symm_apply_apply] using hh
   dsimp only [ψ, Function.comp_apply] at he
-  rw [hi u _,hi h _] at he
+  rw [hi u _, hi h _] at he
   simp_rw [hi (F _) _,← Finset.smul_sum] at he
   have hcn : (c : ℝ) ≠ 0 := (show 0 < (c : ℝ) from hcpos).ne'
   have hh := congrArg (fun w : ℂ => (c : ℝ)⁻¹ • w) he
-  simpa only [smul_sub,smul_smul,inv_mul_cancel₀ hcn,one_smul] using hh
+  simpa only [smul_sub, smul_smul, inv_mul_cancel₀ hcn, one_smul] using hh
 
 #print axioms ginibreLocalRegularity_coordinate_elliptic_equation
 end

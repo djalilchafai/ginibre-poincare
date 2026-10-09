@@ -21,7 +21,7 @@ theorem itoContinuousOperatorDriftRiemann_tendsto (A : ℝ → E →L[ℝ] ℝ) 
         (∫ s in ginibreUniformTime T n i..ginibreUniformTime T n (i+1), b s))
       atTop (𝓝 (∫ s in (0 : ℝ)..T, A s (b s))) := by
   obtain ⟨M, hM⟩ := isCompact_Icc.exists_bound_of_continuousOn hb
-  have hM0 : 0 ≤ M := (norm_nonneg (b 0)).trans (hM 0 ⟨le_rfl,hT⟩)
+  have hM0 : 0 ≤ M := (norm_nonneg (b 0)).trans (hM 0 ⟨le_rfl, hT⟩)
   have hUC := isCompact_Icc.uniformContinuousOn_of_continuous hA
   have hAb : ContinuousOn (fun s => A s (b s)) (Icc 0 T) := hA.clm_apply hb
   apply Metric.tendsto_nhds.mpr
@@ -29,9 +29,9 @@ theorem itoContinuousOperatorDriftRiemann_tendsto (A : ℝ → E →L[ℝ] ℝ) 
   let η := ε/(M*T+1)
   have hden : 0 < M*T+1 := by nlinarith
   have hη : 0 < η := div_pos hε hden
-  obtain ⟨δ,hδ,hclose⟩ := Metric.uniformContinuousOn_iff.mp hUC η hη
+  obtain ⟨δ, hδ, hclose⟩ := Metric.uniformContinuousOn_iff.mp hUC η hη
   have hmesh : Tendsto (fun n : ℕ => T/((n : ℝ)+1)) atTop (𝓝 0) := by
-    simpa only [mul_zero,mul_one_div] using
+    simpa only [mul_zero, mul_one_div] using
       (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)).const_mul T
   filter_upwards [hmesh.eventually (gt_mem_nhds hδ)] with n hn
   let τ := ginibreUniformTime T n
@@ -71,7 +71,7 @@ theorem itoContinuousOperatorDriftRiemann_tendsto (A : ℝ → E →L[ℝ] ℝ) 
     have hh' := intervalIntegral.norm_integral_le_of_norm_le_const hh
     simpa only [abs_of_nonneg (sub_nonneg.mpr (hmono (Nat.le_succ i)))] using hh'
   have hint := intervalIntegral.sum_integral_adjacent_intervals hai
-  simp only [τ, ginibreUniformTime_zero,ginibreUniformTime_end] at hint
+  simp only [τ, ginibreUniformTime_zero, ginibreUniformTime_end] at hint
   rw [dist_eq_norm, ← hint, ← Finset.sum_sub_distrib]
   calc
     _ ≤ ∑ i ∈ Finset.range (n+1), ‖A (τ i) (∫ s in τ i..τ (i+1), b s)-
@@ -80,7 +80,7 @@ theorem itoContinuousOperatorDriftRiemann_tendsto (A : ℝ → E →L[ℝ] ℝ) 
       Finset.sum_le_sum (fun i hi => he i (Finset.mem_range.mp hi))
     _ = η*M*T := by
       simp only [τ, ginibreUniformTime_increment, Finset.sum_const, Finset.card_range,
-        nsmul_eq_mul, Nat.cast_add,Nat.cast_one]
+        nsmul_eq_mul, Nat.cast_add, Nat.cast_one]
       have hne : (n : ℝ)+1 ≠ 0 := by positivity
       field_simp
     _ < ε := by

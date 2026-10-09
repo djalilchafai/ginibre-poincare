@@ -32,11 +32,11 @@ theorem ginibrePuncturedUnitField_global_continuous_integral_exists
   have hex (n : ℕ) := ginibrePuncturedUnitField_continuous_integral_exists B P hB hind u hu hunit
     (n+1 : ℝ≥0) (by positivity) hc i₀
   choose M hM hMC hML hM0 hMS hMlaw using hex
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hJS⟩ := ginibreContinuousMartingale_global_of_horizon_limits P
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hJS⟩ := ginibreContinuousMartingale_global_of_horizon_limits P
     (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal))
     (fun t k ω => ∑ i, brownianUniformLeftSum (B i) (fun s ω => u s ω i) t (k+1) ω)
     M hM hMC hML hM0 hMS
-  refine ⟨J,hJM,hJC,hJL,hJ0,hJS,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0, hJS,?_⟩
   intro t
   exact brownianUnitField_integral_limit_gaussian B P (fun i => (hB i).toIsPreBrownianReal)
     hind u hu hunit i₀ t (J t) (hJS t)

@@ -71,15 +71,15 @@ theorem actualIdentDistrib_of_probability_limits {Ω Ω' E : Type*}
   have hdX := hx.tendstoInDistribution (fun n => (hi n).aemeasurable_fst)
   have hdY := hy.tendstoInDistribution (fun n => (hi n).aemeasurable_snd)
   have hdXY : TendstoInDistribution X atTop y (fun _ => P) Q := by
-    refine ⟨fun n => (hi n).aemeasurable_fst,hdY.aemeasurable_limit,?_⟩
-    have he : (fun n : ℕ => (⟨P.map (X n),(by infer_instance)⟩ : ProbabilityMeasure E)) =
-        (fun n : ℕ => (⟨Q.map (Y n),(by infer_instance)⟩ : ProbabilityMeasure E)) := by
+    refine ⟨fun n => (hi n).aemeasurable_fst, hdY.aemeasurable_limit,?_⟩
+    have he : (fun n : ℕ => (⟨P.map (X n), (by infer_instance)⟩ : ProbabilityMeasure E)) =
+        (fun n : ℕ => (⟨Q.map (Y n), (by infer_instance)⟩ : ProbabilityMeasure E)) := by
       funext n
       apply Subtype.ext
       exact (hi n).map_eq
     rw [he]
     exact hdY.tendsto
-  exact ⟨hdX.aemeasurable_limit,hdY.aemeasurable_limit,tendstoInDistribution_unique X hdX hdXY⟩
+  exact ⟨hdX.aemeasurable_limit, hdY.aemeasurable_limit, tendstoInDistribution_unique X hdX hdXY⟩
 
 end
 end GinibrePoincare

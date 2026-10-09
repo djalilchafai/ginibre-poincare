@@ -20,22 +20,22 @@ theorem ginibreDrivenHamiltonianBoundedStop_eventually_eq_cap {n : ℕ} (hn : 0 
   let H : ℝ≥0 → ℝ := fun t => ginibreHamiltonian n
     (ginibreDrivenMaximalValue n α N.val z (min t T))
   have hH : Continuous H := ginibreDrivenHamiltonianPrefix_continuous T hT
-  obtain ⟨C,hC⟩ := isCompact_Icc.exists_bound_of_continuousOn hH.continuousOn
+  obtain ⟨C, hC⟩ := isCompact_Icc.exists_bound_of_continuousOn hH.continuousOn
   refine ⟨|ginibreHamiltonian n z|+|C|+1,?_⟩
   intro R hR
-  have hzR : ginibreHamiltonian n z ≤ R := by linarith [le_abs_self (ginibreHamiltonian n z),abs_nonneg C]
+  have hzR : ginibreHamiltonian n z ≤ R := by linarith [le_abs_self (ginibreHamiltonian n z), abs_nonneg C]
   refine ⟨hzR,?_⟩
   have hnot : ¬ginibreDrivenHamiltonianFirstLevel n α N.val z R ≤ (T : ℝ≥0∞) := by
     intro hh
-    rcases (ginibreDrivenHamiltonianFirstLevel_le_iff_lifetime hn α N.val N.val.continuous N.property z hz R hzR T).mp hh with hbad | ⟨_,t,ht,hvalue⟩
+    rcases (ginibreDrivenHamiltonianFirstLevel_le_iff_lifetime hn α N.val N.val.continuous N.property z hz R hzR T).mp hh with hbad | ⟨_, t, ht, hvalue⟩
     · simpa [hLife] using hbad
     · have hb := hC t ht
       change ‖H t‖ ≤ C at hb
-      simp only [H,min_eq_left ht.2,Real.norm_eq_abs] at hb
+      simp only [H, min_eq_left ht.2, Real.norm_eq_abs] at hb
       have hup := (le_abs_self _).trans hb
-      linarith [le_abs_self C,abs_nonneg (ginibreHamiltonian n z)]
+      linarith [le_abs_self C, abs_nonneg (ginibreHamiltonian n z)]
   unfold ginibreDrivenHamiltonianBoundedStop
-  rw [min_eq_left (le_of_lt (lt_of_not_ge hnot)),ENNReal.toNNReal_coe]
+  rw [min_eq_left (le_of_lt (lt_of_not_ge hnot)), ENNReal.toNNReal_coe]
 
 end
 end GinibrePoincare

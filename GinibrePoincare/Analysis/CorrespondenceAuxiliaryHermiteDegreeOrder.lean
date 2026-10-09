@@ -47,14 +47,14 @@ theorem finite_hermite_degree_sublevel (n D : ℕ) :
     (Finset.single_le_sum (fun _ _ => Nat.zero_le _) (Finset.mem_univ j)).trans
       ((Nat.le_add_left _ _).trans hi)
   exact ⟨(fun j => ⟨i.val.1 j, Nat.lt_succ_of_le (hp j)⟩,
-    fun j => ⟨i.val.2 j, Nat.lt_succ_of_le (hq j)⟩),rfl⟩
+    fun j => ⟨i.val.2 j, Nat.lt_succ_of_le (hq j)⟩), rfl⟩
 
 theorem degreeHermite_finite_Iic (n : ℕ) (i : DegreeHermiteIndex n) :
     (Set.Iic i).Finite := by
   apply (finite_hermite_degree_sublevel n (hermiteTotalDegree i.val)).subset
   intro j hj
   change degreeHermiteKey j ≤ degreeHermiteKey i at hj
-  rcases Prod.Lex.le_iff.mp hj with h | ⟨h,_⟩
+  rcases Prod.Lex.le_iff.mp hj with h | ⟨h, _⟩
   · exact Nat.le_of_lt h
   · exact h.le
 

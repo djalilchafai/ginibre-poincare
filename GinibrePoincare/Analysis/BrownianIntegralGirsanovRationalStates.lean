@@ -24,12 +24,12 @@ theorem brownianGirsanovRationalGrid_states_identDistrib
     IdentDistrib
       (fun ω (p : Fin (q+1)) i => brownianGirsanovCorrectedPrefix B h
         (itoUniformNNTime T (q*m)) i (p.val*m) ω)
-      (fun ω (p : Fin (q+1)) i => B i (T*(p.val:ℝ≥0)/(q:ℝ≥0)) ω-B i 0 ω)
+      (fun ω (p : Fin (q+1)) i => B i (T*(p.val : ℝ≥0)/(q : ℝ≥0)) ω-B i 0 ω)
       (P.withDensity (fun ω => ENNReal.ofReal
         (brownianPredictableVectorGaussianDensity B h (itoUniformNNTime T (q*m)) (q*m) ω))) P := by
   classical
   let f := fun (a : Fin (q*m) → ι→ℝ) (p : Fin (q+1)) (i : ι) =>
-    ∑ k : Fin (p.val*m), a ⟨k.val,lt_of_lt_of_le k.isLt
+    ∑ k : Fin (p.val*m), a ⟨k.val, lt_of_lt_of_le k.isLt
       (Nat.mul_le_mul_right m (Nat.le_of_lt_succ p.isLt))⟩ i
   have hf : Measurable f := by
     apply measurable_pi_lambda
@@ -54,7 +54,7 @@ theorem brownianGirsanovRationalGrid_states_identDistrib
     rfl
   have hb : (fun ω => f (fun (k : Fin (q*m)) i =>
       B i (itoUniformNNTime T (q*m) (k.val+1)) ω-B i (itoUniformNNTime T (q*m) k) ω)) =
-      (fun ω (p : Fin (q+1)) i => B i (T*(p.val:ℝ≥0)/(q:ℝ≥0)) ω-B i 0 ω) := by
+      (fun ω (p : Fin (q+1)) i => B i (T*(p.val : ℝ≥0)/(q : ℝ≥0)) ω-B i 0 ω) := by
     funext ω p i
     dsimp only [f]
     rw [Fin.sum_univ_eq_sum_range (fun k : ℕ => B i (itoUniformNNTime T (q*m) (k+1)) ω-
@@ -63,9 +63,9 @@ theorem brownianGirsanovRationalGrid_states_identDistrib
       brownianUniformNNTime_rational_endpoint T p.val q m hq hm]
     have hz : itoUniformNNTime T (q*m) 0=0 := by
       change (itoUniformTime T (q*m) 0).toNNReal=0
-      simp only [itoUniformTime,Nat.cast_zero,mul_zero,zero_div,Real.toNNReal_zero]
+      simp only [itoUniformTime, Nat.cast_zero, mul_zero, zero_div, Real.toNNReal_zero]
     rw [hz]
-  rwa [hc,hb] at hl
+  rwa [hc, hb] at hl
 
 end
 end GinibrePoincare

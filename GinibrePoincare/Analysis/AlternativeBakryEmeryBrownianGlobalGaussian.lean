@@ -9,12 +9,12 @@ open MeasureTheory ProbabilityTheory Set Filter
 open scoped Topology NNReal
 namespace GinibrePoincare
 noncomputable section
-local instance : MeasurableSpace C(Icc (0:ℝ) 1,ℝ) := borel _
-local instance : BorelSpace C(Icc (0:ℝ) 1,ℝ) := ⟨rfl⟩
+local instance : MeasurableSpace C(Icc (0 : ℝ) 1, ℝ) := borel _
+local instance : BorelSpace C(Icc (0 : ℝ) 1, ℝ) := ⟨rfl⟩
 theorem bakryBrownianDyadicCompletedPath_isGaussian_of_original
-    (hU : IsGaussianProcess (fun t : Icc (0:ℝ) 1 =>
+    (hU : IsGaussianProcess (fun t : Icc (0 : ℝ) 1 =>
       fun ω => bakryBrownianDyadicPath ω t) bakryBrownianDyadicMeasure) :
-    IsGaussianProcess (fun t : Icc (0:ℝ) 1 =>
+    IsGaussianProcess (fun t : Icc (0 : ℝ) 1 =>
       fun ω => bakryBrownianDyadicCompletedPath ω t) bakryBrownianDyadicCompletedMeasure := by
   constructor
   intro I
@@ -31,25 +31,25 @@ theorem bakryBrownianDyadicCompletedPath_isGaussian_of_original
 #print axioms bakryBrownianDyadicCompletedPath_isGaussian_of_original
 
 theorem bakryBrownianGlobalProcess_isGaussian_of_unit
-    (hU : IsGaussianProcess (fun t : Icc (0:ℝ) 1 =>
+    (hU : IsGaussianProcess (fun t : Icc (0 : ℝ) 1 =>
       fun ω => bakryBrownianDyadicCompletedPath ω t) bakryBrownianDyadicCompletedMeasure) :
     IsGaussianProcess bakryBrownianGlobalProcess bakryBrownianGlobalMeasure := by
   classical
   constructor
   intro I
-  obtain ⟨N,hN⟩ := exists_nat_gt (∑ i : I, (i.val:ℝ))
-  have htime (i : I) : (i.val:ℝ) ≤ N :=
+  obtain ⟨N, hN⟩ := exists_nat_gt (∑ i : I, (i.val : ℝ))
+  have htime (i : I) : (i.val : ℝ) ≤ N :=
     (Finset.single_le_sum (fun j _ => j.val.coe_nonneg) (Finset.mem_univ i)).trans hN.le
   let F : ℕ → BakryBrownianDyadicCompletedSample → (I → ℝ) :=
-    fun n ω i => bakryBrownianDyadicCompletedPath ω (bakryBrownianUnitClamp ((i.val:ℝ)-n))
+    fun n ω i => bakryBrownianDyadicCompletedPath ω (bakryBrownianUnitClamp ((i.val : ℝ)-n))
   have hF (n : ℕ) : Measurable (F n) := by
     apply Measurable.of_eval
     intro i
     exact (continuous_eval_const _).measurable.comp bakryBrownianDyadicCompletedPath_measurable
   have hFG (n : ℕ) : HasGaussianLaw (F n) bakryBrownianDyadicCompletedMeasure := by
-    let ts : I → Icc (0:ℝ) 1 := fun i => bakryBrownianUnitClamp ((i.val:ℝ)-n)
+    let ts : I → Icc (0 : ℝ) 1 := fun i => bakryBrownianUnitClamp ((i.val : ℝ)-n)
     let K : ((Finset.univ.image ts) → ℝ) →L[ℝ] (I → ℝ) :=
-      ContinuousLinearMap.pi (fun i => ContinuousLinearMap.proj ⟨ts i,by simp⟩)
+      ContinuousLinearMap.pi (fun i => ContinuousLinearMap.proj ⟨ts i, by simp⟩)
     convert (hU.hasGaussianLaw (Finset.univ.image ts)).map K using 1
     funext ω i
     rfl
@@ -68,7 +68,7 @@ theorem bakryBrownianGlobalProcess_isGaussian_of_unit
   have hg := hi.hasGaussianLaw_fun_sum hG
   convert hg using 1
   funext ω i
-  simp only [Finset.sum_apply,Finset.restrict_def,bakryBrownianGlobalProcess]
+  simp only [Finset.sum_apply, Finset.restrict_def, bakryBrownianGlobalProcess]
   change bakryBrownianGlobalPath ω i.val = ∑ n : Fin N, F n (ω n) i
   rw [bakryBrownianGlobalPath_eq_finite ω N i.val (htime i)]
   exact (Fin.sum_univ_eq_sum_range (fun n => F n (ω n) i) N).symm

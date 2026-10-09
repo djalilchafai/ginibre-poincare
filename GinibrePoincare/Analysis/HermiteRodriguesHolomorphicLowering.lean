@@ -13,7 +13,7 @@ theorem rodrigues_dhol_add {f g : ℂ → ℂ} (hf : Differentiable ℝ f)
     (hg : Differentiable ℝ g) (z : ℂ) :
     dholOne (fun w => f w+g w) z=dholOne f z+dholOne g z := by
   change dholOne (f+g) z = _
-  rw [dholOne,dholOne,dholOne,fderiv_add (hf z) (hg z)]
+  rw [dholOne, dholOne, dholOne, fderiv_add (hf z) (hg z)]
   simp only [add_apply]
   ring
 
@@ -76,16 +76,16 @@ theorem rodrigues_dhol_diagonalEvalPublic (P : Poly) (z : ℂ) :
 
 theorem dholOne_normalizedEval (n : ℕ) (hn : 0<n) (p q : ℕ) (z : ℂ) :
     dholOne (normalizedEval n hn p q) z =
-      (Real.sqrt (n*p:ℕ):ℂ)*normalizedEval n hn (p-1) q z := by
+      (Real.sqrt (n*p : ℕ) : ℂ)*normalizedEval n hn (p-1) q z := by
   change dholOne (diagonalEvalPublic (normalized n hn p q)) z = _
-  rw [rodrigues_dhol_diagonalEvalPublic,pderiv_Z_normalized]
-  simp [diagonalEvalPublic,normalizedEval]
+  rw [rodrigues_dhol_diagonalEvalPublic, pderiv_Z_normalized]
+  simp [diagonalEvalPublic, normalizedEval]
 
 /-- Literal holomorphic coordinate lowering for the full normalized tensor family. -/
 theorem dholComponent_multivariateNormalized (n : ℕ) (hn : 0<n)
     (p q : Fin n → ℕ) (j : Fin n) (z : Configuration n) :
     dholComponent (multivariateNormalized n hn p q) j z =
-      (Real.sqrt (n*p j:ℕ):ℂ)*multivariateNormalized n hn (lowerAt p j) q z := by
+      (Real.sqrt (n*p j : ℕ) : ℂ)*multivariateNormalized n hn (lowerAt p j) q z := by
   unfold multivariateNormalized
   rw [dholComponent_tensor _ (fun i => differentiable_normalizedEval n hn (p i) (q i)),
     dholOne_normalizedEval]
@@ -94,9 +94,9 @@ theorem dholComponent_multivariateNormalized (n : ℕ) (hn : 0<n)
     (fun i => normalizedEval n hn ((Function.update p j (p j-1)) i) (q i) (z i))
     (Finset.mem_univ j)]
   simp only [Function.update_self]
-  have hprod : (∏ i∈Finset.univ.erase j,normalizedEval n hn
+  have hprod : (∏ i∈Finset.univ.erase j, normalizedEval n hn
       (Function.update p j (p j-1) i) (q i) (z i)) =
-      ∏ i∈Finset.univ.erase j,normalizedEval n hn (p i) (q i) (z i) := by
+      ∏ i∈Finset.univ.erase j, normalizedEval n hn (p i) (q i) (z i) := by
     apply Finset.prod_congr rfl
     intro i hi
     rw [Function.update_of_ne (Finset.mem_erase.mp hi).1]

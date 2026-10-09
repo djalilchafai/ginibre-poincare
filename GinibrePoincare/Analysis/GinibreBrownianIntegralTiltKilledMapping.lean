@@ -21,7 +21,7 @@ theorem actualTiltedKilledPath_map {Ω E : Type*} [MeasurableSpace Ω] [Measurab
     ((P.withDensity d).restrict S).map X=(P.withDensity (S.indicator e)).map Y := by
   have hPath : X=ᵐ[(P.withDensity d).restrict S] Y :=
     (ae_restrict_iff' hS).mpr hXY
-  rw [Measure.map_congr hPath,restrict_withDensity hS,← withDensity_indicator hS]
+  rw [Measure.map_congr hPath, restrict_withDensity hS,← withDensity_indicator hS]
   have hDensity : S.indicator d=ᵐ[P] S.indicator e := by
     filter_upwards [hde] with ω hω
     by_cases hmem : ω∈S

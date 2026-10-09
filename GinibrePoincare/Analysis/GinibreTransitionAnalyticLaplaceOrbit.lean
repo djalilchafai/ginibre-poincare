@@ -22,12 +22,12 @@ theorem actualBochnerTail_translate {E : Type*} [NormedAddCommGroup E] [NormedSp
   have hi : (fun s : ℝ => s+t) '' Ioi 0=Ioi t := by
     ext s
     constructor
-    · rintro ⟨a,ha,rfl⟩
+    · rintro ⟨a, ha, rfl⟩
       change 0<a at ha
       change t<a+t
       linarith
     · intro hs
-      refine ⟨s-t,?_,by ring⟩
+      refine ⟨s-t,?_, by ring⟩
       change t<s at hs
       change 0<s-t
       linarith
@@ -48,7 +48,7 @@ theorem actualContractionLaplace_integrable {E : Type*}
   apply ((integrableOn_exp_mul_Ioi (show -c<0 by linarith) 0).const_mul (c*‖u‖)).mono'
     hs.aestronglyMeasurable
   filter_upwards [] with s
-  rw [norm_smul,Real.norm_eq_abs,abs_of_nonneg (mul_nonneg hc.le (Real.exp_pos _).le)]
+  rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg (mul_nonneg hc.le (Real.exp_pos _).le)]
   calc
     _ ≤ (c*Real.exp (-c*s))*‖u‖ := mul_le_mul_of_nonneg_left (hbound _ _)
       (mul_nonneg hc.le (Real.exp_pos _).le)
@@ -85,13 +85,13 @@ theorem actualContractionLaplace_orbit_formula {E : Type*}
     have hs0 : 0 ≤ s := hs.le
     have hn : (s+(t : ℝ)).toNNReal=t+s.toNNReal := by
       apply NNReal.eq
-      simp only [NNReal.coe_add,Real.coe_toNNReal (s+(t : ℝ)) (add_nonneg hs0 t.property),Real.coe_toNNReal s hs0]
+      simp only [NNReal.coe_add, Real.coe_toNNReal (s+(t : ℝ)) (add_nonneg hs0 t.property), Real.coe_toNNReal s hs0]
       ring
     dsimp only [F]
-    rw [map_smul,smul_smul,hexp,hn,hadd]
+    rw [map_smul, smul_smul, hexp, hn, hadd]
   change A t (∫ s in Ioi (0 : ℝ), F s)=_
-  rw [← (A t).integral_comp_comm hi,integral_congr_ae hpoint,integral_smul,
-    actualBochnerTail_translate F (t : ℝ),htail]
+  rw [← (A t).integral_comp_comm hi, integral_congr_ae hpoint, integral_smul,
+    actualBochnerTail_translate F (t : ℝ), htail]
 
 /-- Actual semigroup orbits through the genuine normalized Laplace range are
 differentiable; their derivative follows from the literal integral formula. -/
@@ -132,9 +132,9 @@ theorem actualContractionLaplace_orbit_derivative {E : Type*}
       _ = c := by simp
   have hDerivative : (c*Real.exp (c*t)) • (r-J t)+Real.exp (c*t) • (0-F t)=
       c • (A t.toNNReal r-A t.toNNReal u) := by
-    rw [mul_smul,← hOrbit,zero_sub,smul_neg]
+    rw [mul_smul,← hOrbit, zero_sub, smul_neg]
     dsimp only [F]
-    rw [smul_smul,hCancel,smul_sub,sub_eq_add_neg]
+    rw [smul_smul, hCancel, smul_sub, sub_eq_add_neg]
   apply (hder.congr_deriv ?_).congr_of_eventuallyEq hEq
   change Real.exp (c*t) • (0-F t)+(c*Real.exp (c*t)) • (r-J t)=_
   rw [add_comm]
@@ -155,7 +155,7 @@ theorem actualContractionLaplace_commutes {E : Type*}
     dsimp only
     rw [map_smul]
     congr 1
-    rw [← hadd,add_comm,hadd]
+    rw [← hadd, add_comm, hadd]
 
 #print axioms actualContractionLaplace_commutes
 

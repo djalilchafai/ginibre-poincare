@@ -13,7 +13,7 @@ set_option backward.isDefEq.respectTransparency false
 theorem ordinaryDolbeaultPiMollification_eq {n : ℕ}
     (φ : ContDiffBump (0 : ℂ)) (a : Configuration n → ℂ) :
     ordinaryDolbeaultMollify (fun p => Complex.ofReal (piPlanarBump n φ p)) a =
-      piPlanarBump n φ ⋆[ContinuousLinearMap.lsmul ℝ ℝ,volume] a := by
+      piPlanarBump n φ ⋆[ContinuousLinearMap.lsmul ℝ ℝ, volume] a := by
   funext p
   unfold ordinaryDolbeaultMollify convolution
   apply integral_congr_ae
@@ -27,8 +27,8 @@ theorem ordinaryDolbeaultPiMollification_closed_ball {n : ℕ}
         (∫ y, dbarComponent θ k y * α j y) = ∫ y, dbarComponent θ j y * α k y)
     (φ : ContDiffBump (0 : ℂ)) (p : Configuration n)
     (hp : φ.rOut + dist p x < R) (j k : Fin n) :
-    dbarComponent (piPlanarBump n φ ⋆[ContinuousLinearMap.lsmul ℝ ℝ,volume] α j) k p =
-      dbarComponent (piPlanarBump n φ ⋆[ContinuousLinearMap.lsmul ℝ ℝ,volume] α k) j p := by
+    dbarComponent (piPlanarBump n φ ⋆[ContinuousLinearMap.lsmul ℝ ℝ, volume] α j) k p =
+      dbarComponent (piPlanarBump n φ ⋆[ContinuousLinearMap.lsmul ℝ ℝ, volume] α k) j p := by
   rw [← ordinaryDolbeaultPiMollification_eq φ (α j),← ordinaryDolbeaultPiMollification_eq φ (α k)]
   exact ordinaryDolbeaultMollify_closed_on (ball x R) α
     (fun t => (hα t).locallyIntegrable (by norm_num)) hclosed _

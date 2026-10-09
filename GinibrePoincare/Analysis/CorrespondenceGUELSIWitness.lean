@@ -19,27 +19,27 @@ theorem gueLSIWitness_square (n : ℕ) (x : EuclideanSpace ℝ (Fin n)) :
   ring
 
 theorem gueLSIWitness_square_integral {n : ℕ} (hn : 0<n) :
-    (∫x,gueLSIWitness n x^2 ∂gueFullMeasure n)=Real.exp ((gueCenterVariance n:ℝ)/2) := by
+    (∫x, gueLSIWitness n x^2 ∂gueFullMeasure n)=Real.exp ((gueCenterVariance n : ℝ)/2) := by
   simp_rw [gueLSIWitness_square]
   rw [gueFullMeasure_center_gaussian_integral hn Real.exp]
   have h := congrFun (mgf_fun_id_gaussianReal (μ := 0) (v := gueCenterVariance n)) 1
-  simpa only [mgf,zero_mul,zero_add,one_pow,mul_one,one_mul] using h
+  simpa only [mgf, zero_mul, zero_add, one_pow, mul_one, one_mul] using h
 
 theorem gueLSIWitness_entropy_integral {n : ℕ} (hn : 0<n) :
-    (∫x,gueLSIWitness n x^2*Real.log (gueLSIWitness n x^2) ∂gueFullMeasure n)=
-      (gueCenterVariance n:ℝ)*Real.exp ((gueCenterVariance n:ℝ)/2) := by
-  simp_rw [gueLSIWitness_square,Real.log_exp]
+    (∫x, gueLSIWitness n x^2*Real.log (gueLSIWitness n x^2) ∂gueFullMeasure n)=
+      (gueCenterVariance n : ℝ)*Real.exp ((gueCenterVariance n : ℝ)/2) := by
+  simp_rw [gueLSIWitness_square, Real.log_exp]
   rw [gueFullMeasure_center_gaussian_integral hn (fun t => Real.exp t*t)]
   have hd := deriv_mgf (X := fun x : ℝ => x) (μ := gaussianReal 0 (gueCenterVariance n))
     (t := 1) (by simp)
   rw [mgf_fun_id_gaussianReal] at hd
-  have hdexp : HasDerivAt (fun t : ℝ => Real.exp ((gueCenterVariance n:ℝ)*t^2/2))
-      ((gueCenterVariance n:ℝ)*Real.exp ((gueCenterVariance n:ℝ)/2)) 1 := by
-    convert (((hasDerivAt_id (1:ℝ)).pow 2).const_mul (gueCenterVariance n:ℝ) |>.div_const 2).exp using 1 <;> norm_num <;> ring
-  have he : (fun t : ℝ => Real.exp ((0:ℝ)*t+(gueCenterVariance n:ℝ)*t^2/2))=
-      (fun t : ℝ => Real.exp ((gueCenterVariance n:ℝ)*t^2/2)) := by simp
-  rw [he,hdexp.deriv] at hd
-  simpa only [one_mul,mul_one,mul_comm] using hd.symm
+  have hdexp : HasDerivAt (fun t : ℝ => Real.exp ((gueCenterVariance n : ℝ)*t^2/2))
+      ((gueCenterVariance n : ℝ)*Real.exp ((gueCenterVariance n : ℝ)/2)) 1 := by
+    convert (((hasDerivAt_id (1 : ℝ)).pow 2).const_mul (gueCenterVariance n : ℝ) |>.div_const 2).exp using 1 <;> norm_num <;> ring
+  have he : (fun t : ℝ => Real.exp ((0 : ℝ)*t+(gueCenterVariance n : ℝ)*t^2/2))=
+      (fun t : ℝ => Real.exp ((gueCenterVariance n : ℝ)*t^2/2)) := by simp
+  rw [he, hdexp.deriv] at hd
+  simpa only [one_mul, mul_one, mul_comm] using hd.symm
 
 
 theorem gueLSIWitness_contDiff (n : ℕ) : ContDiff ℝ ∞ (gueLSIWitness n) :=
@@ -50,30 +50,30 @@ theorem gueLSIWitness_gradient (n : ℕ) (x : EuclideanSpace ℝ (Fin n)) :
   have hd0 : HasFDerivAt (gueCenterCoordinate n)
       (InnerProductSpace.toDual ℝ (EuclideanSpace ℝ (Fin n)) (gueCenterUnit n)) x :=
     (InnerProductSpace.toDual ℝ (EuclideanSpace ℝ (Fin n)) (gueCenterUnit n)).hasFDerivAt
-  have hd := (hd0.const_mul (1/2:ℝ)).exp
-  have he (y) : (1/2:ℝ)*gueCenterCoordinate n y=gueCenterCoordinate n y/2 := by ring
+  have hd := (hd0.const_mul (1/2 : ℝ)).exp
+  have he (y) : (1/2 : ℝ)*gueCenterCoordinate n y=gueCenterCoordinate n y/2 := by ring
   simp_rw [he] at hd
   unfold gradient gueLSIWitness
   rw [hd.fderiv]
   simp only [map_smul]
-  rw [(InnerProductSpace.toDual ℝ (EuclideanSpace ℝ (Fin n))).symm_apply_apply,smul_smul]
+  rw [(InnerProductSpace.toDual ℝ (EuclideanSpace ℝ (Fin n))).symm_apply_apply, smul_smul]
   congr 1
   ring
 
 theorem gueLSIWitness_gradient_energy {n : ℕ} (hn : 0<n) :
-    (∫x,‖gradient (gueLSIWitness n) x‖^2 ∂gueFullMeasure n)=
-      (1/4)*Real.exp ((gueCenterVariance n:ℝ)/2) := by
-  simp_rw [gueLSIWitness_gradient,norm_smul,gueCenterUnit_norm hn,mul_one,Real.norm_eq_abs,sq_abs,div_pow]
-  have he (x) : gueLSIWitness n x^2/(2:ℝ)^2=(1/4)*gueLSIWitness n x^2 := by ring
+    (∫x, ‖gradient (gueLSIWitness n) x‖^2 ∂gueFullMeasure n)=
+      (1/4)*Real.exp ((gueCenterVariance n : ℝ)/2) := by
+  simp_rw [gueLSIWitness_gradient, norm_smul, gueCenterUnit_norm hn, mul_one, Real.norm_eq_abs, sq_abs, div_pow]
+  have he (x) : gueLSIWitness n x^2/(2 : ℝ)^2=(1/4)*gueLSIWitness n x^2 := by ring
   simp_rw [he]
-  rw [integral_const_mul,gueLSIWitness_square_integral hn]
+  rw [integral_const_mul, gueLSIWitness_square_integral hn]
 
 theorem gueLSIWitness_lsi_equality {n : ℕ} (hn : 0<n) :
     squareEntropy (gueFullMeasure n) (gueLSIWitness n)=
-      (2/(n:ℝ))*(∫x,‖gradient (gueLSIWitness n) x‖^2 ∂gueFullMeasure n) := by
+      (2/(n : ℝ))*(∫x, ‖gradient (gueLSIWitness n) x‖^2 ∂gueFullMeasure n) := by
   unfold squareEntropy
-  rw [gueLSIWitness_entropy_integral hn,gueLSIWitness_square_integral hn,Real.log_exp,
-    gueLSIWitness_gradient_energy hn,show (gueCenterVariance n:ℝ)=(n:ℝ)⁻¹ from rfl]
+  rw [gueLSIWitness_entropy_integral hn, gueLSIWitness_square_integral hn, Real.log_exp,
+    gueLSIWitness_gradient_energy hn, show (gueCenterVariance n : ℝ)=(n : ℝ)⁻¹ from rfl]
   ring
 
 theorem gueLSIWitness_memLp {n : ℕ} (hn : 0<n) : MemLp (gueLSIWitness n) 2 (gueFullMeasure n) := by

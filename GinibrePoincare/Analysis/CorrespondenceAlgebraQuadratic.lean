@@ -13,19 +13,19 @@ def correspondenceRelativePhase (n : ℕ) (ζ : ℂ) (z : Configuration n) : Con
 theorem correspondenceRelativePhase_sum {n : ℕ} (hn : 0<n) (ζ : ℂ) (z : Configuration n) :
     coordinateSum (correspondenceRelativePhase n ζ z) = coordinateSum z := by
   have hnC : (n : ℂ) ≠ 0 := by exact_mod_cast hn.ne'
-  simp only [correspondenceRelativePhase,coordinateSum,Finset.sum_add_distrib,Finset.sum_const,
-    Finset.card_univ,Fintype.card_fin,nsmul_eq_mul,← Finset.mul_sum]
+  simp only [correspondenceRelativePhase, coordinateSum, Finset.sum_add_distrib, Finset.sum_const,
+    Finset.card_univ, Fintype.card_fin, nsmul_eq_mul,← Finset.mul_sum]
   change (n : ℂ)*(coordinateSum z/(n : ℂ))+ζ*coordinateSum (recenteredConfiguration n z) = coordinateSum z
-  rw [coordinateSum_recentered,mul_zero,add_zero]
+  rw [coordinateSum_recentered, mul_zero, add_zero]
   exact mul_div_cancel₀ _ hnC
 
 theorem correspondenceRelativePhase_recenter {n : ℕ} (hn : 0<n) (ζ : ℂ) (z : Configuration n) :
     recenteredConfiguration n (correspondenceRelativePhase n ζ z) =
       fun j => ζ*recenteredConfiguration n z j := by
   ext j
-  simp only [recenteredConfiguration,projectToOrthogonal]
+  simp only [recenteredConfiguration, projectToOrthogonal]
   rw [correspondenceRelativePhase_sum hn]
-  simp only [correspondenceRelativePhase,recenteredConfiguration,projectToOrthogonal]
+  simp only [correspondenceRelativePhase, recenteredConfiguration, projectToOrthogonal]
   ring
 
 /-- Remark 1.6 covariance holds for every complex phase, hence every angle. -/
@@ -44,8 +44,8 @@ theorem correspondenceQuadratic_sum_decomposition {n : ℕ} (hn : 0<n) (z : Conf
         (n : ℂ)*(coordinateSum z/(n : ℂ))^2 := by
     unfold ginibreCenteredQuadratic recenteredConfiguration projectToOrthogonal
     simp_rw [sub_sq]
-    simp only [Finset.sum_add_distrib,Finset.sum_sub_distrib,Finset.sum_const,
-      Finset.card_univ,Fintype.card_fin,nsmul_eq_mul]
+    simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib, Finset.sum_const,
+      Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
     rw [← Finset.sum_mul]
     change _ = _
     simp only [coordinateSum,← Finset.mul_sum]

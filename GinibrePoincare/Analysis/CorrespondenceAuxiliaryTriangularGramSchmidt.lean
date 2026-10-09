@@ -30,23 +30,23 @@ theorem gramSchmidtNormed_of_positive_triangular
       simp
     have htri_i := htri i
     rw [himage] at htri_i
-    obtain ⟨a,ha⟩ := (Submodule.mem_span_range_iff_exists_fun ℂ).mp htri_i
+    obtain ⟨a, ha⟩ := (Submodule.mem_span_range_iff_exists_fun ℂ).mp htri_i
     have hf : f i = (c i : ℂ) • g i + ∑ j : {j : ι // j < i}, a j • g j := by
       rw [ha]
       abel
     rw [InnerProductSpace.gramSchmidt_def]
     have hproject (j : ι) (hj : j ∈ Finset.Iio i) :
         (ℂ ∙ InnerProductSpace.gramSchmidt ℂ f j).starProjection (f i) =
-          a ⟨j,Finset.mem_Iio.mp hj⟩ • g j := by
+          a ⟨j, Finset.mem_Iio.mp hj⟩ • g j := by
       rw [ih j (Finset.mem_Iio.mp hj)]
       simp only [Submodule.span_singleton_smul_eq
         (isUnit_iff_ne_zero.mpr (Complex.ofReal_ne_zero.mpr (hc j).ne'))]
-      rw [Submodule.starProjection_singleton,hg.norm_eq_one,one_pow,RCLike.ofReal_one,div_one,hf,
-        inner_add_right,inner_smul_right,inner_sum]
+      rw [Submodule.starProjection_singleton, hg.norm_eq_one, one_pow, RCLike.ofReal_one, div_one, hf,
+        inner_add_right, inner_smul_right, inner_sum]
       have hjne : j ≠ i := (Finset.mem_Iio.mp hj).ne
-      rw [hinner j i,ite_eq_right hjne,mul_zero,zero_add]
-      simp_rw [inner_smul_right,hinner]
-      rw [Finset.sum_eq_single ⟨j,Finset.mem_Iio.mp hj⟩]
+      rw [hinner j i, ite_eq_right hjne, mul_zero, zero_add]
+      simp_rw [inner_smul_right, hinner]
+      rw [Finset.sum_eq_single ⟨j, Finset.mem_Iio.mp hj⟩]
       · simp
       · intro k hk hkj
         have hne : j ≠ k.val := by
@@ -63,11 +63,11 @@ theorem gramSchmidtNormed_of_positive_triangular
       apply Finset.sum_congr rfl
       intro j hj
       exact hproject j (Finset.mem_Iio.mpr j.property)
-    rw [hsum,hf]
+    rw [hsum, hf]
     abel
   funext i
-  rw [InnerProductSpace.gramSchmidtNormed,hgs i,norm_smul,Complex.norm_real,
-    Real.norm_eq_abs,abs_of_pos (hc i),hg.norm_eq_one,mul_one,smul_smul]
+  rw [InnerProductSpace.gramSchmidtNormed, hgs i, norm_smul, Complex.norm_real,
+    Real.norm_eq_abs, abs_of_pos (hc i), hg.norm_eq_one, mul_one, smul_smul]
   simp [Complex.ofReal_ne_zero.mpr (hc i).ne']
 
 #print axioms gramSchmidtNormed_of_positive_triangular

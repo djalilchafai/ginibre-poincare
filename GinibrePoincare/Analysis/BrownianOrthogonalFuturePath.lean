@@ -27,16 +27,16 @@ theorem brownianFamily_whole_future_independent_past {Ω ι : Type*}
     intro q
     cases q with
     | inl q =>
-      rcases q with ⟨i,t⟩
-      refine ⟨{(i,s+t),(i,s)},
-        { toFun := fun v => v ⟨(i,s+t), by simp⟩-v ⟨(i,s), by simp⟩
+      rcases q with ⟨i, t⟩
+      refine ⟨{(i, s+t), (i, s)},
+        { toFun := fun v => v ⟨(i, s+t), by simp⟩-v ⟨(i, s), by simp⟩
           map_add' := by intros; simp only [Pi.add_apply]; ring
           map_smul' := by intros; simp only [Pi.smul_apply, smul_eq_mul, RingHom.id_apply]; ring }, ?_⟩
       intro ω
       rfl
     | inr p =>
-      refine ⟨{(p.1,(p.2 : ℝ≥0))},
-        { toFun := fun v => v ⟨(p.1,(p.2 : ℝ≥0)), by simp⟩
+      refine ⟨{(p.1, (p.2 : ℝ≥0))},
+        { toFun := fun v => v ⟨(p.1, (p.2 : ℝ≥0)), by simp⟩
           map_add' := by intros; rfl
           map_smul' := by intros; rfl }, ?_⟩
       intro ω
@@ -45,12 +45,12 @@ theorem brownianFamily_whole_future_independent_past {Ω ι : Type*}
     (fun q => (hB q.1).aemeasurable (s+q.2) |>.sub ((hB q.1).aemeasurable s))
     (fun p => (hB p.1).aemeasurable p.2)
   intro q p
-  rcases q with ⟨i,t⟩
-  rcases p with ⟨j,v⟩
-  have hXi : MemLp (X (i,t)) 2 P :=
+  rcases q with ⟨i, t⟩
+  rcases p with ⟨j, v⟩
+  have hXi : MemLp (X (i, t)) 2 P :=
     ((hB i).isGaussianProcess.hasGaussianLaw_eval (s+t)).memLp_two.sub
       ((hB i).isGaussianProcess.hasGaussianLaw_eval s).memLp_two
-  have hYj : MemLp (Y (j,v)) 2 P := ((hB j).isGaussianProcess.hasGaussianLaw_eval v).memLp_two
+  have hYj : MemLp (Y (j, v)) 2 P := ((hB j).isGaussianProcess.hasGaussianLaw_eval v).memLp_two
   by_cases hij : i = j
   · subst j
     have hi := (ginibreBrownian_increment_whole_past_independent (B i) P (hB i) s t).comp
@@ -98,12 +98,12 @@ theorem brownianFamily_future_independent_augmented_variable {Ω ι A : Type*}
       (ginibreBrownianFamilyPastSpace B s) (ginibreBrownianFamilyPastSpace_le B P hB s)
       X hx Y hY
     exact brownianFamily_whole_future_independent_past B P hB hind s
-  have hm : Measurable (fun p : (ι × ℝ≥0) → ℝ => fun i t => p (i,t)) := by
+  have hm : Measurable (fun p : (ι × ℝ≥0) → ℝ => fun i t => p (i, t)) := by
     apply measurable_pi_lambda
     intro i
     apply measurable_pi_lambda
     intro t
-    exact measurable_pi_apply (i,t)
+    exact measurable_pi_apply (i, t)
   exact hi.comp hm measurable_id
 
 end

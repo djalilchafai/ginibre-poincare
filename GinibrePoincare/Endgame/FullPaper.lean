@@ -63,6 +63,13 @@ public import GinibrePoincare.Endgame.CorrespondenceEndpoints
 
 The concrete paper results are exported on their stated domains:
 
+For a mathematical reading order, use `HUMAN_READABILITY.md` and its four
+topic guides. To consume large conclusions without positional projections,
+use `fullTheoremOneNine_named`, `fullTheoremOneTen_named`,
+`fullMatrixLift_named`, `correspondenceOperatorNumber_has_bochner_data`, and
+`ginibreBrownianMaximalProcess_CIR_realization_named`. Their result records
+give named access to the same proved identities and domain facts.
+
 * `fullTheoremOneNine`: both exact deficits on the full real generator graph,
   with sharp equality classification on the entire symmetric weak domain.
 * `fullTheoremOneNinePointwiseGamma`: both deficits on the compact smooth

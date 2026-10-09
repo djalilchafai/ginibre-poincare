@@ -84,7 +84,7 @@ theorem brownianUnitShiftedUniformSum_tendstoInMeasure_of_horizon_limits
         have hd := brownianActualLeftGridSum_memLp_two B P hB hind i _
           (fun r => hum r i) (fun r => hui r i) (itoConcatenatedGrid s t (n+1))
           (itoConcatenatedGrid_monotone s t (n+1) (Nat.succ_pos n)) ((n+1)+(n+1))
-        simpa only [sub_zero,brownianActualLeftGridSum,brownianUniformLeftSum,Pi.sub_apply] using (ha.sub hd).integrable_sq
+        simpa only [sub_zero, brownianActualLeftGridSum, brownianUniformLeftSum, Pi.sub_apply] using (ha.sub hd).integrable_sq
       · simpa only [sub_zero] using hi i
     have hsum := itoTendstoInMeasure_finset_sum P Finset.univ _ _
       (fun i n => by
@@ -94,18 +94,18 @@ theorem brownianUnitShiftedUniformSum_tendstoInMeasure_of_horizon_limits
           (fun r => hum r i) (fun r => hui r i) (itoConcatenatedGrid s t (n+1))
           (itoConcatenatedGrid_monotone s t (n+1) (Nat.succ_pos n)) ((n+1)+(n+1))
         exact (ha.sub hd).aestronglyMeasurable) (fun i => hcoord i)
-    simpa only [A,D,Finset.sum_sub_distrib,Finset.sum_const_zero] using hsum
+    simpa only [A, D, Finset.sum_sub_distrib, Finset.sum_const_zero] using hsum
   have hDl := actualTendstoInMeasure_sub P A (fun n ω => A n ω-D n ω) I (fun _ => 0)
     (fun n => (hAm n).aestronglyMeasurable)
     (fun n => ((hAm n).sub (hDm n)).aestronglyMeasurable) hI herr
   have hDl' : TendstoInMeasure P D atTop I := by
-    simpa only [sub_sub_cancel,sub_zero] using hDl
+    simpa only [sub_sub_cancel, sub_zero] using hDl
   have h := actualTendstoInMeasure_sub P D R I J
     (fun n => (hDm n).aestronglyMeasurable) (fun n => (hRm n).aestronglyMeasurable) hDl' hJ
   have he : (fun n ω => D n ω-R n ω) =
       (fun n => brownianUnitShiftedUniformSum B u s t (n+1)) := by
     funext n ω
-    simp only [D,R,brownianUnitShiftedUniformSum]
+    simp only [D, R, brownianUnitShiftedUniformSum]
     simp_rw [brownianActualLeftGridSum_concatenated _ _ s t (n+1) (Nat.succ_pos n) ω]
     rw [Finset.sum_add_distrib]
     ring

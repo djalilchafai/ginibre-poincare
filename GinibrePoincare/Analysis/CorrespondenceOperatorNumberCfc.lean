@@ -21,17 +21,17 @@ theorem correspondenceOperatorNumberResolvent_basis (n : ℕ) (hn : 0<n)
       gaussianHermiteCoefficient hn ((gaussianHermiteHilbertBasis n hn) pq) ij=
         if ij=pq then 1 else 0 := by
     change (gaussianHermiteHilbertBasis n hn).repr ((gaussianHermiteHilbertBasis n hn) pq) ij=_
-    rw [HilbertBasis.repr_self,lp.single_apply]
+    rw [HilbertBasis.repr_self, lp.single_apply]
     simp [Pi.single_apply]
   have hsm : gaussianHermiteCoefficient hn
       (correspondenceOperatorNumberResolventWeight n pq • (gaussianHermiteHilbertBasis n hn) pq) ab=
-      (correspondenceOperatorNumberResolventWeight n pq:ℂ)*
+      (correspondenceOperatorNumberResolventWeight n pq : ℂ)*
         gaussianHermiteCoefficient hn ((gaussianHermiteHilbertBasis n hn) pq) ab := by
     rw [gaussianHermiteCoefficient_eq_inner]
     change inner ℂ (multivariateNormalizedL2 n hn ab.1 ab.2)
-      ((correspondenceOperatorNumberResolventWeight n pq:ℂ) • (gaussianHermiteHilbertBasis n hn) pq) = _
+      ((correspondenceOperatorNumberResolventWeight n pq : ℂ) • (gaussianHermiteHilbertBasis n hn) pq) = _
     rw [inner_smul_right,← gaussianHermiteCoefficient_eq_inner]
-  rw [hsm,hc]
+  rw [hsm, hc]
   by_cases h : ab=pq
   · subst ab
     simp [correspondenceOperatorNumberResolventWeight]
@@ -41,7 +41,7 @@ theorem correspondenceOperatorNumber_cfc_coefficient (n : ℕ) (hn : 0<n)
     (f : ℝ→ℝ) (hf : ContinuousOn f (spectrum ℝ (correspondenceOperatorNumberResolvent n hn)))
     (u : Lp ℂ 2 (complexGaussianMeasure n)) (pq : HermiteMultiIndex n) :
     gaussianHermiteCoefficient hn (cfc f (correspondenceOperatorNumberResolvent n hn) u) pq=
-      (f (correspondenceOperatorNumberResolventWeight n pq):ℂ)*gaussianHermiteCoefficient hn u pq := by
+      (f (correspondenceOperatorNumberResolventWeight n pq) : ℂ)*gaussianHermiteCoefficient hn u pq := by
   have hR := correspondenceOperatorNumberResolvent_isSelfAdjoint n hn
   have hx := correspondenceOperatorNumberResolvent_basis n hn pq
   have hr := correspondenceOperator_eigenvalue_mem_spectrum _ _ _
@@ -52,11 +52,11 @@ theorem correspondenceOperatorNumber_cfc_coefficient (n : ℕ) (hn : 0<n)
   have hSym := hS ((gaussianHermiteHilbertBasis n hn) pq) u
   change inner ℂ (cfc f (correspondenceOperatorNumberResolvent n hn) ((gaussianHermiteHilbertBasis n hn) pq)) u=
     inner ℂ ((gaussianHermiteHilbertBasis n hn) pq) (cfc f (correspondenceOperatorNumberResolvent n hn) u) at hSym
-  rw [← hSym,he]
-  change inner ℂ ((f (correspondenceOperatorNumberResolventWeight n pq):ℂ) • (gaussianHermiteHilbertBasis n hn) pq) u=_
+  rw [← hSym, he]
+  change inner ℂ ((f (correspondenceOperatorNumberResolventWeight n pq) : ℂ) • (gaussianHermiteHilbertBasis n hn) pq) u=_
   rw [inner_smul_left]
   simp only [Complex.conj_ofReal]
-  rw [gaussianHermiteCoefficient_eq_inner,gaussianHermiteHilbertBasis_apply]
+  rw [gaussianHermiteCoefficient_eq_inner, gaussianHermiteHilbertBasis_apply]
 #print axioms correspondenceOperatorNumberResolvent_basis
 #print axioms correspondenceOperatorNumber_cfc_coefficient
 end

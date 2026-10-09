@@ -41,10 +41,10 @@ theorem ginibreContinuousMartingale_global_of_horizon_limits
   have hcompat : ∀ᵐ ω ∂P, ∀ (n m : ℕ), ∀ t ≤ min (n+1 : ℝ≥0) (m+1 : ℝ≥0),
       M n t ω=M m t ω := ae_all_iff.mpr (fun n => ae_all_iff.mpr (hpair n))
   have hex (t : ℝ≥0) : ∃ n : ℕ, t < (n+1 : ℝ≥0) := by
-    obtain ⟨n,hn⟩ := exists_nat_gt (t : ℝ)
+    obtain ⟨n, hn⟩ := exists_nat_gt (t : ℝ)
     refine ⟨n,?_⟩
     apply NNReal.coe_lt_coe.mp
-    simpa only [NNReal.coe_add,NNReal.coe_natCast,NNReal.coe_one] using hn.trans (lt_add_one (n : ℝ))
+    simpa only [NNReal.coe_add, NNReal.coe_natCast, NNReal.coe_one] using hn.trans (lt_add_one (n : ℝ))
   choose idx hidx using hex
   let J := fun t ω => M (idx t) t ω
   have heq (t : ℝ≥0) (n : ℕ) (ht : t ≤ (n+1 : ℝ≥0)) : J t =ᵐ[P] M n t := by
@@ -64,7 +64,7 @@ theorem ginibreContinuousMartingale_global_of_horizon_limits
       filter_upwards [isOpen_Iio.mem_nhds (hidx t)] with s hs
       exact hω (idx s) (idx t) s (le_min (hidx s).le hs.le)
     exact ((hMC (idx t) ω).continuousAt).congr he.symm
-  refine ⟨J,hJM,hJC,fun t => hML (idx t) t,?_,fun t => hlim (idx t) t (hidx t).le⟩
+  refine ⟨J, hJM, hJC, fun t => hML (idx t) t,?_, fun t => hlim (idx t) t (hidx t).le⟩
   exact (heq 0 0 (by norm_num)).trans (hM0 0)
 
 theorem ginibreUnitField_global_continuous_integral_exists
@@ -88,11 +88,11 @@ theorem ginibreUnitField_global_continuous_integral_exists
   have hex (n : ℕ) := ginibreUnitField_continuous_integral_exists B P hB hind u hu hunit
     (n+1 : ℝ≥0) (hc.mono (fun ω hω => hω.continuousOn)) i₀
   choose M hM hMC hML hM0 hMS hMlaw using hex
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hJS⟩ := ginibreContinuousMartingale_global_of_horizon_limits P
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hJS⟩ := ginibreContinuousMartingale_global_of_horizon_limits P
     (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal))
     (fun t k ω => ∑ i, brownianUniformLeftSum (B i) (fun s ω => u s ω i) t (k+1) ω)
     M hM hMC hML hM0 hMS
-  refine ⟨J,hJM,hJC,hJL,hJ0,hJS,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0, hJS,?_⟩
   intro t
   exact brownianUnitField_integral_limit_gaussian B P (fun i => (hB i).toIsPreBrownianReal)
     hind u hu hunit i₀ t (J t) (hJS t)

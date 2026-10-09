@@ -36,7 +36,7 @@ theorem correspondenceBrascampLieb_probability_measure
     (hm : (∫ x, bakryEmeryGibbsWeight W x) = 1) :
     IsProbabilityMeasure (correspondenceBrascampLiebMeasure W) := by
   refine ⟨?_⟩
-  rw [correspondenceBrascampLieb_mass W hi,hm]
+  rw [correspondenceBrascampLieb_mass W hi, hm]
   norm_num
 
 #print axioms correspondenceBrascampLieb_probability_measure

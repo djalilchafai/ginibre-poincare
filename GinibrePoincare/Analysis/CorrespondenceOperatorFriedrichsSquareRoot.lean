@@ -12,8 +12,8 @@ set_option maxHeartbeats 1800000
 nonnegative Friedrichs operator `−A`, with equality of maximal graph domains. -/
 theorem correspondenceFriedrichsSquareRoot_square (n : ℕ) (hn : 0<n)
     (u w : GinibreFullComplexL2 n) :
-    (∃v,(u,v)∈(correspondenceFriedrichsSquareRoot n hn).graph ∧
-      (v,w)∈(correspondenceFriedrichsSquareRoot n hn).graph) ↔
+    (∃v, (u, v)∈(correspondenceFriedrichsSquareRoot n hn).graph ∧
+      (v, w)∈(correspondenceFriedrichsSquareRoot n hn).graph) ↔
     (u,-w)∈(correspondenceOperatorGenerator n hn).graph := by
   let B:=correspondenceFriedrichsResolventSqrt n hn
   let C:=correspondenceFriedrichsComplementSqrt n hn
@@ -27,14 +27,14 @@ theorem correspondenceFriedrichsSquareRoot_square (n : ℕ) (hn : 0<n)
     have h := congrArg (fun L : GinibreFullComplexL2 n→L[ℂ]GinibreFullComplexL2 n=>L x)
       (correspondenceFriedrichsComplementSqrt_square n hn)
     simpa using h
-  simp only [correspondenceFriedrichsSquareRoot_graph,correspondenceFriedrichsSquareRootGraph,
-    correspondenceSquareRootGraph_mem,correspondenceOperatorGenerator_graph_iff,sub_neg_eq_add]
-  change (∃v,B v=C u ∧ B w=C v) ↔ R (u+w)=u
+  simp only [correspondenceFriedrichsSquareRoot_graph, correspondenceFriedrichsSquareRootGraph,
+    correspondenceSquareRootGraph_mem, correspondenceOperatorGenerator_graph_iff, sub_neg_eq_add]
+  change (∃v, B v=C u ∧ B w=C v) ↔ R (u+w)=u
   constructor
-  · rintro ⟨v,hv,hw⟩
+  · rintro ⟨v, hv, hw⟩
     have he : R w=u-R u := by
-      rw [← hb,hw,hc,hv,hcc]
-    rw [map_add,he]
+      rw [← hb, hw, hc, hv, hcc]
+    rw [map_add, he]
     abel
   · intro h
     have hRw : R w=u-R u := by
@@ -43,18 +43,18 @@ theorem correspondenceFriedrichsSquareRoot_square (n : ℕ) (hn : 0<n)
     let v:=C (B (u+w))
     have hv : B v=C u := by
       change B (C (B (u+w)))=C u
-      rw [hc,hb,h]
-    refine ⟨v,hv,?_⟩
+      rw [hc, hb, h]
+    refine ⟨v, hv,?_⟩
     apply correspondenceFriedrichsResolventSqrt_injective n hn
     change B (B w)=B (C v)
-    rw [hb,hc,hv,hcc,hRw]
+    rw [hb, hc, hv, hcc, hRw]
 
 /-- Positivity singles out the nonnegative self-adjoint square root. -/
 theorem correspondenceFriedrichsSquareRoot_nonnegative (n : ℕ) (hn : 0<n)
     (u v : GinibreFullComplexL2 n)
-    (huv : (u,v)∈(correspondenceFriedrichsSquareRoot n hn).graph) :
+    (huv : (u, v)∈(correspondenceFriedrichsSquareRoot n hn).graph) :
     0≤(inner ℂ u v).re := by
-  obtain ⟨x,rfl,rfl⟩ := (correspondenceFriedrichsSquareRoot_graph_parametrize n hn u v).mp huv
+  obtain ⟨x, rfl, rfl⟩ := (correspondenceFriedrichsSquareRoot_graph_parametrize n hn u v).mp huv
   have hB : 0≤correspondenceFriedrichsResolventSqrt n hn := CFC.sqrt_nonneg _
   have hC : 0≤correspondenceFriedrichsComplementSqrt n hn := CFC.sqrt_nonneg _
   have hBC := Commute.mul_nonneg hB hC (correspondenceFriedrichsSquareRoots_commute n hn)
@@ -71,24 +71,24 @@ actual ordinary distributional gradients in the concrete weighted L² space. -/
 theorem correspondenceFriedrichsSquareRoot_domain_ordinary_H1 (n : ℕ) (hn : 0<n)
     (u : GinibreFullComplexL2 n) :
     u∈(correspondenceFriedrichsSquareRoot n hn).domain ↔
-      (∃g : GinibreFullGradientL2 n,IsGinibreDistributionalGradient n (ginibreFullComplexRe n u) g) ∧
-      (∃g : GinibreFullGradientL2 n,IsGinibreDistributionalGradient n (ginibreFullComplexIm n u) g) := by
-  rw [← SetLike.mem_coe,correspondenceFriedrichsSquareRoot_domain,correspondenceFriedrichsResolventSqrt_range_form]
+      (∃g : GinibreFullGradientL2 n, IsGinibreDistributionalGradient n (ginibreFullComplexRe n u) g) ∧
+      (∃g : GinibreFullGradientL2 n, IsGinibreDistributionalGradient n (ginibreFullComplexIm n u) g) := by
+  rw [← SetLike.mem_coe, correspondenceFriedrichsSquareRoot_domain, correspondenceFriedrichsResolventSqrt_range_form]
   constructor
-  · rintro ⟨p,rfl⟩
-    exact ⟨⟨correspondenceOperatorFormGradient n hn p.fst,by
+  · rintro ⟨p, rfl⟩
+    exact ⟨⟨correspondenceOperatorFormGradient n hn p.fst, by
       rw [correspondenceComplexFormValue_re]
       exact correspondenceOperatorFormSpace_weak n hn p.fst⟩,
-      ⟨correspondenceOperatorFormGradient n hn p.snd,by
+      ⟨correspondenceOperatorFormGradient n hn p.snd, by
         rw [correspondenceComplexFormValue_im]
         exact correspondenceOperatorFormSpace_weak n hn p.snd⟩⟩
-  · rintro ⟨⟨g,hg⟩,⟨h,hh⟩⟩
-    let pr:=correspondenceOperatorFormOfWeak n hn ⟨(ginibreFullComplexRe n u,g),hg⟩
-    let pi:=correspondenceOperatorFormOfWeak n hn ⟨(ginibreFullComplexIm n u,h),hh⟩
-    refine ⟨WithLp.toLp 2 (pr,pi),?_⟩
+  · rintro ⟨⟨g, hg⟩, ⟨h, hh⟩⟩
+    let pr:=correspondenceOperatorFormOfWeak n hn ⟨(ginibreFullComplexRe n u, g), hg⟩
+    let pi:=correspondenceOperatorFormOfWeak n hn ⟨(ginibreFullComplexIm n u, h), hh⟩
+    refine ⟨WithLp.toLp 2 (pr, pi),?_⟩
     change ginibreFullComplexOfReal n (correspondenceOperatorFormValue n hn pr)+
       Complex.I •ginibreFullComplexOfReal n (correspondenceOperatorFormValue n hn pi)=u
-    rw [correspondenceOperatorFormOfWeak_value,correspondenceOperatorFormOfWeak_value]
+    rw [correspondenceOperatorFormOfWeak_value, correspondenceOperatorFormOfWeak_value]
     exact ginibreFullComplex_decomposition n u
 
 #print axioms correspondenceFriedrichsSquareRoot_square

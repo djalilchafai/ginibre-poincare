@@ -35,7 +35,7 @@ theorem ginibreBrownian_radial_driver_eq_Lamperti_functional
   have hx := (ginibreBrownianMaximalProcess_global_original_solution (by omega) α z hz B P hB hind).2
   have hc : 0 < Real.sqrt (2*(α : ℝ)/(n : ℝ)) := Real.sqrt_pos.mpr
     (div_pos (mul_pos (by norm_num) (show 0 < (α : ℝ) from hα)) (by exact_mod_cast (show 0 < n by omega)))
-  filter_upwards [hl,hp,hx] with ω hl hp hx
+  filter_upwards [hl, hp, hx] with ω hl hp hx
   funext t
   have hX : Continuous (fun s : ℝ≥0 => ginibreBrownianMaximalProcess n α z B s ω) := by
     simpa only [Real.toNNReal_coe] using
@@ -95,8 +95,8 @@ theorem ginibreBrownian_center_zero_speed_constant
   have hCenter : ∀ s, ginibreContinuousNoiseCenter n (ginibreBrownianFullContinuousNoise n B 0 ω) s = 0 := by
     intro s
     change coordinateSumCLM n ((ginibreBrownianFullContinuousNoise n B 0 ω).val s)=0
-    rw [hN s,map_zero]
-  simp [ginibreCenterOUValue,drivenOUPath,drivenOUCorrection,hCenter]
+    rw [hN s, map_zero]
+  simp [ginibreCenterOUValue, drivenOUPath, drivenOUCorrection, hCenter]
 
  theorem ginibreBrownian_center_radial_driver_independent_all_speeds
     {Ω : Type*} [MeasurableSpace Ω] {n : ℕ} (hn : 2 ≤ n) (α : ℝ≥0)
@@ -125,7 +125,7 @@ theorem ginibreBrownian_independent_radial_Brownian_exists
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (P : Measure Ω)
     [IsProbabilityMeasure P] [P.IsComplete] (hB : ∀ i, IsBrownianReal (B i) P)
     (hind : iIndepFun (fun i ω t => B i t ω) P) :
-    let e : EuclideanSpace ℝ (Fin n × Fin 2) := EuclideanSpace.single (⟨0,by omega⟩,0) 1
+    let e : EuclideanSpace ℝ (Fin n × Fin 2) := EuclideanSpace.single (⟨0, by omega⟩, 0) 1
     ∃ β : ℝ≥0 → Ω → ℝ, IsBrownianReal β P ∧
       IndepFun (fun ω t => coordinateSum (ginibreBrownianMaximalProcess n α z B t ω))
         (fun ω t => β t ω) P ∧
@@ -133,9 +133,9 @@ theorem ginibreBrownian_independent_radial_Brownian_exists
         brownianUniformLeftSum (B i) (fun s ω =>
           ginibreRecenteredRadialDirection n e (ginibreBrownianMaximalProcess n α z B s ω) i)
           t (k+1) ω) atTop (β t)) := by
-  obtain ⟨β,hβ,hM,hL,h0,hLim,hShift,hPast⟩ :=
+  obtain ⟨β, hβ, hM, hL, h0, hLim, hShift, hPast⟩ :=
     ginibreBrownianMaximalProcess_radial_Brownian_exists hn α z hz B P hB hind
-  exact ⟨β,hβ,ginibreBrownian_center_radial_driver_independent_all_speeds hn α z hz B P hB hind
-    _ β hβ.cont hLim,hLim⟩
+  exact ⟨β, hβ, ginibreBrownian_center_radial_driver_independent_all_speeds hn α z hz B P hB hind
+    _ β hβ.cont hLim, hLim⟩
 end
 end GinibrePoincare

@@ -71,7 +71,7 @@ theorem configurationComplexMollification_eq_convolution (φ : Configuration n �
 
 theorem configurationRadial_convolution_holomorphic_eq
     (F : Configuration n → ℂ) (hF : Differentiable ℂ F) :
-    (configurationRadialSmoothingKernel n ⋆[ContinuousLinearMap.lsmul ℝ ℝ,volume] F) = F := by
+    (configurationRadialSmoothingKernel n ⋆[ContinuousLinearMap.lsmul ℝ ℝ, volume] F) = F := by
   funext x
   rw [convolution_lsmul]
   exact configurationRadialSmoothing_mean_value n F hF x

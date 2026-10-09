@@ -46,10 +46,10 @@ theorem ginibreBrownian_augmented_quadratic_secondMoment {Ω ι : Type*}
   have hφ : Measurable (fun z : ℝ => (z^2-(t : ℝ))^2) := by fun_prop
   have hp := (hInd.symm.comp (measurable_id.pow_const 2) hφ).integral_mul_eq_mul_integral
     (hFM.pow_const 2).aestronglyMeasurable ((hφ.comp_aemeasurable hZ.aemeasurable).aestronglyMeasurable)
-  simp only [Pi.mul_apply,Function.comp_apply,id_eq] at hp
+  simp only [Pi.mul_apply, Function.comp_apply, id_eq] at hp
   dsimp only [Z] at hCenter
   simp_rw [mul_pow]
-  rw [hp,hCenter]
+  rw [hp, hCenter]
   ring
 
 theorem ginibreBrownian_augmented_quadratic_memLp_two {Ω ι : Type*}
@@ -66,7 +66,7 @@ theorem ginibreBrownian_augmented_quadratic_memLp_two {Ω ι : Type*}
   have hFM : Measurable F := hF.mono (ginibreBrownianAugmentedFiltration B P hB |>.le s) le_rfl
   have hInd := ginibreBrownian_augmented_coordinate_increment_independent B P hB hind s t i F hF
   have hφLp : MemLp (fun z : ℝ => z^2-(t : ℝ)) 2 (gaussianReal 0 t) :=
-    (ginibreGaussian_hasLaw_square_memLp_two (gaussianReal 0 t) id t ⟨by fun_prop,by simp⟩).sub (memLp_const _)
+    (ginibreGaussian_hasLaw_square_memLp_two (gaussianReal 0 t) id t ⟨by fun_prop, by simp⟩).sub (memLp_const _)
   exact ginibreIndependent_predictable_memLp_two P F _ hFM _ hZ hInd id measurable_id hFi
     (fun z => z^2-(t : ℝ)) (by fun_prop) hφLp
 

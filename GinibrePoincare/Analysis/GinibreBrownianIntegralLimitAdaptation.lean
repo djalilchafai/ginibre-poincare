@@ -28,8 +28,8 @@ theorem actualL2Limit_nullAugmentation_measurable {Ω : Type*} [mAmbient : Measu
     apply Lp.ext
     have hc := (hs n).condExpL2_ae_eq_condExp (𝕜 := ℝ) haug
     have hfix := condExp_of_stronglyMeasurable haug (hS n).stronglyMeasurable ((hs n).integrable (by norm_num))
-    filter_upwards [hc,(hs n).coeFn_toLp] with ω hω hsω
-    simpa only [hfix,hsω] using hω
+    filter_upwards [hc, (hs n).coeFn_toLp] with ω hω hsω
+    simpa only [hfix, hsω] using hω
   have hleft := (hA.tendsto I).comp hlim
   have hright : Tendsto (fun n => A ((hs n).toLp (S n))) atTop (𝓝 I) := by
     simpa only [he] using hlim

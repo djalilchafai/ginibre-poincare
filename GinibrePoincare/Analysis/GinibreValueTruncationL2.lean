@@ -31,7 +31,7 @@ theorem ginibreValueTruncation_vector_memLp {V : Type*} [NormedAddCommGroup V]
     (hf : AEStronglyMeasurable f (ginibreMeasure n)) (g : Configuration n → V)
     (hg : MemLp g 2 (ginibreMeasure n)) :
     MemLp (fun z => deriv (sobolevValueTruncation m) (f z) • g z) 2 (ginibreMeasure n) := by
-  obtain ⟨B,hB0,hB⟩ := sobolevValueTruncation_deriv_bound
+  obtain ⟨B, hB0, hB⟩ := sobolevValueTruncation_deriv_bound
   apply (hg.const_smul B).of_le
     ((((sobolevValueTruncation_smooth m).continuous_deriv (by simp)).comp_aestronglyMeasurable hf).smul hg.aestronglyMeasurable)
   apply ae_of_all
@@ -51,7 +51,7 @@ theorem ginibreValueTruncation_value_error_tendsto (n : ℕ)
     have he : (sobolevValueTruncation m (f z) - f z) ^ 2 =
         (sobolevCutoff m (f z) - 1) ^ 2 * f z ^ 2 := by unfold sobolevValueTruncation; ring
     rw [he]
-    obtain ⟨h0,h1⟩ := sobolevCutoff_mem_unit m (f z)
+    obtain ⟨h0, h1⟩ := sobolevCutoff_mem_unit m (f z)
     have hh : (sobolevCutoff m (f z) - 1) ^ 2 ≤ 1 := by nlinarith
     simpa using mul_le_mul_of_nonneg_right hh (sq_nonneg (f z))
   have ht := tendsto_integral_of_dominated_convergence (f := fun _ => (0 : ℝ))
@@ -74,7 +74,7 @@ theorem ginibreValueTruncation_vector_error_tendsto {V : Type*} [NormedAddCommGr
     (hg : MemLp g 2 (ginibreMeasure n)) :
     Tendsto (fun m => ∫ z, ‖deriv (sobolevValueTruncation m) (f z) • g z - g z‖ ^ 2
       ∂ginibreMeasure n) atTop (𝓝 0) := by
-  obtain ⟨B,hB0,hB⟩ := sobolevValueTruncation_deriv_bound
+  obtain ⟨B, hB0, hB⟩ := sobolevValueTruncation_deriv_bound
   have hb (m : ℕ) (z : Configuration n) :
       ‖deriv (sobolevValueTruncation m) (f z) • g z - g z‖ ^ 2 ≤
       (B + 1) ^ 2 * ‖g z‖ ^ 2 := by
@@ -163,7 +163,7 @@ theorem ginibreValueTruncation_radial (n m : ℕ) (f : Configuration n → ℝ)
     (hr : ∃ F : (Fin n → ℝ) → ℝ, ∀ z, f z = F (fun i => Complex.normSq (z i))) :
     ∃ F : (Fin n → ℝ) → ℝ, ∀ z,
       sobolevValueTruncation m (f z) = F (fun i => Complex.normSq (z i)) := by
-  obtain ⟨F,hF⟩ := hr
+  obtain ⟨F, hF⟩ := hr
   exact ⟨fun r => sobolevValueTruncation m (F r), fun z => by rw [hF]⟩
 
 /-- The concrete bounded value truncation does not enlarge spatial support. -/

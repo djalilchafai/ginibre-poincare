@@ -12,9 +12,9 @@ namespace GinibrePoincare
 noncomputable section
 set_option maxHeartbeats 1800000
 local instance bakryGibbsStationaryReference_pathMeasurable (n : ℕ) (T : ℝ≥0) :
-    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ),Configuration n) := borel _
+    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := borel _
 local instance bakryGibbsStationaryReference_pathBorel (n : ℕ) (T : ℝ≥0) :
-    BorelSpace C(Icc (0 : ℝ) (T : ℝ),Configuration n) := ⟨rfl⟩
+    BorelSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := ⟨rfl⟩
 
 /-- Actual stationary killed OU action reversal on the explicit completed
 Gaussian-coordinate/original-Brownian product. All initial independence and

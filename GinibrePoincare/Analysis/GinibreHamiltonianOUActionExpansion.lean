@@ -41,10 +41,10 @@ theorem ginibreHamiltonianGradientNormSq_path_integral {n : ℕ}
     intro s hs
     rw [uIcc_of_le hT] at hs
     exact ginibreHamiltonianGradientNormSq_interaction _ (hCF s hs)
-  rw [he,intervalIntegral.integral_add ((hN.const_mul _).sub intervalIntegrable_const) hV,
+  rw [he, intervalIntegral.integral_add ((hN.const_mul _).sub intervalIntegrable_const) hV,
     intervalIntegral.integral_sub (hN.const_mul _) intervalIntegrable_const,
-    intervalIntegral.integral_const_mul,intervalIntegral.integral_const]
-  simp only [sub_zero,smul_eq_mul]
+    intervalIntegral.integral_const_mul, intervalIntegral.integral_const]
+  simp only [sub_zero, smul_eq_mul]
   ring
 
 theorem ginibreHamiltonianOUPathQuotient_expansion {n : ℕ} (hn : 0 < n)
@@ -60,7 +60,7 @@ theorem ginibreHamiltonianOUPathQuotient_expansion {n : ℕ} (hn : 0 < n)
     unfold ginibreHamiltonian ginibreInteractionPotential
     ring
   unfold ginibreHamiltonianGradientPathWeight ginibreQuadraticGradientPathWeight ginibreHamiltonianPathEnergy
-  rw [← Real.exp_sub,ginibreHamiltonianGradientNormSq_path_integral T hT x hx hCF,he,he]
+  rw [← Real.exp_sub, ginibreHamiltonianGradientNormSq_path_integral T hT x hx hCF, he, he]
   congr 1
   field_simp
   <;> ring
@@ -93,10 +93,10 @@ theorem ginibreHamiltonianOUPathQuotient_sq_le_vandermonde {n : ℕ} (hn : 0 < n
   refine h.trans_eq ?_
   have he0 : Real.exp (-ginibreInteractionPotential n (x 0)) = vandermondeWeight (x 0) := by
     unfold ginibreInteractionPotential
-    rw [neg_neg,Real.exp_log (vandermondeWeight_pos_of_collisionFree _ (hCF 0 ⟨le_rfl,hT⟩))]
+    rw [neg_neg, Real.exp_log (vandermondeWeight_pos_of_collisionFree _ (hCF 0 ⟨le_rfl, hT⟩))]
   have heT : Real.exp (-ginibreInteractionPotential n (x T)) = vandermondeWeight (x T) := by
     unfold ginibreInteractionPotential
-    rw [neg_neg,Real.exp_log (vandermondeWeight_pos_of_collisionFree _ (hCF T ⟨hT,le_rfl⟩))]
+    rw [neg_neg, Real.exp_log (vandermondeWeight_pos_of_collisionFree _ (hCF T ⟨hT, le_rfl⟩))]
   rw [pow_two,← Real.exp_add]
   rw [← he0,← heT,← Real.exp_add,← Real.exp_add]
   congr 1

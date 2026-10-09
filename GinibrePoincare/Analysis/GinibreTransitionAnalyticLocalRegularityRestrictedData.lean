@@ -47,11 +47,11 @@ theorem ginibreLocalRegularity_restricted_elliptic_exists_weak_derivatives
         dsimp only
         by_cases hx : x ∈ U
         · simp only [Set.indicator_of_mem hx]
-        · simp only [Set.indicator_of_notMem hx,hq x hx,mul_zero]
-    rw [hi u _ hl,hi h _ hθz]
+        · simp only [Set.indicator_of_notMem hx, hq x hx, mul_zero]
+    rw [hi u _ hl, hi h _ hθz]
     simp_rw [hi (F _) _ (fun x hx => hd x hx _)]
     exact heq θ hθ hθc hs
-  obtain ⟨g,hg⟩ := ginibreLocalRegularity_localized_elliptic_exists_weak_derivatives b U
+  obtain ⟨g, hg⟩ := ginibreLocalRegularity_localized_elliptic_exists_weak_derivatives b U
     (U.indicator u) (U.indicator h) (fun i => U.indicator (F i)) hup hhp hFp η hη hc hU heqp
   refine ⟨g,?_⟩
   intro i θ hθ hθc

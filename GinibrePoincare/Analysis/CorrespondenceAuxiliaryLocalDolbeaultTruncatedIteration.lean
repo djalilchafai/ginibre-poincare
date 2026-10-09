@@ -11,8 +11,8 @@ set_option maxHeartbeats 800000
 
 def truncatedDolbeaultBoundaryComposition {n : ℕ} (R : ℝ) (χ : Fin n → ℂ → ℂ) :
     List (Fin n) → (Configuration n → ℂ) → Configuration n → ℂ
-  | [],a => a
-  | j::l,a => dolbeaultTruncatedCutoff j R (planarDbar (χ j))
+  | [], a => a
+  | j::l, a => dolbeaultTruncatedCutoff j R (planarDbar (χ j))
       (truncatedDolbeaultBoundaryComposition R χ l a)
 
 def truncatedDolbeaultPrimitive {n : ℕ} (R : ℝ) (χ : Fin n → ℂ → ℂ)
@@ -28,7 +28,7 @@ theorem truncatedDolbeaultBoundaryComposition_smooth_compact {n : ℕ} (R : ℝ)
     ContDiff ℝ ∞ (truncatedDolbeaultBoundaryComposition R χ l a) ∧
       HasCompactSupport (truncatedDolbeaultBoundaryComposition R χ l a) := by
   induction l with
-  | nil => exact ⟨ha,hc⟩
+  | nil => exact ⟨ha, hc⟩
   | cons j l ih =>
     exact dolbeaultTruncatedCutoff_smooth_compact j R _ _
       (planarDbar_contDiff_infty _ (hχ j)) ih.1 ih.2
@@ -40,11 +40,11 @@ theorem truncatedDolbeaultPrimitive_smooth_compact {n : ℕ} (R : ℝ)
     ContDiff ℝ ∞ (truncatedDolbeaultPrimitive R χ α l) ∧
       HasCompactSupport (truncatedDolbeaultPrimitive R χ α l) := by
   induction l with
-  | nil => exact ⟨contDiff_const,by simp [HasCompactSupport,truncatedDolbeaultPrimitive]⟩
+  | nil => exact ⟨contDiff_const, by simp [HasCompactSupport, truncatedDolbeaultPrimitive]⟩
   | cons j l ih =>
     have hb := truncatedDolbeaultBoundaryComposition_smooth_compact R χ hχ l _ (hα j) (hc j)
     have ht := dolbeaultTruncatedCutoff_smooth_compact j R _ _ (hχ j) hb.1 hb.2
-    exact ⟨ih.1.add ht.1,ih.2.add ht.2⟩
+    exact ⟨ih.1.add ht.1, ih.2.add ht.2⟩
 
 theorem dolbeaultBoundaryLpComposition_ae {n : ℕ} (R : ℝ)
     (χ : Fin n → ℂ → ℂ) (hχ : ∀ j, ContDiff ℝ ∞ (χ j))
@@ -100,9 +100,9 @@ theorem dolbeaultPrimitiveLp_ae {n : ℕ} (R : ℝ)
       (dolbeaultCutoffLpOperator j R (χ j) (hχ j).continuous (hcχ j)
         (dolbeaultBoundaryLpComposition R χ hχ hcχ l
           (((hα j).continuous.memLp_of_hasCompactSupport (p := 2) (μ := volume) (hcα j)).toLp (α j)))),
-      ih,ht] with p h1 h2 h3
+      ih, ht] with p h1 h2 h3
     change _ = truncatedDolbeaultPrimitive R χ α l p + dolbeaultTruncatedCutoff j R (χ j) f p
-    simpa only [Pi.add_apply,h2,h3,dolbeaultPrimitiveLp] using! h1
+    simpa only [Pi.add_apply, h2, h3, dolbeaultPrimitiveLp] using! h1
 
 #print axioms truncatedDolbeaultBoundaryComposition_smooth_compact
 #print axioms truncatedDolbeaultPrimitive_smooth_compact

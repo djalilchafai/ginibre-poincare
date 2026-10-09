@@ -46,7 +46,7 @@ theorem ginibreCompactVolterra_compensator_eq_gradient_process_until
       exact hω r (hr.2.trans he)
     have heq := ginibreCompactVolterra_restricted_ito_identify n B P hB hind α X hX hCont
       f U K hU hf hK hKU hRange t b (fun ω => (hb ω).continuousOn) M hM
-      (fun s hs ω => hbound s ⟨hs.1,hs.2.trans ht⟩ ω)
+      (fun s hs ω => hbound s ⟨hs.1, hs.2.trans ht⟩ ω)
       {ω | t ≤ θ ω} (measurableSet_le measurable_const hθ) hVE (J t) (hJL t ht)
     filter_upwards [heq] with ω hω
     intro hwt

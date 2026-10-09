@@ -16,7 +16,7 @@ theorem real_directional_fderiv (f : E → ℂ) (hf : ContDiff ℝ ∞ f) (x v w
   have h := ((ContinuousLinearMap.apply ℝ ℂ v).hasFDerivAt).comp x hd
   have he : (fun y => fderiv ℝ f y v) =
       (ContinuousLinearMap.apply ℝ ℂ v) ∘ fderiv ℝ f := rfl
-  rw [he,h.fderiv]
+  rw [he, h.fderiv]
   rfl
 
 theorem finiteComplexDbar_contDiff (f : E → ℂ) (hf : ContDiff ℝ ∞ f) (v w : E) :
@@ -36,7 +36,7 @@ theorem finiteComplexDbar_fderiv (f : E → ℂ) (hf : ContDiff ℝ ∞ f) (x v 
   have h' : HasFDerivAt (finiteComplexDbar v w f)
       ((1/2 : ℂ) • ((ContinuousLinearMap.apply ℝ ℂ v).comp (fderiv ℝ (fderiv ℝ f) x) +
         Complex.I • (ContinuousLinearMap.apply ℝ ℂ w).comp (fderiv ℝ (fderiv ℝ f) x))) x := by
-    simpa only [finiteComplexDbar,Function.comp_def,Pi.add_apply] using! h
+    simpa only [finiteComplexDbar, Function.comp_def, Pi.add_apply] using! h
   rw [h'.fderiv]
   simp
   ring
@@ -53,15 +53,15 @@ theorem finiteComplexDbar_commute (f : E → ℂ) (hf : ContDiff ℝ ∞ f)
     Complex.I*fderiv ℝ (finiteComplexDbar a b f) x w) =
     (1/2 : ℂ)*(fderiv ℝ (finiteComplexDbar v w f) x a +
       Complex.I*fderiv ℝ (finiteComplexDbar v w f) x b)
-  rw [finiteComplexDbar_fderiv f hf x a b v,finiteComplexDbar_fderiv f hf x a b w,
-    finiteComplexDbar_fderiv f hf x v w a,finiteComplexDbar_fderiv f hf x v w b,
-    hsym v a,hsym v b,hsym w a,hsym w b]
+  rw [finiteComplexDbar_fderiv f hf x a b v, finiteComplexDbar_fderiv f hf x a b w,
+    finiteComplexDbar_fderiv f hf x v w a, finiteComplexDbar_fderiv f hf x v w b,
+    hsym v a, hsym v b, hsym w a, hsym w b]
   ring
 
 theorem finiteComplexDbar_sub (f g : E → ℂ) (hf : Differentiable ℝ f)
     (hg : Differentiable ℝ g) (v w x : E) :
     finiteComplexDbar v w (f-g) x = finiteComplexDbar v w f x - finiteComplexDbar v w g x := by
-  simp only [finiteComplexDbar,fderiv_sub (hf x) (hg x),ContinuousLinearMap.sub_apply]
+  simp only [finiteComplexDbar, fderiv_sub (hf x) (hg x), ContinuousLinearMap.sub_apply]
   ring
 
 /-- Removing one genuinely solved component of a smooth closed form makes
@@ -75,7 +75,7 @@ theorem localDolbeault_smooth_residual_CR (f g u : E → ℂ)
     finiteComplexDbar v w (g-finiteComplexDbar a b u) x = 0 := by
   rw [finiteComplexDbar_sub g _ (hg.differentiable (by simp))
     ((finiteComplexDbar_contDiff u hu a b).differentiable (by simp)),
-    finiteComplexDbar_commute u hu v w a b x,hsolve,← hclosed,sub_self]
+    finiteComplexDbar_commute u hu v w a b x, hsolve,← hclosed, sub_self]
 
 #print axioms real_directional_fderiv
 #print axioms finiteComplexDbar_contDiff

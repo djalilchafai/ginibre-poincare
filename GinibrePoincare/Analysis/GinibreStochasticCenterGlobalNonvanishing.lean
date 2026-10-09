@@ -34,9 +34,9 @@ theorem ginibreBrownian_center_global_nonvanishing
     ginibreBrownianHamiltonianBoundedStop_exhausts_ae (by omega) α z hz B P hB hind]
     with ω hω hExhaust
   intro t ht
-  obtain ⟨k,hkt⟩ := (hExhaust t).exists
+  obtain ⟨k, hkt⟩ := (hExhaust t).exists
   apply hω k
-  refine ⟨t,hkt,?_⟩
+  refine ⟨t, hkt,?_⟩
   change ginibreCenterSquared n (ginibreBrownianMaximalProcess n α z B (min t _) ω)=0
   rw [min_eq_left hkt]
   exact ht
@@ -58,9 +58,9 @@ theorem ginibreBrownian_center_compact_positive_lower_bound
   let r := fun t : ℝ≥0 => ginibreCenterSquared n (ginibreBrownianMaximalProcess n α z B t ω)
   have hc : Continuous r := (contDiff_ginibreCenterSquared n).continuous.comp
     (by simpa only [Function.comp_def, Real.toNNReal_coe] using hsolution.1.comp NNReal.continuous_coe)
-  obtain ⟨t,ht,hmin⟩ := isCompact_Icc.exists_isMinOn
-    (show (Icc (0 : ℝ≥0) T).Nonempty from ⟨0,le_rfl,bot_le⟩) hc.continuousOn
-  refine ⟨r t,?_,hmin⟩
+  obtain ⟨t, ht, hmin⟩ := isCompact_Icc.exists_isMinOn
+    (show (Icc (0 : ℝ≥0) T).Nonempty from ⟨0, le_rfl, bot_le⟩) hc.continuousOn
+  refine ⟨r t,?_, hmin⟩
   exact lt_of_le_of_ne (Complex.normSq_nonneg _) (Ne.symm (hnonzero t))
 
 #print axioms ginibreBrownian_center_compact_positive_lower_bound

@@ -24,15 +24,15 @@ theorem ginibreBrownianOURiemann_isGaussianProcess {Ω : Type*} [MeasurableSpace
     (Finset.univ.image (fun i : Fin (m+1) => ginibreUniformBrownianTime t m (i.val+1))) ∪
       (Finset.univ.image (fun i : Fin (m+1) => ginibreUniformBrownianTime t m i.val))
   have hS (i : Fin (m+1)) : ginibreUniformBrownianTime t m (i.val+1) ∈ I :=
-    Finset.mem_union_left _ (Finset.mem_image.mpr ⟨i,Finset.mem_univ _,rfl⟩)
+    Finset.mem_union_left _ (Finset.mem_image.mpr ⟨i, Finset.mem_univ _, rfl⟩)
   have hP (i : Fin (m+1)) : ginibreUniformBrownianTime t m i.val ∈ I :=
-    Finset.mem_union_right _ (Finset.mem_image.mpr ⟨i,Finset.mem_univ _,rfl⟩)
+    Finset.mem_union_right _ (Finset.mem_image.mpr ⟨i, Finset.mem_univ _, rfl⟩)
   let L : (I → ℝ) →L[ℝ] ℝ :=
     ∑ i : Fin (m+1), ginibreOUStochasticWeight rate t (ginibreUniformTime t m i) •
-      (ContinuousLinearMap.proj ⟨_,hS i⟩-ContinuousLinearMap.proj ⟨_,hP i⟩)
-  refine ⟨I,L,?_⟩
+      (ContinuousLinearMap.proj ⟨_, hS i⟩-ContinuousLinearMap.proj ⟨_, hP i⟩)
+  refine ⟨I, L,?_⟩
   intro ω
-  simp [L,ginibreBrownianOURiemannSum,Finset.restrict_def,smul_eq_mul]
+  simp [L, ginibreBrownianOURiemannSum, Finset.restrict_def, smul_eq_mul]
 
 theorem ginibreBrownianOURiemann_second_moment {Ω : Type*} [MeasurableSpace Ω]
     (B : ℝ≥0 → Ω → ℝ) (P : Measure Ω) (hB : IsPreBrownianReal B P)

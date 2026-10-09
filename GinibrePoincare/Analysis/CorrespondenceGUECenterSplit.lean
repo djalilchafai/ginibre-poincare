@@ -11,23 +11,23 @@ def gueCenterLine (n : ℕ) : Submodule ℝ (EuclideanSpace ℝ (Fin n)) :=
   Submodule.span ℝ {gueCenterUnit n}
 
 def gueCenterLineIsometry (n : ℕ) (hn : 0<n) : ℝ ≃ₗᵢ[ℝ] gueCenterLine n where
-  toFun t := ⟨t • gueCenterUnit n,by unfold gueCenterLine; exact Submodule.mem_span_singleton.mpr ⟨t,rfl⟩⟩
+  toFun t := ⟨t • gueCenterUnit n, by unfold gueCenterLine; exact Submodule.mem_span_singleton.mpr ⟨t, rfl⟩⟩
   invFun v := inner ℝ (gueCenterUnit n) (v : EuclideanSpace ℝ (Fin n))
   left_inv t := by
     change inner ℝ (gueCenterUnit n) (t • gueCenterUnit n)=t
-    rw [real_inner_smul_right,real_inner_self_eq_norm_sq,gueCenterUnit_norm hn]
+    rw [real_inner_smul_right, real_inner_self_eq_norm_sq, gueCenterUnit_norm hn]
     simp
   right_inv v := by
-    obtain ⟨t,ht⟩ := Submodule.mem_span_singleton.mp v.property
+    obtain ⟨t, ht⟩ := Submodule.mem_span_singleton.mp v.property
     apply Subtype.ext
     change (inner ℝ (gueCenterUnit n) (v : EuclideanSpace ℝ (Fin n))) • gueCenterUnit n=v
-    rw [← ht,real_inner_smul_right,real_inner_self_eq_norm_sq,gueCenterUnit_norm hn]
+    rw [← ht, real_inner_smul_right, real_inner_self_eq_norm_sq, gueCenterUnit_norm hn]
     simp
   map_add' a b := by apply Subtype.ext; exact add_smul _ _ _
   map_smul' a b := by apply Subtype.ext; exact mul_smul _ _ _
   norm_map' t := by
     change ‖t • gueCenterUnit n‖=‖t‖
-    rw [norm_smul,gueCenterUnit_norm hn,mul_one]
+    rw [norm_smul, gueCenterUnit_norm hn, mul_one]
 
 
 def gueCenterSplitEquiv (n : ℕ) (hn : 0<n) : EuclideanSpace ℝ (Fin n) ≃ᵐ
@@ -44,7 +44,7 @@ theorem gueCenterSplit_volume_preserving (n : ℕ) (hn : 0<n) :
 
 theorem gueCenterSplitEquiv_symm_apply (n : ℕ) (hn : 0<n) (t : ℝ)
     (y : (gueCenterLine n)ᗮ) :
-    (gueCenterSplitEquiv n hn).symm (t,y)=t • gueCenterUnit n+y := rfl
+    (gueCenterSplitEquiv n hn).symm (t, y)=t • gueCenterUnit n+y := rfl
 
 theorem gueCenter_orthogonal (n : ℕ) (y : (gueCenterLine n)ᗮ) :
     inner ℝ (gueCenterUnit n) (y : EuclideanSpace ℝ (Fin n))=0 := by

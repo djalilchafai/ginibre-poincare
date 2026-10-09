@@ -11,11 +11,11 @@ set_option backward.isDefEq.respectTransparency false
 
 theorem dolbeault_compact_continuous_bound (χ : ℂ → ℂ) (hχ : Continuous χ)
     (hc : HasCompactSupport χ) : ∃ C : ℝ, ∀ z, ‖χ z‖ ≤ C := by
-  obtain ⟨C,hC⟩ := hc.exists_bound_of_continuousOn hχ.continuousOn
-  refine ⟨max C 0,fun z => ?_⟩
+  obtain ⟨C, hC⟩ := hc.exists_bound_of_continuousOn hχ.continuousOn
+  refine ⟨max C 0, fun z => ?_⟩
   by_cases hz : z ∈ tsupport χ
   · exact (hC z hz).trans (le_max_left _ _)
-  · rw [image_eq_zero_of_notMem_tsupport hz,norm_zero]
+  · rw [image_eq_zero_of_notMem_tsupport hz, norm_zero]
     exact le_max_right _ _
 
 def dolbeaultCompactBound (χ : ℂ → ℂ) (hχ : Continuous χ) (hc : HasCompactSupport χ) : ℝ :=

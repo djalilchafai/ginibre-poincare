@@ -20,9 +20,9 @@ theorem ginibreRealPaperSpeedGenerator_centerSquared {n : ℕ} (hn : 2 ≤ n)
       (4*α/(n : ℝ))*(1-ginibreCenterSquared n z) := by
   unfold ginibreCenterSquared
   have h := congrArg Complex.re (ginibrePaperSpeedGenerator_centerNormSq n hn α z hz)
-  simpa [ginibrePaperSpeedGenerator,ginibreRealPaperSpeedGenerator,complexGinibrePregenerator,
-    sumRadiusPolynomial,centerNormSqPolynomial,observablePolynomial,sumRadiusCoordinate,
-    ginibreCenterSquared,Complex.normSq_apply] using h
+  simpa [ginibrePaperSpeedGenerator, ginibreRealPaperSpeedGenerator, complexGinibrePregenerator,
+    sumRadiusPolynomial, centerNormSqPolynomial, observablePolynomial, sumRadiusCoordinate,
+    ginibreCenterSquared, Complex.normSq_apply] using h
 
 end
 end GinibrePoincare

@@ -5,7 +5,15 @@ public import GinibrePoincare.Analysis.MatrixSpectralSobolevDirections
 
 @[expose] public section
 
-/-! # Genuine transport into the actual Gaussian matrix Sobolev completion -/
+/-! # Genuine transport into the actual Gaussian matrix Sobolev completion
+
+The measure-preserving entry equivalence induces an L² transport of values and
+of every coordinate derivative. On compact smooth functions the chain rule
+identifies the transported entry direction with the corresponding real matrix
+direction; compact support is preserved by the homeomorphism. The resulting map
+on value/gradient pairs is continuous. Its preimage of the closed matrix H¹
+completion therefore contains the entire entry-coordinate core closure.
+-/
 open MeasureTheory Matrix Filter
 open scoped Topology ContDiff
 namespace GinibrePoincare

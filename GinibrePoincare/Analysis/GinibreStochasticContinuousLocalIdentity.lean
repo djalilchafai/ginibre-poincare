@@ -35,7 +35,7 @@ theorem ginibreContinuous_identity_until_of_rational (f g : ℝ≥0 → ℝ)
     apply tendsto_iff_dist_tendsto_zero.mpr
     apply squeeze_zero (fun k => dist_nonneg) _ (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ))
     intro k
-    rw [NNReal.dist_eq,Real.coe_toNNReal _ (hqpos k),abs_of_nonpos (sub_nonpos.mpr (hq k).2.le)]
+    rw [NNReal.dist_eq, Real.coe_toNNReal _ (hqpos k), abs_of_nonpos (sub_nonpos.mpr (hq k).2.le)]
     have hh := le_max_right 0 ((t : ℝ)-1/((k : ℝ)+1))
     linarith [(hq k).1]
   apply (isClosed_eq hf hg).mem_of_tendsto hseq
@@ -43,7 +43,7 @@ theorem ginibreContinuous_identity_until_of_rational (f g : ℝ≥0 → ℝ)
   intro k
   apply hRat
   have hh : (q k : ℝ).toNNReal ≤ t := by
-    rw [← NNReal.coe_le_coe,Real.coe_toNNReal _ (hqpos k)]
+    rw [← NNReal.coe_le_coe, Real.coe_toNNReal _ (hqpos k)]
     exact (hq k).2.le
   exact hh.trans ht
 
@@ -56,7 +56,7 @@ theorem ginibre_ae_continuous_identity_until {Ω : Type*} [MeasurableSpace Ω]
   have hRat : ∀ᵐ ω ∂P, ∀ q : ℚ, (q : ℝ).toNNReal≤θ ω →
       f (q : ℝ).toNNReal ω=g (q : ℝ).toNNReal ω :=
     ae_all_iff.mpr (fun q => hFixed (q : ℝ).toNNReal)
-  filter_upwards [hf,hg,hRat] with ω hf hg hRat
+  filter_upwards [hf, hg, hRat] with ω hf hg hRat
   exact ginibreContinuous_identity_until_of_rational (fun t => f t ω) (fun t => g t ω) hf hg (θ ω) hRat
 end
 end GinibrePoincare

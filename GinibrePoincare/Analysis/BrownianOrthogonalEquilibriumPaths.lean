@@ -11,16 +11,16 @@ namespace GinibrePoincare
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1000000
-local instance (n : ℕ) : MeasurableSpace C(ℝ,Configuration n) := borel _
-local instance (n : ℕ) : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
-local instance : MeasurableSpace C(ℝ,ℂ) := borel _
-local instance : BorelSpace C(ℝ,ℂ) := ⟨rfl⟩
+local instance (n : ℕ) : MeasurableSpace C(ℝ, Configuration n) := borel _
+local instance (n : ℕ) : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
+local instance : MeasurableSpace C(ℝ, ℂ) := borel _
+local instance : BorelSpace C(ℝ, ℂ) := ⟨rfl⟩
 
 /-- The actual canonical path initialized from a configuration sampled at equilibrium. -/
 def ginibreEquilibriumPath {Ω : Type*} {n : ℕ} (α : ℝ)
     (z₀ : Configuration n) (hz₀ : CollisionFree z₀)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ)
-    (p : Configuration n × Ω) : C(ℝ,Configuration n) :=
+    (p : Configuration n × Ω) : C(ℝ, Configuration n) :=
   ginibreDrivenGlobalPathElement α (ginibreFreeInitialVersion z₀ hz₀ p.1,
     ginibreBrownianFullContinuousNoise n B α p.2)
 
@@ -36,7 +36,7 @@ theorem ginibreEquilibriumPath_measurable {Ω : Type*} [MeasurableSpace Ω]
 def ginibreRelativeEquilibriumPath {Ω : Type*} {n : ℕ} (α : ℝ)
     (z₀ : Configuration n) (hz₀ : CollisionFree z₀)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ)
-    (p : Configuration n × Ω) : C(ℝ,Configuration n) :=
+    (p : Configuration n × Ω) : C(ℝ, Configuration n) :=
   ginibreDrivenGlobalPathElement α
     (ginibreFreeInitialVersion (recenteredConfiguration n z₀) (collisionFree_recentered hz₀)
       (recenteredConfiguration n p.1),
@@ -62,11 +62,11 @@ theorem ginibre_equilibrium_OU_relative_functionals_independent {Ω : Type*} [Me
     [IsProbabilityMeasure P] [P.IsComplete] (hB : ∀ i, IsBrownianReal (B i) P)
     (hind : iIndepFun (fun i ω t => B i t ω) P) :
     IndepFun (fun p : Configuration n × Ω => ginibreOUPathElement n α
-      (coordinateSum p.1,ginibreContinuousNoiseCenter n (ginibreBrownianFullContinuousNoise n B α p.2)))
+      (coordinateSum p.1, ginibreContinuousNoiseCenter n (ginibreBrownianFullContinuousNoise n B α p.2)))
       (ginibreRelativeEquilibriumPath α z₀ hz₀ B) ((ginibreMeasure n).prod P) := by
   have hrel : Measurable (fun p : Configuration n × GinibreContinuousNoise n =>
       ginibreDrivenGlobalPathElement α
-        (ginibreFreeInitialVersion (recenteredConfiguration n z₀) (collisionFree_recentered hz₀) p.1,p.2)) :=
+        (ginibreFreeInitialVersion (recenteredConfiguration n z₀) (collisionFree_recentered hz₀) p.1, p.2)) :=
     (ginibreDrivenGlobalPathElement_measurable hn α).comp
       (((ginibreFreeInitialVersion_measurable _ _).comp measurable_fst).prodMk measurable_snd)
   exact (ginibre_equilibrium_center_relative_inputs_independent hn B P hB hind α).comp

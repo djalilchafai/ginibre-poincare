@@ -6,6 +6,19 @@ public import Mathlib.Analysis.InnerProductSpace.PiL2
 
 @[expose] public section
 
+/-! # Orthogonal center and relative Brownian projections
+
+`Configuration n` carries its usual function-space norm. To use Gaussian
+orthogonality, `GinibreRealEuclidean n` equips the same coordinates with the
+real Euclidean norm; `ginibreConfigToEuclidean` transports continuous linear
+maps between these presentations.
+
+The center projection is self-adjoint, and the recentering projection is its
+complement. Their images are orthogonal because the center projection kills
+a recentered configuration. These identities first show that each projected
+noise is Brownian with the corresponding projected covariance, then imply
+independence of the two entire processes by Gaussian orthogonality. -/
+
 open scoped BigOperators ComplexConjugate NNReal
 open MeasureTheory ProbabilityTheory
 namespace GinibrePoincare

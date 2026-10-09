@@ -16,13 +16,13 @@ theorem bakryEmeryRegularizedLiftGibbs_square_lsi
     (hf : ContDiff ℝ 1 f) (hs : HasCompactSupport f) :
     squareEntropy (bakryEmeryNormalizedGibbs volume
       (bakryEmeryRegularizedLiftPotential (E := EuclideanSpace ℝ (Fin d×Fin 2)) n V ε)) f ≤
-      (2/((n:ℝ)*ρ))*∫ x, ‖gradient f x‖^2 ∂bakryEmeryNormalizedGibbs volume
+      (2/((n : ℝ)*ρ))*∫ x, ‖gradient f x‖^2 ∂bakryEmeryNormalizedGibbs volume
         (bakryEmeryRegularizedLiftPotential (E := EuclideanSpace ℝ (Fin d×Fin 2)) n V ε) := by
-  have hκ : 0 < (n:ℝ)*ρ := mul_pos (by exact_mod_cast hn) hρ
+  have hκ : 0 < (n : ℝ)*ρ := mul_pos (by exact_mod_cast hn) hρ
   have hh := bakryEmeryConfigurationGibbs_square_lsi d hd
     (bakryEmeryRegularizedConfigurationPotential n d V ε)
     (bakryEmeryRegularizedConfigurationPotential_contDiff n d V ε hV hε)
-    ((n:ℝ)*ρ) hκ
+    ((n : ℝ)*ρ) hκ
     (bakryEmeryRegularizedConfigurationPotential_euclidean_strongConvex n d ρ ε V hrot hc)
     f hf hs
   rw [bakryEmeryRegularizedConfigurationPotential_euclidean] at hh

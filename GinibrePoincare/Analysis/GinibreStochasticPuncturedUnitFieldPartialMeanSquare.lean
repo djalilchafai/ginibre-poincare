@@ -44,7 +44,7 @@ theorem ginibrePuncturedUnitField_partial_meanSquare_of_horizon_limits
   have hA (i : ι) (s : ℝ≥0) : @Measurable Ω ℝ (ℱ s) _ (A i s) :=
     (PiLp.continuous_apply 2 (fun _ : ι => ℝ) i).measurable.comp (hu s)
   have hb (i : ι) (s : ℝ≥0) (ω : Ω) : ‖A i s ω‖ ≤ 1 := by
-    simpa only [A,hunit s ω] using PiLp.norm_apply_le (u s ω) i
+    simpa only [A, hunit s ω] using PiLp.norm_apply_le (u s ω) i
   have hAc (i : ι) : ∀ᵐ ω ∂P, ContinuousOn (fun s => A i s ω) (Ioi 0) :=
     hc.mono (fun ω hω => (PiLp.continuous_apply 2 (fun _ : ι => ℝ) i).comp_continuousOn hω)
   have hAL (i : ι) (s : ℝ≥0) : MemLp (A i s) 2 P := MemLp.of_bound
@@ -77,7 +77,7 @@ theorem ginibrePuncturedUnitField_partial_meanSquare_of_horizon_limits
     have hh := tendstoInMeasure_ae_unique hsum (hβlim T)
     convert hh using 1
     funext ω
-    simp only [J,Finset.sum_apply]
+    simp only [J, Finset.sum_apply]
   have he := realMartingale_eq_until_of_terminal_ae P ℱ J β hJM hβM T t ht hJT
   have hz := actualMeanSquareZero_finset_sum P Finset.univ
     (fun i k ω => brownianUniformPartialSum (B i) (A i) T (k+1) t ω-M i t ω)
@@ -87,8 +87,8 @@ theorem ginibrePuncturedUnitField_partial_meanSquare_of_horizon_limits
       ∫ ω, (∑ i, (brownianUniformPartialSum (B i) (A i) T (k+1) t ω-M i t ω))^2 ∂P := by
     apply integral_congr_ae
     filter_upwards [he] with ω hω
-    have hh : (∑ i, M i t ω)=β t ω := by simpa only [J,Finset.sum_apply] using hω
-    rw [← hh,Finset.sum_sub_distrib]
+    have hh : (∑ i, M i t ω)=β t ω := by simpa only [J, Finset.sum_apply] using hω
+    rw [← hh, Finset.sum_sub_distrib]
   simp_rw [hEq]
   exact hz
 

@@ -30,9 +30,9 @@ theorem planarDbar_sub_left (a : ℂ → ℂ) (ha : Differentiable ℝ a) (z y :
   have hd := (ha (z-y)).hasFDerivAt.comp y
     ((hasFDerivAt_const z y).sub (hasFDerivAt_id y))
   have he : (fun w : ℂ => a (z-w)) = a ∘ (fun w : ℂ => z-w) := rfl
-  simp only [planarDbar,he,hd.fderiv,ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.sub_apply,ContinuousLinearMap.zero_apply,
-    ContinuousLinearMap.id_apply,ContinuousLinearMap.neg_apply,zero_sub,map_neg]
+  simp only [planarDbar, he, hd.fderiv, ContinuousLinearMap.comp_apply,
+    ContinuousLinearMap.sub_apply, ContinuousLinearMap.zero_apply,
+    ContinuousLinearMap.id_apply, ContinuousLinearMap.neg_apply, zero_sub, map_neg]
   ring
 
 #print axioms cauchyGreenPotential_dbar_integral

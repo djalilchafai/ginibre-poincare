@@ -57,7 +57,7 @@ theorem correspondenceBrascampLieb_probability_variance
       ∂correspondenceBrascampLiebMeasure W) ≤
       ∫ x, correspondenceBrascampLiebInverseEnergy W g b x
       ∂correspondenceBrascampLiebMeasure W := by
-  simpa only [correspondenceBrascampLiebCenter,correspondenceBrascampLiebMean,hMass,div_one] using
+  simpa only [correspondenceBrascampLiebCenter, correspondenceBrascampLiebMean, hMass, div_one] using
     correspondenceBrascampLieb_variance W g b hW hWi hpos hg hgL2 hgE
 
 #print axioms correspondenceBrascampLieb_variance

@@ -18,23 +18,23 @@ theorem independentNoiseMixture_joint_law
     [MeasurableSpace E] [MeasurableSpace F]
     (μ : Measure A) (P : Measure Ω) [IsProbabilityMeasure μ] [IsProbabilityMeasure P]
     (X : A×Ω → E) (N : Ω → F) (hX : Measurable X) (hN : Measurable N)
-    (hfiber : ∀ a, P.map (fun x => (X (a,x),N x))=
-      (P.map (fun x => X (a,x))).prod (P.map N)) :
-    (μ.prod P).map (fun p => (X p,N p.2))=((μ.prod P).map X).prod (P.map N) := by
-  have hJ : Measurable (fun p : A×Ω => (X p,N p.2)) := hX.prodMk (hN.comp measurable_snd)
+    (hfiber : ∀ a, P.map (fun x => (X (a, x), N x))=
+      (P.map (fun x => X (a, x))).prod (P.map N)) :
+    (μ.prod P).map (fun p => (X p, N p.2))=((μ.prod P).map X).prod (P.map N) := by
+  have hJ : Measurable (fun p : A×Ω => (X p, N p.2)) := hX.prodMk (hN.comp measurable_snd)
   apply Measure.ext_prod
   intro s t hs ht
-  have hXs (a : A) : Measurable (fun x => X (a,x)) := hX.comp measurable_prodMk_left
+  have hXs (a : A) : Measurable (fun x => X (a, x)) := hX.comp measurable_prodMk_left
   have hpair (a : A) :
-      P {x | X (a,x)∈s ∧ N x∈t}=(P {x | X (a,x)∈s})*((P.map N) t) := by
+      P {x | X (a, x)∈s ∧ N x∈t}=(P {x | X (a, x)∈s})*((P.map N) t) := by
     have h := congrArg (fun ν : Measure (E×F) => ν (s×ˢt)) (hfiber a)
-    rw [Measure.map_apply ((hXs a).prodMk hN) (hs.prod ht),Measure.prod_prod,
+    rw [Measure.map_apply ((hXs a).prodMk hN) (hs.prod ht), Measure.prod_prod,
       Measure.map_apply (hXs a) hs] at h
     exact h
-  rw [Measure.map_apply hJ (hs.prod ht),Measure.prod_apply (hJ (hs.prod ht)),Measure.prod_prod,
-    Measure.map_apply hX hs,Measure.prod_apply (hX hs)]
-  change (∫⁻ a, P {x | X (a,x)∈s ∧ N x∈t} ∂μ)=
-    (∫⁻ a, P {x | X (a,x)∈s} ∂μ)*((P.map N) t)
+  rw [Measure.map_apply hJ (hs.prod ht), Measure.prod_apply (hJ (hs.prod ht)), Measure.prod_prod,
+    Measure.map_apply hX hs, Measure.prod_apply (hX hs)]
+  change (∫⁻ a, P {x | X (a, x)∈s ∧ N x∈t} ∂μ)=
+    (∫⁻ a, P {x | X (a, x)∈s} ∂μ)*((P.map N) t)
   simp_rw [hpair]
   exact lintegral_mul_const _ (measurable_measure_prodMk_left (hX hs))
 
@@ -45,26 +45,26 @@ theorem independentNoiseMixture_joint_law_ae
     [MeasurableSpace E] [MeasurableSpace F]
     (μ : Measure A) (P : Measure Ω) [IsProbabilityMeasure μ] [IsProbabilityMeasure P]
     (X : A×Ω → E) (N : Ω → F) (hX : Measurable X) (hN : Measurable N)
-    (hfiber : ∀ᵐ a ∂μ, P.map (fun x => (X (a,x),N x))=
-      (P.map (fun x => X (a,x))).prod (P.map N)) :
-    (μ.prod P).map (fun p => (X p,N p.2))=((μ.prod P).map X).prod (P.map N) := by
-  have hJ : Measurable (fun p : A×Ω => (X p,N p.2)) := hX.prodMk (hN.comp measurable_snd)
+    (hfiber : ∀ᵐ a ∂μ, P.map (fun x => (X (a, x), N x))=
+      (P.map (fun x => X (a, x))).prod (P.map N)) :
+    (μ.prod P).map (fun p => (X p, N p.2))=((μ.prod P).map X).prod (P.map N) := by
+  have hJ : Measurable (fun p : A×Ω => (X p, N p.2)) := hX.prodMk (hN.comp measurable_snd)
   apply Measure.ext_prod
   intro s t hs ht
-  have hXs (a : A) : Measurable (fun x => X (a,x)) := hX.comp measurable_prodMk_left
+  have hXs (a : A) : Measurable (fun x => X (a, x)) := hX.comp measurable_prodMk_left
   have hpair : ∀ᵐ a ∂μ,
-      P {x | X (a,x)∈s ∧ N x∈t}=(P {x | X (a,x)∈s})*((P.map N) t) := by
+      P {x | X (a, x)∈s ∧ N x∈t}=(P {x | X (a, x)∈s})*((P.map N) t) := by
     filter_upwards [hfiber] with a ha
     have h := congrArg (fun ν : Measure (E×F) => ν (s×ˢt)) ha
-    rw [Measure.map_apply ((hXs a).prodMk hN) (hs.prod ht),Measure.prod_prod,
+    rw [Measure.map_apply ((hXs a).prodMk hN) (hs.prod ht), Measure.prod_prod,
       Measure.map_apply (hXs a) hs] at h
     exact h
-  rw [Measure.map_apply hJ (hs.prod ht),Measure.prod_apply (hJ (hs.prod ht)),Measure.prod_prod,
-    Measure.map_apply hX hs,Measure.prod_apply (hX hs)]
-  change (∫⁻ a, P {x | X (a,x)∈s ∧ N x∈t} ∂μ)=
-    (∫⁻ a, P {x | X (a,x)∈s} ∂μ)*((P.map N) t)
+  rw [Measure.map_apply hJ (hs.prod ht), Measure.prod_apply (hJ (hs.prod ht)), Measure.prod_prod,
+    Measure.map_apply hX hs, Measure.prod_apply (hX hs)]
+  change (∫⁻ a, P {x | X (a, x)∈s ∧ N x∈t} ∂μ)=
+    (∫⁻ a, P {x | X (a, x)∈s} ∂μ)*((P.map N) t)
   calc
-    _ = ∫⁻ a, (P {x | X (a,x)∈s})*((P.map N) t) ∂μ := lintegral_congr_ae hpair
+    _ = ∫⁻ a, (P {x | X (a, x)∈s})*((P.map N) t) ∂μ := lintegral_congr_ae hpair
     _ = _ := lintegral_mul_const _ (measurable_measure_prodMk_left (hX hs))
 
 #print axioms independentNoiseMixture_joint_law_ae

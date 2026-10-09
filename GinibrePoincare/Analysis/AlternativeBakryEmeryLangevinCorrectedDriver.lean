@@ -9,35 +9,35 @@ open scoped Topology NNReal
 namespace GinibrePoincare
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
-local instance bakryCorrectedDriver_fullPathMeasurable (n : ℕ) : MeasurableSpace C(ℝ,Configuration n) := borel _
-local instance bakryCorrectedDriver_fullPathBorel (n : ℕ) : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+local instance bakryCorrectedDriver_fullPathMeasurable (n : ℕ) : MeasurableSpace C(ℝ, Configuration n) := borel _
+local instance bakryCorrectedDriver_fullPathBorel (n : ℕ) : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
 local instance bakryCorrectedDriver_compactPathMeasurable (n : ℕ) (T : ℝ≥0) :
-    MeasurableSpace C(Icc (0:ℝ) (T:ℝ),EuclideanSpace ℝ (Fin n × Fin 2)) := borel _
+    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ), EuclideanSpace ℝ (Fin n × Fin 2)) := borel _
 local instance bakryCorrectedDriver_compactPathBorel (n : ℕ) (T : ℝ≥0) :
-    BorelSpace C(Icc (0:ℝ) (T:ℝ),EuclideanSpace ℝ (Fin n × Fin 2)) := ⟨rfl⟩
+    BorelSpace C(Icc (0 : ℝ) (T : ℝ), EuclideanSpace ℝ (Fin n × Fin 2)) := ⟨rfl⟩
 
 lemma bakryEmeryGibbsConfigurationTilt_continuous {n : ℕ}
     (W : Configuration n → ℝ) (hW : ContDiff ℝ 2 W) :
     Continuous (bakryEmeryGibbsConfigurationTilt n W) := by
   have hS : ContDiff ℝ 2 (bakryEmeryGibbsRelativePotential W) :=
     hW.sub (contDiff_const.mul (contDiff_configurationNormSq.of_le (by simp)))
-  exact (ginibreBrownianEmbeddingCLM n ((n:ℝ)^2)).continuous.comp
-    (continuous_pi (fun i => bakryEmeryGibbsPotentialTilt_continuous n ((n:ℝ)^2) _ hS i))
+  exact (ginibreBrownianEmbeddingCLM n ((n : ℝ)^2)).continuous.comp
+    (continuous_pi (fun i => bakryEmeryGibbsPotentialTilt_continuous n ((n : ℝ)^2) _ hS i))
 
 def bakryEmeryOriginalCompactDriver {Ω : Type*} (n : ℕ)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (T : ℝ≥0) (ω : Ω) :
-    C(Icc (0:ℝ) (T:ℝ),EuclideanSpace ℝ (Fin n × Fin 2)) where
-  toFun t := configurationEuclideanEquiv n ((ginibreBrownianFullContinuousNoise n B ((n:ℝ)^2) ω).val t)
+    C(Icc (0 : ℝ) (T : ℝ), EuclideanSpace ℝ (Fin n × Fin 2)) where
+  toFun t := configurationEuclideanEquiv n ((ginibreBrownianFullContinuousNoise n B ((n : ℝ)^2) ω).val t)
   continuous_toFun := (configurationEuclideanEquiv n).continuous.comp
-    ((ginibreBrownianFullContinuousNoise n B ((n:ℝ)^2) ω).val.continuous.comp continuous_subtype_val)
+    ((ginibreBrownianFullContinuousNoise n B ((n : ℝ)^2) ω).val.continuous.comp continuous_subtype_val)
 
 def bakryEmeryCorrectedCompactDriver {Ω : Type*} (n : ℕ)
     (W : Configuration n → ℝ) (hW : ContDiff ℝ 2 W)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (T : ℝ≥0)
     (Y : ℝ≥0 → Ω → Configuration n) (hYC : ∀ ω, Continuous (fun t => Y t ω)) (ω : Ω) :
-    C(Icc (0:ℝ) (T:ℝ),EuclideanSpace ℝ (Fin n × Fin 2)) where
+    C(Icc (0 : ℝ) (T : ℝ), EuclideanSpace ℝ (Fin n × Fin 2)) where
   toFun t := bakryEmeryOriginalCompactDriver n B T ω t -
-    ∫ s in (0:ℝ)..(t:ℝ), configurationEuclideanEquiv n
+    ∫ s in (0 : ℝ)..(t : ℝ), configurationEuclideanEquiv n
       (bakryEmeryGibbsConfigurationTilt n W (Y s.toNNReal ω))
   continuous_toFun := by
     have hc : Continuous (fun s : ℝ => configurationEuclideanEquiv n
@@ -55,11 +55,11 @@ theorem bakryEmeryOriginalCompactDriver_measurable {Ω : Type*} [MeasurableSpace
   apply ContinuousMap.measurable_iff_eval.mpr
   intro t
   have heval : Continuous (fun N : GinibreContinuousNoise n =>
-      configurationEuclideanEquiv n (N.val (t:ℝ))) :=
+      configurationEuclideanEquiv n (N.val (t : ℝ))) :=
     (configurationEuclideanEquiv n).continuous.comp
-      ((continuous_eval_const (t:ℝ)).comp continuous_subtype_val)
+      ((continuous_eval_const (t : ℝ)).comp continuous_subtype_val)
   exact heval.measurable.comp
-    (ginibreBrownianFullContinuousNoise_measurable n B P hB ((n:ℝ)^2))
+    (ginibreBrownianFullContinuousNoise_measurable n B P hB ((n : ℝ)^2))
 
 theorem bakryEmeryCorrectedCompactDriver_measurable {Ω : Type*} [MeasurableSpace Ω]
     (n : ℕ) (W : Configuration n → ℝ) (hW : ContDiff ℝ 2 W)
@@ -83,9 +83,9 @@ theorem bakryEmeryCorrectedCompactDriver_measurable {Ω : Type*} [MeasurableSpac
   have hv := measurable_uncurry_of_continuous_of_measurable hvC hvM
   apply ContinuousMap.measurable_iff_eval.mpr
   intro t
-  have hm : Measurable (fun ω => ∫ s in (0:ℝ)..(t:ℝ), v s ω) := by
-    rw [show (fun ω => ∫ s in (0:ℝ)..(t:ℝ), v s ω) =
-      (fun ω => ∫ s in Ioc (0:ℝ) (t:ℝ), v s ω) by
+  have hm : Measurable (fun ω => ∫ s in (0 : ℝ)..(t : ℝ), v s ω) := by
+    rw [show (fun ω => ∫ s in (0 : ℝ)..(t : ℝ), v s ω) =
+      (fun ω => ∫ s in Ioc (0 : ℝ) (t : ℝ), v s ω) by
       funext ω; rw [intervalIntegral.integral_of_le t.property.1]]
     have hs : StronglyMeasurable (Function.uncurry (fun ω s => v s ω)) := by
       convert (hv.comp measurable_swap).stronglyMeasurable using 1
@@ -96,62 +96,62 @@ theorem bakryEmeryCorrectedCompactDriver_measurable {Ω : Type*} [MeasurableSpac
     (bakryEmeryOriginalCompactDriver_measurable n B P hB T)).sub hm
 
 def bakryEmeryRawDriverEmbedding (n : ℕ) (T : ℝ≥0)
-    (x : Icc (0:ℝ≥0) T → (Fin n × Fin 2) → ℝ)
-    (t : Icc (0:ℝ) (T:ℝ)) : EuclideanSpace ℝ (Fin n × Fin 2) :=
-  configurationEuclideanEquiv n (ginibreBrownianEmbeddingCLM n ((n:ℝ)^2)
-    (x ⟨(t:ℝ).toNNReal,⟨zero_le,Real.toNNReal_le_iff_le_coe.mpr t.property.2⟩⟩))
+    (x : Icc (0 : ℝ≥0) T → (Fin n × Fin 2) → ℝ)
+    (t : Icc (0 : ℝ) (T : ℝ)) : EuclideanSpace ℝ (Fin n × Fin 2) :=
+  configurationEuclideanEquiv n (ginibreBrownianEmbeddingCLM n ((n : ℝ)^2)
+    (x ⟨(t : ℝ).toNNReal, ⟨zero_le, Real.toNNReal_le_iff_le_coe.mpr t.property.2⟩⟩))
 
 lemma bakryEmeryRawDriverEmbedding_measurable (n : ℕ) (T : ℝ≥0) :
     Measurable (bakryEmeryRawDriverEmbedding n T) := by
   apply measurable_pi_lambda
   intro t
   exact (configurationEuclideanEquiv n).continuous.measurable.comp
-    ((ginibreBrownianEmbeddingCLM n ((n:ℝ)^2)).continuous.measurable.comp (measurable_pi_apply _))
+    ((ginibreBrownianEmbeddingCLM n ((n : ℝ)^2)).continuous.measurable.comp (measurable_pi_apply _))
 
 lemma bakryEmeryPotentialTilt_time_integral_measurable {Ω : Type*} [MeasurableSpace Ω]
     (n : ℕ) (W : Configuration n → ℝ) (hW : ContDiff ℝ 2 W)
     (Y : ℝ≥0 → Ω → Configuration n) (hYC : ∀ ω, Continuous (fun t => Y t ω))
     (hYm : ∀ t, Measurable (Y t)) (i : Fin n × Fin 2) (t : ℝ) (ht : 0 ≤ t) :
-    Measurable (fun ω => ∫ s in (0:ℝ)..t,
-      bakryEmeryGibbsPotentialTilt n ((n:ℝ)^2) (bakryEmeryGibbsRelativePotential W)
+    Measurable (fun ω => ∫ s in (0 : ℝ)..t,
+      bakryEmeryGibbsPotentialTilt n ((n : ℝ)^2) (bakryEmeryGibbsRelativePotential W)
         (Y s.toNNReal ω) i) := by
   have hS : ContDiff ℝ 2 (bakryEmeryGibbsRelativePotential W) :=
     hW.sub (contDiff_const.mul (contDiff_configurationNormSq.of_le (by simp)))
-  let v := fun s : ℝ => fun ω => bakryEmeryGibbsPotentialTilt n ((n:ℝ)^2)
+  let v := fun s : ℝ => fun ω => bakryEmeryGibbsPotentialTilt n ((n : ℝ)^2)
     (bakryEmeryGibbsRelativePotential W) (Y s.toNNReal ω) i
   have hc (ω : Ω) : Continuous (fun s => v s ω) :=
-    (bakryEmeryGibbsPotentialTilt_continuous n ((n:ℝ)^2) _ hS i).comp
+    (bakryEmeryGibbsPotentialTilt_continuous n ((n : ℝ)^2) _ hS i).comp
       ((hYC ω).comp continuous_real_toNNReal)
   have hm (s : ℝ) : Measurable (v s) :=
-    (bakryEmeryGibbsPotentialTilt_measurable n ((n:ℝ)^2) _ i).comp (hYm s.toNNReal)
+    (bakryEmeryGibbsPotentialTilt_measurable n ((n : ℝ)^2) _ i).comp (hYm s.toNNReal)
   have hv := measurable_uncurry_of_continuous_of_measurable hc hm
   have hs : StronglyMeasurable (Function.uncurry (fun ω s => v s ω)) := by
     convert (hv.comp measurable_swap).stronglyMeasurable using 1
     funext p; rfl
-  have hh : Measurable (fun ω => ∫ s in Ioc (0:ℝ) t, v s ω) := hs.integral_prod_right.measurable
-  simpa only [v,intervalIntegral.integral_of_le ht] using hh
+  have hh : Measurable (fun ω => ∫ s in Ioc (0 : ℝ) t, v s ω) := hs.integral_prod_right.measurable
+  simpa only [v, intervalIntegral.integral_of_le ht] using hh
 
 
 lemma bakryEmeryRawDriverEmbedding_corrected_eq {Ω : Type*} (n : ℕ)
     (W : Configuration n → ℝ) (hW : ContDiff ℝ 2 W)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (T : ℝ≥0)
     (Y : ℝ≥0 → Ω → Configuration n) (hYC : ∀ ω, Continuous (fun t => Y t ω))
-    (ω : Ω) (t : Icc (0:ℝ) (T:ℝ)) :
+    (ω : Ω) (t : Icc (0 : ℝ) (T : ℝ)) :
     bakryEmeryRawDriverEmbedding n T (fun u i => B i u.val ω-B i 0 ω-
-      ∫ s in (0:ℝ)..(u.val:ℝ), bakryEmeryGibbsPotentialTilt n ((n:ℝ)^2)
+      ∫ s in (0 : ℝ)..(u.val : ℝ), bakryEmeryGibbsPotentialTilt n ((n : ℝ)^2)
         (bakryEmeryGibbsRelativePotential W) (Y s.toNNReal ω) i) t =
-    configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n:ℝ)^2) ω t) -
-      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n:ℝ)^2) ω 0) -
-      ∫ s in (0:ℝ)..(t:ℝ), configurationEuclideanEquiv n
+    configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n : ℝ)^2) ω t) -
+      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n : ℝ)^2) ω 0) -
+      ∫ s in (0 : ℝ)..(t : ℝ), configurationEuclideanEquiv n
         (bakryEmeryGibbsConfigurationTilt n W (Y s.toNNReal ω)) := by
-  let F := fun i r ω => bakryEmeryGibbsPotentialTilt n ((n:ℝ)^2)
+  let F := fun i r ω => bakryEmeryGibbsPotentialTilt n ((n : ℝ)^2)
     (bakryEmeryGibbsRelativePotential W) (Y r ω) i
   have hS : ContDiff ℝ 2 (bakryEmeryGibbsRelativePotential W) :=
     hW.sub (contDiff_const.mul (contDiff_configurationNormSq.of_le (by simp)))
   have hFc : Continuous (fun s : ℝ => fun i => F i s.toNNReal ω) :=
-    continuous_pi (fun i => (bakryEmeryGibbsPotentialTilt_continuous n ((n:ℝ)^2) _ hS i).comp
+    continuous_pi (fun i => (bakryEmeryGibbsPotentialTilt_continuous n ((n : ℝ)^2) _ hS i).comp
       ((hYC ω).comp continuous_real_toNNReal))
-  have hh := ginibreCorrectedBrownianNoise_eq n ((n:ℝ)^2) B F ω t t.property.1
+  have hh := ginibreCorrectedBrownianNoise_eq n ((n : ℝ)^2) B F ω t t.property.1
     (hFc.intervalIntegrable 0 t)
   have he := congrArg (configurationEuclideanEquiv n) hh
   have htilt : Continuous (fun s : ℝ => bakryEmeryGibbsConfigurationTilt n W (Y s.toNNReal ω)) :=
@@ -159,39 +159,39 @@ lemma bakryEmeryRawDriverEmbedding_corrected_eq {Ω : Type*} (n : ℕ)
       ((hYC ω).comp continuous_real_toNNReal)
   have hc := (configurationEuclideanEquiv n).toContinuousLinearMap.intervalIntegral_comp_comm (μ := volume)
     (htilt.intervalIntegrable 0 t)
-  change (∫ s in (0:ℝ)..(t:ℝ), configurationEuclideanEquiv n
+  change (∫ s in (0 : ℝ)..(t : ℝ), configurationEuclideanEquiv n
     (bakryEmeryGibbsConfigurationTilt n W (Y s.toNNReal ω))) =
-    configurationEuclideanEquiv n (∫ s in (0:ℝ)..(t:ℝ),
+    configurationEuclideanEquiv n (∫ s in (0 : ℝ)..(t : ℝ),
       bakryEmeryGibbsConfigurationTilt n W (Y s.toNNReal ω)) at hc
   have he' : configurationEuclideanEquiv n
       (ginibreConfigurationBrownianNoise n
-        (fun i r ω => B i r ω-B i 0 ω-∫ s in (0:ℝ)..(r:ℝ), F i s.toNNReal ω)
-        ((n:ℝ)^2) ω t) =
-      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n:ℝ)^2) ω t) -
-      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n:ℝ)^2) ω 0) -
-      ∫ s in (0:ℝ)..(t:ℝ), configurationEuclideanEquiv n
+        (fun i r ω => B i r ω-B i 0 ω-∫ s in (0 : ℝ)..(r : ℝ), F i s.toNNReal ω)
+        ((n : ℝ)^2) ω t) =
+      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n : ℝ)^2) ω t) -
+      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n : ℝ)^2) ω 0) -
+      ∫ s in (0 : ℝ)..(t : ℝ), configurationEuclideanEquiv n
         (bakryEmeryGibbsConfigurationTilt n W (Y s.toNNReal ω)) := by
     rw [hc]
-    simpa only [map_sub,bakryEmeryGibbsConfigurationTilt,F] using he
+    simpa only [map_sub, bakryEmeryGibbsConfigurationTilt, F] using he
   convert he' using 1
   simp only [bakryEmeryRawDriverEmbedding]
   apply congrArg (configurationEuclideanEquiv n)
   ext j
-  simp only [ginibreConfigurationBrownianNoise,ginibreBrownianEmbeddingCLM_apply,
-    Real.coe_toNNReal _ t.property.1,F]
+  simp only [ginibreConfigurationBrownianNoise, ginibreBrownianEmbeddingCLM_apply,
+    Real.coe_toNNReal _ t.property.1, F]
 
 
 lemma bakryEmeryRawDriverEmbedding_original_eq {Ω : Type*} (n : ℕ)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (T : ℝ≥0) (ω : Ω)
-    (t : Icc (0:ℝ) (T:ℝ)) :
+    (t : Icc (0 : ℝ) (T : ℝ)) :
     bakryEmeryRawDriverEmbedding n T (fun u i => B i u.val ω-B i 0 ω) t =
-      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n:ℝ)^2) ω t) -
-      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n:ℝ)^2) ω 0) := by
-  change configurationEuclideanEquiv n (ginibreBrownianEmbeddingCLM n ((n:ℝ)^2)
-    ((fun i => B i (t:ℝ).toNNReal ω)-(fun i => B i 0 ω))) = _
-  rw [map_sub,map_sub]
+      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n : ℝ)^2) ω t) -
+      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n : ℝ)^2) ω 0) := by
+  change configurationEuclideanEquiv n (ginibreBrownianEmbeddingCLM n ((n : ℝ)^2)
+    ((fun i => B i (t : ℝ).toNNReal ω)-(fun i => B i 0 ω))) = _
+  rw [map_sub, map_sub]
   congr 1 <;> apply congrArg (configurationEuclideanEquiv n) <;> ext j <;>
-    simp only [ginibreConfigurationBrownianNoise,ginibreBrownianEmbeddingCLM_apply,Real.toNNReal_zero]
+    simp only [ginibreConfigurationBrownianNoise, ginibreBrownianEmbeddingCLM_apply, Real.toNNReal_zero]
 
 /-- Transfer of the actual relative-potential Girsanov whole-driver law to
 the measurable compact continuous Hilbert drivers used by the actual flow. -/
@@ -203,18 +203,18 @@ theorem bakryEmeryCorrectedCompactDriver_law {Ω : Type*} [MeasurableSpace Ω]
     (hY : StronglyAdapted (ginibreBrownianAugmentedFiltration B P
       (fun i => (hB i).toIsPreBrownianReal)) Y) (d : Ω → ENNReal)
     (hLaw : (P.withDensity d).map
-      (fun ω (u : Icc (0:ℝ≥0) T) i => B i u.val ω-B i 0 ω-
-        ∫ s in (0:ℝ)..(u.val:ℝ), bakryEmeryGibbsPotentialTilt n ((n:ℝ)^2)
+      (fun ω (u : Icc (0 : ℝ≥0) T) i => B i u.val ω-B i 0 ω-
+        ∫ s in (0 : ℝ)..(u.val : ℝ), bakryEmeryGibbsPotentialTilt n ((n : ℝ)^2)
           (bakryEmeryGibbsRelativePotential W) (Y s.toNNReal ω) i) =
-      P.map (fun ω (u : Icc (0:ℝ≥0) T) i => B i u.val ω-B i 0 ω)) :
+      P.map (fun ω (u : Icc (0 : ℝ≥0) T) i => B i u.val ω-B i 0 ω)) :
     (P.withDensity d).map (bakryEmeryCorrectedCompactDriver n W hW B T Y hYC) =
       P.map (bakryEmeryOriginalCompactDriver n B T) := by
-  letI : Nonempty (Icc (0:ℝ) (T:ℝ)) := ⟨⟨0,⟨le_rfl,T.property⟩⟩⟩
+  letI : Nonempty (Icc (0 : ℝ) (T : ℝ)) := ⟨⟨0, ⟨le_rfl, T.property⟩⟩⟩
   let Q := P.withDensity d
-  let X := fun ω (u : Icc (0:ℝ≥0) T) i => B i u.val ω-B i 0 ω-
-    ∫ s in (0:ℝ)..(u.val:ℝ), bakryEmeryGibbsPotentialTilt n ((n:ℝ)^2)
+  let X := fun ω (u : Icc (0 : ℝ≥0) T) i => B i u.val ω-B i 0 ω-
+    ∫ s in (0 : ℝ)..(u.val : ℝ), bakryEmeryGibbsPotentialTilt n ((n : ℝ)^2)
       (bakryEmeryGibbsRelativePotential W) (Y s.toNNReal ω) i
-  let Z := fun ω (u : Icc (0:ℝ≥0) T) i => B i u.val ω-B i 0 ω
+  let Z := fun ω (u : Icc (0 : ℝ≥0) T) i => B i u.val ω-B i 0 ω
   have hYm (t : ℝ≥0) : Measurable (Y t) := (hY t).measurable.mono
     ((ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)).le t) le_rfl
   have hXm : Measurable X := by
@@ -234,22 +234,22 @@ theorem bakryEmeryCorrectedCompactDriver_law {Ω : Type*} [MeasurableSpace Ω]
       (aemeasurable_iff_measurable.mp ((hB i).aemeasurable 0))
   have hC : (fun ω t => bakryEmeryCorrectedCompactDriver n W hW B T Y hYC ω t) =ᵐ[P]
       (fun ω => bakryEmeryRawDriverEmbedding n T (X ω)) := by
-    filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB ((n:ℝ)^2),
-      ginibreConfigurationBrownianNoise_actual n B P hB ((n:ℝ)^2)] with ω he hz
+    filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB ((n : ℝ)^2),
+      ginibreConfigurationBrownianNoise_actual n B P hB ((n : ℝ)^2)] with ω he hz
     funext t
     rw [bakryEmeryRawDriverEmbedding_corrected_eq n W hW B T Y hYC ω t,
-      hz.2,map_zero,sub_zero]
-    change configurationEuclideanEquiv n ((ginibreBrownianFullContinuousNoise n B ((n:ℝ)^2) ω).val t) -
-      (∫ s in (0:ℝ)..(t:ℝ), configurationEuclideanEquiv n
+      hz.2, map_zero, sub_zero]
+    change configurationEuclideanEquiv n ((ginibreBrownianFullContinuousNoise n B ((n : ℝ)^2) ω).val t) -
+      (∫ s in (0 : ℝ)..(t : ℝ), configurationEuclideanEquiv n
         (bakryEmeryGibbsConfigurationTilt n W (Y s.toNNReal ω))) = _
     rw [he]
   have hO : (fun ω t => bakryEmeryOriginalCompactDriver n B T ω t) =ᵐ[P]
       (fun ω => bakryEmeryRawDriverEmbedding n T (Z ω)) := by
-    filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB ((n:ℝ)^2),
-      ginibreConfigurationBrownianNoise_actual n B P hB ((n:ℝ)^2)] with ω he hz
+    filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB ((n : ℝ)^2),
+      ginibreConfigurationBrownianNoise_actual n B P hB ((n : ℝ)^2)] with ω he hz
     funext t
-    rw [bakryEmeryRawDriverEmbedding_original_eq n B T ω t,hz.2,map_zero,sub_zero]
-    change configurationEuclideanEquiv n ((ginibreBrownianFullContinuousNoise n B ((n:ℝ)^2) ω).val t) = _
+    rw [bakryEmeryRawDriverEmbedding_original_eq n B T ω t, hz.2, map_zero, sub_zero]
+    change configurationEuclideanEquiv n ((ginibreBrownianFullContinuousNoise n B ((n : ℝ)^2) ω).val t) = _
     rw [he]
   have hmap := congrArg (Measure.map (bakryEmeryRawDriverEmbedding n T)) hLaw
   rw [Measure.map_map (bakryEmeryRawDriverEmbedding_measurable n T) hXm,
@@ -266,11 +266,11 @@ theorem bakryEmeryCorrectedCompactDriver_zero {Ω : Type*} (n : ℕ)
     (W : Configuration n → ℝ) (hW : ContDiff ℝ 2 W)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (T : ℝ≥0)
     (Y : ℝ≥0 → Ω → Configuration n) (hYC : ∀ ω, Continuous (fun t => Y t ω)) (ω : Ω) :
-    bakryEmeryCorrectedCompactDriver n W hW B T Y hYC ω ⟨0,⟨le_rfl,T.property⟩⟩ = 0 := by
-  change configurationEuclideanEquiv n ((ginibreBrownianFullContinuousNoise n B ((n:ℝ)^2) ω).val 0) -
-    (∫ s in (0:ℝ)..0, configurationEuclideanEquiv n
+    bakryEmeryCorrectedCompactDriver n W hW B T Y hYC ω ⟨0, ⟨le_rfl, T.property⟩⟩ = 0 := by
+  change configurationEuclideanEquiv n ((ginibreBrownianFullContinuousNoise n B ((n : ℝ)^2) ω).val 0) -
+    (∫ s in (0 : ℝ)..0, configurationEuclideanEquiv n
       (bakryEmeryGibbsConfigurationTilt n W (Y s.toNNReal ω))) = 0
-  rw [(ginibreBrownianFullContinuousNoise n B ((n:ℝ)^2) ω).property]
+  rw [(ginibreBrownianFullContinuousNoise n B ((n : ℝ)^2) ω).property]
   simp
 
 theorem bakryEmeryCorrectedCompactDriver_ae_eq {Ω : Type*} [MeasurableSpace Ω]
@@ -278,39 +278,39 @@ theorem bakryEmeryCorrectedCompactDriver_ae_eq {Ω : Type*} [MeasurableSpace Ω]
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (P : Measure Ω)
     (hB : ∀ i, IsBrownianReal (B i) P) (T : ℝ≥0)
     (Y : ℝ≥0 → Ω → Configuration n) (hYC : ∀ ω, Continuous (fun t => Y t ω)) :
-    ∀ᵐ ω ∂P, ∀ t : Icc (0:ℝ) (T:ℝ),
+    ∀ᵐ ω ∂P, ∀ t : Icc (0 : ℝ) (T : ℝ),
       bakryEmeryCorrectedCompactDriver n W hW B T Y hYC ω t =
       configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n
-        (fun i r ω => B i r ω-B i 0 ω-∫ s in (0:ℝ)..(r:ℝ),
-          bakryEmeryGibbsPotentialTilt n ((n:ℝ)^2) (bakryEmeryGibbsRelativePotential W)
-            (Y s.toNNReal ω) i) ((n:ℝ)^2) ω t) := by
-  filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB ((n:ℝ)^2),
-    ginibreConfigurationBrownianNoise_actual n B P hB ((n:ℝ)^2)] with ω he hz
+        (fun i r ω => B i r ω-B i 0 ω-∫ s in (0 : ℝ)..(r : ℝ),
+          bakryEmeryGibbsPotentialTilt n ((n : ℝ)^2) (bakryEmeryGibbsRelativePotential W)
+            (Y s.toNNReal ω) i) ((n : ℝ)^2) ω t) := by
+  filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB ((n : ℝ)^2),
+    ginibreConfigurationBrownianNoise_actual n B P hB ((n : ℝ)^2)] with ω he hz
   intro t
   have hh := bakryEmeryRawDriverEmbedding_corrected_eq n W hW B T Y hYC ω t
-  rw [hz.2,map_zero,sub_zero] at hh
+  rw [hz.2, map_zero, sub_zero] at hh
   have hraw : bakryEmeryCorrectedCompactDriver n W hW B T Y hYC ω t =
       bakryEmeryRawDriverEmbedding n T (fun u i => B i u.val ω-B i 0 ω-
-        ∫ s in (0:ℝ)..(u.val:ℝ), bakryEmeryGibbsPotentialTilt n ((n:ℝ)^2)
+        ∫ s in (0 : ℝ)..(u.val : ℝ), bakryEmeryGibbsPotentialTilt n ((n : ℝ)^2)
           (bakryEmeryGibbsRelativePotential W) (Y s.toNNReal ω) i) t := by
     rw [hh]
-    change configurationEuclideanEquiv n ((ginibreBrownianFullContinuousNoise n B ((n:ℝ)^2) ω).val t) -
-      (∫ s in (0:ℝ)..(t:ℝ), configurationEuclideanEquiv n
+    change configurationEuclideanEquiv n ((ginibreBrownianFullContinuousNoise n B ((n : ℝ)^2) ω).val t) -
+      (∫ s in (0 : ℝ)..(t : ℝ), configurationEuclideanEquiv n
         (bakryEmeryGibbsConfigurationTilt n W (Y s.toNNReal ω))) = _
     rw [he]
   rw [hraw]
   simp only [bakryEmeryRawDriverEmbedding]
   apply congrArg (configurationEuclideanEquiv n)
   ext j
-  simp only [ginibreConfigurationBrownianNoise,ginibreBrownianEmbeddingCLM_apply,
+  simp only [ginibreConfigurationBrownianNoise, ginibreBrownianEmbeddingCLM_apply,
     Real.coe_toNNReal _ t.property.1]
 
 theorem bakryEmeryOriginalCompactDriver_ae_eq {Ω : Type*} [MeasurableSpace Ω]
     (n : ℕ) (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (P : Measure Ω)
     (hB : ∀ i, IsBrownianReal (B i) P) (T : ℝ≥0) :
-    ∀ᵐ ω ∂P, ∀ t : Icc (0:ℝ) (T:ℝ), bakryEmeryOriginalCompactDriver n B T ω t =
-      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n:ℝ)^2) ω t) := by
-  filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB ((n:ℝ)^2)] with ω he
+    ∀ᵐ ω ∂P, ∀ t : Icc (0 : ℝ) (T : ℝ), bakryEmeryOriginalCompactDriver n B T ω t =
+      configurationEuclideanEquiv n (ginibreConfigurationBrownianNoise n B ((n : ℝ)^2) ω t) := by
+  filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB ((n : ℝ)^2)] with ω he
   intro t
   exact congrArg (configurationEuclideanEquiv n) (he t)
 

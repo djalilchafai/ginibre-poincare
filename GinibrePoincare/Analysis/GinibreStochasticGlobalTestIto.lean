@@ -5,8 +5,18 @@ public import GinibrePoincare.Analysis.GinibreStochasticLocalTestItoIntegral
 
 @[expose] public section
 
-/-! Every collision-free C² test of the actual original global Brownian SDE
-has a genuine local Itô martingale realization with actual exhausting stops. -/
+/-! # Local Itô decomposition along the global solution
+
+A real test `f` needs only to be C² on the collision-free set. The theorem
+provides increasing, exhausting Hamiltonian stops and, for each stop, a
+continuous square-integrable martingale whose compensator is the concrete
+paper-speed generator applied to `f`.
+
+After obtaining the stopped Itô integral from
+`GinibreStochasticLocalTestItoIntegral`, the proof removes the stopped-process
+notation before the stop. At the endpoint this uses `min t τ = t`; inside the
+drift integral it uses `s.toNNReal ≤ t ≤ τ` for `s` in the integration interval.
+There is no claim here that the unlocalized martingale is globally integrable. -/
 open Set MeasureTheory ProbabilityTheory Filter
 open scoped Topology NNReal
 namespace GinibrePoincare
@@ -38,12 +48,12 @@ theorem ginibreBrownianMaximalProcess_global_local_ito
     le_add_of_nonneg_right (Nat.cast_nonneg k)
   refine ⟨fun k => ginibreBrownianHamiltonianBoundedStop_isStoppingTime hn α z hz B P hB _ (hR k) k,
     fun ω => ginibreBrownianHamiltonianBoundedStop_natural_monotone n α z B ω,
-    ginibreBrownianHamiltonianBoundedStop_exhausts_ae hn α z hz B P hB hind,?_⟩
+    ginibreBrownianHamiltonianBoundedStop_exhausts_ae hn α z hz B P hB hind, ?_⟩
   intro k
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hLimit,hIto,hEnd⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hLimit, hIto, hEnd⟩ :=
     ginibreBrownianMaximalProcess_local_test_ito_integral_exists hn α z hz B P hB hind
       (ginibreHamiltonian n z+k) (hR k) k f hf
-  refine ⟨J,hJM,hJC,hJL,hJ0,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0, ?_⟩
   filter_upwards [hIto] with ω hω
   intro t ht
   have hh := hω t ht
@@ -59,12 +69,12 @@ theorem ginibreBrownianMaximalProcess_global_local_ito
     intro s hs
     rw [uIcc_of_le t.coe_nonneg] at hs
     have hst : s.toNNReal ≤ t := by
-      rw [← NNReal.coe_le_coe,Real.coe_toNNReal _ hs.1]
+      rw [← NNReal.coe_le_coe, Real.coe_toNNReal _ hs.1]
       exact hs.2
     change ginibreRealPaperSpeedGenerator n α f
       (ginibreBrownianMaximalProcess n α z B (min s.toNNReal _) ω) = _
     rw [min_eq_left (hst.trans ht)]
-  rw [hXt,hInt] at hh
+  rw [hXt, hInt] at hh
   exact hh
 end
 end GinibrePoincare

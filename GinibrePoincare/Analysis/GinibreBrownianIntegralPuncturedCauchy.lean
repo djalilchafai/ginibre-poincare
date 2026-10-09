@@ -42,7 +42,7 @@ theorem brownianInitialCutoff_integral_limits_cauchy {Ω ι : Type*}
     exact brownianUniformLeftSum_memLp_two B P hB hind j _ ha hi T (k+1)
   have herror (n k : ℕ) : (∫ ω, (S k ω-A n k ω)^2 ∂P) ≤
       C^2*(2*ε n+(T : ℝ)/((k : ℝ)+1)) := by
-    simpa only [Nat.cast_add,Nat.cast_one] using
+    simpa only [Nat.cast_add, Nat.cast_one] using
       brownianUniformLeftSum_initial_cutoff_error_bound B P hB hind j F hF C (ε n) hC (hε n) hb
         T hT (k+1) (Nat.succ_pos k)
   have hpair (n m : ℕ) : (∫ ω, (M n ω-M m ω)^2 ∂P) ≤ 8*C^2*(ε n+ε m) := by
@@ -58,19 +58,19 @@ theorem brownianInitialCutoff_integral_limits_cauchy {Ω ι : Type*}
       have hh := actualMeanSquare_difference_le_four_errors P (M n) (A n k) (S k) (A m k) (M m)
         (hM n) (hAL n k) (hSL k) (hAL m k) (hM m)
       have he (ω : Ω) : (A n k ω-S k ω)^2=(S k ω-A n k ω)^2 := by ring
-      simp_rw [he,hreverse] at hh
+      simp_rw [he, hreverse] at hh
       exact hh.trans (by dsimp only [D]; gcongr <;> apply herror)
     have hmesh : Tendsto (fun k : ℕ => (T : ℝ)/((k : ℝ)+1)) atTop (𝓝 0) := by
-      simpa only [mul_zero,mul_one_div] using
+      simpa only [mul_zero, mul_one_div] using
         (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)).const_mul (T : ℝ)
     have hDn : Tendsto D atTop (𝓝 (8*C^2*(ε n+ε m))) := by
       have hh := (((hlim n).add ((hmesh.const_add (2*ε n)).const_mul (C^2))).add
         ((hmesh.const_add (2*ε m)).const_mul (C^2))).add (hlim m) |>.const_mul 4
-      convert hh using 1 <;> dsimp [D,ε,A] <;> ring
+      convert hh using 1 <;> dsimp [D, ε, A] <;> ring
     exact ge_of_tendsto hDn (Eventually.of_forall hbound)
   have hεlim : Tendsto ε atTop (𝓝 0) := tendsto_one_div_add_atTop_nhds_zero_nat
   have hsum : Tendsto (fun q : ℕ × ℕ => ε q.1+ε q.2) atTop (𝓝 0) := by
-    simpa only [zero_add,Function.comp_def] using
+    simpa only [zero_add, Function.comp_def] using
       (hεlim.comp (show Tendsto Prod.fst (atTop : Filter (ℕ × ℕ)) atTop from by
         simpa only [← prod_atTop_atTop_eq] using tendsto_fst)).add
       (hεlim.comp (show Tendsto Prod.snd (atTop : Filter (ℕ × ℕ)) atTop from by

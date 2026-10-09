@@ -12,17 +12,17 @@ open scoped NNReal
 namespace GinibrePoincare
 noncomputable section
 
-local instance GinibreHamiltonianOUActionWeight_realMeasurable (n : ℕ) : MeasurableSpace C(ℝ,Configuration n) := borel _
-local instance GinibreHamiltonianOUActionWeight_realBorel (n : ℕ) : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
-local instance GinibreHamiltonianOUActionWeight_compactMeasurable (n : ℕ) (T : ℝ) : MeasurableSpace C(Icc (0 : ℝ) T,Configuration n) := borel _
-local instance GinibreHamiltonianOUActionWeight_compactBorel (n : ℕ) (T : ℝ) : BorelSpace C(Icc (0 : ℝ) T,Configuration n) := ⟨rfl⟩
+local instance GinibreHamiltonianOUActionWeight_realMeasurable (n : ℕ) : MeasurableSpace C(ℝ, Configuration n) := borel _
+local instance GinibreHamiltonianOUActionWeight_realBorel (n : ℕ) : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
+local instance GinibreHamiltonianOUActionWeight_compactMeasurable (n : ℕ) (T : ℝ) : MeasurableSpace C(Icc (0 : ℝ) T, Configuration n) := borel _
+local instance GinibreHamiltonianOUActionWeight_compactBorel (n : ℕ) (T : ℝ) : BorelSpace C(Icc (0 : ℝ) T, Configuration n) := ⟨rfl⟩
 
 def ginibreQuadraticGradientPathWeight (n : ℕ) (α T : ℝ) (x : ℝ → Configuration n) : ℝ :=
   Real.exp (-((n : ℝ)*configurationNormSq (x 0)+(n : ℝ)*configurationNormSq (x T))/2 +
     2*α*T - α*(∫ s in (0 : ℝ)..T, configurationNormSq (x s)))
 
 def ginibreHamiltonianOUActionWeight (n : ℕ) (α T : ℝ) (hT : 0 ≤ T)
-    (x : C(Icc (0 : ℝ) T,Configuration n)) : ℝ :=
+    (x : C(Icc (0 : ℝ) T, Configuration n)) : ℝ :=
   letI : Fact ((0 : ℝ) ≤ T) := ⟨hT⟩
   ginibreHamiltonianCompactPathWeight n α T hT x /
     ginibreQuadraticGradientPathWeight n α T (ContinuousMap.IccExtendCM x)
@@ -34,25 +34,25 @@ theorem ginibreQuadraticGradientPathWeight_reverse (n : ℕ) (α T : ℝ)
   unfold ginibreQuadraticGradientPathWeight
   have hi := intervalIntegral.integral_comp_sub_left
     (fun s => configurationNormSq (x s)) (a := 0) (b := T) T
-  simp only [sub_zero,sub_self] at hi ⊢
+  simp only [sub_zero, sub_self] at hi ⊢
   rw [hi]
   congr 1
   ring
 
 theorem ginibreQuadraticGradientPathWeight_measurable (n : ℕ) (α T : ℝ) :
-    Measurable (fun x : C(ℝ,Configuration n) => ginibreQuadraticGradientPathWeight n α T x) := by
+    Measurable (fun x : C(ℝ, Configuration n) => ginibreQuadraticGradientPathWeight n α T x) := by
   have hnorm : Measurable (configurationNormSq : Configuration n → ℝ) :=
     (contDiff_configurationNormSq (n := n)).continuous.measurable
-  have hm : Measurable (fun p : C(ℝ,Configuration n) × ℝ => configurationNormSq (p.1 p.2)) :=
+  have hm : Measurable (fun p : C(ℝ, Configuration n) × ℝ => configurationNormSq (p.1 p.2)) :=
     hnorm.comp continuous_eval.measurable
-  have hi (s : Set ℝ) : Measurable (fun x : C(ℝ,Configuration n) => ∫ t in s, configurationNormSq (x t)) :=
+  have hi (s : Set ℝ) : Measurable (fun x : C(ℝ, Configuration n) => ∫ t in s, configurationNormSq (x t)) :=
     hm.stronglyMeasurable.integral_prod_right'.measurable
-  have he : Measurable (fun x : C(ℝ,Configuration n) => ∫ t in (0 : ℝ)..T, configurationNormSq (x t)) := by
+  have he : Measurable (fun x : C(ℝ, Configuration n) => ∫ t in (0 : ℝ)..T, configurationNormSq (x t)) := by
     unfold intervalIntegral
     exact (hi _).sub (hi _)
-  have h0 : Measurable (fun x : C(ℝ,Configuration n) => configurationNormSq (x 0)) :=
+  have h0 : Measurable (fun x : C(ℝ, Configuration n) => configurationNormSq (x 0)) :=
     hnorm.comp (continuous_eval_const (0 : ℝ)).measurable
-  have hT : Measurable (fun x : C(ℝ,Configuration n) => configurationNormSq (x T)) :=
+  have hT : Measurable (fun x : C(ℝ, Configuration n) => configurationNormSq (x T)) :=
     hnorm.comp (continuous_eval_const T).measurable
   unfold ginibreQuadraticGradientPathWeight
   exact Real.measurable_exp.comp
@@ -64,10 +64,10 @@ theorem ginibreHamiltonianOUActionWeight_measurable (n : ℕ) (α T : ℝ) (hT :
   letI : Fact ((0 : ℝ) ≤ T) := ⟨hT⟩
   exact (ginibreHamiltonianCompactPathWeight_measurable n α T hT).div
     ((ginibreQuadraticGradientPathWeight_measurable n α T).comp
-      (ContinuousMap.IccExtendCM : C(C(Icc (0 : ℝ) T,Configuration n), C(ℝ,Configuration n))).continuous.measurable)
+      (ContinuousMap.IccExtendCM : C(C(Icc (0 : ℝ) T, Configuration n), C(ℝ, Configuration n))).continuous.measurable)
 
 theorem ginibreHamiltonianOUActionWeight_reverse (n : ℕ) (α T : ℝ) (hT : 0 ≤ T)
-    (x : C(Icc (0 : ℝ) T,Configuration n)) :
+    (x : C(Icc (0 : ℝ) T, Configuration n)) :
     ginibreHamiltonianOUActionWeight n α T hT
       (x.comp (ginibreHamiltonianCompactReverseTime T hT)) =
     ginibreHamiltonianOUActionWeight n α T hT x := by
@@ -77,7 +77,7 @@ theorem ginibreHamiltonianOUActionWeight_reverse (n : ℕ) (α T : ℝ) (hT : 0 
   congr 1
   change ginibreQuadraticGradientPathWeight n α T
     (fun s => ContinuousMap.IccExtendCM (x.comp (ginibreHamiltonianCompactReverseTime T hT)) s) = _
-  rw [ginibreHamiltonianCompactExtend_reverse,ginibreQuadraticGradientPathWeight_reverse]
+  rw [ginibreHamiltonianCompactExtend_reverse, ginibreQuadraticGradientPathWeight_reverse]
 
 /-- The actual stationary original-Brownian OU product law, reweighted by the
 correct Hamiltonian/quadratic action quotient, is time-reversal invariant.

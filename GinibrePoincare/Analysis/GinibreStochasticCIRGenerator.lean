@@ -5,7 +5,18 @@ public import GinibrePoincare.Analysis.GinibreDynamicsGenerator
 
 @[expose] public section
 
-/-! Genuine real CIR coefficients and smooth radial tests for the actual Brownian SDE. -/
+/-! # Smooth radius tests and CIR drift coefficients
+
+The radius is a quadratic polynomial in configuration coordinates, so it is
+smooth on the whole configuration space. Its generator identities are
+needed only on the collision-free set, where the singular Ginibre generator
+is defined by the concrete drift formula.
+
+The linear-radius identity is obtained by taking real parts of the complex
+polynomial generator calculation. For the squared radius, the polynomial
+carré-du-champ identity supplies the additional `8 * α / n * radius` term.
+Together these formulas identify the drift and squared diffusion amplitude
+used in the stochastic CIR realization. -/
 open scoped Topology ContDiff
 namespace GinibrePoincare
 noncomputable section
@@ -33,8 +44,8 @@ theorem ginibreRealPaperSpeedGenerator_pairwiseRadius {n : ℕ} (hn : 2 ≤ n)
     ginibreRealPaperSpeedGenerator n α pairwiseRadius z =
       (4*α/(n : ℝ))*((recenteredGammaShape n : ℝ)-pairwiseRadius z) := by
   have h := congrArg Complex.re (ginibrePaperSpeedGenerator_radius n hn α z hz)
-  simpa [ginibrePaperSpeedGenerator,ginibreRealPaperSpeedGenerator,complexGinibrePregenerator,
-    sumRadiusPolynomial,observablePolynomial,sumRadiusCoordinate,complexRadius] using h
+  simpa [ginibrePaperSpeedGenerator, ginibreRealPaperSpeedGenerator, complexGinibrePregenerator,
+    sumRadiusPolynomial, observablePolynomial, sumRadiusCoordinate, complexRadius] using h
 theorem ginibreRealPaperSpeedGenerator_pairwiseRadius_square {n : ℕ} (hn : 2 ≤ n)
     (α : ℝ) (z : Configuration n) (hz : CollisionFree z) :
     ginibreRealPaperSpeedGenerator n α (fun w => pairwiseRadius w^2) z =
@@ -51,9 +62,9 @@ theorem ginibreRealPaperSpeedGenerator_pairwiseRadius_square {n : ℕ} (hn : 2 �
   have hr := congrArg Complex.re h
   have hb : ginibrePregenerator n (fun w => pairwiseRadius w^2) z =
       2*pairwiseRadius z*(4*(recenteredGammaShape n : ℝ)-4*pairwiseRadius z)+8*pairwiseRadius z := by
-    simpa [complexGinibrePregenerator,sumRadiusPolynomial,observablePolynomial,sumRadiusCoordinate,
+    simpa [complexGinibrePregenerator, sumRadiusPolynomial, observablePolynomial, sumRadiusCoordinate,
       complexRadius, ← Complex.ofReal_pow] using hr
-  rw [ginibreRealPaperSpeedGenerator,hb]
+  rw [ginibreRealPaperSpeedGenerator, hb]
   ring
 
 end

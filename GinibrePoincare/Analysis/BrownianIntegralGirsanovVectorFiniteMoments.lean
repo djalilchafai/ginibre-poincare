@@ -22,7 +22,7 @@ theorem brownianPredictableVectorGaussianDensity_lintegral_step_sq
       ∫⁻ ω, ENNReal.ofReal (brownianPredictableVectorGaussianDensity B h τ N ω)^2*
         ENNReal.ofReal (Real.exp ((∑ i, (h N ω i)^2)*((τ (N+1)-τ N : ℝ≥0) : ℝ))) ∂P := by
   classical
-  let Y := fun ω => (h N ω,brownianPredictableVectorGaussianDensity B h τ N ω)
+  let Y := fun ω => (h N ω, brownianPredictableVectorGaussianDensity B h τ N ω)
   have hY : @Measurable Ω ((ι→ℝ)×ℝ) (ginibreBrownianAugmentedFiltration B P hB (τ N)) _ Y :=
     (hh N).prodMk (brownianPredictableVectorGaussianDensity_measurable_at B P hB h τ hτ hh N)
   have hYa := hY.mono ((ginibreBrownianAugmentedFiltration B P hB).le (τ N)) le_rfl
@@ -37,9 +37,9 @@ theorem brownianPredictableVectorGaussianDensity_lintegral_step_sq
   have he := gaussianVectorPredictableTilt_lintegral_sq P Y X hYa.aemeasurable
     (τ (N+1)-τ N) hX hi Prod.fst (fun y : (ι→ℝ)×ℝ => ENNReal.ofReal y.2^2)
     measurable_fst ((ENNReal.measurable_ofReal.comp measurable_snd).pow_const 2)
-  simp only [Y,Prod.fst,Prod.snd,X] at he
+  simp only [Y, Prod.fst, Prod.snd, X] at he
   simp_rw [brownianPredictableVectorGaussianDensity_succ,
-    ENNReal.ofReal_mul (brownianPredictableVectorGaussianDensity_pos B h τ N _).le,mul_pow]
+    ENNReal.ofReal_mul (brownianPredictableVectorGaussianDensity_pos B h τ N _).le, mul_pow]
   exact he
 
 /-- Genuine uniform second-moment bound for the finite predictable Gaussian
@@ -55,7 +55,7 @@ theorem brownianPredictableVectorGaussianDensity_lintegral_sq_le
       ENNReal.ofReal (Real.exp (C^2*(τ N : ℝ))) := by
   classical
   induction N with
-  | zero => simp [brownianPredictableVectorGaussianDensity,h0]
+  | zero => simp [brownianPredictableVectorGaussianDensity, h0]
   | succ N ih =>
     rw [brownianPredictableVectorGaussianDensity_lintegral_step_sq B P hB hind h τ hτ hh N]
     have he (ω : Ω) : ENNReal.ofReal (Real.exp ((∑ i, (h N ω i)^2)*((τ (N+1)-τ N : ℝ≥0) : ℝ))) ≤

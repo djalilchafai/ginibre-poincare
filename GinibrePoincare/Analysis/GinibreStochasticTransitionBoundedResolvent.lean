@@ -21,12 +21,12 @@ theorem ginibreOriginalStochasticL2Resolvent_bounded_representative {Ω : Type*}
     (f : Lp ℝ 2 (ginibreMeasure n)) (v : Configuration n → ℝ)
     (hf : (f : Configuration n → ℝ)=ᵐ[ginibreMeasure n] v)
     (hv : Measurable v) (C : ℝ) (hC : ∀ z, ‖v z‖≤C) :
-    let r := fun z => ∫ t in Ioi (0:ℝ), c*Real.exp (-c*t)*
+    let r := fun z => ∫ t in Ioi (0 : ℝ), c*Real.exp (-c*t)*
       ginibreStationaryContinuousTransitionMean α B P v t z
     Measurable r ∧ (∀ z, ‖r z‖≤C) ∧
       (ginibreOriginalStochasticL2Resolvent hn α P B hB hiB c f : Configuration n → ℝ)=ᵐ[ginibreMeasure n] r := by
   letI := ginibreMeasure_isProbabilityMeasure hn
-  let r := fun z => ∫ t in Ioi (0:ℝ), c*Real.exp (-c*t)*
+  let r := fun z => ∫ t in Ioi (0 : ℝ), c*Real.exp (-c*t)*
     ginibreStationaryContinuousTransitionMean α B P v t z
   have hm := ginibreStationaryContinuousTransitionMean_joint_measurable hn α P B hB v hv
   have hm' := hm.comp (measurable_swap : Measurable (@Prod.swap (Configuration n) ℝ))
@@ -34,19 +34,19 @@ theorem ginibreOriginalStochasticL2Resolvent_bounded_representative {Ω : Type*}
     (measurable_const (a := c)).mul (Real.measurable_exp.comp
       ((measurable_const (a := -c)).mul measurable_snd))
   have hw := he.mul hm'
-  have hri : Measurable r := (hw.stronglyMeasurable.integral_prod_right' (ν := volume.restrict (Ioi (0:ℝ)))).measurable
+  have hri : Measurable r := (hw.stronglyMeasurable.integral_prod_right' (ν := volume.restrict (Ioi (0 : ℝ)))).measurable
   have hrb (z : Configuration n) : ‖r z‖≤C := by
     have hs : AEStronglyMeasurable (fun t : ℝ => ginibreStationaryContinuousTransitionMean α B P v t z)
         (volume.restrict (Ioi 0)) :=
       (hm.comp (measurable_id.prodMk (measurable_const (a := z)))).aestronglyMeasurable
-    simpa [r,smul_eq_mul] using (actualNormalizedLaplaceIntegral_norm_bound
+    simpa [r, smul_eq_mul] using (actualNormalizedLaplaceIntegral_norm_bound
       (fun t : ℝ => ginibreStationaryContinuousTransitionMean α B P v t z) c C hc hs
       (ae_of_all _ fun t => ginibreStationaryContinuousTransitionMean_bound α P B v C hC t z)).2
   have hr : MemLp r 2 (ginibreMeasure n) := MemLp.of_bound hri.aestronglyMeasurable C (ae_of_all _ hrb)
   have he : ginibreOriginalStochasticL2Resolvent hn α P B hB hiB c f=hr.toLp r :=
     ginibreOriginalStochasticL2Resolvent_of_bounded_point_identity hn α P B hB hiB hc
       f (hr.toLp r) v hf hv C hC hr.coeFn_toLp.symm
-  exact ⟨hri,hrb,he ▸ hr.coeFn_toLp⟩
+  exact ⟨hri, hrb, he ▸ hr.coeFn_toLp⟩
 
 #print axioms ginibreOriginalStochasticL2Resolvent_bounded_representative
 end

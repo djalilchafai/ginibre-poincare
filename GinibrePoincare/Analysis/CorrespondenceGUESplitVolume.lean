@@ -7,11 +7,11 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 
 def gueSplitIndex (n : ℕ) : Fin n⊕Fin n ≃ Fin n×Fin 2 where
-  toFun := Sum.elim (fun i => (i,0)) (fun i => (i,1))
+  toFun := Sum.elim (fun i => (i, 0)) (fun i => (i, 1))
   invFun p := if p.2=0 then Sum.inl p.1 else Sum.inr p.1
   left_inv s := by cases s <;> simp
   right_inv p := by
-    rcases p with ⟨i,j⟩
+    rcases p with ⟨i, j⟩
     fin_cases j <;> simp
 
 def gueSplitMeasurableEquiv (n : ℕ) : EuclideanSpace ℝ (Fin n×Fin 2) ≃ᵐ
@@ -22,7 +22,7 @@ def gueSplitMeasurableEquiv (n : ℕ) : EuclideanSpace ℝ (Fin n×Fin 2) ≃ᵐ
         ((MeasurableEquiv.toLp 2 (Fin n→ℝ)).prodCongr (MeasurableEquiv.toLp 2 (Fin n→ℝ)))))
 
 theorem gueSplitMeasurableEquiv_apply (n : ℕ) (x : EuclideanSpace ℝ (Fin n×Fin 2)) :
-    gueSplitMeasurableEquiv n x=(gueRealProjection n x,gueAuxProjection n x) := by
+    gueSplitMeasurableEquiv n x=(gueRealProjection n x, gueAuxProjection n x) := by
   rfl
 
 theorem gueSplit_volume_preserving (n : ℕ) :

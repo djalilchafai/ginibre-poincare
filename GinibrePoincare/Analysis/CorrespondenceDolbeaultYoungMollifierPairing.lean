@@ -23,21 +23,21 @@ theorem dolbeaultPiBump_convolution_test (n : ℕ) (φ : ContDiffBump (0 : ℂ))
     (hθ : Continuous θ) (hc : HasCompactSupport θ) :
     (∫ x, (piPlanarBump n φ ⋆[lsmul ℝ ℝ, volume] f) x*θ x) =
       ∫ y, (piPlanarBump n φ y : ℂ)*(∫ x, f (x-y)*θ x) := by
-  obtain ⟨C,hC⟩ := hθ.bounded_above_of_compact_support hc
+  obtain ⟨C, hC⟩ := hθ.bounded_above_of_compact_support hc
   have hb : Integrable (fun p : Configuration n × Configuration n =>
       (piPlanarBump n φ p.2 : ℂ)*f (p.1-p.2)) (volume.prod volume) := by
-    simpa only [lsmul_apply,Complex.real_smul] using
+    simpa only [lsmul_apply, Complex.real_smul] using
       (piPlanarBump_integrable n φ).convolution_integrand (lsmul ℝ ℝ) hf
   have hi : Integrable (fun p : Configuration n × Configuration n =>
       (piPlanarBump n φ p.2 : ℂ)*f (p.1-p.2)*θ p.1) (volume.prod volume) :=
     hb.mul_bdd (hθ.comp continuous_fst).aestronglyMeasurable (ae_of_all _ (fun p => hC p.1))
   calc
     _ = ∫ x, ∫ y, (piPlanarBump n φ y : ℂ)*f (x-y)*θ x := by
-      simp only [convolution_lsmul,Complex.real_smul,integral_mul_const]
+      simp only [convolution_lsmul, Complex.real_smul, integral_mul_const]
     _ = ∫ y, ∫ x, (piPlanarBump n φ y : ℂ)*f (x-y)*θ x := integral_integral_swap hi
     _ = _ := by
       apply integral_congr_ae
-      exact ae_of_all _ (fun y => by simp only [mul_assoc,integral_const_mul])
+      exact ae_of_all _ (fun y => by simp only [mul_assoc, integral_const_mul])
 
 theorem dolbeaultPiBump_average_test (n : ℕ) (φ : ContDiffBump (0 : ℂ))
     (u : dolbeaultOrdinaryL2 n) (θ : Configuration n → ℂ)
@@ -50,11 +50,11 @@ theorem dolbeaultPiBump_average_test (n : ℕ) (φ : ContDiffBump (0 : ℂ))
     rw [dolbeaultCompactPairing_eq_integral θ hθ hc]
     apply integral_congr_ae
     exact ae_of_all _ (fun x => mul_comm _ _)
-  rw [← ht,piL2BumpAverage,← T.integral_comp_comm (integrable_piL2BumpIntegrand n φ u)]
+  rw [← ht, piL2BumpAverage,← T.integral_comp_comm (integrable_piL2BumpIntegrand n φ u)]
   apply integral_congr_ae
   exact ae_of_all _ (fun y => by
     dsimp only
-    rw [map_smul,ht,Complex.real_smul]
+    rw [map_smul, ht, Complex.real_smul]
     congr 1
     apply integral_congr_ae
     filter_upwards [lebesgueL2Translate_ae n y u] with x hx

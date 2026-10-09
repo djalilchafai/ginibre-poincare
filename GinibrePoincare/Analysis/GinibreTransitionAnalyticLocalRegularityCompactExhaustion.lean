@@ -30,7 +30,7 @@ theorem ginibreLocalRegularityCompactSet_isCompact (n j : ℕ) :
 
 theorem ginibreLocalRegularityCompactSet_subset (n j : ℕ) :
     ginibreLocalRegularityCompactSet n j ⊆ {z | CollisionFree z} := by
-  rintro z ⟨x,hx,rfl⟩
+  rintro z ⟨x, hx, rfl⟩
   exact x.property
 
 theorem ginibreLocalRegularityCompactSet_monotone (n : ℕ) :
@@ -40,9 +40,9 @@ theorem ginibreLocalRegularityCompactSet_monotone (n : ℕ) :
 
 theorem ginibreLocalRegularityCompactSet_subset_open_succ (n j : ℕ) :
     ginibreLocalRegularityCompactSet n j ⊆ ginibreLocalRegularityOpenSet n (j+1) := by
-  rintro z ⟨x,hx,rfl⟩
+  rintro z ⟨x, hx, rfl⟩
   exact (isOpen_collisionFree n).isOpenMap_subtype_val.image_interior_subset _
-    ⟨x,(ginibreLocalRegularityCFCompactExhaustion n).subset_interior_succ j hx,rfl⟩
+    ⟨x, (ginibreLocalRegularityCFCompactExhaustion n).subset_interior_succ j hx, rfl⟩
 
 theorem ginibreLocalRegularityOpenSet_isOpen (n j : ℕ) :
     IsOpen (ginibreLocalRegularityOpenSet n j) := isOpen_interior
@@ -61,8 +61,8 @@ theorem ginibreLocalRegularityOpenSet_iUnion (n : ℕ) :
   · exact iUnion_subset (fun j => (ginibreLocalRegularityOpenSet_subset_compact n j).trans
       (ginibreLocalRegularityCompactSet_subset n j))
   · intro z hz
-    obtain ⟨j,hj⟩ := (ginibreLocalRegularityCFCompactExhaustion n).exists_mem ⟨z,hz⟩
-    exact mem_iUnion.mpr ⟨j+1,ginibreLocalRegularityCompactSet_subset_open_succ n j ⟨⟨z,hz⟩,hj,rfl⟩⟩
+    obtain ⟨j, hj⟩ := (ginibreLocalRegularityCFCompactExhaustion n).exists_mem ⟨z, hz⟩
+    exact mem_iUnion.mpr ⟨j+1, ginibreLocalRegularityCompactSet_subset_open_succ n j ⟨⟨z, hz⟩, hj, rfl⟩⟩
 
 theorem ginibreLocalRegularityOpenSet_contains_compact {n : ℕ}
     (K : Set (Configuration n)) (hK : IsCompact K) (hs : K ⊆ {z | CollisionFree z}) :

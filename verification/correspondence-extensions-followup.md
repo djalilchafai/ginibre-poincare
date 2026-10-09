@@ -1,5 +1,11 @@
 # Independent extension and dynamics correspondence follow-up
 
+> Revision context (2026-10-09): this document preserves its original dated
+> mathematical source-review findings and snapshots. The later readability
+> revision has a separate [semantic diff review](readability-semantic-review.md)
+> and [build/axiom verification record](readability-final-check.txt); it is not a
+> new review against the paper. See [STATUS](../STATUS.md) for current evidence.
+
 Reviewed 2026-10-08 by `fresh_correspondence_extensions`, independently of the proof authors, against the working tree above `eb57b0df96825a6b84fc514396d1a342888e46a4`. This is a source correspondence review, not a kernel audit or registry receipt. Authority: [arXiv:2608.19358v2](https://arxiv.org/html/2608.19358v2), cached authoritative HTML `/tmp/correspondence-v2.html`; local TeX was not used. The tree was changing during review. New operator-core and square-root work is explicitly distinguished below.
 
 The earlier [extension inventory](correspondence-extensions.md) and [dynamics inventory](correspondence-dynamics.md) retain their historical snapshot. Their previously verified numbered and displayed results are not invalidated by this follow-up. The table below revisits every unresolved row in those inventories and expands Section 1.2 and Section 1.5's analytic assertions. A matching conclusion means that actual definitions and theorem signatures were inspected; compilation alone was not treated as correspondence evidence.

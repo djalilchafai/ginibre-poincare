@@ -5,7 +5,19 @@ public import GinibrePoincare.Analysis.GinibreStochasticHamiltonianItoTerminal
 
 @[expose] public section
 
-/-! A genuine continuous Hamiltonian Itô martingale for the canonical stopped Brownian solution. -/
+/-! # Hamiltonian Itô martingale under localization
+
+The stopped path lies in the compact Hamiltonian sublevel `K`, contained in
+the collision-free open set `U`. On this set the Hamiltonian is C² and the
+drift is bounded. These facts permit the compact Volterra Itô theorem to
+construct a continuous square-integrable martingale `J`.
+
+The proof establishes the stopped Volterra equation, applies
+`ginibreCompactVolterra_continuous_ito_martingale_exists`, and identifies its
+compensator with `ginibreRealPaperSpeedGenerator`. Finally it evaluates the
+identity at the random bounded stop: the stopped path has the same value
+there as at the deterministic cap `T`. This terminal identity is the input
+to the nonexplosion argument in `GinibreStochasticNoncollision`. -/
 open Set MeasureTheory ProbabilityTheory Filter
 open scoped Topology NNReal
 namespace GinibrePoincare
@@ -48,7 +60,7 @@ theorem ginibreBrownianHamiltonian_continuous_ito_martingale_exists
   have hCont : ∀ ω, Continuous (fun t => X t ω) := ginibreBrownianHamiltonianStoppedProcess_continuous hn α z hz B R hR T
   have hX := ginibreBrownianHamiltonianStoppedProcess_stronglyAdapted hn α z hz B P hB R hR T
   have hb : ∀ ω, Continuous (fun s => b s ω) := ginibreBrownianHamiltonianStoppedDrift_continuous hn α z hz B R hR T
-  obtain ⟨M,hM,hbound⟩ := ginibreBrownianHamiltonianStoppedDrift_bounded hn α z hz B R hR T
+  obtain ⟨M, hM, hbound⟩ := ginibreBrownianHamiltonianStoppedDrift_bounded hn α z hz B R hR T
   have hσ : Measurable σ := measurable_of_Ici (fun t =>
     ginibreBrownianHamiltonianBoundedStop_survival_measurable hn α z hz B P hB R hR T t)
   have hσT (ω : Ω) : σ ω ≤ T := ginibreDrivenHamiltonianBoundedStop_le n α _ z R T
@@ -63,11 +75,11 @@ theorem ginibreBrownianHamiltonian_continuous_ito_martingale_exists
     have hzero : ginibreConfigurationBrownianNoise n B α ω 0=0 := by
       rw [← hNoise 0]
       exact (ginibreBrownianFullContinuousNoise n B α ω).property
-    rw [hzero,sub_zero]
+    rw [hzero, sub_zero]
     have hinit : X 0 ω=z := ginibreBrownianHamiltonianStoppedProcess_initial n α z hz B R T ω
     rw [hinit]
     exact hh
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hEq⟩ := ginibreCompactVolterra_continuous_ito_martingale_exists
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hEq⟩ := ginibreCompactVolterra_continuous_ito_martingale_exists
     n B P hB hind α X hX hCont (ginibreHamiltonian n) U K hU hf hK hKU hRange T b hb
     M hM.le (fun s hs ω => hbound s ω) σ hσ hσT hVE
   have hIto : ∀ᵐ ω ∂P, ∀ t ≤ σ ω, ginibreHamiltonian n (X t ω)-ginibreHamiltonian n z=J t ω+
@@ -82,13 +94,13 @@ theorem ginibreBrownianHamiltonian_continuous_ito_martingale_exists
     have hinit : X 0 ω=z := ginibreBrownianHamiltonianStoppedProcess_initial n α z hz B R T ω
     rw [hinit] at hh
     linarith
-  refine ⟨J,hJM,hJC,hJL,hJ0,hIto,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0, hIto,?_⟩
   filter_upwards [hIto] with ω hω
   have hh := hω (σ ω) le_rfl
   have hEnd : X (σ ω) ω=X T ω := by
     change ginibreBrownianMaximalProcess n α z B (min (σ ω) (σ ω)) ω =
       ginibreBrownianMaximalProcess n α z B (min T (σ ω)) ω
-    rw [min_self,min_eq_right (hσT ω)]
+    rw [min_self, min_eq_right (hσT ω)]
   rw [hEnd] at hh
   linarith
 end

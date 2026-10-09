@@ -21,8 +21,8 @@ def bakryEmeryFiniteEndpoint
   let N := fun s => Real.sqrt 2 • bakryEmeryPolygonalNoise m h x.ofLp s
   let Y := bakryEmeryLangevinCorrectionOn W κ hκ hW hc N
     ((bakryEmeryPolygonalNoise_continuous m h x.ofLp).const_smul (Real.sqrt 2))
-    z ((m:ℝ)*h) (by positivity)
-  Y ((m:ℝ)*h)+N ((m:ℝ)*h)
+    z ((m : ℝ)*h) (by positivity)
+  Y ((m : ℝ)*h)+N ((m : ℝ)*h)
 
 private theorem covariance_nonneg (κ : ℝ) (hκ : 0 < κ) (t : ℝ) (ht : 0 ≤ t) :
     0 ≤ bakryEmeryResponseCovariance κ t := by
@@ -38,10 +38,10 @@ theorem bakryEmeryFiniteEndpoint_lipschitz
     (W : EuclideanSpace ℝ ι → ℝ) (κ : ℝ) (hκ : 0 < κ) (hW : ContDiff ℝ 2 W)
     (hc : ConvexOn ℝ univ (fun x => W x-κ/2*‖x‖^2))
     (z : EuclideanSpace ℝ ι) (m : ℕ) (h : ℝ) (hh : 0 < h) :
-    LipschitzWith (Real.toNNReal (Real.sqrt (2*bakryEmeryResponseCovariance κ ((m:ℝ)*h))))
+    LipschitzWith (Real.toNNReal (Real.sqrt (2*bakryEmeryResponseCovariance κ ((m : ℝ)*h))))
       (bakryEmeryFiniteEndpoint W κ hκ hW hc z m h hh) := by
-  have hT : 0 ≤ (m:ℝ)*h := by positivity
-  have hq := covariance_nonneg κ hκ ((m:ℝ)*h) hT
+  have hT : 0 ≤ (m : ℝ)*h := by positivity
+  have hq := covariance_nonneg κ hκ ((m : ℝ)*h) hT
   apply LipschitzWith.of_dist_le_mul
   intro x y
   let N := fun a : EuclideanSpace ℝ (Fin m × ι) =>
@@ -49,13 +49,13 @@ theorem bakryEmeryFiniteEndpoint_lipschitz
   let Y := fun a : EuclideanSpace ℝ (Fin m × ι) =>
     bakryEmeryLangevinCorrectionOn W κ hκ hW hc (N a)
       ((bakryEmeryPolygonalNoise_continuous m h a.ofLp).const_smul (Real.sqrt 2))
-      z ((m:ℝ)*h) hT
+      z ((m : ℝ)*h) hT
   have hx := bakryEmeryLangevinCorrectionOn_spec W κ hκ hW hc (N x)
     ((bakryEmeryPolygonalNoise_continuous m h x.ofLp).const_smul (Real.sqrt 2))
-    z ((m:ℝ)*h) hT
+    z ((m : ℝ)*h) hT
   have hy := bakryEmeryLangevinCorrectionOn_spec W κ hκ hW hc (N y)
     ((bakryEmeryPolygonalNoise_continuous m h y.ofLp).const_smul (Real.sqrt 2))
-    z ((m:ℝ)*h) hT
+    z ((m : ℝ)*h) hT
   have hb := bakryEmeryLangevin_polygonal_noise_response W κ hκ
     (hW.differentiable (by norm_num)) hc m h hh (Real.sqrt 2) x.ofLp y.ofLp
     (Y y) (Y x) hy.1.continuousOn hx.1.continuousOn (hx.2.1.trans hy.2.1.symm)
@@ -65,10 +65,10 @@ theorem bakryEmeryFiniteEndpoint_lipschitz
   have hs : (Real.sqrt 2)^2 = 2 := Real.sq_sqrt (by norm_num)
   change ‖bakryEmeryFiniteEndpoint W κ hκ hW hc z m h hh x-
     bakryEmeryFiniteEndpoint W κ hκ hW hc z m h hh y‖^2 ≤
-      ((Real.sqrt 2)^2*bakryEmeryResponseCovariance κ ((m:ℝ)*h))*‖x-y‖^2 at hb
+      ((Real.sqrt 2)^2*bakryEmeryResponseCovariance κ ((m : ℝ)*h))*‖x-y‖^2 at hb
   rw [hs] at hb
   rw [Real.toNNReal_of_nonneg (Real.sqrt_nonneg _)]
-  have hs' := Real.sq_sqrt (show 0 ≤ 2*bakryEmeryResponseCovariance κ ((m:ℝ)*h) by positivity)
+  have hs' := Real.sq_sqrt (show 0 ≤ 2*bakryEmeryResponseCovariance κ ((m : ℝ)*h) by positivity)
   apply (sq_le_sq₀ (norm_nonneg _) (mul_nonneg (Real.sqrt_nonneg _) (norm_nonneg _))).mp
   rw [mul_pow, hs']
   exact hb
@@ -82,22 +82,22 @@ theorem bakryEmeryFiniteEndpoint_square_lsi [Nonempty ι]
     {L : ℝ≥0} (hfL : LipschitzWith L f) (C : ℝ) (hfC : ∀ y, |f y| ≤ C) :
     squareEntropy (Measure.pi (fun _ : Fin m × ι => gaussianReal 0 1))
       (fun x => f (bakryEmeryFiniteEndpoint W κ hκ hW hc z m h hh (WithLp.toLp 2 x))) ≤
-      (4*bakryEmeryResponseCovariance κ ((m:ℝ)*h))*
+      (4*bakryEmeryResponseCovariance κ ((m : ℝ)*h))*
       ∫ x, ‖gradient f (bakryEmeryFiniteEndpoint W κ hκ hW hc z m h hh
         (WithLp.toLp 2 x))‖^2
         ∂Measure.pi (fun _ : Fin m × ι => gaussianReal 0 1) := by
-  haveI : Nonempty (Fin m) := ⟨⟨0,hm⟩⟩
-  have hq := covariance_nonneg κ hκ ((m:ℝ)*h) (by positivity)
-  let K := Real.toNNReal (Real.sqrt (2*bakryEmeryResponseCovariance κ ((m:ℝ)*h)))
-  have hk : (K:ℝ)^2=2*bakryEmeryResponseCovariance κ ((m:ℝ)*h) := by
+  haveI : Nonempty (Fin m) := ⟨⟨0, hm⟩⟩
+  have hq := covariance_nonneg κ hκ ((m : ℝ)*h) (by positivity)
+  let K := Real.toNNReal (Real.sqrt (2*bakryEmeryResponseCovariance κ ((m : ℝ)*h)))
+  have hk : (K : ℝ)^2=2*bakryEmeryResponseCovariance κ ((m : ℝ)*h) := by
     dsimp [K]
     rw [max_eq_left (Real.sqrt_nonneg _), Real.sq_sqrt (by positivity)]
   have hb := bakryEmeryGaussianResponse_square_lsi (I := Fin m × ι) 1 (by norm_num)
     (bakryEmeryFiniteEndpoint W κ hκ hW hc z m h hh)
     (bakryEmeryFiniteEndpoint_lipschitz W κ hκ hW hc z m h hh)
     f hf hfL C hfC
-  have hk' : ((Real.toNNReal (Real.sqrt (2*bakryEmeryResponseCovariance κ ((m:ℝ)*h)))):ℝ)^2 =
-      2*bakryEmeryResponseCovariance κ ((m:ℝ)*h) := hk
+  have hk' : ((Real.toNNReal (Real.sqrt (2*bakryEmeryResponseCovariance κ ((m : ℝ)*h)))) : ℝ)^2 =
+      2*bakryEmeryResponseCovariance κ ((m : ℝ)*h) := hk
   rw [hk'] at hb
   convert hb using 1 <;> simp only [NNReal.coe_one] <;> ring
 
@@ -125,7 +125,7 @@ theorem bakryEmeryFiniteEndpointLaw_square_lsi [Nonempty ι]
     (f : EuclideanSpace ℝ ι → ℝ) (hf : ContDiff ℝ 1 f)
     {L : ℝ≥0} (hfL : LipschitzWith L f) (C : ℝ) (hfC : ∀ y, |f y| ≤ C) :
     squareEntropy (bakryEmeryFiniteEndpointLaw W κ hκ hW hc z m h hh) f ≤
-      (4*bakryEmeryResponseCovariance κ ((m:ℝ)*h))*
+      (4*bakryEmeryResponseCovariance κ ((m : ℝ)*h))*
         ∫ x, ‖gradient f x‖^2 ∂bakryEmeryFiniteEndpointLaw W κ hκ hW hc z m h hh := by
   have hΦ := (bakryEmeryFiniteEndpoint_lipschitz W κ hκ hW hc z m h hh).continuous.comp
     (PiLp.continuous_toLp 2 (fun _ : Fin m × ι => ℝ))
@@ -154,10 +154,10 @@ theorem bakryEmeryFiniteEndpointLaw_uniform_square_lsi [Nonempty ι]
     squareEntropy (bakryEmeryFiniteEndpointLaw W κ hκ hW hc z m h hh) f ≤
       (2/κ)*∫ x, ‖gradient f x‖^2 ∂bakryEmeryFiniteEndpointLaw W κ hκ hW hc z m h hh := by
   have hb := bakryEmeryFiniteEndpointLaw_square_lsi W κ hκ hW hc z m hm h hh f hf hfL C hfC
-  have hq : bakryEmeryResponseCovariance κ ((m:ℝ)*h) ≤ 1/(2*κ) := by
+  have hq : bakryEmeryResponseCovariance κ ((m : ℝ)*h) ≤ 1/(2*κ) := by
     unfold bakryEmeryResponseCovariance
     exact div_le_div_of_nonneg_right (sub_le_self _ (Real.exp_nonneg _)) (by positivity)
-  have hcoef : 4*bakryEmeryResponseCovariance κ ((m:ℝ)*h) ≤ 2/κ := by
+  have hcoef : 4*bakryEmeryResponseCovariance κ ((m : ℝ)*h) ≤ 2/κ := by
     calc
       _ ≤ 4*(1/(2*κ)) := mul_le_mul_of_nonneg_left hq (by norm_num)
       _ = _ := by field_simp; ring

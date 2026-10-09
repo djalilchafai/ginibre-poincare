@@ -21,7 +21,7 @@ theorem brownianPredictableGaussianDensity_lintegral_step_sq
     (∫⁻ ω, ENNReal.ofReal (brownianPredictableGaussianDensity (B j) h τ (N+1) ω)^2 ∂P)=
       ∫⁻ ω, ENNReal.ofReal (brownianPredictableGaussianDensity (B j) h τ N ω)^2*
         ENNReal.ofReal (Real.exp ((h N ω)^2*((τ (N+1)-τ N : ℝ≥0) : ℝ))) ∂P := by
-  let Y := fun ω => (h N ω,brownianPredictableGaussianDensity (B j) h τ N ω)
+  let Y := fun ω => (h N ω, brownianPredictableGaussianDensity (B j) h τ N ω)
   have hY : @Measurable Ω (ℝ×ℝ) (ginibreBrownianAugmentedFiltration B P hB (τ N)) _ Y :=
     (hh N).prodMk (brownianPredictableGaussianDensity_measurable_at B P hB j h τ hτ hh N)
   have hYa := hY.mono ((ginibreBrownianAugmentedFiltration B P hB).le (τ N)) le_rfl
@@ -35,9 +35,9 @@ theorem brownianPredictableGaussianDensity_lintegral_step_sq
   have he := gaussianPredictableTilt_lintegral_sq P Y X hYa.aemeasurable
     (τ (N+1)-τ N) hX hi Prod.fst (fun y : ℝ×ℝ => ENNReal.ofReal y.2^2)
     measurable_fst ((ENNReal.measurable_ofReal.comp measurable_snd).pow_const 2)
-  simp only [Y,Prod.fst,Prod.snd,X] at he
+  simp only [Y, Prod.fst, Prod.snd, X] at he
   simp_rw [brownianPredictableGaussianDensity_succ,
-    ENNReal.ofReal_mul (brownianPredictableGaussianDensity_pos (B j) h τ N _).le,mul_pow]
+    ENNReal.ofReal_mul (brownianPredictableGaussianDensity_pos (B j) h τ N _).le, mul_pow]
   exact he
 
 /-- Genuine uniform second-moment bound for the finite predictable Gaussian
@@ -52,7 +52,7 @@ theorem brownianPredictableGaussianDensity_lintegral_sq_le
     (∫⁻ ω, ENNReal.ofReal (brownianPredictableGaussianDensity (B j) h τ N ω)^2 ∂P) ≤
       ENNReal.ofReal (Real.exp (C^2*(τ N : ℝ))) := by
   induction N with
-  | zero => simp [brownianPredictableGaussianDensity,h0]
+  | zero => simp [brownianPredictableGaussianDensity, h0]
   | succ N ih =>
     rw [brownianPredictableGaussianDensity_lintegral_step_sq B P hB hind j h τ hτ hh N]
     have he (ω : Ω) : ENNReal.ofReal (Real.exp ((h N ω)^2*((τ (N+1)-τ N : ℝ≥0) : ℝ))) ≤
@@ -60,7 +60,7 @@ theorem brownianPredictableGaussianDensity_lintegral_sq_le
       apply ENNReal.ofReal_le_ofReal
       apply Real.exp_le_exp.mpr
       apply mul_le_mul_of_nonneg_right _ (NNReal.coe_nonneg _)
-      simpa only [Real.norm_eq_abs,sq_abs] using pow_le_pow_left₀ (norm_nonneg _) (hb N ω) 2
+      simpa only [Real.norm_eq_abs, sq_abs] using pow_le_pow_left₀ (norm_nonneg _) (hb N ω) 2
     calc
       _ ≤ ∫⁻ ω, ENNReal.ofReal (brownianPredictableGaussianDensity (B j) h τ N ω)^2*
           ENNReal.ofReal (Real.exp (C^2*((τ (N+1)-τ N : ℝ≥0) : ℝ))) ∂P :=

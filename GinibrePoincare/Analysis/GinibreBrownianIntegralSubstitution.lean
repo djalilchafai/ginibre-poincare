@@ -82,12 +82,12 @@ theorem brownianIntegral_bounded_substitution_meanSquare
           β (itoUniformNNTime T (n+1) k) ω)^2 ∂P) atTop (𝓝 0) := by
       have hh := (hpartial (itoUniformNNTime T (n+1) k)
         (itoUniformNNTime_le_end T (n+1) k (Nat.succ_pos n) (by omega))).comp hK
-      simpa only [Function.comp_def,he] using hh
+      simpa only [Function.comp_def, he] using hh
     exact actualMeanSquareLimit_weighted_grid_increments P
       (fun m => brownianAggregatePartialSum B u T ((n+1)*(m+1))) β A
       (itoUniformNNTime T (n+1)) (n+1) (fun k m => hpL _ _) (fun k => hβ _)
       (fun k => (hAm _).aestronglyMeasurable) C hC (fun k => hAb _) hl
-  obtain ⟨m,hm⟩ := actualMeanSquare_diagonal_selection P
+  obtain ⟨m, hm⟩ := actualMeanSquare_diagonal_selection P
     (fun n m => brownianSubstitutionCoarseApproximation B u A T (n+1) (m+1))
     (fun n => brownianUniformLeftSum β A T (n+1)) hfixed
   have herror := brownianSubstitutionCoarseApproximation_frozen_error_tendsto_meanSquare
@@ -103,7 +103,7 @@ theorem brownianIntegral_bounded_substitution_meanSquare
     have hp := Nat.mul_pos (Nat.succ_pos n) (Nat.succ_pos (m n))
     exact Nat.sub_add_cancel hp
   have hPL := hproduct.comp hK
-  simp only [Function.comp_def,he] at hPL
+  simp only [Function.comp_def, he] at hPL
   have hcoarse := actualMeanSquareLimit_transfer P
     (fun n ω => ∑ i, brownianUniformLeftSum (B i) (fun r ω => A r ω*u i r ω)
       T ((n+1)*(m n+1)) ω)

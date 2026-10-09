@@ -24,7 +24,7 @@ theorem realMartingale_continuous_maximal_lt_le {Ω : Type*} [MeasurableSpace Ω
   let A : ℕ → Set Ω := fun N => ⋂ n ≥ N, E n
   have hA : Monotone A := by
     intro i j hij ω hω
-    simp only [A,Set.mem_iInter] at *
+    simp only [A, Set.mem_iInter] at *
     exact fun n hn => hω n (hij.trans hn)
   have hbound : ∀ N, P (A N) ≤
       ENNReal.ofReal (∫ ω, (M T ω)^2 ∂P)/(ε : ℝ≥0∞)^2 := by
@@ -40,8 +40,8 @@ theorem realMartingale_continuous_maximal_lt_le {Ω : Type*} [MeasurableSpace Ω
       filter_upwards [hcont] with ω hc
       intro hω
       have he := continuousPath_uniform_grid_detects T (fun t => M t ω) hc ε hω
-      obtain ⟨N,hN⟩ := eventually_atTop.mp he
-      exact Set.mem_iUnion.mpr ⟨N,Set.mem_iInter.mpr (fun n =>
+      obtain ⟨N, hN⟩ := eventually_atTop.mp he
+      exact Set.mem_iUnion.mpr ⟨N, Set.mem_iInter.mpr (fun n =>
         Set.mem_iInter.mpr (fun hn => hN n hn))⟩)
     _ ≤ _ := by rw [hA.measure_iUnion]; exact iSup_le hbound
 
@@ -60,7 +60,7 @@ theorem realMartingale_continuous_difference_maximal_le
       ENNReal.ofReal (∫ ω, (M T ω - N T ω)^2 ∂P)/(ε : ℝ≥0∞)^2 := by
   apply realMartingale_continuous_maximal_lt_le P ℱ (M-N) (hM.sub hN) T
     (hMT.sub hNT) ?_ ε hε
-  filter_upwards [hcontM,hcontN] with ω hm hn
+  filter_upwards [hcontM, hcontN] with ω hm hn
   exact hm.sub hn
 
 /-- Genuine terminal mean-square convergence of continuous martingale
@@ -80,7 +80,7 @@ theorem realMartingale_uniform_probability_cauchy
   have hn := ENNReal.continuous_ofReal.continuousAt.tendsto.comp hterm
   have hd := ENNReal.Tendsto.div_const hn
     (b := (ε : ℝ≥0∞)^2) (Or.inr (pow_ne_zero 2 (by exact_mod_cast hε.ne')))
-  simp only [ENNReal.ofReal_zero,ENNReal.zero_div] at hd
+  simp only [ENNReal.ofReal_zero, ENNReal.zero_div] at hd
   exact tendsto_of_tendsto_of_tendsto_of_le_of_le tendsto_const_nhds hd
     (fun j => bot_le) (fun j => realMartingale_continuous_difference_maximal_le
       P ℱ (M j) (N j) (hM j) (hN j) T (hMT j) (hNT j) (hcontM j) (hcontN j) ε hε)

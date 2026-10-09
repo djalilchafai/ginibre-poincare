@@ -43,11 +43,11 @@ theorem entire_compact_CR_test {n : ℕ} (F : Configuration n → ℂ)
     rw [(hF z).fderiv_restrictScalars (𝕜 := ℝ)]
     have hi : imaginaryCoordinateDirection j = Complex.I • realCoordinateDirection j := by
       funext k
-      simp [imaginaryCoordinateDirection,realCoordinateDirection,coordinateDirection,Pi.smul_apply]
+      simp [imaginaryCoordinateDirection, realCoordinateDirection, coordinateDirection, Pi.smul_apply]
     change fderiv ℂ F z (realCoordinateDirection j) +
       Complex.I * fderiv ℂ F z (imaginaryCoordinateDirection j) = 0
-    rw [hi,map_smul]
-    simp only [smul_eq_mul,← mul_assoc,Complex.I_mul_I,neg_one_mul,add_neg_cancel]
+    rw [hi, map_smul]
+    simp only [smul_eq_mul,← mul_assoc, Complex.I_mul_I, neg_one_mul, add_neg_cancel]
   have hfunc : (fun z => F z * ((fderiv ℝ θ z (realCoordinateDirection j) : ℂ) +
       Complex.I*(fderiv ℝ θ z (imaginaryCoordinateDirection j) : ℂ))) =
       (fun z => fderiv ℝ θ z (realCoordinateDirection j) • F z +
@@ -55,20 +55,20 @@ theorem entire_compact_CR_test {n : ℕ} (F : Configuration n → ℂ)
     funext z
     simp only [Complex.real_smul]
     ring
-  rw [hfunc,integral_add (h1 _) ((h1 _).const_mul _),integral_const_mul,hibp,hibp]
+  rw [hfunc, integral_add (h1 _) ((h1 _).const_mul _), integral_const_mul, hibp, hibp]
   rw [mul_neg,← neg_add,← integral_const_mul,← integral_add (h2 _) ((h2 _).const_mul _)]
   have hz : (∫ z, θ z • fderiv ℝ F z (realCoordinateDirection j) +
       Complex.I*(θ z • fderiv ℝ F z (imaginaryCoordinateDirection j))) = 0 := by
     have hzero : ∀ z, θ z • fderiv ℝ F z (realCoordinateDirection j) +
         Complex.I*(θ z • fderiv ℝ F z (imaginaryCoordinateDirection j)) = 0 := by
       intro z
-      rw [Complex.real_smul,Complex.real_smul]
+      rw [Complex.real_smul, Complex.real_smul]
       calc
         _ = (θ z : ℂ)*(fderiv ℝ F z (realCoordinateDirection j) +
           Complex.I*fderiv ℝ F z (imaginaryCoordinateDirection j)) := by ring
-        _ = 0 := by rw [hpoint,mul_zero]
-    simp only [hzero,integral_zero]
-  rw [hz,neg_zero]
+        _ = 0 := by rw [hpoint, mul_zero]
+    simp only [hzero, integral_zero]
+  rw [hz, neg_zero]
 
 #print axioms entire_compact_CR_test
 end

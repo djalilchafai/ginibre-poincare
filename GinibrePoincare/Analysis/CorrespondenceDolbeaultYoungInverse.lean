@@ -17,7 +17,7 @@ theorem dolbeaultSlice_truncated_fundamental {n : ℕ} (j : Fin n)
   apply integral_congr_ae
   exact ae_of_all _ (fun y => by
     by_cases hy : y∈Metric.closedBall (0 : ℂ) R
-    · simp only [dolbeaultTruncatedCauchyGreen,Set.indicator_of_mem hy]
+    · simp only [dolbeaultTruncatedCauchyGreen, Set.indicator_of_mem hy]
     · have hout : w+Pi.single j y ∉ tsupport θ := by
         intro hz
         have he : y = (w+Pi.single j y : Configuration n) j-w j := by simp
@@ -27,14 +27,14 @@ theorem dolbeaultSlice_truncated_fundamental {n : ℕ} (j : Fin n)
             _ ≤ ‖(w+Pi.single j y : Configuration n) j‖+‖w j‖ := norm_sub_le _ _
             _ ≤ _ := add_le_add (norm_le_pi_norm _ j) (norm_le_pi_norm _ j)
         apply hy
-        simp only [Metric.mem_closedBall,dist_zero_right]
+        simp only [Metric.mem_closedBall, dist_zero_right]
         have ht := hT _ hz
         linarith
       have hd : dbarComponent θ j (w+Pi.single j y)=0 := by
         unfold dbarComponent
         rw [fderiv_of_notMem_tsupport ℝ hout]
         simp
-      simp only [dolbeaultTruncatedCauchyGreen,Set.indicator_of_notMem hy,hd,mul_zero])
+      simp only [dolbeaultTruncatedCauchyGreen, Set.indicator_of_notMem hy, hd, mul_zero])
 
 /-- Actual ordinary distributional coordinate right-inverse for arbitrary compact
 L² input, obtained from the locally L¹ singular kernel, not from a Gaussian input. -/
@@ -60,7 +60,7 @@ theorem dolbeaultCauchyGreenL2_weak_inverse {n : ℕ} (j : Fin n)
   apply integral_congr_ae
   filter_upwards [hu] with w hw
   by_cases hm : w∈Metric.closedBall (0 : Configuration n) M
-  · have hb : ‖w‖≤M := by simpa only [Metric.mem_closedBall,dist_zero_right] using hm
+  · have hb : ‖w‖≤M := by simpa only [Metric.mem_closedBall, dist_zero_right] using hm
     rw [dolbeaultSlice_truncated_fundamental j M T R hR w hb θ (hθ.of_le (by simp)) hc hT]
     ring
   · rw [hw hm]

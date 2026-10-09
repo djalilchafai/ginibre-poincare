@@ -19,7 +19,7 @@ theorem gaussianVectorExponentialTilt_eq_exp {ι : Type*} [Fintype ι]
     gaussianVectorExponentialTilt h v x =
       Real.exp (∑ i, (h i*x i-(h i)^2*(v : ℝ)/2)) := by
   classical
-  simp only [gaussianVectorExponentialTilt,gaussianExponentialTilt,Real.exp_sum]
+  simp only [gaussianVectorExponentialTilt, gaussianExponentialTilt, Real.exp_sum]
 
 theorem gaussianVectorExponentialTilt_nonneg {ι : Type*} [Fintype ι]
     (h : ι → ℝ) (v : ℝ≥0) (x : ι → ℝ) : 0≤gaussianVectorExponentialTilt h v x := by
@@ -47,7 +47,7 @@ theorem gaussianVectorExponentialTilt_integral {ι : Type*} [Fintype ι]
   classical
   unfold gaussianVectorExponentialTilt
   rw [integral_fintype_prod_eq_prod]
-  simp only [gaussianExponentialTilt_integral,Finset.prod_const_one]
+  simp only [gaussianExponentialTilt_integral, Finset.prod_const_one]
 
 theorem gaussianVectorExponentialTilt_integral_sq {ι : Type*} [Fintype ι]
     (h : ι → ℝ) (v : ℝ≥0) :
@@ -57,14 +57,14 @@ theorem gaussianVectorExponentialTilt_integral_sq {ι : Type*} [Fintype ι]
   simp_rw [gaussianVectorExponentialTilt,← Finset.prod_pow]
   rw [integral_fintype_prod_eq_prod (μ:=fun _ : ι => gaussianReal 0 v)
     (fun i x => (gaussianExponentialTilt (h i) v x)^2)]
-  simp only [gaussianExponentialTilt_integral_sq,← Real.exp_sum,Finset.sum_mul]
+  simp only [gaussianExponentialTilt_integral_sq,← Real.exp_sum, Finset.sum_mul]
 
 theorem gaussianVectorExponentialTilt_lintegral {ι : Type*} [Fintype ι]
     (h : ι → ℝ) (v : ℝ≥0) :
     (∫⁻ x, ENNReal.ofReal (gaussianVectorExponentialTilt h v x)
       ∂Measure.pi (fun _ : ι => gaussianReal 0 v))=1 := by
   rw [← ofReal_integral_eq_lintegral_ofReal (gaussianVectorExponentialTilt_integrable h v)
-    (Eventually.of_forall (gaussianVectorExponentialTilt_nonneg h v)),gaussianVectorExponentialTilt_integral]
+    (Eventually.of_forall (gaussianVectorExponentialTilt_nonneg h v)), gaussianVectorExponentialTilt_integral]
   exact ENNReal.ofReal_one
 
 theorem gaussianVectorExponentialTilt_lintegral_sq {ι : Type*} [Fintype ι]
@@ -75,7 +75,7 @@ theorem gaussianVectorExponentialTilt_lintegral_sq {ι : Type*} [Fintype ι]
   have he (x : ι → ℝ) := (ENNReal.ofReal_pow (gaussianVectorExponentialTilt_nonneg h v x) 2).symm
   simp_rw [he]
   rw [← ofReal_integral_eq_lintegral_ofReal (gaussianVectorExponentialTilt_sq_integrable h v)
-    (Eventually.of_forall fun x => sq_nonneg _),gaussianVectorExponentialTilt_integral_sq]
+    (Eventually.of_forall fun x => sq_nonneg _), gaussianVectorExponentialTilt_integral_sq]
 
 end
 end GinibrePoincare

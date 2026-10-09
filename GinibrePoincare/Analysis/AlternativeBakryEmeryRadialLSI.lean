@@ -17,7 +17,7 @@ theorem bakryEmery_kostlan_radius_bounded_lsi
     (f : ℝ → ℝ) (hf : ContDiff ℝ 1 f) {K : ℝ≥0} (hLip : LipschitzWith K f)
     (C : ℝ) (hb : ∀ r, ‖f r‖ ≤ C) :
     squareEntropy ((potentialSquaredRadiusLaw n k V).map Real.sqrt) f ≤
-      (2/((n:ℝ)*ρ)) * ∫ r, (deriv f r)^2 ∂(potentialSquaredRadiusLaw n k V).map Real.sqrt := by
+      (2/((n : ℝ)*ρ)) * ∫ r, (deriv f r)^2 ∂(potentialSquaredRadiusLaw n k V).map Real.sqrt := by
   let E := EuclideanSpace ℝ (Fin (k+1) × Fin 2)
   let μ := bakryEmeryNormalizedGibbs (volume : Measure E) (bakryEmeryEuclideanLiftPotential n V)
   have hmap : μ.map norm = (potentialSquaredRadiusLaw n k V).map Real.sqrt :=
@@ -36,7 +36,7 @@ theorem bakryEmery_kostlan_radius_bounded_lsi
       (mul_le_mul_of_nonneg_left (dist_norm_norm_le x y) K.coe_nonneg))) C
     (fun x => hb ‖x‖)
   change squareEntropy μ (fun x : E => f ‖x‖) ≤ _ at h
-  rw [←he,hg,hmap] at h
+  rw [←he, hg, hmap] at h
   exact h
 
 #print axioms bakryEmery_kostlan_radius_bounded_lsi

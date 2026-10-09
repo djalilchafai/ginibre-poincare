@@ -15,8 +15,8 @@ noncomputable section
 set_option maxHeartbeats 1200000
 set_option backward.isDefEq.respectTransparency false
 
-local instance GinibreHamiltonianOUReferenceProcess_measurable (n : ℕ) : MeasurableSpace C(ℝ,Configuration n) := borel _
-local instance GinibreHamiltonianOUReferenceProcess_borel (n : ℕ) : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+local instance GinibreHamiltonianOUReferenceProcess_measurable (n : ℕ) : MeasurableSpace C(ℝ, Configuration n) := borel _
+local instance GinibreHamiltonianOUReferenceProcess_borel (n : ℕ) : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
 
 def ginibreHamiltonianOUValue (n : ℕ) (α : ℝ) (z : Configuration n) (t : ℝ≥0)
     (N : GinibreContinuousNoise n) : Configuration n :=
@@ -24,17 +24,17 @@ def ginibreHamiltonianOUValue (n : ℕ) (α : ℝ) (z : Configuration n) (t : �
 
 theorem ginibreHamiltonianOUValue_measurable (n : ℕ) (α : ℝ) (z : Configuration n) (t : ℝ≥0) :
     Measurable (ginibreHamiltonianOUValue n α z t) := by
-  have hj : Continuous (fun p : C(ℝ,Configuration n) × ℝ => Real.exp ((2*α/(n : ℝ))*p.2) • p.1 p.2) :=
+  have hj : Continuous (fun p : C(ℝ, Configuration n) × ℝ => Real.exp ((2*α/(n : ℝ))*p.2) • p.1 p.2) :=
     (Real.continuous_exp.comp (continuous_const.mul continuous_snd)).smul continuous_eval
-  have hInt : Measurable (fun N : C(ℝ,Configuration n) => ∫ s in (0 : ℝ)..(t : ℝ),
+  have hInt : Measurable (fun N : C(ℝ, Configuration n) => ∫ s in (0 : ℝ)..(t : ℝ),
       Real.exp ((2*α/(n : ℝ))*s) • N s) := by
     have hi := hj.measurable.stronglyMeasurable.integral_prod_right'
       (ν := volume.restrict (Ioc (0 : ℝ) (t : ℝ)))
     simpa only [intervalIntegral.integral_of_le t.coe_nonneg] using hi.measurable
-  have hInner : Measurable (fun N : C(ℝ,Configuration n) => z-(2*α/(n : ℝ)) •
+  have hInner : Measurable (fun N : C(ℝ, Configuration n) => z-(2*α/(n : ℝ)) •
       ∫ s in (0 : ℝ)..(t : ℝ), Real.exp ((2*α/(n : ℝ))*s) • N s) :=
     measurable_const.sub (hInt.const_smul (2*α/(n : ℝ)))
-  have hV : Measurable (fun N : C(ℝ,Configuration n) => N (t : ℝ)+
+  have hV : Measurable (fun N : C(ℝ, Configuration n) => N (t : ℝ)+
       Real.exp (-(2*α/(n : ℝ))*(t : ℝ)) • (z-(2*α/(n : ℝ)) •
         ∫ s in (0 : ℝ)..(t : ℝ), Real.exp ((2*α/(n : ℝ))*s) • N s)) :=
     (continuous_eval_const (t : ℝ)).measurable.add (hInner.const_smul (Real.exp (-(2*α/(n : ℝ))*(t : ℝ))))
@@ -48,7 +48,7 @@ def ginibreHamiltonianOUReferenceProcess {Ω : Type*} (n : ℕ) (α : ℝ) (z : 
 theorem ginibreHamiltonianOUReferenceProcess_zero {Ω : Type*} (n : ℕ) (α : ℝ) (z : Configuration n)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (ω : Ω) :
     ginibreHamiltonianOUReferenceProcess n α z B 0 ω = z := by
-  simp [ginibreHamiltonianOUReferenceProcess,ginibreHamiltonianOUValue,drivenOUPath,
+  simp [ginibreHamiltonianOUReferenceProcess, ginibreHamiltonianOUValue, drivenOUPath,
     (ginibreBrownianFullContinuousNoise n B α ω).property]
 
 theorem ginibreHamiltonianOUReferenceProcess_continuous {Ω : Type*} (n : ℕ) (α : ℝ)
@@ -83,7 +83,7 @@ theorem ginibreHamiltonianOUReferenceProcess_stronglyAdapted {Ω : Type*} [mAmbi
     filter_upwards [hAE] with ω hω
     apply drivenOUPath_congr_nonneg _ z _ _ (s : ℝ) s.property
     intro u hu
-    rw [hω.2 u,hω.1 u,min_eq_left hu.2]
+    rw [hω.2 u, hω.1 u, min_eq_left hu.2]
   exact ((aemeasurable_iff_measurable (μ := μ)).mp
     (hPast.aemeasurable.congr heq)).stronglyMeasurable
 
@@ -101,7 +101,7 @@ theorem ginibreHamiltonianOUReferenceProcess_original_equation {Ω : Type*} [Mea
     (ginibreBrownianFullContinuousNoise n B α ω).val
     (ginibreBrownianFullContinuousNoise n B α ω).val.continuous (t : ℝ)
   change ginibreHamiltonianOUReferenceProcess n α z B t ω = _ at h
-  rw [h,hω]
+  rw [h, hω]
   congr 1
   apply intervalIntegral.integral_congr
   intro s hs

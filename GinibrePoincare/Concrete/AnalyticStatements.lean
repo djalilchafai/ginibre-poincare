@@ -6,11 +6,16 @@ public import Mathlib.MeasureTheory.Measure.Typeclasses.Probability
 @[expose] public section
 
 /-!
-# Exact analytic statements remaining in the main proof
+# Exact analytic inputs to the main proof
 
 Each proposition is written using the concrete measures, derivatives, and
 normalized ground-state transform.  None is bundled into a certificate and
 none is postulated by a declaration.
+
+This module defines the propositions; it does not prove them. Their proofs
+are `groundStateAdmissibility` and `groundStateEnergyIdentity` in
+`Analysis/GroundStateDbar.lean`. `Endgame/FullMainAnalyticProof.lean` supplies
+these proved inputs to the scalar reduction in `MainProofReduction.lean`.
 -/
 
 namespace GinibrePoincare

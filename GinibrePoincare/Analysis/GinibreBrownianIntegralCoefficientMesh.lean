@@ -102,7 +102,7 @@ theorem brownianCoefficientSampleMesh_integrable_sq {Ω κ : Type*}
   have hle : brownianCoefficientSampleMesh F a b ω ≤ 2*C := by
     apply Finset.sup'_le
     intro i hi
-    exact (norm_sub_le _ _).trans (by linarith [hbound (a i) ω,hbound (b i) ω])
+    exact (norm_sub_le _ _).trans (by linarith [hbound (a i) ω, hbound (b i) ω])
   rw [norm_pow, Real.norm_of_nonneg hnn]
   exact pow_le_pow_left₀ hnn hle 2
 

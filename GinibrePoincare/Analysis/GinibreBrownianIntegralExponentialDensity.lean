@@ -14,8 +14,8 @@ set_option maxHeartbeats 800000
 theorem itoUniformNNTime_eq_ginibreUniformBrownianTime (T : ℝ≥0) (n k : ℕ) :
     itoUniformNNTime T (n+1) k = ginibreUniformBrownianTime T n k := by
   apply NNReal.coe_injective
-  rw [itoUniformNNTime_coe,ginibreUniformBrownianTime_coe]
-  simp only [itoUniformTime,ginibreUniformTime,Nat.cast_add,Nat.cast_one]
+  rw [itoUniformNNTime_coe, ginibreUniformBrownianTime_coe]
+  simp only [itoUniformTime, ginibreUniformTime, Nat.cast_add, Nat.cast_one]
 
 /-- The finite Gaussian change-of-measure density is literally the exponential
  of the actual Brownian left sums minus half the actual energy Riemann sum. -/
@@ -29,12 +29,12 @@ theorem brownianPredictableVectorGaussianDensity_uniform_eq {Ω ι : Type*} [Fin
   unfold brownianPredictableVectorGaussianDensity brownianVectorExponentialUniformSum
     brownianVectorTimeEnergyUniformSum brownianUniformLeftSum
   apply congrArg Real.exp
-  simp_rw [Finset.sum_sub_distrib,Finset.sum_div,itoUniformNNTime_increment_sub_coe]
+  simp_rw [Finset.sum_sub_distrib, Finset.sum_div, itoUniformNNTime_increment_sub_coe]
   rw [Finset.sum_comm]
   congr 1
   simp_rw [← Finset.sum_div,← Finset.sum_mul]
   rw [Fin.sum_univ_eq_sum_range (fun k : ℕ => ∑ i, (F i (ginibreUniformBrownianTime T n k) ω)^2) (n+1)]
-  simp only [itoUniformNNTime_eq_ginibreUniformBrownianTime,Nat.cast_add,Nat.cast_one]
+  simp only [itoUniformNNTime_eq_ginibreUniformBrownianTime, Nat.cast_add, Nat.cast_one]
 
 /-- For the genuine coordinate integral limits, the actual exponential density
  has expectation one; uniform integrability and L¹ convergence are derived. -/

@@ -24,10 +24,10 @@ theorem correspondenceOperator_stochastic_semigroup_eq {Ω : Type*} [MeasurableS
     apply ContinuousLinearMap.ext
     intro u
     rw [ginibreOriginalStochasticL2Operator_zero_speed]
-    simp only [zero_div,zero_mul]
+    simp only [zero_div, zero_mul]
     exact (correspondenceOperatorRealEvolution_zero_apply hn u).symm
-  · have hαp : 0<(α:ℝ) := by exact_mod_cast (pos_iff_ne_zero.mpr hα)
-    have hc : 0<α/(n:ℝ≥0) := div_pos (pos_iff_ne_zero.mpr hα)
+  · have hαp : 0<(α : ℝ) := by exact_mod_cast (pos_iff_ne_zero.mpr hα)
+    have hc : 0<α/(n : ℝ≥0) := div_pos (pos_iff_ne_zero.mpr hα)
       (by exact_mod_cast hn)
     apply correspondenceOperatorContractionSemigroup_eq_from_actual_laplace hn
       (ginibreOriginalStochasticL2Operator hn α P B hB hiB)
@@ -36,7 +36,7 @@ theorem correspondenceOperator_stochastic_semigroup_eq {Ω : Type*} [MeasurableS
       (by intro s t u; rw [ginibreOriginalStochasticL2Operator_semigroup]; rfl)
       (by intro u; rw [ginibreOriginalStochasticL2Operator_zero]; rfl) (α/n) hc
     intro u
-    simpa only [NNReal.coe_div,NNReal.coe_natCast,ginibreOriginalStochasticL2Resolvent] using
+    simpa only [NNReal.coe_div, NNReal.coe_natCast, ginibreOriginalStochasticL2Resolvent] using
       correspondenceOperator_stochastic_resolvent_eq hn α hαp P B hB hiB u
 
 /-- The actual stochastic transition on complex observables acts componentwise
@@ -66,7 +66,7 @@ theorem correspondenceOperator_complex_stochastic_semigroup_eq {Ω : Type*} [Mea
   unfold correspondenceOperatorComplexStochasticTransition
   rw [correspondenceOperator_stochastic_semigroup_eq hn α P B hB hiB T]
   rw [← correspondenceOperatorEvolution_ofReal,← correspondenceOperatorEvolution_ofReal,
-    ← map_smul,← map_add,ginibreFullComplex_decomposition]
+    ← map_smul,← map_add, ginibreFullComplex_decomposition]
 
 #print axioms correspondenceOperator_complex_stochastic_semigroup_eq
 #print axioms correspondenceOperator_stochastic_semigroup_eq

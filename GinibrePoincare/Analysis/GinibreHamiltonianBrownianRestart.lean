@@ -20,7 +20,7 @@ theorem ginibreConfigurationBrownianNoise_shift_nonneg {Ω : Type*} (n : ℕ)
       ginibreConfigurationBrownianNoise n B α ω (s+t)-ginibreConfigurationBrownianNoise n B α ω s := by
   have hc : (s : ℝ)+t=((s+t.toNNReal : ℝ≥0) : ℝ) := by simp [Real.coe_toNNReal t ht]
   funext j
-  simp only [ginibreConfigurationBrownianNoise,brownianFamilyShift,hc,Real.toNNReal_coe,Pi.sub_apply]
+  simp only [ginibreConfigurationBrownianNoise, brownianFamilyShift, hc, Real.toNNReal_coe, Pi.sub_apply]
   simp only [Complex.ofReal_sub, ← smul_sub]
   congr 1
   ring
@@ -48,12 +48,12 @@ theorem ginibreBrownianMaximalProcess_canonical_restart
     have hShift := ginibreDrivenPath_shift n α _ _ hω.2.2.2 s s.property
     refine ⟨hShift.1,?_⟩
     intro t ht
-    rw [hNoise t,ginibreConfigurationBrownianNoise_shift_nonneg n B α s ω t ht]
+    rw [hNoise t, ginibreConfigurationBrownianNoise_shift_nonneg n B α s ω t ht]
     exact hShift.2 t ht
   have h := ginibreDrivenPath_canonical_global
     (hω.1.comp (continuous_const.add continuous_id))
     (fun t ht => hω.2.2.1 (s+t) (add_nonneg s.property ht)) he
-  simpa only [X,Function.comp_def,Pi.add_apply,id_eq,add_zero,Real.toNNReal_coe,
+  simpa only [X, Function.comp_def, Pi.add_apply, id_eq, add_zero, Real.toNNReal_coe,
     ← NNReal.coe_add] using h
 
 end

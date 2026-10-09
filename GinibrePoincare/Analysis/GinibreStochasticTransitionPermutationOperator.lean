@@ -27,20 +27,20 @@ theorem ginibreOriginalStochasticL2Operator_permute_bounded {Ω : Type*} [Measur
   have hpermuted : (ginibreRealPermutationL2 σ f : Configuration n → ℝ)=ᵐ[ginibreMeasure n]
       (fun z => v (permute σ z)) := by
     have hcomp := (ginibre_measurePreserving_permute σ).quasiMeasurePreserving.ae_eq hfv
-    filter_upwards [ginibreRealPermutationL2_ae σ f,hcomp] with z hz hz'
+    filter_upwards [ginibreRealPermutationL2_ae σ f, hcomp] with z hz hz'
     exact hz.trans hz'
-  obtain ⟨hrm,hrb,hr⟩ := ginibreOriginalStochasticL2Operator_bounded_representative hn α P B hB hiB T
+  obtain ⟨hrm, hrb, hr⟩ := ginibreOriginalStochasticL2Operator_bounded_representative hn α P B hB hiB T
     f v hfv hv C hC
-  obtain ⟨hsm,hsb,hs⟩ := ginibreOriginalStochasticL2Operator_bounded_representative hn α P B hB hiB T
+  obtain ⟨hsm, hsb, hs⟩ := ginibreOriginalStochasticL2Operator_bounded_representative hn α P B hB hiB T
     (ginibreRealPermutationL2 σ f) (fun z => v (permute σ z)) hpermuted
     (hv.comp (ginibre_measurePreserving_permute σ).measurable) C (fun z => hC _)
   have hrcomp := (ginibre_measurePreserving_permute σ).quasiMeasurePreserving.ae_eq hr
   apply Lp.ext
-  filter_upwards [hs,ginibreRealPermutationL2_ae σ (A f),hrcomp,ginibre_ae_collisionFree n hn]
+  filter_upwards [hs, ginibreRealPermutationL2_ae σ (A f), hrcomp, ginibre_ae_collisionFree n hn]
     with z hz hp hr' hcf
   change (A f) (permute σ z) =
     ginibreStationaryContinuousTransitionMean α B P v T (permute σ z) at hr'
-  rw [hz,hp,hr']
+  rw [hz, hp, hr']
   exact ginibreStationaryContinuousTransitionMean_permute hn σ α P B hB hiB v hv T z hcf
 
 theorem ginibreOriginalStochasticL2Operator_permute_symmetric_input {Ω : Type*} [MeasurableSpace Ω]
@@ -57,8 +57,8 @@ theorem ginibreOriginalStochasticL2Operator_permute_symmetric_input {Ω : Type*}
   have he : A.comp (Q.comp S)=Q.comp (A.comp S) := by
     apply ginibreSymmetricSource_operators_eq_of_bounded_values n
     intro u hu
-    obtain ⟨C,hC⟩ := hu
-    obtain ⟨v,hv,hvb,hfv⟩ := ginibreBoundedLp_measurable_version hn u.val C hC
+    obtain ⟨C, hC⟩ := hu
+    obtain ⟨v, hv, hvb, hfv⟩ := ginibreBoundedLp_measurable_version hn u.val C hC
     exact ginibreOriginalStochasticL2Operator_permute_bounded hn σ α P B hB hiB T u.val v hfv hv (max C 0) hvb
   exact congrArg (fun L => L f) he
 

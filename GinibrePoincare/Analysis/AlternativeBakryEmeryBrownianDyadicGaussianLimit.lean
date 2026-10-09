@@ -35,18 +35,18 @@ theorem bakryBrownian_centered_gaussian_limit {Ω : Type*} [MeasurableSpace Ω]
   have hCF (n : ℕ) : (∫ sample, Complex.exp ((t*X n sample : ℝ)*Complex.I) ∂P) =
       Complex.exp (-(v n : ℝ)*t^2/2 : ℂ) := by
     have hh := congrArg (fun μ : Measure ℝ => charFun μ t) (hX n).map_eq
-    rw [charFun_apply_real,integral_map (hX n).aemeasurable (by fun_prop),charFun_gaussianReal] at hh
-    simpa only [mul_zero,Complex.ofReal_zero,zero_mul,zero_sub,Complex.ofReal_mul,
-      Complex.ofReal_pow,Complex.ofReal_div,Complex.ofReal_ofNat,Function.comp_def,neg_mul,neg_div] using hh
+    rw [charFun_apply_real, integral_map (hX n).aemeasurable (by fun_prop), charFun_gaussianReal] at hh
+    simpa only [mul_zero, Complex.ofReal_zero, zero_mul, zero_sub, Complex.ofReal_mul,
+      Complex.ofReal_pow, Complex.ofReal_div, Complex.ofReal_ofNat, Function.comp_def, neg_mul, neg_div] using hh
   have hExp : Tendsto (fun n => Complex.exp (-(v n : ℝ)*t^2/2 : ℂ)) atTop
       (𝓝 (Complex.exp (-(w : ℝ)*t^2/2 : ℂ))) := by
     apply Complex.continuous_exp.continuousAt.tendsto.comp
     exact (((Complex.continuous_ofReal.continuousAt.tendsto.comp
       (NNReal.continuous_coe.continuousAt.tendsto.comp hv)).neg.mul_const ((t : ℂ)^2)).div_const 2)
   have he := tendsto_nhds_unique (hIntegral.congr hCF) hExp
-  rw [charFun_apply_real,integral_map hY (by fun_prop),charFun_gaussianReal]
-  simpa only [mul_zero,Complex.ofReal_zero,zero_mul,zero_sub,Complex.ofReal_mul,
-    Complex.ofReal_pow,Complex.ofReal_div,Complex.ofReal_ofNat,Function.comp_def,neg_mul,neg_div] using he
+  rw [charFun_apply_real, integral_map hY (by fun_prop), charFun_gaussianReal]
+  simpa only [mul_zero, Complex.ofReal_zero, zero_mul, zero_sub, Complex.ofReal_mul,
+    Complex.ofReal_pow, Complex.ofReal_div, Complex.ofReal_ofNat, Function.comp_def, neg_mul, neg_div] using he
 
 #print axioms bakryBrownian_centered_gaussian_limit
 end

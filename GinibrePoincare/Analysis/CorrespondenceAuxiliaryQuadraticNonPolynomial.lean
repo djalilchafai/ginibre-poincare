@@ -26,9 +26,9 @@ private theorem realPair_ratio (a : ℝ) (ha : a ≠ 0) :
 
 private theorem imaginaryPair_ratio (a : ℝ) (ha : a ≠ 0) :
     ((Complex.I*(a : ℂ))^2)/(Complex.normSq (Complex.I*(a : ℂ)) : ℂ) = -1 := by
-  rw [Complex.normSq_mul,Complex.normSq_I,one_mul,Complex.normSq_ofReal]
+  rw [Complex.normSq_mul, Complex.normSq_I, one_mul, Complex.normSq_ofReal]
   push_cast
-  rw [mul_pow,Complex.I_sq,neg_one_mul]
+  rw [mul_pow, Complex.I_sq, neg_one_mul]
   simp [pow_two, mul_ne_zero (Complex.ofReal_ne_zero.mpr ha) (Complex.ofReal_ne_zero.mpr ha)]
 
 private theorem quadratic_path_generator (n : ℕ) (t : ℝ) (ht : t ≠ 0) :
@@ -89,7 +89,7 @@ private theorem quadratic_imaginary_path_generator (n : ℕ) (t : ℝ) (ht : t �
         intro k hk
         exact hr j k hk
       _ = _ := by
-        simp only [Finset.sum_const,nsmul_eq_mul,mul_neg_one,Finset.sum_neg_distrib]
+        simp only [Finset.sum_const, nsmul_eq_mul, mul_neg_one, Finset.sum_neg_distrib]
         rw [vandermondeDegree_eq_sum_Ioi_card]
         push_cast
         rfl
@@ -120,7 +120,7 @@ theorem holomorphicQuadraticSum_generator_no_continuous_extension (n : ℕ)
         (4/(n : ℂ))*(vandermondeDegree n : ℂ)) (Set.Ioi (0 : ℝ)) := by
     intro t ht
     dsimp only
-    rw [he _ (realCollisionPath_free n t (ne_of_gt ht)),quadratic_path_generator n t (ne_of_gt ht)]
+    rw [he _ (realCollisionPath_free n t (ne_of_gt ht)), quadratic_path_generator n t (ne_of_gt ht)]
   have hi : Set.EqOn (fun t => F (fun j => Complex.I*realCollisionPath n t j))
       (fun t => -4*holomorphicQuadraticSum (fun j => Complex.I*realCollisionPath n t j)-
         (4/(n : ℂ))*(vandermondeDegree n : ℂ)) (Set.Ioi (0 : ℝ)) := by
@@ -130,25 +130,25 @@ theorem holomorphicQuadraticSum_generator_no_continuous_extension (n : ℕ)
       exact realCollisionPath_free n t (ne_of_gt ht)
         (mul_left_cancel₀ Complex.I_ne_zero heq)
     dsimp only
-    rw [he _ hfree,quadratic_imaginary_path_generator n t (ne_of_gt ht)]
+    rw [he _ hfree, quadratic_imaginary_path_generator n t (ne_of_gt ht)]
   have hzero : (0 : ℝ) ∈ closure (Set.Ioi (0 : ℝ)) := by rw [closure_Ioi]; exact le_rfl
   have hr0 := hr.closure (hF.comp hc) (by fun_prop) hzero
   have hi0 := hi.closure (hF.comp hci) (by fun_prop) hzero
   dsimp only at hr0 hi0
-  simp only [realCollisionPath,zero_mul,Complex.ofReal_zero,mul_zero,
-    holomorphicQuadraticSum,zero_pow (by decide : 2 ≠ 0),Finset.sum_const_zero,
-    sub_zero,zero_add,zero_sub] at hr0 hi0
+  simp only [realCollisionPath, zero_mul, Complex.ofReal_zero, mul_zero,
+    holomorphicQuadraticSum, zero_pow (by decide : 2 ≠ 0), Finset.sum_const_zero,
+    sub_zero, zero_add, zero_sub] at hr0 hi0
   have hzpath : realCollisionPath n 0 = fun _ => 0 := by
     funext j
     simp [realCollisionPath]
   rw [hzpath] at hr0
   have hvpos : 0 < vandermondeDegree n := by
     rw [vandermondeDegree_eq_sum_Ioi_card]
-    have hi : (Finset.Ioi (⟨0,by omega⟩ : Fin n)).card > 0 := by
+    have hi : (Finset.Ioi (⟨0, by omega⟩ : Fin n)).card > 0 := by
       apply Finset.card_pos.mpr
-      exact ⟨⟨1,by omega⟩,by simp⟩
+      exact ⟨⟨1, by omega⟩, by simp⟩
     exact lt_of_lt_of_le hi (Finset.single_le_sum (f := fun i : Fin n => (Finset.Ioi i).card)
-      (fun i _ => Nat.zero_le _) (Finset.mem_univ (⟨0,by omega⟩ : Fin n)))
+      (fun i _ => Nat.zero_le _) (Finset.mem_univ (⟨0, by omega⟩ : Fin n)))
   have hneq : (4/(n : ℂ))*(vandermondeDegree n : ℂ) ≠ 0 := by
     apply mul_ne_zero
     · exact div_ne_zero (by norm_num) (by exact_mod_cast (show n ≠ 0 by omega))
@@ -173,9 +173,9 @@ theorem holomorphicQuadraticSum_generator_not_mixed_polynomial (n : ℕ)
     apply continuous_pi
     intro k
     by_cases hk : k.2 = 0
-    · simp only [hk,ite_true]
+    · simp only [hk, ite_true]
       exact continuous_apply k.1
-    · simp only [hk,ite_false]
+    · simp only [hk, ite_false]
       exact Complex.continuous_conj.comp (continuous_apply k.1)
   · intro z hz
     exact (h z hz).symm

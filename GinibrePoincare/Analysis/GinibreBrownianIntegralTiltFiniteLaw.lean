@@ -30,7 +30,7 @@ theorem brownianVectorExponentialIntegralDensity_finite_states_identDistrib
       (fun n => brownianUniformLeftSum (B i) (F i) T (n+1)) atTop (I i))
     (t : α → ℝ≥0) (ht : ∀ a, t a≤T) :
     IdentDistrib (fun ω a i => B i (t a) ω-B i 0 ω-
-      ∫ s in (0:ℝ)..(t a:ℝ), F i (Real.toNNReal s) ω)
+      ∫ s in (0 : ℝ)..(t a : ℝ), F i (Real.toNNReal s) ω)
       (fun ω a i => B i (t a) ω-B i 0 ω)
       (P.withDensity (fun ω => ENNReal.ofReal (brownianVectorExponentialIntegralDensity F T I ω))) P := by
   classical
@@ -41,26 +41,26 @@ theorem brownianVectorExponentialIntegralDensity_finite_states_identDistrib
   letI : IsProbabilityMeasure Q := gaussianDensity_isProbabilityMeasure_of_integral_one P d hd.1 hd.2.1 hd.2.2.1
   let idx := fun (n : ℕ) (a : α) => (⟨brownianRationalApproxIndex T (t a) n,
     Nat.lt_succ_of_le (brownianRationalApproxIndex_le T (t a) hT (ht a) n)⟩ : Fin (n+2))
-  let r := fun n a => T*((idx n a).val:ℝ≥0)/(n+1:ℕ)
+  let r := fun n a => T*((idx n a).val : ℝ≥0)/(n+1 : ℕ)
   let X := fun n ω a i => B i (r n a) ω-B i 0 ω-
-    ∫ s in (0:ℝ)..(r n a:ℝ), F i (Real.toNNReal s) ω
+    ∫ s in (0 : ℝ)..(r n a : ℝ), F i (Real.toNNReal s) ω
   let Y := fun n ω a i => B i (r n a) ω-B i 0 ω
   let x := fun ω a i => B i (t a) ω-B i 0 ω-
-    ∫ s in (0:ℝ)..(t a:ℝ), F i (Real.toNNReal s) ω
+    ∫ s in (0 : ℝ)..(t a : ℝ), F i (Real.toNNReal s) ω
   let y := fun ω a i => B i (t a) ω-B i 0 ω
   have hr (n : ℕ) (a : α) : r n a∈Set.Icc 0 T := by
     refine ⟨bot_le,?_⟩
     dsimp only [r]
     rw [mul_div_assoc]
-    apply (mul_le_mul_of_nonneg_left ((div_le_one (by positivity : (0:ℝ≥0)<(n+1:ℕ))).mpr ?_)
-      (show (0:ℝ≥0)≤T from bot_le)).trans_eq (mul_one T)
+    apply (mul_le_mul_of_nonneg_left ((div_le_one (by positivity : (0 : ℝ≥0)<(n+1 : ℕ))).mpr ?_)
+      (show (0 : ℝ≥0)≤T from bot_le)).trans_eq (mul_one T)
     exact_mod_cast brownianRationalApproxIndex_le T (t a) hT (ht a) n
   have hrt (a : α) : Tendsto (fun n => r n a) atTop (𝓝 (t a)) :=
     brownianRationalApproxTime_tendsto T (t a) hT
   have hi (n : ℕ) : IdentDistrib (X n) (Y n) Q P := by
     have hl := brownianVectorExponentialIntegralDensity_rational_states_hasLaw B P
       (fun i => (hB i).toIsPreBrownianReal) hind F hF C hC hb T hc hs I hI (n+1) (Nat.succ_pos n)
-    let V := fun ω (p : Fin (n+2)) i => B i (T*(p.val:ℝ≥0)/(n+1:ℕ)) ω-B i 0 ω
+    let V := fun ω (p : Fin (n+2)) i => B i (T*(p.val : ℝ≥0)/(n+1 : ℕ)) ω-B i 0 ω
     have hmV : Measurable V := by
       apply measurable_pi_lambda
       intro p
@@ -68,7 +68,7 @@ theorem brownianVectorExponentialIntegralDensity_finite_states_identDistrib
       intro i
       exact (aemeasurable_iff_measurable.mp ((hB i).aemeasurable _)).sub
         (aemeasurable_iff_measurable.mp ((hB i).aemeasurable _))
-    have hbase : HasLaw V (P.map V) P := ⟨hmV.aemeasurable,rfl⟩
+    have hbase : HasLaw V (P.map V) P := ⟨hmV.aemeasurable, rfl⟩
     have hm : Measurable (fun z : Fin (n+2) → ι→ℝ => fun a => z (idx n a)) := by
       apply measurable_pi_lambda
       intro a
@@ -76,18 +76,18 @@ theorem brownianVectorExponentialIntegralDensity_finite_states_identDistrib
     exact (hl.identDistrib hbase).comp hm
   have hXae : ∀ᵐ ω ∂Q, Tendsto (fun n => X n ω) atTop (𝓝 (x ω)) := by
     have hp : ∀ᵐ ω ∂P, ∀ i, ContinuousOn (fun s : ℝ≥0 => B i s ω-B i 0 ω-
-        ∫ u in (0:ℝ)..(s:ℝ), F i (Real.toNNReal u) ω) (Set.Icc 0 T) :=
+        ∫ u in (0 : ℝ)..(s : ℝ), F i (Real.toNNReal u) ω) (Set.Icc 0 T) :=
       ae_all_iff.mpr (fun i => brownianCorrectedPath_continuousOn B P hB F T hc i)
     have hpQ : ∀ᵐ ω ∂Q, ∀ i, ContinuousOn (fun s : ℝ≥0 => B i s ω-B i 0 ω-
-        ∫ u in (0:ℝ)..(s:ℝ), F i (Real.toNNReal u) ω) (Set.Icc 0 T) :=
+        ∫ u in (0 : ℝ)..(s : ℝ), F i (Real.toNNReal u) ω) (Set.Icc 0 T) :=
       (withDensity_absolutelyContinuous P _).ae_le hp
     filter_upwards [hpQ] with ω hω
     apply tendsto_pi_nhds.mpr
     intro a
     apply tendsto_pi_nhds.mpr
     intro i
-    exact (hω i (t a) ⟨bot_le,ht a⟩).tendsto.comp
-      (tendsto_nhdsWithin_iff.mpr ⟨hrt a,Eventually.of_forall (fun n => hr n a)⟩)
+    exact (hω i (t a) ⟨bot_le, ht a⟩).tendsto.comp
+      (tendsto_nhdsWithin_iff.mpr ⟨hrt a, Eventually.of_forall (fun n => hr n a)⟩)
   have hYae : ∀ᵐ ω ∂P, Tendsto (fun n => Y n ω) atTop (𝓝 (y ω)) := by
     have hp := ae_all_iff.mpr (fun i => (hB i).cont)
     filter_upwards [hp] with ω hω

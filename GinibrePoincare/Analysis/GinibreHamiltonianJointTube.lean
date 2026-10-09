@@ -34,7 +34,7 @@ set_option maxHeartbeats 800000
   have h0 : ‖u 0 ()‖ ≤ r := by
     simp only [u, hpe 0 bot_le, NNReal.coe_zero, hX.2.1, hY.2.1]
     have hδr : δ < r := lt_of_le_of_lt (le_mul_of_one_le_right hδ (Real.one_le_exp (mul_nonneg L.property T.property))) hsmall
-    exact (le_trans (by have h := hnoise 0 ⟨le_rfl,T.property⟩; linarith [norm_nonneg (N 0-M 0)]) hδr.le)
+    exact (le_trans (by have h := hnoise 0 ⟨le_rfl, T.property⟩; linarith [norm_nonneg (N 0-M 0)]) hδr.le)
   intro t ht
   by_contra hn
   have hrt : r ≤ ‖X t-Y t‖ := le_of_not_gt hn

@@ -6,6 +6,18 @@ public import Mathlib.LinearAlgebra.Matrix.Basis
 
 @[expose] public section
 
+/-! # Schur decomposition on simple spectrum
+
+An eigenbasis gives an invariant flag of initial spans. Gram–Schmidt preserves
+these initial spans, so the same endomorphism is upper triangular in the resulting
+orthonormal basis. Changing from that basis to a fixed orthonormal basis produces
+a unitary matrix and the Schur conjugation identity. The matrix endpoint applies
+this construction to the eigenbasis available on simple spectrum; the Gaussian
+endpoint uses almost-everywhere separability of the characteristic polynomial.
+This proof establishes the simple-spectrum case needed by the integration route.
+-/
+
+
 open Submodule InnerProductSpace
 open scoped Matrix
 namespace GinibrePoincare

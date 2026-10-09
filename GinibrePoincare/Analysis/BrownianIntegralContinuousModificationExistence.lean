@@ -21,21 +21,21 @@ theorem realMartingale_terminal_cauchy_exists_continuous_limit
     (hc : ∀ n, ∀ᵐ ω ∂P, ContinuousOn (fun t => F n t ω) (Set.Icc 0 T))
     (hterm : Tendsto (fun q : ℕ × ℕ =>
       ∫ ω, (F q.2 T ω-F q.1 T ω)^2 ∂P) atTop (𝓝 0)) :
-    ∃ s : ℕ → ℕ, StrictMono s ∧ ∃ L : Ω → C(Set.Icc 0 T,ℝ),
+    ∃ s : ℕ → ℕ, StrictMono s ∧ ∃ L : Ω → C(Set.Icc 0 T, ℝ),
       ∀ᵐ ω ∂P, TendstoUniformly (fun n (t : Set.Icc 0 T) => F (s n) t ω) (L ω) atTop := by
   let G := fun n => continuousIntervalPathVersion (F n) T
   have hG := continuousIntervalPathVersion_probability_cauchy P ℱ F hF T hT hc hterm
-  let d : ℕ → ℝ := fun n => ((1:ℝ)/2)^n
+  let d : ℕ → ℝ := fun n => ((1 : ℝ)/2)^n
   have hd : ∀ n, 0 < d n := fun n => pow_pos (by norm_num) n
   let p : ℕ → ℝ≥0∞ := fun n => ENNReal.ofReal (d n)
   have hp : ∀ n, 0 < p n := fun n => ENNReal.ofReal_pos.mpr (hd n)
   have hpsum : (∑' n, p n) ≠ ⊤ := by
     rw [←ENNReal.ofReal_tsum_of_nonneg (fun n => (hd n).le) summable_geometric_two]
     exact ENNReal.ofReal_ne_top
-  obtain ⟨s,hs,hlimit⟩ := continuousProbabilityCauchy_exists_uniform_limit P G hG
+  obtain ⟨s, hs, hlimit⟩ := continuousProbabilityCauchy_exists_uniform_limit P G hG
     d hd summable_geometric_two p hp hpsum
-  refine ⟨s,hs,(fun ω => continuousMartingalePathLimit (fun n => G (s n)) ω),?_⟩
-  filter_upwards [hlimit,continuousIntervalPathVersion_sequence_eq_ae P F T hc] with ω hl he
+  refine ⟨s, hs, (fun ω => continuousMartingalePathLimit (fun n => G (s n)) ω),?_⟩
+  filter_upwards [hlimit, continuousIntervalPathVersion_sequence_eq_ae P F T hc] with ω hl he
   convert hl using 1
   funext n t
   exact (he (s n) t).symm

@@ -25,7 +25,7 @@ theorem multivariateMixedMonomialL2_mem_hermite_rectangle (n : ℕ) (hn : 0 < n)
     intro F hF
     induction hF using Submodule.span_induction with
     | mem g hg =>
-      obtain ⟨a,b,ha,hb,rfl⟩ := hg
+      obtain ⟨a, b, ha, hb, rfl⟩ := hg
       refine ⟨memLp_two_multivariateNormalized n hn a b,?_⟩
       have he : (memLp_two_multivariateNormalized n hn a b).toLp
           (multivariateNormalized n hn a b) = multivariateNormalizedL2 n hn a b := by
@@ -34,24 +34,24 @@ theorem multivariateMixedMonomialL2_mem_hermite_rectangle (n : ℕ) (hn : 0 < n)
           multivariateNormalizedL2_coeFn n hn a b] with z h1 h2
         exact h1.trans h2.symm
       rw [he]
-      exact Submodule.subset_span ⟨a,b,ha,hb,rfl⟩
-    | zero => exact ⟨MemLp.zero,by simp⟩
+      exact Submodule.subset_span ⟨a, b, ha, hb, rfl⟩
+    | zero => exact ⟨MemLp.zero, by simp⟩
     | add f g hf hg ihf ihg =>
-      obtain ⟨hfm,hfs⟩ := ihf
-      obtain ⟨hgm,hgs⟩ := ihg
+      obtain ⟨hfm, hfs⟩ := ihf
+      obtain ⟨hgm, hgs⟩ := ihg
       refine ⟨hfm.add hgm,?_⟩
       rw [MemLp.toLp_add hfm hgm]
       exact S.add_mem hfs hgs
     | smul c f hf ih =>
-      obtain ⟨hfm,hfs⟩ := ih
+      obtain ⟨hfm, hfs⟩ := ih
       refine ⟨hfm.const_smul c,?_⟩
       rw [MemLp.toLp_const_smul c hfm]
       exact S.smul_mem c hfs
   have hpoint : (fun z : Configuration n => ∏ i, z i ^ p i * conj (z i) ^ q i) ∈
       multivariateNormalizedRectangleSpan n hn p q := by
     rw [multivariateNormalizedRectangleSpan_eq_mixedMonomialRectangleSpan]
-    exact Submodule.subset_span ⟨p,q,fun _ => le_rfl,fun _ => le_rfl,rfl⟩
-  obtain ⟨hm,hs⟩ := lift hpoint
+    exact Submodule.subset_span ⟨p, q, fun _ => le_rfl, fun _ => le_rfl, rfl⟩
+  obtain ⟨hm, hs⟩ := lift hpoint
   have he : hm.toLp _ = multivariateMixedMonomialL2 n hn p q := by
     apply Lp.ext
     filter_upwards [hm.coeFn_toLp,

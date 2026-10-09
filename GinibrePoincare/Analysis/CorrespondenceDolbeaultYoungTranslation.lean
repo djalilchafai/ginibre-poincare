@@ -15,7 +15,7 @@ abbrev dolbeaultOrdinaryL2 (n : ℕ) := Lp ℂ 2 (volume : Measure (Configuratio
 
 def dolbeaultCoordinateTranslation {n : ℕ} (j : Fin n) (y : ℂ) :
     C(Configuration n, Configuration n) :=
-  ⟨fun z => z-Pi.single j y,continuous_id.sub continuous_const⟩
+  ⟨fun z => z-Pi.single j y, continuous_id.sub continuous_const⟩
 
 theorem dolbeaultCoordinateTranslation_preserving {n : ℕ} (j : Fin n) (y : ℂ) :
     MeasurePreserving (dolbeaultCoordinateTranslation j y)

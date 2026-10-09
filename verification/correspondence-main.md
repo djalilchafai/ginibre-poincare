@@ -1,5 +1,11 @@
 # Independent correspondence review: main inequality, Sections 2–4 and Appendices A–B
 
+> Revision context (2026-10-09): this document preserves its original dated
+> mathematical source-review findings and snapshots. The later readability
+> revision has a separate [semantic diff review](readability-semantic-review.md)
+> and [build/axiom verification record](readability-final-check.txt); it is not a
+> new review against the paper. See [STATUS](../STATUS.md) for current evidence.
+
 > Historical review at proof snapshot `0779d080f22fcd93258f0e6e0cb34944bada110c`. Its findings are retained as evidence, not current unresolved-work labels. See the [current main, auxiliary and contextual follow-up](correspondence-main-followup.md) and [integrated review](../CORRESPONDENCE_REVIEW.md) for item-specific resolutions and remaining qualifications.
 
 Reviewed on 2026-10-08 against source snapshot `0779d080f22fcd93258f0e6e0cb34944bada110c`.

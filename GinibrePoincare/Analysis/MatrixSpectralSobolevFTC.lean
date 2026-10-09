@@ -8,7 +8,16 @@ public import Mathlib.MeasureTheory.Function.LocallyIntegrable
 
 @[expose] public section
 
-/-! # Fundamental theorem across finitely many exceptional spectral points -/
+/-! # Fundamental theorem across finitely many exceptional spectral points
+
+The first proof inducts on the finite exceptional set. An exceptional point
+inside the interval splits it into two intervals; continuity makes the boundary
+values cancel when the two fundamental-theorem identities are added. Points
+outside the interval require no split. Applying this result to `f * ψ` yields
+integration by parts. The final theorem chooses endpoints outside the test
+support and converts interval integrals to full-line integrals, so no singular
+boundary contribution survives.
+-/
 open MeasureTheory Set
 namespace GinibrePoincare
 noncomputable section
@@ -28,25 +37,26 @@ theorem integral_derivative_eq_sub_off_finite (S : Finset ℝ) (f g : ℝ → �
   | @insert c S hc ih =>
     intro a b hab hcont hd hi
     by_cases hmid : c ∈ Ioo a b
-    · have hca := hmid.1.le
-      have hcb := hmid.2.le
-      have hleft : Icc a c ⊆ Icc a b := fun x hx => ⟨hx.1, hx.2.trans hcb⟩
-      have hright : Icc c b ⊆ Icc a b := fun x hx => ⟨hca.trans hx.1, hx.2⟩
-      have hil : IntervalIntegrable g volume a c := hi.mono_set (by
-        simpa only [uIcc_of_le hca, uIcc_of_le hab] using hleft)
-      have hir : IntervalIntegrable g volume c b := hi.mono_set (by
-        simpa only [uIcc_of_le hcb, uIcc_of_le hab] using hright)
-      have hl := ih a c hca (hcont.mono hleft) (by
+    · -- Split at the exceptional point; continuity cancels the joining value.
+      have hexception_left := hmid.1.le
+      have hexception_right := hmid.2.le
+      have hleftInterval_subset : Icc a c ⊆ Icc a b := fun x hx => ⟨hx.1, hx.2.trans hexception_right⟩
+      have hrightInterval_subset : Icc c b ⊆ Icc a b := fun x hx => ⟨hexception_left.trans hx.1, hx.2⟩
+      have hleft_integrable : IntervalIntegrable g volume a c := hi.mono_set (by
+        simpa only [uIcc_of_le hexception_left, uIcc_of_le hab] using hleftInterval_subset)
+      have hright_integrable : IntervalIntegrable g volume c b := hi.mono_set (by
+        simpa only [uIcc_of_le hexception_right, uIcc_of_le hab] using hrightInterval_subset)
+      have hleftFTC := ih a c hexception_left (hcont.mono hleftInterval_subset) (by
         intro x hx hxs
         apply hd x ⟨hx.1, hx.2.trans hmid.2⟩
         simp only [Finset.mem_insert, not_or]
-        exact ⟨hx.2.ne, hxs⟩) hil
-      have hr := ih c b hcb (hcont.mono hright) (by
+        exact ⟨hx.2.ne, hxs⟩) hleft_integrable
+      have hrightFTC := ih c b hexception_right (hcont.mono hrightInterval_subset) (by
         intro x hx hxs
         apply hd x ⟨hmid.1.trans hx.1, hx.2⟩
         simp only [Finset.mem_insert, not_or]
-        exact ⟨hx.1.ne', hxs⟩) hir
-      rw [← intervalIntegral.integral_add_adjacent_intervals hil hir, hl, hr]
+        exact ⟨hx.1.ne', hxs⟩) hright_integrable
+      rw [← intervalIntegral.integral_add_adjacent_intervals hleft_integrable hright_integrable, hleftFTC, hrightFTC]
       ring
     · apply ih a b hab hcont _ hi
       intro x hx hxs

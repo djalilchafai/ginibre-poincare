@@ -19,12 +19,12 @@ theorem ginibreCenterRadialDirection_scaled_coordinate {n : ℕ} (hn : 0 < n)
   have hne : configurationEuclideanEquiv n (ginibreRepeatedCenterCLM n z) ≠ 0 := by
     intro h
     have hh := ginibreRepeatedCenterEuclidean_norm_sq n z
-    rw [h,norm_zero,zero_pow (by norm_num)] at hh
+    rw [h, norm_zero, zero_pow (by norm_num)] at hh
     have hnR : (n : ℝ) ≠ 0 := by exact_mod_cast hn.ne'
     exact hz ((mul_eq_zero.mp hh.symm).resolve_left hnR)
-  simp only [ginibreCenterRadialDirection,brownianRadialUnitVector,if_neg hne,
-    PiLp.smul_apply,smul_eq_mul]
-  rw [← mul_assoc,mul_inv_cancel₀ (norm_ne_zero_iff.mpr hne),one_mul]
+  simp only [ginibreCenterRadialDirection, brownianRadialUnitVector, if_neg hne,
+    PiLp.smul_apply, smul_eq_mul]
+  rw [← mul_assoc, mul_inv_cancel₀ (norm_ne_zero_iff.mpr hne), one_mul]
 
 theorem ginibreCenterCIR_noise_amplitude_square {n : ℕ} (hn : 0 < n)
     (α : ℝ) (hα : 0 ≤ α) (z : Configuration n) :
@@ -34,7 +34,7 @@ theorem ginibreCenterCIR_noise_amplitude_square {n : ℕ} (hn : 0 < n)
   have hnR : (n : ℝ) ≠ 0 := by exact_mod_cast hn.ne'
   have hs : (Real.sqrt (2*α/(n : ℝ)^2))^2=2*α/(n : ℝ)^2 :=
     Real.sq_sqrt (div_nonneg (by positivity) (sq_nonneg _))
-  rw [mul_pow,mul_pow,hs,ginibreRepeatedCenterEuclidean_norm_sq]
+  rw [mul_pow, mul_pow, hs, ginibreRepeatedCenterEuclidean_norm_sq]
   field_simp
   <;> ring
 
@@ -43,7 +43,7 @@ theorem ginibreCenterCIR_noise_amplitude {n : ℕ} (hn : 0 < n)
     2*Real.sqrt (2*α/(n : ℝ)^2)*
       ‖configurationEuclideanEquiv n (ginibreRepeatedCenterCLM n z)‖ =
       Real.sqrt ((8*α/(n : ℝ))*ginibreCenterSquared n z) := by
-  rw [← ginibreCenterCIR_noise_amplitude_square hn α hα z,Real.sqrt_sq_eq_abs,
+  rw [← ginibreCenterCIR_noise_amplitude_square hn α hα z, Real.sqrt_sq_eq_abs,
     abs_of_nonneg (by positivity)]
 
 theorem ginibreCenterCIR_noise_coordinate {n : ℕ} (hn : 0 < n)
@@ -56,10 +56,10 @@ theorem ginibreCenterCIR_noise_coordinate {n : ℕ} (hn : 0 < n)
     ginibreCenterRadialDirection_scaled_coordinate hn z hz e i]
   have hc : fderiv ℝ (ginibreCenterSquared n) z (ginibreCoordinateDirection i) =
       2*configurationEuclideanEquiv n (ginibreRepeatedCenterCLM n z) i := by
-    obtain ⟨j,b⟩ := i
-    fin_cases b <;> simp [ginibre_fderiv_centerSquared,ginibreCoordinateDirection,
-      realCoordinateDirection,imaginaryCoordinateDirection,coordinateDirection,
-      coordinateSum,ginibreRepeatedCenterCLM,coordinateSumCLM_apply]
+    obtain ⟨j, b⟩ := i
+    fin_cases b <;> simp [ginibre_fderiv_centerSquared, ginibreCoordinateDirection,
+      realCoordinateDirection, imaginaryCoordinateDirection, coordinateDirection,
+      coordinateSum, ginibreRepeatedCenterCLM, coordinateSumCLM_apply]
   rw [hc]
   ring
 

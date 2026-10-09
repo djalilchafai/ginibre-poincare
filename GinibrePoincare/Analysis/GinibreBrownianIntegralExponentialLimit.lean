@@ -46,9 +46,9 @@ theorem brownianVectorExponentialUniformSum_tendstoInMeasure {Ω ι : Type*}
     funext ω
     exact (Finset.sum_apply ω Finset.univ _).symm
   have hhalf (n : ℕ) : AEStronglyMeasurable (fun ω => brownianVectorTimeEnergyUniformSum F T n ω/2) P := by
-    convert (hemi n).mul (aestronglyMeasurable_const (b := (2:ℝ)⁻¹)) using 1
+    convert (hemi n).mul (aestronglyMeasurable_const (b := (2 : ℝ)⁻¹)) using 1
     funext ω
-    simp only [Pi.mul_apply,div_eq_mul_inv]
+    simp only [Pi.mul_apply, div_eq_mul_inv]
   have hexponent := actualTendstoInMeasure_sub P _ _ _ _ hsumm hhalf hsum hehalf
   have hexponentm (n : ℕ) : AEStronglyMeasurable (fun ω => (∑ i, brownianUniformLeftSum (B i) (F i) T (n+1) ω)-brownianVectorTimeEnergyUniformSum F T n ω/2) P := (hsumm n).sub (hhalf n)
   exact itoTendstoInMeasure_continuous P _ _ hexponentm hexponent Real.exp Real.continuous_exp

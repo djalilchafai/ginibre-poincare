@@ -30,9 +30,9 @@ theorem actualMeanSquareLimit_bounded_mul {Ω : Type*} [MeasurableSpace Ω]
     apply integral_mono (hprod n).integrable_sq (((hS n).sub hI).integrable_sq.const_mul (C^2))
     intro ω
     have ha : (A ω)^2 ≤ C^2 := by
-      simpa only [Real.norm_eq_abs,sq_abs] using
+      simpa only [Real.norm_eq_abs, sq_abs] using
         pow_le_pow_left₀ (norm_nonneg _) (hbound ω) 2
-    simpa only [mul_pow,Pi.sub_apply] using mul_le_mul_of_nonneg_right ha (sq_nonneg (S n ω-I ω))
+    simpa only [mul_pow, Pi.sub_apply] using mul_le_mul_of_nonneg_right ha (sq_nonneg (S n ω-I ω))
   apply squeeze_zero (fun n => integral_nonneg fun ω => sq_nonneg _) hle
   simpa using hlim.const_mul (C^2)
 
@@ -86,7 +86,7 @@ theorem actualMeanSquareLimit_finite_bounded_weights {Ω κ : Type*} [Measurable
       ((hS i n).sub (hI i)) C (hbound i))
     (fun i => actualMeanSquareLimit_bounded_mul P (S i) (I i) (A i)
       (hS i) (hI i) (hA i) C hC (hbound i) (hlim i))
-  simpa only [mul_sub,Finset.sum_sub_distrib] using hh
+  simpa only [mul_sub, Finset.sum_sub_distrib] using hh
 
 end
 end GinibrePoincare

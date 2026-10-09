@@ -5,6 +5,18 @@ public import Mathlib.Data.Prod.Lex
 
 @[expose] public section
 
+/-! # The Vandermonde block of the Schur differential
+
+Strict lower entries are ordered by column and decreasing row. With that order,
+the lower-entry commutator map for an upper triangular matrix is triangular;
+its diagonal entries are differences of the triangular diagonal eigenvalues.
+Its complex determinant is their product, and its squared norm is the
+Vandermonde weight. The later lemmas identify this matrix with the actual
+lower-entry part of the skew-Hermitian tangent commutator. Upper triangular
+conjugate-transpose terms contribute zero to those lower entries.
+-/
+
+
 open Matrix Order OrderDual
 open scoped BigOperators
 namespace GinibrePoincare

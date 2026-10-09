@@ -19,8 +19,8 @@ theorem standardComplexGaussian_normSq_gamma :
       (complexCoordinateGaussianProbability 1 : Measure ℂ)) 0).map_eq
   have hr : gaussianBlockRadius 1 1=(fun z : Configuration 1 => Complex.normSq (z 0)) := by
     funext z
-    simp [gaussianBlockRadius,configurationNormSq]
-  rw [← he,Measure.map_map Complex.continuous_normSq.measurable (measurable_pi_apply 0)]
+    simp [gaussianBlockRadius, configurationNormSq]
+  rw [← he, Measure.map_map Complex.continuous_normSq.measurable (measurable_pi_apply 0)]
   change (gaussianBlockMeasure 1 1).map (fun z : Configuration 1 => Complex.normSq (z 0))=gammaMeasure 1 1
   rw [← hr]
   simpa using gaussianBlockRadius_gamma 1 1 (by decide) (by decide)
@@ -41,7 +41,7 @@ theorem ginibreCenterSquared_pairwiseRadius_independent (n : ℕ) (hn : 0 < n) :
 
 /-- Exact joint Gamma product law of both concrete equilibrium radii. -/
 theorem ginibreTwoRadius_equilibrium_gamma_product (n : ℕ) (hn : 2 ≤ n) :
-    (ginibreMeasure n).map (fun z => (ginibreCenterSquared n z,pairwiseRadius z))=
+    (ginibreMeasure n).map (fun z => (ginibreCenterSquared n z, pairwiseRadius z))=
       (gammaMeasure 1 1).prod (gammaMeasure (recenteredGammaShape n : ℝ) 1) := by
   letI := ginibreMeasure_isProbabilityMeasure (by omega : 0<n)
   have hmS : Measurable (ginibreCenterSquared n) :=
@@ -50,8 +50,8 @@ theorem ginibreTwoRadius_equilibrium_gamma_product (n : ℕ) (hn : 2 ≤ n) :
     unfold pairwiseRadius
     fun_prop
   rw [(ginibreCenterSquared_pairwiseRadius_independent n (by omega)).map_prod_eq_prod_map_map
-    hmS.aemeasurable hmR.aemeasurable,ginibreCenterSquared_equilibrium_gamma n (by omega)]
-  rw [recenteredGammaShape_eq n (by omega),pairwiseRadius_ginibre_gamma n hn]
+    hmS.aemeasurable hmR.aemeasurable, ginibreCenterSquared_equilibrium_gamma n (by omega)]
+  rw [recenteredGammaShape_eq n (by omega), pairwiseRadius_ginibre_gamma n hn]
 
 #print axioms ginibreCenterSquared_pairwiseRadius_independent
 #print axioms ginibreTwoRadius_equilibrium_gamma_product

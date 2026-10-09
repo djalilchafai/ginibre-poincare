@@ -1,6 +1,25 @@
 # Ginibre Poincaré formalization — current status
 
-Updated 2026-10-08 after completing the correspondence proof work. The final
+## Readability revision — 2026-10-09
+
+The [reading guides](HUMAN_READABILITY.md), proof explanations in 82 modules,
+named result interfaces and conservative punctuation pass are integrated.
+Existing declaration signatures are unchanged; an independent diff review also
+inspected definition bodies. See the [semantic review](verification/readability-semantic-review.md).
+The formatter's 17 regression cases and the local source audit pass.
+The full single-thread `make check` passes: 5,814 build jobs, 6,920 public axiom
+queries and 14,592 all-local declarations, including private helpers. Only
+`propext`, `Classical.choice` and `Quot.sound` occur. The import smoke test and all ten proof-route independence checks pass.
+The fresh export contains 14,592 declarations and 12,588 theorems (including
+generated declarations); 32 endpoint views and the twelve thematic views are
+refreshed, with named-interface shortcuts in the offline explorer. JavaScript
+syntax and embedded-data checks pass; browser rendering could not be checked
+because the sandbox blocks Chromium's crash-handler socket setup. The online
+explorer was not redeployed. See the [verification record](verification/readability-final-check.txt).
+The earlier mathematical correspondence and verification evidence below is the
+2026-10-08 checkpoint.
+
+Mathematical correspondence checkpoint — 2026-10-08, after completing the proof work. The final
 independent main/auxiliary/Appendix A–B and extension/dynamics reviews found no
 remaining concrete conclusion gap in their combined inventory of
 [arXiv:2608.19358v2](https://arxiv.org/html/2608.19358v2). Actual measures, domains,
@@ -27,7 +46,7 @@ See [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md) and
 | General real Brascamp–Lieb | C² potential with everywhere positive-definite actual Hessian and finite Gibbs mass; locally Lipschitz or ordinary local L² weak gradients, value globally L², finite inverse-Hessian energy; no uniform-curvature/global-gradient-L² assumption |
 | Appendices A–B | Actual weak closure/core/norm equivalence and positive-speed collision capacity; O(ε⁴) cutoff-square and O(ε²) gradient rates; literal leading coefficients, tensor expansion, normalized Gram–Schmidt and Slater ground state |
 | Problems 1.11, 1.15, 1.16; Appendix C | Open research questions and numerical experiments; not solved or theorem-certified |
-| Publication | Prior Palomar Theorem 1.1 comparison passed; live public registration remains unconfirmed |
+| Publication | Palomar Theorem 1.1 comparison published as PALOMAR-2026-10-09-000001 v1; current-source revision requires new verification |
 
 ## Latest progress and domain qualifications
 
@@ -54,7 +73,7 @@ formalization packages.
 Every changed result's paper route, Lean route and module evidence is recorded
 in REPORT.md. No overall completion percentage is assigned.
 
-## Build and audit evidence
+## Build and audit evidence — 2026-10-08 checkpoint
 
 `LEAN_NUM_THREADS=1 make check` **passes** on the final proof tree:
 
@@ -83,9 +102,9 @@ Freshly generated with `python3 scripts/count_lean_sources.py`:
 
 | Scope | Files/modules | Physical lines |
 | --- | ---: | ---: |
-| Project Lean sources, roots, generated facades and Lean tooling | 1,727 | 185,400 |
+| Project Lean sources, roots, generated facades and Lean tooling | 1,727 | 186,672 |
 | Transitively imported Mathlib | 3,813 | 1,256,051 |
-| Project plus imported Mathlib | 5,540 | 1,441,451 |
+| Project plus imported Mathlib | 5,540 | 1,442,723 |
 
 Comments and blank lines are included. Each imported Mathlib module is counted
 once in full. Archives, Lean core and other dependencies are excluded. These
@@ -97,16 +116,15 @@ No remaining concrete conclusion gap was found in the combined independent
 paper inventory. The final mathematical build and axiom checks pass. Open
 research Problems and Appendix C retain their exclusions above.
 
-Registry publication remains unconfirmed: the latest 16:11:40 UTC search is
-HTTP 200 with no matching entry (revision 190); the canonical repository record
-is HTTP 404. The earlier authenticated GET returned HTTP 403; no cause is
-inferred. Accepted consent is not a public receipt. See the sanitized
-[publication evidence](verification/registry-publication-check.md).
-
-The final repository snapshot contains the completed proof/documentation
-integration. The next external publication step is a successful registry status
-or public registration receipt; no duplicate submission or maintainer message
-has been sent.
+Palomar [version 1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-09-000001&version=1)
+is publicly registered for the earlier Theorem 1.1 comparison snapshot.
+See the [public receipt](verification/registry-publication-check.md).
+The current source requires an ordinary new immutable revision, its own full
+mechanical verification and review, and registration using the same Palomar ID.
+The local fresh Comparator attempt is blocked by the execution sandbox's
+network-namespace socket restriction; the earlier official pass remains
+historical evidence. The next step is exact-commit official verification after
+publishing the refreshed repository and website.
 
 ## Historical checkpoints (superseded)
 

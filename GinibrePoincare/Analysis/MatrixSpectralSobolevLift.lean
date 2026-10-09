@@ -5,7 +5,16 @@ public import GinibrePoincare.Analysis.MatrixSymmetricLift
 
 @[expose] public section
 
-/-! # Continuous collision extension of the actual measurable spectral lift -/
+/-! # Continuous collision extension of the actual measurable spectral lift
+
+Symmetry makes different enumerations of the full characteristic roots produce
+the same value. On simple spectrum this continuous full-root lift agrees with
+the chosen measurable-label lift. The local smooth labeling shows agreement on
+an entire neighborhood of each simple matrix, so their derivatives agree there.
+The module consequently transfers the exact overlap-energy formula to the
+continuous lift, while almost-everywhere agreement preserves Gaussian integrals.
+This supplies the continuous observable used by collision removability.
+-/
 open Matrix MeasureTheory Filter
 open scoped BigOperators Topology
 namespace GinibrePoincare

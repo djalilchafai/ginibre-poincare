@@ -20,11 +20,11 @@ theorem actualMeanSquareZero_sub {Ω : Type*} [MeasurableSpace Ω]
     Tendsto (fun n => ∫ ω, (E n ω-F n ω)^2 ∂P) atTop (𝓝 0) := by
   have h := actualMeanSquareZero_finset_sum P (Finset.univ : Finset (Fin 2))
     (fun i n ω => if i=0 then E n ω else -F n ω)
-    (fun i n => by by_cases hi : i=0 <;> simp only [hi,if_true,if_false]; exact hE n; exact (hF n).neg)
+    (fun i n => by by_cases hi : i=0 <;> simp only [hi, if_true, if_false]; exact hE n; exact (hF n).neg)
     (fun i => by by_cases hi : i=0
-                 · simpa only [hi,if_true] using he
-                 · simpa only [hi,if_false,neg_sq] using hf)
-  simpa [Fin.sum_univ_two,sub_eq_add_neg] using h
+                 · simpa only [hi, if_true] using he
+                 · simpa only [hi, if_false, neg_sq] using hf)
+  simpa [Fin.sum_univ_two, sub_eq_add_neg] using h
 
 def brownianAggregatePartialSum {Ω ι : Type*} [Fintype ι]
     (B : ι → ℝ≥0 → Ω → ℝ) (u : ι → ℝ≥0 → Ω → ℝ)
@@ -47,7 +47,7 @@ theorem brownianSubstitutionCoarseApproximation_refinement {Ω ι : Type*} [Fint
         (B i (itoUniformNNTime T (N*M) (k+1)) ω-B i (itoUniformNNTime T (N*M) k) ω)) := by
   classical
   unfold brownianSubstitutionCoarseApproximation brownianAggregatePartialSum
-  simp_rw [← Finset.sum_sub_distrib,Finset.mul_sum]
+  simp_rw [← Finset.sum_sub_distrib, Finset.mul_sum]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro i hi

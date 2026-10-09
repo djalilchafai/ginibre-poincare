@@ -7,6 +7,21 @@ public import Mathlib.MeasureTheory.Function.LpSpace.InfiniteSum
 
 @[expose] public section
 
+/-! # Linking the Hilbert expansion to a pointwise entire series
+
+Hilbert-space convergence alone does not give pointwise convergence. The first
+lemma bridges the two: convergence in L² gives a subsequence converging almost
+everywhere, while pointwise summability identifies its limit. Countability lets
+all finite-sum representative identities hold on one common set of full measure.
+
+For the zero Hermite mode, summing over the antiholomorphic index leaves only
+index zero. The norm bound on each Hilbert coefficient then invokes the factorial
+series estimates of `GaussianEntireSeriesBounds` to prove pointwise summability.
+The resulting series represents the orthogonal projection almost everywhere;
+entire regularity is supplied separately by `GaussianEntireDifferentiability`.
+-/
+
+
 open MeasureTheory Filter
 open scoped Topology BigOperators
 namespace GinibrePoincare

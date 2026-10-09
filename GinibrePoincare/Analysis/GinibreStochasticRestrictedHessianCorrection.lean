@@ -55,7 +55,7 @@ theorem ginibreCompactVolterra_restricted_hessian_tendstoInProbability
   have hd : TendstoInMeasure P (fun k => E.indicator (D k)) atTop (fun _ => 0) := by
     apply tendstoInMeasure_of_tendsto_ae
       (fun k => ((hmA k).sub (hmN k)).indicator hE |>.aestronglyMeasurable)
-    filter_upwards [hVolterra,ginibreConfigurationBrownianNoise_actual n B P hB α] with ω hω hW
+    filter_upwards [hVolterra, ginibreConfigurationBrownianNoise_actual n B P hB α] with ω hω hW
     by_cases he : ω ∈ E
     · simp only [Set.indicator_of_mem he]
       have h := itoActualPath_drift_hessian_tendsto f U K hU hf hK hKU T
@@ -64,7 +64,7 @@ theorem ginibreCompactVolterra_restricted_hessian_tendstoInProbability
         ((hW.1.comp continuous_subtype_val).continuousOn) (hb ω)
       convert! h using 1
       funext k
-      dsimp [D,A,N,ginibreConfigurationPathHessianSum,ginibreConfigurationBrownianHessianSum]
+      dsimp [D, A, N, ginibreConfigurationPathHessianSum, ginibreConfigurationBrownianHessianSum]
       rw [← Finset.sum_sub_distrib]
       apply Finset.sum_congr rfl
       intro l hl
@@ -78,7 +78,7 @@ theorem ginibreCompactVolterra_restricted_hessian_tendstoInProbability
   have h := ginibre_tendstoInMeasure_add P _ _ _ _ hd hn
   convert! h using 1
   · funext k ω
-    by_cases he : ω ∈ E <;> simp [Set.indicator_of_mem,Set.indicator_of_notMem,he,D,A,N]
+    by_cases he : ω ∈ E <;> simp [Set.indicator_of_mem, Set.indicator_of_notMem, he, D, A, N]
   · funext ω
     simp
 end

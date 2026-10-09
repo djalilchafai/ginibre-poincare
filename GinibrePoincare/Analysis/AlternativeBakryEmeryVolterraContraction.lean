@@ -18,16 +18,16 @@ theorem bakryEmeryVolterra_weighted_contraction (g : E → E) {K : ℝ≥0}
     (hg : LipschitzWith K g) (L : ℝ) (hL : 0 < L) (t : ℝ) (ht : 0 ≤ t)
     (N X Y : ℝ → E) (C : ℝ) (hC : 0 ≤ C)
     (hXY : ∀ s ∈ Icc 0 t, ‖X s - Y s‖ ≤ C) :
-    ‖Real.exp (-L*t) • ∫ s in (0:ℝ)..t,
+    ‖Real.exp (-L*t) • ∫ s in (0 : ℝ)..t,
       (g (Real.exp (L*s) • X s + N s) - g (Real.exp (L*s) • Y s + N s))‖ ≤
-      ((K:ℝ)/L)*C := by
+      ((K : ℝ)/L)*C := by
   have hd (s : ℝ) : HasDerivAt (fun r => Real.exp (L*r)/L) (Real.exp (L*s)) s := by
     convert (((hasDerivAt_id s).const_mul L).exp.div_const L) using 1 <;> simp [hL.ne']
   have hi : IntervalIntegrable (fun s => Real.exp (L*s)) volume 0 t :=
     (Real.continuous_exp.comp (continuous_const.mul continuous_id)).intervalIntegrable _ _
   have he := intervalIntegral.integral_eq_sub_of_hasDerivAt (fun s _ => hd s) hi
   have hbound := intervalIntegral.norm_integral_le_of_norm_le ht
-    (g := fun s => (K:ℝ)*Real.exp (L*s)*C)
+    (g := fun s => (K : ℝ)*Real.exp (L*s)*C)
     (ae_of_all _ (fun s hs => by
       have hh := hg.norm_sub_le (Real.exp (L*s) • X s + N s)
         (Real.exp (L*s) • Y s + N s)
@@ -37,7 +37,7 @@ theorem bakryEmeryVolterra_weighted_contraction (g : E → E) {K : ℝ≥0}
       simpa only [mul_assoc] using mul_le_mul_of_nonneg_left
         (hXY s ⟨hs.1.le, hs.2⟩)
         (mul_nonneg K.coe_nonneg (Real.exp_nonneg (L*s)))))
-    ((hi.const_mul (K:ℝ)).mul_const C)
+    ((hi.const_mul (K : ℝ)).mul_const C)
   rw [intervalIntegral.integral_mul_const, intervalIntegral.integral_const_mul, he] at hbound
   rw [norm_smul, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
   have hmul := mul_le_mul_of_nonneg_left hbound (Real.exp_nonneg (-L*t))
@@ -45,21 +45,21 @@ theorem bakryEmeryVolterra_weighted_contraction (g : E → E) {K : ℝ≥0}
     rw [← Real.exp_add]
     convert Real.exp_zero using 1 <;> ring
   have hpos := Real.exp_pos (-L*t)
-  have hK : 0 ≤ (K:ℝ) := K.coe_nonneg
+  have hK : 0 ≤ (K : ℝ) := K.coe_nonneg
   simp only [mul_zero, Real.exp_zero] at hmul
   apply hmul.trans
   apply (mul_le_mul_iff_right₀ hL).mp
   field_simp
-  have hn : 0 ≤ Real.exp (-L*t)*(K:ℝ)*C := by positivity
-  have heq : Real.exp (-(L*t))*(K:ℝ)*(Real.exp (L*t)-1)*C =
-      (K:ℝ)*C-Real.exp (-(L*t))*(K:ℝ)*C := by
+  have hn : 0 ≤ Real.exp (-L*t)*(K : ℝ)*C := by positivity
+  have heq : Real.exp (-(L*t))*(K : ℝ)*(Real.exp (L*t)-1)*C =
+      (K : ℝ)*C-Real.exp (-(L*t))*(K : ℝ)*C := by
     calc
-      _ = (K:ℝ)*C*(Real.exp (-(L*t))*Real.exp (L*t))-
-        Real.exp (-(L*t))*(K:ℝ)*C := by ring
+      _ = (K : ℝ)*C*(Real.exp (-(L*t))*Real.exp (L*t))-
+        Real.exp (-(L*t))*(K : ℝ)*C := by ring
       _ = _ := by rw [show Real.exp (-(L*t))*Real.exp (L*t)=1 by
                     simpa only [neg_mul] using hcancel]; ring
   rw [heq]
-  simpa only [neg_mul] using sub_le_self ((K:ℝ)*C) hn
+  simpa only [neg_mul] using sub_le_self ((K : ℝ)*C) hn
 
 #print axioms bakryEmeryVolterra_weighted_contraction
 end

@@ -39,11 +39,11 @@ theorem brownianUniformLeftSum_difference_secondMoment_le_mesh {Ω ι : Type*}
     apply Eventually.of_forall
     intro ω
     have he : ∃ k : Fin ((n+1)*(m+1)), brownianUniformRefinementMesh F T n m ω = ‖G k ω‖ := by
-      obtain ⟨k,hk,he⟩ := Finset.exists_mem_eq_sup' Finset.univ_nonempty (fun k => ‖G k ω‖)
+      obtain ⟨k, hk, he⟩ := Finset.exists_mem_eq_sup' Finset.univ_nonempty (fun k => ‖G k ω‖)
       exact ⟨k, he⟩
-    obtain ⟨k,hk⟩ := he
-    rw [hk,norm_pow,Real.norm_of_nonneg (norm_nonneg _)]
-    simpa only [Real.norm_eq_abs,sq_abs] using
+    obtain ⟨k, hk⟩ := he
+    rw [hk, norm_pow, Real.norm_of_nonneg (norm_nonneg _)]
+    simpa only [Real.norm_eq_abs, sq_abs] using
       (Finset.single_le_sum (fun i _ => sq_nonneg (G i ω)) (Finset.mem_univ k))
   have hle (k : Fin ((n+1)*(m+1))) : (∫ ω, (G k ω)^2 ∂P) ≤
       ∫ ω, (brownianUniformRefinementMesh F T n m ω)^2 ∂P := by
@@ -51,14 +51,14 @@ theorem brownianUniformLeftSum_difference_secondMoment_le_mesh {Ω ι : Type*}
     intro ω
     have hh : ‖G k ω‖ ≤ brownianUniformRefinementMesh F T n m ω :=
       Finset.le_sup' (f := fun k => ‖G k ω‖) (Finset.mem_univ k)
-    simpa only [Real.norm_eq_abs,sq_abs] using pow_le_pow_left₀ (norm_nonneg _) hh 2
+    simpa only [Real.norm_eq_abs, sq_abs] using pow_le_pow_left₀ (norm_nonneg _) hh 2
   rw [brownianUniformLeftSum_difference_secondMoment B P hB hind j F hF hFi T (n+1) (m+1) (Nat.succ_pos _) (Nat.succ_pos _)]
   calc
     _ ≤ (T : ℝ)/((n+1)*(m+1) : ℕ)*∑ _k : Fin ((n+1)*(m+1)),
         ∫ ω, (brownianUniformRefinementMesh F T n m ω)^2 ∂P :=
       mul_le_mul_of_nonneg_left (Finset.sum_le_sum fun k _ => hle k) (by positivity)
     _ = _ := by
-      simp only [Finset.sum_const,Finset.card_univ,Fintype.card_fin,nsmul_eq_mul]
+      simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
       have hp : (((n+1)*(m+1) : ℕ) : ℝ) ≠ 0 := by positivity
       field_simp
 

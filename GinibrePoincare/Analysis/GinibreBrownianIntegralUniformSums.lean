@@ -48,7 +48,7 @@ theorem brownianUniformLeftSum_difference_secondMoment {Ω ι : Type*}
     exact itoUniformNNTime_mono T (N*M) (Nat.succ_le_of_lt hik)
   have hh := ginibreBrownian_augmented_linear_sum_isometry B P hB hind j (N*M) s d hchron G hG
     (fun k => (hFi _).sub (hFi _))
-  simp only [hend,hd,← Finset.mul_sum] at hh
+  simp only [hend, hd,← Finset.mul_sum] at hh
   rw [← hh]
   apply integral_congr_ae
   apply Eventually.of_forall
@@ -58,7 +58,7 @@ theorem brownianUniformLeftSum_difference_secondMoment {Ω ι : Type*}
   simp only [brownianUniformLeftSum]
   rw [
     itoUniformNNWeightedSum_difference_common_grid (fun t => F t ω) (fun t => F t ω) (fun t => B j t ω) T N M hN hM]
-  simpa only [G,s] using (Fin.sum_univ_eq_sum_range (fun k =>
+  simpa only [G, s] using (Fin.sum_univ_eq_sum_range (fun k =>
     (F (itoUniformNNTime T N (k/M)) ω-F (itoUniformNNTime T M (k/N)) ω)*
       (B j (itoUniformNNTime T (N*M) (k+1)) ω-B j (itoUniformNNTime T (N*M) k) ω)) (N*M)).symm
 

@@ -11,7 +11,7 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 
 theorem correspondenceOperatorEvolution_hasDerivAt (n : ℕ) (hn : 0<n)
-    (u v : GinibreFullComplexL2 n) (hp : (u,v)∈(correspondenceOperatorGenerator n hn).graph)
+    (u v : GinibreFullComplexL2 n) (hp : (u, v)∈(correspondenceOperatorGenerator n hn).graph)
     {t : ℝ} (ht : 0<t) :
     HasDerivAt (fun s : ℝ => correspondenceOperatorEvolution n hn s.toNNReal u)
       (correspondenceOperatorEvolution n hn t.toNNReal v) t :=
@@ -30,8 +30,8 @@ theorem correspondenceOperatorGenerator_real_difference_dissipative {n : ℕ} (h
   let r := correspondenceOperatorFormResolvent n hn ((u-v)-(a-b))
   have hv : correspondenceOperatorFormValue n hn r = u-v := heq
   have he := correspondenceOperatorFormResolvent_riesz n hn ((u-v)-(a-b)) r
-  rw [correspondenceOperatorFormSpace_inner,hv,inner_sub_left] at he
-  have hp : 0 ≤ (1/(n:ℝ))*inner ℝ (correspondenceOperatorFormGradient n hn r)
+  rw [correspondenceOperatorFormSpace_inner, hv, inner_sub_left] at he
+  have hp : 0 ≤ (1/(n : ℝ))*inner ℝ (correspondenceOperatorFormGradient n hn r)
       (correspondenceOperatorFormGradient n hn r) := by
     rw [real_inner_self_eq_norm_sq]
     positivity
@@ -88,9 +88,9 @@ theorem correspondenceOperatorRealEvolution_graph_derivative {n : ℕ} (hn : 0<n
     (t : ℝ) (ht : 0<t) :
     HasDerivAt (fun s : ℝ => correspondenceOperatorRealEvolution n hn s.toNNReal u)
       (correspondenceOperatorRealEvolution n hn t.toNNReal v) t := by
-  have hgraph : (ginibreFullComplexOfReal n u,ginibreFullComplexOfReal n v) ∈
+  have hgraph : (ginibreFullComplexOfReal n u, ginibreFullComplexOfReal n v) ∈
       (correspondenceOperatorGenerator n hn).graph := by
-    rw [correspondenceOperatorGenerator_graph_iff,← map_sub,correspondenceOperatorComplexResolvent_ofReal,hg]
+    rw [correspondenceOperatorGenerator_graph_iff,← map_sub, correspondenceOperatorComplexResolvent_ofReal, hg]
   have hd := correspondenceOperatorEvolution_hasDerivAt n hn _ _ hgraph ht
   exact (ginibreFullComplexRe n).hasFDerivAt.comp_hasDerivAt t hd
 
@@ -101,9 +101,9 @@ theorem correspondenceOperatorRealEvolution_preserves_graph {n : ℕ} (hn : 0<n)
     correspondenceOperatorValueResolvent n hn
       (correspondenceOperatorRealEvolution n hn t u-correspondenceOperatorRealEvolution n hn t v)=
       correspondenceOperatorRealEvolution n hn t u := by
-  have hgraph : (ginibreFullComplexOfReal n u,ginibreFullComplexOfReal n v) ∈
+  have hgraph : (ginibreFullComplexOfReal n u, ginibreFullComplexOfReal n v) ∈
       (correspondenceOperatorGenerator n hn).graph := by
-    rw [correspondenceOperatorGenerator_graph_iff,← map_sub,correspondenceOperatorComplexResolvent_ofReal,hg]
+    rw [correspondenceOperatorGenerator_graph_iff,← map_sub, correspondenceOperatorComplexResolvent_ofReal, hg]
   have hh := resolventCfcEvolution_preserves_generator_graph (correspondenceOperatorComplexResolvent n hn)
     (correspondenceOperatorComplexResolvent_isSelfAdjoint n hn) (correspondenceOperatorComplexResolvent_injective n hn)
     t _ _ hgraph

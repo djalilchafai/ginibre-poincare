@@ -6,6 +6,23 @@ public import GinibrePoincare.Analysis.GaussianEntireHyperplaneDivision
 
 @[expose] public section
 
+/-! # Entire factorization across all collision hyperplanes
+
+Start with the one-hyperplane division theorem in
+`GaussianEntireHyperplaneDivision`. To iterate it, the quotient must still
+vanish on each remaining collision hyperplane. The first lemma proves this by
+moving along a direction within that hyperplane but transverse to the factor
+already divided out, then using continuity at the intersection.
+
+Distinct ordered collision pairs admit such a coordinate direction. Finite-set
+induction therefore divides out every factor exactly once, and their product is
+the Vandermonde polynomial. Alternation supplies collision vanishing; uniqueness
+of continuous quotients from `EntireVandermondeDivision` supplies symmetry.
+The last theorem applies this pointwise argument to entire representatives of
+alternating Gaussian L² classes.
+-/
+
+
 open MeasureTheory Filter
 open scoped Topology BigOperators
 namespace GinibrePoincare

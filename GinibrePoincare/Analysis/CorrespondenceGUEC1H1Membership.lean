@@ -11,20 +11,20 @@ set_option maxHeartbeats 600000
 theorem gueL2_toLp_dist_eq_sqrt {n : ℕ} (μ : Measure (EuclideanSpace ℝ (Fin n)))
     {F : Type*} [NormedAddCommGroup F] [InnerProductSpace ℝ F] [CompleteSpace F]
     (f g : EuclideanSpace ℝ (Fin n) → F) (hf : MemLp f 2 μ) (hg : MemLp g 2 μ) :
-    dist (hf.toLp f) (hg.toLp g)=Real.sqrt (∫x,‖f x-g x‖^2 ∂μ) := by
-  have he : (∫x,‖f x-g x‖^2 ∂μ)=‖hf.toLp f-hg.toLp g‖^2 := by
+    dist (hf.toLp f) (hg.toLp g)=Real.sqrt (∫x, ‖f x-g x‖^2 ∂μ) := by
+  have he : (∫x, ‖f x-g x‖^2 ∂μ)=‖hf.toLp f-hg.toLp g‖^2 := by
     rw [← integral_norm_sq_eq_L2_norm_sq]
     apply integral_congr_ae
-    filter_upwards [Lp.coeFn_sub (hf.toLp f) (hg.toLp g),hf.coeFn_toLp,hg.coeFn_toLp] with x hx hfx hgx
-    simp only [hx,Pi.sub_apply,hfx,hgx]
-  rw [he,Real.sqrt_sq_eq_abs,abs_of_nonneg (norm_nonneg _),dist_eq_norm]
+    filter_upwards [Lp.coeFn_sub (hf.toLp f) (hg.toLp g), hf.coeFn_toLp, hg.coeFn_toLp] with x hx hfx hgx
+    simp only [hx, Pi.sub_apply, hfx, hgx]
+  rw [he, Real.sqrt_sq_eq_abs, abs_of_nonneg (norm_nonneg _), dist_eq_norm]
 
 theorem gueSymmetric_C1_pair_mem_H1Completion {n : ℕ} (hn : 0<n)
     (f : EuclideanSpace ℝ (Fin n) → ℝ) (hf : ContDiff ℝ 1 f)
-    (hs : ∀σ x,f (guePermute n σ x)=f x)
+    (hs : ∀σ x, f (guePermute n σ x)=f x)
     (hv : MemLp f 2 (gueFullMeasure n))
     (hg : MemLp (gradient f) 2 (gueFullMeasure n)) :
-    (hv.toLp f,hg.toLp (gradient f))∈gueSymmetricH1Completion n := by
+    (hv.toLp f, hg.toLp (gradient f))∈gueSymmetricH1Completion n := by
   letI := gueFullMeasure_probability hn
   let μ := gueFullMeasure n
   let F := fun k => gueSymmetricSpatialTruncation n k f
@@ -51,15 +51,15 @@ theorem gueSymmetric_C1_pair_mem_H1Completion {n : ℕ} (hn : 0<n)
     exact (h.sub (hD i)).integrable_sq
   have htV : Tendsto (fun k => (hFV k).toLp (F k)) atTop (nhds (hv.toLp f)) := by
     apply tendsto_iff_dist_tendsto_zero.mpr
-    simp_rw [gueL2_toLp_dist_eq_sqrt,Real.norm_eq_abs,sq_abs]
+    simp_rw [gueL2_toLp_dist_eq_sqrt, Real.norm_eq_abs, sq_abs]
     simpa [F] using (gueSymmetricSpatialTruncation_L2_errors n μ f hf hv 0 (by simp)).1.sqrt
   have htG : Tendsto (fun k => (hFG k).toLp (gradient (F k))) atTop (nhds (hg.toLp (gradient f))) := by
     apply tendsto_iff_dist_tendsto_zero.mpr
     simp_rw [gueL2_toLp_dist_eq_sqrt]
-    have he k : (∫x,‖gradient (F k) x-gradient f x‖^2 ∂μ)=
-        ∑i,∫x,(fderiv ℝ (F k) x (EuclideanSpace.basisFun (Fin n) ℝ i)-
+    have he k : (∫x, ‖gradient (F k) x-gradient f x‖^2 ∂μ)=
+        ∑i,∫x, (fderiv ℝ (F k) x (EuclideanSpace.basisFun (Fin n) ℝ i)-
           fderiv ℝ f x (EuclideanSpace.basisFun (Fin n) ℝ i))^2 ∂μ := by
-      simp only [EuclideanSpace.real_norm_sq_eq,PiLp.sub_apply,gue_gradient_coordinate]
+      simp only [EuclideanSpace.real_norm_sq_eq, PiLp.sub_apply, gue_gradient_coordinate]
       exact integral_finsetSum _ (fun i hi => hDE k i)
     simp_rw [he]
     have ht := tendsto_finsetSum Finset.univ (fun i hi =>
@@ -69,10 +69,10 @@ theorem gueSymmetric_C1_pair_mem_H1Completion {n : ℕ} (hn : 0<n)
   apply Eventually.of_forall
   intro k
   apply subset_closure
-  refine ⟨F k,hFC k,hFS k,?_,(hFV k).coeFn_toLp,(hFG k).coeFn_toLp⟩
+  refine ⟨F k, hFC k, hFS k,?_, (hFV k).coeFn_toLp, (hFG k).coeFn_toLp⟩
   intro σ x
   unfold F gueSymmetricSpatialTruncation
-  rw [gueSymmetricSpatialCutoff_symmetric,hs]
+  rw [gueSymmetricSpatialCutoff_symmetric, hs]
 
 #print axioms gueSymmetric_C1_pair_mem_H1Completion
 end

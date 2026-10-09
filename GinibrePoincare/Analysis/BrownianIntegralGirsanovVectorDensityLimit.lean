@@ -42,9 +42,9 @@ theorem brownianPredictableVectorGaussianDensity_uniform_limit_normalized
       ENNReal.ofReal (Real.exp (C^2*(T : ℝ))) := by
     have hh2 := brownianPredictableVectorGaussianDensity_lintegral_sq_le B P hB hind
       (fun k => h (itoUniformNNTime T (n+1) k)) (itoUniformNNTime T (n+1))
-      (itoUniformNNTime_mono _ _) (by simp [itoUniformNNTime,itoUniformTime])
+      (itoUniformNNTime_mono _ _) (by simp [itoUniformNNTime, itoUniformTime])
       (fun k => hh _) C hC (fun k => hb _) (n+1)
-    simpa only [f,itoUniformNNTime_end T (n+1) (Nat.succ_pos n)] using hh2
+    simpa only [f, itoUniformNNTime_end T (n+1) (Nat.succ_pos n)] using hh2
   exact nonnegativeDensities_limit_normalized_of_secondMoment_bound P f hm
     (fun n ω => (brownianPredictableVectorGaussianDensity_pos B _ _ _ ω).le)
     (Real.exp (C^2*(T : ℝ))) (Real.exp_pos _).le h2

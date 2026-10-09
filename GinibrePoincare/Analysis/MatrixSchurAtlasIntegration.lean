@@ -5,6 +5,17 @@ public import GinibrePoincare.Analysis.MatrixSchurProductIntegration
 
 @[expose] public section
 
+/-! # Integration on one injective Schur atlas piece
+
+Change of variables on an injective sorted Schur chart contributes its actual
+Jacobian, the product of an angular density and the Vandermonde weight. For a
+unitary-invariant observable, the angular conjugation drops out of its value.
+Tonelli factorization separates the angular and upper-triangular integrals.
+The last theorem transports this formula to a chart centered at any unitary
+matrix; conjugation preserves volume because its absolute real determinant is one.
+-/
+
+
 open Matrix NormedSpace MeasureTheory Filter Set
 open scoped Matrix Matrix.Norms.Operator Topology ENNReal
 namespace GinibrePoincare

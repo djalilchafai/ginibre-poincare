@@ -14,18 +14,18 @@ private theorem kernel_bound (n : ℕ) :
     ∃ M : ℝ, 0 ≤ M ∧ ∀ z, ‖configurationRadialSmoothingKernel n z‖ ≤ M := by
   have hb := (configurationRadialSmoothingKernel_compact n).bddAbove_image
     ((configurationRadialSmoothingKernel_contDiff n).continuous.norm.continuousOn)
-  obtain ⟨M,hM⟩ := hb
-  refine ⟨max 0 M,le_max_left _ _,fun z => ?_⟩
+  obtain ⟨M, hM⟩ := hb
+  refine ⟨max 0 M, le_max_left _ _, fun z => ?_⟩
   by_cases hz : z ∈ tsupport (configurationRadialSmoothingKernel n)
-  · exact (hM ⟨z,hz,rfl⟩).trans (le_max_right _ _)
-  · rw [image_eq_zero_of_notMem_tsupport hz,norm_zero]
+  · exact (hM ⟨z, hz, rfl⟩).trans (le_max_right _ _)
+  · rw [image_eq_zero_of_notMem_tsupport hz, norm_zero]
     exact le_max_left _ _
 
 private theorem kernel_support_ball (n : ℕ) :
     tsupport (configurationRadialSmoothingKernel n) ⊆ closedBall (0 : Configuration n) 2 := by
   apply closure_minimal _ isClosed_closedBall
   intro z hz
-  rw [Metric.mem_closedBall,dist_zero_right]
+  rw [Metric.mem_closedBall, dist_zero_right]
   apply pi_norm_le_iff_of_nonneg (by norm_num) |>.mpr
   intro i
   have hzi : planarRadialSmoothingKernel (z i) ≠ 0 := by
@@ -33,7 +33,7 @@ private theorem kernel_support_ball (n : ℕ) :
     exact hz (Finset.prod_eq_zero (Finset.mem_univ i) hi)
   have hbase : planarRadialSmoothingBase (z i) ≠ 0 := by
     intro h
-    exact hzi (by simp [planarRadialSmoothingKernel,h])
+    exact hzi (by simp [planarRadialSmoothingKernel, h])
   have hpos : 0 < 2-Complex.normSq (z i) := by
     by_contra h
     exact hbase (Real.smoothTransition.zero_of_nonpos (le_of_not_gt h))
@@ -56,58 +56,58 @@ theorem positiveWeightEntire_local_bound (n : ℕ) (w : Configuration n → ℝ)
   letI : IsFiniteMeasure (volume.restrict K) := ⟨by
     rw [Measure.restrict_apply_univ]
     exact hK.measure_lt_top⟩
-  obtain ⟨c,hc,hcw⟩ := hw K hK
+  obtain ⟨c, hc, hcw⟩ := hw K hK
   let T := positiveWeightLocalRestriction volume w hK.measurableSet hc hcw
-  obtain ⟨M,hM,hMb⟩ := kernel_bound n
+  obtain ⟨M, hM, hMb⟩ := kernel_bound n
   let B : ℝ := (measureUnivNNReal (volume.restrict K) : ℝ) ^ ((2 : ENNReal).toReal⁻¹) * M
-  refine ⟨B * ‖T‖,mul_nonneg (mul_nonneg (Real.rpow_nonneg (NNReal.coe_nonneg _) _) hM)
-    (norm_nonneg _),fun u F hF hFu z hz => ?_⟩
+  refine ⟨B * ‖T‖, mul_nonneg (mul_nonneg (Real.rpow_nonneg (NNReal.coe_nonneg _) _) hM)
+    (norm_nonneg _), fun u F hF hFu z hz => ?_⟩
   let φ : Configuration n → ℂ := fun y => (configurationRadialSmoothingKernel n (z-y) : ℂ)
   have hφ : Continuous φ := Complex.continuous_ofReal.comp
     ((configurationRadialSmoothingKernel_contDiff n).continuous.comp (continuous_const.sub continuous_id))
   have hm : MemLp (conj ∘ φ) 2 (volume.restrict K) :=
     MemLp.of_bound (Complex.continuous_conj.comp hφ).aestronglyMeasurable M
-      (ae_of_all _ (fun y => by simpa [φ,Function.comp_def] using hMb (z-y)))
+      (ae_of_all _ (fun y => by simpa [φ, Function.comp_def] using hMb (z-y)))
   let g := hm.toLp (conj ∘ φ)
   have hg : ‖g‖ ≤ B := by
     apply Lp.norm_le_of_ae_bound hM
       (f := g)
     filter_upwards [hm.coeFn_toLp] with y hy
     rw [hy]
-    simpa [φ,Function.comp_def] using hMb (z-y)
+    simpa [φ, Function.comp_def] using hMb (z-y)
   have hAC : volume ≪ volume.withDensity (fun y => ENNReal.ofReal (w y)) := by
     apply withDensity_absolutelyContinuous' hwm.ennreal_ofReal.aemeasurable
     apply Eventually.of_forall
     intro y
-    obtain ⟨d,hd,hdw⟩ := hw {y} isCompact_singleton
+    obtain ⟨d, hd, hdw⟩ := hw {y} isCompact_singleton
     exact (ENNReal.ofReal_pos.mpr (hd.trans_le (hdw y (by simp)))).ne'
   have he : inner ℂ g (T u) = F z := by
     rw [L2.inner_def]
     have hpair : (∫ y in K, inner ℂ (g y) ((T u) y)) = ∫ y in K, φ y * F y := by
       apply integral_congr_ae
-      filter_upwards [hm.coeFn_toLp,positiveWeightLocalRestriction_coe volume w
+      filter_upwards [hm.coeFn_toLp, positiveWeightLocalRestriction_coe volume w
         hK.measurableSet hc hcw u, ae_restrict_of_ae (hAC.ae_le hFu)] with y hg ht hf
-      rw [hg,ht,← hf]
-      simp [RCLike.inner_apply,mul_comm]
+      rw [hg, ht,← hf]
+      simp [RCLike.inner_apply, mul_comm]
     rw [hpair]
     have hs : ∀ y ∉ K, φ y * F y = 0 := by
       intro y hy
       have hnot : z-y ∉ tsupport (configurationRadialSmoothingKernel n) := by
         intro h
         have hk := kernel_support_ball n h
-        have hnorm : ‖z-y‖ ≤ 2 := by simpa [Metric.mem_closedBall,dist_zero_right] using hk
+        have hnorm : ‖z-y‖ ≤ 2 := by simpa [Metric.mem_closedBall, dist_zero_right] using hk
         apply hy
         change dist y 0 ≤ R+2
         rw [dist_zero_right]
         have htri := norm_add_le (y-z) z
-        rw [sub_add_cancel,norm_sub_rev] at htri
+        rw [sub_add_cancel, norm_sub_rev] at htri
         linarith
-      simp [φ,image_eq_zero_of_notMem_tsupport hnot]
+      simp [φ, image_eq_zero_of_notMem_tsupport hnot]
     rw [setIntegral_eq_integral_of_forall_compl_eq_zero hs]
     have hmval := configurationRadialSmoothing_mean_value n F hF z
     have hcvol := integral_sub_left_eq_self
       (fun y : Configuration n => configurationRadialSmoothingKernel n y • F (z-y)) volume z
-    simpa only [φ,sub_sub_cancel,Complex.real_smul] using hcvol.trans hmval
+    simpa only [φ, sub_sub_cancel, Complex.real_smul] using hcvol.trans hmval
   rw [← he]
   calc
     _ ≤ ‖g‖ * ‖T u‖ := norm_inner_le_norm _ _
@@ -134,16 +134,16 @@ theorem positiveWeightEntire_tendstoLocallyUniformly (n : ℕ) (w : Configuratio
   rw [Metric.tendstoLocallyUniformly_iff]
   intro ε hε x
   let R := ‖x‖+1
-  obtain ⟨C,hC,hbound⟩ := positiveWeightEntire_local_bound n w hwm hw R (by dsimp [R]; positivity)
+  obtain ⟨C, hC, hbound⟩ := positiveWeightEntire_local_bound n w hwm hw R (by dsimp [R]; positivity)
   have hlim : Tendsto (fun i => C * ‖u-U i‖) l (𝓝 0) := by
     simpa using (((show Tendsto (fun _ : ι => u) l (𝓝 u) from tendsto_const_nhds).sub ht).norm.const_mul C)
-  refine ⟨ball x 1,ball_mem_nhds x (by norm_num),?_⟩
+  refine ⟨ball x 1, ball_mem_nhds x (by norm_num),?_⟩
   filter_upwards [hlim.eventually (gt_mem_nhds hε)] with i hi y hy
   have hdiff : (fun z => f z-F i z) =ᵐ[volume.withDensity (fun z => ENNReal.ofReal (w z))]
       ((u-U i : Lp ℂ 2 (volume.withDensity (fun z => ENNReal.ofReal (w z)))) : Configuration n → ℂ) := by
-    filter_upwards [hf.2,(hF i).2,Lp.coeFn_sub u (U i)] with z hu hU hs
+    filter_upwards [hf.2, (hF i).2, Lp.coeFn_sub u (U i)] with z hu hU hs
     simp only [Pi.sub_apply] at hs
-    rw [hu,hU,hs]
+    rw [hu, hU, hs]
   have hyR : ‖y‖ ≤ R := by
     have hdist : ‖y-x‖ < 1 := by simpa [dist_eq_norm] using hy
     dsimp [R]
@@ -170,9 +170,9 @@ theorem positiveWeightEntire_limit (n : ℕ) (w : Configuration n → ℝ)
       TendstoLocallyUniformly F f l := by
   have hu : u ∈ positiveLocalWeightedEntireL2 n w :=
     (isClosed_positiveLocalWeightedEntireL2 n w hwm hw).mem_of_tendsto ht
-      (Eventually.of_forall (fun i => ⟨F i,(hF i).1,(hF i).2⟩))
-  obtain ⟨f,hf,hfu⟩ := hu
-  exact ⟨f,hf,hfu,positiveWeightEntire_tendstoLocallyUniformly n w hwm hw U u F f hF ⟨hf,hfu⟩ ht⟩
+      (Eventually.of_forall (fun i => ⟨F i, (hF i).1, (hF i).2⟩))
+  obtain ⟨f, hf, hfu⟩ := hu
+  exact ⟨f, hf, hfu, positiveWeightEntire_tendstoLocallyUniformly n w hwm hw U u F f hF ⟨hf, hfu⟩ ht⟩
 
 #print axioms positiveWeightEntire_tendstoLocallyUniformly
 #print axioms positiveWeightEntire_limit

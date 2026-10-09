@@ -5,6 +5,22 @@ public import GinibrePoincare.Analysis.BrownianOrthogonalEquilibriumOriginal
 
 @[expose] public section
 
+/-! # Equilibrium paths with independent initial state and noise
+
+The first identity rewrites the normalized Vandermonde-weighted Gaussian
+initial coordinates, together with an independent noise sample, as
+`ginibreMeasure n × P`. It uses the Gaussian coordinate assembly law and
+transport of the density under the assembly map.
+
+The path-law identity then expresses the original equilibrium law as the
+pushforward of that product by the canonical solution map. Collision
+normalization does not affect it because the Ginibre initial state is
+collision-free almost everywhere. Evaluation at the terminal time gives
+the original process marginal; the final invariant-law theorem chooses a
+fixed collision-free default state to discharge the auxiliary path-version
+parameter. No independence assumption on initial state remains to be proved:
+it is built into the product measure. -/
+
 open Set Filter MeasureTheory ProbabilityTheory
 open scoped NNReal
 namespace GinibrePoincare
@@ -12,14 +28,14 @@ noncomputable section
 set_option maxHeartbeats 2400000
 set_option backward.isDefEq.respectTransparency false
 local instance ginibreEquilibriumProduct_pathMeasurable (n : ℕ) (T : ℝ≥0) :
-    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ),Configuration n) := borel _
+    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := borel _
 local instance ginibreEquilibriumProduct_pathBorel (n : ℕ) (T : ℝ≥0) :
-    BorelSpace C(Icc (0 : ℝ) (T : ℝ),Configuration n) := ⟨rfl⟩
+    BorelSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := ⟨rfl⟩
 
 local instance ginibreEquilibriumProduct_globalMeasurable (n : ℕ) :
-    MeasurableSpace C(ℝ,Configuration n) := borel _
+    MeasurableSpace C(ℝ, Configuration n) := borel _
 local instance ginibreEquilibriumProduct_globalBorel (n : ℕ) :
-    BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+    BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
 
 theorem ginibreGaussian_weighted_initial_noise_product {Ω : Type*} [MeasurableSpace Ω]
     {n : ℕ} (hn : 0 < n) (P : Measure Ω) [IsProbabilityMeasure P] :
@@ -35,10 +51,10 @@ theorem ginibreGaussian_weighted_initial_noise_product {Ω : Type*} [MeasurableS
     (ENNReal.measurable_ofReal.comp (contDiff_vandermondeWeight n).continuous.measurable).comp measurable_fst
   change ((ginibreNormalizingMass n)⁻¹ • (γ.prod P).withDensity
     ((fun x : Configuration n × Ω => vandermondeDensity x.1) ∘ A)).map A = _
-  rw [Measure.map_smul _ hA.aemeasurable,ginibre_map_density_composition _ A hA _ hw]
+  rw [Measure.map_smul _ hA.aemeasurable, ginibre_map_density_composition _ A hA _ hw]
   have hm : (γ.prod P).map A = (complexGaussianMeasure n).prod P := by
     rw [← Measure.map_prod_map γ P (ginibreHamiltonianOUCoordinateAssembly n).continuous.measurable measurable_id,
-      Measure.map_id,ginibreGaussian_coordinate_assembly_law hn]
+      Measure.map_id, ginibreGaussian_coordinate_assembly_law hn]
   rw [hm]
   have hd : ((complexGaussianMeasure n).prod P).withDensity
       (fun x : Configuration n × Ω => vandermondeDensity x.1) = (rawGinibreMeasure n).prod P := by
@@ -57,16 +73,16 @@ theorem ginibreOriginalEquilibriumPathLaw_product {Ω : Type*} [MeasurableSpace 
     ginibreOriginalEquilibriumPathLaw n α T P B =
     ((ginibreMeasure n).prod P).map (fun p =>
       (ginibreEquilibriumPath α z₀ hz₀ B p).comp
-        ⟨Subtype.val,continuous_subtype_val⟩) := by
+        ⟨Subtype.val, continuous_subtype_val⟩) := by
   let F := fun p : Configuration n × Ω => ginibreCanonicalJointHorizonPath α T
-    (ginibreInitialCollisionNormalize n p.1,ginibreBrownianFullContinuousNoise n B α p.2)
+    (ginibreInitialCollisionNormalize n p.1, ginibreBrownianFullContinuousNoise n B α p.2)
   have hF : Measurable F := (ginibreCanonicalJointHorizonPath_measurable hn α T).comp
     (((ginibreInitialCollisionNormalize_measurable n).comp measurable_fst).prodMk
       ((ginibreBrownianFullContinuousNoise_measurable n B P hB α).comp measurable_snd))
   have hA : Measurable (Prod.map (ginibreHamiltonianOUCoordinateAssembly n) (id : Ω → Ω)) :=
     (ginibreHamiltonianOUCoordinateAssembly n).continuous.measurable.prodMap measurable_id
   have he : ginibreOriginalEquilibriumPathLaw n α T P B = ((ginibreMeasure n).prod P).map F := by
-    rw [← ginibreGaussian_weighted_initial_noise_product hn P,Measure.map_map hF hA]
+    rw [← ginibreGaussian_weighted_initial_noise_product hn P, Measure.map_map hF hA]
     rw [Measure.map_smul _ (hF.comp hA).aemeasurable]
     rfl
   rw [he]
@@ -77,9 +93,9 @@ theorem ginibreOriginalEquilibriumPathLaw_product {Ω : Type*} [MeasurableSpace 
     exact (ginibre_ae_collisionFree n hn).mono fun z hz => Eventually.of_forall fun _ => hz
   filter_upwards [hCF] with p hp
   have hN := ginibreInitialCollisionNormalize_of_free p.1 hp
-  have hFree : ginibreFreeInitialVersion z₀ hz₀ p.1 = ⟨p.1,hp⟩ := by
-    simp [ginibreFreeInitialVersion,hp]
-  simp only [F,hN,ginibreEquilibriumPath,hFree,ginibreCanonicalJointHorizonPath]
+  have hFree : ginibreFreeInitialVersion z₀ hz₀ p.1 = ⟨p.1, hp⟩ := by
+    simp [ginibreFreeInitialVersion, hp]
+  simp only [F, hN, ginibreEquilibriumPath, hFree, ginibreCanonicalJointHorizonPath]
   rfl
 
 theorem ginibreBrownian_equilibrium_original_marginal {Ω : Type*} [MeasurableSpace Ω]
@@ -94,17 +110,17 @@ theorem ginibreBrownian_equilibrium_original_marginal {Ω : Type*} [MeasurableSp
   rw [ginibreOriginalEquilibriumPathLaw_product hn α P B hB T z₀ hz₀] at h
   have hPath : Measurable (fun p : Configuration n × Ω =>
       (ginibreEquilibriumPath α z₀ hz₀ B p).comp
-        (⟨Subtype.val,continuous_subtype_val⟩ : C(Icc (0 : ℝ) (T : ℝ),ℝ))) :=
+        (⟨Subtype.val, continuous_subtype_val⟩ : C(Icc (0 : ℝ) (T : ℝ), ℝ))) :=
     (ContinuousMap.continuous_precomp _).measurable.comp
       (ginibreEquilibriumPath_measurable hn α z₀ hz₀ B P hB)
   rw [Measure.map_map (continuous_eval_const _).measurable hPath] at h
   have he : (fun p : Configuration n × Ω =>
       ((ginibreEquilibriumPath α z₀ hz₀ B p).comp
-        (⟨Subtype.val,continuous_subtype_val⟩ : C(Icc (0 : ℝ) (T : ℝ),ℝ)))
-          ⟨(T : ℝ),⟨T.property,le_rfl⟩⟩) =ᵐ[(ginibreMeasure n).prod P]
+        (⟨Subtype.val, continuous_subtype_val⟩ : C(Icc (0 : ℝ) (T : ℝ), ℝ)))
+          ⟨(T : ℝ), ⟨T.property, le_rfl⟩⟩) =ᵐ[(ginibreMeasure n).prod P]
       (fun p => ginibreBrownianMaximalProcess n α p.1 B T p.2) := by
     filter_upwards [ginibre_equilibrium_path_eq_original hn α z₀ hz₀ B P hB hiB] with p hp
-    simpa only [ContinuousMap.comp_apply,ContinuousMap.coe_mk,Real.toNNReal_coe] using hp (T : ℝ)
+    simpa only [ContinuousMap.comp_apply, ContinuousMap.coe_mk, Real.toNNReal_coe] using hp (T : ℝ)
   exact (Measure.map_congr he).symm.trans h
 
 theorem ginibreBrownian_equilibrium_original_invariant {Ω : Type*} [MeasurableSpace Ω]

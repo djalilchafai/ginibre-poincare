@@ -27,7 +27,7 @@ theorem drivenVolterra_lipschitz_stability (b : E → E) (L : ℝ≥0) (hb : Lip
     ((hbX.integral_hasStrictDerivAt 0 s).hasDerivAt).sub ((hbY.integral_hasStrictDerivAt 0 s).hasDerivAt)
   have hW : Continuous W := continuous_iff_continuousAt.mpr fun s => (hD s).continuousAt
   have hDiff (s : ℝ) (hs : s ∈ Icc 0 T) : X s-Y s = N s-M s+W s := by
-    rw [hEqX s hs,hEqY s hs]
+    rw [hEqX s hs, hEqY s hs]
     dsimp [W]
     abel
   have hXY (s : ℝ) (hs : s ∈ Icc 0 T) : ‖X s-Y s‖ ≤ δ+‖W s‖ := by
@@ -37,7 +37,7 @@ theorem drivenVolterra_lipschitz_stability (b : E → E) (L : ℝ≥0) (hb : Lip
   have hbound (s : ℝ) (hs : s ∈ Ico 0 T) :
       ‖b (X s)-b (Y s)‖ ≤ (L : ℝ)*‖W s‖+(L : ℝ)*δ := by
     have h := hb.norm_sub_le (X s) (Y s)
-    have hxy := hXY s ⟨hs.1,hs.2.le⟩
+    have hxy := hXY s ⟨hs.1, hs.2.le⟩
     nlinarith [mul_le_mul_of_nonneg_left hxy L.coe_nonneg]
   have hGr := norm_le_gronwallBound_of_norm_deriv_right_le hW.continuousOn
     (fun s hs => (hD s).hasDerivWithinAt)

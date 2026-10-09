@@ -12,7 +12,7 @@ theorem gueDoubledRegularized_compact_expectation_tendsto {n : ℕ} (hn : 0<n)
     Tendsto (fun k => ∫ x, f x ∂bakryEmeryNormalizedGibbs volume
       (gueDoubledRegularizedPotential n (gueRegularizationScale k))) atTop
       (nhds (∫ x, f x ∂gueDoubledOrderedMeasure n)) := by
-  obtain ⟨C,hC⟩ := hf.norm.bddAbove_range_of_hasCompactSupport hs.norm
+  obtain ⟨C, hC⟩ := hf.norm.bddAbove_range_of_hasCompactSupport hs.norm
   have hb (x) : ‖f x‖≤C := hC (mem_range_self x)
   rw [gueDoubledOrderedMeasure_integral]
   exact gueDoubledRegularized_expectation_tendsto hn f hf C
@@ -41,7 +41,7 @@ theorem gueDoubledOrderedMeasure_square_lsi {n : ℕ} (hn : 0<n)
     (f : EuclideanSpace ℝ (Fin n×Fin 2) → ℝ)
     (hf : ContDiff ℝ 1 f) (hs : HasCompactSupport f) :
     squareEntropy (gueDoubledOrderedMeasure n) f ≤
-      (2/(n:ℝ))*∫ x, ‖gradient f x‖^2 ∂gueDoubledOrderedMeasure n := by
+      (2/(n : ℝ))*∫ x, ‖gradient f x‖^2 ∂gueDoubledOrderedMeasure n := by
   have he := gueDoubledRegularized_entropy_tendsto hn f hf.continuous hs
   have hg : Continuous (gradient f) :=
     (InnerProductSpace.toDual ℝ (EuclideanSpace ℝ (Fin n×Fin 2))).symm.continuous.comp

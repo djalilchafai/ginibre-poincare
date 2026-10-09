@@ -30,7 +30,7 @@ theorem ginibreHamiltonianOU_reference_compact_stopped_exists {Ω : Type*} [mAmb
       (∀ t ω, Y t ω = ginibreHamiltonianOUReferenceProcess n α z B (min t (θ ω)) ω) ∧
       ∀ᵐ ω ∂P, ∀ t ≤ θ ω, Y t ω = z+ginibreConfigurationBrownianNoise n B α ω t+
         ∫ s in (0 : ℝ)..t, (-2*α/(n : ℝ)) • Y s.toNNReal ω := by
-  obtain ⟨ρ,hρ,hBall⟩ := Metric.mem_nhds_iff.mp ((isOpen_collisionFree n).mem_nhds hz)
+  obtain ⟨ρ, hρ, hBall⟩ := Metric.mem_nhds_iff.mp ((isOpen_collisionFree n).mem_nhds hz)
   let r := ρ/2
   have hr : 0 < r := by dsimp [r]; linarith
   let K := Metric.closedBall z r
@@ -50,14 +50,14 @@ theorem ginibreHamiltonianOU_reference_compact_stopped_exists {Ω : Type*} [mAmb
   have hθT (ω : Ω) : θ ω ≤ T := hittingBtwn_le ω
   have hθpos (ω : Ω) : 0 < θ ω :=
     drivenContinuous_closed_hitting_pos V _ (isClosed_le continuous_const continuous_norm) T hT ω
-      (hVC ω) (by simpa [V,U,ginibreHamiltonianOUReferenceProcess_zero] using not_le_of_gt hr)
+      (hVC ω) (by simpa [V, U, ginibreHamiltonianOUReferenceProcess_zero] using not_le_of_gt hr)
   let Y : ℝ≥0 → Ω → Configuration n := fun t ω => U (min t (θ ω)) ω
   have hYC (ω : Ω) : Continuous (fun t => Y t ω) := (hUC ω).comp (continuous_id.min continuous_const)
   have hYR (t : ℝ≥0) (ω : Ω) : Y t ω ∈ K := by
     apply Metric.mem_closedBall.mpr
     rw [dist_eq_norm]
     exact drivenContinuous_norm_le_until_hitting V r T ω (hVC ω)
-      (by simp [V,U,ginibreHamiltonianOUReferenceProcess_zero,hr.le]) _ (min_le_right t (θ ω))
+      (by simp [V, U, ginibreHamiltonianOUReferenceProcess_zero, hr.le]) _ (min_le_right t (θ ω))
   have hYA : StronglyAdapted (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)) Y := by
     let F := ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)
     intro s
@@ -68,16 +68,16 @@ theorem ginibreHamiltonianOU_reference_compact_stopped_exists {Ω : Type*} [mAmb
     rw [tendsto_pi_nhds]
     intro ω
     exact (hUC ω).continuousAt.tendsto.comp (tendsto_const_nhds.min (stoppingUpperGrid_tendsto (θ ω)))
-  refine ⟨K,isCompact_closedBall z r,hKCF,Y,hYC,hYR,?_,hYA,θ,hStop,
-    fun ω => ⟨hθpos ω,hθT ω⟩,fun t ω => rfl,?_⟩
+  refine ⟨K, isCompact_closedBall z r, hKCF, Y, hYC, hYR,?_, hYA, θ, hStop,
+    fun ω => ⟨hθpos ω, hθT ω⟩, fun t ω => rfl,?_⟩
   · intro ω
-    simp [Y,U,ginibreHamiltonianOUReferenceProcess_zero]
+    simp [Y, U, ginibreHamiltonianOUReferenceProcess_zero]
   · filter_upwards [ginibreHamiltonianOUReferenceProcess_original_equation n α z B P hB] with ω hω
     intro t ht
     change U (min t (θ ω)) ω = _
     have huEq : U t ω = z+ginibreConfigurationBrownianNoise n B α ω t+
         ∫ s in (0 : ℝ)..t, (-2*α/(n : ℝ)) • U s.toNNReal ω := hω t
-    rw [min_eq_left ht,huEq]
+    rw [min_eq_left ht, huEq]
     congr 1
     apply intervalIntegral.integral_congr
     intro s hs

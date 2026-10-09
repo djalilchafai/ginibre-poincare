@@ -30,8 +30,8 @@ theorem ginibreInitialCollisionNormalize_measurable (n : ℕ) :
   (ginibreInitialCollisionEmbedding n).measurable_invFun
 
 theorem ginibreInitialCollisionNormalize_of_free {n : ℕ} (z : Configuration n) (hz : CollisionFree z) :
-    ginibreInitialCollisionNormalize n z = ⟨z,hz⟩ :=
-  (ginibreInitialCollisionEmbedding n).leftInverse_invFun ⟨z,hz⟩
+    ginibreInitialCollisionNormalize n z = ⟨z, hz⟩ :=
+  (ginibreInitialCollisionEmbedding n).leftInverse_invFun ⟨z, hz⟩
 
 theorem ginibreGaussian_coordinates_collisionFree_ae {n : ℕ} (hn : 0 < n) :
     ∀ᵐ x ∂Measure.pi (fun _ : Fin n × Fin 2 => gaussianReal 0 (1/2)),
@@ -40,12 +40,12 @@ theorem ginibreGaussian_coordinates_collisionFree_ae {n : ℕ} (hn : 0 < n) :
     rw [ae_iff]
     have he : {z : Configuration n | ¬ CollisionFree z} = collisionSet n := by
       ext z
-      simp only [Set.mem_setOf_eq,collisionFree_iff_not_mem_collisionSet,not_not]
+      simp only [Set.mem_setOf_eq, collisionFree_iff_not_mem_collisionSet, not_not]
     rw [he]
     exact complexGaussianMeasure_collisionSet n
   have hp : MeasurePreserving (ginibreHamiltonianOUCoordinateAssembly n)
       (Measure.pi (fun _ : Fin n × Fin 2 => gaussianReal 0 (1/2))) (complexGaussianMeasure n) :=
-    ⟨(ginibreHamiltonianOUCoordinateAssembly n).continuous.measurable,ginibreGaussian_coordinate_assembly_law hn⟩
+    ⟨(ginibreHamiltonianOUCoordinateAssembly n).continuous.measurable, ginibreGaussian_coordinate_assembly_law hn⟩
   exact hp.quasiMeasurePreserving.ae hCF
 
 #print axioms ginibreGaussian_coordinates_collisionFree_ae

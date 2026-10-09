@@ -11,8 +11,8 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 /-- Ginibre and configuration Lebesgue measure have the same null sets. -/
 theorem correspondenceOperator_volume_absolutelyContinuous_ginibre {n : ℕ} (hn : 0<n) :
-    (volume:Measure (Configuration n)) ≪ ginibreMeasure n := by
-  have hac : (volume:Measure (Configuration n)) ≪ complexGaussianMeasure n := by
+    (volume : Measure (Configuration n)) ≪ ginibreMeasure n := by
+  have hac : (volume : Measure (Configuration n)) ≪ complexGaussianMeasure n := by
     rw [complexGaussianDensityIdentification n hn]
     apply withDensity_absolutelyContinuous'
     · apply Measurable.aemeasurable
@@ -22,7 +22,7 @@ theorem correspondenceOperator_volume_absolutelyContinuous_ginibre {n : ℕ} (hn
         unfold complexGaussianDensity gaussianWeight
         apply ne_of_gt
         apply ENNReal.ofReal_pos.mpr
-        have hnR : 0<(n:ℝ) := by exact_mod_cast hn
+        have hnR : 0<(n : ℝ) := by exact_mod_cast hn
         positivity)
   exact hac.trans (complexGaussianMeasure_absolutelyContinuous_ginibreMeasure (ginibreMassEvaluation n hn))
 
@@ -31,7 +31,7 @@ actual invariant Ginibre measure. -/
 theorem correspondenceOperator_transition_absolutelyContinuous_ginibre
     {Ω : Type*} [MeasurableSpace Ω] {n : ℕ} (hn : 0<n)
     (α : ℝ≥0) (hα : 0<α) (B : (Fin n×Fin 2)→ℝ≥0→Ω→ℝ) (P : Measure Ω)
-    [IsProbabilityMeasure P] [P.IsComplete] (hB : ∀i,IsBrownianReal (B i) P)
+    [IsProbabilityMeasure P] [P.IsComplete] (hB : ∀i, IsBrownianReal (B i) P)
     (hind : iIndepFun (fun i ω t => B i t ω) P) (t : ℝ≥0) (ht : 0<t)
     (z : {z : Configuration n // CollisionFree z}) :
     ginibreBrownianTransitionKernel hn α B P t z ≪ ginibreMeasure n := by
@@ -45,7 +45,7 @@ or permutation symmetry is imposed. -/
 theorem correspondenceOperator_invariant_absolutelyContinuous_ginibre
     {Ω : Type*} [MeasurableSpace Ω] {n : ℕ} (hn : 0<n)
     (α : ℝ≥0) (hα : 0<α) (B : (Fin n×Fin 2)→ℝ≥0→Ω→ℝ) (P : Measure Ω)
-    [IsProbabilityMeasure P] [P.IsComplete] (hB : ∀i,IsBrownianReal (B i) P)
+    [IsProbabilityMeasure P] [P.IsComplete] (hB : ∀i, IsBrownianReal (B i) P)
     (hind : iIndepFun (fun i ω t => B i t ω) P) (t : ℝ≥0) (ht : 0<t)
     (ν : Measure {z : Configuration n // CollisionFree z})
     (hInv : ginibreBrownianTransitionKernel hn α B P t ∘ₘ ν=ν.map Subtype.val) :
@@ -57,7 +57,7 @@ theorem correspondenceOperator_invariant_absolutelyContinuous_ginibre
   have he : (fun z => ginibreBrownianTransitionKernel hn α B P t z s)=fun _ => 0 := by
     funext z
     exact (correspondenceOperator_transition_absolutelyContinuous_ginibre hn α hα B P hB hind t ht z) hs0
-  rw [he,lintegral_zero]
+  rw [he, lintegral_zero]
 #print axioms correspondenceOperator_volume_absolutelyContinuous_ginibre
 #print axioms correspondenceOperator_transition_absolutelyContinuous_ginibre
 #print axioms correspondenceOperator_invariant_absolutelyContinuous_ginibre

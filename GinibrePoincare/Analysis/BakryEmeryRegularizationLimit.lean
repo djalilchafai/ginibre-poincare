@@ -54,13 +54,13 @@ smooth radial densities; the uniform domination is proved from strong convexity.
 theorem bakryEmeryRegularizedLift_test_integral_tendsto (μ : Measure E)
     (n : ℕ) (ρ : ℝ) (V : Potential) (hV : Continuous V)
     (hρ : 0 ≤ ρ) (hrot : IsRotationalPotential V) (hc : IsRhoConvexPotential ρ V)
-    (hG : Integrable (fun x : E => Real.exp (-((n:ℝ)*ρ)/2*‖x‖^2)) μ)
+    (hG : Integrable (fun x : E => Real.exp (-((n : ℝ)*ρ)/2*‖x‖^2)) μ)
     (f : E → ℝ) (hf : AEStronglyMeasurable f μ) (C : ℝ)
     (hC : 0 ≤ C) (hb : ∀ x, ‖f x‖ ≤ C) :
     Tendsto (fun ε : ℝ => ∫ x, Real.exp (-bakryEmeryRegularizedLiftPotential n V ε x)*f x ∂μ)
       (𝓝 0) (𝓝 (∫ x, Real.exp (-bakryEmeryEuclideanLiftPotential n V x)*f x ∂μ)) := by
-  let B : E → ℝ := fun x => C * Real.exp (-(n:ℝ)*V 0) *
-    Real.exp (-((n:ℝ)*ρ)/2*‖x‖^2)
+  let B : E → ℝ := fun x => C * Real.exp (-(n : ℝ)*V 0) *
+    Real.exp (-((n : ℝ)*ρ)/2*‖x‖^2)
   have hmeas (ε : ℝ) : AEStronglyMeasurable
       (fun x : E => Real.exp (-bakryEmeryRegularizedLiftPotential n V ε x)*f x) μ := by
     have hcont : Continuous (fun x : E => bakryEmeryRegularizedLiftPotential n V ε x) :=
@@ -70,7 +70,7 @@ theorem bakryEmeryRegularizedLift_test_integral_tendsto (μ : Measure E)
   apply tendsto_integral_filter_of_dominated_convergence B
     (Eventually.of_forall hmeas)
     (Eventually.of_forall (fun ε => Eventually.of_forall (fun x => ?_)))
-    (hG.const_mul (C * Real.exp (-(n:ℝ)*V 0)))
+    (hG.const_mul (C * Real.exp (-(n : ℝ)*V 0)))
     (Eventually.of_forall (fun x => ?_))
   · dsimp [B]
     rw [abs_mul, abs_of_pos (Real.exp_pos _)]
@@ -78,7 +78,7 @@ theorem bakryEmeryRegularizedLift_test_integral_tendsto (μ : Measure E)
     have hd := bakryEmeryRegularizedLift_density_domination n ρ ε hρ hrot hc x
     calc
       Real.exp (-bakryEmeryRegularizedLiftPotential n V ε x) * ‖f x‖ ≤
-          (Real.exp (-(n:ℝ)*V 0)*Real.exp (-((n:ℝ)*ρ)/2*‖x‖^2))*C :=
+          (Real.exp (-(n : ℝ)*V 0)*Real.exp (-((n : ℝ)*ρ)/2*‖x‖^2))*C :=
         mul_le_mul hd (hb x) (norm_nonneg _) (by positivity)
       _ = _ := by ring
   · exact (Real.continuous_exp.continuousAt.tendsto.comp
@@ -88,7 +88,7 @@ theorem bakryEmeryRegularizedLift_test_integral_tendsto (μ : Measure E)
 theorem bakryEmeryRegularizedLift_expectation_tendsto (μ : Measure E) [NeZero μ]
     (n : ℕ) (ρ : ℝ) (V : Potential) (hV : Continuous V)
     (hρ : 0 ≤ ρ) (hrot : IsRotationalPotential V) (hc : IsRhoConvexPotential ρ V)
-    (hG : Integrable (fun x : E => Real.exp (-((n:ℝ)*ρ)/2*‖x‖^2)) μ)
+    (hG : Integrable (fun x : E => Real.exp (-((n : ℝ)*ρ)/2*‖x‖^2)) μ)
     (f : E → ℝ) (hf : AEStronglyMeasurable f μ) (C : ℝ)
     (hC : 0 ≤ C) (hb : ∀ x, ‖f x‖ ≤ C) :
     Tendsto (fun ε : ℝ => ∫ x, f x ∂bakryEmeryNormalizedGibbs μ
@@ -104,7 +104,7 @@ theorem bakryEmeryRegularizedLift_expectation_tendsto (μ : Measure E) [NeZero �
     (fun _ => 1) aestronglyMeasurable_const 1 (by norm_num) (by simp)
   simp only [mul_one] at hmass
   have hI : Integrable (fun x => Real.exp (-bakryEmeryEuclideanLiftPotential n V x)) μ := by
-    apply (hG.const_mul (Real.exp (-(n:ℝ)*V 0))).mono' hcont0.neg.rexp.aestronglyMeasurable
+    apply (hG.const_mul (Real.exp (-(n : ℝ)*V 0))).mono' hcont0.neg.rexp.aestronglyMeasurable
     apply Eventually.of_forall
     intro x
     have hd := bakryEmeryRegularizedLift_density_domination n ρ 0 hρ hrot hc x
@@ -119,13 +119,13 @@ theorem bakryEmeryRegularizedLift_expectation_tendsto (μ : Measure E) [NeZero �
 theorem bakryEmeryRegularizedLift_compact_expectation_tendsto (μ : Measure E) [NeZero μ]
     (n : ℕ) (ρ : ℝ) (V : Potential) (hV : Continuous V)
     (hρ : 0 ≤ ρ) (hrot : IsRotationalPotential V) (hc : IsRhoConvexPotential ρ V)
-    (hG : Integrable (fun x : E => Real.exp (-((n:ℝ)*ρ)/2*‖x‖^2)) μ)
+    (hG : Integrable (fun x : E => Real.exp (-((n : ℝ)*ρ)/2*‖x‖^2)) μ)
     (f : E → ℝ) (hf : Continuous f) (hfc : HasCompactSupport f) :
     Tendsto (fun ε : ℝ => ∫ x, f x ∂bakryEmeryNormalizedGibbs μ
       (bakryEmeryRegularizedLiftPotential n V ε)) (𝓝 0)
       (𝓝 (∫ x, f x ∂bakryEmeryNormalizedGibbs μ
         (bakryEmeryEuclideanLiftPotential n V))) := by
-  obtain ⟨C,hC⟩ := hf.norm.bddAbove_range_of_hasCompactSupport hfc.norm
+  obtain ⟨C, hC⟩ := hf.norm.bddAbove_range_of_hasCompactSupport hfc.norm
   have hb (x : E) : ‖f x‖ ≤ C := hC (mem_range_self x)
   exact bakryEmeryRegularizedLift_expectation_tendsto μ n ρ V hV hρ hrot hc hG f
     hf.aestronglyMeasurable C ((norm_nonneg (f 0)).trans (hb 0)) hb
@@ -135,7 +135,7 @@ theorem bakryEmeryRegularizedLift_compact_expectation_tendsto (μ : Measure E) [
 theorem bakryEmeryRegularizedLift_entropy_tendsto (μ : Measure E) [NeZero μ]
     (n : ℕ) (ρ : ℝ) (V : Potential) (hV : Continuous V)
     (hρ : 0 ≤ ρ) (hrot : IsRotationalPotential V) (hc : IsRhoConvexPotential ρ V)
-    (hG : Integrable (fun x : E => Real.exp (-((n:ℝ)*ρ)/2*‖x‖^2)) μ)
+    (hG : Integrable (fun x : E => Real.exp (-((n : ℝ)*ρ)/2*‖x‖^2)) μ)
     (f : E → ℝ) (hf : Continuous f) (hfc : HasCompactSupport f) :
     Tendsto (fun ε : ℝ => squareEntropy (bakryEmeryNormalizedGibbs μ
       (bakryEmeryRegularizedLiftPotential n V ε)) f) (𝓝 0)

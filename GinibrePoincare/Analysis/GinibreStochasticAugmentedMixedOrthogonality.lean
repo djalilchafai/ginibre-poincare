@@ -40,12 +40,12 @@ theorem ginibreBrownian_augmented_mixed_disjoint_orthogonal {Ω ι : Type*}
   have hp := hInd.symm.integral_mul_eq_mul_integral
     (by convert! hH.aestronglyMeasurable using 1)
     (by convert! ((hLaw k).aemeasurable.aestronglyMeasurable.mul (hLaw l).aemeasurable.aestronglyMeasurable) using 1)
-  simp only [Function.comp_def,Pi.mul_apply,id_eq] at hp
+  simp only [Function.comp_def, Pi.mul_apply, id_eq] at hp
   calc
     _ = ∫ ω, H ω*((B k (r+v) ω-B k r ω)*(B l (r+v) ω-B l r ω)) ∂P := by
       apply integral_congr_ae
       exact Eventually.of_forall (fun ω => by dsimp [H]; ring)
-    _ = 0 := by rw [hp,ginibreBrownian_family_mixed_increment_mean B P hB hind r v k l hkl,mul_zero]
+    _ = 0 := by rw [hp, ginibreBrownian_family_mixed_increment_mean B P hB hind r v k l hkl, mul_zero]
 
 end
 end GinibrePoincare

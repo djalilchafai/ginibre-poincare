@@ -15,42 +15,42 @@ set_option maxHeartbeats 1000000
 
 def ginibreInteractionConfigurationTilt (n : ℕ) (α : ℝ) (z : Configuration n) : Configuration n :=
   fun j => Real.sqrt (2*α/(n : ℝ)^2) •
-    ((ginibreInteractionBrownianTilt n α z (j,0):ℂ)+
-      Complex.I*(ginibreInteractionBrownianTilt n α z (j,1):ℂ))
+    ((ginibreInteractionBrownianTilt n α z (j, 0) : ℂ)+
+      Complex.I*(ginibreInteractionBrownianTilt n α z (j, 1) : ℂ))
 
 def ginibreBrownianEmbeddingCLM (n : ℕ) (α : ℝ) :
     ((Fin n × Fin 2) → ℝ) →L[ℝ] Configuration n :=
-  ContinuousLinearMap.pi fun j => Real.sqrt (2*α/(n:ℝ)^2) •
-    ((Complex.ofRealCLM.comp (ContinuousLinearMap.proj (j,0)))+
-      Complex.I • (Complex.ofRealCLM.comp (ContinuousLinearMap.proj (j,1))))
+  ContinuousLinearMap.pi fun j => Real.sqrt (2*α/(n : ℝ)^2) •
+    ((Complex.ofRealCLM.comp (ContinuousLinearMap.proj (j, 0)))+
+      Complex.I • (Complex.ofRealCLM.comp (ContinuousLinearMap.proj (j, 1))))
 
 @[simp] theorem ginibreBrownianEmbeddingCLM_apply (n : ℕ) (α : ℝ)
     (v : (Fin n × Fin 2) → ℝ) (j : Fin n) :
-    ginibreBrownianEmbeddingCLM n α v j = Real.sqrt (2*α/(n:ℝ)^2) •
-      ((v (j,0):ℂ)+Complex.I*(v (j,1):ℂ)) := by
-  simp [ginibreBrownianEmbeddingCLM,smul_eq_mul]
+    ginibreBrownianEmbeddingCLM n α v j = Real.sqrt (2*α/(n : ℝ)^2) •
+      ((v (j, 0) : ℂ)+Complex.I*(v (j, 1) : ℂ)) := by
+  simp [ginibreBrownianEmbeddingCLM, smul_eq_mul]
 
 /-- The actual Brownian interaction tilt changes the stationary OU drift
 into precisely the original paper-normalized Ginibre Langevin drift. -/
 theorem ginibreInteractionConfigurationTilt_eq_drift (n : ℕ) (α : ℝ)
     (hα : 0≤α) (z : Configuration n) (hz : CollisionFree z) :
-    ginibreInteractionConfigurationTilt n α z = ginibreLangevinDrift n α z-(-2*α/(n:ℝ)) • z := by
+    ginibreInteractionConfigurationTilt n α z = ginibreLangevinDrift n α z-(-2*α/(n : ℝ)) • z := by
   ext j
   apply Complex.ext
-  · have ht := ginibreInteractionBrownianTilt_noise_drift n α hα z (j,0)
+  · have ht := ginibreInteractionBrownianTilt_noise_drift n α hα z (j, 0)
     have hd := ginibreInteractionPotential_originalDrift_real α z hz j
-    simpa [ginibreInteractionConfigurationTilt,Complex.smul_re,smul_eq_mul,
-      ginibreCoordinateDirection,realCoordinateDirection,Pi.sub_apply,Pi.smul_apply] using ht.trans hd.symm
-  · have ht := ginibreInteractionBrownianTilt_noise_drift n α hα z (j,1)
+    simpa [ginibreInteractionConfigurationTilt, Complex.smul_re, smul_eq_mul,
+      ginibreCoordinateDirection, realCoordinateDirection, Pi.sub_apply, Pi.smul_apply] using ht.trans hd.symm
+  · have ht := ginibreInteractionBrownianTilt_noise_drift n α hα z (j, 1)
     have hd := ginibreInteractionPotential_originalDrift_imaginary α z hz j
-    simpa [ginibreInteractionConfigurationTilt,Complex.smul_im,smul_eq_mul,
-      ginibreCoordinateDirection,imaginaryCoordinateDirection,Pi.sub_apply,Pi.smul_apply] using ht.trans hd.symm
+    simpa [ginibreInteractionConfigurationTilt, Complex.smul_im, smul_eq_mul,
+      ginibreCoordinateDirection, imaginaryCoordinateDirection, Pi.sub_apply, Pi.smul_apply] using ht.trans hd.symm
 
 /-- Literal correction of the reference driving noise by the actual
 interaction drift, without stochastic-integral or law assumptions. -/
 def ginibreInteractionCorrectedNoise (n : ℕ) (α : ℝ)
     (N Y : ℝ → Configuration n) (t : ℝ) : Configuration n :=
-  N t-∫ u in (0:ℝ)..t, ginibreInteractionConfigurationTilt n α (Y u)
+  N t-∫ u in (0 : ℝ)..t, ginibreInteractionConfigurationTilt n α (Y u)
 
 /-- Exact configuration-valued identity for the literal corrected Brownian
 coordinates, proved by commuting a real linear embedding with time integration. -/
@@ -59,57 +59,57 @@ theorem ginibreCorrectedBrownianNoise_eq {Ω : Type*} (n : ℕ) (α : ℝ)
     (F : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (ω : Ω) (t : ℝ) (ht : 0≤t)
     (hi : IntervalIntegrable (fun s : ℝ => fun i => F i (Real.toNNReal s) ω) volume 0 t) :
     ginibreConfigurationBrownianNoise n
-      (fun i r ω => B i r ω-B i 0 ω-∫ s in (0:ℝ)..(r:ℝ), F i (Real.toNNReal s) ω) α ω t =
+      (fun i r ω => B i r ω-B i 0 ω-∫ s in (0 : ℝ)..(r : ℝ), F i (Real.toNNReal s) ω) α ω t =
     ginibreConfigurationBrownianNoise n B α ω t-ginibreConfigurationBrownianNoise n B α ω 0-
-      ∫ s in (0:ℝ)..t, ginibreBrownianEmbeddingCLM n α (fun i => F i (Real.toNNReal s) ω) := by
+      ∫ s in (0 : ℝ)..t, ginibreBrownianEmbeddingCLM n α (fun i => F i (Real.toNNReal s) ω) := by
   let L := ginibreBrownianEmbeddingCLM n α
   have he (i : Fin n × Fin 2) :
-      (∫ s in (0:ℝ)..t, (fun i => F i (Real.toNNReal s) ω)) i =
-      ∫ s in (0:ℝ)..t, F i (Real.toNNReal s) ω :=
+      (∫ s in (0 : ℝ)..t, (fun i => F i (Real.toNNReal s) ω)) i =
+      ∫ s in (0 : ℝ)..t, F i (Real.toNNReal s) ω :=
     by simpa only [ContinuousLinearMap.proj_apply] using
       ((ContinuousLinearMap.proj i : (((Fin n × Fin 2) → ℝ) →L[ℝ] ℝ)).intervalIntegral_comp_comm hi).symm
   have hv : (fun i => B i t.toNNReal ω-B i 0 ω-
-      ∫ s in (0:ℝ)..t, F i (Real.toNNReal s) ω) =
+      ∫ s in (0 : ℝ)..t, F i (Real.toNNReal s) ω) =
       (fun i => B i t.toNNReal ω)-(fun i => B i 0 ω)-
-        ∫ s in (0:ℝ)..t, (fun i => F i (Real.toNNReal s) ω) := by
+        ∫ s in (0 : ℝ)..t, (fun i => F i (Real.toNNReal s) ω) := by
     funext i
-    simp only [Pi.sub_apply,he]
+    simp only [Pi.sub_apply, he]
   have hL := L.intervalIntegral_comp_comm hi
   change L (fun i => B i t.toNNReal ω-B i 0 ω-
-    ∫ s in (0:ℝ)..(t.toNNReal:ℝ), F i (Real.toNNReal s) ω) =
-      L (fun i => B i t.toNNReal ω)-L (fun i => B i (0:ℝ).toNNReal ω)-_
-  rw [Real.coe_toNNReal _ ht,Real.toNNReal_zero,hv,map_sub,map_sub,← hL]
+    ∫ s in (0 : ℝ)..(t.toNNReal : ℝ), F i (Real.toNNReal s) ω) =
+      L (fun i => B i t.toNNReal ω)-L (fun i => B i (0 : ℝ).toNNReal ω)-_
+  rw [Real.coe_toNNReal _ ht, Real.toNNReal_zero, hv, map_sub, map_sub,← hL]
 
 /-- Every genuine compact collision-free OU reference solution obeys the
 original Volterra equation with its literal interaction-corrected noise. -/
 theorem ginibreOUPath_corrected_original_volterra {n : ℕ} (α : ℝ) (hα : 0≤α)
     (z : Configuration n) (N Y : ℝ → Configuration n) (T : ℝ≥0)
-    (hY : ContinuousOn Y (Icc 0 (T:ℝ))) (hcf : ∀ t∈Icc 0 (T:ℝ), CollisionFree (Y t))
-    (hEq : ∀ t∈Icc 0 (T:ℝ), Y t=z+N t+
-      ∫ u in (0:ℝ)..t, (-2*α/(n:ℝ)) • Y u) :
-    ∀ t∈Icc 0 (T:ℝ), Y t=z+ginibreInteractionCorrectedNoise n α N Y t+
-      ∫ u in (0:ℝ)..t, ginibreLangevinDrift n α (Y u) := by
+    (hY : ContinuousOn Y (Icc 0 (T : ℝ))) (hcf : ∀ t∈Icc 0 (T : ℝ), CollisionFree (Y t))
+    (hEq : ∀ t∈Icc 0 (T : ℝ), Y t=z+N t+
+      ∫ u in (0 : ℝ)..t, (-2*α/(n : ℝ)) • Y u) :
+    ∀ t∈Icc 0 (T : ℝ), Y t=z+ginibreInteractionCorrectedNoise n α N Y t+
+      ∫ u in (0 : ℝ)..t, ginibreLangevinDrift n α (Y u) := by
   intro t ht
-  have hDrift : ContinuousOn (fun u => ginibreLangevinDrift n α (Y u)) (Icc 0 (T:ℝ)) :=
+  have hDrift : ContinuousOn (fun u => ginibreLangevinDrift n α (Y u)) (Icc 0 (T : ℝ)) :=
     fun u hu => (ginibreLangevinDrift_contDiffAt n α (Y u) (hcf u hu)).continuousAt.comp_continuousWithinAt (hY u hu)
-  have hOU : ContinuousOn (fun u => (-2*α/(n:ℝ)) • Y u) (Icc 0 (T:ℝ)) := by
-    exact hY.const_smul (-2*α/(n:ℝ))
+  have hOU : ContinuousOn (fun u => (-2*α/(n : ℝ)) • Y u) (Icc 0 (T : ℝ)) := by
+    exact hY.const_smul (-2*α/(n : ℝ))
   have hiD : IntervalIntegrable (fun u => ginibreLangevinDrift n α (Y u)) volume 0 t := by
     apply ContinuousOn.intervalIntegrable
     rw [uIcc_of_le ht.1]
     exact hDrift.mono (Icc_subset_Icc_right ht.2)
-  have hiOU : IntervalIntegrable (fun u => (-2*α/(n:ℝ)) • Y u) volume 0 t := by
+  have hiOU : IntervalIntegrable (fun u => (-2*α/(n : ℝ)) • Y u) volume 0 t := by
     apply ContinuousOn.intervalIntegrable
     rw [uIcc_of_le ht.1]
     exact hOU.mono (Icc_subset_Icc_right ht.2)
-  have hc : (∫ u in (0:ℝ)..t, ginibreInteractionConfigurationTilt n α (Y u)) =
-      (∫ u in (0:ℝ)..t, ginibreLangevinDrift n α (Y u))-
-      ∫ u in (0:ℝ)..t, (-2*α/(n:ℝ)) • Y u := by
+  have hc : (∫ u in (0 : ℝ)..t, ginibreInteractionConfigurationTilt n α (Y u)) =
+      (∫ u in (0 : ℝ)..t, ginibreLangevinDrift n α (Y u))-
+      ∫ u in (0 : ℝ)..t, (-2*α/(n : ℝ)) • Y u := by
     rw [← intervalIntegral.integral_sub hiD hiOU]
     apply intervalIntegral.integral_congr
     intro u hu
     rw [uIcc_of_le ht.1] at hu
-    exact ginibreInteractionConfigurationTilt_eq_drift n α hα (Y u) (hcf u ⟨hu.1,hu.2.trans ht.2⟩)
+    exact ginibreInteractionConfigurationTilt_eq_drift n α hα (Y u) (hcf u ⟨hu.1, hu.2.trans ht.2⟩)
   rw [hEq t ht]
   unfold ginibreInteractionCorrectedNoise
   rw [hc]
@@ -119,24 +119,24 @@ theorem ginibreOUPath_corrected_original_volterra {n : ℕ} (α : ℝ) (hα : 0�
 collision-free OU prefix after correcting its actual interaction noise. -/
 theorem ginibreOUPath_corrected_canonical_prefix {n : ℕ} (α : ℝ) (hα : 0≤α)
     (z : Configuration n) (N Y : ℝ → Configuration n) (T : ℝ≥0)
-    (hY : ContinuousOn Y (Icc 0 (T:ℝ))) (hY0 : Y 0=z)
-    (hcf : ∀ t∈Icc 0 (T:ℝ), CollisionFree (Y t))
-    (hEq : ∀ t∈Icc 0 (T:ℝ), Y t=z+N t+
-      ∫ u in (0:ℝ)..t, (-2*α/(n:ℝ)) • Y u) :
-    (T:ℝ≥0∞) ≤ ginibreDrivenMaximalLifetime n α (ginibreInteractionCorrectedNoise n α N Y) z ∧
+    (hY : ContinuousOn Y (Icc 0 (T : ℝ))) (hY0 : Y 0=z)
+    (hcf : ∀ t∈Icc 0 (T : ℝ), CollisionFree (Y t))
+    (hEq : ∀ t∈Icc 0 (T : ℝ), Y t=z+N t+
+      ∫ u in (0 : ℝ)..t, (-2*α/(n : ℝ)) • Y u) :
+    (T : ℝ≥0∞) ≤ ginibreDrivenMaximalLifetime n α (ginibreInteractionCorrectedNoise n α N Y) z ∧
       ∀ t : ℝ≥0, t<T → ginibreDrivenMaximalValue n α
         (ginibreInteractionCorrectedNoise n α N Y) z t = Y t := by
-  have hD : ContinuousOn (fun u => ginibreLangevinDrift n α (Y u)) (Icc 0 (T:ℝ)) :=
+  have hD : ContinuousOn (fun u => ginibreLangevinDrift n α (Y u)) (Icc 0 (T : ℝ)) :=
     fun u hu => (ginibreLangevinDrift_contDiffAt n α (Y u) (hcf u hu)).continuousAt.comp_continuousWithinAt (hY u hu)
   have hseg : GinibreDrivenSegment n α (ginibreInteractionCorrectedNoise n α N Y) z T Y := by
-    refine ⟨hY,hY0,?_⟩
+    refine ⟨hY, hY0,?_⟩
     intro t ht
-    refine ⟨hcf t ht,?_,ginibreOUPath_corrected_original_volterra α hα z N Y T hY hcf hEq t ht⟩
+    refine ⟨hcf t ht,?_, ginibreOUPath_corrected_original_volterra α hα z N Y T hY hcf hEq t ht⟩
     apply ContinuousOn.intervalIntegrable
     rw [uIcc_of_le ht.1]
     exact hD.mono (Icc_subset_Icc_right ht.2)
-  have hL : (T:ℝ≥0∞)≤ginibreDrivenMaximalLifetime n α (ginibreInteractionCorrectedNoise n α N Y) z :=
-    le_iSup_of_le (⟨T,⟨Y,hseg⟩⟩ : ginibreDrivenHorizons n α (ginibreInteractionCorrectedNoise n α N Y) z) le_rfl
+  have hL : (T : ℝ≥0∞)≤ginibreDrivenMaximalLifetime n α (ginibreInteractionCorrectedNoise n α N Y) z :=
+    le_iSup_of_le (⟨T, ⟨Y, hseg⟩⟩ : ginibreDrivenHorizons n α (ginibreInteractionCorrectedNoise n α N Y) z) le_rfl
   refine ⟨hL,?_⟩
   intro t ht
   exact ginibreDrivenMaximalValue_eq_segment hseg t ht.le ((ENNReal.coe_lt_coe.mpr ht).trans_le hL)
@@ -145,7 +145,7 @@ theorem ginibreOUPath_corrected_canonical_prefix {n : ℕ} (α : ℝ) (hα : 0�
 def ginibreInteractionCorrectedBrownian {Ω : Type*} (n : ℕ) (α : ℝ)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ)
     (Y : ℝ≥0 → Ω → Configuration n) : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ :=
-  fun i r ω => B i r ω-B i 0 ω-∫ s in (0:ℝ)..(r:ℝ),
+  fun i r ω => B i r ω-B i 0 ω-∫ s in (0 : ℝ)..(r : ℝ),
     ginibreInteractionBrownianTilt n α (Y s.toNNReal ω) i
 
 theorem ginibreInteractionCorrectedBrownian_noise_continuous {Ω : Type*}
@@ -157,7 +157,7 @@ theorem ginibreInteractionCorrectedBrownian_noise_continuous {Ω : Type*}
       ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω 0=0 := by
   have hc (i : Fin n × Fin 2) : Continuous (fun t : ℝ => ginibreInteractionBrownianTilt n α (Y t.toNNReal ω) i) :=
     ((ginibreInteractionBrownianTilt_continuousOn n α i).comp_continuous hY hCF).comp continuous_real_toNNReal
-  have hp (i : Fin n × Fin 2) : Continuous (fun t : ℝ => ∫ s in (0:ℝ)..t,
+  have hp (i : Fin n × Fin 2) : Continuous (fun t : ℝ => ∫ s in (0 : ℝ)..t,
       ginibreInteractionBrownianTilt n α (Y s.toNNReal ω) i) :=
     intervalIntegral.continuous_primitive (fun a b => (hc i).intervalIntegrable a b) 0
   constructor
@@ -169,7 +169,7 @@ theorem ginibreInteractionCorrectedBrownian_noise_continuous {Ω : Type*}
     exact ((hB i).comp continuous_real_toNNReal).sub continuous_const |>.sub
       ((hp i).comp (continuous_subtype_val.comp continuous_real_toNNReal))
   · ext j
-    simp [ginibreConfigurationBrownianNoise,ginibreInteractionCorrectedBrownian]
+    simp [ginibreConfigurationBrownianNoise, ginibreInteractionCorrectedBrownian]
 
 /-- A genuine reference OU prefix becomes the actual original Ginibre
 Volterra prefix under its literal coordinate Brownian Girsanov correction. -/
@@ -180,38 +180,38 @@ theorem ginibreOUPath_correctedBrownian_original_volterra {Ω : Type*}
     (hYC : Continuous (fun t => Y t ω)) (hcf : ∀ t, CollisionFree (Y t ω))
     (hN0 : ginibreConfigurationBrownianNoise n B α ω 0=0)
     (hEq : ∀ t≤θ, Y t ω=z+ginibreConfigurationBrownianNoise n B α ω t+
-      ∫ s in (0:ℝ)..(t:ℝ), (-2*α/(n:ℝ)) • Y s.toNNReal ω) :
+      ∫ s in (0 : ℝ)..(t : ℝ), (-2*α/(n : ℝ)) • Y s.toNNReal ω) :
     ∀ t≤θ, Y t ω=z+ginibreConfigurationBrownianNoise n
       (ginibreInteractionCorrectedBrownian n α B Y) α ω t+
-      ∫ s in (0:ℝ)..(t:ℝ), ginibreLangevinDrift n α (Y s.toNNReal ω) := by
+      ∫ s in (0 : ℝ)..(t : ℝ), ginibreLangevinDrift n α (Y s.toNNReal ω) := by
   let y := fun s : ℝ => Y s.toNNReal ω
   have hcont : Continuous y := hYC.comp continuous_real_toNNReal
   have hF : Continuous (fun s : ℝ => fun i => ginibreInteractionBrownianTilt n α (Y s.toNNReal ω) i) := by
     apply continuous_pi
     intro i
     exact ((ginibreInteractionBrownianTilt_continuousOn n α i).comp_continuous hYC hcf).comp continuous_real_toNNReal
-  have hEqR : ∀ t∈Icc (0:ℝ) (θ:ℝ), y t=z+ginibreConfigurationBrownianNoise n B α ω t+
-      ∫ s in (0:ℝ)..t, (-2*α/(n:ℝ)) • y s := by
+  have hEqR : ∀ t∈Icc (0 : ℝ) (θ : ℝ), y t=z+ginibreConfigurationBrownianNoise n B α ω t+
+      ∫ s in (0 : ℝ)..t, (-2*α/(n : ℝ)) • y s := by
     intro t ht
     have he := hEq t.toNNReal (Real.toNNReal_le_iff_le_coe.mpr ht.2)
-    simpa only [y,Real.coe_toNNReal _ ht.1] using he
+    simpa only [y, Real.coe_toNNReal _ ht.1] using he
   have hV := ginibreOUPath_corrected_original_volterra α hα z
     (ginibreConfigurationBrownianNoise n B α ω) y θ hcont.continuousOn
     (fun t ht => hcf _) hEqR
   intro t ht
   have hnoise := ginibreCorrectedBrownianNoise_eq n α B
-    (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) ω (t:ℝ) t.property (hF.intervalIntegrable 0 t)
-  rw [hN0,sub_zero] at hnoise
-  have hcor : (∫ s in (0:ℝ)..(t:ℝ), ginibreBrownianEmbeddingCLM n α
+    (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) ω (t : ℝ) t.property (hF.intervalIntegrable 0 t)
+  rw [hN0, sub_zero] at hnoise
+  have hcor : (∫ s in (0 : ℝ)..(t : ℝ), ginibreBrownianEmbeddingCLM n α
       (fun i => ginibreInteractionBrownianTilt n α (Y s.toNNReal ω) i)) =
-      ∫ s in (0:ℝ)..(t:ℝ), ginibreInteractionConfigurationTilt n α (y s) := by
+      ∫ s in (0 : ℝ)..(t : ℝ), ginibreInteractionConfigurationTilt n α (y s) := by
     congr 1
   rw [hcor] at hnoise
-  have he := hV t ⟨t.property,by exact_mod_cast ht⟩
+  have he := hV t ⟨t.property, by exact_mod_cast ht⟩
   change Y t ω=z+ginibreConfigurationBrownianNoise n
-    (fun i r ω => B i r ω-B i 0 ω-∫ s in (0:ℝ)..(r:ℝ),
+    (fun i r ω => B i r ω-B i 0 ω-∫ s in (0 : ℝ)..(r : ℝ),
       ginibreInteractionBrownianTilt n α (Y s.toNNReal ω) i) α ω t+_
-  simpa only [y,Real.toNNReal_coe,ginibreInteractionCorrectedNoise,← hnoise] using he
+  simpa only [y, Real.toNNReal_coe, ginibreInteractionCorrectedNoise,← hnoise] using he
 
 end
 end GinibrePoincare

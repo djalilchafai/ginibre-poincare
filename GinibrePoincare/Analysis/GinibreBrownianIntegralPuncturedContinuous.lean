@@ -33,7 +33,7 @@ theorem brownianPuncturedContinuousIntegral_exists {Ω ι : Type*}
         (brownianUniformLeftSum (B j) F t (k+1) ω-M t ω)^2 ∂P) atTop (𝓝 0) := by
   let hbrown := fun i => (hB i).toIsPreBrownianReal
   let ℱ := ginibreBrownianAugmentedFiltration B P hbrown
-  obtain ⟨A,hAM,hAC,hAL,hA0,hAS,hAT⟩ :=
+  obtain ⟨A, hAM, hAC, hAL, hA0, hAS, hAT⟩ :=
     brownianPuncturedIntegral_continuous_approximants B P hB hind j F hF hc C hC hb T hT
   let K := fun n => realMartingaleHorizonCap (A n) T
   have hKM (n : ℕ) : Martingale (K n) ℱ P :=
@@ -42,25 +42,25 @@ theorem brownianPuncturedContinuousIntegral_exists {Ω ι : Type*}
   have hKC (n : ℕ) : ∀ᵐ ω ∂P, ContinuousOn (fun t => K n t ω) (Set.Icc 0 T) :=
     ae_of_all P fun ω => (realMartingaleHorizonCap_continuous (A n) (hAC n) T ω).continuousOn
   have hcap (n : ℕ) (t : ℝ≥0) (ω : Ω) : K n t ω=K n (min t T) ω := by
-    simp [K,realMartingaleHorizonCap,min_assoc]
+    simp [K, realMartingaleHorizonCap, min_assoc]
   have hterm : Tendsto (fun q : ℕ × ℕ => ∫ ω, (K q.2 T ω-K q.1 T ω)^2 ∂P)
       atTop (𝓝 0) := by
     convert hAT using 1
     funext q
     apply integral_congr_ae
-    exact ae_of_all P fun ω => by simp only [K,realMartingaleHorizonCap,min_self]; ring
-  obtain ⟨M,hMM,hMC,hML,hMP,hMS⟩ := realMartingale_terminal_cauchy_exists_continuous_martingale
+    exact ae_of_all P fun ω => by simp only [K, realMartingaleHorizonCap, min_self]; ring
+  obtain ⟨M, hMM, hMC, hML, hMP, hMS⟩ := realMartingale_terminal_cauchy_exists_continuous_martingale
     P ℱ (ginibreBrownianFamilyPastSpace B) (ginibreBrownianFamilyPastSpace_le B P hbrown)
     (fun t => rfl) K hKM T (fun n => hKL n T) hKC hcap hterm
   have hz : M 0 =ᵐ[P] (fun _ => 0) := by
     have hK0 (n : ℕ) : K n 0 =ᵐ[P] (fun _ => 0) := by
-      simpa only [K,realMartingaleHorizonCap,zero_min] using hA0 n
+      simpa only [K, realMartingaleHorizonCap, zero_min] using hA0 n
     have hp := (hMP 0).congr hK0 EventuallyEq.rfl
     have hpz : TendstoInMeasure P (fun _ : ℕ => (fun _ : Ω => (0 : ℝ))) atTop (fun _ => 0) :=
       tendstoInMeasure_of_tendsto_ae (fun _ => aestronglyMeasurable_const)
         (ae_of_all P fun _ => tendsto_const_nhds)
     exact tendstoInMeasure_ae_unique hp hpz
-  refine ⟨M,hMM,hMC,hML,hz,?_⟩
+  refine ⟨M, hMM, hMC, hML, hz,?_⟩
   intro t htT
   by_cases ht0 : t=0
   · subst t
@@ -68,8 +68,8 @@ theorem brownianPuncturedContinuousIntegral_exists {Ω ι : Type*}
       have hh : (fun ω => (brownianUniformLeftSum (B j) F 0 (k+1) ω-M 0 ω)^2) =ᵐ[P]
           (fun _ => (0 : ℝ)) := by
         filter_upwards [hz] with ω hω
-        simp [brownianUniformLeftSum,itoUniformNNTime,itoUniformTime,hω]
-      rw [integral_congr_ae hh,integral_zero]
+        simp [brownianUniformLeftSum, itoUniformNNTime, itoUniformTime, hω]
+      rw [integral_congr_ae hh, integral_zero]
     simpa only [he] using (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ)) atTop (𝓝 0))
   have ht : 0 < t := lt_of_le_of_ne bot_le (Ne.symm ht0)
   let ε := fun n : ℕ => 1/((n : ℝ)+1)
@@ -93,9 +93,9 @@ theorem brownianPuncturedContinuousIntegral_exists {Ω ι : Type*}
   · intro n k
     have hh := brownianUniformLeftSum_initial_cutoff_error_bound B P hbrown hind j F hF
       C (ε n) hC (by dsimp [ε]; positivity) hb t ht (k+1) (Nat.succ_pos k)
-    simpa only [S,D,Nat.cast_add,Nat.cast_one,mul_add] using hh
+    simpa only [S, D, Nat.cast_add, Nat.cast_one, mul_add] using hh
   · intro n
-    simpa only [D,ε,K,realMartingaleHorizonCap,min_eq_left htT] using hAS n t htT
+    simpa only [D, ε, K, realMartingaleHorizonCap, min_eq_left htT] using hAS n t htT
   · exact hMS t
 
 #print axioms brownianPuncturedContinuousIntegral_exists

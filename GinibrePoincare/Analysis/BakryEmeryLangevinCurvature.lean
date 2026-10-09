@@ -31,17 +31,17 @@ theorem bakryEmeryLangevinDrift_derivative_curvature (W : E → ℝ) (κ : ℝ)
     rw [he, inner_smul_left, norm_smul, mul_pow, Real.norm_eq_abs, sq_abs,
       inner_sub_right, conj_trivial] at h
     have hmul : (t-s)*F t ≤ (t-s)*F s := by
-      dsimp [F,b]
+      dsimp [F, b]
       nlinarith only [h]
     exact (mul_le_mul_iff_right₀ (sub_pos.mpr hst)).mp hmul
   have hl : HasDerivAt (fun t : ℝ => x+t•v) v 0 := by
-    simpa using (hasDerivAt_id (0:ℝ)).smul_const v |>.const_add x
+    simpa using (hasDerivAt_id (0 : ℝ)).smul_const v |>.const_add x
   have hb : DifferentiableAt ℝ b x :=
     (bakryEmeryLangevinDrift_contDiffAt W x hW.contDiffAt).differentiableAt (by norm_num)
-  have hb' : HasFDerivAt b (fderiv ℝ b x) (x+(0:ℝ)•v) := by simpa using hb.hasFDerivAt
+  have hb' : HasFDerivAt b (fderiv ℝ b x) (x+(0 : ℝ)•v) := by simpa using hb.hasFDerivAt
   have hdb := hb'.comp_hasDerivAt 0 hl
   have hinner := (innerSL ℝ v).hasFDerivAt.comp_hasDerivAt 0 hdb
-  have hlinear := ((hasDerivAt_id (0:ℝ)).const_mul κ).mul_const (‖v‖^2)
+  have hlinear := ((hasDerivAt_id (0 : ℝ)).const_mul κ).mul_const (‖v‖^2)
   have hf := hinner.add hlinear
   have h := hf.nonpos_of_antitone hmono
   simp only [innerSL_apply_apply, b, mul_one] at h

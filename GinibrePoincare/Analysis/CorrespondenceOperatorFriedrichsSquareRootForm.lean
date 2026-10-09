@@ -44,12 +44,12 @@ theorem correspondenceComplexFormResolvent_adjoint (n : ℕ) (hn : 0<n) :
   intro p
   apply ext_inner_left ℝ
   intro x
-  rw [ContinuousLinearMap.adjoint_inner_right,correspondenceComplex_real_inner n,ginibreFullComplex_inner_re,
-    correspondenceComplexFormValue_re,correspondenceComplexFormValue_im]
+  rw [ContinuousLinearMap.adjoint_inner_right, correspondenceComplex_real_inner n, ginibreFullComplex_inner_re,
+    correspondenceComplexFormValue_re, correspondenceComplexFormValue_im]
   rw [WithLp.prod_inner_apply]
   change inner ℝ (correspondenceOperatorFormResolvent n hn (ginibreFullComplexRe n x)) p.fst+
     inner ℝ (correspondenceOperatorFormResolvent n hn (ginibreFullComplexIm n x)) p.snd=_
-  rw [correspondenceOperatorFormResolvent_riesz,correspondenceOperatorFormResolvent_riesz]
+  rw [correspondenceOperatorFormResolvent_riesz, correspondenceOperatorFormResolvent_riesz]
 
 theorem correspondenceFriedrichsResolventSqrt_norm_form (n : ℕ) (hn : 0<n)
     (x : GinibreFullComplexL2 n) :
@@ -60,19 +60,19 @@ theorem correspondenceFriedrichsResolventSqrt_norm_form (n : ℕ) (hn : 0<n)
     rw [WithLp.prod_norm_sq_eq_of_L2]
     change ‖correspondenceOperatorFormResolvent n hn (ginibreFullComplexRe n x)‖^2+
       ‖correspondenceOperatorFormResolvent n hn (ginibreFullComplexIm n x)‖^2=_
-    rw [correspondenceOperatorValueResolvent_positive,correspondenceOperatorValueResolvent_positive]
+    rw [correspondenceOperatorValueResolvent_positive, correspondenceOperatorValueResolvent_positive]
   have hB := (correspondenceFriedrichsResolventSqrt n hn).apply_norm_sq_eq_inner_adjoint_left x
   have hself : (correspondenceFriedrichsResolventSqrt n hn).adjoint=correspondenceFriedrichsResolventSqrt n hn :=
     correspondenceFriedrichsResolventSqrt_selfAdjoint n hn
   rw [hself] at hB
   change ‖correspondenceFriedrichsResolventSqrt n hn x‖^2=
     (inner ℂ ((correspondenceFriedrichsResolventSqrt n hn*correspondenceFriedrichsResolventSqrt n hn) x) x).re at hB
-  rw [correspondenceFriedrichsResolventSqrt_square,ginibreFullComplex_inner_re,
-    correspondenceOperatorComplexResolvent_re,correspondenceOperatorComplexResolvent_im] at hB
+  rw [correspondenceFriedrichsResolventSqrt_square, ginibreFullComplex_inner_re,
+    correspondenceOperatorComplexResolvent_re, correspondenceOperatorComplexResolvent_im] at hB
   have hre := real_inner_comm (ginibreFullComplexRe n x) (correspondenceOperatorValueResolvent n hn (ginibreFullComplexRe n x))
   have him := real_inner_comm (ginibreFullComplexIm n x) (correspondenceOperatorValueResolvent n hn (ginibreFullComplexIm n x))
-  rw [hre,him] at hB
-  nlinarith [norm_nonneg (correspondenceComplexFormResolvent n hn x),norm_nonneg (correspondenceFriedrichsResolventSqrt n hn x)]
+  rw [hre, him] at hB
+  nlinarith [norm_nonneg (correspondenceComplexFormResolvent n hn x), norm_nonneg (correspondenceFriedrichsResolventSqrt n hn x)]
 
 /-- The actual resolvent CFC square root has precisely the ordinary weighted
 complex H¹ value range. -/
@@ -82,7 +82,7 @@ theorem correspondenceFriedrichsResolventSqrt_range_form (n : ℕ) (hn : 0<n) :
       (correspondenceFriedrichsResolventSqrt n hn).restrictScalars ℝ := by
     apply ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mpr
     intro x y
-    rw [correspondenceComplex_real_inner n,correspondenceComplex_real_inner n]
+    rw [correspondenceComplex_real_inner n, correspondenceComplex_real_inner n]
     exact congrArg Complex.re ((ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mp
       (correspondenceFriedrichsResolventSqrt_selfAdjoint n hn)) x y)
   have h := correspondenceSquareRoot_adjoint_range (correspondenceComplexFormResolvent n hn)

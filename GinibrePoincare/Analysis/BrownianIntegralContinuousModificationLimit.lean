@@ -15,7 +15,7 @@ noncomputable section
 /-- The actual continuous limit of a uniformly Cauchy path sequence; zero on
 paths where convergence fails. Every output is a continuous function. -/
 def continuousMartingalePathLimit {K Ω : Type*} [TopologicalSpace K] [CompactSpace K]
-    (F : ℕ → Ω → C(K,ℝ)) (ω : Ω) : C(K,ℝ) := by
+    (F : ℕ → Ω → C(K, ℝ)) (ω : Ω) : C(K, ℝ) := by
   classical
   exact if h : CauchySeq (fun n => F n ω) then
     Classical.choose (cauchySeq_tendsto_of_complete h) else 0
@@ -24,12 +24,12 @@ def continuousMartingalePathLimit {K Ω : Type*} [TopologicalSpace K] [CompactSp
 uniformly convergent continuous path sequence, by Borel–Cantelli. -/
 theorem continuousMartingalePathLimit_tendsto_ae
     {K Ω : Type*} [TopologicalSpace K] [CompactSpace K] [MeasurableSpace Ω]
-    (P : Measure Ω) (F : ℕ → Ω → C(K,ℝ))
+    (P : Measure Ω) (F : ℕ → Ω → C(K, ℝ))
     (d : ℕ → ℝ) (hd0 : ∀ n, 0 ≤ d n) (hd : Summable d)
     (hp : (∑' n, P {ω | ∃ t, d n < |F (n+1) ω t - F n ω t|}) ≠ ⊤) :
     ∀ᵐ ω ∂P, Tendsto (fun n => F n ω) atTop (𝓝 (continuousMartingalePathLimit F ω)) := by
   filter_upwards [ae_eventually_notMem hp] with ω hω
-  obtain ⟨N,hN⟩ := eventually_atTop.mp hω
+  obtain ⟨N, hN⟩ := eventually_atTop.mp hω
   have hs : CauchySeq (fun n => F n ω) := by
     apply (cauchySeq_shift N).mp
     apply cauchySeq_of_dist_le_of_summable (fun n => d (n+N))
@@ -39,16 +39,16 @@ theorem continuousMartingalePathLimit_tendsto_ae
       have hn := hN (n+N) (by omega)
       have hh : |F (n+N+1) ω t - F (n+N) ω t| ≤ d (n+N) := by
         by_contra h
-        exact hn ⟨t,lt_of_not_ge h⟩
-      simpa [Real.dist_eq,abs_sub_comm,Nat.add_assoc,Nat.add_comm,Nat.add_left_comm] using hh
+        exact hn ⟨t, lt_of_not_ge h⟩
+      simpa [Real.dist_eq, abs_sub_comm, Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hh
     · exact (summable_nat_add_iff N).mpr hd
-  simp only [continuousMartingalePathLimit,dif_pos hs]
+  simp only [continuousMartingalePathLimit, dif_pos hs]
   exact Classical.choose_spec (cauchySeq_tendsto_of_complete hs)
 
 /-- The constructed limit is genuinely uniform on the whole compact time domain. -/
 theorem continuousMartingalePathLimit_uniform_ae
     {K Ω : Type*} [TopologicalSpace K] [CompactSpace K] [MeasurableSpace Ω]
-    (P : Measure Ω) (F : ℕ → Ω → C(K,ℝ))
+    (P : Measure Ω) (F : ℕ → Ω → C(K, ℝ))
     (d : ℕ → ℝ) (hd0 : ∀ n, 0 ≤ d n) (hd : Summable d)
     (hp : (∑' n, P {ω | ∃ t, d n < |F (n+1) ω t - F n ω t|}) ≠ ⊤) :
     ∀ᵐ ω ∂P, TendstoUniformly (fun n t => F n ω t)

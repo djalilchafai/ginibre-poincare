@@ -44,24 +44,24 @@ theorem brownianPredictableVectorGaussianDensity_corrected_product_law
       (sampledMartingaleFiltration (ginibreBrownianAugmentedFiltration B P hB) τ hτ) Z
     · intro k
       by_cases hk : k<N
-      · simpa only [Z,if_pos hk] using hm k
-      · simp only [Z,if_neg hk]
+      · simpa only [Z, if_pos hk] using hm k
+      · simp only [Z, if_neg hk]
         exact measurable_const
     · intro k Y hY
       by_cases hk : k<N
       · have hf := brownianPredictableVectorGaussianDensity_terminal_fresh_increment B P hB hind h τ hτ hh k N hk Y hY
-        simpa only [Z,if_pos hk,W,Q] using hf.2
-      · simp only [Z,if_neg hk]
+        simpa only [Z, if_pos hk, W, Q] using hf.2
+      · simp only [Z, if_neg hk]
         exact indepFun_const_right Y 0
   have hif := hi.precomp (g := fun k : Fin N => k.val) Fin.val_injective
   have heq : (fun k : Fin N => Z k)=(fun k : Fin N => W k) := by
     funext k ω
-    simp only [Z,if_pos k.isLt]
+    simp only [Z, if_pos k.isLt]
   rw [heq] at hif
   apply hif.hasLaw_pi
   intro k
   exact (brownianPredictableVectorGaussianDensity_terminal_fresh_increment B P hB hind h τ hτ hh
-    k N k.isLt (fun _ => (0:ℝ)) measurable_const).1
+    k N k.isLt (fun _ => (0 : ℝ)) measurable_const).1
 
 /-- Original vector innovation array on the identical chronological grid has
 exactly the same actual product law. -/

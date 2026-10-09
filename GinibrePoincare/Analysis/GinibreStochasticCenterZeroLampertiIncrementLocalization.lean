@@ -67,8 +67,8 @@ theorem ginibreCenterRegularizedIto_positive_start_increment
       J t-J a + ∫ r in (a : ℝ)..t, ginibreLampertiCenterDrift n α
         (ginibreCenterSquared n (X r.toNNReal)) := by
   have hsum := intervalIntegral.integral_add_adjacent_intervals hIa hIt
-  have hea := ginibreCenterSquareRootRegularized_eq hδ (X a) (hlow a ⟨le_rfl,hat⟩).le
-  have het := ginibreCenterSquareRootRegularized_eq hδ (X t) (hlow t ⟨hat,le_rfl⟩).le
+  have hea := ginibreCenterSquareRootRegularized_eq hδ (X a) (hlow a ⟨le_rfl, hat⟩).le
+  have het := ginibreCenterSquareRootRegularized_eq hδ (X t) (hlow t ⟨hat, le_rfl⟩).le
   have he := ginibreCenterRegularized_generator_interval hn α δ hδ X a t hat hfree hlow
   rw [hea] at ha
   rw [het] at ht

@@ -14,22 +14,22 @@ noncomputable section
 set_option maxHeartbeats 2400000
 set_option backward.isDefEq.respectTransparency false
 local instance ginibreOriginalInitialIntegration_pathMeasurable (n : ℕ) (T : ℝ≥0) :
-    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ),Configuration n) := borel _
+    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := borel _
 local instance ginibreOriginalInitialIntegration_pathBorel (n : ℕ) (T : ℝ≥0) :
-    BorelSpace C(Icc (0 : ℝ) (T : ℝ),Configuration n) := ⟨rfl⟩
+    BorelSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := ⟨rfl⟩
 
 def ginibreGaussianInitialOriginalPath {Ω : Type*} (n : ℕ) (α : ℝ) (T : ℝ≥0)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (x : ((Fin n × Fin 2) → ℝ) × Ω) :
-    C(Icc (0 : ℝ) (T : ℝ),Configuration n) :=
+    C(Icc (0 : ℝ) (T : ℝ), Configuration n) :=
   ginibreCanonicalJointHorizonPath α T
     (ginibreInitialCollisionNormalize n (ginibreHamiltonianOUCoordinateAssembly n x.1),
       ginibreBrownianFullContinuousNoise n B α x.2)
 
 def ginibreGaussianInitialOUPath {Ω : Type*} (n : ℕ) (α : ℝ) (T : ℝ≥0)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (x : ((Fin n × Fin 2) → ℝ) × Ω) :
-    C(Icc (0 : ℝ) (T : ℝ),Configuration n) :=
+    C(Icc (0 : ℝ) (T : ℝ), Configuration n) :=
   ginibreHamiltonianOUJointHorizonPath n α T
-    (ginibreHamiltonianOUCoordinateAssembly n x.1,ginibreBrownianFullContinuousNoise n B α x.2)
+    (ginibreHamiltonianOUCoordinateAssembly n x.1, ginibreBrownianFullContinuousNoise n B α x.2)
 
 theorem ginibreGaussianInitialOriginalPath_measurable {Ω : Type*} [MeasurableSpace Ω]
     {n : ℕ} (hn : 0 < n) (α : ℝ) (T : ℝ≥0)
@@ -82,11 +82,11 @@ theorem ginibreHamiltonian_original_killed_gaussian_initial_identity {Ω : Type*
   have hCancel : ∀ᵐ x ∂γ, w x * e x = 1 := by
     filter_upwards [ginibreGaussian_coordinates_collisionFree_ae hn] with x hx
     change ENNReal.ofReal (vandermondeWeight _) * ENNReal.ofReal (Real.exp (ginibreInteractionPotential n _)) = 1
-    rw [← ENNReal.ofReal_mul (vandermondeWeight_nonneg _),ginibreInteraction_initial_density_cancellation _ hx]
+    rw [← ENNReal.ofReal_mul (vandermondeWeight_nonneg _), ginibreInteraction_initial_density_cancellation _ hx]
     norm_num
   have hFiber : ∀ᵐ x ∂γ,
-      (P.map (fun ω => C (x,ω))).restrict S =
-      (P.withDensity (fun ω => e x * S.indicator a (O (x,ω)))).map (fun ω => O (x,ω)) := by
+      (P.map (fun ω => C (x, ω))).restrict S =
+      (P.withDensity (fun ω => e x * S.indicator a (O (x, ω)))).map (fun ω => O (x, ω)) := by
     filter_upwards [ginibreGaussian_coordinates_collisionFree_ae hn] with x hx
     have h := ginibreBrownian_original_joint_killed_compact_path_law_all_initial hn B P hB hiB α
       (ginibreHamiltonianOUCoordinateAssembly n x) hx R T hT
@@ -94,26 +94,26 @@ theorem ginibreHamiltonian_original_killed_gaussian_initial_identity {Ω : Type*
     have hDensity : (fun ω => ENNReal.ofReal (Real.exp (ginibreInteractionPotential n (ginibreHamiltonianOUCoordinateAssembly n x)) *
         ginibreHamiltonianKilledOUActionWeight n α (T : ℝ) R T.property
           (ginibreHamiltonianOUReferenceHorizon n α (ginibreHamiltonianOUCoordinateAssembly n x) B T ω))) =
-        (fun ω => e x * S.indicator a (O (x,ω))) := by
+        (fun ω => e x * S.indicator a (O (x, ω))) := by
       funext ω
       rw [ENNReal.ofReal_mul (Real.exp_pos _).le]
       congr 1
-      change ENNReal.ofReal (S.indicator (ginibreHamiltonianOUActionWeight n α (T : ℝ) T.property) (O (x,ω))) =
-        S.indicator a (O (x,ω))
-      by_cases hs : O (x,ω) ∈ S
-      · rw [Set.indicator_of_mem hs,Set.indicator_of_mem hs]
-      · rw [Set.indicator_of_notMem hs,Set.indicator_of_notMem hs]
+      change ENNReal.ofReal (S.indicator (ginibreHamiltonianOUActionWeight n α (T : ℝ) T.property) (O (x, ω))) =
+        S.indicator a (O (x, ω))
+      by_cases hs : O (x, ω) ∈ S
+      · rw [Set.indicator_of_mem hs, Set.indicator_of_mem hs]
+      · rw [Set.indicator_of_notMem hs, Set.indicator_of_notMem hs]
         exact ENNReal.ofReal_zero
     rw [hDensity] at h
     have hOE : ginibreHamiltonianOUReferenceHorizon n α (ginibreHamiltonianOUCoordinateAssembly n x) B T =
-        (fun ω => O (x,ω)) := by funext ω; rfl
+        (fun ω => O (x, ω)) := by funext ω; rfl
     rw [hOE] at h
-    simpa only [C,ginibreGaussianInitialOriginalPath,hNorm,O,ginibreGaussianInitialOUPath,S,
+    simpa only [C, ginibreGaussianInitialOriginalPath, hNorm, O, ginibreGaussianInitialOUPath, S,
       ginibreHamiltonianOUReferenceHorizon] using h
   have hMix := ginibre_killed_product_mixture γ P C O hC hO S hS a ha w e hw he hCancel hFiber
   have hKilled : S.indicator a = (fun x => ENNReal.ofReal (ginibreHamiltonianKilledOUActionWeight n α (T : ℝ) R T.property x)) := by
     funext x
-    by_cases hx : x ∈ S <;> simp [S,a,ginibreHamiltonianKilledOUActionWeight,hx]
+    by_cases hx : x ∈ S <;> simp [S, a, ginibreHamiltonianKilledOUActionWeight, hx]
   rw [hKilled] at hMix
   exact hMix
 

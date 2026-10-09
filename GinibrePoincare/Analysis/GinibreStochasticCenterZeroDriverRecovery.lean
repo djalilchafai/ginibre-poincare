@@ -21,7 +21,7 @@ theorem ginibreCenterPuncturedDriver_eq_recovery
       ginibreCenterPositiveStartLamperti n α k (S ω) t =
         β t ω - β (ginibreCenterPositiveStart k) ω) :
     (fun ω t => β t ω) =ᵐ[P] (fun ω => ginibreCenterPuncturedLampertiRecovery n α (S ω)) := by
-  filter_upwards [hc,h0,hi] with ω hc h0 hi
+  filter_upwards [hc, h0, hi] with ω hc h0 hi
   exact (ginibreCenterPuncturedLampertiRecovery_eq n α (S ω) _ hc h0 hi).symm
 
 theorem ginibreCenterPuncturedDriver_independent

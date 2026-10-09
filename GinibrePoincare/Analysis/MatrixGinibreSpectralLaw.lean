@@ -5,6 +5,18 @@ public import GinibrePoincare.Analysis.GinibreMassFiniteness
 
 @[expose] public section
 
+/-! # Identifying Gaussian matrix spectral expectations with Ginibre expectations
+
+Write the Ginibre measure as its normalized Vandermonde-weighted Gaussian
+density. Symmetry partitions its integral into permutation chambers, producing
+the same ordered diagonal integral that comes from Schur integration of Gaussian
+matrices. Both measures have mass one; this proves the common chamber integral
+is nonzero and finite, allowing cancellation of the two normalizing constants.
+Consequently all measurable symmetric nonnegative spectral tests have identical
+expectations. No spectral density identification is supplied as a hypothesis.
+-/
+
+
 open Matrix MeasureTheory Filter Set
 open scoped Matrix Matrix.Norms.Operator ENNReal
 namespace GinibrePoincare
@@ -72,20 +84,20 @@ theorem matrixGaussian_symmetric_spectral_lintegral {n : ℕ} (hn : 0 < n)
   obtain ⟨d, hd, hd1⟩ := matrixGaussian_ordered_symmetric_spectral_integral hn
   obtain ⟨q, hq, hq1⟩ := ginibre_ordered_symmetric_integral hn
   let K := ∫⁻ z in matrixSchurOrderedConfigurations n, schurDiagonalSpectralDensity n z
-  have hK0 : K ≠ 0 := by
+  have hchamberMass_ne_zero : K ≠ 0 := by
     intro hz
     change 1 = d * K at hd1
     rw [hz, mul_zero] at hd1
     exact one_ne_zero hd1
-  have hd0 : d ≠ 0 := by
+  have hmatrixConstant_ne_zero : d ≠ 0 := by
     intro hz
     rw [hz, zero_mul] at hd1
     exact one_ne_zero hd1
   have hp : d * K ≠ ∞ := by
     rw [← hd1]
     exact ENNReal.one_ne_top
-  have hKtop : K ≠ ∞ := ne_of_lt (ENNReal.lt_top_of_mul_ne_top_right hp hd0)
-  have he : d = q := (ENNReal.mul_left_inj hK0 hKtop).mp (hd1.symm.trans hq1)
+  have hchamberMass_ne_top : K ≠ ∞ := ne_of_lt (ENNReal.lt_top_of_mul_ne_top_right hp hmatrixConstant_ne_zero)
+  have he : d = q := (ENNReal.mul_left_inj hchamberMass_ne_zero hchamberMass_ne_top).mp (hd1.symm.trans hq1)
   rw [hd F hF hsym, hq F hF hsym, he]
 
 #print axioms matrixGaussian_symmetric_spectral_lintegral

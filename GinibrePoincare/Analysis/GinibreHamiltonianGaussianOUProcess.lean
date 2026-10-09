@@ -32,10 +32,10 @@ theorem ginibreBrownianOU_zero_isGaussianProcess {Ω : Type*} [MeasurableSpace �
     ext i
     have h := (PiLp.proj 2 (fun _ : I => ℝ) i : EuclideanSpace ℝ I →L[ℝ] ℝ).integral_comp_comm (hG m).integrable
     have hL := ginibreBrownianOURiemannSum_hasLaw B P hB.toIsPreBrownianReal rate i.val m
-    simpa [X,PiLp.proj_apply,hL.integral_eq] using h.symm
+    simpa [X, PiLp.proj_apply, hL.integral_eq] using h.symm
   have hb (i : I) : ∃ C : ℝ≥0, ∀ m, ginibreBrownianOURiemannVariance rate i.val m ≤ C := by
-    obtain ⟨C,hC⟩ := (ginibreBrownianOURiemannVariance_tendsto rate i.val).bddAbove_range
-    exact ⟨C,fun m => hC (mem_range_self m)⟩
+    obtain ⟨C, hC⟩ := (ginibreBrownianOURiemannVariance_tendsto rate i.val).bddAbove_range
+    exact ⟨C, fun m => hC (mem_range_self m)⟩
   choose C hC using hb
   have hbound (m : ℕ) : (∫ ω, ‖X m ω‖^2 ∂P) ≤ ∑ i : I, (C i : ℝ) := by
     simp_rw [PiLp.norm_sq_eq_of_L2, X, Real.norm_eq_abs, sq_abs]
@@ -65,7 +65,7 @@ theorem independent_gaussian_initial_process_isGaussianProcess
   have hr : Measurable (fun p : ℝ≥0 → ℝ => fun i : I => p i.val) :=
     Measurable.of_eval (fun i => measurable_pi_apply i.val)
   have hI : IndepFun Z Y P := hind.comp measurable_id hr
-  have hpair : HasGaussianLaw (fun ω => (Z ω,Y ω)) P := by
+  have hpair : HasGaussianLaw (fun ω => (Z ω, Y ω)) P := by
     constructor
     · exact hZ.aemeasurable.prodMk hY.aemeasurable
     · rw [hI.map_prod_eq_prod_map_map hZ.aemeasurable hY.aemeasurable]

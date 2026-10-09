@@ -77,8 +77,8 @@ private theorem entropyPerturbation_bounds (M : ℝ) (hM : 0 ≤ M) :
   obtain ⟨B₁, hB₁⟩ := (isCompact_Icc.prod isCompact_Icc).bddAbove_image hd
   obtain ⟨B₂, hB₂⟩ := (isCompact_Icc.prod isCompact_Icc).bddAbove_image hdd
   refine ⟨max B₁ B₂, fun t ht x hx => ⟨?_, ?_⟩⟩
-  · exact (hB₁ (mem_image_of_mem _ (show (t,x) ∈ S from ⟨ht,hx⟩))).trans (le_max_left _ _)
-  · exact (hB₂ (mem_image_of_mem _ (show (t,x) ∈ S from ⟨ht,hx⟩))).trans (le_max_right _ _)
+  · exact (hB₁ (mem_image_of_mem _ (show (t, x) ∈ S from ⟨ht, hx⟩))).trans (le_max_left _ _)
+  · exact (hB₂ (mem_image_of_mem _ (show (t, x) ∈ S from ⟨ht, hx⟩))).trans (le_max_right _ _)
 
 /-- The second variation of the logarithmic moment of `(1+t f)²`, for a bounded
 measurable observable. Both derivatives are derived under the actual integral. -/
@@ -92,7 +92,7 @@ theorem squareLogPerturbation_second_derivative {X : Type*} [MeasurableSpace X]
   dsimp only
   let r := 1/(2*(M+1))
   have hr : 0 < r := by dsimp [r]; positivity
-  obtain ⟨B,hB⟩ := entropyPerturbation_bounds M hM
+  obtain ⟨B, hB⟩ := entropyPerturbation_bounds M hM
   have hx (x : X) : f x ∈ Icc (-M) M := abs_le.mp (hb x)
   have hm (t : ℝ) : AEStronglyMeasurable (fun x => entropyPerturbation t (f x)) μ := by
     unfold entropyPerturbation
@@ -113,7 +113,7 @@ theorem squareLogPerturbation_second_derivative {X : Type*} [MeasurableSpace X]
   have hi (t : ℝ) : Integrable (fun x => entropyPerturbation t (f x)) μ := by
     have hc : Continuous (fun y : ℝ => entropyPerturbation t y) := by
       exact Real.continuous_mul_log.comp (by fun_prop)
-    obtain ⟨C,hC⟩ := isCompact_Icc.bddAbove_image hc.norm.continuousOn
+    obtain ⟨C, hC⟩ := isCompact_Icc.bddAbove_image hc.norm.continuousOn
     exact (integrable_const C).mono' (hm t) (ae_of_all _ fun x => hC (mem_image_of_mem _ (hx x)))
   constructor
   · filter_upwards [Ioo_mem_nhds (neg_neg_of_pos hr) hr] with t ht
@@ -184,7 +184,7 @@ theorem squareEntropy_affine_bound_variance {X : Type*} [MeasurableSpace X]
     have he : (fun x => (1+t*f x)^2) = fun x => 1+2*t*f x+t^2*f x^2 := by
       funext x; ring
     rw [he, integral_add (f := fun x => 1+2*t*f x) (g := fun x => t^2*f x^2) ((integrable_const 1).add (hi.const_mul (2*t)))
-      (hi2.const_mul (t^2)), integral_add (f := fun _ => (1:ℝ)) (g := fun x => 2*t*f x) (integrable_const 1) (hi.const_mul (2*t)),
+      (hi2.const_mul (t^2)), integral_add (f := fun _ => (1 : ℝ)) (g := fun x => 2*t*f x) (integrable_const 1) (hi.const_mul (2*t)),
       integral_const, integral_const_mul, integral_const_mul]
     simp [m, a, b]
   have hmD (t : ℝ) : HasDerivAt m (m' t) t := by
@@ -193,14 +193,14 @@ theorem squareEntropy_affine_bound_variance {X : Type*} [MeasurableSpace X]
     · funext s; rfl
     · dsimp [m']; ring
   have hmDD : HasDerivAt m' (2*b) 0 := by
-    convert (((hasDerivAt_id (0:ℝ)).const_mul 2).mul_const b).const_add (2*a) using 1 <;>
+    convert (((hasDerivAt_id (0 : ℝ)).const_mul 2).mul_const b).const_add (2*a) using 1 <;>
       simp [m']
   have hm0 : m 0 = 1 := by simp [m]
   have hn : ∀ᶠ t in 𝓝 (0 : ℝ), m t ≠ 0 :=
     (hmD 0).continuousAt.eventually_ne (by simp [m])
-  obtain ⟨hAD,hADD⟩ := squareLogPerturbation_second_derivative μ f hf M hM hb
+  obtain ⟨hAD, hADD⟩ := squareLogPerturbation_second_derivative μ f hf M hM hb
   have hGD : ∀ᶠ t in 𝓝 (0 : ℝ), HasDerivAt G (G' t) t := by
-    filter_upwards [hAD,hn] with t ht hnt
+    filter_upwards [hAD, hn] with t ht hnt
     convert (ht.sub ((hmD t).mul ((hmD t).log hnt))).sub
       (((hasDerivAt_id t).pow 2).const_mul C) using 1
     · funext s; rfl
@@ -211,11 +211,11 @@ theorem squareEntropy_affine_bound_variance {X : Type*} [MeasurableSpace X]
   have hGDD : HasDerivAt G' (4*(b-a^2)-2*C) 0 := by
     have hlog := (hmD 0).log (by simp [m]) |>.add_const 1
     convert (hADD.sub (hmDD.mul hlog)).sub
-      ((hasDerivAt_id (0:ℝ)).const_mul (2*C)) using 1
+      ((hasDerivAt_id (0 : ℝ)).const_mul (2*C)) using 1
     · funext s; rfl
     · simp [m, m']
       ring
-  have hzero : G 0 = 0 := by simp [G,A,m]
+  have hzero : G 0 = 0 := by simp [G, A, m]
   have hmax : IsLocalMax G 0 := by
     apply Eventually.of_forall
     intro t
@@ -226,7 +226,7 @@ theorem squareEntropy_affine_bound_variance {X : Type*} [MeasurableSpace X]
     rw [hm t] at hh
     change A t - m t*Real.log (m t) ≤ C*t^2 at hh
     dsimp [G]; linarith
-  have he : deriv G =ᶠ[𝓝 (0:ℝ)] G' := hGD.mono fun _ ht => ht.deriv
+  have he : deriv G =ᶠ[𝓝 (0 : ℝ)] G' := hGD.mono fun _ ht => ht.deriv
   have hsecond : deriv (deriv G) 0 = 4*(b-a^2)-2*C :=
     he.deriv_eq.trans hGDD.deriv
   have hc := (hGD.self_of_nhds).continuousAt

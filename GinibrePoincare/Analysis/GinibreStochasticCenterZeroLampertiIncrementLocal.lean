@@ -38,7 +38,7 @@ theorem ginibreBrownian_center_Lamperti_positive_start_local
   let c := Real.sqrt (2*(α : ℝ)/(n : ℝ))
   let E : Set Ω := {ω | a+r ≤ ginibreBrownianHamiltonianBoundedStop n α z B R T ω ∧
     ∀ u ∈ Icc a (a+r), δ < ginibreCenterSquared n (X u ω)}
-  obtain ⟨J,hJM,hJC,hJL,hJS,hInc⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJS, hInc⟩ :=
     ginibreBrownianMaximalProcess_center_regularized_increment_exists hn α z hz B P hB hind R hR T δ hδ
   have hf : ContDiffOn ℝ 2 f {x | CollisionFree x} :=
     ((contDiff_ginibreCenterSquareRootRegularized n hδ).of_le
@@ -74,7 +74,7 @@ theorem ginibreBrownian_center_Lamperti_positive_start_local
       rw [min_eq_left (hu.2.trans hω.1)]
     change (Real.sqrt (2*(α : ℝ)/(n : ℝ)^2)*fderiv ℝ f (X (a+itoUniformNNTime r (k+1) j) ω) (ginibreCoordinateDirection i))*_ = _
     rw [ginibreCenterRegularized_noise_coordinate_interval hn α δ hδ (fun u => X u ω) a (a+r) _ hω.2 hu e i,
-      hXeq,mul_assoc]
+      hXeq, mul_assoc]
   have hAe : ∀ᵐ ω ∂P, ω ∈ E → J (a+r) ω-J a ω=c*(β (a+r) ω-β a ω) := by
     have hp := ginibre_tendstoInMeasure_indicator P E _ _ hJShift
     have hq := ginibre_tendstoInMeasure_indicator P E _ _ hQ
@@ -91,7 +91,7 @@ theorem ginibreBrownian_center_Lamperti_positive_start_local
     filter_upwards [tendstoInMeasure_ae_unique hp hq] with ω hω
     intro he
     simpa only [Set.indicator_of_mem he] using hω
-  filter_upwards [hAe,hInc] with ω hAe hInc
+  filter_upwards [hAe, hInc] with ω hAe hInc
   intro hω
   have hh := hInc a (a+r) (le_add_of_nonneg_right bot_le) hω.1 hω.2
   rw [hAe hω] at hh

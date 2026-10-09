@@ -29,9 +29,9 @@ theorem ginibreBrownian_local_radius_CIR_martingale_exists
   have hn0 : 0 < n := lt_of_lt_of_le (by decide : 0 < 2) hn
   have hf : ContDiffOn ℝ 2 (pairwiseRadius) {x : Configuration n | CollisionFree x} :=
     (ginibre_contDiff_pairwiseRadius n).of_le (WithTop.coe_le_coe.mpr (show (2 : ENat) ≤ ⊤ from le_top)) |>.contDiffOn
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hEq,hEnd⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hEq, hEnd⟩ :=
     ginibreBrownianMaximalProcess_local_test_ito_martingale_exists hn0 α z hz B P hB hind R hR T (pairwiseRadius) hf
-  refine ⟨J,hJM,hJC,hJL,hJ0,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0,?_⟩
   filter_upwards [hEq] with ω hω
   intro t ht
   rw [hω t ht]
@@ -59,9 +59,9 @@ theorem ginibreBrownian_local_radius_square_CIR_martingale_exists
   have hn0 : 0 < n := lt_of_lt_of_le (by decide : 0 < 2) hn
   have hf : ContDiffOn ℝ 2 ((fun x : Configuration n => pairwiseRadius x^2)) {x : Configuration n | CollisionFree x} :=
     ((ginibre_contDiff_pairwiseRadius n).pow 2).of_le (WithTop.coe_le_coe.mpr (show (2 : ENat) ≤ ⊤ from le_top)) |>.contDiffOn
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hEq,hEnd⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hEq, hEnd⟩ :=
     ginibreBrownianMaximalProcess_local_test_ito_martingale_exists hn0 α z hz B P hB hind R hR T ((fun x : Configuration n => pairwiseRadius x^2)) hf
-  refine ⟨J,hJM,hJC,hJL,hJ0,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0,?_⟩
   filter_upwards [hEq] with ω hω
   intro t ht
   rw [hω t ht]
@@ -89,9 +89,9 @@ theorem ginibreBrownian_local_center_CIR_martingale_exists
   have hn0 : 0 < n := lt_of_lt_of_le (by decide : 0 < 2) hn
   have hf : ContDiffOn ℝ 2 (ginibreCenterSquared n) {x : Configuration n | CollisionFree x} :=
     (contDiff_ginibreCenterSquared n).of_le (WithTop.coe_le_coe.mpr (show (2 : ENat) ≤ ⊤ from le_top)) |>.contDiffOn
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hEq,hEnd⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hEq, hEnd⟩ :=
     ginibreBrownianMaximalProcess_local_test_ito_martingale_exists hn0 α z hz B P hB hind R hR T (ginibreCenterSquared n) hf
-  refine ⟨J,hJM,hJC,hJL,hJ0,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0,?_⟩
   filter_upwards [hEq] with ω hω
   intro t ht
   rw [hω t ht]

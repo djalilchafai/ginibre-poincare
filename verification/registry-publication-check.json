@@ -1,13 +1,16 @@
 {
-  "checked_at_utc": "2026-10-08T16:11:40Z",
+  "checked_at_utc": "2026-10-09T07:32:25.510354+00:00",
   "submission_id": "7fh68vzqfjeu",
   "submitted_commit": "fb58b4fd765f19a65c46cb82fb647fb0d94e28ca",
   "comparison_scope": "Full symmetric weak-H1 Theorem 1.1 and exhaustive affine equality only",
-  "publication_confirmed": false,
-  "registry_id": null,
-  "registered_url": null,
-  "conclusion": "Public registry publication remains unconfirmed. Successful search has no matching entry, the canonical repository endpoint returns 404, and the earlier authenticated status request returned 403. No cause of the authenticated response is inferred; accepted consent is not a public receipt.",
-  "observations": [
+  "publication_confirmed": true,
+  "registry_id": "PALOMAR-2026-10-09-000001",
+  "registered_url": "https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-09-000001&version=1",
+  "registered_at_utc": "2026-10-09T00:48:41Z",
+  "version": 1,
+  "public_record_url": "https://data.palomar-registry.org/entries/PALOMAR-2026-10-09-000001-v1.json",
+  "conclusion": "Version 1 public publication confirmed by public entry, repository and version projections and authenticated status. Its immutable source predates the current readability revision.",
+  "historical_observations": [
     {
       "kind": "public_search",
       "url": "https://data.palomar-registry.org/api/v1/results?q=ginibre",
@@ -37,10 +40,8 @@
     }
   ],
   "qualifications": [
-    "A missing search result is not proof of permanent nonpublication.",
-    "Submission consent acceptance is distinct from final registration.",
-    "The submitted immutable comparison commit precedes the current correspondence-completion proofs.",
-    "No duplicate submission, write request or maintainer outreach was performed.",
-    "Credentials and private response payloads are excluded."
+    "The registered comparison covers Theorem 1.1 and exhaustive affine equality only.",
+    "Current source requires a new ordinary revision using existing_id; v1 remains immutable.",
+    "Credentials and unpublished review payloads are excluded."
   ]
 }

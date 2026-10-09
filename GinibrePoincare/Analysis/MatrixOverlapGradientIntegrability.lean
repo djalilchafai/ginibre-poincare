@@ -6,6 +6,19 @@ public import GinibrePoincare.Analysis.GinibrePermutationGradient
 
 @[expose] public section
 
+/-! # Finite overlap energy controls the ordinary Ginibre gradient
+
+Differentiate the permutation identity to prove invariance of the classical
+squared gradient. On the almost-everywhere simple-spectrum set, the matrix
+overlap energy bounds this quantity by a factor of four. Transport integrals
+through the spectral law to obtain both Ginibre gradient integrability and the
+energy bound. Finally identify the squared Euclidean gradient norm with the
+coordinate sum to obtain its L² membership.
+
+The input here is finite overlap energy, not matrix Sobolev membership. The
+latter is handled by the separate correspondence matrix weak-closure bridge.
+-/
+
 open Matrix MeasureTheory Filter
 open scoped BigOperators
 namespace GinibrePoincare

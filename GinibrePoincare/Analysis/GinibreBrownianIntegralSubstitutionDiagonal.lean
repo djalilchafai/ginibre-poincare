@@ -17,8 +17,8 @@ theorem actualMeanSquare_diagonal_selection {Ω : Type*} [MeasurableSpace Ω]
   have hex (n : ℕ) : ∃ m, (∫ ω, (S n m ω-I n ω)^2 ∂P) ≤ 1/((n : ℝ)+1) := by
     have hp : (0 : ℝ)<1/((n : ℝ)+1) := by positivity
     have h := (hlim n).eventually (gt_mem_nhds hp)
-    obtain ⟨m,hm⟩ := h.exists
-    exact ⟨m,hm.le⟩
+    obtain ⟨m, hm⟩ := h.exists
+    exact ⟨m, hm.le⟩
   choose m hm using hex
   refine ⟨m,?_⟩
   exact squeeze_zero (fun n => integral_nonneg fun ω => sq_nonneg _) hm

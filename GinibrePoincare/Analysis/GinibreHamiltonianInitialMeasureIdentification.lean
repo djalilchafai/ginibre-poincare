@@ -15,7 +15,7 @@ theorem ginibre_map_density_composition {A E : Type*} [MeasurableSpace A] [Measu
     (μ : Measure A) (f : A → E) (hf : Measurable f) (w : E → ENNReal) (hw : Measurable w) :
     (μ.withDensity (w ∘ f)).map f = (μ.map f).withDensity w := by
   ext s hs
-  rw [Measure.map_apply hf hs,withDensity_apply _ (hf hs),withDensity_apply _ hs]
+  rw [Measure.map_apply hf hs, withDensity_apply _ (hf hs), withDensity_apply _ hs]
   rw [← lintegral_indicator (hf hs),← lintegral_indicator hs]
   have he : (f ⁻¹' s).indicator (w ∘ f) = (s.indicator w) ∘ f := by
     funext x
@@ -27,7 +27,7 @@ theorem ginibre_map_completion {A E : Type*} [MeasurableSpace A] [MeasurableSpac
     (μ : Measure A) (f : A → E) (hf : Measurable f) :
     μ.completion.map (fun x : NullMeasurableSpace A μ => f x) = μ.map f := by
   ext s hs
-  rw [Measure.map_apply hf.nullMeasurable.measurable' hs,Measure.map_apply hf hs]
+  rw [Measure.map_apply hf.nullMeasurable.measurable' hs, Measure.map_apply hf hs]
   rfl
 
 theorem ginibre_lintegral_completion {A : Type*} [MeasurableSpace A]
@@ -36,7 +36,7 @@ theorem ginibre_lintegral_completion {A : Type*} [MeasurableSpace A]
   have hh := lintegral_map hg
     (measurable_id.nullMeasurable.measurable' : Measurable (fun x : NullMeasurableSpace A μ => (id : A → A) x))
     (μ := μ.completion)
-  rw [ginibre_map_completion μ id measurable_id,Measure.map_id] at hh
+  rw [ginibre_map_completion μ id measurable_id, Measure.map_id] at hh
   exact hh.symm
 
 theorem ginibre_completion_weighted_map {A E : Type*} [MeasurableSpace A] [MeasurableSpace E]
@@ -44,7 +44,7 @@ theorem ginibre_completion_weighted_map {A E : Type*} [MeasurableSpace A] [Measu
     (μ.completion.withDensity (fun x : NullMeasurableSpace A μ => w x)).map
       (fun x : NullMeasurableSpace A μ => f x) = (μ.withDensity w).map f := by
   ext s hs
-  rw [Measure.map_apply hf.nullMeasurable.measurable' hs,Measure.map_apply hf hs,
+  rw [Measure.map_apply hf.nullMeasurable.measurable' hs, Measure.map_apply hf hs,
     withDensity_apply (fun x : NullMeasurableSpace A μ => w x) (hf.nullMeasurable.measurable' hs),
     withDensity_apply w (hf hs)]
   have hl := lintegral_indicator (μ := μ.completion) (f := fun x : NullMeasurableSpace A μ => w x)
@@ -73,7 +73,7 @@ theorem ginibreGaussian_completed_coordinates_vandermonde_law {n : ℕ} (hn : 0 
   rw [ginibre_map_density_composition γ.completion f hA.nullMeasurable.measurable' _ hw]
   change (γ.completion.map (fun x : NullMeasurableSpace ((Fin n × Fin 2) → ℝ) γ =>
     ginibreHamiltonianOUCoordinateAssembly n x)).withDensity vandermondeDensity = _
-  rw [ginibre_map_completion γ _ hA,ginibreGaussian_coordinate_assembly_law hn]
+  rw [ginibre_map_completion γ _ hA, ginibreGaussian_coordinate_assembly_law hn]
   rfl
 
 theorem ginibreGaussian_completed_initial_noise_vandermonde_law {Ω : Type*} [MeasurableSpace Ω]
@@ -99,7 +99,7 @@ theorem ginibreGaussian_completed_initial_noise_vandermonde_law {Ω : Type*} [Me
   change (ν.completion.map (fun x : NullMeasurableSpace (((Fin n × Fin 2) → ℝ) × Ω) ν => f x)).withDensity vandermondeDensity = _
   rw [ginibre_map_completion ν f hf]
   change ((γ.prod P).map ((ginibreHamiltonianOUCoordinateAssembly n) ∘ Prod.fst)).withDensity vandermondeDensity = _
-  rw [← Measure.map_map hA measurable_fst,Measure.map_fst_prod,measure_univ,one_smul,
+  rw [← Measure.map_map hA measurable_fst, Measure.map_fst_prod, measure_univ, one_smul,
     ginibreGaussian_coordinate_assembly_law hn]
   rfl
 

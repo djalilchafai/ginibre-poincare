@@ -34,11 +34,11 @@ theorem correspondenceLogPotential_weak_partial (θ : ℂ → ℂ)
         (∫ z : ℂ, cauchyGreenRegularizedKernel τ z*θ z)) := by
     filter_upwards [self_mem_nhdsWithin] with τ hτ
     have hf : ContDiff ℝ 1 (fun z => (correspondenceLogRegularized τ z : ℂ)) := by
-      simpa only [Function.comp_def,Complex.ofRealCLM_apply] using
+      simpa only [Function.comp_def, Complex.ofRealCLM_apply] using
         ((Complex.ofRealCLM.contDiff.comp (correspondenceLogRegularized_contDiff τ hτ)).of_le (by simp) : ContDiff ℝ 1 _)
     rw [planarPartial_compact_integrationByParts _ _
       hf hθ hc]
-    simp_rw [correspondenceLogRegularized_partial τ hτ,mul_assoc]
+    simp_rw [correspondenceLogRegularized_partial τ hτ, mul_assoc]
     rw [integral_const_mul]
     ring
   exact tendsto_nhds_unique hl (hr.congr' he.symm)

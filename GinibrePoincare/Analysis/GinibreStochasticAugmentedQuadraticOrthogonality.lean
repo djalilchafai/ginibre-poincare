@@ -43,19 +43,19 @@ theorem ginibreBrownian_augmented_quadratic_disjoint_orthogonal {Ω ι : Type*}
       (le_add_of_nonneg_right (show (0 : ℝ≥0) ≤ v from bot_le))
   have hSq := ginibreGaussian_hasLaw_square_memLp_two P Z v hZ
   have hMean : (∫ ω, ((Z ω)^2-(v : ℝ)) ∂P) = 0 := by
-    rw [integral_sub (hSq.integrable (by norm_num)) (integrable_const _),ginibreGaussian_hasLaw_square_mean P Z v hZ]
+    rw [integral_sub (hSq.integrable (by norm_num)) (integrable_const _), ginibreGaussian_hasLaw_square_mean P Z v hZ]
     simp
   have hInd := ginibreBrownian_augmented_coordinate_increment_independent B P hB hind r v j H hHM
   have hφ : Measurable (fun z : ℝ => z^2-(v : ℝ)) := by fun_prop
   have hp := (hInd.symm.comp measurable_id hφ).integral_mul_eq_mul_integral
     hH.aestronglyMeasurable (hφ.comp_aemeasurable hZ.aemeasurable).aestronglyMeasurable
-  simp only [Function.comp_apply,Pi.mul_apply,id_eq] at hp
+  simp only [Function.comp_apply, Pi.mul_apply, id_eq] at hp
   dsimp only [Z] at hMean
   calc
     _ = ∫ ω, H ω*((B j (r+v) ω-B j r ω)^2-(v : ℝ)) ∂P := by
       apply integral_congr_ae
       exact Eventually.of_forall (fun ω => by dsimp [H]; ring)
-    _ = 0 := by rw [hp,hMean,mul_zero]
+    _ = 0 := by rw [hp, hMean, mul_zero]
 
 end
 end GinibrePoincare

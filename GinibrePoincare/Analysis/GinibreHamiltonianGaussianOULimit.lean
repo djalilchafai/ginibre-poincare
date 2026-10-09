@@ -19,8 +19,8 @@ theorem centeredGaussian_ae_limit_hasGaussianLaw_of_variance_bound
     (C : ℝ≥0) (hC : ∀ m, v m ≤ C)
     (hlim : ∀ᵐ ω ∂P, Tendsto (fun m => X m ω) atTop (𝓝 (Y ω))) :
     HasGaussianLaw Y P := by
-  obtain ⟨v₀,hv₀,r,hr,hv⟩ := (isCompact_Icc (a := (0 : ℝ≥0)) (b := C)).tendsto_subseq
-    (fun m => ⟨zero_le,hC m⟩)
+  obtain ⟨v₀, hv₀, r, hr, hv⟩ := (isCompact_Icc (a := (0 : ℝ≥0)) (b := C)).tendsto_subseq
+    (fun m => ⟨zero_le, hC m⟩)
   have hY := ginibreGaussian_hasLaw_of_ae_limit P (fun m => X (r m)) Y
     (fun _ => 0) (fun m => v (r m)) 0 v₀ (fun m => hLaw (r m)) tendsto_const_nhds hv
     (hlim.mono (fun ω hω => hω.comp hr.tendsto_atTop))
@@ -41,10 +41,10 @@ theorem centeredGaussian_vector_ae_limit_hasGaussianLaw_of_second_moment_bound
   intro L
   have hLG (m : ℕ) : HasGaussianLaw (fun ω => L (X m ω)) P := (hG m).map L
   have hLMean (m : ℕ) : (∫ ω, L (X m ω) ∂P)=0 := by
-    rw [L.integral_comp_comm (hG m).integrable,hMean m,map_zero]
+    rw [L.integral_comp_comm (hG m).integrable, hMean m, map_zero]
   let v : ℕ → ℝ≥0 := fun m => (variance (fun ω => L (X m ω)) P).toNNReal
   have hLaw (m : ℕ) : HasLaw (fun ω => L (X m ω)) (gaussianReal 0 (v m)) P :=
-    ⟨(hLG m).aemeasurable,by simpa only [hLMean m] using (hLG m).map_eq_gaussianReal⟩
+    ⟨(hLG m).aemeasurable, by simpa only [hLMean m] using (hLG m).map_eq_gaussianReal⟩
   have hv (m : ℕ) : v m ≤ (‖L‖^2*C).toNNReal := by
     apply Real.toNNReal_mono
     calc
@@ -55,7 +55,7 @@ theorem centeredGaussian_vector_ae_limit_hasGaussianLaw_of_second_moment_bound
           (((hG m).memLp_two.integrable_norm_pow (by decide : (2 : ℕ) ≠ 0)).const_mul _)
         intro ω
         have h := mul_self_le_mul_self (norm_nonneg (L (X m ω))) (L.le_opNorm (X m ω))
-        simpa only [← sq,norm_pow,Real.norm_eq_abs,sq_abs,mul_pow] using h
+        simpa only [← sq, norm_pow, Real.norm_eq_abs, sq_abs, mul_pow] using h
       _ = ‖L‖^2*(∫ ω, ‖X m ω‖^2 ∂P) := integral_const_mul _ _
       _ ≤ ‖L‖^2*C := mul_le_mul_of_nonneg_left (hC m) (sq_nonneg _)
   have hYLG := centeredGaussian_ae_limit_hasGaussianLaw_of_variance_bound P

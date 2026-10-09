@@ -8,8 +8,8 @@ open MeasureTheory ProbabilityTheory Set Filter
 open scoped NNReal ENNReal Topology
 namespace GinibrePoincare
 noncomputable section
-local instance (n : ℕ) : MeasurableSpace C(ℝ,Configuration n) := borel _
-local instance (n : ℕ) : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+local instance (n : ℕ) : MeasurableSpace C(ℝ, Configuration n) := borel _
+local instance (n : ℕ) : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
 set_option backward.isDefEq.respectTransparency false
 
 /-- Actual continuous canonical path version, with the fixed collision-free
@@ -18,7 +18,7 @@ def ginibreStationaryContinuousTransitionMean {Ω : Type*} [MeasurableSpace Ω]
     {n : ℕ} (α : ℝ) (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (P : Measure Ω)
     (v : Configuration n → ℝ) (t : ℝ) (z : Configuration n) : ℝ :=
   ∫ ω, v (ginibreEquilibriumPath α (ginibreCollisionFreeDefault n).val
-    (ginibreCollisionFreeDefault n).property B (z,ω) t) ∂P
+    (ginibreCollisionFreeDefault n).property B (z, ω) t) ∂P
 
 theorem ginibreStationaryContinuousTransitionMean_joint_measurable {Ω : Type*} [MeasurableSpace Ω]
     {n : ℕ} (hn : 0<n) (α : ℝ) (P : Measure Ω) [IsProbabilityMeasure P] [P.IsComplete]
@@ -29,7 +29,7 @@ theorem ginibreStationaryContinuousTransitionMean_joint_measurable {Ω : Type*} 
     (ginibreCollisionFreeDefault n).property B P hB
   have h : Measurable (fun q : (ℝ × Configuration n) × Ω =>
       v (ginibreEquilibriumPath α (ginibreCollisionFreeDefault n).val
-        (ginibreCollisionFreeDefault n).property B (q.1.2,q.2) q.1.1)) :=
+        (ginibreCollisionFreeDefault n).property B (q.1.2, q.2) q.1.1)) :=
     hv.comp (continuous_eval.measurable.comp
       ((hp.comp ((measurable_snd.comp measurable_fst).prodMk measurable_snd)).prodMk
         (measurable_fst.comp measurable_fst)))
@@ -43,7 +43,7 @@ theorem ginibreStationaryContinuousTransitionMean_bound {Ω : Type*} [Measurable
   simpa [ginibreStationaryContinuousTransitionMean] using
     (norm_integral_le_of_norm_le_const (μ := P)
       (f := fun ω => v (ginibreEquilibriumPath α (ginibreCollisionFreeDefault n).val
-        (ginibreCollisionFreeDefault n).property B (z,ω) t))
+        (ginibreCollisionFreeDefault n).property B (z, ω) t))
       (ae_of_all P fun ω => hC _))
 
 theorem ginibreStationaryContinuousTransitionMean_eq_original_ae {Ω : Type*} [MeasurableSpace Ω]
@@ -68,11 +68,11 @@ theorem ginibreOriginalStochasticL2Operator_measurable_mean_pairing {Ω : Type*}
     (hg : (g : Configuration n → ℝ)=ᵐ[ginibreMeasure n] v)
     (hv : Measurable v) (C : ℝ) (hC : ∀ z, ‖v z‖≤C) :
     inner ℝ f (ginibreOriginalStochasticL2Operator hn α P B hB hiB T g)=
-      ∫ z, f z * ginibreStationaryContinuousTransitionMean α B P v (T:ℝ) z ∂ginibreMeasure n := by
+      ∫ z, f z * ginibreStationaryContinuousTransitionMean α B P v (T : ℝ) z ∂ginibreMeasure n := by
   rw [ginibreOriginalStochasticL2Operator_bounded_measurable_pairing hn α P B hB hiB T f g v hg hv C hC]
   apply integral_congr_ae
   filter_upwards [ginibreStationaryContinuousTransitionMean_eq_original_ae hn α P B hB hiB v] with z hz
-  rw [hz (T:ℝ),Real.toNNReal_coe]
+  rw [hz (T : ℝ), Real.toNNReal_coe]
 
 theorem ginibreStationaryContinuousTransitionMean_integrable {Ω : Type*} [MeasurableSpace Ω]
     {n : ℕ} (hn : 0<n) (α : ℝ) (P : Measure Ω) [IsProbabilityMeasure P] [P.IsComplete]
@@ -80,7 +80,7 @@ theorem ginibreStationaryContinuousTransitionMean_integrable {Ω : Type*} [Measu
     (v : Configuration n → ℝ) (hv : Measurable v) (C : ℝ) (hC : ∀ z, ‖v z‖≤C)
     (t : ℝ) (z : Configuration n) :
     Integrable (fun ω => v (ginibreEquilibriumPath α (ginibreCollisionFreeDefault n).val
-      (ginibreCollisionFreeDefault n).property B (z,ω) t)) P := by
+      (ginibreCollisionFreeDefault n).property B (z, ω) t)) P := by
   have hpath := (ginibreEquilibriumPath_measurable hn α (ginibreCollisionFreeDefault n).val
     (ginibreCollisionFreeDefault n).property B P hB).comp ((measurable_const (a := z)).prodMk measurable_id)
   apply (integrable_const C).mono'
@@ -106,13 +106,13 @@ theorem ginibreStationaryContinuousTransitionMean_eq_original {Ω : Type*} [Meas
     ginibreStationaryContinuousTransitionMean α B P v t z=
       ∫ ω, v (ginibreBrownianMaximalProcess n α z B t.toNNReal ω) ∂P := by
   have hfree : ginibreFreeInitialVersion (ginibreCollisionFreeDefault n).val
-      (ginibreCollisionFreeDefault n).property z=⟨z,hz⟩ := by simp [ginibreFreeInitialVersion,hz]
+      (ginibreCollisionFreeDefault n).property z=⟨z, hz⟩ := by simp [ginibreFreeInitialVersion, hz]
   apply integral_congr_ae
   filter_upwards [ginibreBrownianMaximalLifetime_top_ae hn α z hz B P hB hiB] with ω hω
   apply congrArg v
-  simp only [ginibreEquilibriumPath,hfree,ginibreDrivenGlobalPathElement,
+  simp only [ginibreEquilibriumPath, hfree, ginibreDrivenGlobalPathElement,
     show ginibreDrivenMaximalLifetime n α (ginibreBrownianFullContinuousNoise n B α ω).val z=⊤ from hω,
-    dif_pos rfl,dif_pos True.intro,ContinuousMap.coe_mk,ginibreBrownianMaximalProcess]
+    dif_pos rfl, dif_pos True.intro, ContinuousMap.coe_mk, ginibreBrownianMaximalProcess]
 
 #print axioms ginibreStationaryContinuousTransitionMean_joint_measurable
 #print axioms ginibreStationaryContinuousTransitionMean_bound

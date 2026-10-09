@@ -91,7 +91,7 @@ review:
     and their final follow-up inspections found no remaining concrete conclusion
     gap in the combined inventory. This is agent statement correspondence review,
     not independent human mathematical review or registry publication. Prior Palomar editorial readiness concerns only the submitted
-    Theorem 1.1 surface. Live registry publication is not confirmed.
+    Theorem 1.1 surface. Palomar v1 is published as PALOMAR-2026-10-09-000001 for the earlier immutable Theorem 1.1 snapshot. Current-source revision verification is separate.
     The supported-toolchain v4.35.0-rc2 build and public/private axiom audits pass.
     Actual Comparator strictly compares the full weak-H1 Theorem 1.1 and affine
     equality and passes con-ron, nanoda and Lean default kernels; see PALOMAR.md.

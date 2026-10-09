@@ -20,8 +20,8 @@ theorem correspondenceImaginaryCoordinate_gradient {n : ℕ} (j : Fin n) (z : Co
   rw [(correspondenceImaginaryCoordinate j).fderiv]
   by_cases hij : i=j
   · subst i
-    simp [correspondenceImaginaryCoordinate,realCoordinateDirection,imaginaryCoordinateDirection,coordinateDirection]
-  · simp [hij,Ne.symm hij,correspondenceImaginaryCoordinate,realCoordinateDirection,imaginaryCoordinateDirection,
+    simp [correspondenceImaginaryCoordinate, realCoordinateDirection, imaginaryCoordinateDirection, coordinateDirection]
+  · simp [hij, Ne.symm hij, correspondenceImaginaryCoordinate, realCoordinateDirection, imaginaryCoordinateDirection,
     coordinateDirection]
 
 theorem correspondenceImaginaryCoordinate_hessian {n : ℕ} (j : Fin n) (z : Configuration n) :
@@ -35,7 +35,7 @@ theorem correspondenceImaginaryCoordinate_hessian {n : ℕ} (j : Fin n) (z : Con
 
 theorem correspondenceImaginaryCoordinate_HessianSquare {n : ℕ} (j : Fin n) (z : Configuration n) :
     ginibreBochnerHessianSquare (correspondenceImaginaryCoordinate j) z = 0 := by
-  simp [ginibreBochnerHessianSquare,correspondenceImaginaryCoordinate_hessian]
+  simp [ginibreBochnerHessianSquare, correspondenceImaginaryCoordinate_hessian]
 
 #print axioms correspondenceImaginaryCoordinate_gradient
 #print axioms correspondenceImaginaryCoordinate_hessian

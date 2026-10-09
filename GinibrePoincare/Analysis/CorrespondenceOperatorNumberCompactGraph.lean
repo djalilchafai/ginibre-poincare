@@ -12,7 +12,7 @@ set_option maxHeartbeats 1200000
 to the maximal self-adjoint operator's graph. -/
 theorem correspondenceOperatorNumber_compact_graph {n : ℕ} (hn : 0<n)
     (f : BKCompactTest n) :
-    (f.l2,bkCompactNumberL2 f)∈(correspondenceOperatorNumber n hn).graph := by
+    (f.l2, bkCompactNumberL2 f)∈(correspondenceOperatorNumber n hn).graph := by
   rw [correspondenceOperatorNumber_graph_iff_ordinary_form]
   refine ⟨fun j=>(f.dbar j).l2,?_,?_⟩
   · intro j

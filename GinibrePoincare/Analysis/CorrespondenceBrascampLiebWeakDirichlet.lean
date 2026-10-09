@@ -57,15 +57,15 @@ theorem correspondenceBrascampLieb_weak_dirichlet
     have hi := (correspondenceBrascampLieb_localL2_locallyIntegrable _ (hG i)).integrable_smul_right_of_hasCompactSupport
         ((Real.continuous_exp.comp hW.continuous.neg).mul (hD i).continuous)
         (hcD i).mul_left
-    simpa only [smul_eq_mul,Pi.mul_apply,mul_comm,mul_left_comm,mul_assoc,
-      bakryEmeryGibbsWeight,Function.comp_apply,Pi.neg_apply] using hi
+    simpa only [smul_eq_mul, Pi.mul_apply, mul_comm, mul_left_comm, mul_assoc,
+      bakryEmeryGibbsWeight, Function.comp_apply, Pi.neg_apply] using hi
   have he (i : ι) : (∫ x, u x*L i x ∂μ) = -(∫ x, G x i*D i x ∂μ) := by
     have ha := correspondenceBrascampLieb_weak_weighted_adjoint W u (fun x => G x i) (b i)
       (hW.of_le (by norm_num)) hu (hG i) (hw i) (D i) ((hD i).of_le (by norm_num)) (hcD i)
     have heq : (fun x => u x*(bakryEmeryGibbsDirectional W (b i) x*D i x-
         bakryEmeryGibbsDirectional (D i) (b i) x)) = -(fun x => u x*L i x) := by
       funext x
-      simp only [Pi.neg_apply,L]
+      simp only [Pi.neg_apply, L]
       ring
     rw [heq] at ha
     change (∫ x, G x i*D i x ∂μ) = ∫ x, -(u x*L i x) ∂μ at ha
@@ -80,7 +80,7 @@ theorem correspondenceBrascampLieb_weak_dirichlet
       ∑ i, ∫ x, G x i*D i x ∂μ := by
     unfold dotProduct correspondenceBrascampLiebGradient
     exact integral_finsetSum _ (fun i _ => hiG i)
-  rw [hl,hr]
+  rw [hl, hr]
   simp_rw [he]
   exact Finset.sum_neg_distrib _
 

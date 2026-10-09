@@ -38,12 +38,12 @@ theorem ginibreCenterRadialDirection_continuousAt {n : ℕ} (hn : 0 < n)
     intro h
     have he : ginibreRepeatedCenterCLM n z = 0 :=
       (configurationEuclideanEquiv n).injective (by simpa using h)
-    have hi := congrFun he (⟨0,hn⟩ : Fin n)
+    have hi := congrFun he (⟨0, hn⟩ : Fin n)
     have hs : coordinateSum z=0 := by
-      simpa only [ginibreRepeatedCenterCLM,ContinuousLinearMap.pi_apply,
-        coordinateSumCLM_apply,Pi.zero_apply] using hi
+      simpa only [ginibreRepeatedCenterCLM, ContinuousLinearMap.pi_apply,
+        coordinateSumCLM_apply, Pi.zero_apply] using hi
     apply hz
-    simp [ginibreCenterSquared,hs]
+    simp [ginibreCenterSquared, hs]
   have hc : ContinuousAt (fun x => configurationEuclideanEquiv n (ginibreRepeatedCenterCLM n x)) z :=
     ((configurationEuclideanEquiv n).continuous.comp (ginibreRepeatedCenterCLM n).continuous).continuousAt
   exact (brownianRadialUnitVector_continuousAt _ e hne).comp
@@ -62,14 +62,14 @@ theorem ginibreBrownianMaximalProcess_centerDirection_properties
       (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal) t) _ (u t)) ∧
     (∀ t ω, ‖u t ω‖=1) ∧ (∀ᵐ ω ∂P, Continuous (fun t => u t ω)) := by
   dsimp only
-  obtain ⟨hAdapt,hPath⟩ := ginibreBrownianMaximalProcess_global_original_solution
+  obtain ⟨hAdapt, hPath⟩ := ginibreBrownianMaximalProcess_global_original_solution
     (by omega) α z hz B P hB hind
   refine ⟨fun t => (ginibreCenterRadialDirection_measurable n e).comp
-    (hAdapt t).measurable,fun t ω => ginibreCenterRadialDirection_norm n e he _,?_⟩
-  filter_upwards [hPath,ginibreBrownian_center_global_nonvanishing hn α z hz hcenter B P hB hind]
+    (hAdapt t).measurable, fun t ω => ginibreCenterRadialDirection_norm n e he _,?_⟩
+  filter_upwards [hPath, ginibreBrownian_center_global_nonvanishing hn α z hz hcenter B P hB hind]
     with ω hω hnonzero
   have hX : Continuous (fun t : ℝ≥0 => ginibreBrownianMaximalProcess n α z B t ω) := by
-    simpa only [Function.comp_def,Real.toNNReal_coe] using hω.1.comp NNReal.continuous_coe
+    simpa only [Function.comp_def, Real.toNNReal_coe] using hω.1.comp NNReal.continuous_coe
   apply continuous_iff_continuousAt.mpr
   intro t
   exact (ginibreCenterRadialDirection_continuousAt (by omega) e _ (hnonzero t)).comp

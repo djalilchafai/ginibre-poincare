@@ -27,32 +27,32 @@ theorem bakryEmeryEuclideanGibbs_radius_law
     have hq : ‖bakryEmeryBlockHilbertEquiv k z‖^2=configurationNormSq z := by
       change ‖(WithLp.toLp 2 z : BakryEmeryHilbertBlock k)‖^2 = _
       rw [PiLp.norm_sq_eq_of_L2]
-      simp only [configurationNormSq,Complex.normSq_eq_norm_sq]
-    simp only [W,bakryEmeryRegularizedConfigurationPotential,bakryEmeryEuclideanLiftPotential,
-      zero_pow (by decide : 2 ≠ 0),add_zero,←hq,Real.sqrt_sq (norm_nonneg _)]
+      simp only [configurationNormSq, Complex.normSq_eq_norm_sq]
+    simp only [W, bakryEmeryRegularizedConfigurationPotential, bakryEmeryEuclideanLiftPotential,
+      zero_pow (by decide : 2 ≠ 0), add_zero,←hq, Real.sqrt_sq (norm_nonneg _)]
   have hp := bakryEmeryBlockLift_eq_normalizedGibbs n k hn ρ hρ V hV hrot hc
   rw [hphys] at hp
   have hm := bakryEmeryConfiguration_normalizedGibbs_map (k+1) W hW
-  rw [←hp,bakryEmeryRegularizedConfigurationPotential_euclidean] at hm
+  rw [←hp, bakryEmeryRegularizedConfigurationPotential_euclidean] at hm
   have hz : bakryEmeryRegularizedLiftPotential (E := EuclideanSpace ℝ (Fin (k+1)×Fin 2)) n V 0 =
       bakryEmeryEuclideanLiftPotential n V := by
     funext x
-    simp only [bakryEmeryRegularizedLiftPotential,bakryEmeryEuclideanLiftPotential,
-      zero_pow (by decide : 2 ≠ 0),add_zero,Real.sqrt_sq (norm_nonneg _)]
+    simp only [bakryEmeryRegularizedLiftPotential, bakryEmeryEuclideanLiftPotential,
+      zero_pow (by decide : 2 ≠ 0), add_zero, Real.sqrt_sq (norm_nonneg _)]
   rw [hz] at hm
   change (bakryEmeryBlockLift n k V).map (configurationEuclideanEquiv (k+1)) =
     bakryEmeryNormalizedGibbs volume
       (bakryEmeryEuclideanLiftPotential (E := EuclideanSpace ℝ (Fin (k+1)×Fin 2)) n V) at hm
-  rw [←hm,Measure.map_map continuous_norm.measurable (configurationEuclideanEquiv (k+1)).continuous.measurable]
+  rw [←hm, Measure.map_map continuous_norm.measurable (configurationEuclideanEquiv (k+1)).continuous.measurable]
   have hfun : norm ∘ configurationEuclideanEquiv (k+1) =
       Real.sqrt ∘ gaussianBlockRadius 1 (k+1) := by
     funext z
-    rw [Function.comp_apply,Function.comp_apply]
+    rw [Function.comp_apply, Function.comp_apply]
     rw [←Real.sqrt_sq (norm_nonneg (configurationEuclideanEquiv (k+1) z)),
       ginibre_configurationEuclidean_norm_sq]
-    simp only [gaussianBlockRadius,Nat.cast_one,one_mul]
+    simp only [gaussianBlockRadius, Nat.cast_one, one_mul]
   rw [hfun,←Measure.map_map Real.continuous_sqrt.measurable
-    (continuous_gaussianBlockRadius 1 (k+1)).measurable,bakryEmeryBlockLift_squaredRadius n k hV]
+    (continuous_gaussianBlockRadius 1 (k+1)).measurable, bakryEmeryBlockLift_squaredRadius n k hV]
 
 theorem bakryEmery_radius_gradient_energy
     {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [CompleteSpace E]
@@ -62,8 +62,8 @@ theorem bakryEmery_radius_gradient_energy
     (contDiffAt_norm ℝ hx : ContDiffAt ℝ 1 (norm : E → ℝ) x).differentiableAt one_ne_zero
   have hd := ((hf.differentiable one_ne_zero) ‖x‖).hasDerivAt.comp_hasFDerivAt x hn.hasFDerivAt
   have he : fderiv ℝ (fun y : E => f ‖y‖) x = deriv f ‖x‖ • fderiv ℝ norm x := hd.fderiv
-  simp only [gradient,LinearIsometryEquiv.norm_map,he,norm_smul,norm_fderiv_norm hn,
-    mul_one,Real.norm_eq_abs,sq_abs]
+  simp only [gradient, LinearIsometryEquiv.norm_map, he, norm_smul, norm_fderiv_norm hn,
+    mul_one, Real.norm_eq_abs, sq_abs]
 
 theorem bakryEmeryEuclideanGibbs_radius_gradient_energy_ae
     (n k : ℕ) (V : Potential) (f : ℝ → ℝ) (hf : ContDiff ℝ 1 f) :

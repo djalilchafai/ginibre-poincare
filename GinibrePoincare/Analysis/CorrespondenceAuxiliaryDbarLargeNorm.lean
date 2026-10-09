@@ -31,7 +31,7 @@ theorem gaussianSchwartzDbar_solutions_unbounded_norm {n : ℕ} (hn : 0 < n)
       rw [Lp.norm_const 2 (complexGaussianMeasure n) c (by norm_num)]
       have hcNorm : ‖c‖ = ‖u‖+|B|+1 := by
         change ‖((‖u‖+|B|+1 : ℝ) : ℂ)‖ = _
-        rw [Complex.norm_real,Real.norm_eq_abs,abs_of_nonneg (by positivity)]
+        rw [Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by positivity)]
       simp only [hcNorm]
       simp
     have hbound := norm_sub_norm_le k u

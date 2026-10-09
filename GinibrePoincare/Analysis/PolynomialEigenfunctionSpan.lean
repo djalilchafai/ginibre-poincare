@@ -47,7 +47,7 @@ private theorem hermite_times_radialPolynomial_mem_span (n a b : ℕ) (P : Polyn
   induction hp using Submodule.span_induction with
   | mem P hP =>
     obtain ⟨m, rfl⟩ := hP
-    exact Submodule.subset_span ⟨⟨a,b,m⟩, rfl⟩
+    exact Submodule.subset_span ⟨⟨a, b, m⟩, rfl⟩
   | zero =>
     convert (polynomialEigenfunctionSpan n).zero_mem using 1
     ext z; simp

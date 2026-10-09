@@ -41,9 +41,9 @@ theorem ginibreBrownianHamiltonian_ito_at_surviving_time
   have hRange : ∀ t ω, X t ω ∈ K := ginibreBrownianHamiltonianStoppedProcess_range hn α z hz B R hR T
   have hCont : ∀ ω, Continuous (fun t => X t ω) := ginibreBrownianHamiltonianStoppedProcess_continuous hn α z hz B R hR T
   have hX := ginibreBrownianHamiltonianStoppedProcess_stronglyAdapted hn α z hz B P hB R hR T
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hJP,hJEnd⟩ := ginibreCompactProcess_continuous_gradient_integral_exists
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hJP, hJEnd⟩ := ginibreCompactProcess_continuous_gradient_integral_exists
     n B P hB hind α X hX hCont (ginibreHamiltonian n) U K hU hf hK hKU hRange S
-  obtain ⟨M,hM,hbound⟩ := ginibreBrownianHamiltonianStoppedDrift_bounded hn α z hz B R hR T
+  obtain ⟨M, hM, hbound⟩ := ginibreBrownianHamiltonianStoppedDrift_bounded hn α z hz B R hR T
   let b := fun (s : ℝ) ω => ginibreLangevinDrift n α (X s.toNNReal ω)
   have hb : ∀ ω, Continuous (fun s => b s ω) := ginibreBrownianHamiltonianStoppedDrift_continuous hn α z hz B R hR T
   have hEq := ginibreCompactVolterra_restricted_ito_identify n B P hB hind α X hX hCont
@@ -53,7 +53,7 @@ theorem ginibreBrownianHamiltonian_ito_at_surviving_time
     (ginibreBrownianHamiltonianBoundedStop_survival_measurable hn α z hz B P hB R hR T S)
     (ginibreBrownianHamiltonianStoppedProcess_restricted_volterra hn α z hz B P hB R hR T S)
     (J S) hJEnd
-  refine ⟨J,hJM,hJC,hJL,hJ0,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0,?_⟩
   filter_upwards [hEq] with ω hω
   intro hs
   have hh := hω hs

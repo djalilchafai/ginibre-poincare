@@ -19,15 +19,15 @@ theorem cauchyGreenPotential_dbar_source (f : ℂ → ℂ)
   have h := cauchyGreenKernel_fundamental_identity θ hθ hcθ
   have hder (y : ℂ) : planarDbar θ y = -planarDbar f (z-y) :=
     planarDbar_sub_left f (hf.differentiable (by simp)) z y
-  simp_rw [hder,mul_neg,integral_neg] at h
+  simp_rw [hder, mul_neg, integral_neg] at h
   have hh := neg_injective h
-  simpa only [cauchyGreenPotential,convolution,ContinuousLinearMap.mul_apply',θ,sub_zero] using! hh
+  simpa only [cauchyGreenPotential, convolution, ContinuousLinearMap.mul_apply', θ, sub_zero] using! hh
 
 theorem planarDbar_mul (f g : ℂ → ℂ) (hf : Differentiable ℝ f)
     (hg : Differentiable ℝ g) (z : ℂ) :
     planarDbar (f*g) z = planarDbar f z * g z + f z * planarDbar g z := by
-  rw [planarDbar,fderiv_mul (hf z) (hg z)]
-  simp only [ContinuousLinearMap.add_apply,ContinuousLinearMap.smul_apply,smul_eq_mul,planarDbar]
+  rw [planarDbar, fderiv_mul (hf z) (hg z)]
+  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply, smul_eq_mul, planarDbar]
   ring
 
 /-- The literal boundary correction formula. Its right-hand side contains
@@ -54,7 +54,7 @@ theorem cauchyGreen_cutoff_homotopy (χ g : ℂ → ℂ)
       (hχ.continuous.mul (planarDbar_continuous g (hg.of_le (by simp)))) z).integrable
   rw [he] at h
   simp only [ContinuousLinearMap.mul_apply'] at hi hj
-  simp only [cauchyGreenPotential,convolution,Pi.add_apply,ContinuousLinearMap.mul_apply',mul_add] at h
+  simp only [cauchyGreenPotential, convolution, Pi.add_apply, ContinuousLinearMap.mul_apply', mul_add] at h
   rw [integral_add hi hj] at h
   change _ = χ z * g z at h
   change _ = χ z * g z - _

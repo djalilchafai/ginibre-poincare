@@ -15,8 +15,8 @@ theorem ginibreDrivenMaximalValue_collisionFree {n : ℕ} (α : ℝ)
     CollisionFree (ginibreDrivenMaximalValue n α N.val z.val t) := by
   by_cases ht : (t : ℝ≥0∞) < ginibreDrivenMaximalLifetime n α N.val z.val
   · have hd : (t : ℝ) ∈ ginibreDrivenMaximalDomain n α N.val z.val :=
-      ⟨t.property,by simpa using ht⟩
-    simpa only [ginibreDrivenMaximalPath,Real.toNNReal_coe] using
+      ⟨t.property, by simpa using ht⟩
+    simpa only [ginibreDrivenMaximalPath, Real.toNNReal_coe] using
       (ginibreDrivenMaximalPath_equation hd).1
   · rw [show ginibreDrivenMaximalValue n α N.val z.val t=z.val from dif_neg ht]
     exact z.property
@@ -47,10 +47,10 @@ theorem ginibreCanonicalStateTransitionKernel_apply {n : ℕ} (hn : 0 < n) (α :
     (t : ℝ≥0) (μ : Measure (GinibreContinuousNoise n)) [IsProbabilityMeasure μ]
     (z : {z : Configuration n // CollisionFree z}) :
     ginibreCanonicalStateTransitionKernel α t μ z =
-      μ.map (fun N => ginibreCanonicalStateValue α t (z,N)) := by
+      μ.map (fun N => ginibreCanonicalStateValue α t (z, N)) := by
   unfold ginibreCanonicalStateTransitionKernel
   rw [Kernel.map_apply _ (ginibreCanonicalStateValue_measurable hn α t),
-    Kernel.prod_apply,Kernel.id_apply,Kernel.const_apply,Measure.dirac_prod,
+    Kernel.prod_apply, Kernel.id_apply, Kernel.const_apply, Measure.dirac_prod,
     Measure.map_map (ginibreCanonicalStateValue_measurable hn α t) measurable_prodMk_left]
   rfl
 

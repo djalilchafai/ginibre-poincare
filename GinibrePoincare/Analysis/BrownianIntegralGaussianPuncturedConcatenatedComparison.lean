@@ -57,8 +57,8 @@ theorem brownianUniformLeftSum_concatenated_punctured_difference_tendsto_meanSqu
         (itoConcatenatedGrid 0 t (k+1)) ((k+1)+(k+1)) ω =
         brownianUniformLeftSum (B j) F t (k+1) ω := by
       rw [brownianActualLeftGridSum_concatenated _ _ _ _ _ (Nat.succ_pos k)]
-      simp [brownianUniformLeftSum,itoUniformNNTime,itoUniformTime]
-    simp only [zero_add,he,sub_self,zero_pow (by decide : (2 : ℕ) ≠ 0),integral_zero]
+      simp [brownianUniformLeftSum, itoUniformNNTime, itoUniformTime]
+    simp only [zero_add, he, sub_self, zero_pow (by decide : (2 : ℕ) ≠ 0), integral_zero]
     exact tendsto_const_nhds
   have hspos : 0 < s := lt_of_le_of_ne bot_le (Ne.symm hs)
   have hstpos : 0 < s+t := add_pos_of_pos_of_nonneg hspos bot_le
@@ -87,7 +87,7 @@ theorem brownianUniformLeftSum_concatenated_punctured_difference_tendsto_meanSqu
     (hcut n) (hcuti n) _ (itoConcatenatedGrid_monotone s t (k+1) (Nat.succ_pos k)) _
   have hAU (n k) : (∫ ω, (A k ω-U n k ω)^2 ∂P) ≤
       C^2*(2*ε n+((s+t : ℝ≥0) : ℝ)/((k : ℝ)+1)) := by
-    simpa only [Nat.cast_add,Nat.cast_one] using brownianUniformLeftSum_initial_cutoff_error_bound
+    simpa only [Nat.cast_add, Nat.cast_one] using brownianUniformLeftSum_initial_cutoff_error_bound
       B P hB hind j F hF C (ε n) hC (hε n) hbound (s+t) hstpos (k+1) (Nat.succ_pos k)
   have hVD (n k) : (∫ ω, (V n k ω-D k ω)^2 ∂P) ≤
       C^2*(2*ε n+(s : ℝ)/((k : ℝ)+1)) := by
@@ -96,14 +96,14 @@ theorem brownianUniformLeftSum_concatenated_punctured_difference_tendsto_meanSqu
           brownianUniformLeftSum (B j) (brownianInitialTimeCutoff F (ε n)) s (k+1) ω)^2 := by
       have hh := brownianConcatenated_initial_cutoff_difference (B j) F s t (ε n) (hε n) (hεs n)
         (k+1) (Nat.succ_pos k) ω
-      dsimp only [V,D]
+      dsimp only [V, D]
       calc
         _ = (brownianActualLeftGridSum (B j) F (itoConcatenatedGrid s t (k+1)) ((k+1)+(k+1)) ω-
           brownianActualLeftGridSum (B j) (brownianInitialTimeCutoff F (ε n))
             (itoConcatenatedGrid s t (k+1)) ((k+1)+(k+1)) ω)^2 := by ring
         _ = _ := congrArg (fun x : ℝ => x^2) hh
     simp_rw [he]
-    simpa only [Nat.cast_add,Nat.cast_one] using brownianUniformLeftSum_initial_cutoff_error_bound
+    simpa only [Nat.cast_add, Nat.cast_one] using brownianUniformLeftSum_initial_cutoff_error_bound
       B P hB hind j F hF C (ε n) hC (hε n) hbound s hspos (k+1) (Nat.succ_pos k)
   have hUV (n) : Tendsto (fun k => ∫ ω, (U n k ω-V n k ω)^2 ∂P) atTop (𝓝 0) := by
     apply brownianUniformLeftSum_concatenated_difference_tendsto_meanSquare B P hB hind j _
@@ -117,11 +117,11 @@ theorem brownianUniformLeftSum_concatenated_punctured_difference_tendsto_meanSqu
   · intro n k
     have hh := actualMeanSquare_difference_le_four_errors P (A k) (U n k) (V n k) (D k) (D k)
       (hAL k) (hUL n k) (hVL n k) (hDL k) (hDL k)
-    simp only [sub_self,zero_pow (by decide : (2 : ℕ) ≠ 0),integral_zero,add_zero] at hh
+    simp only [sub_self, zero_pow (by decide : (2 : ℕ) ≠ 0), integral_zero, add_zero] at hh
     exact hh.trans (by dsimp only [v]; gcongr <;> first | exact hAU n k | exact hVD n k)
   · intro n
     have hm (r : ℝ) : Tendsto (fun k : ℕ => r/((k : ℝ)+1)) atTop (𝓝 0) := by
-      simpa only [mul_zero,mul_one_div] using (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)).const_mul r
+      simpa only [mul_zero, mul_one_div] using (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)).const_mul r
     have hh := ((((hm ((s+t : ℝ≥0) : ℝ)).const_add (2*ε n)).const_mul (C^2)).add (hUV n)).add
       (((hm (s : ℝ)).const_add (2*ε n)).const_mul (C^2)) |>.const_mul 4
     convert hh using 1 <;> (try dsimp only [v]) <;> ring

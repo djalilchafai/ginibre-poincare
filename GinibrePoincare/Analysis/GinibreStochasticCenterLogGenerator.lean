@@ -22,12 +22,12 @@ theorem ginibre_fderiv_centerSquared (n : ℕ) (z v : Configuration n) :
   let I : Configuration n →L[ℝ] ℝ := Complex.imCLM.comp (coordinateSumCLM n)
   have he : ginibreCenterSquared n = fun x => R x*R x+I x*I x := by
     funext x
-    simp [ginibreCenterSquared,Complex.normSq_apply,R,I,pow_two]
+    simp [ginibreCenterSquared, Complex.normSq_apply, R, I, pow_two]
   rw [he]
   have hd := (((R.hasFDerivAt (x := z)).mul (R.hasFDerivAt (x := z))).add ((I.hasFDerivAt (x := z)).mul (I.hasFDerivAt (x := z)))).fderiv
   change (fderiv ℝ (⇑R*⇑R+⇑I*⇑I) z) v = _
   rw [hd]
-  simp [R,I,ContinuousLinearMap.add_apply,ContinuousLinearMap.smul_apply]
+  simp [R, I, ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply]
   <;> ring
 
 theorem ginibre_centerSquared_gradient_normSq (n : ℕ) (z : Configuration n) :
@@ -35,11 +35,11 @@ theorem ginibre_centerSquared_gradient_normSq (n : ℕ) (z : Configuration n) :
   unfold realGradientNormSq
   simp_rw [ginibre_fderiv_centerSquared]
   have hr (j : Fin n) : coordinateSum (realCoordinateDirection j : Configuration n)=1 := by
-    simp [realCoordinateDirection,coordinateDirection,coordinateSum]
+    simp [realCoordinateDirection, coordinateDirection, coordinateSum]
   have hi (j : Fin n) : coordinateSum (imaginaryCoordinateDirection j : Configuration n)=Complex.I := by
-    simp [imaginaryCoordinateDirection,coordinateDirection,coordinateSum]
-  simp_rw [hr,hi]
-  simp [ginibreCenterSquared,Complex.normSq_apply]
+    simp [imaginaryCoordinateDirection, coordinateDirection, coordinateSum]
+  simp_rw [hr, hi]
+  simp [ginibreCenterSquared, Complex.normSq_apply]
   <;> ring
 
 theorem ginibre_deriv_deriv_log {r : ℝ} (hr : 0 < r) :
@@ -58,8 +58,8 @@ theorem ginibreRealPaperSpeedGenerator_log_centerSquared {n : ℕ} (hn : 2 ≤ n
     ((contDiff_ginibreCenterSquared n).of_le
       (WithTop.coe_le_coe.mpr (show (2 : ENat) ≤ ⊤ from le_top))).contDiffAt
   rw [ginibreRealPaperSpeedGenerator_scalar_comp α (ginibreCenterSquared n) Real.log z hf
-      (Real.contDiffAt_log.mpr hpos.ne'),(Real.hasDerivAt_log hpos.ne').deriv,
-    ginibre_deriv_deriv_log hpos,ginibreRealPaperSpeedGenerator_centerSquared hn α z hz,
+      (Real.contDiffAt_log.mpr hpos.ne'), (Real.hasDerivAt_log hpos.ne').deriv,
+    ginibre_deriv_deriv_log hpos, ginibreRealPaperSpeedGenerator_centerSquared hn α z hz,
     ginibre_centerSquared_gradient_normSq]
   have hnR : (n : ℝ) ≠ 0 := by exact_mod_cast (show n ≠ 0 by omega)
   field_simp

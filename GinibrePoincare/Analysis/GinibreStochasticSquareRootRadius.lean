@@ -39,7 +39,7 @@ theorem ginibreCIR_noise_amplitude_factor {n : ℕ} (α : ℝ) (z : Configuratio
   have h4 : Real.sqrt (4*pairwiseRadius z)=2*Real.sqrt (pairwiseRadius z) := by
     rw [Real.sqrt_mul (by norm_num : (0 : ℝ) ≤ 4)]
     norm_num
-  rw [he,Real.sqrt_mul (mul_nonneg (by norm_num) hρ),h4]
+  rw [he, Real.sqrt_mul (mul_nonneg (by norm_num) hρ), h4]
 
 theorem ginibre_squareRootRadius_noise_coordinate {n : ℕ} (hn : 2 ≤ n)
     (α : ℝ) (hα : 0 ≤ α) (z : Configuration n) (hz : CollisionFree z)
@@ -53,7 +53,7 @@ theorem ginibre_squareRootRadius_noise_coordinate {n : ℕ} (hn : 2 ≤ n)
     _ = (1/(2*Real.sqrt (pairwiseRadius z)))*
         (Real.sqrt (2*α/(n : ℝ)^2)*fderiv ℝ pairwiseRadius z (ginibreCoordinateDirection i)) := by ring
     _ = _ := by
-      rw [ginibreCIR_noise_coordinate hn α hα z hz e i,ginibreCIR_noise_amplitude_factor α z hρ.le]
+      rw [ginibreCIR_noise_coordinate hn α hα z hz e i, ginibreCIR_noise_amplitude_factor α z hρ.le]
       field_simp
       <;> ring
 end

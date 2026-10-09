@@ -17,17 +17,17 @@ theorem realMartingale_square_submartingale (P : Measure Ω) [IsFiniteMeasure P]
     (ℱ : Filtration ι ‹MeasurableSpace Ω›) (M : ι → Ω → ℝ)
     (hM : Martingale M ℱ P) (hL2 : ∀ i, MemLp (M i) 2 P) :
     Submartingale (fun i ω => (M i ω)^2) ℱ P := by
-  refine ⟨?_,?_,fun i => (hL2 i).integrable_sq⟩
+  refine ⟨?_,?_, fun i => (hL2 i).integrable_sq⟩
   · intro i
     exact (show Continuous (fun r : ℝ => r^2) by fun_prop).comp_stronglyMeasurable (hM.1 i)
   · intro i j hij
     have hj := _root_.Integrable.norm_condExp_rpow_le
       (f := M j) (μ := P) (m := ℱ i) (p := 2) (by norm_num)
       (show Integrable (fun ω => ‖M j ω‖^(2 : ℝ)) P by
-        simpa [Real.rpow_two,Real.norm_eq_abs,sq_abs] using (hL2 j).integrable_sq)
+        simpa [Real.rpow_two, Real.norm_eq_abs, sq_abs] using (hL2 j).integrable_sq)
     have he := hM.2 i j hij
-    filter_upwards [hj,he] with ω hω he
-    simpa [he,Real.rpow_two,Real.norm_eq_abs,sq_abs] using hω
+    filter_upwards [hj, he] with ω hω he
+    simpa [he, Real.rpow_two, Real.norm_eq_abs, sq_abs] using hω
 
 /-- Genuine finite-grid maximal second-moment estimate derived from conditional
 Jensen and Doob's maximal inequality. -/
@@ -43,14 +43,14 @@ theorem realMartingale_finite_maximal_mul_le {Ω : Type*} [MeasurableSpace Ω]
       {ω | ((ε^2 : ℝ≥0) : ℝ) ≤ (Finset.range (n+1)).sup' Finset.nonempty_range_add_one
         (fun k => (M k ω)^2)} := by
     intro ω hω
-    obtain ⟨k,hkn,hk⟩ := hω
+    obtain ⟨k, hkn, hk⟩ := hω
     change ((ε^2 : ℝ≥0) : ℝ) ≤ (Finset.range (n+1)).sup' Finset.nonempty_range_add_one
       (fun k => (M k ω)^2)
     apply (Finset.le_sup'_iff Finset.nonempty_range_add_one).mpr
-    refine ⟨k,Finset.mem_range.mpr (by omega),?_⟩
+    refine ⟨k, Finset.mem_range.mpr (by omega),?_⟩
     have hsq' := sq_le_sq₀ ε.coe_nonneg (norm_nonneg (M k ω))
     have hh : (ε : ℝ)^2 ≤ ‖M k ω‖^2 := hsq'.mpr hk
-    simpa [Real.norm_eq_abs,sq_abs] using hh
+    simpa [Real.norm_eq_abs, sq_abs] using hh
   calc
     _ ≤ ((ε^2 : ℝ≥0) : ℝ≥0∞) * P {ω | ((ε^2 : ℝ≥0) : ℝ) ≤
         (Finset.range (n+1)).sup' Finset.nonempty_range_add_one (fun k => (M k ω)^2)} := by
@@ -74,13 +74,13 @@ theorem realMartingale_finite_maximal_le {Ω : Type*} [MeasurableSpace Ω]
 /-- Actual monotone sampling preserves a genuine martingale and its filtration. -/
 def sampledMartingaleFiltration {J : Type*} [Preorder J]
     (ℱ : Filtration ι ‹MeasurableSpace Ω›) (τ : J → ι) (hτ : Monotone τ) :
-    Filtration J ‹MeasurableSpace Ω› := ⟨fun i => ℱ (τ i),ℱ.mono'.comp hτ,fun i => ℱ.le (τ i)⟩
+    Filtration J ‹MeasurableSpace Ω› := ⟨fun i => ℱ (τ i), ℱ.mono'.comp hτ, fun i => ℱ.le (τ i)⟩
 
 theorem realMartingale_monotone_sampling {J : Type*} [Preorder J]
     (P : Measure Ω) (ℱ : Filtration ι ‹MeasurableSpace Ω›) (M : ι → Ω → ℝ)
     (hM : Martingale M ℱ P) (τ : J → ι) (hτ : Monotone τ) :
     Martingale (fun i => M (τ i)) (sampledMartingaleFiltration ℱ τ hτ) P :=
-  ⟨fun i => hM.1 (τ i),fun _i _j hij => hM.2 _ _ (hτ hij)⟩
+  ⟨fun i => hM.1 (τ i), fun _i _j hij => hM.2 _ _ (hτ hij)⟩
 
 /-- The genuine terminal L² hypothesis supplies every earlier L² marginal. -/
 theorem realMartingale_memLp_two_of_le (P : Measure Ω) [IsFiniteMeasure P]

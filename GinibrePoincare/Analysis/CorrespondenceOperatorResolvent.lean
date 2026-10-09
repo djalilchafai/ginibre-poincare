@@ -244,8 +244,8 @@ theorem correspondenceOperator_smoothCompact_pair (n : ℕ) (hn : 0 < n)
     (f : Configuration n → ℝ) (hf : ContDiff ℝ ∞ f) (hc : HasCompactSupport f) :
     ∃ p : correspondenceOperatorWeakSpace n hn,
       (p.val.1 : Configuration n → ℝ) =ᵐ[ginibreMeasure n] f := by
-  obtain ⟨hmv,hmg⟩ := ginibreFull_smoothCompact_memLp n hn f hf hc
-  exact ⟨⟨(hmv.toLp f,hmg.toLp (ginibreEuclideanGradient f)),
+  obtain ⟨hmv, hmg⟩ := ginibreFull_smoothCompact_memLp n hn f hf hc
+  exact ⟨⟨(hmv.toLp f, hmg.toLp (ginibreEuclideanGradient f)),
     ginibre_smooth_distributional_gradient n hn _ _ f hf hmv.coeFn_toLp hmg.coeFn_toLp⟩,
     hmv.coeFn_toLp⟩
 
@@ -256,7 +256,7 @@ theorem correspondenceOperator_orthogonal_weak_eq_zero (n : ℕ) (hn : 0 < n)
   let := ginibreMeasure_isProbabilityMeasure hn
   have htest (ψ : Configuration n → ℝ) (hψ : ContDiff ℝ ∞ ψ) (hc : HasCompactSupport ψ) :
       (∫ z, ψ z • a z ∂ginibreMeasure n) = 0 := by
-    obtain ⟨p,hp⟩ := correspondenceOperator_smoothCompact_pair n hn ψ hψ hc
+    obtain ⟨p, hp⟩ := correspondenceOperator_smoothCompact_pair n hn ψ hψ hc
     have hh := ha p
     rw [L2.inner_def] at hh
     rw [← hh]
@@ -275,14 +275,14 @@ theorem correspondenceOperatorValueResolvent_eq_zero_iff (n : ℕ) (hn : 0 < n)
   constructor
   · intro hz
     have hnorm := correspondenceOperatorValueResolvent_positive n hn f
-    rw [hz,inner_zero_right] at hnorm
+    rw [hz, inner_zero_right] at hnorm
     have hR : correspondenceOperatorFormResolvent n hn f = 0 := by
       apply norm_eq_zero.mp
       nlinarith [norm_nonneg (correspondenceOperatorFormResolvent n hn f)]
     apply correspondenceOperator_orthogonal_weak_eq_zero n hn f
     intro p
     have hr := correspondenceOperatorFormResolvent_riesz n hn f (correspondenceOperatorFormOfWeak n hn p)
-    rw [hR,inner_zero_left,correspondenceOperatorFormOfWeak_value] at hr
+    rw [hR, inner_zero_left, correspondenceOperatorFormOfWeak_value] at hr
     exact hr.symm
   · intro hz
     simp [hz]
@@ -291,7 +291,7 @@ theorem correspondenceOperatorValueResolvent_injective (n : ℕ) (hn : 0 < n) :
     Function.Injective (correspondenceOperatorValueResolvent n hn) := by
   intro f h heq
   have hz : correspondenceOperatorValueResolvent n hn (f-h)=0 := by
-    rw [map_sub,heq,sub_self]
+    rw [map_sub, heq, sub_self]
   exact sub_eq_zero.mp ((correspondenceOperatorValueResolvent_eq_zero_iff n hn (f-h)).mp hz)
 
 theorem correspondenceOperatorValueResolvent_denseRange (n : ℕ) (hn : 0 < n) :

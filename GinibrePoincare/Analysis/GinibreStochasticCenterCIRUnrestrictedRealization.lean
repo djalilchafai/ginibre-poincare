@@ -47,12 +47,12 @@ theorem ginibreBrownianMaximalProcess_center_unrestricted_CIR_realization
               ∫ s in (0 : ℝ)..t, (4*(α : ℝ)/(n : ℝ))*
                 ((1 : ℝ)-(ginibreCenterSquared n) (X s.toNNReal ω))) := by
   classical
-  let i₀ : Fin n × Fin 2 := (⟨0,by omega⟩,0)
+  let i₀ : Fin n × Fin 2 := (⟨0, by omega⟩, 0)
   let e : EuclideanSpace ℝ (Fin n × Fin 2) := EuclideanSpace.single i₀ 1
-  have he : ‖e‖=1 := by simp [e,PiLp.norm_single]
-  obtain ⟨β,hβ,hβM,hβL,hβ0,hβLim,hβShift,hβFresh⟩ :=
+  have he : ‖e‖=1 := by simp [e, PiLp.norm_single]
+  obtain ⟨β, hβ, hβM, hβL, hβ0, hβLim, hβShift, hβFresh⟩ :=
     ginibreBrownianMaximalProcess_center_unrestricted_Brownian_exists hn α hα z hz B P hB hind
-  refine ⟨β,hβ,hβM,hβL,hβFresh,?_,?_,?_,?_,?_⟩
+  refine ⟨β, hβ, hβM, hβL, hβFresh,?_,?_,?_,?_,?_⟩
   · intro k
     exact ginibreBrownianHamiltonianBoundedStop_isStoppingTime (by omega) α z hz B P hB
       _ (le_add_of_nonneg_right (Nat.cast_nonneg k)) k
@@ -63,8 +63,8 @@ theorem ginibreBrownianMaximalProcess_center_unrestricted_CIR_realization
       (ginibreBrownianMaximalProcess_global_original_solution (by omega) α z hz B P hB hind).2]
       with ω hnonzero hsolution
     have hc : Continuous (fun t : ℝ≥0 => ginibreBrownianMaximalProcess n α z B t ω) := by
-      simpa only [Function.comp_def,Real.toNNReal_coe] using hsolution.1.comp NNReal.continuous_coe
-    refine ⟨(contDiff_ginibreCenterSquared n).continuous.comp hc,fun t ht => ?_⟩
+      simpa only [Function.comp_def, Real.toNNReal_coe] using hsolution.1.comp NNReal.continuous_coe
+    refine ⟨(contDiff_ginibreCenterSquared n).continuous.comp hc, fun t ht => ?_⟩
     exact lt_of_le_of_ne (ginibreCenterSquared_nonneg n _) (Ne.symm (hnonzero t ht))
   · intro R hR T
     by_cases hcenter : ginibreCenterSquared n z=0

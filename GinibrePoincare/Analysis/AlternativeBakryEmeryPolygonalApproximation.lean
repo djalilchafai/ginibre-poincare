@@ -13,13 +13,13 @@ theorem bakryEmeryPolygonalNoise_sampled_grid
     (u : ℕ → EuclideanSpace ℝ ι) :
     bakryEmeryPolygonalNoise m h
       (fun p : Fin m × ι => (u (p.1.val+1) p.2-u p.1.val p.2)/Real.sqrt h)
-      ((k:ℝ)*h) = u k-u 0 := by
-  have hr (j : Fin m) : bakryEmeryPolygonalRamp h j.val ((k:ℝ)*h) =
+      ((k : ℝ)*h) = u k-u 0 := by
+  have hr (j : Fin m) : bakryEmeryPolygonalRamp h j.val ((k : ℝ)*h) =
       if j.val < k then Real.sqrt h else 0 := by
     by_cases hj : j.val < k
     · rw [if_pos hj]
       apply bakryEmeryPolygonalRamp_after h hh
-      have hj' : ((j.val+1:ℕ):ℝ) ≤ (k:ℝ) := by exact_mod_cast hj
+      have hj' : ((j.val+1 : ℕ) : ℝ) ≤ (k : ℝ) := by exact_mod_cast hj
       exact mul_le_mul_of_nonneg_right hj' hh.le
     · rw [if_neg hj]
       apply bakryEmeryPolygonalRamp_before h hh.le
@@ -28,7 +28,7 @@ theorem bakryEmeryPolygonalNoise_sampled_grid
   have hf (a : ℝ) : Real.sqrt h*(a/Real.sqrt h)=a := by field_simp
   apply PiLp.ext
   intro i
-  change (∑ j : Fin m, bakryEmeryPolygonalRamp h j.val ((k:ℝ)*h) *
+  change (∑ j : Fin m, bakryEmeryPolygonalRamp h j.val ((k : ℝ)*h) *
       ((u (j.val+1) i-u j.val i)/Real.sqrt h)) = u k i-u 0 i
   simp_rw [hr, ite_mul, hf, zero_mul]
   rw [Fin.sum_univ_eq_sum_range (fun j : ℕ => if j < k then u (j+1) i-u j i else 0),
@@ -44,32 +44,32 @@ theorem bakryEmeryPolygonalNoise_sampled_grid
 theorem bakryEmeryPolygonalNoise_sampled_interpolation
     (m k : ℕ) (hk : k < m) (h : ℝ) (hh : 0 < h)
     (u : ℕ → EuclideanSpace ℝ ι) (t : ℝ)
-    (ht : t ∈ Icc ((k:ℝ)*h) (((k+1:ℕ):ℝ)*h)) :
+    (ht : t ∈ Icc ((k : ℝ)*h) (((k+1 : ℕ) : ℝ)*h)) :
     bakryEmeryPolygonalNoise m h
       (fun p : Fin m × ι => (u (p.1.val+1) p.2-u p.1.val p.2)/Real.sqrt h) t =
-      u k-u 0 + ((t-(k:ℝ)*h)/h) • (u (k+1)-u k) := by
+      u k-u 0 + ((t-(k : ℝ)*h)/h) • (u (k+1)-u k) := by
   let x : (Fin m × ι) → ℝ :=
     fun p => (u (p.1.val+1) p.2-u p.1.val p.2)/Real.sqrt h
   let P := bakryEmeryPolygonalNoise m h x
   let D := (1/h) • (u (k+1)-u k)
-  have hD : (WithLp.toLp 2 (fun i => x (⟨k,hk⟩,i)/Real.sqrt h) : EuclideanSpace ℝ ι) = D := by
+  have hD : (WithLp.toLp 2 (fun i => x (⟨k, hk⟩, i)/Real.sqrt h) : EuclideanSpace ℝ ι) = D := by
     apply PiLp.ext
     intro i
     change (u (k+1) i-u k i)/Real.sqrt h/Real.sqrt h = (1/h)*(u (k+1) i-u k i)
     rw [div_div, Real.mul_self_sqrt hh.le]
     ring
-  have hd (r : ℝ) (hr : r ∈ Ioo ((k:ℝ)*h) t) : HasDerivAt P D r := by
+  have hd (r : ℝ) (hr : r ∈ Ioo ((k : ℝ)*h) t) : HasDerivAt P D r := by
     rw [← hD]
-    exact bakryEmeryPolygonalNoise_hasDerivAt m h hh x ⟨k,hk⟩ r ⟨hr.1, hr.2.trans_le ht.2⟩
+    exact bakryEmeryPolygonalNoise_hasDerivAt m h hh x ⟨k, hk⟩ r ⟨hr.1, hr.2.trans_le ht.2⟩
   have he := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le ht.1
     (bakryEmeryPolygonalNoise_continuous m h x).continuousOn hd
-    (intervalIntegrable_const : IntervalIntegrable (fun _ : ℝ => D) volume ((k:ℝ)*h) t)
+    (intervalIntegrable_const : IntervalIntegrable (fun _ : ℝ => D) volume ((k : ℝ)*h) t)
   rw [intervalIntegral.integral_const] at he
-  have hPa : P ((k:ℝ)*h) = u k-u 0 :=
+  have hPa : P ((k : ℝ)*h) = u k-u 0 :=
     bakryEmeryPolygonalNoise_sampled_grid m k hk.le h hh u
-  change (t-(k:ℝ)*h) • D = P t-P ((k:ℝ)*h) at he
+  change (t-(k : ℝ)*h) • D = P t-P ((k : ℝ)*h) at he
   rw [hPa] at he
-  have he' : P t = u k-u 0+(t-(k:ℝ)*h) • D := by
+  have he' : P t = u k-u 0+(t-(k : ℝ)*h) • D := by
     rw [he]
     abel
   simpa only [P, D, x, smul_smul, one_div, div_eq_mul_inv, one_mul] using he'
@@ -78,13 +78,13 @@ theorem bakryEmeryPolygonalNoise_sampled_interpolation
 theorem bakryEmeryPolygonalNoise_sampled_error
     (m k : ℕ) (hk : k < m) (h : ℝ) (hh : 0 < h)
     (u : ℕ → EuclideanSpace ℝ ι) (t : ℝ)
-    (ht : t ∈ Icc ((k:ℝ)*h) (((k+1:ℕ):ℝ)*h))
+    (ht : t ∈ Icc ((k : ℝ)*h) (((k+1 : ℕ) : ℝ)*h))
     (v : EuclideanSpace ℝ ι) (ε : ℝ)
     (h0 : ‖u k-v‖ ≤ ε) (h1 : ‖u (k+1)-v‖ ≤ ε) :
     ‖bakryEmeryPolygonalNoise m h
       (fun p : Fin m × ι => (u (p.1.val+1) p.2-u p.1.val p.2)/Real.sqrt h) t-
       (v-u 0)‖ ≤ ε := by
-  let a := (t-(k:ℝ)*h)/h
+  let a := (t-(k : ℝ)*h)/h
   have ha0 : 0 ≤ a := div_nonneg (sub_nonneg.mpr ht.1) hh.le
   have ha1 : a ≤ 1 := by
     apply (div_le_one hh).mpr
@@ -107,8 +107,8 @@ theorem bakryEmeryPolygonalNoise_sampled_error
   exact hc
 
 private theorem grid_cover (m : ℕ) (hm : 0 < m) (h : ℝ) (hh : 0 < h)
-    (t : ℝ) (ht : t ∈ Icc 0 ((m:ℝ)*h)) :
-    ∃ k < m, t ∈ Icc ((k:ℝ)*h) (((k+1:ℕ):ℝ)*h) := by
+    (t : ℝ) (ht : t ∈ Icc 0 ((m : ℝ)*h)) :
+    ∃ k < m, t ∈ Icc ((k : ℝ)*h) (((k+1 : ℕ) : ℝ)*h) := by
   induction m generalizing t with
   | zero => omega
   | succ m ih =>
@@ -116,56 +116,56 @@ private theorem grid_cover (m : ℕ) (hm : 0 < m) (h : ℝ) (hh : 0 < h)
     · subst m
       refine ⟨0, by omega, ?_⟩
       simpa using ht
-    · by_cases htm : t ≤ (m:ℝ)*h
-      · obtain ⟨k,hk,hcell⟩ := ih (Nat.pos_of_ne_zero hm0) t ⟨ht.1,htm⟩
-        exact ⟨k,Nat.lt_succ_of_lt hk,hcell⟩
-      · exact ⟨m,Nat.lt_succ_self m,⟨(lt_of_not_ge htm).le,ht.2⟩⟩
+    · by_cases htm : t ≤ (m : ℝ)*h
+      · obtain ⟨k, hk, hcell⟩ := ih (Nat.pos_of_ne_zero hm0) t ⟨ht.1, htm⟩
+        exact ⟨k, Nat.lt_succ_of_lt hk, hcell⟩
+      · exact ⟨m, Nat.lt_succ_self m, ⟨(lt_of_not_ge htm).le, ht.2⟩⟩
 
 /-- Continuous paths are approximated uniformly by the literal Gaussian-grid
 polygon encoding of their sampled increments. -/
 theorem bakryEmeryPolygonalNoise_sampled_uniform_error
     (T : ℝ) (N : ℝ → EuclideanSpace ℝ ι) (hN : ContinuousOn N (Icc 0 T))
     (ε : ℝ) (hε : 0 < ε) :
-    ∃ δ > 0, ∀ (m : ℕ) (hm : 0 < m) (h : ℝ), 0 < h → (m:ℝ)*h=T → h < δ →
+    ∃ δ > 0, ∀ (m : ℕ) (hm : 0 < m) (h : ℝ), 0 < h → (m : ℝ)*h=T → h < δ →
       ∀ t ∈ Icc 0 T,
       ‖bakryEmeryPolygonalNoise m h
-        (fun p : Fin m × ι => (N ((p.1.val+1:ℕ)*h) p.2-N ((p.1.val:ℝ)*h) p.2)/Real.sqrt h) t-
+        (fun p : Fin m × ι => (N ((p.1.val+1 : ℕ)*h) p.2-N ((p.1.val : ℝ)*h) p.2)/Real.sqrt h) t-
         (N t-N 0)‖ ≤ ε := by
-  have hu := (isCompact_Icc : IsCompact (Icc (0:ℝ) T)).uniformContinuousOn_of_continuous hN
-  obtain ⟨δ,hδ,hclose⟩ := Metric.uniformContinuousOn_iff.mp hu ε hε
-  refine ⟨δ,hδ,?_⟩
+  have hu := (isCompact_Icc : IsCompact (Icc (0 : ℝ) T)).uniformContinuousOn_of_continuous hN
+  obtain ⟨δ, hδ, hclose⟩ := Metric.uniformContinuousOn_iff.mp hu ε hε
+  refine ⟨δ, hδ,?_⟩
   intro m hm h hh hT hhd t ht
-  obtain ⟨k,hk,hcell⟩ := grid_cover m hm h hh t (hT ▸ ht)
-  have hend : (((k+1:ℕ):ℝ)*h) ≤ T := by
+  obtain ⟨k, hk, hcell⟩ := grid_cover m hm h hh t (hT ▸ ht)
+  have hend : (((k+1 : ℕ) : ℝ)*h) ≤ T := by
     rw [← hT]
     exact mul_le_mul_of_nonneg_right (by exact_mod_cast hk) hh.le
-  have hk0 : 0 ≤ (k:ℝ)*h := by positivity
-  have hk1 : 0 ≤ (((k+1:ℕ):ℝ)*h) := by positivity
-  have hkmem : (k:ℝ)*h ∈ Icc 0 T := ⟨hk0,hcell.1.trans ht.2⟩
-  have hk1mem : (((k+1:ℕ):ℝ)*h) ∈ Icc 0 T := ⟨hk1,hend⟩
-  have hd0 : dist ((k:ℝ)*h) t ≤ h := by
+  have hk0 : 0 ≤ (k : ℝ)*h := by positivity
+  have hk1 : 0 ≤ (((k+1 : ℕ) : ℝ)*h) := by positivity
+  have hkmem : (k : ℝ)*h ∈ Icc 0 T := ⟨hk0, hcell.1.trans ht.2⟩
+  have hk1mem : (((k+1 : ℕ) : ℝ)*h) ∈ Icc 0 T := ⟨hk1, hend⟩
+  have hd0 : dist ((k : ℝ)*h) t ≤ h := by
     rw [Real.dist_eq, abs_of_nonpos (sub_nonpos.mpr hcell.1)]
     push_cast at hcell
     linarith [hcell.2]
-  have hd1 : dist (((k+1:ℕ):ℝ)*h) t ≤ h := by
+  have hd1 : dist (((k+1 : ℕ) : ℝ)*h) t ≤ h := by
     rw [Real.dist_eq, abs_of_nonneg (sub_nonneg.mpr hcell.2)]
     push_cast at hcell ⊢
     linarith [hcell.1]
-  have he0 : ‖N ((k:ℝ)*h)-N t‖ ≤ ε := by
+  have he0 : ‖N ((k : ℝ)*h)-N t‖ ≤ ε := by
     rw [← dist_eq_norm]
     exact (hclose _ hkmem _ ht (hd0.trans_lt hhd)).le
-  have he1 : ‖N (((k+1:ℕ):ℝ)*h)-N t‖ ≤ ε := by
+  have he1 : ‖N (((k+1 : ℕ) : ℝ)*h)-N t‖ ≤ ε := by
     rw [← dist_eq_norm]
     exact (hclose _ hk1mem _ ht (hd1.trans_lt hhd)).le
   simpa using bakryEmeryPolygonalNoise_sampled_error m k hk h hh
-    (fun j => N ((j:ℝ)*h)) t hcell (N t) ε he0 he1
+    (fun j => N ((j : ℝ)*h)) t hcell (N t) ε he0 he1
 
 /-- The actual sampled polygon as a compact-time continuous path. -/
 def bakryEmeryPolygonalSamplePath (T : ℝ) (N : ℝ → EuclideanSpace ℝ ι) (n : ℕ) :
     C(Icc 0 T, EuclideanSpace ℝ ι) :=
-  let h := T/(n+1:ℝ)
+  let h := T/(n+1 : ℝ)
   let x : (Fin (n+1) × ι) → ℝ := fun p =>
-    (N (((p.1.val+1:ℕ):ℝ)*h) p.2-N ((p.1.val:ℝ)*h) p.2)/Real.sqrt h
+    (N (((p.1.val+1 : ℕ) : ℝ)*h) p.2-N ((p.1.val : ℝ)*h) p.2)/Real.sqrt h
   ⟨fun t => bakryEmeryPolygonalNoise (n+1) h x t.val+N 0,
     ((bakryEmeryPolygonalNoise_continuous (n+1) h x).comp continuous_subtype_val).add continuous_const⟩
 
@@ -179,22 +179,22 @@ theorem bakryEmeryPolygonalSamplePath_tendsto
         continuousOn_iff_continuous_restrict.mp hN⟩ : C(Icc 0 T, EuclideanSpace ℝ ι))) := by
   apply Metric.tendsto_nhds.mpr
   intro ε hε
-  obtain ⟨δ,hδ,herror⟩ := bakryEmeryPolygonalNoise_sampled_uniform_error T N hN (ε/2) (by positivity)
-  have hs : Filter.Tendsto (fun n : ℕ => T/(n+1:ℝ)) Filter.atTop (nhds 0) :=
+  obtain ⟨δ, hδ, herror⟩ := bakryEmeryPolygonalNoise_sampled_uniform_error T N hN (ε/2) (by positivity)
+  have hs : Filter.Tendsto (fun n : ℕ => T/(n+1 : ℝ)) Filter.atTop (nhds 0) :=
     by simpa only [Function.comp_def, Nat.cast_add, Nat.cast_one] using
       tendsto_const_nhds.div_atTop (tendsto_natCast_atTop_atTop.comp (tendsto_add_atTop_nat 1))
   filter_upwards [hs.eventually (gt_mem_nhds hδ)] with n hn
-  have hh : 0 < T/(n+1:ℝ) := by positivity
-  have heq : ((n+1:ℕ):ℝ)*(T/(n+1:ℝ))=T := by push_cast; field_simp
+  have hh : 0 < T/(n+1 : ℝ) := by positivity
+  have heq : ((n+1 : ℕ) : ℝ)*(T/(n+1 : ℝ))=T := by push_cast; field_simp
   apply lt_of_le_of_lt _ (half_lt_self hε)
   rw [dist_eq_norm]
   apply (ContinuousMap.norm_le _ (by positivity : 0 ≤ ε/2)).mpr
   intro t
-  change ‖bakryEmeryPolygonalNoise (n+1) (T/(n+1:ℝ))
+  change ‖bakryEmeryPolygonalNoise (n+1) (T/(n+1 : ℝ))
       (fun p : Fin (n+1) × ι =>
-        (N (((p.1.val+1:ℕ):ℝ)*(T/(n+1:ℝ))) p.2-
-         N ((p.1.val:ℝ)*(T/(n+1:ℝ))) p.2)/Real.sqrt (T/(n+1:ℝ))) t.val+N 0-N t.val‖ ≤ ε/2
-  have he := herror (n+1) (by omega) (T/(n+1:ℝ)) hh heq hn t.val t.property
+        (N (((p.1.val+1 : ℕ) : ℝ)*(T/(n+1 : ℝ))) p.2-
+         N ((p.1.val : ℝ)*(T/(n+1 : ℝ))) p.2)/Real.sqrt (T/(n+1 : ℝ))) t.val+N 0-N t.val‖ ≤ ε/2
+  have he := herror (n+1) (by omega) (T/(n+1 : ℝ)) hh heq hn t.val t.property
   convert he using 1
   congr 1
   abel

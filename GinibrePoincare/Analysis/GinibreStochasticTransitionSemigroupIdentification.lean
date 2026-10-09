@@ -7,6 +7,22 @@ public import GinibrePoincare.Analysis.GinibreTransitionAnalyticZeroSpeed
 
 @[expose] public section
 
+/-! # Original stochastic transitions equal the analytic evolution
+
+The operator acts on the full symmetric real L² space. The first theorem
+inherits the semigroup law from the unrestricted stochastic L² operator.
+For positive speed, equality with `ginibreFullRealPaperEvolution` follows
+from the contraction-semigroup identification theorem: continuity,
+contractivity, the identity at time zero, and equality of Laplace transforms
+are the inputs. Zero speed is handled separately because both evolutions
+are the identity.
+
+The last theorem translates operator equality into an almost-everywhere
+formula for the original Brownian process when the L² input has a bounded
+measurable representative `v`. The equality is almost everywhere in the
+initial Ginibre configuration; it does not assert pointwise equality for
+every initial configuration or every arbitrary representative. -/
+
 open Set MeasureTheory ProbabilityTheory Filter
 open scoped NNReal Topology
 namespace GinibrePoincare
@@ -43,7 +59,7 @@ theorem ginibreOriginalSymmetricStochasticL2Operator_eq_paper_positive {Ω : Typ
     (ginibreOriginalSymmetricStochasticL2Operator_semigroup hn α P B hB hiB)
     (ginibreOriginalSymmetricStochasticL2Operator_zero hn α P B hB hiB) α hα
   exact ginibreOriginalSymmetricStochasticL2Operator_laplace hn α
-    (show 0<(α:ℝ) by exact_mod_cast hα) P B hB hiB
+    (show 0<(α : ℝ) by exact_mod_cast hα) P B hB hiB
 
 theorem ginibreOriginalSymmetricStochasticL2Operator_eq_paper {Ω : Type*} [MeasurableSpace Ω]
     {n : ℕ} (hn : 0<n) (α : ℝ≥0) (P : Measure Ω)
@@ -74,15 +90,15 @@ theorem ginibreBrownian_original_transition_eq_paper_ae {Ω : Type*} [Measurable
     (hv : Measurable v) (C : ℝ) (hC : ∀ z, ‖v z‖≤C) :
     (fun z => ∫ ω, v (ginibreBrownianMaximalProcess n α z B T ω) ∂P)=ᵐ[ginibreMeasure n]
       (ginibreFullRealPaperEvolution n hn α T u).val := by
-  obtain ⟨hm,hb,he⟩ := ginibreOriginalStochasticL2Operator_bounded_representative
+  obtain ⟨hm, hb, he⟩ := ginibreOriginalStochasticL2Operator_bounded_representative
     hn α P B hB hiB T u.val v hu hv C hC
   have hop : ginibreOriginalStochasticL2Operator hn α P B hB hiB T u.val=
       (ginibreFullRealPaperEvolution n hn α T u).val := by
     rw [← ginibreOriginalSymmetricStochasticL2Operator_eq_paper hn α P B hB hiB T]
     rfl
   rw [hop] at he
-  filter_upwards [he,ginibre_ae_collisionFree n hn] with z hz hcf
-  rw [hz,ginibreStationaryContinuousTransitionMean_eq_original hn α P B hB hiB v z hcf]
+  filter_upwards [he, ginibre_ae_collisionFree n hn] with z hz hcf
+  rw [hz, ginibreStationaryContinuousTransitionMean_eq_original hn α P B hB hiB v z hcf]
   simp
 
 #print axioms ginibreBrownian_original_transition_eq_paper_ae

@@ -47,8 +47,8 @@ theorem ginibreBrownianMaximalProcess_local_center_CIR_Brownian_integral
   let X := ginibreBrownianHamiltonianStoppedProcess n α z B R T
   let a := fun t ω => Real.sqrt ((8*(α : ℝ)/(n : ℝ))*(ginibreCenterSquared n) (X t ω))
   let u := fun t ω => ginibreCenterRadialDirection n e (ginibreBrownianMaximalProcess n α z B t ω)
-  obtain ⟨hu,hunit,huc⟩ := ginibreBrownianMaximalProcess_centerDirection_properties hn α z hz hcenter B P hB hind e he
-  obtain ⟨ha,hac,C,hC,hbound⟩ := ginibreBrownianHamiltonianStoppedProcess_center_CIR_amplitude_properties
+  obtain ⟨hu, hunit, huc⟩ := ginibreBrownianMaximalProcess_centerDirection_properties hn α z hz hcenter B P hB hind e he
+  obtain ⟨ha, hac, C, hC, hbound⟩ := ginibreBrownianHamiltonianStoppedProcess_center_CIR_amplitude_properties
     (by omega) α z hz B P hB R hR T
   have hui (i : Fin n × Fin 2) (t : ℝ≥0) : @Measurable Ω ℝ (F t) _ (fun ω => u t ω i) :=
     (PiLp.continuous_apply 2 (fun _ : Fin n × Fin 2 => ℝ) i).measurable.comp (hu t)
@@ -58,15 +58,15 @@ theorem ginibreBrownianMaximalProcess_local_center_CIR_Brownian_integral
   have hA (i : Fin n × Fin 2) (t : ℝ≥0) : @Measurable Ω ℝ (F t) _ (A i t) :=
     (ha t).measurable.mul (hui i t)
   have hAb (i : Fin n × Fin 2) (t : ℝ≥0) (ω : Ω) : ‖A i t ω‖ ≤ C := by
-    rw [show A i t ω=a t ω*u t ω i from rfl,norm_mul]
+    rw [show A i t ω=a t ω*u t ω i from rfl, norm_mul]
     exact (mul_le_mul_of_nonneg_right (hbound t ω) (norm_nonneg _)).trans
       (by simpa only [mul_one] using mul_le_mul_of_nonneg_left (hub i t ω) hC.le)
   have hAc (i : Fin n × Fin 2) : ∀ᵐ ω ∂P, ContinuousOn (fun t => A i t ω) (Icc 0 T) := by
     filter_upwards [huc] with ω hω
     exact ((hac ω).mul ((PiLp.continuous_apply 2 (fun _ : Fin n × Fin 2 => ℝ) i).comp hω)).continuousOn
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hJS⟩ := ginibreBoundedField_continuous_integral_exists
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hJS⟩ := ginibreBoundedField_continuous_integral_exists
     B P hB hind A hA T hAc C hC.le hAb
-  obtain ⟨N,hNM,hNC,hNL,hN0,hNS,hNIto⟩ := ginibreBrownianMaximalProcess_local_center_CIR_integral_exists
+  obtain ⟨N, hNM, hNC, hNL, hN0, hNS, hNIto⟩ := ginibreBrownianMaximalProcess_local_center_CIR_integral_exists
     hn α z hz B P hB hind R hR T e
   have hEq : ∀ᵐ ω ∂P, ∀ t ≤ ginibreBrownianHamiltonianBoundedStop n α z B R T ω,
       J t ω=N t ω := by
@@ -89,12 +89,12 @@ theorem ginibreBrownianMaximalProcess_local_center_CIR_Brownian_integral
       (Eventually.of_forall (fun ω => (hac ω).continuousOn)) β hβL hβLim (J t) (hJS t ht)
   have hAL (t : ℝ≥0) : AEStronglyMeasurable (a t) P :=
     ((ha t).mono (F.le t)).aestronglyMeasurable
-  refine ⟨J,hJM,hJC,hJL,hJ0,hMS,?_,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0, hMS,?_,?_⟩
   · intro t ht
     apply ginibre_tendstoInMeasure_of_meanSquare P _ _ _ (hMS t ht)
     intro k
     exact ((ginibreWeightedUniformLeftSum_memLp P β a hβL hAL C hbound t (k+1)).sub (hJL t)).integrable_sq
-  · filter_upwards [hEq,hNIto] with ω hω hIto
+  · filter_upwards [hEq, hNIto] with ω hω hIto
     intro t ht
     rw [hω t ht]
     exact hIto t ht

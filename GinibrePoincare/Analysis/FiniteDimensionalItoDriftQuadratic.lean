@@ -14,12 +14,12 @@ variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 
 /-- Actual bilinear second differential, evaluated on two different increments. -/
 def itoHessianBilinear (f : E → ℝ) (x a b : E) : ℝ :=
-  iteratedFDeriv ℝ 2 f x ![a,b]
+  iteratedFDeriv ℝ 2 f x ![a, b]
 
 theorem itoHessianBilinear_norm_le (f : E → ℝ) (x a b : E) :
     ‖itoHessianBilinear f x a b‖ ≤ ‖iteratedFDeriv ℝ 2 f x‖ * ‖a‖ * ‖b‖ := by
   simpa [itoHessianBilinear, Fin.prod_univ_two, mul_assoc] using
-    (iteratedFDeriv ℝ 2 f x).le_opNorm ![a,b]
+    (iteratedFDeriv ℝ 2 f x).le_opNorm ![a, b]
 
 theorem itoDirectionalHessian_add (f : E → ℝ) (x a b : E) :
     itoDirectionalHessian f x (a+b) = itoDirectionalHessian f x a +

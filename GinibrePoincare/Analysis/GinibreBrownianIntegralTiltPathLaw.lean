@@ -30,19 +30,19 @@ theorem brownianVectorExponentialIntegralDensity_whole_path_law
     (hI : ∀ i, TendstoInMeasure P
       (fun n => brownianUniformLeftSum (B i) (F i) T (n+1)) atTop (I i)) :
     let Q := P.withDensity (fun ω => ENNReal.ofReal (brownianVectorExponentialIntegralDensity F T I ω))
-    let X := fun ω (t : Set.Icc (0:ℝ≥0) T) i => B i t.val ω-B i 0 ω-
-      ∫ s in (0:ℝ)..(t.val:ℝ), F i (Real.toNNReal s) ω
-    let Y := fun ω (t : Set.Icc (0:ℝ≥0) T) i => B i t.val ω-B i 0 ω
+    let X := fun ω (t : Set.Icc (0 : ℝ≥0) T) i => B i t.val ω-B i 0 ω-
+      ∫ s in (0 : ℝ)..(t.val : ℝ), F i (Real.toNNReal s) ω
+    let Y := fun ω (t : Set.Icc (0 : ℝ≥0) T) i => B i t.val ω-B i 0 ω
     Measurable X ∧ Measurable Y ∧ Q.map X=P.map Y ∧
       ∀ i, ∀ᵐ ω ∂Q, ContinuousOn (fun t : ℝ≥0 => B i t ω-B i 0 ω-
-        ∫ s in (0:ℝ)..(t:ℝ), F i (Real.toNNReal s) ω) (Set.Icc 0 T) := by
+        ∫ s in (0 : ℝ)..(t : ℝ), F i (Real.toNNReal s) ω) (Set.Icc 0 T) := by
   classical
   dsimp only
   let d := brownianVectorExponentialIntegralDensity F T I
   let Q := P.withDensity (fun ω => ENNReal.ofReal (d ω))
-  let X := fun ω (t : Set.Icc (0:ℝ≥0) T) i => B i t.val ω-B i 0 ω-
-    ∫ s in (0:ℝ)..(t.val:ℝ), F i (Real.toNNReal s) ω
-  let Y := fun ω (t : Set.Icc (0:ℝ≥0) T) i => B i t.val ω-B i 0 ω
+  let X := fun ω (t : Set.Icc (0 : ℝ≥0) T) i => B i t.val ω-B i 0 ω-
+    ∫ s in (0 : ℝ)..(t.val : ℝ), F i (Real.toNNReal s) ω
+  let Y := fun ω (t : Set.Icc (0 : ℝ≥0) T) i => B i t.val ω-B i 0 ω
   have hd := brownianVectorExponentialIntegralDensity_normalized B P
     (fun i => (hB i).toIsPreBrownianReal) hind F hF C hC hb T hc hs I hI
   letI : IsProbabilityMeasure Q := gaussianDensity_isProbabilityMeasure_of_integral_one P d hd.1 hd.2.1 hd.2.2.1
@@ -67,8 +67,8 @@ theorem brownianVectorExponentialIntegralDensity_whole_path_law
     intro i
     exact (aemeasurable_iff_measurable.mp ((hB i).aemeasurable _)).sub
       (aemeasurable_iff_measurable.mp ((hB i).aemeasurable _))
-  let ν := fun J : Finset (Set.Icc (0:ℝ≥0) T) => P.map (fun ω => J.restrict (Y ω))
-  letI (J : Finset (Set.Icc (0:ℝ≥0) T)) : IsProbabilityMeasure (ν J) :=
+  let ν := fun J : Finset (Set.Icc (0 : ℝ≥0) T) => P.map (fun ω => J.restrict (Y ω))
+  letI (J : Finset (Set.Icc (0 : ℝ≥0) T)) : IsProbabilityMeasure (ν J) :=
     (by infer_instance)
   have hprojX : IsProjectiveLimit (Q.map X) ν := by
     intro J
@@ -79,7 +79,7 @@ theorem brownianVectorExponentialIntegralDensity_whole_path_law
     intro J
     rw [Measure.map_map (show Measurable J.restrict by fun_prop) hYm]
     rfl
-  refine ⟨hXm,hYm,hprojX.unique hprojY,?_⟩
+  refine ⟨hXm, hYm, hprojX.unique hprojY,?_⟩
   intro i
   exact (withDensity_absolutelyContinuous P _).ae_le
     (brownianCorrectedPath_continuousOn B P hB F T hc i)
@@ -108,16 +108,16 @@ theorem brownianBoundedVector_girsanov_whole_path_exists {Ω ι : Type*}
       (∫ ω, brownianVectorExponentialIntegralDensity F T (fun i => M i T) ω ∂P)=1 ∧
       let Q := P.withDensity (fun ω => ENNReal.ofReal
         (brownianVectorExponentialIntegralDensity F T (fun i => M i T) ω))
-      let X := fun ω (t : Set.Icc (0:ℝ≥0) T) i => B i t.val ω-B i 0 ω-
-        ∫ s in (0:ℝ)..(t.val:ℝ), F i (Real.toNNReal s) ω
-      let Y := fun ω (t : Set.Icc (0:ℝ≥0) T) i => B i t.val ω-B i 0 ω
+      let X := fun ω (t : Set.Icc (0 : ℝ≥0) T) i => B i t.val ω-B i 0 ω-
+        ∫ s in (0 : ℝ)..(t.val : ℝ), F i (Real.toNNReal s) ω
+      let Y := fun ω (t : Set.Icc (0 : ℝ≥0) T) i => B i t.val ω-B i 0 ω
       Measurable X ∧ Measurable Y ∧ Q.map X=P.map Y ∧
         ∀ i, ∀ᵐ ω ∂Q, ContinuousOn (fun t : ℝ≥0 => B i t ω-B i 0 ω-
-          ∫ s in (0:ℝ)..(t:ℝ), F i (Real.toNNReal s) ω) (Set.Icc 0 T) := by
+          ∫ s in (0 : ℝ)..(t : ℝ), F i (Real.toNNReal s) ω) (Set.Icc 0 T) := by
   classical
-  obtain ⟨M,hM,hi,hn,hL⟩ := brownianBoundedVector_exponential_integral_exists_normalized
+  obtain ⟨M, hM, hi, hn, hL⟩ := brownianBoundedVector_exponential_integral_exists_normalized
     B P hB hind F hF C hC hb T hc
-  refine ⟨M,hM,hi,hn,?_⟩
+  refine ⟨M, hM, hi, hn,?_⟩
   have hFi (i : ι) (t : ℝ≥0) : MemLp (F i t) 2 P := by
     apply MemLp.of_bound
       ((hF i t).mono ((ginibreBrownianAugmentedFiltration B P

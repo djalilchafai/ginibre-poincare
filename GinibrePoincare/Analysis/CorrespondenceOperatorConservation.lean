@@ -26,16 +26,16 @@ theorem correspondenceOperatorComplexResolvent_constant (n : ℕ) (hn : 0<n) (c 
       ginibreRealConstantL2 n hn c.im := ginibreFullConstant_im n hn c
   have hd := ginibreFullComplex_decomposition n
     (correspondenceOperatorComplexResolvent n hn (ginibreFullConstant n hn c).val)
-  rw [correspondenceOperatorComplexResolvent_re,correspondenceOperatorComplexResolvent_im,
-    hr,hi,correspondenceOperatorValueResolvent_constant,correspondenceOperatorValueResolvent_constant] at hd
+  rw [correspondenceOperatorComplexResolvent_re, correspondenceOperatorComplexResolvent_im,
+    hr, hi, correspondenceOperatorValueResolvent_constant, correspondenceOperatorValueResolvent_constant] at hd
   have hc := ginibreFullComplex_decomposition n (ginibreFullConstant n hn c).val
-  rw [hr,hi] at hc
+  rw [hr, hi] at hc
   exact hd.symm.trans hc
 
 /-- Every constant belongs to the unrestricted generator kernel. -/
 theorem correspondenceOperatorGenerator_constant (n : ℕ) (hn : 0<n) (c : ℂ) :
-    ((ginibreFullConstant n hn c).val,0) ∈ (correspondenceOperatorGenerator n hn).graph := by
-  rw [correspondenceOperatorGenerator_graph_iff,sub_zero]
+    ((ginibreFullConstant n hn c).val, 0) ∈ (correspondenceOperatorGenerator n hn).graph := by
+  rw [correspondenceOperatorGenerator_graph_iff, sub_zero]
   exact correspondenceOperatorComplexResolvent_constant n hn c
 
 /-- The unrestricted diffusion is conservative, preserving the literal

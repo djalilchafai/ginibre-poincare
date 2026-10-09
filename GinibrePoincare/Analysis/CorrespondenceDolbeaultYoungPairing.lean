@@ -25,7 +25,7 @@ theorem dolbeaultCompactPairing_eq_integral {n : ℕ} (θ : Configuration n → 
   filter_upwards [((Complex.continuous_conj.comp hθ).memLp_of_hasCompactSupport
     (p := 2) (μ := volume) (hc.comp_left (map_zero _))).coeFn_toLp] with z hz
   rw [hz]
-  simp [RCLike.inner_apply,mul_comm]
+  simp [RCLike.inner_apply, mul_comm]
 
 theorem dolbeaultTranslateL2_ae {n : ℕ} (j : Fin n) (y : ℂ) (u : dolbeaultOrdinaryL2 n) :
     (dolbeaultTranslateL2 j y u : Configuration n → ℂ) =ᵐ[volume]

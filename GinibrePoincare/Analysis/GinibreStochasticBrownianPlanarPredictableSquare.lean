@@ -17,11 +17,11 @@ theorem ginibreBrownian_planar_predictable_quadratic_secondMoment {Ω : Type*}
     (hBr : IsBrownianReal Br P) (hBi : IsBrownianReal Bi P)
     (hind : IndepFun (fun ω u => Br u ω) (fun ω u => Bi u ω) P) (s t : ℝ≥0)
     (F : (Set.Iic s → ℝ) × (Set.Iic s → ℝ) → ℝ) (hF : Measurable F) :
-    (∫ ω, (F ((fun v => Br v ω),(fun v => Bi v ω))*
+    (∫ ω, (F ((fun v => Br v ω), (fun v => Bi v ω))*
       ((Br (s+t) ω-Br s ω)^2-(t : ℝ)))^2 ∂P) =
-      (2*(t : ℝ)^2)*(∫ ω, (F ((fun v => Br v ω),(fun v => Bi v ω)))^2 ∂P) := by
+      (2*(t : ℝ)^2)*(∫ ω, (F ((fun v => Br v ω), (fun v => Bi v ω)))^2 ∂P) := by
   let := hBr.isGaussianProcess.isProbabilityMeasure
-  let Past := fun ω => ((fun v : Set.Iic s => Br v ω),(fun v : Set.Iic s => Bi v ω))
+  let Past := fun ω => ((fun v : Set.Iic s => Br v ω), (fun v : Set.Iic s => Bi v ω))
   have hPast : Measurable Past := by
     apply Measurable.prodMk
     · apply measurable_pi_lambda
@@ -49,11 +49,11 @@ theorem ginibreBrownian_planar_predictable_quadratic_secondMoment {Ω : Type*}
     (hBr : IsBrownianReal Br P) (hBi : IsBrownianReal Bi P)
     (hind : IndepFun (fun ω u => Br u ω) (fun ω u => Bi u ω) P) (s t : ℝ≥0)
     (F : (Set.Iic s → ℝ) × (Set.Iic s → ℝ) → ℝ) (hF : Measurable F) :
-    (∫ ω, (F ((fun v => Br v ω),(fun v => Bi v ω))*
+    (∫ ω, (F ((fun v => Br v ω), (fun v => Bi v ω))*
       ((Br (s+t) ω-Br s ω)*(Bi (s+t) ω-Bi s ω)))^2 ∂P) =
-      (t : ℝ)^2*(∫ ω, (F ((fun v => Br v ω),(fun v => Bi v ω)))^2 ∂P) := by
+      (t : ℝ)^2*(∫ ω, (F ((fun v => Br v ω), (fun v => Bi v ω)))^2 ∂P) := by
   let := hBr.isGaussianProcess.isProbabilityMeasure
-  let Past := fun ω => ((fun v : Set.Iic s => Br v ω),(fun v : Set.Iic s => Bi v ω))
+  let Past := fun ω => ((fun v : Set.Iic s => Br v ω), (fun v : Set.Iic s => Bi v ω))
   have hPast : Measurable Past := by
     apply Measurable.prodMk
     · apply measurable_pi_lambda
@@ -69,7 +69,7 @@ theorem ginibreBrownian_planar_predictable_quadratic_secondMoment {Ω : Type*}
     norm_num
     ring
   have h := ginibreIndependent_predictable_secondMoment P Past
-    (fun ω => (Br (s+t) ω-Br s ω,Bi (s+t) ω-Bi s ω)) hPast _
+    (fun ω => (Br (s+t) ω-Br s ω, Bi (s+t) ω-Bi s ω)) hPast _
     (ginibreBrownian_planar_increment_hasLaw Br Bi P hBr hBi hind s t)
     (ginibreBrownian_planar_increment_independent_past Br Bi P hBr hBi hind s t)
     F hF (fun u : ℝ × ℝ => u.1*u.2) (by fun_prop)

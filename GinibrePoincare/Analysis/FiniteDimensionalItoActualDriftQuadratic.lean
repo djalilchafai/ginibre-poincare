@@ -27,12 +27,12 @@ theorem itoActualPath_drift_hessian_tendsto
         (W (ginibreUniformBrownianTime T n (i.val+1)) -
           W (ginibreUniformBrownianTime T n i)))) atTop (𝓝 0) := by
   classical
-  obtain ⟨B,hB⟩ := isCompact_Icc.exists_bound_of_continuousOn hb
+  obtain ⟨B, hB⟩ := isCompact_Icc.exists_bound_of_continuousOn hb
   let M := max B 0
   have hM : 0 ≤ M := le_max_right _ _
   have hbm : ∀ t ∈ Set.Icc (0 : ℝ) T, ‖b t‖ ≤ M :=
     fun t ht => (hB t ht).trans (le_max_left _ _)
-  let q : ∀ n, ℕ → Fin (n+1) := fun n i => ⟨i%(n+1),Nat.mod_lt _ (Nat.succ_pos n)⟩
+  let q : ∀ n, ℕ → Fin (n+1) := fun n i => ⟨i%(n+1), Nat.mod_lt _ (Nat.succ_pos n)⟩
   let x := fun n i => X (ginibreUniformBrownianTime T n (q n i))
   let a := fun n i => W (ginibreUniformBrownianTime T n ((q n i).val+1)) -
     W (ginibreUniformBrownianTime T n (q n i))
@@ -41,7 +41,7 @@ theorem itoActualPath_drift_hessian_tendsto
   have hm : Tendsto m atTop (𝓝 0) := by
     have hh := (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)).const_mul (M*(T : ℝ))
     have hlim : Tendsto (fun n : ℕ => M*((T : ℝ)/((n : ℝ)+1))) atTop (𝓝 0) := by
-      simpa [div_eq_mul_inv,mul_assoc] using hh
+      simpa [div_eq_mul_inv, mul_assoc] using hh
     simpa only [add_zero] using (itoUniformPathMesh_tendsto W T hW).add hlim
   have hv : ∀ n, ∑ i ∈ Finset.range (n+1), ‖c n i‖ ≤ M*(T : ℝ) := by
     intro n
@@ -50,10 +50,10 @@ theorem itoActualPath_drift_hessian_tendsto
     convert hh using 1
     apply Finset.sum_congr rfl
     intro i hi
-    simp [c,q,Nat.mod_eq_of_lt i.is_lt]
+    simp [c, q, Nat.mod_eq_of_lt i.is_lt]
   have ht := itoDirectionalHessian_local_compact_drift_sum_tendsto f U K hU hf hK hKU
     (fun n => Finset.range (n+1)) x a c
-    (fun n i hi => hX _ ⟨bot_le,ginibreUniformBrownianTime_le_end T n _
+    (fun n i hi => hX _ ⟨bot_le, ginibreUniformBrownianTime_le_end T n _
       (Nat.le_of_lt (q n i).is_lt)⟩) (M*(T : ℝ)) (mul_nonneg hM T.coe_nonneg)
     m hm (fun n => add_nonneg (itoUniformPathMesh_nonneg W T n) (by positivity))
     (fun n i hi => (itoUniformPathMesh_increment_le W T n (q n i)).trans
@@ -66,7 +66,7 @@ theorem itoActualPath_drift_hessian_tendsto
     itoDirectionalHessian f (x n i) (a n i+c n i)-itoDirectionalHessian f (x n i) (a n i)) (n+1)]
   apply Finset.sum_congr rfl
   intro i hi
-  simp [x,a,c,q,Nat.mod_eq_of_lt i.is_lt]
+  simp [x, a, c, q, Nat.mod_eq_of_lt i.is_lt]
 
 end
 end GinibrePoincare

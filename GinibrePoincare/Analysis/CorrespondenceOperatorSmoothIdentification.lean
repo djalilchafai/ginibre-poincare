@@ -14,12 +14,12 @@ set_option backward.isDefEq.respectTransparency false
 theorem correspondenceOperatorGenerator_ofReal_variational_iff {n : ℕ} (hn : 0 < n)
     (u v : GinibreFullValueL2 n) (g : GinibreFullGradientL2 n)
     (hu : IsGinibreDistributionalGradient n u g) :
-    (ginibreFullComplexOfReal n u,ginibreFullComplexOfReal n v) ∈
+    (ginibreFullComplexOfReal n u, ginibreFullComplexOfReal n v) ∈
       (correspondenceOperatorGenerator n hn).graph ↔
       ∀ w : GinibreFullValueL2 n, ∀ h : GinibreFullGradientL2 n,
         IsGinibreDistributionalGradient n w h →
-        (1/(n:ℝ))*inner ℝ g h = -inner ℝ v w := by
-  rw [correspondenceOperatorGenerator_graph_iff,← map_sub,correspondenceOperatorComplexResolvent_ofReal]
+        (1/(n : ℝ))*inner ℝ g h = -inner ℝ v w := by
+  rw [correspondenceOperatorGenerator_graph_iff,← map_sub, correspondenceOperatorComplexResolvent_ofReal]
   have hinj : Function.Injective (ginibreFullComplexOfReal n) := by
     intro a b hab
     have hh := congrArg (ginibreFullComplexRe n) hab
@@ -33,11 +33,11 @@ theorem correspondenceOperatorGenerator_ofReal_variational_iff {n : ℕ} (hn : 0
     have hg : correspondenceOperatorFormGradient n hn r=g :=
       (ginibre_distributional_gradient_unique n hn u g _ hu
         (by simpa only [hv] using hrweak)).symm
-    let q : correspondenceOperatorWeakSpace n hn := ⟨(w,h),hw⟩
+    let q : correspondenceOperatorWeakSpace n hn := ⟨(w, h), hw⟩
     have hr := correspondenceOperatorFormResolvent_riesz n hn (u-v)
       (correspondenceOperatorFormOfWeak n hn q)
-    rw [correspondenceOperatorFormSpace_inner,correspondenceOperatorFormOfWeak_value,
-      correspondenceOperatorFormOfWeak_gradient,hv,hg,inner_sub_left] at hr
+    rw [correspondenceOperatorFormSpace_inner, correspondenceOperatorFormOfWeak_value,
+      correspondenceOperatorFormOfWeak_gradient, hv, hg, inner_sub_left] at hr
     linarith
   · intro heq
     have hh := correspondenceOperatorGenerator_resolvent_unique n hn (u-v) u g hu
@@ -48,16 +48,16 @@ theorem correspondenceOperatorGenerator_ofReal_variational_iff {n : ℕ} (hn : 0
 weak-H¹ values admitting their actual weighted weak divergence in L². -/
 theorem correspondenceOperatorGenerator_real_graph_iff_exists_gradient {n : ℕ} (hn : 0<n)
     (u v : GinibreFullValueL2 n) :
-    (ginibreFullComplexOfReal n u,ginibreFullComplexOfReal n v) ∈
+    (ginibreFullComplexOfReal n u, ginibreFullComplexOfReal n v) ∈
       (correspondenceOperatorGenerator n hn).graph ↔
     ∃ g : GinibreFullGradientL2 n, IsGinibreDistributionalGradient n u g ∧
       ∀ w : GinibreFullValueL2 n, ∀ h : GinibreFullGradientL2 n,
         IsGinibreDistributionalGradient n w h →
-        (1/(n:ℝ))*inner ℝ g h = -inner ℝ v w := by
+        (1/(n : ℝ))*inner ℝ g h = -inner ℝ v w := by
   constructor
   · intro hgraph
     have heq := (correspondenceOperatorGenerator_graph_iff n hn _ _).mp hgraph
-    rw [← map_sub,correspondenceOperatorComplexResolvent_ofReal] at heq
+    rw [← map_sub, correspondenceOperatorComplexResolvent_ofReal] at heq
     have heqr : correspondenceOperatorValueResolvent n hn (u-v)=u := by
       have h := congrArg (ginibreFullComplexRe n) heq
       simpa using h
@@ -66,8 +66,8 @@ theorem correspondenceOperatorGenerator_real_graph_iff_exists_gradient {n : ℕ}
     have hr := correspondenceOperatorFormSpace_weak n hn r
     have hu : IsGinibreDistributionalGradient n u (correspondenceOperatorFormGradient n hn r) := by
       simpa only [hv] using hr
-    exact ⟨_,hu,(correspondenceOperatorGenerator_ofReal_variational_iff hn u v _ hu).mp hgraph⟩
-  · rintro ⟨g,hu,heq⟩
+    exact ⟨_, hu, (correspondenceOperatorGenerator_ofReal_variational_iff hn u v _ hu).mp hgraph⟩
+  · rintro ⟨g, hu, heq⟩
     exact (correspondenceOperatorGenerator_ofReal_variational_iff hn u v g hu).mpr heq
 
 theorem correspondenceOperatorGenerator_smooth_graph {n : ℕ} (hn : 0 < n)
@@ -130,13 +130,13 @@ theorem correspondenceOperator_friedrichs_form_closure (n : ℕ) (hn : 0 < n) :
     exact ginibreWeakPair_mem_closure_interiorSmooth hn p.1 p.2 hp
   · apply closure_minimal _ (correspondenceOperatorWeakSpace_isClosed n hn)
     intro p hp
-    obtain ⟨f,hf,hc,hs,hv,hg⟩ := hp
+    obtain ⟨f, hf, hc, hs, hv, hg⟩ := hp
     exact ginibre_smooth_distributional_gradient n hn p.1 p.2 f hf hv hg
 
 /-- Exact real and imaginary decomposition of the unrestricted complex operator graph. -/
 theorem correspondenceOperatorGenerator_graph_iff_real_imag (n : ℕ) (hn : 0 < n)
     (u v : GinibreFullComplexL2 n) :
-    (u,v) ∈ (correspondenceOperatorGenerator n hn).graph ↔
+    (u, v) ∈ (correspondenceOperatorGenerator n hn).graph ↔
       correspondenceOperatorValueResolvent n hn (ginibreFullComplexRe n u-ginibreFullComplexRe n v)=
         ginibreFullComplexRe n u ∧
       correspondenceOperatorValueResolvent n hn (ginibreFullComplexIm n u-ginibreFullComplexIm n v)=
@@ -146,21 +146,21 @@ theorem correspondenceOperatorGenerator_graph_iff_real_imag (n : ℕ) (hn : 0 < 
   · intro hh
     constructor
     · have h := congrArg (ginibreFullComplexRe n) hh
-      simpa only [correspondenceOperatorComplexResolvent_re,map_sub] using h
+      simpa only [correspondenceOperatorComplexResolvent_re, map_sub] using h
     · have h := congrArg (ginibreFullComplexIm n) hh
-      simpa only [correspondenceOperatorComplexResolvent_im,map_sub] using h
-  · rintro ⟨hr,hi⟩
+      simpa only [correspondenceOperatorComplexResolvent_im, map_sub] using h
+  · rintro ⟨hr, hi⟩
     have hd := ginibreFullComplex_decomposition n (correspondenceOperatorComplexResolvent n hn (u-v))
     have hdu := ginibreFullComplex_decomposition n u
     have hr' : ginibreFullComplexRe n (correspondenceOperatorComplexResolvent n hn (u-v)) =
         ginibreFullComplexRe n u := by
-      rw [correspondenceOperatorComplexResolvent_re,(ginibreFullComplexRe n).map_sub]
+      rw [correspondenceOperatorComplexResolvent_re, (ginibreFullComplexRe n).map_sub]
       exact hr
     have hi' : ginibreFullComplexIm n (correspondenceOperatorComplexResolvent n hn (u-v)) =
         ginibreFullComplexIm n u := by
-      rw [correspondenceOperatorComplexResolvent_im,(ginibreFullComplexIm n).map_sub]
+      rw [correspondenceOperatorComplexResolvent_im, (ginibreFullComplexIm n).map_sub]
       exact hi
-    rw [hr',hi'] at hd
+    rw [hr', hi'] at hd
     exact hd.symm.trans hdu
 
 #print axioms correspondenceOperator_friedrichs_form_closure

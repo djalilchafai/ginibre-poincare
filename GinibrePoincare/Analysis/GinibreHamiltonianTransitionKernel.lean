@@ -48,7 +48,7 @@ theorem ginibreCanonicalTransitionKernel_apply {n : ℕ} (hn : 0 < n) (α : ℝ)
       μ.map (fun N => ginibreDrivenMaximalValue n α N.val z.val t) := by
   unfold ginibreCanonicalTransitionKernel
   rw [Kernel.map_apply _ (ginibreDrivenMaximalValue_joint_measurable hn α t),
-    Kernel.prod_apply,Kernel.id_apply,Kernel.const_apply,Measure.dirac_prod,
+    Kernel.prod_apply, Kernel.id_apply, Kernel.const_apply, Measure.dirac_prod,
     Measure.map_map (ginibreDrivenMaximalValue_joint_measurable hn α t) measurable_prodMk_left]
   rfl
 

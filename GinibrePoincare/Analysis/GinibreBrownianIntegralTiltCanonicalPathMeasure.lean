@@ -12,35 +12,35 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1600000
 local instance canonicalPathMeasurable (n : ℕ) (T : ℝ≥0) :
-    MeasurableSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := borel _
+    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := borel _
 local instance canonicalPathBorel (n : ℕ) (T : ℝ≥0) :
-    BorelSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := ⟨rfl⟩
+    BorelSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := ⟨rfl⟩
 
 def ginibreCanonicalCompactPath {Ω : Type*} (n : ℕ) (α : ℝ) (z : Configuration n)
-    (T : ℝ≥0) (N : Ω → ℝ → Configuration n) : Ω → C(Icc (0:ℝ) (T:ℝ),Configuration n) :=
+    (T : ℝ≥0) (N : Ω → ℝ → Configuration n) : Ω → C(Icc (0 : ℝ) (T : ℝ), Configuration n) :=
   ginibreFiniteContinuousNoiseNormalize n T
     (fun ω t => ginibreDrivenMaximalPath n α (N ω) z t.val)
 
 theorem ginibreCanonicalCompactPath_apply_of_alive {Ω : Type*} (n : ℕ) (α : ℝ)
     (z : Configuration n) (T : ℝ≥0) (N : Ω → ℝ → Configuration n) (ω : Ω)
-    (hAlive : (T:ℝ≥0∞)<ginibreDrivenMaximalLifetime n α (N ω) z)
-    (t : Icc (0:ℝ) (T:ℝ)) :
+    (hAlive : (T : ℝ≥0∞)<ginibreDrivenMaximalLifetime n α (N ω) z)
+    (t : Icc (0 : ℝ) (T : ℝ)) :
     ginibreCanonicalCompactPath n α z T N ω t=ginibreDrivenMaximalPath n α (N ω) z t.val := by
-  have hc : Continuous (fun t : Icc (0:ℝ) (T:ℝ) => ginibreDrivenMaximalPath n α (N ω) z t.val) :=
+  have hc : Continuous (fun t : Icc (0 : ℝ) (T : ℝ) => ginibreDrivenMaximalPath n α (N ω) z t.val) :=
     continuousOn_iff_continuous_domRestrict.mp (ginibreDrivenMaximalPath_segment T hAlive).1
-  simp [ginibreCanonicalCompactPath,ginibreFiniteContinuousNoiseNormalize,ContinuousMap.mkD,hc]
+  simp [ginibreCanonicalCompactPath, ginibreFiniteContinuousNoiseNormalize, ContinuousMap.mkD, hc]
 
 theorem ginibreCanonicalCompactPath_forall_iff_of_alive {Ω : Type*} (n : ℕ) (α : ℝ)
     (z : Configuration n) (T : ℝ≥0) (N : Ω → ℝ → Configuration n) (ω : Ω)
-    (hAlive : (T:ℝ≥0∞)<ginibreDrivenMaximalLifetime n α (N ω) z)
+    (hAlive : (T : ℝ≥0∞)<ginibreDrivenMaximalLifetime n α (N ω) z)
     (A : Set (Configuration n)) :
     (∀ t, ginibreCanonicalCompactPath n α z T N ω t∈A) ↔
       (∀ t≤T, ginibreDrivenMaximalValue n α (N ω) z t∈A) := by
   constructor
   · intro h t ht
-    have he := h (⟨t,⟨t.property,by exact_mod_cast ht⟩⟩ : Icc (0:ℝ) (T:ℝ))
+    have he := h (⟨t, ⟨t.property, by exact_mod_cast ht⟩⟩ : Icc (0 : ℝ) (T : ℝ))
     simpa only [ginibreCanonicalCompactPath_apply_of_alive n α z T N ω hAlive,
-      ginibreDrivenMaximalPath,Real.toNNReal_coe] using he
+      ginibreDrivenMaximalPath, Real.toNNReal_coe] using he
   · intro h t
     rw [ginibreCanonicalCompactPath_apply_of_alive n α z T N ω hAlive]
     exact h t.val.toNNReal (Real.toNNReal_le_iff_le_coe.mpr t.property.2)
@@ -52,31 +52,31 @@ theorem ginibreActualCanonical_compact_path_law {Ω : Type*} [MeasurableSpace Ω
     {n : ℕ} (nPos : 0<n) (α : ℝ) (z : Configuration n) (T : ℝ≥0)
     (P Q : Measure Ω) [P.IsComplete] (hQP : Q ≪ P) (hPQ : P ≪ Q)
     (N M : Ω → ℝ → Configuration n)
-    (hAliveN : ∀ᵐ ω ∂Q, (T:ℝ≥0∞)<ginibreDrivenMaximalLifetime n α (N ω) z)
-    (hAliveM : ∀ᵐ ω ∂P, (T:ℝ≥0∞)<ginibreDrivenMaximalLifetime n α (M ω) z)
+    (hAliveN : ∀ᵐ ω ∂Q, (T : ℝ≥0∞)<ginibreDrivenMaximalLifetime n α (N ω) z)
+    (hAliveM : ∀ᵐ ω ∂P, (T : ℝ≥0∞)<ginibreDrivenMaximalLifetime n α (M ω) z)
     (hLaw : IdentDistrib
-      (fun ω (t : Icc (0:ℝ≥0) T) => ginibreDrivenMaximalValue n α (N ω) z t.val)
-      (fun ω (t : Icc (0:ℝ≥0) T) => ginibreDrivenMaximalValue n α (M ω) z t.val) Q P) :
+      (fun ω (t : Icc (0 : ℝ≥0) T) => ginibreDrivenMaximalValue n α (N ω) z t.val)
+      (fun ω (t : Icc (0 : ℝ≥0) T) => ginibreDrivenMaximalValue n α (M ω) z t.val) Q P) :
     Measurable (ginibreCanonicalCompactPath n α z T N) ∧
       Measurable (ginibreCanonicalCompactPath n α z T M) ∧
       Q.map (ginibreCanonicalCompactPath n α z T N)=P.map (ginibreCanonicalCompactPath n α z T M) := by
-  let R := fun f : Icc (0:ℝ≥0) T → Configuration n => fun t : Icc (0:ℝ) (T:ℝ) =>
-    f ⟨t.val.toNNReal,⟨bot_le,Real.toNNReal_le_iff_le_coe.mpr t.property.2⟩⟩
+  let R := fun f : Icc (0 : ℝ≥0) T → Configuration n => fun t : Icc (0 : ℝ) (T : ℝ) =>
+    f ⟨t.val.toNNReal, ⟨bot_le, Real.toNNReal_le_iff_le_coe.mpr t.property.2⟩⟩
   have hRm : Measurable R := by
     apply measurable_pi_lambda
     intro t
     exact measurable_pi_apply _
   have hReal := hLaw.comp hRm
-  have hXm : Measurable (fun ω (t : Icc (0:ℝ) (T:ℝ)) => ginibreDrivenMaximalPath n α (N ω) z t.val) :=
+  have hXm : Measurable (fun ω (t : Icc (0 : ℝ) (T : ℝ)) => ginibreDrivenMaximalPath n α (N ω) z t.val) :=
     aemeasurable_iff_measurable.mp (hReal.aemeasurable_fst.mono_ac hPQ)
-  have hYm : Measurable (fun ω (t : Icc (0:ℝ) (T:ℝ)) => ginibreDrivenMaximalPath n α (M ω) z t.val) :=
+  have hYm : Measurable (fun ω (t : Icc (0 : ℝ) (T : ℝ)) => ginibreDrivenMaximalPath n α (M ω) z t.val) :=
     aemeasurable_iff_measurable.mp hReal.aemeasurable_snd
-  have hcNQ : ∀ᵐ ω ∂Q, Continuous (fun t : Icc (0:ℝ) (T:ℝ) => ginibreDrivenMaximalPath n α (N ω) z t.val) := by
+  have hcNQ : ∀ᵐ ω ∂Q, Continuous (fun t : Icc (0 : ℝ) (T : ℝ) => ginibreDrivenMaximalPath n α (N ω) z t.val) := by
     filter_upwards [hAliveN] with ω hω
     exact continuousOn_iff_continuous_domRestrict.mp (ginibreDrivenMaximalPath_segment T hω).1
-  have hcNP : ∀ᵐ ω ∂P, Continuous (fun t : Icc (0:ℝ) (T:ℝ) => ginibreDrivenMaximalPath n α (N ω) z t.val) :=
+  have hcNP : ∀ᵐ ω ∂P, Continuous (fun t : Icc (0 : ℝ) (T : ℝ) => ginibreDrivenMaximalPath n α (N ω) z t.val) :=
     hPQ.ae_le hcNQ
-  have hcM : ∀ᵐ ω ∂P, Continuous (fun t : Icc (0:ℝ) (T:ℝ) => ginibreDrivenMaximalPath n α (M ω) z t.val) := by
+  have hcM : ∀ᵐ ω ∂P, Continuous (fun t : Icc (0 : ℝ) (T : ℝ) => ginibreDrivenMaximalPath n α (M ω) z t.val) := by
     filter_upwards [hAliveM] with ω hω
     exact continuousOn_iff_continuous_domRestrict.mp (ginibreDrivenMaximalPath_segment T hω).1
   exact ginibreFiniteContinuousNoiseNormalize_law n T P Q _ _ hXm hYm hcNP hcM hQP hReal.map_eq
@@ -99,7 +99,7 @@ theorem ginibreActualOU_sublevel_canonical_compact_path_law_exists {Ω : Type*}
         (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) T (fun i => M i T) ω ∂P)=1 ∧
       let Q := P.withDensity (fun ω => ENNReal.ofReal (brownianVectorExponentialIntegralDensity
         (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) T (fun i => M i T) ω))
-      ((∀ᵐ ω ∂Q, (T:ℝ≥0∞)<ginibreDrivenMaximalLifetime n α
+      ((∀ᵐ ω ∂Q, (T : ℝ≥0∞)<ginibreDrivenMaximalLifetime n α
         (ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω) z) ∧
       (Measurable (ginibreCanonicalCompactPath n α z T (fun ω =>
         ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω)) ∧
@@ -121,7 +121,7 @@ theorem ginibreActualOU_sublevel_canonical_compact_path_law_exists {Ω : Type*}
             Real.exp (ginibreInteractionPotential n z)*
               (ginibreHamiltonianGradientPathWeight n α T (fun s => Y s.toNNReal ω)/
                 ginibreQuadraticGradientPathWeight n α T (fun s => Y s.toNNReal ω))) := by
-  obtain ⟨Y,M,hM,hDi,hD1,hPath,hCouple⟩ :=
+  obtain ⟨Y, M, hM, hDi, hD1, hPath, hCouple⟩ :=
     ginibreActualOU_sublevel_canonical_whole_path_law_exists hn B P hB hind α z hz R hR T hT
   let F := fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i
   let D := brownianVectorExponentialIntegralDensity F T (fun i => M i T)
@@ -130,13 +130,13 @@ theorem ginibreActualOU_sublevel_canonical_compact_path_law_exists {Ω : Type*}
   have hPQ : P ≪ Q := withDensity_absolutelyContinuous'
     (ENNReal.measurable_ofReal.comp_aemeasurable hDi.aemeasurable)
     (ae_of_all P (fun ω => ne_of_gt (ENNReal.ofReal_pos.mpr (Real.exp_pos _))))
-  have hAliveM : ∀ᵐ ω ∂P, (T:ℝ≥0∞)<ginibreDrivenMaximalLifetime n α
+  have hAliveM : ∀ᵐ ω ∂P, (T : ℝ≥0∞)<ginibreDrivenMaximalLifetime n α
       (ginibreBrownianFullContinuousNoise n B α ω).val z := by
     filter_upwards [ginibreBrownianMaximalLifetime_top_ae hn α z hz B P hB hind] with ω hω
-    change (T:ℝ≥0∞)<ginibreBrownianMaximalLifetime n α z B ω
+    change (T : ℝ≥0∞)<ginibreBrownianMaximalLifetime n α z B ω
     rw [hω]
     exact ENNReal.coe_lt_top
-  refine ⟨Y,M,hM,hDi,hD1,⟨hPath.1,?_⟩,hCouple⟩
+  refine ⟨Y, M, hM, hDi, hD1, ⟨hPath.1,?_⟩, hCouple⟩
   exact ginibreActualCanonical_compact_path_law hn α z T P Q hQP hPQ _ _ hPath.1 hAliveM hPath.2
 
 #print axioms ginibreActualOU_sublevel_canonical_compact_path_law_exists

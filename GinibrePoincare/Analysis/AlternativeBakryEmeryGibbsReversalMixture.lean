@@ -58,19 +58,19 @@ theorem bakryEmeryGibbs_killed_gaussian_initial_identity {Ω : Type*} [Measurabl
     rw [← ENNReal.ofReal_mul (Real.exp_pos _).le, ← Real.exp_add]
     simp
   have hFiber : ∀ᵐ x ∂γ,
-      (P.map (fun ω => C (x,ω))).restrict S =
-      (P.withDensity (fun ω => e x * S.indicator a (O (x,ω)))).map (fun ω => O (x,ω)) := by
+      (P.map (fun ω => C (x, ω))).restrict S =
+      (P.withDensity (fun ω => e x * S.indicator a (O (x, ω)))).map (fun ω => O (x, ω)) := by
     apply Filter.Eventually.of_forall
     intro x
     have h := bakryEmeryGibbs_fixed_initial_killed_law hn W hW κ hκ hc P B hB hiB
       (ginibreHamiltonianOUCoordinateAssembly n x) T hT R
     have hOE : ginibreHamiltonianOUReferenceHorizon n ((n : ℝ)^2)
-        (ginibreHamiltonianOUCoordinateAssembly n x) B T = (fun ω => O (x,ω)) := by
+        (ginibreHamiltonianOUCoordinateAssembly n x) B T = (fun ω => O (x, ω)) := by
       funext ω
       rfl
     rw [hOE] at h
-    simpa only [C,O,S,a,e,bakryEmeryGibbsGaussianInitialPath,
-      bakryEmeryGibbsGaussianInitialOUPath,bakryEmeryGibbsKilledOUAction,
+    simpa only [C, O, S, a, e, bakryEmeryGibbsGaussianInitialPath,
+      bakryEmeryGibbsGaussianInitialOUPath, bakryEmeryGibbsKilledOUAction,
       ginibreHamiltonianOUReferenceHorizon] using h
   exact ginibre_killed_product_mixture γ P C O hC hO S hS a ha w e hw he hCancel hFiber
 

@@ -62,10 +62,10 @@ theorem ginibreBrownianMaximalProcess_center_regularized_increment_exists
   let X := ginibreBrownianHamiltonianStoppedProcess n α z B R T
   have hf : ContDiffOn ℝ 2 (ginibreCenterSquareRootRegularized n δ) {x | CollisionFree x} :=
     ((contDiff_ginibreCenterSquareRootRegularized n hδ).of_le (by exact WithTop.coe_le_coe.mpr (show (2 : ENat) ≤ ⊤ from le_top))).contDiffOn
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hJS,hIto,hEnd⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hJS, hIto, hEnd⟩ :=
     ginibreBrownianMaximalProcess_local_test_ito_integral_exists (by omega) α z hz B P hB hind
       R hR T (ginibreCenterSquareRootRegularized n δ) hf
-  refine ⟨J,hJM,hJC,hJL,hJS,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJS,?_⟩
   filter_upwards [hIto] with ω hIto
   intro a t hat ht hlow
   have hCF (u : ℝ≥0) : CollisionFree (X u ω) :=

@@ -8,20 +8,22 @@ See [numbered report](REPORT.md) for exported statements and [correspondence rev
 
 | Subproject / entry point | Modules | Lines | Scope |
 | --- | ---: | ---: | --- |
-| [Complex Gaussian and Hermite analysis](GinibrePoincare/Subprojects/ComplexGaussianHermite.lean) | 164 | 22,311 | Gaussian laws, moments, complex Hermite basis, completeness, Parseval and Wirtinger calculus. |
+| [Complex Gaussian and Hermite analysis](GinibrePoincare/Subprojects/ComplexGaussianHermite.lean) | 164 | 22,367 | Gaussian laws, moments, complex Hermite basis, completeness, Parseval and Wirtinger calculus. |
 | [Gaussian log-Sobolev and entropy](GinibrePoincare/Subprojects/GaussianLSI.lean) | 65 | 6,052 | Gaussian LSI via discrete approximation, entropy tensorization and analytic closure. |
-| [Ginibre measure and holomorphic geometry](GinibrePoincare/Subprojects/GinibreMeasureGeometry.lean) | 51 | 10,472 | Concrete normalization, Vandermonde isometry, symmetry and holomorphic projection geometry. |
+| [Ginibre measure and holomorphic geometry](GinibrePoincare/Subprojects/GinibreMeasureGeometry.lean) | 51 | 10,505 | Concrete normalization, Vandermonde isometry, symmetry and holomorphic projection geometry. |
 | [Weak Sobolev domains and collision capacity](GinibrePoincare/Subprojects/WeakSobolev.lean) | 52 | 6,970 | Weak gradients, mollification, core approximation, collision removal and capacity; Appendix A. |
-| [Poincaré deficits and equality](GinibrePoincare/Subprojects/DeficitsEquality.lean) | 40 | 5,614 | Sharp symmetric inequality, Hermite deficits and affine equality; supports Theorems 1.1, 1.9 and 1.10. |
+| [Poincaré deficits and equality](GinibrePoincare/Subprojects/DeficitsEquality.lean) | 40 | 5,646 | Sharp symmetric inequality, Hermite deficits and affine equality; supports Theorems 1.1, 1.9 and 1.10. |
 | [Polynomial, radial and equilibrium sectors](GinibrePoincare/Subprojects/PolynomialRadial.lean) | 64 | 7,375 | Equilibrium factorization, Hermite–Laguerre eigenfunctions, Kostlan laws and radial LSI; Theorems 1.2, 1.4, 1.12. |
-| [Diffusion operators and analytic semigroups](GinibrePoincare/Subprojects/GeneratorSemigroup.lean) | 233 | 22,505 | Generator domains, Bochner identities, curvature, resolvents and transition identification. |
-| [Stochastic calculus foundations](GinibrePoincare/Subprojects/StochasticCalculus.lean) | 231 | 17,411 | Brownian integration, quadratic variation, Girsanov changes of law and finite-dimensional Itô formulas. |
-| [Ginibre stochastic dynamics](GinibrePoincare/Subprojects/StochasticDynamics.lean) | 375 | 28,896 | Singular stochastic equation, Hamiltonian noise constructions, independence, CIR factorization and stationarity; Theorem 1.3. |
-| [Matrix lift and eigenvector overlaps](GinibrePoincare/Subprojects/MatrixLift.lean) | 128 | 11,330 | Schur and spectral charts, matrix Gaussian law and finite-energy overlap inequalities; Theorem 1.13. |
-| [Nonquadratic potentials](GinibrePoincare/Subprojects/NonQuadratic.lean) | 288 | 30,189 | Weighted dbar, general-potential geometry, convex transports and radial LSI; Theorem 1.14. |
-| [Paper assembly](GinibrePoincare/Subprojects/Endgame.lean) | 16 | 1,652 | Public completion endpoints and finite or abstract reduction assemblies. |
+| [Diffusion operators and analytic semigroups](GinibrePoincare/Subprojects/GeneratorSemigroup.lean) | 233 | 22,631 | Generator domains, Bochner identities, curvature, resolvents and transition identification. |
+| [Stochastic calculus foundations](GinibrePoincare/Subprojects/StochasticCalculus.lean) | 231 | 17,526 | Brownian integration, quadratic variation, Girsanov changes of law and finite-dimensional Itô formulas. |
+| [Ginibre stochastic dynamics](GinibrePoincare/Subprojects/StochasticDynamics.lean) | 375 | 29,287 | Singular stochastic equation, Hamiltonian noise constructions, independence, CIR factorization and stationarity; Theorem 1.3. |
+| [Matrix lift and eigenvector overlaps](GinibrePoincare/Subprojects/MatrixLift.lean) | 128 | 11,579 | Schur and spectral charts, matrix Gaussian law and finite-energy overlap inequalities; Theorem 1.13. |
+| [Nonquadratic potentials](GinibrePoincare/Subprojects/NonQuadratic.lean) | 288 | 30,223 | Weighted dbar, general-potential geometry, convex transports and radial LSI; Theorem 1.14. |
+| [Paper assembly](GinibrePoincare/Subprojects/Endgame.lean) | 16 | 1,831 | Public completion endpoints and finite or abstract reduction assemblies. |
 
 Counts include comments and blank lines, exclude generated facades and Mathlib. The full project/transitive Mathlib counts are refreshed separately with `python3 scripts/count_lean_sources.py`.
+
+For ordered mathematical reading paths, start with the [human reading guide](HUMAN_READABILITY.md). The inventory below lists files; the guide explains how the principal arguments fit together.
 
 See [box-and-arrow dependency diagrams](DEPENDENCIES.md) for every group’s direct dependencies.
 

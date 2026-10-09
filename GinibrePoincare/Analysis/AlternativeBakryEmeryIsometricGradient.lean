@@ -19,8 +19,8 @@ lemma bakryEmery_isometry_dual_norm (e : E ≃ₗᵢ[ℝ] F) (L : F →L[ℝ] �
   · apply ContinuousLinearMap.opNorm_le_bound L (norm_nonneg _)
     intro y
     have h := ContinuousLinearMap.le_opNorm (L.comp e.toContinuousLinearEquiv.toContinuousLinearMap) (e.symm y)
-    simpa only [ContinuousLinearMap.comp_apply,LinearIsometryEquiv.coe_toContinuousLinearEquiv,
-      ContinuousLinearEquiv.coe_coe,LinearIsometryEquiv.apply_symm_apply,
+    simpa only [ContinuousLinearMap.comp_apply, LinearIsometryEquiv.coe_toContinuousLinearEquiv,
+      ContinuousLinearEquiv.coe_coe, LinearIsometryEquiv.apply_symm_apply,
       LinearIsometryEquiv.norm_map] using h
 
 /-- The literal gradient energy is preserved by real/complex Hilbert
@@ -31,7 +31,7 @@ theorem bakryEmery_isometry_gradient_norm (e : E ≃ₗᵢ[ℝ] F) (f : F → �
   have hd : fderiv ℝ (f ∘ e) x = (fderiv ℝ f (e x)).comp
       e.toContinuousLinearEquiv.toContinuousLinearMap :=
     (hf.hasFDerivAt.comp x e.toContinuousLinearEquiv.toContinuousLinearMap.hasFDerivAt).fderiv
-  simp only [gradient,LinearIsometryEquiv.norm_map]
+  simp only [gradient, LinearIsometryEquiv.norm_map]
   rw [hd]
   exact bakryEmery_isometry_dual_norm e _
 

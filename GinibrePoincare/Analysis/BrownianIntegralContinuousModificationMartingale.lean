@@ -31,9 +31,9 @@ theorem realMartingale_terminal_cauchy_exists_continuous_martingale
       (∀ t, MemLp (M t) 2 P) ∧
       (∀ t, TendstoInMeasure P (fun n => F n t) atTop (M t)) ∧
       ∀ t, Tendsto (fun n => ∫ ω, (F n t ω-M t ω)^2 ∂P) atTop (𝓝 0) := by
-  obtain ⟨s,hs,L,hL⟩ := realMartingale_terminal_cauchy_exists_continuous_limit
+  obtain ⟨s, hs, L, hL⟩ := realMartingale_terminal_cauchy_exists_continuous_limit
     P ℱ F hF T hT hc hterm
-  let tcap : ℝ≥0 → Set.Icc 0 T := fun t => ⟨min t T,bot_le,min_le_right _ _⟩
+  let tcap : ℝ≥0 → Set.Icc 0 T := fun t => ⟨min t T, bot_le, min_le_right _ _⟩
   let M : ℝ≥0 → Ω → ℝ := fun t ω => L ω (tcap t)
   have htcap : Continuous tcap := by
     exact Continuous.subtype_mk (continuous_id.min continuous_const) _
@@ -69,7 +69,7 @@ theorem realMartingale_terminal_cauchy_exists_continuous_martingale
       (fun n => hsL2 n t) (I t) (hI t) s hs (M t)
     filter_upwards [hL] with ω hω
     have hh := hω.tendsto_at (tcap t)
-    simpa only [M,tcap,←hcap] using hh
+    simpa only [M, tcap,←hcap] using hh
   have hm : ∀ t, MemLp (M t) 2 P := fun t =>
     (memLp_congr_ae (hMI t)).mpr (Lp.memLp (I t))
   have hmeas : StronglyAdapted ℱ M := by
@@ -93,8 +93,8 @@ theorem realMartingale_terminal_cauchy_exists_continuous_martingale
     intro t
     rw [hto t]
     exact hI t
-  refine ⟨M,realMartingale_of_actual_L2_limits P ℱ F hF hsL2 M hmeas hm hlim,
-    (fun ω => (L ω).continuous.comp htcap),hm,?_,?_⟩
+  refine ⟨M, realMartingale_of_actual_L2_limits P ℱ F hF hsL2 M hmeas hm hlim,
+    (fun ω => (L ω).continuous.comp htcap), hm,?_,?_⟩
   · intro t
     exact (tendstoInMeasure_of_tendsto_Lp (hlim t)).congr
       (fun n => (hsL2 n t).coeFn_toLp) ((hm t).coeFn_toLp)
@@ -104,10 +104,10 @@ theorem realMartingale_terminal_cauchy_exists_continuous_martingale
       rw [←integral_square_eq_L2_norm_sq]
       apply integral_congr_ae
       filter_upwards [Lp.coeFn_sub ((hsL2 n t).toLp (F n t)) ((hm t).toLp (M t)),
-        (hsL2 n t).coeFn_toLp,(hm t).coeFn_toLp] with ω hsub hFω hMω
-      simp only [hsub,Pi.sub_apply,hFω,hMω]
+        (hsL2 n t).coeFn_toLp, (hm t).coeFn_toLp] with ω hsub hFω hMω
+      simp only [hsub, Pi.sub_apply, hFω, hMω]
     have hn := ((hlim t).sub (tendsto_const_nhds (x := (hm t).toLp (M t)))).norm.pow 2
-    simpa only [←he,sub_self,norm_zero,zero_pow (by norm_num : 2 ≠ 0)] using hn
+    simpa only [←he, sub_self, norm_zero, zero_pow (by norm_num : 2 ≠ 0)] using hn
 
 end
 end GinibrePoincare

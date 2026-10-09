@@ -16,22 +16,22 @@ theorem correspondenceSquareRoot_adjoint_range
     {H K : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H] [CompleteSpace H]
     [NormedAddCommGroup K] [InnerProductSpace ℝ K] [CompleteSpace K]
     (A : H→L[ℝ]K) (B : H→L[ℝ]H) (hB : B.adjoint=B)
-    (hd : DenseRange B) (hn : ∀x,‖A x‖=‖B x‖) :
+    (hd : DenseRange B) (hn : ∀x, ‖A x‖=‖B x‖) :
     range A.adjoint=range B := by
   let U := A.toLinearMap.extendOfIsometry (e:=B.toLinearMap) hd hn
   have he : A=U.toContinuousLinearMap.comp B := by
     ext x
     exact (LinearMap.extendOfIsometry_eq A.toLinearMap hd hn x).symm
   have hadj : A.adjoint=B.comp U.toContinuousLinearMap.adjoint := by
-    rw [he,ContinuousLinearMap.adjoint_comp,hB]
+    rw [he, ContinuousLinearMap.adjoint_comp, hB]
   rw [hadj]
   apply Subset.antisymm
-  · rintro y ⟨x,rfl⟩
-    exact ⟨U.toContinuousLinearMap.adjoint x,rfl⟩
-  · rintro y ⟨x,rfl⟩
+  · rintro y ⟨x, rfl⟩
+    exact ⟨U.toContinuousLinearMap.adjoint x, rfl⟩
+  · rintro y ⟨x, rfl⟩
     refine ⟨U x,?_⟩
     have h:=congrArg (fun L : H→L[ℝ]H=>L x) U.adjoint_comp_self
-    simpa only [ContinuousLinearMap.comp_apply,ContinuousLinearMap.id_apply,one_apply_eq_self,LinearIsometry.coe_toContinuousLinearMap] using congrArg B h
+    simpa only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.id_apply, one_apply_eq_self, LinearIsometry.coe_toContinuousLinearMap] using congrArg B h
 
 /-- The bounded functional-calculus square root of the actual resolvent. -/
 def correspondenceFriedrichsResolventSqrt (n : ℕ) (hn : 0<n) :
@@ -54,12 +54,12 @@ theorem correspondenceFriedrichsResolventSqrt_injective (n : ℕ) (hn : 0<n) :
   intro x y h
   apply correspondenceOperatorComplexResolvent_injective n hn
   have he:=congrArg (correspondenceFriedrichsResolventSqrt n hn) h
-  simpa only [← ContinuousLinearMap.mul_apply,correspondenceFriedrichsResolventSqrt_square] using he
+  simpa only [← ContinuousLinearMap.mul_apply, correspondenceFriedrichsResolventSqrt_square] using he
 
 theorem correspondenceFriedrichsResolventSqrt_denseRange (n : ℕ) (hn : 0<n) :
     DenseRange (correspondenceFriedrichsResolventSqrt n hn) := by
   apply (correspondenceOperatorComplexResolvent_denseRange n hn).mono
-  rintro y ⟨x,rfl⟩
+  rintro y ⟨x, rfl⟩
   refine ⟨correspondenceFriedrichsResolventSqrt n hn x,?_⟩
   exact congrArg (fun L : GinibreFullComplexL2 n→L[ℂ]GinibreFullComplexL2 n=>L x)
     (correspondenceFriedrichsResolventSqrt_square n hn)

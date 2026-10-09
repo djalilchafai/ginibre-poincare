@@ -31,7 +31,7 @@ def CorrespondenceBrascampLiebHasWeakDerivative (u G : E → ℝ) (v : E) : Prop
         (∫ x, θ x*J x) = -(∫ x, fderiv ℝ θ x v*U x) := by
   let ρ := bakryEmeryGibbsWeight W
   have hρ : Continuous ρ := Real.continuous_exp.comp hW.neg
-  have hp : ∀x,0<ρ x := fun _ => Real.exp_pos _
+  have hp : ∀x, 0<ρ x := fun _ => Real.exp_pos _
   let d : E → ℝ := fun x => fderiv ℝ χ x v
   have hd : Continuous d := (hχ.continuous_fderiv (by simp)).clm_apply continuous_const
   have hdc : HasCompactSupport d := hc.fderiv_apply ℝ v
@@ -39,23 +39,23 @@ def CorrespondenceBrascampLiebHasWeakDerivative (u G : E → ℝ) (v : E) : Prop
   have hJG := correspondenceBrascampLieb_localL2_compact_multiplier G χ hG hχ.continuous hc
   have hJU := correspondenceWeightedElliptic_compact_value_memLp ρ hρ hp u d hu hd hdc
   have hJ := hJG.add hJU
-  refine ⟨hU.toLp _,hJ.toLp _,hU.coeFn_toLp,hJ.coeFn_toLp,?_⟩
+  refine ⟨hU.toLp _, hJ.toLp _, hU.coeFn_toLp, hJ.coeFn_toLp,?_⟩
   intro θ hθ hθc
   have hul := correspondenceWeightedElliptic_locallyIntegrable ρ hρ hp u hu
   have hGl := correspondenceBrascampLieb_localL2_locallyIntegrable G hG
   have hDθ : Continuous (fun x => fderiv ℝ θ x v) :=
     (hθ.continuous_fderiv (by simp)).clm_apply continuous_const
   have hi1 : Integrable (fun x => θ x*χ x*G x) := by
-    simpa only [smul_eq_mul,Pi.mul_apply,mul_comm] using hGl.integrable_smul_right_of_hasCompactSupport (hθ.continuous.mul hχ.continuous)
+    simpa only [smul_eq_mul, Pi.mul_apply, mul_comm] using hGl.integrable_smul_right_of_hasCompactSupport (hθ.continuous.mul hχ.continuous)
       (hθc.mul_right)
   have hi2 : Integrable (fun x => θ x*d x*u x) := by
-    simpa only [smul_eq_mul,Pi.mul_apply,mul_comm] using hul.integrable_smul_right_of_hasCompactSupport (hθ.continuous.mul hd) (hθc.mul_right)
+    simpa only [smul_eq_mul, Pi.mul_apply, mul_comm] using hul.integrable_smul_right_of_hasCompactSupport (hθ.continuous.mul hd) (hθc.mul_right)
   have hi3 : Integrable (fun x => χ x*fderiv ℝ θ x v*u x) := by
-    simpa only [smul_eq_mul,Pi.mul_apply,mul_comm] using hul.integrable_smul_right_of_hasCompactSupport (hχ.continuous.mul hDθ) (hc.mul_right)
+    simpa only [smul_eq_mul, Pi.mul_apply, mul_comm] using hul.integrable_smul_right_of_hasCompactSupport (hχ.continuous.mul hDθ) (hc.mul_right)
   have he := hw (χ*θ) (hχ.mul hθ) (hc.mul_right)
   have hder (x : E) : fderiv ℝ (χ*θ) x v = d x*θ x+χ x*fderiv ℝ θ x v := by
     rw [fderiv_mul (hχ.differentiable (by simp) x) (hθ.differentiable (by simp) x)]
-    simp [d,mul_comm,add_comm]
+    simp [d, mul_comm, add_comm]
   have he' : (∫ x, θ x*χ x*G x) =
       -(∫ x, θ x*d x*u x) -(∫ x, χ x*fderiv ℝ θ x v*u x) := by
     have hl : (∫ x, (χ*θ) x*G x) = ∫ x, θ x*χ x*G x := by
@@ -71,7 +71,7 @@ def CorrespondenceBrascampLiebHasWeakDerivative (u G : E → ℝ) (v : E) : Prop
         ring
       rw [heq]
       exact integral_add hi2 hi3
-    rw [hl,hr] at he
+    rw [hl, hr] at he
     linarith
   have hl : (∫ x, θ x*(hJ.toLp _ : E → ℝ) x) =
       (∫ x, θ x*χ x*G x)+(∫ x, θ x*d x*u x) := by
@@ -93,7 +93,7 @@ def CorrespondenceBrascampLiebHasWeakDerivative (u G : E → ℝ) (v : E) : Prop
     filter_upwards [hU.coeFn_toLp] with x hx
     rw [hx]
     ring
-  rw [hl,hr]
+  rw [hl, hr]
   linarith
 
 theorem correspondenceBrascampLieb_weak_test_C1
@@ -104,8 +104,8 @@ theorem correspondenceBrascampLieb_weak_test_C1
     (hw : CorrespondenceBrascampLiebHasWeakDerivative u G v)
     (θ : E → ℝ) (hθ : ContDiff ℝ 1 θ) (hc : HasCompactSupport θ) :
     (∫ x, θ x*G x) = -(∫ x, fderiv ℝ θ x v*u x) := by
-  obtain ⟨χ,hχ,hχc,hχone⟩ := ginibreLocalRegularity_exists_compact_cutoff (tsupport θ) hc
-  obtain ⟨U,J,hU,hJ,hwJ⟩ := correspondenceBrascampLieb_weak_localization W u G v hW
+  obtain ⟨χ, hχ, hχc, hχone⟩ := ginibreLocalRegularity_exists_compact_cutoff (tsupport θ) hc
+  obtain ⟨U, J, hU, hJ, hwJ⟩ := correspondenceBrascampLieb_weak_localization W u G v hW
     hu hG hw χ hχ hχc
   have he := correspondenceWeightedElliptic_weak_test_C1 U J v hwJ θ hθ hc
   have hl : (∫ x, θ x*J x) = ∫ x, θ x*G x := by
@@ -117,7 +117,7 @@ theorem correspondenceBrascampLieb_weak_test_C1
       have hxD : fderiv ℝ χ x v = 0 := by
         rw [(hχone x hs).fderiv_eq]
         simp
-      rw [hx1,hxD]
+      rw [hx1, hxD]
       ring
     · simp [image_eq_zero_of_notMem_tsupport hs]
   have hr : (∫ x, fderiv ℝ θ x v*U x) = ∫ x, fderiv ℝ θ x v*u x := by
@@ -130,7 +130,7 @@ theorem correspondenceBrascampLieb_weak_test_C1
       ring
     · have hzero : fderiv ℝ θ x = 0 := fderiv_of_notMem_tsupport (𝕜 := ℝ) hs
       simp [hzero]
-  rwa [hl,hr] at he
+  rwa [hl, hr] at he
 
 #print axioms correspondenceBrascampLieb_weak_test_C1
 #print axioms correspondenceBrascampLieb_weak_localization

@@ -39,7 +39,7 @@ theorem ginibreBrownianMaximalProcess_local_center_CIR_integral_exists
   have hf : ContDiffOn ℝ 2 ((ginibreCenterSquared n) : Configuration n → ℝ) {x | CollisionFree x} :=
     ((contDiff_ginibreCenterSquared n).of_le
       (by exact WithTop.coe_le_coe.mpr (show (2 : ENat) ≤ ⊤ from le_top))).contDiffOn
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hLimit,hIto,hEnd⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hLimit, hIto, hEnd⟩ :=
     ginibreBrownianMaximalProcess_local_test_ito_integral_exists (by omega) α z hz B P hB hind R hR T (ginibreCenterSquared n) hf
   have hCF (s : ℝ≥0) (ω : Ω) : CollisionFree (X s ω) :=
     (ginibreBrownianHamiltonianStoppedProcess_range (by omega) α z hz B R hR T s ω).1
@@ -49,7 +49,7 @@ theorem ginibreBrownianMaximalProcess_local_center_CIR_integral_exists
           ginibreCenterRadialDirection n e (X s ω) i) t (k+1) ω) := by
     funext k ω
     exact ginibreConfigurationBrownianGradientSum_centerSquared hn B α α.coe_nonneg X hCF e t k ω
-  refine ⟨J,hJM,hJC,hJL,hJ0,?_,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0,?_,?_⟩
   · intro t ht
     rw [← hSum t]
     exact hLimit t ht

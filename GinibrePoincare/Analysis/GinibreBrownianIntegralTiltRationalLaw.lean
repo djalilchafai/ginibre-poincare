@@ -28,25 +28,25 @@ theorem brownianVectorExponentialIntegralDensity_rational_states_hasLaw
     (hI : ∀ i, TendstoInMeasure P
       (fun n => brownianUniformLeftSum (B i) (F i) T (n+1)) atTop (I i))
     (q : ℕ) (hq : 0<q) :
-    HasLaw (fun ω (p : Fin (q+1)) i => B i (T*(p.val:ℝ≥0)/(q:ℝ≥0)) ω-B i 0 ω-
-      ∫ s in (0:ℝ)..(T*(p.val:ℝ≥0)/(q:ℝ≥0):ℝ≥0), F i (Real.toNNReal s) ω)
-      (P.map (fun ω (p : Fin (q+1)) i => B i (T*(p.val:ℝ≥0)/(q:ℝ≥0)) ω-B i 0 ω))
+    HasLaw (fun ω (p : Fin (q+1)) i => B i (T*(p.val : ℝ≥0)/(q : ℝ≥0)) ω-B i 0 ω-
+      ∫ s in (0 : ℝ)..(T*(p.val : ℝ≥0)/(q : ℝ≥0) : ℝ≥0), F i (Real.toNNReal s) ω)
+      (P.map (fun ω (p : Fin (q+1)) i => B i (T*(p.val : ℝ≥0)/(q : ℝ≥0)) ω-B i 0 ω))
       (P.withDensity (fun ω => ENNReal.ofReal (brownianVectorExponentialIntegralDensity F T I ω))) := by
   classical
   let τ := fun n => itoUniformNNTime T (q*(n+1))
   let h := fun n k ω i => F i (τ n k) ω
   let D := fun n => brownianPredictableVectorGaussianDensity B (h n) (τ n) (q*(n+1))
   let X := fun n ω (p : Fin (q+1)) i => brownianGirsanovCorrectedPrefix B (h n) (τ n) i (p.val*(n+1)) ω
-  let Y := fun ω (p : Fin (q+1)) i => B i (T*(p.val:ℝ≥0)/(q:ℝ≥0)) ω-B i 0 ω
+  let Y := fun ω (p : Fin (q+1)) i => B i (T*(p.val : ℝ≥0)/(q : ℝ≥0)) ω-B i 0 ω
   let x := fun ω (p : Fin (q+1)) i => Y ω p i-
-    ∫ s in (0:ℝ)..(T*(p.val:ℝ≥0)/(q:ℝ≥0):ℝ≥0), F i (Real.toNNReal s) ω
+    ∫ s in (0 : ℝ)..(T*(p.val : ℝ≥0)/(q : ℝ≥0) : ℝ≥0), F i (Real.toNNReal s) ω
   have hh (n k : ℕ) : @Measurable Ω (ι→ℝ)
       (ginibreBrownianAugmentedFiltration B P hB (τ n k)) _ (h n k) := by
     letI : MeasurableSpace Ω := ginibreBrownianAugmentedFiltration B P hB (τ n k)
     exact Measurable.of_eval (fun i => hF i _)
   have hzero (n : ℕ) : τ n 0=0 := by
     change (itoUniformTime T (q*(n+1)) 0).toNNReal=0
-    simp only [itoUniformTime,Nat.cast_zero,mul_zero,zero_div,Real.toNNReal_zero]
+    simp only [itoUniformTime, Nat.cast_zero, mul_zero, zero_div, Real.toNNReal_zero]
   have hdm (n : ℕ) : Measurable (D n) :=
     (brownianPredictableVectorGaussianDensity_measurable_at B P hB (h n) (τ n)
       (itoUniformNNTime_mono _ _) (hh n) _).mono
@@ -57,9 +57,9 @@ theorem brownianVectorExponentialIntegralDensity_rational_states_hasLaw
     brownianPredictableVectorGaussianDensity_lintegral B P hB hind (h n) (τ n)
       (itoUniformNNTime_mono _ _) (hh n) _
   have hdi (n : ℕ) : Integrable (D n) P :=
-    ⟨(hdm n).aestronglyMeasurable,(hasFiniteIntegral_iff_ofReal (hdp n)).mpr (by rw [hdli]; simp)⟩
+    ⟨(hdm n).aestronglyMeasurable, (hasFiniteIntegral_iff_ofReal (hdp n)).mpr (by rw [hdli]; simp)⟩
   have hdn (n : ℕ) : (∫ ω, D n ω ∂P)=1 := by
-    rw [integral_eq_lintegral_of_nonneg_ae (hdp n) (hdm n).aestronglyMeasurable,hdli]
+    rw [integral_eq_lintegral_of_nonneg_ae (hdp n) (hdm n).aestronglyMeasurable, hdli]
     simp
   have hxmeas (n : ℕ) : Measurable (X n) := by
     apply measurable_pi_lambda
@@ -86,31 +86,31 @@ theorem brownianVectorExponentialIntegralDensity_rational_states_hasLaw
     apply tendsto_pi_nhds.mpr
     intro i
     by_cases hp : p.val=0
-    · have ht0 : T*(p.val:ℝ≥0)/(q:ℝ≥0)=0 := by simp [hp]
-      have hX0 (n : ℕ) : X n ω p i=0 := by simp [X,hp,brownianGirsanovCorrectedPrefix]
+    · have ht0 : T*(p.val : ℝ≥0)/(q : ℝ≥0)=0 := by simp [hp]
+      have hX0 (n : ℕ) : X n ω p i=0 := by simp [X, hp, brownianGirsanovCorrectedPrefix]
       have hx0 : x ω p i=0 := by
-        dsimp only [x,Y]
+        dsimp only [x, Y]
         rw [ht0]
         simp
-      simp_rw [hX0,hx0]
+      simp_rw [hX0, hx0]
       exact tendsto_const_nhds
     · have hp' : 0<p.val := Nat.pos_of_ne_zero hp
-      have ht : T*(p.val:ℝ≥0)/(q:ℝ≥0)≤T := by
+      have ht : T*(p.val : ℝ≥0)/(q : ℝ≥0)≤T := by
         rw [mul_div_assoc]
-        apply (mul_le_mul_of_nonneg_left ((div_le_one (by positivity : (0:ℝ≥0)<q)).mpr ?_) (show (0:ℝ≥0)≤T from bot_le)).trans_eq
+        apply (mul_le_mul_of_nonneg_left ((div_le_one (by positivity : (0 : ℝ≥0)<q)).mpr ?_) (show (0 : ℝ≥0)≤T from bot_le)).trans_eq
           (mul_one T)
         exact_mod_cast Nat.le_of_lt_succ p.isLt
       have hc' := (hω i).mono (Set.Icc_subset_Icc le_rfl ht)
       have hri := brownianRationalPrefix_drift_tendsto T p.val q hp' hq (fun s => F i s ω) hc'
       have heq (n : ℕ) : X n ω p i = Y ω p i-
           ∑ k ∈ Finset.range (p.val*(n+1)), F i (itoUniformNNTime T (q*(n+1)) k) ω*
-            ((T:ℝ)/(q*(n+1):ℕ)) := by
+            ((T : ℝ)/(q*(n+1) : ℕ)) := by
         dsimp only [X]
-        rw [brownianGirsanovCorrectedPrefix_eq,hzero n]
-        dsimp only [h,τ,Y]
+        rw [brownianGirsanovCorrectedPrefix_eq, hzero n]
+        dsimp only [h, τ, Y]
         rw [brownianUniformNNTime_rational_endpoint T p.val q (n+1) hq (Nat.succ_pos n)]
         simp_rw [itoUniformNNTime_increment_sub_coe]
-      simpa only [heq,x] using tendsto_const_nhds.sub hri
+      simpa only [heq, x] using tendsto_const_nhds.sub hri
   have hxl := tendstoInMeasure_of_tendsto_ae (fun n => (hxmeas n).aestronglyMeasurable) hae
   have hx := hxl.aemeasurable (fun n => (hxmeas n).aemeasurable)
   let μ := P.map Y
@@ -118,14 +118,14 @@ theorem brownianVectorExponentialIntegralDensity_rational_states_hasLaw
   have hd := brownianVectorExponentialIntegralDensity_normalized B P hB hind F hF C hC hb T hc hs I hI
   have hDeq (n : ℕ) : D n = brownianVectorExponentialUniformSum B F T (brownianRationalRefinementIndex q n) := by
     have he := brownianPredictableVectorGaussianDensity_uniform_eq B F T (brownianRationalRefinementIndex q n)
-    simpa only [brownianRationalRefinementIndex_succ q n hq,D,h,τ] using he
+    simpa only [brownianRationalRefinementIndex_succ q n hq, D, h, τ] using he
   apply actualVaryingDensity_constantLaw_limit P D _ hdi hd.1 hdp hd.2.1 hdn hd.2.2.1
     (by simpa only [Function.comp_def,← hDeq] using hd.2.2.2.comp (brownianRationalRefinementIndex_tendsto q hq))
     X x (fun n => (hxmeas n).aemeasurable) hx hxl μ
   intro n
   have hl := brownianGirsanovRationalGrid_states_identDistrib B P hB hind (h n) T q (n+1)
     hq (Nat.succ_pos n) (hh n)
-  exact ⟨hl.aemeasurable_fst,hl.map_eq⟩
+  exact ⟨hl.aemeasurable_fst, hl.map_eq⟩
 
 end
 end GinibrePoincare

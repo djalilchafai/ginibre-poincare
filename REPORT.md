@@ -1,6 +1,7 @@
 # Ginibre Poincaré formalization report
 
-Updated on 2026-10-08 with the correspondence-completion proof additions.
+Updated on 2026-10-09 with the human readability revision; mathematical
+correspondence findings below remain the 2026-10-08 review.
 
 Paper authority: Djalil Chafaï, *An optimal Poincaré inequality for the complex
 Ginibre log-gas*, [arXiv:2608.19358v2](https://arxiv.org/html/2608.19358v2).
@@ -18,6 +19,36 @@ and [STATUS.md](STATUS.md) for precise verification evidence.
 Problems 1.11, 1.15 and 1.16 remain open research questions; Appendix C numerical
 experiments are outside theorem certification. No overall completion percentage
 is assigned.
+
+## Human readability revision
+
+The [reading index](HUMAN_READABILITY.md) and four topic guides give ordered
+routes from definitions through the main arguments to the paper endpoints,
+including ordinary weak domains, generator graphs, stochastic localization,
+matrix overlaps, nonquadratic potentials and Appendices A–B. Eighty-two Lean
+modules have revised mathematical explanations or declaration documentation.
+Proof-local names now identify important coefficient, convergence and driver
+facts in the revised arguments.
+
+Seven named result records expose the existing conclusions of Theorems 1.9
+and 1.10, the matrix inequalities, maximal-domain Gaussian Bochner identity,
+and relative-radius stopped CIR realization. Five proved adapters construct
+these interfaces; existing theorem names and statements remain available.
+The differential deficit and pointwise Γ₂ proofs now use the named deficit
+fields. No mathematical proof route or endpoint domain is changed.
+
+Conservative comma and binder-colon spacing was applied to 844 modules. The
+formatter deliberately preserves compound mathematical notation and skips
+syntax-defining files. `make readability` checks this policy and its regression
+cases. It does not claim conformance to every Mathlib style convention.
+
+The [statement comparison](verification/readability-statement-check.json)
+inspects 3,490 existing declarations in 896 edited Lean files: no signatures
+changed after ignoring comments and whitespace, and no declarations were
+removed. This source comparison complements the kernel build and axiom audits;
+it is not a new paper-correspondence review. Technical helper modules outside
+the documented routes have not all received individual mathematical editorial
+reviews. The [status dashboard](STATUS.md) and [verification record](verification/readability-final-check.txt) record the passing build and audits, refreshed views and browser-check limitation.
 
 ## Independent full-paper correspondence review
 
@@ -42,9 +73,10 @@ reconstruction of the inaccessible 1976 proof is not claimed. Introductory
 physical applications are represented by the actual density, antisymmetry and
 normalized Slater identities, without inventing unspecified external models.
 
-[Live registry checks](verification/registry-publication-check.md) still cannot
-confirm publication. Accepted consent and Theorem 1.1 mechanical comparison are
-not a public registration receipt and do not certify every paper endpoint.
+[Live registry checks](verification/registry-publication-check.md) confirm
+PALOMAR-2026-10-09-000001 v1 publication for the earlier immutable Theorem 1.1
+comparison snapshot. This receipt does not certify every paper endpoint or the
+current readability revision.
 
 ## Historical Palomar mechanical checkpoint
 

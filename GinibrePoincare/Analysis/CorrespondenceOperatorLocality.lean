@@ -12,23 +12,23 @@ the mixed energy is zero. -/
 theorem correspondenceOperator_dirichlet_strong_locality {n : ℕ}
     (f g : Configuration n → ℝ)
     (hlocal : ∀ z ∈ tsupport f, ∃ c : ℝ, g =ᶠ[𝓝 z] (fun _ => c)) :
-    (1/(n:ℝ))*(∫ z, inner ℝ (ginibreEuclideanGradient f z)
+    (1/(n : ℝ))*(∫ z, inner ℝ (ginibreEuclideanGradient f z)
       (ginibreEuclideanGradient g z) ∂ginibreMeasure n)=0 := by
   have he : ∀ z, inner ℝ (ginibreEuclideanGradient f z)
       (ginibreEuclideanGradient g z)=0 := by
     intro z
     by_cases hz : z∈tsupport f
-    · obtain ⟨c,hc⟩ := hlocal z hz
+    · obtain ⟨c, hc⟩ := hlocal z hz
       have hd : fderiv ℝ g z=0 := by rw [hc.fderiv_eq]; simp
       have hg : ginibreEuclideanGradient g z=0 := by
         ext k
-        simp [ginibreEuclideanGradient,hd]
-      rw [hg,inner_zero_right]
+        simp [ginibreEuclideanGradient, hd]
+      rw [hg, inner_zero_right]
     · have hf : ginibreEuclideanGradient f z=0 := by
         ext k
-        simp [ginibreEuclideanGradient,fderiv_of_notMem_tsupport ℝ hz]
-      rw [hf,inner_zero_left]
-  simp only [he,integral_zero,mul_zero]
+        simp [ginibreEuclideanGradient, fderiv_of_notMem_tsupport ℝ hz]
+      rw [hf, inner_zero_left]
+  simp only [he, integral_zero, mul_zero]
 
 /-- A genuine ordinary weak gradient vanishes where its observable is
 constant on an open set; this is derived from distributional testing. -/
@@ -56,13 +56,13 @@ theorem correspondenceOperator_weak_gradient_zero_on_constant_open (n : ℕ) (hn
         have hd := image_eq_zero_of_notMem_tsupport hz'
         simp [hd]
     have hdz : (∫ z, fderiv ℝ θ z (ginibreCoordinateDirection k))=0 := by
-      rcases k with ⟨j,k⟩
+      rcases k with ⟨j, k⟩
       fin_cases k
       · exact integral_fderiv_configuration_real_eq_zero θ (hθ.of_le (by simp)) hθc j
       · exact integral_fderiv_configuration_imag_eq_zero θ (hθ.of_le (by simp)) hθc j
     have hw := hu.2.2 k θ hθ hθc (hθs.trans hs)
-    rw [he,integral_const_mul,hdz,mul_zero,neg_zero] at hw
-    simpa only [smul_eq_mul,mul_comm] using hw
+    rw [he, integral_const_mul, hdz, mul_zero, neg_zero] at hw
+    simpa only [smul_eq_mul, mul_comm] using hw
   have hAll : ∀ᵐ z ∂volume, ∀ k : Fin n × Fin 2, z∈U → g z k=0 :=
     (ae_all_iff.mpr hz)
   filter_upwards [hac.ae_le hAll] with z hz
@@ -78,7 +78,7 @@ theorem correspondenceOperator_weak_dirichlet_strong_locality (n : ℕ) (hn : 0<
     (U : Set (Configuration n)) (hU : IsOpen U) (hs : U ⊆ {z | CollisionFree z})
     (hus : tsupport (u : Configuration n → ℝ) ⊆ U)
     (c : ℝ) (hvc : ∀ z∈U, v z=c) :
-    (1/(n:ℝ))*inner ℝ g h=0 := by
+    (1/(n : ℝ))*inner ℝ g h=0 := by
   have hzero := correspondenceOperator_weak_gradient_zero_on_constant_open n hn v h hv U hU hs c hvc
   let V := {z : Configuration n | CollisionFree z} ∩ (tsupport (u : Configuration n → ℝ))ᶜ
   have hV : IsOpen V := (isOpen_collisionFree n).inter (isClosed_tsupport _).isOpen_compl
@@ -87,13 +87,13 @@ theorem correspondenceOperator_weak_dirichlet_strong_locality (n : ℕ) (hn : 0<
   rw [L2.inner_def]
   have hi : (∫ z, inner ℝ (g z) (h z) ∂ginibreMeasure n)=0 := by
     apply integral_eq_zero_of_ae
-    filter_upwards [hzero,hgu,ginibre_ae_collisionFree n hn] with z hhz hgz hcf
+    filter_upwards [hzero, hgu, ginibre_ae_collisionFree n hn] with z hhz hgz hcf
     change inner ℝ (g z) (h z)=0
     by_cases hz : z∈U
-    · rw [hhz hz,inner_zero_right]
+    · rw [hhz hz, inner_zero_right]
     · have hout : z∉tsupport (u : Configuration n → ℝ) := fun hh => hz (hus hh)
-      rw [hgz ⟨hcf,hout⟩,inner_zero_left]
-  rw [hi,mul_zero]
+      rw [hgz ⟨hcf, hout⟩, inner_zero_left]
+  rw [hi, mul_zero]
 
 #print axioms correspondenceOperator_weak_gradient_zero_on_constant_open
 #print axioms correspondenceOperator_weak_dirichlet_strong_locality

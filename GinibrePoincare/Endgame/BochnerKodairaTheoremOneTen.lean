@@ -22,11 +22,11 @@ Bochner–Kodaira identity, for every genuine real symmetric weak pair. -/
 theorem bochnerKodaira_ginibre_weak_first_deficit {n : ℕ} (hn : 0 < n)
     (u : GinibreFullValueL2 n) (g : GinibreFullGradientL2 n)
     (hu : IsGinibreDistributionalGradient n u g)
-    (hs : IsGinibreSymmetricWeakPair (u,g)) :
+    (hs : IsGinibreSymmetricWeakPair (u, g)) :
     ginibreWeakEnergy n g - 2*ginibreL2Variance n hn u =
       2*‖ginibreFullHolomorphicRemainder n hn u‖^2 +
-        (4/(n:ℝ))*ginibreDifferentialSecondEnergy n hn g := by
-  obtain ⟨huc,hsc⟩ := ginibreFullCenter_weak_pair hn u g hu hs
+        (4/(n : ℝ))*ginibreDifferentialSecondEnergy n hn g := by
+  obtain ⟨huc, hsc⟩ := ginibreFullCenter_weak_pair hn u g hu hs
   have hc := ginibreFullTransformedDbar_weak_coefficient hn
     (ginibreFullCenter n hn u) g huc hsc
   have hBK := bkInverseSquareRoot_total_energy hn (ginibreFullCenteredTransform n hn u)
@@ -37,8 +37,8 @@ theorem bochnerKodaira_ginibre_weak_first_deficit {n : ℕ} (hn : 0 < n)
   rw [ginibreFullTransformedDbar_norm_sum hn g, hw,
     ginibreFullWeak_zero_mode_norm hn u g hu hs] at hBK
   change ginibreDifferentialSecondEnergy n hn g = _ at hBK
-  have hn0 : (n:ℝ) ≠ 0 := by exact_mod_cast hn.ne'
-  have hE : (4/(n:ℝ))*ginibreDifferentialSecondEnergy n hn g =
+  have hn0 : (n : ℝ) ≠ 0 := by exact_mod_cast hn.ne'
+  have hE : (4/(n : ℝ))*ginibreDifferentialSecondEnergy n hn g =
       ginibreWeakEnergy n g - 4*ginibreL2Variance n hn u +
         4*‖ginibreFullHolomorphicPart n hn u‖^2 := by
     rw [hBK]
@@ -58,24 +58,24 @@ theorem bochnerKodairaTheoremOneTen {n : ℕ} (hn : 0 < n)
       (ginibreFullGenerator n hn).graph) :
     ∃ g : GinibreFullGradientL2 n,
       IsGinibreDistributionalGradient n u.val g ∧
-      IsGinibreSymmetricWeakPair (u.val,g) ∧
+      IsGinibreSymmetricWeakPair (u.val, g) ∧
       (∀ j, IsGaussianSchwartzDbar n (ginibreDifferentialDeficitVector n hn u.val)
         (ginibreDifferentialFirstDerivative n hn g j) j) ∧
       (∀ j k, IsGaussianSchwartzDbar n (ginibreDifferentialFirstDerivative n hn g j)
         (ginibreDifferentialSecondDerivative n hn g j k) k) ∧
       ginibreWeakEnergy n g - 2*ginibreL2Variance n hn u.val =
         2*‖ginibreFullHolomorphicRemainder n hn u.val‖^2 +
-          (4/(n:ℝ))*ginibreDifferentialSecondEnergy n hn g ∧
+          (4/(n : ℝ))*ginibreDifferentialSecondEnergy n hn g ∧
       ‖v.val‖^2 - 2*ginibreWeakEnergy n g =
-        ‖v.val + (2:ℝ) • ginibreFullCenter n hn u.val‖^2 +
+        ‖v.val + (2 : ℝ) • ginibreFullCenter n hn u.val‖^2 +
           4*‖ginibreFullHolomorphicRemainder n hn u.val‖^2 +
-          (8/(n:ℝ))*ginibreDifferentialSecondEnergy n hn g := by
-  obtain ⟨g,hu,hs,hsecond⟩ := ginibreGenerator_second_deficit_algebra hn u v hgraph
+          (8/(n : ℝ))*ginibreDifferentialSecondEnergy n hn g := by
+  obtain ⟨g, hu, hs, hsecond⟩ := ginibreGenerator_second_deficit_algebra hn u v hgraph
   have hfirst := bochnerKodaira_ginibre_weak_first_deficit hn u.val g hu hs
-  obtain ⟨hd,hdd⟩ := ginibreDifferentialDeficit_weak_derivatives hn u.val g hu hs
-  refine ⟨g,hu,hs,fun j => (gaussianSchwartzDbar_iff_weak hn _ _ j).mpr (hd j),
-    fun j k => (gaussianSchwartzDbar_iff_weak hn _ _ k).mpr (hdd j k),hfirst,?_⟩
-  rw [hsecond,hfirst]
+  obtain ⟨hd, hdd⟩ := ginibreDifferentialDeficit_weak_derivatives hn u.val g hu hs
+  refine ⟨g, hu, hs, fun j => (gaussianSchwartzDbar_iff_weak hn _ _ j).mpr (hd j),
+    fun j k => (gaussianSchwartzDbar_iff_weak hn _ _ k).mpr (hdd j k), hfirst,?_⟩
+  rw [hsecond, hfirst]
   ring
 
 #print axioms bochnerKodaira_ginibre_weak_first_deficit

@@ -68,7 +68,7 @@ theorem bochnerDirectionalDerivative_second_mul (u : E) (f g : E → ℝ) (x : E
       (fun y => bochnerDirectionalDerivative u f y*g y+f y*bochnerDirectionalDerivative u g y) := by
     funext y
     exact bochnerDirectionalDerivative_mul u f g y (hf.differentiable (by simp) y) (hg.differentiable (by simp) y)
-  rw [he,bochnerDirectionalDerivative_add u (fun y => bochnerDirectionalDerivative u f y*g y) (fun y => f y*bochnerDirectionalDerivative u g y) x
+  rw [he, bochnerDirectionalDerivative_add u (fun y => bochnerDirectionalDerivative u f y*g y) (fun y => f y*bochnerDirectionalDerivative u g y) x
     ((hdf.differentiable (by simp) x).mul (hg.differentiable (by simp) x))
     ((hf.differentiable (by simp) x).mul (hdg.differentiable (by simp) x)),
     bochnerDirectionalDerivative_mul u (bochnerDirectionalDerivative u f) g x (hdf.differentiable (by simp) x) (hg.differentiable (by simp) x),
@@ -104,19 +104,19 @@ theorem bochnerDirectionalDerivative_second_mul_at (u : E) (f g : E → ℝ) (x 
   have hdf := bochnerDirectionalDerivative_contDiffAt u f x hf
   have hdg := bochnerDirectionalDerivative_contDiffAt u g x hg
   have hfe : ∀ᶠ y in 𝓝 x, DifferentiableAt ℝ f y := by
-    filter_upwards [(hf.of_le (by simp : (1:WithTop ℕ∞)≤∞)).eventually (by simp)] with y hy
+    filter_upwards [(hf.of_le (by simp : (1 : WithTop ℕ∞)≤∞)).eventually (by simp)] with y hy
     exact hy.differentiableAt (by simp)
   have hge : ∀ᶠ y in 𝓝 x, DifferentiableAt ℝ g y := by
-    filter_upwards [(hg.of_le (by simp : (1:WithTop ℕ∞)≤∞)).eventually (by simp)] with y hy
+    filter_upwards [(hg.of_le (by simp : (1 : WithTop ℕ∞)≤∞)).eventually (by simp)] with y hy
     exact hy.differentiableAt (by simp)
   have he : bochnerDirectionalDerivative u (fun y => f y*g y)=ᶠ[𝓝 x]
       (fun y => bochnerDirectionalDerivative u f y*g y+f y*bochnerDirectionalDerivative u g y) := by
-    filter_upwards [hfe,hge] with y hy hy'
+    filter_upwards [hfe, hge] with y hy hy'
     exact bochnerDirectionalDerivative_mul u f g y hy hy'
   have hh : bochnerDirectionalDerivative u (bochnerDirectionalDerivative u (fun y => f y*g y)) x=
     bochnerDirectionalDerivative u (fun y => bochnerDirectionalDerivative u f y*g y+f y*bochnerDirectionalDerivative u g y) x := by
     exact congrArg (fun a : E →L[ℝ] ℝ => a u) (he.fderiv_eq (𝕜 := ℝ))
-  rw [hh,bochnerDirectionalDerivative_add u (fun y => bochnerDirectionalDerivative u f y*g y) (fun y => f y*bochnerDirectionalDerivative u g y) x
+  rw [hh, bochnerDirectionalDerivative_add u (fun y => bochnerDirectionalDerivative u f y*g y) (fun y => f y*bochnerDirectionalDerivative u g y) x
     ((hdf.differentiableAt (by simp)).mul (hg.differentiableAt (by simp)))
     ((hf.differentiableAt (by simp)).mul (hdg.differentiableAt (by simp))),
     bochnerDirectionalDerivative_mul u (bochnerDirectionalDerivative u f) g x (hdf.differentiableAt (by simp)) (hg.differentiableAt (by simp)),

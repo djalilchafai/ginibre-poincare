@@ -43,8 +43,8 @@ theorem localResolventCaccioppoli_energy_bound {Ω E : Type*}
   have hi1 := integral_add (hU.integrable_sq.const_mul (ℓ/2)) (hF.integrable_sq.const_mul (1/(2*ℓ)))
   have hi2 := integral_add (hG.norm.integrable_sq.const_mul (c/2)) (hH.norm.integrable_sq.const_mul (2*c))
   simp only [Pi.add_apply] at h1 h2 hi1 hi2
-  rw [hi1,integral_const_mul,integral_const_mul] at h1
-  rw [integral_const_mul,hi2,integral_const_mul,integral_const_mul] at h2
+  rw [hi1, integral_const_mul, integral_const_mul] at h1
+  rw [integral_const_mul, hi2, integral_const_mul, integral_const_mul] at h2
   linarith
 
 #print axioms localResolventCaccioppoli_energy_bound

@@ -32,7 +32,7 @@ theorem brownianPredictableVectorGaussianDensity_fresh_increment
       IndepFun Y W Q := by
   classical
   dsimp only
-  let S := fun ω => (h N ω,(brownianPredictableVectorGaussianDensity B h τ N ω,Y ω))
+  let S := fun ω => (h N ω, (brownianPredictableVectorGaussianDensity B h τ N ω, Y ω))
   have hS : @Measurable Ω ((ι→ℝ)×(ℝ×α))
       (ginibreBrownianAugmentedFiltration B P hB (τ N)) _ S :=
     (hh N).prodMk ((brownianPredictableVectorGaussianDensity_measurable_at

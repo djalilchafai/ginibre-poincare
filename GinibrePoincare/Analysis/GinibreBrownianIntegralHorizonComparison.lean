@@ -43,25 +43,25 @@ theorem brownianUniformPartialSum_horizon_difference_tendsto_meanSquare
   have hpast : ∀ n k, a n k ≤ s n k ∧ b n k ≤ s n k := by
     intro n k
     by_cases hz : d n k = 0
-    · simp [a,b,hz]
+    · simp [a, b, hz]
     · have hh := itoHorizonIntersection_positive_samples T t (n+1) (n+1) k.1 k.2 (hdpos n k hz)
-      simpa only [a,b,if_neg hz] using ⟨hh.1,hh.2.1⟩
+      simpa only [a, b, if_neg hz] using ⟨hh.1, hh.2.1⟩
   have has : ∀ n k, a n k ∈ Set.Icc 0 T := by
     intro n k
     by_cases hz : d n k = 0
-    · simp [a,hz]
+    · simp [a, hz]
     · have hh := itoHorizonIntersection_positive_samples T t (n+1) (n+1) k.1 k.2 (hdpos n k hz)
-      exact ⟨bot_le,by simpa only [a,if_neg hz] using hh.2.2.le.trans ht⟩
+      exact ⟨bot_le, by simpa only [a, if_neg hz] using hh.2.2.le.trans ht⟩
   have hbs : ∀ n k, b n k ∈ Set.Icc 0 T := by
     intro n k
     by_cases hz : d n k = 0
-    · simp [b,hz]
-    · exact ⟨bot_le,by simpa only [b,if_neg hz] using
+    · simp [b, hz]
+    · exact ⟨bot_le, by simpa only [b, if_neg hz] using
         (itoUniformNNTime_le_end t (n+1) k.2 (Nat.succ_pos n) k.2.is_lt.le).trans ht⟩
   have hdisj : ∀ n i k, i ≠ k → d n i ≠ 0 → d n k ≠ 0 →
       s n i+d n i ≤ s n k ∨ s n k+d n k ≤ s n i := by
     intro n i k hik hdi hdk
-    have hn : (i.1.val,i.2.val) ≠ (k.1.val,k.2.val) := by
+    have hn : (i.1.val, i.2.val) ≠ (k.1.val, k.2.val) := by
       intro hh
       apply hik
       apply Prod.ext <;> apply Fin.ext
@@ -69,7 +69,7 @@ theorem brownianUniformPartialSum_horizon_difference_tendsto_meanSquare
       · exact congrArg Prod.snd hh
     have hh := itoHorizonIntersections_disjoint T t (n+1) (n+1) i.1 i.2 k.1 k.2 hn
     have hl : min (e n i) (e n k) ≤ max (s n i) (s n k) := Set.Ioc_disjoint_Ioc.mp hh
-    rw [hsd,hsd]
+    rw [hsd, hsd]
     rcases le_total (s n i) (s n k) with h | h
     · rw [max_eq_right h] at hl
       exact Or.inl ((min_le_iff.mp hl).resolve_right (not_le.mpr (hdpos n k hdk)))
@@ -81,21 +81,21 @@ theorem brownianUniformPartialSum_horizon_difference_tendsto_meanSquare
       (Nat.succ_pos n) (Nat.succ_pos n)
     simp only [←Fin.sum_univ_eq_sum_range] at hh
     have hsum : (∑ k : κ n, d n k) = t := by
-      simpa only [κ,Fintype.sum_prod_type,d,e,s] using hh
+      simpa only [κ, Fintype.sum_prod_type, d, e, s] using hh
     have hr := congrArg (fun x : ℝ≥0 => (x : ℝ)) hsum
     simp only [NNReal.coe_sum] at hr
     exact hr.le.trans ht
   let δ : ℕ → ℝ := fun n => (T : ℝ)/(n+1)+(t : ℝ)/(n+1)
   have hδ : Tendsto δ atTop (𝓝 0) := by
     have h0 := tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)
-    simpa [δ,div_eq_mul_inv,mul_assoc] using (h0.const_mul (T : ℝ)).add (h0.const_mul (t : ℝ))
+    simpa [δ, div_eq_mul_inv, mul_assoc] using (h0.const_mul (T : ℝ)).add (h0.const_mul (t : ℝ))
   have hdist : ∀ n k, dist (a n k) (b n k) ≤ δ n := by
     intro n k
     by_cases hz : d n k = 0
-    · simp only [a,b,if_pos hz,dist_self]
+    · simp only [a, b, if_pos hz, dist_self]
       dsimp [δ]
       positivity
-    · simpa only [a,b,if_neg hz,δ,Nat.cast_add,Nat.cast_one] using
+    · simpa only [a, b, if_neg hz, δ, Nat.cast_add, Nat.cast_one] using
         itoHorizonIntersection_sample_dist_le T t (n+1) (n+1) k.1 k.2
           (Nat.succ_pos n) (Nat.succ_pos n) (hdpos n k hz)
   have hlim := brownianDisjointSampleDifferences_tendsto_meanSquare B P hB hind j κ
@@ -116,17 +116,17 @@ theorem brownianUniformPartialSum_horizon_difference_tendsto_meanSquare
   intro i hi
   apply Finset.sum_congr rfl
   intro k hk
-  by_cases hz : d n (i,k) = 0
-  · have heq : e n (i,k) = s n (i,k) := by
-      have hh := hsd n (i,k)
+  by_cases hz : d n (i, k) = 0
+  · have heq : e n (i, k) = s n (i, k) := by
+      have hh := hsd n (i, k)
       simpa [hz] using hh.symm
     change (F (itoUniformNNTime T (n+1) i) ω-F (itoUniformNNTime t (n+1) k) ω)*
-      (B j (e n (i,k)) ω-B j (s n (i,k)) ω) = _
+      (B j (e n (i, k)) ω-B j (s n (i, k)) ω) = _
     rw [heq]
-    simp [a,b,hz]
+    simp [a, b, hz]
   · change (F (itoUniformNNTime T (n+1) i) ω-F (itoUniformNNTime t (n+1) k) ω)*
-      (B j (e n (i,k)) ω-B j (s n (i,k)) ω) = _
-    simp only [a,b,if_neg hz,hsd]
+      (B j (e n (i, k)) ω-B j (s n (i, k)) ω) = _
+    simp only [a, b, if_neg hz, hsd]
 
 end
 end GinibrePoincare

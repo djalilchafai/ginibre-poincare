@@ -22,19 +22,19 @@ theorem itoIntersection_mem_bounds (a b c d x : ℝ≥0)
     a < x ∧ x ≤ b ∧ c < x ∧ x ≤ d := by
   have he := itoIntersection_end_eq_of_positive a b c d (hx.1.trans_le hx.2)
   rw [he] at hx
-  exact ⟨(le_max_left _ _).trans_lt hx.1,hx.2.trans (min_le_left _ _),
-    (le_max_right _ _).trans_lt hx.1,hx.2.trans (min_le_right _ _)⟩
+  exact ⟨(le_max_left _ _).trans_lt hx.1, hx.2.trans (min_le_left _ _),
+    (le_max_right _ _).trans_lt hx.1, hx.2.trans (min_le_right _ _)⟩
 
 /-- Distinct cells of two monotone grids have disjoint literal intersection
 intervals, including every empty cell. -/
 theorem itoGridIntersections_disjoint (a c : ℕ → ℝ≥0) (ha : Monotone a) (hc : Monotone c)
-    (i j k l : ℕ) (hne : (i,j) ≠ (k,l)) :
+    (i j k l : ℕ) (hne : (i, j) ≠ (k, l)) :
     Disjoint (Set.Ioc (max (a i) (c j)) (max (max (a i) (c j)) (min (a (i+1)) (c (j+1)))))
       (Set.Ioc (max (a k) (c l)) (max (max (a k) (c l)) (min (a (k+1)) (c (l+1))))) := by
   apply Set.disjoint_left.mpr
   intro x hx hy
-  obtain ⟨hax,hxa,hcx,hxc⟩ := itoIntersection_mem_bounds _ _ _ _ _ hx
-  obtain ⟨hak,hxk,hcl,hxl⟩ := itoIntersection_mem_bounds _ _ _ _ _ hy
+  obtain ⟨hax, hxa, hcx, hxc⟩ := itoIntersection_mem_bounds _ _ _ _ _ hx
+  obtain ⟨hak, hxk, hcl, hxl⟩ := itoIntersection_mem_bounds _ _ _ _ _ hy
   have hik : i = k := by
     by_contra h
     rcases lt_or_gt_of_ne h with h | h
@@ -45,7 +45,7 @@ theorem itoGridIntersections_disjoint (a c : ℕ → ℝ≥0) (ha : Monotone a) 
     rcases lt_or_gt_of_ne h with h | h
     · exact (not_lt_of_ge (hxc.trans (hc (Nat.succ_le_of_lt h)))) hcl
     · exact (not_lt_of_ge (hxl.trans (hc (Nat.succ_le_of_lt h)))) hcx
-  exact hne (by simp [hik,hjl])
+  exact hne (by simp [hik, hjl])
 
 /-- The total real duration of the literal intersection refinement is the
 original horizon, even for nonuniform and noncommensurate grids. -/
@@ -58,9 +58,9 @@ theorem itoGridIntersections_total_duration
         ((max (a i) (c j) : ℝ≥0) : ℝ))) = T := by
   have hh := itoWeightedIntervalSums_difference_intersections (fun s => (s : ℝ)) T a c N M
     ha hc ha0 haN hc0 hcM (fun _ => 1) (fun _ => 0)
-  simp only [one_mul,zero_mul,Finset.sum_const_zero,sub_zero] at hh
-  rw [Finset.sum_range_sub (fun i => (a i : ℝ)) N,haN,ha0] at hh
-  simpa only [NNReal.coe_zero,sub_zero] using hh.symm
+  simp only [one_mul, zero_mul, Finset.sum_const_zero, sub_zero] at hh
+  rw [Finset.sum_range_sub (fun i => (a i : ℝ)) N, haN, ha0] at hh
+  simpa only [NNReal.coe_zero, sub_zero] using hh.symm
 
 /-- Actual intersection grid for the fixed-T partial sum and horizon-t sum. -/
 def itoHorizonIntersectionStart (T t : ℝ≥0) (N M i j : ℕ) : ℝ≥0 :=
@@ -84,11 +84,11 @@ theorem itoHorizonIntersection_positive_samples
     by_contra hh
     have htai := le_of_not_gt hh
     have hh : t ≤ itoHorizonIntersectionStart T t N M i j := by
-      simpa [itoHorizonIntersectionStart,min_eq_left htai] using
+      simpa [itoHorizonIntersectionStart, min_eq_left htai] using
         (le_max_left t (itoUniformNNTime t M j))
     exact (not_lt_of_ge hh) hstart
-  exact ⟨by simpa [itoHorizonIntersectionStart,min_eq_right ha.le] using
-    (le_max_left (itoUniformNNTime T N i) (itoUniformNNTime t M j)),le_max_right _ _,ha⟩
+  exact ⟨by simpa [itoHorizonIntersectionStart, min_eq_right ha.le] using
+    (le_max_left (itoUniformNNTime T N i) (itoUniformNNTime t M j)), le_max_right _ _, ha⟩
 
 /-- Samples whose cells actually overlap are at distance at most the sum of
 the two true time meshes. -/
@@ -97,7 +97,7 @@ theorem itoHorizonIntersection_sample_dist_le
     (h : itoHorizonIntersectionStart T t N M i j < itoHorizonIntersectionEnd T t N M i j) :
     dist (itoUniformNNTime T N i) (itoUniformNNTime t M j) ≤
       (T : ℝ)/N + (t : ℝ)/M := by
-  obtain ⟨ha,hc,hat⟩ := itoHorizonIntersection_positive_samples T t N M i j h
+  obtain ⟨ha, hc, hat⟩ := itoHorizonIntersection_positive_samples T t N M i j h
   have he := itoIntersection_end_eq_of_positive _ _ _ _ h
   have hcb : itoUniformNNTime t M j ≤ itoUniformNNTime T N (i+1) :=
     hc.trans (h.le.trans (he.le.trans ((min_le_left _ _).trans (min_le_right _ _))))
@@ -118,7 +118,7 @@ theorem itoHorizonIntersection_sample_dist_le
 
 /-- Actual clipped-horizon intersection cells are pairwise disjoint. -/
 theorem itoHorizonIntersections_disjoint (T t : ℝ≥0) (N M i j k l : ℕ)
-    (hne : (i,j) ≠ (k,l)) :
+    (hne : (i, j) ≠ (k, l)) :
     Disjoint (Set.Ioc (itoHorizonIntersectionStart T t N M i j)
       (itoHorizonIntersectionEnd T t N M i j))
       (Set.Ioc (itoHorizonIntersectionStart T t N M k l)
@@ -134,14 +134,14 @@ theorem itoHorizonIntersections_total_duration (T t : ℝ≥0) (ht : t ≤ T)
       (itoHorizonIntersectionEnd T t N M i j-itoHorizonIntersectionStart T t N M i j)) = t := by
   apply NNReal.coe_injective
   simp only [NNReal.coe_sum]
-  simp only [itoHorizonIntersectionEnd,itoHorizonIntersectionStart]
+  simp only [itoHorizonIntersectionEnd, itoHorizonIntersectionStart]
   simp_rw [NNReal.coe_sub (le_max_left _ _)]
   exact itoGridIntersections_total_duration t
     (fun i => min t (itoUniformNNTime T N i)) (itoUniformNNTime t M) N M
     (monotone_const.min (itoUniformNNTime_mono T N)) (itoUniformNNTime_mono t M)
-    (by simp [itoUniformNNTime,itoUniformTime])
-    (by rw [itoUniformNNTime_end T N hN,min_eq_left ht])
-    (by simp [itoUniformNNTime,itoUniformTime]) (itoUniformNNTime_end t M hM)
+    (by simp [itoUniformNNTime, itoUniformTime])
+    (by rw [itoUniformNNTime_end T N hN, min_eq_left ht])
+    (by simp [itoUniformNNTime, itoUniformTime]) (itoUniformNNTime_end t M hM)
 
 end
 end GinibrePoincare

@@ -20,7 +20,7 @@ theorem ginibreHamiltonian_compact_path_sublevel_exhaustion
     intro t
     exact (ginibreHamiltonian_contDiffAt n (x t) (hCF t)).continuousAt.comp x.continuous.continuousAt
   have hK := isCompact_range hH
-  obtain ⟨R,hR,hBound⟩ := hK.isBounded.exists_pos_norm_le
+  obtain ⟨R, hR, hBound⟩ := hK.isBounded.exists_pos_norm_le
   refine ⟨R+1, fun t => ?_⟩
   change Real.exp (-(R+1)) < ginibreWeight n (x t)
   rw [← ginibreHamiltonian_exp_neg (x t) (hCF t)]
@@ -45,7 +45,7 @@ theorem ginibreHamiltonian_compact_sublevel_survival_reverse
       apply Subtype.ext
       change T - (T - t.val) = t.val
       ring
-    simpa only [ContinuousMap.comp_apply,he] using hh
+    simpa only [ContinuousMap.comp_apply, he] using hh
   · intro h t
     exact h ((ginibreHamiltonianCompactReverseTime T hT) t)
 
@@ -53,9 +53,9 @@ theorem ginibreHamiltonian_compact_path_natural_sublevel_exhaustion
     {n : ℕ} (T : ℝ) (x : C(Icc (0 : ℝ) T, Configuration n))
     (hCF : ∀ t, CollisionFree (x t)) :
     ∃ k : ℕ, ∀ t, x t ∈ ginibreHamiltonianOUSublevelDomain n (k : ℝ) := by
-  obtain ⟨R,hR⟩ := ginibreHamiltonian_compact_path_sublevel_exhaustion T x hCF
-  obtain ⟨k,hk⟩ := exists_nat_gt R
-  refine ⟨k,fun t => ?_⟩
+  obtain ⟨R, hR⟩ := ginibreHamiltonian_compact_path_sublevel_exhaustion T x hCF
+  obtain ⟨k, hk⟩ := exists_nat_gt R
+  refine ⟨k, fun t => ?_⟩
   have hh := hR t
   change Real.exp (-R) < ginibreWeight n (x t) at hh
   change Real.exp (-(k : ℝ)) < ginibreWeight n (x t)
@@ -66,7 +66,7 @@ theorem ginibreHamiltonian_compact_path_survival_exhaustion_iff
     (∃ k : ℕ, ∀ t, x t ∈ ginibreHamiltonianOUSublevelDomain n (k : ℝ)) ↔
       (∀ t, CollisionFree (x t)) := by
   constructor
-  · rintro ⟨k,hk⟩ t
+  · rintro ⟨k, hk⟩ t
     have hh := hk t
     have hMem : x t ∈ ginibreHamiltonianSublevel n k := by
       rw [ginibreHamiltonianSublevel_eq_weight_superlevel]

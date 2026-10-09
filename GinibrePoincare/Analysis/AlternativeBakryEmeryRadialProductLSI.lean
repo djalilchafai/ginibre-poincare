@@ -14,7 +14,7 @@ theorem bakryEmery_radiusProduct_lsi (n : ℕ) (hn : 0 < n)
     (hrot : IsRotationalPotential V) (hc : IsRhoConvexPotential ρ V)
     (f : (Fin n → ℝ) → ℝ) (hf : ContDiff ℝ 1 f) {K : ℝ≥0}
     (hLip : LipschitzWith K f) (C : ℝ) (hC : 0 ≤ C) (hb : ∀ r, |f r| ≤ C) :
-    squareEntropy (potentialRadiusProduct n V) f ≤ (2/((n:ℝ)*ρ)) *
+    squareEntropy (potentialRadiusProduct n V) f ≤ (2/((n : ℝ)*ρ)) *
       ∫ r, directionalEnergy (fun i : Fin n => Pi.single i 1) f r ∂potentialRadiusProduct n V := by
   apply bakryEmery_radiusProduct_lsi_of_factor_lsi n hn ρ hρ V hV hrot hc _ f hf hLip C hC hb
   intro i g hg L hgLip D hD hgBound

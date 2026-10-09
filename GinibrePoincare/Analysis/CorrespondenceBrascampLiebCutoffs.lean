@@ -11,7 +11,7 @@ variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   [FiniteDimensional ℝ E]
 
 def correspondenceBrascampLiebBump : ContDiffBump (0 : E) :=
-  ⟨1,2,by norm_num,by norm_num⟩
+  ⟨1, 2, by norm_num, by norm_num⟩
 
 def correspondenceBrascampLiebCutoff (k : ℕ) (x : E) : ℝ :=
   (correspondenceBrascampLiebBump (E := E)) (((k : ℝ)+1)⁻¹ • x)
@@ -27,7 +27,7 @@ theorem correspondenceBrascampLieb_cutoff_compact (k : ℕ) :
 
 theorem correspondenceBrascampLieb_cutoff_unit (k : ℕ) (x : E) :
     0 ≤ correspondenceBrascampLiebCutoff k x ∧ correspondenceBrascampLiebCutoff k x ≤ 1 :=
-  ⟨(correspondenceBrascampLiebBump (E := E)).nonneg,(correspondenceBrascampLiebBump (E := E)).le_one⟩
+  ⟨(correspondenceBrascampLiebBump (E := E)).nonneg, (correspondenceBrascampLiebBump (E := E)).le_one⟩
 
 theorem correspondenceBrascampLieb_cutoff_fderiv (k : ℕ) (x v : E) :
     fderiv ℝ (correspondenceBrascampLiebCutoff k) x v =
@@ -38,19 +38,19 @@ theorem correspondenceBrascampLieb_cutoff_fderiv (k : ℕ) (x v : E) :
       ((hasFDerivAt_id x).const_smul (((k : ℝ)+1)⁻¹))
   unfold correspondenceBrascampLiebCutoff
   simpa [Function.comp_def,
-    ContinuousLinearMap.comp_apply,map_smul,smul_eq_mul] using
+    ContinuousLinearMap.comp_apply, map_smul, smul_eq_mul] using
     congrArg (fun L : E →L[ℝ] ℝ => L v) hd.fderiv
 
 theorem correspondenceBrascampLieb_cutoff_derivative_bound :
     ∃ M : ℝ, 0 ≤ M ∧ ∀ k (x v : E),
       |fderiv ℝ (correspondenceBrascampLiebCutoff k) x v| ≤
         M / ((k : ℝ)+1) * ‖v‖ := by
-  obtain ⟨M,hM⟩ := ((correspondenceBrascampLiebBump (E := E)).contDiff (n := 1)).continuous_fderiv
+  obtain ⟨M, hM⟩ := ((correspondenceBrascampLiebBump (E := E)).contDiff (n := 1)).continuous_fderiv
     one_ne_zero |>.bounded_above_of_compact_support
       ((correspondenceBrascampLiebBump (E := E)).hasCompactSupport.fderiv ℝ)
-  refine ⟨M,(norm_nonneg _).trans (hM 0),?_⟩
+  refine ⟨M, (norm_nonneg _).trans (hM 0),?_⟩
   intro k x v
-  rw [correspondenceBrascampLieb_cutoff_fderiv,abs_mul,abs_of_nonneg (by positivity)]
+  rw [correspondenceBrascampLieb_cutoff_fderiv, abs_mul, abs_of_nonneg (by positivity)]
   have hb : |fderiv ℝ ((correspondenceBrascampLiebBump (E := E)) : E → ℝ)
       (((k : ℝ)+1)⁻¹ • x) v| ≤ M*‖v‖ :=
     ((fderiv ℝ ((correspondenceBrascampLiebBump (E := E)) : E → ℝ)
@@ -63,13 +63,13 @@ theorem correspondenceBrascampLieb_cutoff_derivative_bound :
 theorem correspondenceBrascampLieb_cutoff_eventually_one
     (K : Set E) (hK : IsCompact K) :
     ∀ᶠ k : ℕ in atTop, ∀ x ∈ K, correspondenceBrascampLiebCutoff k x = 1 := by
-  obtain ⟨R,hR⟩ := hK.isBounded.exists_norm_le
+  obtain ⟨R, hR⟩ := hK.isBounded.exists_norm_le
   filter_upwards [eventually_ge_atTop (Nat.ceil R)] with k hk
   intro x hx
   apply (correspondenceBrascampLiebBump (E := E)).one_of_mem_closedBall
-  rw [Metric.mem_closedBall,dist_zero_right]
+  rw [Metric.mem_closedBall, dist_zero_right]
   change ‖((k : ℝ)+1)⁻¹ • x‖ ≤ (1 : ℝ)
-  rw [norm_smul,Real.norm_of_nonneg (by positivity)]
+  rw [norm_smul, Real.norm_of_nonneg (by positivity)]
   have hp : 0 < (k : ℝ)+1 := by positivity
   rw [inv_mul_le_iff₀ hp]
   have hkR : R ≤ (k : ℝ) :=
@@ -82,10 +82,10 @@ theorem correspondenceBrascampLieb_cutoff_directional_bound
     ∃ M : ℝ, 0 ≤ M ∧ ∀ k (x : E) (i : ι),
       |bakryEmeryGibbsDirectional (correspondenceBrascampLiebCutoff k) (b i) x| ≤
         M / ((k : ℝ)+1) := by
-  obtain ⟨M,hM0,hM⟩ := correspondenceBrascampLieb_cutoff_derivative_bound (E := E)
-  refine ⟨M,hM0,?_⟩
+  obtain ⟨M, hM0, hM⟩ := correspondenceBrascampLieb_cutoff_derivative_bound (E := E)
+  refine ⟨M, hM0,?_⟩
   intro k x i
-  simpa only [bakryEmeryGibbsDirectional,b.orthonormal.norm_eq_one,mul_one] using hM k x (b i)
+  simpa only [bakryEmeryGibbsDirectional, b.orthonormal.norm_eq_one, mul_one] using hM k x (b i)
 
 #print axioms correspondenceBrascampLieb_cutoff_directional_bound
 #print axioms correspondenceBrascampLieb_cutoff_derivative_bound

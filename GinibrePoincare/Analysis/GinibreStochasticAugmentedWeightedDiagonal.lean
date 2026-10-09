@@ -56,7 +56,7 @@ theorem ginibreBrownianAugmentedWeightedDiagonal_tendstoInProbability {Ω ι : T
   intro n
   apply Eventually.of_forall
   intro ω
-  dsimp only [E,R,F,ginibreBrownianAugmentedQuadraticError,ginibreBrownianAugmentedWeightedDiagonal]
+  dsimp only [E, R, F, ginibreBrownianAugmentedQuadraticError, ginibreBrownianAugmentedWeightedDiagonal]
   rw [← Finset.sum_add_distrib]
   apply Finset.sum_congr rfl
   intro i hi

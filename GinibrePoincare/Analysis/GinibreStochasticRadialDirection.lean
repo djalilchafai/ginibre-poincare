@@ -8,8 +8,19 @@ public import GinibrePoincare.Analysis.GinibreDrivenPathFactorization
 
 @[expose] public section
 
-/-! The actual recentered path has a continuous unit radial direction: collision
-freeness, rather than an assumed radial positivity certificate, excludes zero. -/
+/-! # The relative radial direction along the original process
+
+With at least two particles, a zero recentered configuration would force two
+distinct particles to coincide. Collision-freeness therefore proves both
+nonvanishing of the recentered vector and positivity of `pairwiseRadius`.
+
+`ginibreRecenteredRadialDirection` normalizes that vector in real Euclidean
+coordinates. A fixed unit vector `e` defines it at zero, keeping the function
+measurable and unit length everywhere. Along almost every original solution
+path, noncollision excludes that exceptional branch, so continuity follows
+from continuity of normalization away from zero. Composing the measurable
+direction with the adapted process proves the filtration measurability
+needed to construct the radial Brownian integral. -/
 open Set MeasureTheory ProbabilityTheory
 open scoped Topology NNReal
 namespace GinibrePoincare
@@ -24,27 +35,27 @@ theorem recenteredConfiguration_ne_zero_of_collisionFree {n : ℕ} (hn : 2 ≤ n
   have hi := congrFun h i
   have hj := congrFun h j
   have he : z i = z j := by
-    simp only [recenteredConfiguration,projectToOrthogonal,Pi.zero_apply] at hi hj
+    simp only [recenteredConfiguration, projectToOrthogonal, Pi.zero_apply] at hi hj
     exact sub_eq_zero.mp hi |>.trans (sub_eq_zero.mp hj).symm
-  have hij : i ≠ j := by simp [i,j,Fin.ext_iff]
+  have hij : i ≠ j := by simp [i, j, Fin.ext_iff]
   exact hij (hz he)
 
 theorem pairwiseRadius_pos_of_collisionFree {n : ℕ} (hn : 2 ≤ n)
     (z : Configuration n) (hz : CollisionFree z) : 0 < pairwiseRadius z := by
   classical
-  let i : Fin n := ⟨0,by omega⟩
-  let j : Fin n := ⟨1,by omega⟩
-  have hij : i ≠ j := by simp [i,j,Fin.ext_iff]
+  let i : Fin n := ⟨0, by omega⟩
+  let j : Fin n := ⟨1, by omega⟩
+  have hij : i ≠ j := by simp [i, j, Fin.ext_iff]
   have hzj : z i-z j ≠ 0 := sub_ne_zero.mpr (fun h => hij (hz h))
   unfold pairwiseRadius
   apply Finset.sum_pos'
   · intro k hk
     exact Finset.sum_nonneg (fun l hl => Complex.normSq_nonneg _)
-  · refine ⟨i,Finset.mem_univ _,?_⟩
+  · refine ⟨i, Finset.mem_univ _,?_⟩
     apply Finset.sum_pos'
     · intro k hk
       exact Complex.normSq_nonneg _
-    · exact ⟨j,Finset.mem_Ioi.mpr (by simp [i,j]),Complex.normSq_pos.mpr hzj⟩
+    · exact ⟨j, Finset.mem_Ioi.mpr (by simp [i, j]), Complex.normSq_pos.mpr hzj⟩
 
 theorem brownianRadialUnitVector_continuousAt {E : Type*}
     [NormedAddCommGroup E] [InnerProductSpace ℝ E] [CompleteSpace E] (x e : E) (hx : x ≠ 0) :
@@ -52,8 +63,8 @@ theorem brownianRadialUnitVector_continuousAt {E : Type*}
   have he : (fun y => brownianRadialUnitVector y e) =ᶠ[nhds x]
       (fun y => ‖y‖⁻¹ • y) := by
     filter_upwards [isOpen_compl_singleton.mem_nhds hx] with y hy
-    simp only [Set.mem_compl_iff,Set.mem_singleton_iff] at hy
-    simp [brownianRadialUnitVector,hy]
+    simp only [Set.mem_compl_iff, Set.mem_singleton_iff] at hy
+    simp [brownianRadialUnitVector, hy]
   exact ((continuous_norm.continuousAt.inv₀ (norm_ne_zero_iff.mpr hx)).smul
     continuousAt_id).congr he.symm
 
@@ -100,10 +111,10 @@ theorem ginibreBrownianMaximalProcess_radialDirection_properties
       (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal) t) _ (u t)) ∧
     (∀ t ω, ‖u t ω‖=1) ∧ (∀ᵐ ω ∂P, Continuous (fun t => u t ω)) := by
   dsimp only
-  obtain ⟨hAdapt,hPath⟩ := ginibreBrownianMaximalProcess_global_original_solution
+  obtain ⟨hAdapt, hPath⟩ := ginibreBrownianMaximalProcess_global_original_solution
     (by omega) α z hz B P hB hind
   refine ⟨fun t => (ginibreRecenteredRadialDirection_measurable n e).comp
-    (hAdapt t).measurable,fun t ω => ginibreRecenteredRadialDirection_norm n e he _,?_⟩
+    (hAdapt t).measurable, fun t ω => ginibreRecenteredRadialDirection_norm n e he _,?_⟩
   filter_upwards [hPath] with ω hω
   have hX : Continuous (fun t : ℝ≥0 => ginibreBrownianMaximalProcess n α z B t ω) := by
     simpa only [Real.toNNReal_coe] using (show Continuous (fun t : ℝ≥0 => ginibreBrownianMaximalProcess n α z B (t : ℝ).toNNReal ω) from hω.1.comp NNReal.continuous_coe)

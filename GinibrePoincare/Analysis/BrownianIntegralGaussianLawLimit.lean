@@ -19,13 +19,13 @@ theorem actualConstantLaw_of_tendstoInMeasure
     (S : ℕ → Ω → E) (hS : ∀ n, HasLaw (S n) μ P) (L : Ω → E)
     (hL : TendstoInMeasure P S atTop L) : HasLaw L μ P := by
   have hd := hL.tendstoInDistribution (fun n => (hS n).aemeasurable)
-  have hid : HasLaw (id : E → E) μ μ := ⟨measurable_id.aemeasurable,Measure.map_id⟩
+  have hid : HasLaw (id : E → E) μ μ := ⟨measurable_id.aemeasurable, Measure.map_id⟩
   have hdid : TendstoInDistribution S atTop (id : E → E) (fun _ => P) μ :=
     tendstoInDistribution_of_identDistrib 0
     (fun n => (hS 0).identDistrib (hS n)) ((hS 0).identDistrib hid)
   have he := tendstoInDistribution_unique S hd hdid
   rw [Measure.map_id] at he
-  exact ⟨hd.aemeasurable_limit,he⟩
+  exact ⟨hd.aemeasurable_limit, he⟩
 
 /-- Gaussian endpoint law of a genuine probability limit of the actual
 coordinate sums driven by an adapted unit field. -/

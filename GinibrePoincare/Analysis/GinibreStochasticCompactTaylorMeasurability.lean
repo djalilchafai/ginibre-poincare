@@ -28,7 +28,7 @@ theorem ginibreCompactProcess_taylor_remainder_measurable {Ω : Type*} [Measurab
     (hRange : ∀ t ω, X t ω ∈ K) (s t : ℝ≥0) :
     Measurable (fun ω => itoTaylorRemainder f (X s ω) (X t ω-X s ω)) := by
   classical
-  obtain ⟨C,hC,hG,hH⟩ := ginibreCompactProcess_test_coefficients n F X hX hCont
+  obtain ⟨C, hC, hG, hH⟩ := ginibreCompactProcess_test_coefficients n F X hX hCont
     f U K hU hf hK hKU hRange
   have hmX (r : ℝ≥0) : Measurable (X r) := ((hX r).mono (F.le r)).measurable
   have hmf (r : ℝ≥0) : Measurable (fun ω => f (X r ω)) :=

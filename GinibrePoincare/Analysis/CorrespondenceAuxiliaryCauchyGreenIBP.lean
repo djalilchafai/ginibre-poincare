@@ -39,7 +39,7 @@ theorem planarDbar_compact_integrationByParts (f θ : ℂ → ℂ)
       funext z
       unfold planarDbar
       ring
-    rw [he,integral_const_mul,integral_add (hi1 1) ((hi1 Complex.I).const_mul Complex.I),
+    rw [he, integral_const_mul, integral_add (hi1 1) ((hi1 Complex.I).const_mul Complex.I),
       integral_const_mul]
   have hright : (∫ z : ℂ, planarDbar f z * θ z) =
       (1/2 : ℂ) * ((∫ z : ℂ, fderiv ℝ f z 1 * θ z) +
@@ -50,9 +50,9 @@ theorem planarDbar_compact_integrationByParts (f θ : ℂ → ℂ)
       funext z
       unfold planarDbar
       ring
-    rw [he,integral_const_mul,integral_add (hi2 1) ((hi2 Complex.I).const_mul Complex.I),
+    rw [he, integral_const_mul, integral_add (hi2 1) ((hi2 Complex.I).const_mul Complex.I),
       integral_const_mul]
-  rw [hleft,hright,hibp 1,hibp Complex.I]
+  rw [hleft, hright, hibp 1, hibp Complex.I]
   ring
 
 theorem cauchyGreenRegularizedKernel_test_identity (τ : ℝ) (hτ : 0 < τ)

@@ -8,8 +8,21 @@ public import GinibrePoincare.Analysis.GinibreStochasticCIRDrivenLocal
 
 @[expose] public section
 
-/-! Joint genuine center and relative CIR realizations. Every nonnegative speed and every collision-free deterministic initial state
-is included, including zero initial center. -/
+/-! # Independent CIR drivers for the two radii
+
+The two observables are `ginibreCenterSquared` and `pairwiseRadius`. Their
+CIR drift shapes are respectively `1` and `recenteredGammaShape n`; both use
+the same speed factor `4 * α / n`. Independence in the conclusion concerns
+the entire scalar Brownian driver processes.
+
+The proof first separates zero speed, where the observables are constant.
+For positive speed it constructs the unrestricted center driver and the
+relative radial driver, proves their independence, and realizes each local
+integral. The center integral has separate branches for zero and positive
+initial center, since normalization of its radial direction at zero requires
+a different argument. Intersecting the two full-measure Itô events yields
+both equations with the same Hamiltonian stopping time and time cap.
+The sum-convergence clauses specify the integrals by mean-square limits. -/
 open Set MeasureTheory ProbabilityTheory Filter
 open scoped Topology NNReal
 namespace GinibrePoincare
@@ -44,35 +57,37 @@ theorem ginibreBrownian_full_two_radius_independent_CIR_realization
               ∫ s in (0 : ℝ)..t, (4*(α : ℝ)/(n : ℝ))*
                 ((recenteredGammaShape n : ℝ)-pairwiseRadius (X s.toNNReal ω))) := by
   classical
+  -- At zero speed the two observables are constant, so treat this case directly.
   by_cases hα0 : α=0
   · subst α
     simpa only [NNReal.coe_zero] using ginibreBrownian_zero_speed_two_radius_CIR_realization
       (by omega) z hz B P hB hind
   have hα : 0 < α := lt_of_le_of_ne bot_le (Ne.symm hα0)
-  let i₀ : Fin n × Fin 2 := (⟨0,by omega⟩,0)
+  let i₀ : Fin n × Fin 2 := (⟨0, by omega⟩, 0)
   let e : EuclideanSpace ℝ (Fin n × Fin 2) := EuclideanSpace.single i₀ 1
-  have he : ‖e‖=1 := by simp [e,PiLp.norm_single]
-  obtain ⟨βS,hβS,hβSM,hβSL,hβS0,hβSLim,hβSShift,hβSFresh⟩ :=
+  have he : ‖e‖=1 := by simp [e, PiLp.norm_single]
+  obtain ⟨βS, hβS, hβSM, hβSL, hβS0, hβSLim, hβSShift, hβSFresh⟩ :=
     ginibreBrownianMaximalProcess_center_unrestricted_Brownian_exists hn α hα z hz B P hB hind
-  obtain ⟨βR,hβR,hβRM,hβRL,hβR0,hβRLim,hβRShift,hβRFresh⟩ :=
+  obtain ⟨βR, hβR, hβRM, hβRL, hβR0, hβRLim, hβRShift, hβRFresh⟩ :=
     ginibreBrownianMaximalProcess_radial_Brownian_exists hn α z hz B P hB hind
-  refine ⟨βS,βR,hβS,hβR,?_,?_⟩
+  refine ⟨βS, βR, hβS, hβR, ?_, ?_⟩
   · exact ginibreBrownian_unrestricted_center_radial_drivers_independent hn α hα z hz
       B P hB hind e e βS βR hβS.cont hβS0 hβSShift hβR.cont hβRLim
   · intro R hR T
+    -- The zero-center branch requires the unrestricted center construction.
     have hcenterIntegral := if hcenter : ginibreCenterSquared n z=0 then
       ginibreBrownianMaximalProcess_zero_center_CIR_Brownian_integral hn α hα z hz hcenter
         B P hB hind e he βS hβSM hβSL hβSLim R hR T else
       ginibreBrownianMaximalProcess_local_center_CIR_Brownian_integral hn α z hz
         (lt_of_le_of_ne (ginibreCenterSquared_nonneg n z) (Ne.symm hcenter))
         B P hB hind e he βS hβSL hβSLim R hR T
-    obtain ⟨JS,hJSM,hJSC,hJSL,hJS0,hJSMS,hJSLim,hSIto⟩ := hcenterIntegral
-    obtain ⟨JR,hJRM,hJRC,hJRL,hJR0,hJRMS,hJRLim,hRIto⟩ :=
+    obtain ⟨JS, hJSM, hJSC, hJSL, hJS0, hJSMS, hJSLim, hSIto⟩ := hcenterIntegral
+    obtain ⟨JR, hJRM, hJRC, hJRL, hJR0, hJRMS, hJRLim, hRIto⟩ :=
       ginibreBrownianMaximalProcess_local_CIR_Brownian_integral hn α z hz B P hB hind
         e he βR hβRL hβRLim R hR T
-    refine ⟨JS,JR,hJSM,hJRM,hJSC,hJRC,hJSMS,hJRMS,?_⟩
-    filter_upwards [hSIto,hRIto] with ω hs hr
-    exact fun t ht => ⟨hs t ht,hr t ht⟩
+    refine ⟨JS, JR, hJSM, hJRM, hJSC, hJRC, hJSMS, hJRMS, ?_⟩
+    filter_upwards [hSIto, hRIto] with ω hs hr
+    exact fun t ht => ⟨hs t ht, hr t ht⟩
 
 #print axioms ginibreBrownian_full_two_radius_independent_CIR_realization
 end

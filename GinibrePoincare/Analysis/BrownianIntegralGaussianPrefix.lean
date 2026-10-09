@@ -54,18 +54,18 @@ theorem brownianUnitGridPrefix_gaussian
         simp [brownianUnitGridPrefix]
       rw [hz]
       refine ⟨measurable_const.aemeasurable,?_⟩
-      simp [Measure.map_const,gaussianReal_zero_var]
+      simp [Measure.map_const, gaussianReal_zero_var]
   | succ n hn =>
-      obtain ⟨hl,hi⟩ := brownianUnitGridInnovation_gaussian_independent B P hB hind
+      obtain ⟨hl, hi⟩ := brownianUnitGridInnovation_gaussian_independent B P hB hind
         u τ hu hunit n (brownianUnitGridPrefix B u τ n)
         (brownianUnitGridPrefix_measurable B P hB u τ hτ hu n) i
       have hh := IndepFun.hasLaw_add hn hl hi
       have heq : brownianUnitGridPrefix B u τ (n+1) =
           brownianUnitGridPrefix B u τ n+brownianUnitGridInnovation B u τ n := by
         funext ω
-        simp [brownianUnitGridPrefix,Finset.sum_range_succ,Pi.add_apply]
-      rw [heq,Finset.sum_range_succ]
-      simpa only [gaussianReal_conv_gaussianReal,zero_add] using hh
+        simp [brownianUnitGridPrefix, Finset.sum_range_succ, Pi.add_apply]
+      rw [heq, Finset.sum_range_succ]
+      simpa only [gaussianReal_conv_gaussianReal, zero_add] using hh
 
 end
 end GinibrePoincare

@@ -22,7 +22,7 @@ theorem ginibre_deriv_deriv_sqrt {r : ℝ} (hr : 0 < r) :
     have h := ((Real.hasDerivAt_sqrt hn).const_mul 2).inv (mul_ne_zero (by norm_num) hs)
     convert! h using 1
     · funext x
-      simp only [one_div,Pi.inv_apply]
+      simp only [one_div, Pi.inv_apply]
     · field_simp
       <;> ring
   exact (hg.congr_of_eventuallyEq he).deriv
@@ -55,7 +55,7 @@ theorem ginibreRealPaperSpeedGenerator_squareRootRadius {n : ℕ} (hn : 2 ≤ n)
   have hφ : ContDiffAt ℝ 2 Real.sqrt (pairwiseRadius z) := Real.contDiffAt_sqrt hρ.ne'
   change ginibreRealPaperSpeedGenerator n α (fun w => Real.sqrt (pairwiseRadius w)) z = _
   rw [ginibreRealPaperSpeedGenerator_scalar_comp α pairwiseRadius Real.sqrt z hf hφ,
-    (Real.hasDerivAt_sqrt hρ.ne').deriv,ginibre_deriv_deriv_sqrt hρ,
+    (Real.hasDerivAt_sqrt hρ.ne').deriv, ginibre_deriv_deriv_sqrt hρ,
     ginibreRealPaperSpeedGenerator_pairwiseRadius hn α z hz]
   have hg : realGradientNormSq pairwiseRadius z=4*(n : ℝ)*pairwiseRadius z :=
     ginibre_pairwiseRadius_gradient_normSq n z

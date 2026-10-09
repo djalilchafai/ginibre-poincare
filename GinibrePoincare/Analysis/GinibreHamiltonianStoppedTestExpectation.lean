@@ -35,17 +35,17 @@ theorem ginibreBrownian_stopped_core_test_expectation
   let A := fun ω => ∫ s in (0 : ℝ)..(σ ω : ℝ), ginibreRealPaperSpeedGenerator n α f (X s.toNNReal ω)
   have hf2 : ContDiffOn ℝ 2 f {x | CollisionFree x} :=
     (hf.1.of_le (WithTop.coe_le_coe.mpr (show (2 : ENat) ≤ ⊤ from le_top))).contDiffOn
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hEq,hEnd⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hEq, hEnd⟩ :=
     ginibreBrownianMaximalProcess_local_test_ito_martingale_exists hn α z hz B P hB hind R hR T f hf2
   have hσ := ginibreBrownianHamiltonianBoundedStop_isStoppingTime hn α z hz B P hB R hR T
   have hσT (ω : Ω) : σ ω ≤ T := ginibreDrivenHamiltonianBoundedStop_le n α _ z R T
   have hStop := continuous_martingale_bounded_stopping_integral hJM (ae_of_all P hJC) hσ hσT
   have hJmean : (∫ ω, J (σ ω) ω ∂P)=0 := by
-    rw [hStop.2,integral_congr_ae hJ0]
+    rw [hStop.2, integral_congr_ae hJ0]
     simp
   have hXmeas : Measurable (X T) :=
     ((ginibreBrownianHamiltonianStoppedProcess_stronglyAdapted hn α z hz B P hB R hR T T).mono (F.le T)).measurable
-  obtain ⟨C,hC⟩ := hf.2.1.exists_bound_of_continuous hf.1.continuous
+  obtain ⟨C, hC⟩ := hf.2.1.exists_bound_of_continuous hf.1.continuous
   have hY : Integrable Y P := (integrable_const C).mono'
     (hf.1.continuous.measurable.comp hXmeas).aestronglyMeasurable
     (ae_of_all P (fun ω => hC (X T ω)))
@@ -59,7 +59,7 @@ theorem ginibreBrownian_stopped_core_test_expectation
   rw [integral_add (f := fun ω => f z+J (σ ω) ω) (g := A)
       ((integrable_const (f z)).add hStop.1) hA,
     integral_add (f := fun _ => f z) (g := fun ω => J (σ ω) ω)
-      (integrable_const (f z)) hStop.1,hJmean] at hInt
+      (integrable_const (f z)) hStop.1, hJmean] at hInt
   simpa using hInt
 
 end

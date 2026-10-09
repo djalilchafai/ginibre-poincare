@@ -35,9 +35,9 @@ theorem ginibreCompactVolterra_continuous_ito_integral_exists
       (∀ ω, Continuous (fun t => J t ω)) ∧ (∀ t, MemLp (J t) 2 P) ∧ J 0 =ᵐ[P] (fun _ => 0) ∧
       (∀ t ≤ T, TendstoInMeasure P (ginibreConfigurationBrownianGradientSum n B α X f t) atTop (J t)) ∧
       ∀ᵐ ω ∂P, ∀ t ≤ θ ω, ginibreConfigurationTestCompensator n α X f b t ω=J t ω := by
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hPartial,hLimit⟩ := ginibreCompactProcess_continuous_gradient_integral_all_horizons
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hPartial, hLimit⟩ := ginibreCompactProcess_continuous_gradient_integral_all_horizons
     n B P hB hind α X hX hCont f U K hU hf hK hKU hRange T
-  refine ⟨J,hJM,hJC,hJL,hJ0,hLimit,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0, hLimit,?_⟩
   exact ginibreCompactVolterra_compensator_eq_gradient_process_until n B P hB hind α X hX hCont
     f U K hU hf hK hKU hRange T b hb M hM hbound θ hθ hθT hVolterra
     J (Filter.Eventually.of_forall hJC) hLimit

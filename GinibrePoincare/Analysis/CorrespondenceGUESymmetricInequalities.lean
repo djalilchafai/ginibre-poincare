@@ -9,15 +9,15 @@ set_option backward.isDefEq.respectTransparency false
 
 theorem gueFullMeasure_symmetric_compact_integral {n : ℕ} (hn : 0<n)
     (f : EuclideanSpace ℝ (Fin n) → ℝ) (hf : Continuous f) (hc : HasCompactSupport f)
-    (hs : ∀σ x,f (guePermute n σ x)=f x) :
-    (∫x,f x ∂gueFullMeasure n)=(∫x,f x ∂gueOrderedMeasure n) := by
-  obtain ⟨C,hC⟩ := hf.norm.bddAbove_range_of_hasCompactSupport hc.norm
+    (hs : ∀σ x, f (guePermute n σ x)=f x) :
+    (∫x, f x ∂gueFullMeasure n)=(∫x, f x ∂gueOrderedMeasure n) := by
+  obtain ⟨C, hC⟩ := hf.norm.bddAbove_range_of_hasCompactSupport hc.norm
   exact gueFullMeasure_symmetric_integral hn f hf hs C (fun x => hC (mem_range_self x))
 
 theorem gueFullMeasure_symmetric_square_lsi_compactC1 {n : ℕ} (hn : 0<n)
     (f : EuclideanSpace ℝ (Fin n) → ℝ) (hf : ContDiff ℝ 1 f) (hc : HasCompactSupport f)
-    (hs : ∀σ x,f (guePermute n σ x)=f x) :
-    squareEntropy (gueFullMeasure n) f ≤ (2/(n:ℝ))*∫x,‖gradient f x‖^2 ∂gueFullMeasure n := by
+    (hs : ∀σ x, f (guePermute n σ x)=f x) :
+    squareEntropy (gueFullMeasure n) f ≤ (2/(n : ℝ))*∫x, ‖gradient f x‖^2 ∂gueFullMeasure n := by
   have hf2 : HasCompactSupport (fun x => f x^2) := hc.comp_left (g := fun t : ℝ => t^2) (by simp)
   have he := gueFullMeasure_symmetric_compact_integral hn
     (fun x => f x^2*Real.log (f x^2)) (continuous_square_mul_log hf.continuous)
@@ -33,14 +33,14 @@ theorem gueFullMeasure_symmetric_square_lsi_compactC1 {n : ℕ} (hn : 0<n)
   have hge := gueFullMeasure_symmetric_compact_integral hn (fun x => ‖gradient f x‖^2)
     (hg.norm.pow 2) hgc (gueSymmetric_gradient_norm_sq n f hf hs)
   unfold squareEntropy
-  rw [he,h2,hge]
+  rw [he, h2, hge]
   exact gueOrderedMeasure_square_lsi hn f hf hc
 
 theorem gueFullMeasure_symmetric_poincare_compactC1 {n : ℕ} (hn : 0<n)
     (f : EuclideanSpace ℝ (Fin n) → ℝ) (hf : ContDiff ℝ 1 f) (hc : HasCompactSupport f)
-    (hs : ∀σ x,f (guePermute n σ x)=f x) :
-    (∫x,f x^2 ∂gueFullMeasure n)-(∫x,f x ∂gueFullMeasure n)^2 ≤
-      (1/(n:ℝ))*∫x,‖gradient f x‖^2 ∂gueFullMeasure n := by
+    (hs : ∀σ x, f (guePermute n σ x)=f x) :
+    (∫x, f x^2 ∂gueFullMeasure n)-(∫x, f x ∂gueFullMeasure n)^2 ≤
+      (1/(n : ℝ))*∫x, ‖gradient f x‖^2 ∂gueFullMeasure n := by
   have hf2 : HasCompactSupport (fun x => f x^2) := hc.comp_left (g := fun t : ℝ => t^2) (by simp)
   have h2 := gueFullMeasure_symmetric_compact_integral hn (fun x => f x^2) (hf.continuous.pow 2)
     hf2 (by intros σ x; rw [hs])
@@ -53,7 +53,7 @@ theorem gueFullMeasure_symmetric_poincare_compactC1 {n : ℕ} (hn : 0<n)
       (map_zero _)).comp_left (g := fun x : EuclideanSpace ℝ (Fin n) => ‖x‖^2) (by simp)
   have hge := gueFullMeasure_symmetric_compact_integral hn (fun x => ‖gradient f x‖^2)
     (hg.norm.pow 2) hgc (gueSymmetric_gradient_norm_sq n f hf hs)
-  rw [h1,h2,hge]
+  rw [h1, h2, hge]
   exact gueOrderedMeasure_poincare_compactC1 hn f hf hc
 
 #print axioms gueFullMeasure_symmetric_square_lsi_compactC1

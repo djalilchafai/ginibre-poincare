@@ -40,10 +40,10 @@ variable {ι : Type*} [Fintype ι] [DecidableEq ι]
       ∫ x, u x*L x ∂μ := by
     unfold correspondenceBrascampLiebCenter
     simp_rw [sub_mul]
-    rw [integral_sub hiu (hiL.const_mul _),integral_const_mul,hstat]
+    rw [integral_sub hiu (hiL.const_mul _), integral_const_mul, hstat]
     ring
   unfold correspondenceBrascampLiebCoreL2
-  rw [correspondenceBrascampLieb_toLp_inner,correspondenceBrascampLieb_toLp_norm_sq]
+  rw [correspondenceBrascampLieb_toLp_inner, correspondenceBrascampLieb_toLp_norm_sq]
   rw [hcenter]
   exact correspondenceBrascampLieb_weak_compact_bound W u f.val G b hW hu hG hw hpos hE
     (f.smooth.of_le (by norm_num)) f.compact

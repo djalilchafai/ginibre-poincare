@@ -7,9 +7,9 @@ open scoped NNReal ENNReal Topology
 namespace GinibrePoincare
 noncomputable section
 local instance correspondenceOperatorPathMeasurableSpace (n : ℕ) (T : ℝ≥0) :
-    MeasurableSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := borel _
+    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := borel _
 local instance correspondenceOperatorPathBorelSpace (n : ℕ) (T : ℝ≥0) :
-    BorelSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := ⟨rfl⟩
+    BorelSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := ⟨rfl⟩
 
 /-- The actual killed original Ginibre path law is absolutely continuous with
 respect to the genuine OU path law. Its density is not an assumed Girsanov
@@ -44,10 +44,10 @@ theorem correspondenceOperator_path_absolutelyContinuous_OU {Ω : Type*}
     (hind : iIndepFun (fun i ω t => B i t ω) P) (α : ℝ≥0)
     (z : Configuration n) (hz : CollisionFree z) (T : ℝ≥0) (hT : 0<T) :
     P.map (fun ω => ginibreCanonicalJointHorizonPath α T
-      (⟨z,hz⟩,ginibreBrownianFullContinuousNoise n B α ω)) ≪
+      (⟨z, hz⟩, ginibreBrownianFullContinuousNoise n B α ω)) ≪
       P.map (ginibreHamiltonianOUReferenceHorizon n α z B T) := by
   let X := fun ω => ginibreCanonicalJointHorizonPath α T
-    (⟨z,hz⟩,ginibreBrownianFullContinuousNoise n B α ω)
+    (⟨z, hz⟩, ginibreBrownianFullContinuousNoise n B α ω)
   let μ := P.map X
   have hX : Measurable X := (ginibreCanonicalJointHorizonPath_measurable hn α T).comp
     (measurable_const.prodMk (ginibreBrownianFullContinuousNoise_measurable n B P hB α))
@@ -78,9 +78,9 @@ theorem correspondenceOperator_path_absolutelyContinuous_OU {Ω : Type*}
   apply measure_eq_zero_iff_ae_notMem.mpr
   have hAll : ∀ᵐ x ∂μ, ∀ k : ℕ, x∉s∩ginibreHamiltonianCompactSurvival n T k :=
     ae_all_iff.mpr (fun k => measure_eq_zero_iff_ae_notMem.mp (hk k))
-  filter_upwards [hEx,hAll] with x hx hnot
-  obtain ⟨k,hk⟩ := hx
-  exact fun hsx => hnot k ⟨hsx,hk⟩
+  filter_upwards [hEx, hAll] with x hx hnot
+  obtain ⟨k, hk⟩ := hx
+  exact fun hsx => hnot k ⟨hsx, hk⟩
 
 #print axioms correspondenceOperator_path_absolutelyContinuous_OU
 
@@ -93,14 +93,14 @@ theorem correspondenceOperator_endpoint_absolutelyContinuous_OU {Ω : Type*}
     (hind : iIndepFun (fun i ω t => B i t ω) P) (α : ℝ≥0)
     (z : Configuration n) (hz : CollisionFree z) (T : ℝ≥0) (hT : 0<T) :
     P.map (fun ω => ginibreCanonicalJointHorizonPath α T
-      (⟨z,hz⟩,ginibreBrownianFullContinuousNoise n B α ω) ⟨T,⟨T.property,le_rfl⟩⟩) ≪
+      (⟨z, hz⟩, ginibreBrownianFullContinuousNoise n B α ω) ⟨T, ⟨T.property, le_rfl⟩⟩) ≪
       P.map (fun ω => ginibreHamiltonianOUReferenceHorizon n α z B T ω
-        ⟨T,⟨T.property,le_rfl⟩⟩) := by
-  let e : C(Icc (0:ℝ) (T:ℝ),Configuration n) → Configuration n :=
-    fun x => x ⟨T,⟨T.property,le_rfl⟩⟩
+        ⟨T, ⟨T.property, le_rfl⟩⟩) := by
+  let e : C(Icc (0 : ℝ) (T : ℝ), Configuration n) → Configuration n :=
+    fun x => x ⟨T, ⟨T.property, le_rfl⟩⟩
   have he : Measurable e := (continuous_eval_const _).measurable
   have hX : Measurable (fun ω => ginibreCanonicalJointHorizonPath α T
-      (⟨z,hz⟩,ginibreBrownianFullContinuousNoise n B α ω)) :=
+      (⟨z, hz⟩, ginibreBrownianFullContinuousNoise n B α ω)) :=
     (ginibreCanonicalJointHorizonPath_measurable hn α T).comp
     (measurable_const.prodMk (ginibreBrownianFullContinuousNoise_measurable n B P hB α))
   have hY := ginibreHamiltonianOUReferenceHorizon_measurable n α z B P hB T
@@ -109,7 +109,7 @@ theorem correspondenceOperator_endpoint_absolutelyContinuous_OU {Ω : Type*}
   intro a ha ha0
   change (P.map (e ∘ ginibreHamiltonianOUReferenceHorizon n α z B T)) a=0 at ha0
   change (P.map (e ∘ (fun ω => ginibreCanonicalJointHorizonPath α T
-    (⟨z,hz⟩,ginibreBrownianFullContinuousNoise n B α ω)))) a=0
+    (⟨z, hz⟩, ginibreBrownianFullContinuousNoise n B α ω)))) a=0
   rw [Measure.map_apply (he.comp hY) ha] at ha0
   rw [Measure.map_apply (he.comp hX) ha]
   have hy0 : (P.map (ginibreHamiltonianOUReferenceHorizon n α z B T)) (e ⁻¹' a)=0 := by

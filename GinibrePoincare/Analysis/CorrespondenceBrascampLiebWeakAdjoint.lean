@@ -31,7 +31,7 @@ theorem correspondenceBrascampLieb_weak_weighted_adjoint
       ρ x*(bakryEmeryGibbsDirectional θ v x-
         bakryEmeryGibbsDirectional W v x*θ x) := by
     rw [fderiv_mul (hρ.differentiable (by norm_num) x) (hθ.differentiable (by norm_num) x)]
-    simp only [ContinuousLinearMap.add_apply,ContinuousLinearMap.smul_apply,smul_eq_mul]
+    simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply, smul_eq_mul]
     have hd := correspondenceBrascampLieb_density_derivative W hW v x
     change fderiv ℝ ρ x v = -bakryEmeryGibbsDirectional W v x*ρ x at hd
     rw [hd]

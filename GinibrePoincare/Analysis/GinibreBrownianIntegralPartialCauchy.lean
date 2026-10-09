@@ -19,10 +19,10 @@ theorem real_condExp_square_integral_le {Ω : Type*} [mAmbient : MeasurableSpace
     (f : Ω → ℝ) (hf : MemLp f 2 P) :
     (∫ ω, (P[f | m] ω)^2 ∂P) ≤ ∫ ω, (f ω)^2 ∂P := by
   have hi : Integrable (fun ω => ‖f ω‖^(2 : ℝ)) P := by
-    simpa only [Real.rpow_two,Real.norm_eq_abs,sq_abs] using hf.integrable_sq
+    simpa only [Real.rpow_two, Real.norm_eq_abs, sq_abs] using hf.integrable_sq
   have hle := Integrable.norm_condExp_rpow_le (f := f) (m := m) (μ := P) (p := 2) (by norm_num) hi
   have hj : (fun ω => (P[f | m] ω)^2) ≤ᵐ[P] P[(fun ω => (f ω)^2) | m] := by
-    simpa only [Real.rpow_two,Real.norm_eq_abs,sq_abs] using hle
+    simpa only [Real.rpow_two, Real.norm_eq_abs, sq_abs] using hle
   calc
     _ ≤ ∫ ω, P[(fun ω => (f ω)^2) | m] ω ∂P :=
       integral_mono_ae ((hf.condExp (by norm_num)).integrable_sq) integrable_condExp hj
@@ -58,7 +58,7 @@ theorem brownianUniformPartialSum_difference_secondMoment_le_terminal {Ω ι : T
   have hterminal : (brownianUniformPartialSum (B j) F T N-brownianUniformPartialSum (B j) F T M) T =
       fun ω => brownianUniformLeftSum (B j) F T N ω-brownianUniformLeftSum (B j) F T M ω := by
     funext ω
-    simp only [Pi.sub_apply,brownianUniformPartialSum_terminal]
+    simp only [Pi.sub_apply, brownianUniformPartialSum_terminal]
   rw [hterminal] at hc
   calc
     _ = ∫ ω, (P[(fun ω => brownianUniformLeftSum (B j) F T N ω-brownianUniformLeftSum (B j) F T M ω) |

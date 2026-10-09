@@ -121,7 +121,7 @@ theorem correspondenceOperator_integral_pointwiseGammaTwo {n : ℕ} (hn : 0 < n)
   let g := ginibrePregenerator n f
   have hg := correspondenceOperator_pregenerator_preserves_core hn f hf.1 hf.2.1 hs
   have hgg := correspondenceOperator_pregenerator_preserves_core hn g hg.1 hg.2.1 hg.2.2
-  let Q : Configuration n → ℝ := fun z => (1/(n:ℝ))*∑ i : Fin n × Fin 2,
+  let Q : Configuration n → ℝ := fun z => (1/(n : ℝ))*∑ i : Fin n × Fin 2,
     (bochnerDirectionalDerivative (ginibreBochnerDirection i) f z)^2
   have hQ : ContDiff ℝ ∞ Q := by
     apply contDiff_const.mul

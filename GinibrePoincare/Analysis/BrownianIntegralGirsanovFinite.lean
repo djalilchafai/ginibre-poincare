@@ -31,7 +31,7 @@ theorem brownianPredictableGaussianDensity_succ {Ω : Type*}
     brownianPredictableGaussianDensity B h τ (N+1) ω =
       brownianPredictableGaussianDensity B h τ N ω*
         gaussianExponentialTilt (h N ω) (τ (N+1)-τ N) (B (τ (N+1)) ω-B (τ N) ω) := by
-  simp only [brownianPredictableGaussianDensity,Finset.sum_range_succ,Real.exp_add,
+  simp only [brownianPredictableGaussianDensity, Finset.sum_range_succ, Real.exp_add,
     gaussianExponentialTilt]
 
 theorem brownianPredictableGaussianDensity_measurable_at
@@ -59,7 +59,7 @@ theorem brownianPredictableGaussianDensity_measurable_at
     funext ω
     rw [brownianPredictableGaussianDensity_succ]
     unfold gaussianExponentialTilt
-    simp only [Pi.mul_apply,Pi.sub_apply]
+    simp only [Pi.mul_apply, Pi.sub_apply]
     congr 2
     ring
 
@@ -75,7 +75,7 @@ theorem brownianPredictableGaussianDensity_lintegral
   induction N with
   | zero => simp [brownianPredictableGaussianDensity]
   | succ N ih =>
-    let Y := fun ω => (h N ω,brownianPredictableGaussianDensity (B j) h τ N ω)
+    let Y := fun ω => (h N ω, brownianPredictableGaussianDensity (B j) h τ N ω)
     have hY : @Measurable Ω (ℝ×ℝ) (ginibreBrownianAugmentedFiltration B P hB (τ N)) _ Y :=
       (hh N).prodMk (brownianPredictableGaussianDensity_measurable_at B P hB j h τ hτ hh N)
     have hYa := hY.mono ((ginibreBrownianAugmentedFiltration B P hB).le (τ N)) le_rfl
@@ -89,7 +89,7 @@ theorem brownianPredictableGaussianDensity_lintegral
     have he := gaussianPredictableTilt_lintegral P Y X hYa.aemeasurable
       (τ (N+1)-τ N) hX hi Prod.fst (fun y : ℝ×ℝ => ENNReal.ofReal y.2)
       measurable_fst (ENNReal.measurable_ofReal.comp measurable_snd)
-    simp only [Y,Prod.fst,Prod.snd,X] at he
+    simp only [Y, Prod.fst, Prod.snd, X] at he
     simp_rw [brownianPredictableGaussianDensity_succ,
       ENNReal.ofReal_mul (brownianPredictableGaussianDensity_pos (B j) h τ N _).le]
     exact he.trans ih

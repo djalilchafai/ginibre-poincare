@@ -17,8 +17,8 @@ theorem correspondenceFriedrichs_one_sub_resolvent_nonneg (n : ℕ) (hn : 0<n) :
   have h2 := norm_inner_le_norm (𝕜:=ℂ) (correspondenceOperatorComplexResolvent n hn x) x
   have h3 := correspondenceOperatorComplexResolvent_norm_le n hn x
   change 0≤RCLike.re (inner ℂ ((1-correspondenceOperatorComplexResolvent n hn) x) x)
-  rw [sub_apply,one_apply_eq_self,inner_sub_left,map_sub,inner_self_eq_norm_sq]
-  nlinarith [norm_nonneg x,norm_nonneg (correspondenceOperatorComplexResolvent n hn x)]
+  rw [sub_apply, one_apply_eq_self, inner_sub_left, map_sub, inner_self_eq_norm_sq]
+  nlinarith [norm_nonneg x, norm_nonneg (correspondenceOperatorComplexResolvent n hn x)]
 
 def correspondenceFriedrichsComplementSqrt (n : ℕ) (hn : 0<n) :
     GinibreFullComplexL2 n→L[ℂ]GinibreFullComplexL2 n :=
@@ -46,7 +46,7 @@ theorem correspondenceFriedrichsSquareRoots_sum_squares (n : ℕ) (hn : 0<n)
     (x : GinibreFullComplexL2 n) :
     correspondenceFriedrichsResolventSqrt n hn (correspondenceFriedrichsResolventSqrt n hn x)+
       correspondenceFriedrichsComplementSqrt n hn (correspondenceFriedrichsComplementSqrt n hn x)=x := by
-  rw [← mul_apply_eq_comp,← mul_apply_eq_comp,correspondenceFriedrichsResolventSqrt_square,
+  rw [← mul_apply_eq_comp,← mul_apply_eq_comp, correspondenceFriedrichsResolventSqrt_square,
     correspondenceFriedrichsComplementSqrt_square]
   simp
 

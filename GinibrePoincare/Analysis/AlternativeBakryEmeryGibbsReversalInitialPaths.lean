@@ -55,7 +55,7 @@ theorem bakryEmeryGibbsGaussianInitialOUPath_measurable {Ω : Type*} [Measurable
       W ((configurationEuclideanEquiv n).symm x)-κ/2*‖x‖^2))
     (T : ℝ≥0) (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ)
     (x : ((Fin n × Fin 2) → ℝ) × Ω) :
-    bakryEmeryGibbsGaussianInitialPath W hW κ hκ hc T B x ⟨0,le_rfl,T.property⟩ =
+    bakryEmeryGibbsGaussianInitialPath W hW κ hκ hc T B x ⟨0, le_rfl, T.property⟩ =
       ginibreHamiltonianOUCoordinateAssembly n x.1 := by
   unfold bakryEmeryGibbsGaussianInitialPath
   rw [bakryEmeryGibbsPath_initial]

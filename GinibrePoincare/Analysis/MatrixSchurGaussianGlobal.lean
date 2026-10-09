@@ -4,6 +4,16 @@ public import GinibrePoincare.Analysis.MatrixSchurGlobalIntegration
 
 @[expose] public section
 
+/-! # Inserting the Gaussian density into global Schur integration
+
+The matrix Gaussian density depends only on the Hilbert–Schmidt squared norm,
+which is invariant under unitary conjugation. Multiply a unitary-invariant test
+by that density and apply the global volume integration formula. Testing with
+the constant one gives the mass equation that determines the common angular
+constant in subsequent spectral-law comparisons.
+-/
+
+
 open Matrix NormedSpace MeasureTheory Filter Set
 open scoped Matrix Matrix.Norms.Operator Topology ENNReal
 namespace GinibrePoincare

@@ -15,8 +15,8 @@ theorem raw_leading_coefficient (ρ : ℝ) (p q : ℕ) :
   classical
   unfold raw
   rw [MvPolynomial.coeff_sum]
-  simp only [Z,W,MvPolynomial.X_pow_eq_monomial,MvPolynomial.C_mul_monomial,
-    MvPolynomial.monomial_mul,mul_one,MvPolynomial.coeff_monomial]
+  simp only [Z, W, MvPolynomial.X_pow_eq_monomial, MvPolynomial.C_mul_monomial,
+    MvPolynomial.monomial_mul, mul_one, MvPolynomial.coeff_monomial]
   rw [Finset.sum_eq_single 0]
   · simp
   · intro k hk hk0

@@ -33,8 +33,8 @@ theorem dolbeaultBoundedMultiplier_norm {n : ℕ} (b : Configuration n → ℂ)
     (hC : ∀ᵐ z : Configuration n ∂volume, ‖b z‖≤C) (u : dolbeaultOrdinaryL2 n) :
     ‖dolbeaultBoundedMultiplierValue b hb C hC u‖ ≤ C*‖u‖ := by
   apply Lp.norm_le_mul_norm_of_ae_le_mul
-  filter_upwards [dolbeaultBoundedMultiplier_ae b hb C hC u,hC] with z hz hc
-  rw [hz,norm_mul]
+  filter_upwards [dolbeaultBoundedMultiplier_ae b hb C hC u, hC] with z hz hc
+  rw [hz, norm_mul]
   exact mul_le_mul_of_nonneg_right hc (norm_nonneg _)
 
 def dolbeaultBoundedMultiplierLinear {n : ℕ} (b : Configuration n → ℂ)
@@ -45,20 +45,20 @@ def dolbeaultBoundedMultiplierLinear {n : ℕ} (b : Configuration n → ℂ)
   map_add' u v := by
     apply Lp.ext
     filter_upwards [dolbeaultBoundedMultiplier_ae b hb C hC (u+v),
-      dolbeaultBoundedMultiplier_ae b hb C hC u,dolbeaultBoundedMultiplier_ae b hb C hC v,
-      Lp.coeFn_add u v,Lp.coeFn_add (dolbeaultBoundedMultiplierValue b hb C hC u)
+      dolbeaultBoundedMultiplier_ae b hb C hC u, dolbeaultBoundedMultiplier_ae b hb C hC v,
+      Lp.coeFn_add u v, Lp.coeFn_add (dolbeaultBoundedMultiplierValue b hb C hC u)
         (dolbeaultBoundedMultiplierValue b hb C hC v)] with z h1 h2 h3 h4 h5
     simp only [Pi.add_apply] at h4 h5
-    rw [h1,h5,h2,h3,h4]
+    rw [h1, h5, h2, h3, h4]
     ring
   map_smul' c u := by
     apply Lp.ext
     filter_upwards [dolbeaultBoundedMultiplier_ae b hb C hC (c •u),
-      dolbeaultBoundedMultiplier_ae b hb C hC u,Lp.coeFn_smul c u,
+      dolbeaultBoundedMultiplier_ae b hb C hC u, Lp.coeFn_smul c u,
       Lp.coeFn_smul c (dolbeaultBoundedMultiplierValue b hb C hC u)] with z h1 h2 h3 h4
     simp only [RingHom.id_apply]
-    simp only [Pi.smul_apply,smul_eq_mul] at h3 h4
-    rw [h1,h4,h2,h3]
+    simp only [Pi.smul_apply, smul_eq_mul] at h3 h4
+    rw [h1, h4, h2, h3]
     ring
 
 /-- Actual bounded multiplication, ready to compose with coordinate Cauchy–Green homotopies. -/

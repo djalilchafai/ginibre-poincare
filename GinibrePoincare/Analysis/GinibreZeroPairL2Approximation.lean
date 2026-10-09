@@ -41,7 +41,7 @@ theorem ginibreZeroPair_L2_error_tendsto {V : Type*} [NormedAddCommGroup V]
       have he : ginibreZeroPairAvoidanceCutoff n m z • f z - f z =
           (ginibreZeroPairAvoidanceCutoff n m z - 1) • f z := by rw [sub_smul, one_smul]
       rw [he, norm_smul, mul_pow, Real.norm_eq_abs, sq_abs]
-      obtain ⟨h0,h1⟩ := ginibreZeroPairAvoidanceCutoff_mem_unit n m z
+      obtain ⟨h0, h1⟩ := ginibreZeroPairAvoidanceCutoff_mem_unit n m z
       have hb : (ginibreZeroPairAvoidanceCutoff n m z - 1) ^ 2 ≤ 1 := by nlinarith
       simpa using mul_le_mul_of_nonneg_right hb (sq_nonneg ‖f z‖))) ?_
   · simpa using ht

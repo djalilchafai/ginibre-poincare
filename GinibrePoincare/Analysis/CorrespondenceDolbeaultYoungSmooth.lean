@@ -37,7 +37,7 @@ theorem dolbeaultCoordinateConvolution_pointwise_ae {n : ℕ} (j : Fin n)
   calc
     _ = ∫ x : Configuration n, Θ x*(dolbeaultCoordinateConvolution j k u) x := by
       apply integral_congr_ae
-      exact ae_of_all _ (fun x => by simp [Θ,Complex.real_smul])
+      exact ae_of_all _ (fun x => by simp [Θ, Complex.real_smul])
     _ = ∫ y : ℂ, k y*(∫ x : Configuration n, Θ x*u (x-Pi.single j y)) :=
       dolbeaultCoordinateConvolution_compact_test j k hk u Θ hΘ hcΘ
     _ = ∫ y : ℂ, k y*(∫ x : Configuration n, Θ x*f (x-Pi.single j y)) := by simp_rw [he]
@@ -45,7 +45,7 @@ theorem dolbeaultCoordinateConvolution_pointwise_ae {n : ℕ} (j : Fin n)
       (dolbeaultCoordinatePointwise_compact_test j k hk f hf.continuous hfi Θ hΘ hcΘ).symm
     _ = _ := by
       apply integral_congr_ae
-      exact ae_of_all _ (fun x => by simp [Θ,Complex.real_smul])
+      exact ae_of_all _ (fun x => by simp [Θ, Complex.real_smul])
 
 /-- Literal smooth compact representative of the truncated singular coordinate solver. -/
 theorem dolbeaultCauchyGreenL2_smooth_compact_representative {n : ℕ} (j : Fin n)

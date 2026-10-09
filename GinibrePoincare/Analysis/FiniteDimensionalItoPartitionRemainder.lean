@@ -5,6 +5,19 @@ public import Mathlib.Topology.MetricSpace.Sequences
 
 @[expose] public section
 
+/-! # Taylor expansion along finite partitions
+
+The exact chain identity telescopes the increment expansions into gradient,
+quadratic Hessian and remainder sums. It is algebraic: the remainder is
+defined by the expansion itself, so this identity needs no smoothness.
+
+For convergence of remainder sums, C² regularity and compact convex
+localization give a uniform bound of the form `ε / (C + 1) * ‖increment‖²`.
+A vanishing increment mesh eventually makes every increment small enough;
+summing and using the quadratic-sum bound `C` yields a total error below
+`ε`. Stochastic applications establish their mesh and quadratic-sum controls
+in separate modules. -/
+
 open Filter
 open scoped Topology
 namespace GinibrePoincare

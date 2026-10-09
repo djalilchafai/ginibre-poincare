@@ -37,8 +37,8 @@ theorem bochnerDirectionalDerivative_comm (u v : E) (f : E → ℝ) (x : E)
     (hf : ContDiffAt ℝ ∞ f x) :
     bochnerDirectionalDerivative u (bochnerDirectionalDerivative v f) x=
       bochnerDirectionalDerivative v (bochnerDirectionalDerivative u f) x := by
-  rw [bochnerDirectionalDerivative_iterated u v f x hf,bochnerDirectionalDerivative_iterated v u f x hf]
-  exact (hf.isSymmSndFDerivAt (by simpa using (WithTop.coe_le_coe.mpr (show (2:ℕ∞)≤⊤ from le_top)))).eq u v
+  rw [bochnerDirectionalDerivative_iterated u v f x hf, bochnerDirectionalDerivative_iterated v u f x hf]
+  exact (hf.isSymmSndFDerivAt (by simpa using (WithTop.coe_le_coe.mpr (show (2 : ℕ∞)≤⊤ from le_top)))).eq u v
 
 theorem bochnerDirectionalDerivative_add (u : E) (f g : E → ℝ) (x : E)
     (hf : DifferentiableAt ℝ f x) (hg : DifferentiableAt ℝ g x) :
@@ -69,7 +69,7 @@ theorem bochnerDirectionalDerivative_mul (u : E) (f g : E → ℝ) (x : E)
       bochnerDirectionalDerivative u f x*g x+f x*bochnerDirectionalDerivative u g x := by
   unfold bochnerDirectionalDerivative
   rw [fderiv_fun_mul hf hg]
-  simp only [ContinuousLinearMap.add_apply,ContinuousLinearMap.smul_apply,smul_eq_mul]
+  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply, smul_eq_mul]
   ring
 
 theorem bochnerDirectionalDerivative_sum {ι : Type*} [Fintype ι]

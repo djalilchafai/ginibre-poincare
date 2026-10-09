@@ -24,13 +24,13 @@ theorem ginibreCenterSmallHitting_ge_of_lower_bound {Ω : Type*} {n : ℕ}
   unfold hittingBtwn
   split_ifs with hh
   · apply le_csInf
-    · obtain ⟨t,ht,hh⟩ := hh
-      exact ⟨t,ht,hh⟩
+    · obtain ⟨t, ht, hh⟩ := hh
+      exact ⟨t, ht, hh⟩
     · intro t ht
       by_contra h
       have htb : t ≤ b := (not_le.mp h).le
       have hm : C-δ ≤ ‖C-ginibreCenterSquared n (X t ω)‖ := ht.2
-      rw [Real.norm_eq_abs,abs_of_nonneg (sub_nonneg.mpr (hb t ω))] at hm
+      rw [Real.norm_eq_abs, abs_of_nonneg (sub_nonneg.mpr (hb t ω))] at hm
       linarith [hlower t htb]
   · exact hbT
 
@@ -50,12 +50,12 @@ theorem ginibreBrownian_center_small_stops_exhaust_ae
     ginibreBrownianHamiltonianBoundedStop_exhausts_ae (by omega) α z hz B P hB hind]
     with ω hpositive hExhaust
   intro b
-  obtain ⟨c,hc,hbound⟩ := hpositive b
+  obtain ⟨c, hc, hbound⟩ := hpositive b
   have hlim : Tendsto (fun k : ℕ => 2/((k : ℝ)+1)) atTop (𝓝 0) := by
-    simpa only [mul_zero,mul_one_div] using
+    simpa only [mul_zero, mul_one_div] using
       (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)).const_mul 2
-  obtain ⟨k₀,hk₀⟩ := exists_nat_ge (b : ℝ)
-  filter_upwards [hExhaust b,hlim.eventually (gt_mem_nhds hc),eventually_ge_atTop k₀]
+  obtain ⟨k₀, hk₀⟩ := exists_nat_ge (b : ℝ)
+  filter_upwards [hExhaust b, hlim.eventually (gt_mem_nhds hc), eventually_ge_atTop k₀]
     with k hσ hδ hk
   dsimp only
   intro C hC
@@ -69,7 +69,7 @@ theorem ginibreBrownian_center_small_stops_exhaust_ae
       change ginibreBrownianMaximalProcess n α z B (min t _) ω = _
       rw [min_eq_left (ht.trans hσ)]
     rw [he]
-    exact hδ.trans_le (hbound t ⟨bot_le,ht⟩)
+    exact hδ.trans_le (hbound t ⟨bot_le, ht⟩)
 
 #print axioms ginibreBrownian_center_small_stops_exhaust_ae
 #print axioms ginibreCenterSmallHitting_ge_of_lower_bound

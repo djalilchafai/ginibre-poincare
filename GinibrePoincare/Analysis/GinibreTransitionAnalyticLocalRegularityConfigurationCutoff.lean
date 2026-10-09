@@ -43,7 +43,7 @@ theorem ginibreLocalRegularity_configuration_cutoff_exists_weak_derivatives
   have heb : ∀ θ : Configuration n → ℂ, ContDiff ℝ ∞ θ → HasCompactSupport θ → tsupport θ ⊆ K →
       (∫ z, (up z : ℂ)*ginibreLocalRegularityLaplacian (fun k => e.symm (b k)) θ z) =
         (∫ z, (hp z : ℂ)*θ z)-∑ k, ∫ z, (Fp k z : ℂ)*ginibreLocalRegularityDirectional (e.symm (b k)) θ z := by
-    simpa only [e,b,ginibreLocalRegularity_coordinate_basis] using hec
+    simpa only [e, b, ginibreLocalRegularity_coordinate_basis] using hec
   have heE := ginibreLocalRegularity_coordinate_elliptic_equation n (fun k => b k) K
     (fun z => (up z : ℂ)) (fun z => (hp z : ℂ)) (fun k z => (Fp k z : ℂ)) heb
   let ηE := fun x => (η (e.symm x) : ℂ)
@@ -53,9 +53,9 @@ theorem ginibreLocalRegularity_configuration_cutoff_exists_weak_derivatives
     intro x hx
     have hxx : x ∈ tsupport (η ∘ e.symm) := (tsupport_comp_subset Complex.ofReal_zero (η ∘ e.symm)) hx
     have hy : e.symm x ∈ tsupport η := (Set.ext_iff.mp (tsupport_comp_eq_preimage η e.symm.toHomeomorph) x).mp hxx
-    exact ⟨e.symm x,hK hy,e.apply_symm_apply x⟩
+    exact ⟨e.symm x, hK hy, e.apply_symm_apply x⟩
   have hEm : MeasurableSet (e '' K) := e.toHomeomorph.toMeasurableEquiv.measurableSet_image.mpr hKm
-  obtain ⟨G,hG⟩ := ginibreLocalRegularity_restricted_elliptic_exists_weak_derivatives b (e '' K) hEm
+  obtain ⟨G, hG⟩ := ginibreLocalRegularity_restricted_elliptic_exists_weak_derivatives b (e '' K) hEm
     (fun x => (up (e.symm x) : ℂ)) (fun x => (hp (e.symm x) : ℂ)) (fun k x => (Fp k (e.symm x) : ℂ))
     (ginibreLocalRegularity_coordinate_restricted_memLp n K _ ((hup.ofReal (K := ℂ)).restrict K))
     (ginibreLocalRegularity_coordinate_restricted_memLp n K _ ((hhp.ofReal (K := ℂ)).restrict K))
@@ -63,7 +63,7 @@ theorem ginibreLocalRegularity_configuration_cutoff_exists_weak_derivatives
     ηE hηE hηEc hηEs heE
   have hηup (z) : η z*up z = η z*u z := by
     by_cases hz : z ∈ K
-    · simp [up,Set.indicator_of_mem hz]
+    · simp [up, Set.indicator_of_mem hz]
     · have hηz : η z = 0 := image_eq_zero_of_notMem_tsupport (fun ht => hz (hK ht))
       simp [hηz]
   have hsource (x) : ηE x*(up (e.symm x) : ℂ) = (η (e.symm x)*u (e.symm x) : ℝ) := by
@@ -85,7 +85,7 @@ theorem ginibreLocalRegularity_configuration_cutoff_exists_weak_derivatives
       rw [hz]]
     exact (hcomplex k).2 θ hθ hθc
   choose g hgm hge using hreal
-  exact ⟨g,hgm,hge⟩
+  exact ⟨g, hgm, hge⟩
 
 #print axioms ginibreLocalRegularity_configuration_cutoff_exists_weak_derivatives
 end

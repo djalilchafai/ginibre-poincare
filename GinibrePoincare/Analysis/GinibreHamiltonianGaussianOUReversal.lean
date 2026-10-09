@@ -59,16 +59,16 @@ theorem ginibreOUTransition_detailed_balance (rate t : ℝ≥0) (s u : Set ℝ)
   by_cases hv : ginibreOUVariance rate t=0
   · have ha : ginibreOUDecay rate t=1 := by
       have hvar := ginibreOUVariance_coe rate t
-      rw [hv,NNReal.coe_zero] at hvar
+      rw [hv, NNReal.coe_zero] at hvar
       have hpos := ginibreOUDecay_nonneg rate t
       nlinarith
     have hK (x : ℝ) : ginibreOUTransition rate t x=Measure.dirac x := by
       change gaussianReal (ginibreOUDecay rate t*x) (ginibreOUVariance rate t)=Measure.dirac x
-      simp only [hv,ha,one_mul,gaussianReal_zero_var]
-    simp_rw [hK,Measure.dirac_apply' _ hu,Measure.dirac_apply' _ hs]
+      simp only [hv, ha, one_mul, gaussianReal_zero_var]
+    simp_rw [hK, Measure.dirac_apply' _ hu, Measure.dirac_apply' _ hs]
     change (∫⁻ x in s, u.indicator (fun _ => (1 : ℝ≥0∞)) x ∂gaussianReal 0 (1/2))=
       ∫⁻ x in u, s.indicator (fun _ => (1 : ℝ≥0∞)) x ∂gaussianReal 0 (1/2)
-    rw [setLIntegral_indicator hu,setLIntegral_indicator hs,inter_comm s u]
+    rw [setLIntegral_indicator hu, setLIntegral_indicator hs, inter_comm s u]
   · exact ginibreOUTransition_detailed_balance_positive rate t hv s u hs hu
 
 theorem ginibreOU_stationary_pair_law_reversal (rate t : ℝ≥0) :
@@ -78,7 +78,7 @@ theorem ginibreOU_stationary_pair_law_reversal (rate t : ℝ≥0) :
   intro s u hs hu
   rw [Measure.map_apply measurable_swap (hs.prod hu)]
   have he : Prod.swap ⁻¹' (s ×ˢ u)=u ×ˢ s := by ext p; simp [and_comm]
-  rw [he,Measure.compProd_apply_prod hu hs,Measure.compProd_apply_prod hs hu]
+  rw [he, Measure.compProd_apply_prod hu hs, Measure.compProd_apply_prod hs hu]
   exact ginibreOUTransition_detailed_balance rate t u s hu hs
 
 

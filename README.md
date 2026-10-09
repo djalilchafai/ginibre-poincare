@@ -1,5 +1,13 @@
 # Ginibre Poincaré formalization
 
+The 2026-10-09 readability revision adds mathematical reading routes, proof
+outlines and named result interfaces for deficits, matrix bounds, CIR
+localization and maximal-domain Bochner data. Its full build and public/private
+axiom audits pass; [verification evidence](verification/readability-final-check.txt)
+and the [independent semantic diff review](verification/readability-semantic-review.md)
+record the scope. The mathematical correspondence findings remain the dated
+2026-10-08 reviews.
+
 The principal numbered endpoints are compiled and audited, including Theorems 1.9 and 1.10, nonquadratic potentials and matrix-lift/eigenvector-overlap inequalities. The ordinary Gaussian derivative domain, canonical dbar solver, global entire Vandermonde factorization and literal representative distance formulas are complete; see [the numbered report](REPORT.md). Open Problems 1.11, 1.15 and 1.16 remain research questions, and numerical experiments are outside theorem certification. The public entry point is [FullPaper.lean](GinibrePoincare/Endgame/FullPaper.lean).
 See [STATUS.md](STATUS.md) for exact domains, the full dashboard and validation.
 
@@ -14,8 +22,17 @@ See the [proof-route inventory](REPORT.md#independent-proof-routes-and-domain-qu
 for domains, proof correspondence and audit evidence. The new correspondence endpoints close the previously identified matrix H¹,
 pointwise Γ₂, unrestricted operator/dynamics and auxiliary bridges. Independent
 follow-up findings and exact domain qualifications are in
-[the correspondence review](CORRESPONDENCE_REVIEW.md). Registry publication
-remains unconfirmed by the [live checks](verification/registry-publication-check.md).
+[the correspondence review](CORRESPONDENCE_REVIEW.md). The public registry confirms
+[PALOMAR-2026-10-09-000001 v1](https://data.palomar-registry.org/entries/PALOMAR-2026-10-09-000001-v1.json),
+registered at `2026-10-09T00:48:41Z` for the submitted Theorem 1.1 snapshot
+`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`. This receipt concerns that immutable
+snapshot; the later full-paper/readability revision has separate local verification.
+See [registry evidence](verification/registry-publication-check.md).
+
+For mathematical reading, start with [the human reading guide](HUMAN_READABILITY.md).
+It gives ordered routes from definitions through the central lemmas to each
+numbered theorem, explains weak domains and generator graphs, and distinguishes
+the Hermite and differential proof routes.
 
 The library is grouped into 12 thematic [subprojects](SUBPROJECTS.md), including
 complex Gaussian/Hermite analysis, Gaussian LSI, stochastic calculus, stochastic
@@ -29,7 +46,9 @@ using `python3 scripts/group_subprojects.py` (requires Graphviz `dot`).
 The [formal Lean dependency graph](FORMAL_DEPENDENCIES.md) additionally extracts
 constant references from compiled theorem statements and proof/definition bodies,
 with static SVGs, a [live interactive explorer](https://djalilchafai.github.io/ginibre-poincare/formal_dependencies.html),
-and an [offline copy](formal-dependencies.html).
+and an [offline copy](formal-dependencies.html). The local 2026-10-09 export
+includes the new named interfaces; the live explorer remains the previously
+published version until redeployment is confirmed.
 
 The development includes sharp symmetric weak-H¹ Poincaré and exhaustive
 affine equality, both literal Theorem 1.9 deficits, differential deficits,
@@ -75,4 +94,5 @@ make palomar-structure  # offline layout, source, metadata and configuration che
 make palomar            # readiness checks, then actual Comparator with independent kernels
 ```
 
-Palomar currently requires Lean ≥ 4.35.0-rc2. The user authorized this upgrade and a deliberate proof hole only in the independent Challenge theorem; the Solution and proof library remain subject to the full soundness policy. The supported-toolchain full build, public/private axiom audits and actual Comparator with all three kernels pass. The dependency manifest is included in the final Git snapshot. Registry publication is a separate step.
+Palomar currently requires Lean ≥ 4.35.0-rc2. The user authorized this upgrade and a deliberate proof hole only in the independent Challenge theorem; the Solution and proof library remain subject to the full soundness policy. The supported-toolchain full build, public/private axiom audits and actual Comparator with all three kernels pass. The dependency manifest is included in the final Git snapshot. The public v1 receipt confirms the submitted immutable snapshot. Publishing a
+later source revision is a separate registry update; see [PALOMAR.md](PALOMAR.md).

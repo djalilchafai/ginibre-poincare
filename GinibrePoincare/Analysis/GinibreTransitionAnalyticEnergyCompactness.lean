@@ -17,10 +17,10 @@ theorem actualL2_toLp_norm_sq {Ω E : Type*} [MeasurableSpace Ω]
     [NormedAddCommGroup E] [InnerProductSpace ℝ E] (μ : Measure Ω)
     (f : Ω → E) (hf : MemLp f 2 μ) :
     ‖hf.toLp f‖^2 = ∫ x, ‖f x‖^2 ∂μ := by
-  rw [← real_inner_self_eq_norm_sq,L2.inner_def]
+  rw [← real_inner_self_eq_norm_sq, L2.inner_def]
   apply integral_congr_ae
   filter_upwards [hf.coeFn_toLp] with x hx
-  simp only [hx,real_inner_self_eq_norm_sq]
+  simp only [hx, real_inner_self_eq_norm_sq]
 
 theorem actualL2Limit_memLp_of_energy_bound {Ω E : Type*} [MeasurableSpace Ω]
     [NormedAddCommGroup E] [InnerProductSpace ℝ E] (μ : Measure Ω)

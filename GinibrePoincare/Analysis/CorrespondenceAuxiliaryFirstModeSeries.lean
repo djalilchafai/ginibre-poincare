@@ -41,7 +41,7 @@ theorem firstModeHermite_series_creation (n : ℕ) (hn : 0 < n)
       fun_prop
     change fderiv ℂ (fun w => c p * multivariateNormalized n hn p 0 w) z _ = _
     rw [fderiv_const_mul hp]
-    simp only [ContinuousLinearMap.smul_apply,smul_eq_mul]
+    simp only [ContinuousLinearMap.smul_apply, smul_eq_mul]
     rw [fderiv_holomorphicHermite_coordinate]
     ring
   rw [hfd]
@@ -57,10 +57,10 @@ theorem firstModeHermite_series_creation (n : ℕ) (hn : 0 < n)
   rw [← tsum_mul_left,← tsum_mul_left,← hs1.tsum_sub hs2]
   apply tsum_congr
   intro p
-  rw [gaussianHermite_firstMode_creation,hcoord]
+  rw [gaussianHermite_firstMode_creation, hcoord]
   have hroot : (Real.sqrt (n*p j : ℕ) : ℂ) =
       (Real.sqrt n : ℂ)*(Real.sqrt (p j) : ℂ) := by
-    rw [Nat.cast_mul,Real.sqrt_mul (Nat.cast_nonneg n),Complex.ofReal_mul]
+    rw [Nat.cast_mul, Real.sqrt_mul (Nat.cast_nonneg n), Complex.ofReal_mul]
   rw [hroot]
   have hne : (Real.sqrt n : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr
     (Real.sqrt_pos.mpr (Nat.cast_pos.mpr hn)).ne'
@@ -111,12 +111,12 @@ theorem firstModeHermite_term_creation (n : ℕ) (hn : 0 < n)
     change DifferentiableAt ℂ (fun w => multivariateNormalized n hn p 0 w) z
     simp only [multivariateNormalized_zero_right]
     fun_prop
-  rw [gaussianHermite_firstMode_creation,fderiv_const_mul hp]
-  simp only [ContinuousLinearMap.smul_apply,smul_eq_mul]
+  rw [gaussianHermite_firstMode_creation, fderiv_const_mul hp]
+  simp only [ContinuousLinearMap.smul_apply, smul_eq_mul]
   rw [fderiv_holomorphicHermite_coordinate]
   have hroot : (Real.sqrt (n*p j : ℕ) : ℂ) =
       (Real.sqrt n : ℂ)*(Real.sqrt (p j) : ℂ) := by
-    rw [Nat.cast_mul,Real.sqrt_mul (Nat.cast_nonneg n),Complex.ofReal_mul]
+    rw [Nat.cast_mul, Real.sqrt_mul (Nat.cast_nonneg n), Complex.ofReal_mul]
   rw [hroot]
   have hne : (Real.sqrt n : ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr
     (Real.sqrt_pos.mpr (Nat.cast_pos.mpr hn)).ne'

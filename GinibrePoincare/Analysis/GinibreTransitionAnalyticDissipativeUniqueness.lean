@@ -33,8 +33,8 @@ theorem realHilbert_orbit_unique_of_dissipative_derivative {E : Type*}
   have hanti : AntitoneOn F (Icc 0 T) :=
     antitoneOn_of_deriv_nonpos (convex_Icc 0 T) ((hx.sub hy).norm.pow 2) hdiff hnonpos
   intro s hs
-  have hh := hanti ⟨le_rfl,hT⟩ hs hs.1
-  have hz : F 0=0 := by simp [F,hinit]
+  have hh := hanti ⟨le_rfl, hT⟩ hs hs.1
+  have hz : F 0=0 := by simp [F, hinit]
   rw [hz] at hh
   have hn : ‖x s-y s‖=0 := by dsimp [F] at hh; nlinarith [norm_nonneg (x s-y s)]
   exact sub_eq_zero.mp (norm_eq_zero.mp hn)

@@ -61,7 +61,7 @@ theorem ginibreCompactVolterra_restricted_ito_exists
         (∫ s in (0 : ℝ)..T, fderiv ℝ f (X s.toNNReal ω) (b s ω))+
         ((α : ℝ)/(n : ℝ)^2)*(∫ s in (0 : ℝ)..T, configurationLaplacian f (X s.toNNReal ω)) := by
   classical
-  obtain ⟨I,hI⟩ := ginibreCompactProcess_gradient_integral_exists n B P
+  obtain ⟨I, hI⟩ := ginibreCompactProcess_gradient_integral_exists n B P
     (fun i => (hB i).toIsPreBrownianReal) hind α X hX hCont f U K hU hf hK hKU hRange T
   have hg := ginibre_tendstoInMeasure_indicator P E _ _ hI
   have hd := ginibreCompactVolterra_restricted_drift_riemann_tendstoInProbability n B P
@@ -92,14 +92,14 @@ theorem ginibreCompactVolterra_restricted_ito_exists
       fun _ : ℕ => Z := by
     funext k ω
     by_cases he : ω ∈ E
-    · simp only [Set.indicator_of_mem he,Z]
+    · simp only [Set.indicator_of_mem he, Z]
       exact (ginibreConfigurationPath_discrete_chain n B α X f T k ω).symm
-    · simp [Set.indicator_of_notMem he,Z]
+    · simp [Set.indicator_of_notMem he, Z]
   rw [heq] at hsum
-  refine ⟨I,hI,?_⟩
+  refine ⟨I, hI,?_⟩
   filter_upwards [tendstoInMeasure_ae_unique hc hsum] with ω hω
   intro he
-  simp only [Z,Set.indicator_of_mem he,add_zero] at hω
+  simp only [Z, Set.indicator_of_mem he, add_zero] at hω
   convert hω using 1 <;> ring
 theorem ginibreCompactVolterra_restricted_ito_identify
     {Ω : Type*} [MeasurableSpace Ω] (n : ℕ)
@@ -122,9 +122,9 @@ theorem ginibreCompactVolterra_restricted_ito_identify
     ∀ᵐ ω ∂P, ω ∈ E → f (X T ω)-f (X 0 ω)=J ω+
       (∫ s in (0 : ℝ)..T, fderiv ℝ f (X s.toNNReal ω) (b s ω))+
       ((α : ℝ)/(n : ℝ)^2)*(∫ s in (0 : ℝ)..T, configurationLaplacian f (X s.toNNReal ω)) := by
-  obtain ⟨I,hI,hEq⟩ := ginibreCompactVolterra_restricted_ito_exists n B P hB hind α X hX hCont
+  obtain ⟨I, hI, hEq⟩ := ginibreCompactVolterra_restricted_ito_exists n B P hB hind α X hX hCont
     f U K hU hf hK hKU hRange T b hb M hM hbound E hE hVolterra
-  filter_upwards [hEq,tendstoInMeasure_ae_unique hI hJ] with ω hω hJω
+  filter_upwards [hEq, tendstoInMeasure_ae_unique hI hJ] with ω hω hJω
   intro he
   simpa only [hJω] using hω he
 

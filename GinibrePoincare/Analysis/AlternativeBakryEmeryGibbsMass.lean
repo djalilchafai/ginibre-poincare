@@ -25,7 +25,7 @@ theorem bakryEmeryRegularizedLift_density_integrable
     Real.continuous_exp.comp ((continuous_const.mul (hV.comp
       (Complex.continuous_ofReal.comp (Real.continuous_sqrt.comp
         ((continuous_norm.pow 2).add continuous_const))))).neg)
-  apply (hG.const_mul (Real.exp (-(n:ℝ)*V 0))).mono hm.aestronglyMeasurable
+  apply (hG.const_mul (Real.exp (-(n : ℝ)*V 0))).mono hm.aestronglyMeasurable
   filter_upwards [] with x
   rw [Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
   simpa only [Real.norm_eq_abs, abs_of_pos (mul_pos (Real.exp_pos _) (Real.exp_pos _)),

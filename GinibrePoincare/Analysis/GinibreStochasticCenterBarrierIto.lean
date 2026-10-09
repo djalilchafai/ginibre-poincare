@@ -15,12 +15,12 @@ set_option maxHeartbeats 1600000
 
 theorem ginibreHamiltonianSublevel_centerSquared_bound {n : ℕ} (hn : 0 < n) (R : ℝ) :
     ∃ C : ℝ, 0 < C ∧ ∀ x ∈ ginibreHamiltonianSublevel n R, ginibreCenterSquared n x ≤ C := by
-  obtain ⟨C,hC⟩ := (ginibreHamiltonianSublevel_isCompact hn R).exists_bound_of_continuousOn
+  obtain ⟨C, hC⟩ := (ginibreHamiltonianSublevel_isCompact hn R).exists_bound_of_continuousOn
     (contDiff_ginibreCenterSquared n).continuous.continuousOn
-  refine ⟨|C|+1,by positivity,?_⟩
+  refine ⟨|C|+1, by positivity,?_⟩
   intro x hx
   have hh := hC x hx
-  rw [Real.norm_eq_abs,abs_of_nonneg (ginibreCenterSquared_nonneg n x)] at hh
+  rw [Real.norm_eq_abs, abs_of_nonneg (ginibreCenterSquared_nonneg n x)] at hh
   linarith [le_abs_self C]
 
 theorem ginibreBrownian_center_barrier_ito_exists
@@ -40,10 +40,10 @@ theorem ginibreBrownian_center_barrier_ito_exists
   have hf : ContDiffOn ℝ 2 (ginibreCenterLogBarrier n ε) {x | CollisionFree x} :=
     ((contDiff_ginibreCenterLogBarrier n hε).of_le
       (WithTop.coe_le_coe.mpr (show (2 : ENat) ≤ ⊤ from le_top))).contDiffOn
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hLim,hEq,hEnd⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hLim, hEq, hEnd⟩ :=
     ginibreBrownianMaximalProcess_local_test_ito_integral_exists (by omega) α z hz B P hB hind
       R hR T (ginibreCenterLogBarrier n ε) hf
-  refine ⟨J,hJM,hJC,hJL,hJ0,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0,?_⟩
   filter_upwards [hEq] with ω hω
   intro t ht
   rw [hω t ht]

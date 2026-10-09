@@ -124,7 +124,7 @@ theorem productSeparatedDbarLeft_convolution_transfer
     ((φ.property.1.of_le (by norm_num)).comp contDiff_fst).mul
       ((ψ.property.1.of_le (by norm_num)).comp contDiff_snd)
   have hkc : HasCompactSupport k := separatedPlanarKernel_hasCompactSupport φ ψ φ.property.2 ψ.property.2
-  have he := productComplexDbar_convolution_transfer f k hf hk hc hkc (1,0) (Complex.I,0) x
+  have he := productComplexDbar_convolution_transfer f k hf hk hc hkc (1, 0) (Complex.I, 0) x
   change (∫ a, f a * productDbarLeft k (x-a)
       ∂((volume : Measure ℂ).prod (volume : Measure ℂ))) =
     ∫ a, productDbarLeft f a * k (x-a)
@@ -146,7 +146,7 @@ theorem productSeparatedDbarRight_convolution_transfer
     ((φ.property.1.of_le (by norm_num)).comp contDiff_fst).mul
       ((ψ.property.1.of_le (by norm_num)).comp contDiff_snd)
   have hkc : HasCompactSupport k := separatedPlanarKernel_hasCompactSupport φ ψ φ.property.2 ψ.property.2
-  have he := productComplexDbar_convolution_transfer f k hf hk hc hkc (0,1) (0,Complex.I) x
+  have he := productComplexDbar_convolution_transfer f k hf hk hc hkc (0, 1) (0, Complex.I) x
   change (∫ a, f a * productDbarRight k (x-a)
       ∂((volume : Measure ℂ).prod (volume : Measure ℂ))) =
     ∫ a, productDbarRight f a * k (x-a)

@@ -36,8 +36,8 @@ theorem ginibreInteractionBrownianTilt_compact_bound (n : ℕ) (α : ℝ)
     ∃ C : ℝ, 0 ≤ C ∧ ∀ z ∈ K, (∑ i, (ginibreInteractionBrownianTilt n α z i)^2) ≤ C^2 := by
   have hc : ContinuousOn (fun z => ∑ i, (ginibreInteractionBrownianTilt n α z i)^2) K :=
     continuousOn_finset_sum _ (fun i _ => ((ginibreInteractionBrownianTilt_continuousOn n α i).mono hCF).pow 2)
-  obtain ⟨R,hR,hb⟩ := (hK.image_of_continuousOn hc).isBounded.exists_pos_norm_le
-  refine ⟨R+1,by linarith,?_⟩
+  obtain ⟨R, hR, hb⟩ := (hK.image_of_continuousOn hc).isBounded.exists_pos_norm_le
+  refine ⟨R+1, by linarith,?_⟩
   intro z hz
   have hh := hb _ (mem_image_of_mem _ hz)
   rw [Real.norm_eq_abs] at hh
@@ -61,14 +61,14 @@ theorem ginibreInteractionBrownianTilt_energy (n : ℕ) (α : ℝ) (hα : 0 ≤ 
     (∑ i, (ginibreInteractionBrownianTilt n α z i)^2) =
       (α/(2*(n : ℝ)^2))*ginibreInteractionGradientNormSq n z := by
   unfold ginibreInteractionBrownianTilt ginibreInteractionGradientNormSq
-  simp only [Fintype.sum_prod_type,Fin.sum_univ_two,ginibreCoordinateDirection,
+  simp only [Fintype.sum_prod_type, Fin.sum_univ_two, ginibreCoordinateDirection,
     if_pos rfl, if_neg (by decide : (1 : Fin 2) ≠ 0)]
   rw [Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro j hj
   have hs : (Real.sqrt (2*α/(n : ℝ)^2))^2 = 2*α/(n : ℝ)^2 :=
     Real.sq_sqrt (div_nonneg (by linarith) (sq_nonneg _))
-  simp only [mul_pow,neg_sq,div_pow,hs,ite_true]
+  simp only [mul_pow, neg_sq, div_pow, hs, ite_true]
   ring
 
 /-- The actual interaction drift tilt has genuine normalized coordinate
@@ -94,7 +94,7 @@ theorem ginibreInteractionBrownianTilt_exponential_exists {Ω : Type*} [Measurab
         (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) T (fun i => M i T)) P ∧
       (∫ ω, brownianVectorExponentialIntegralDensity
         (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) T (fun i => M i T) ω ∂P)=1 := by
-  obtain ⟨C,hC,hb⟩ := ginibreInteractionBrownianTilt_compact_bound n α K hK hCF
+  obtain ⟨C, hC, hb⟩ := ginibreInteractionBrownianTilt_compact_bound n α K hK hCF
   have hF (i : Fin n × Fin 2) (r : ℝ≥0) :
       @Measurable Ω ℝ (ginibreBrownianAugmentedFiltration B P
         (fun i => (hB i).toIsPreBrownianReal) r) _
@@ -104,10 +104,10 @@ theorem ginibreInteractionBrownianTilt_exponential_exists {Ω : Type*} [Measurab
       ContinuousOn (fun r => ginibreInteractionBrownianTilt n α (Y r ω) i) (Icc 0 T) :=
     ae_of_all P (fun ω => ((ginibreInteractionBrownianTilt_continuousOn n α i).comp_continuous
       (hYC ω) (fun r => hCF _ (hRange r ω))).continuousOn)
-  obtain ⟨M,hM,hDi,hD1,hLimit⟩ := brownianBoundedVector_exponential_integral_exists_normalized
+  obtain ⟨M, hM, hDi, hD1, hLimit⟩ := brownianBoundedVector_exponential_integral_exists_normalized
     B P hB hind (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i)
       hF C hC (fun r ω => hb _ (hRange r ω)) T hc
-  exact ⟨M,hM,hDi,hD1⟩
+  exact ⟨M, hM, hDi, hD1⟩
 
 theorem ginibreInteractionBrownianTilt_leftSums {Ω : Type*} (n : ℕ)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (α : ℝ)
@@ -119,7 +119,7 @@ theorem ginibreInteractionBrownianTilt_leftSums {Ω : Type*} (n : ℕ)
   unfold brownianUniformLeftSum ginibreInteractionBrownianTilt
   have hc (a : ℝ) : -(Real.sqrt (2*α/(n : ℝ)^2)*a)/2 =
       -(Real.sqrt (2*α/(n : ℝ)^2)/2)*a := by ring
-  rw [hc,Finset.mul_sum]
+  rw [hc, Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro i hi
   rw [Finset.mul_sum]
@@ -146,7 +146,7 @@ theorem ginibreInteractionBrownianTilt_integrals_eq_gradient {Ω : Type*} [Measu
         (fun r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) t (k+1)) atTop (M i t)) :
     ∀ᵐ ω ∂P, ∀ t ≤ T, (∑ i, M i t ω) = -J t ω/2 := by
   classical
-  obtain ⟨C,hC,hb⟩ := ginibreInteractionBrownianTilt_compact_bound n α K hK hCF
+  obtain ⟨C, hC, hb⟩ := ginibreInteractionBrownianTilt_compact_bound n α K hK hCF
   let F := fun (i : Fin n × Fin 2) r ω => ginibreInteractionBrownianTilt n α (Y r ω) i
   have hF (i : Fin n × Fin 2) (r : ℝ≥0) :
       @Measurable Ω ℝ (ginibreBrownianAugmentedFiltration B P

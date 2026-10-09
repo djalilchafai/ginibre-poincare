@@ -35,7 +35,7 @@ theorem correspondenceBrascampLieb_core_orthogonal_constants
         (∫ x, u x*correspondenceWeightedEllipticGenerator b (bakryEmeryGibbsWeight W) θ x
           ∂correspondenceBrascampLiebMeasure W) = 0 := by
       intro θ hθ hc
-      let f : CorrespondenceBrascampLiebCompactTest E := ⟨θ,hθ,hc⟩
+      let f : CorrespondenceBrascampLiebCompactTest E := ⟨θ, hθ, hc⟩
       have hI : inner ℝ u (correspondenceBrascampLiebCoreL2 W b hW f) =
           ∫ x, u x*bakryEmeryGibbsGenerator W b θ x
           ∂correspondenceBrascampLiebMeasure W := by
@@ -43,11 +43,11 @@ theorem correspondenceBrascampLieb_core_orthogonal_constants
         apply integral_congr_ae
         filter_upwards [correspondenceBrascampLieb_core_ae W b hW f] with x hx
         rw [hx]
-        simp [f,mul_comm]
+        simp [f, mul_comm]
       rw [correspondenceBrascampLieb_weighted_generator_eq W θ b (hW.of_le (by norm_num)),← hI]
       rw [real_inner_comm]
-      exact hu _ ⟨f,rfl⟩
-    obtain ⟨c,hc⟩ := correspondenceWeightedElliptic_annihilator_constant b
+      exact hu _ ⟨f, rfl⟩
+    obtain ⟨c, hc⟩ := correspondenceWeightedElliptic_annihilator_constant b
       (bakryEmeryGibbsWeight W) (Real.contDiff_exp.comp (hW.of_le (show (1 : ℕ∞ω) ≤ 2 by norm_num)).neg)
       (fun _ => Real.exp_pos _) u (Lp.memLp u) hAnn
     apply Submodule.mem_span_singleton.mpr
@@ -56,9 +56,9 @@ theorem correspondenceBrascampLieb_core_orthogonal_constants
     have hOne : correspondenceBrascampLiebOneL2 W =ᵐ[correspondenceBrascampLiebMeasure W]
         (fun _ => (1 : ℝ)) :=
       (memLp_const (μ := correspondenceBrascampLiebMeasure W) (p := 2) (1 : ℝ)).coeFn_toLp
-    filter_upwards [hc,hOne,Lp.coeFn_smul c (correspondenceBrascampLiebOneL2 W)] with x hcx h1x hsx
-    rw [hsx,hcx]
-    simp only [Pi.smul_apply,h1x,smul_eq_mul,mul_one]
+    filter_upwards [hc, hOne, Lp.coeFn_smul c (correspondenceBrascampLiebOneL2 W)] with x hcx h1x hsx
+    rw [hsx, hcx]
+    simp only [Pi.smul_apply, h1x, smul_eq_mul, mul_one]
   · exact correspondenceBrascampLieb_constants_orthogonal W b hW
 
  theorem correspondenceBrascampLieb_core_dense_centered

@@ -38,7 +38,7 @@ theorem uniformProbabilityCauchy_exists_subsequence
       (fun j hj => Nat.zero_le _) (Finset.mem_range.mpr (Nat.lt_succ_self n))
     dsimp [s]
     omega
-  refine ⟨s,hs,?_⟩
+  refine ⟨s, hs,?_⟩
   apply ne_top_of_le_ne_top hpsum
   apply ENNReal.tsum_le_tsum
   intro n
@@ -48,7 +48,7 @@ theorem uniformProbabilityCauchy_exists_subsequence
 almost surely uniformly convergent deterministic subsequence. -/
 theorem continuousProbabilityCauchy_exists_uniform_limit
     {K Ω : Type*} [TopologicalSpace K] [CompactSpace K] [MeasurableSpace Ω]
-    (P : Measure Ω) (F : ℕ → Ω → C(K,ℝ))
+    (P : Measure Ω) (F : ℕ → Ω → C(K, ℝ))
     (h : ∀ ε > 0, Tendsto (fun q : ℕ × ℕ =>
       P {ω | ∃ t, ε < |F q.2 ω t - F q.1 ω t|}) atTop (𝓝 0))
     (d : ℕ → ℝ) (hd0 : ∀ n, 0 < d n) (hd : Summable d)
@@ -56,9 +56,9 @@ theorem continuousProbabilityCauchy_exists_uniform_limit
     ∃ s : ℕ → ℕ, StrictMono s ∧
       ∀ᵐ ω ∂P, TendstoUniformly (fun n t => F (s n) ω t)
         (continuousMartingalePathLimit (fun n => F (s n)) ω) atTop := by
-  obtain ⟨s,hs,he⟩ := uniformProbabilityCauchy_exists_subsequence P
+  obtain ⟨s, hs, he⟩ := uniformProbabilityCauchy_exists_subsequence P
     (fun n ω t => F n ω t) h d hd0 p hp hpsum
-  exact ⟨s,hs,continuousMartingalePathLimit_uniform_ae P (fun n => F (s n))
+  exact ⟨s, hs, continuousMartingalePathLimit_uniform_ae P (fun n => F (s n))
     d (fun n => (hd0 n).le) hd he⟩
 
 end

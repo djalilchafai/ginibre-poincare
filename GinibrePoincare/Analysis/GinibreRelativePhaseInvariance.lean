@@ -15,23 +15,23 @@ set_option maxHeartbeats 1000000
 
 /-- Rotate the relative configuration by a quarter turn, fixing its center. -/
 def ginibreRelativeQuarterTurn (n : ℕ) (z : Configuration n) : Configuration n :=
-  fun i => coordinateSum z/(n:ℂ)+Complex.I*recenteredConfiguration n z i
+  fun i => coordinateSum z/(n : ℂ)+Complex.I*recenteredConfiguration n z i
 
 theorem coordinateSum_ginibreRelativeQuarterTurn {n : ℕ} (hn : 0<n) (z : Configuration n) :
     coordinateSum (ginibreRelativeQuarterTurn n z)=coordinateSum z := by
-  have hnC : (n:ℂ)≠0 := by exact_mod_cast hn.ne'
-  simp only [ginibreRelativeQuarterTurn,coordinateSum,Finset.sum_add_distrib,Finset.sum_const,
-    Finset.card_univ,Fintype.card_fin,nsmul_eq_mul,← Finset.mul_sum]
-  change (n:ℂ)*(coordinateSum z/(n:ℂ))+Complex.I*coordinateSum (recenteredConfiguration n z)=coordinateSum z
-  rw [coordinateSum_recentered,mul_zero,add_zero]
+  have hnC : (n : ℂ)≠0 := by exact_mod_cast hn.ne'
+  simp only [ginibreRelativeQuarterTurn, coordinateSum, Finset.sum_add_distrib, Finset.sum_const,
+    Finset.card_univ, Fintype.card_fin, nsmul_eq_mul,← Finset.mul_sum]
+  change (n : ℂ)*(coordinateSum z/(n : ℂ))+Complex.I*coordinateSum (recenteredConfiguration n z)=coordinateSum z
+  rw [coordinateSum_recentered, mul_zero, add_zero]
   exact mul_div_cancel₀ _ hnC
 
 theorem recentered_ginibreRelativeQuarterTurn {n : ℕ} (hn : 0<n) (z : Configuration n) :
     recenteredConfiguration n (ginibreRelativeQuarterTurn n z)=fun i => Complex.I*recenteredConfiguration n z i := by
   ext i
-  simp only [recenteredConfiguration,projectToOrthogonal]
+  simp only [recenteredConfiguration, projectToOrthogonal]
   rw [coordinateSum_ginibreRelativeQuarterTurn hn]
-  simp only [ginibreRelativeQuarterTurn,recenteredConfiguration,projectToOrthogonal]
+  simp only [ginibreRelativeQuarterTurn, recenteredConfiguration, projectToOrthogonal]
   ring
 
 theorem pairwiseRadius_ginibreRelativeQuarterTurn (n : ℕ) (z : Configuration n) :
@@ -42,9 +42,9 @@ theorem pairwiseRadius_ginibreRelativeQuarterTurn (n : ℕ) (z : Configuration n
   apply Finset.sum_congr rfl
   intro k hk
   have he : ginibreRelativeQuarterTurn n z j-ginibreRelativeQuarterTurn n z k=Complex.I*(z j-z k) := by
-    simp only [ginibreRelativeQuarterTurn,recenteredConfiguration,projectToOrthogonal]
+    simp only [ginibreRelativeQuarterTurn, recenteredConfiguration, projectToOrthogonal]
     ring
-  rw [he,Complex.normSq_mul]
+  rw [he, Complex.normSq_mul]
   simp
 
 def recenteredQuarterTurn (n : ℕ) (w : zeroSumHyperplane n) : zeroSumHyperplane n := Complex.I • w
@@ -58,13 +58,13 @@ theorem measurePreserving_recenteredQuarterTurn {n : ℕ} (hn : 0<n) :
     funext z
     apply Subtype.ext
     ext i
-    simp only [Function.comp_apply,recenteredQuarterTurn,recenteredCoordinate,
-      Submodule.coe_smul,Pi.smul_apply,smul_eq_mul,globalPhase,recenteredConfiguration,
-      projectToOrthogonal,coordinateSum,← Finset.mul_sum]
+    simp only [Function.comp_apply, recenteredQuarterTurn, recenteredCoordinate,
+      Submodule.coe_smul, Pi.smul_apply, smul_eq_mul, globalPhase, recenteredConfiguration,
+      projectToOrthogonal, coordinateSum,← Finset.mul_sum]
     ring
   refine ⟨hm,?_⟩
   change ((ginibreMeasure n).map (recenteredCoordinate n)).map (recenteredQuarterTurn n)=_
-  rw [Measure.map_map hm (measurable_recenteredCoordinate n),he,
+  rw [Measure.map_map hm (measurable_recenteredCoordinate n), he,
     ← Measure.map_map (measurable_recenteredCoordinate n) (measurePreserving_globalPhase_ginibreMeasure hn Complex.I (by simp)).measurable,
     (measurePreserving_globalPhase_ginibreMeasure hn Complex.I (by simp)).map_eq]
   rfl
@@ -77,7 +77,7 @@ theorem measurePreserving_ginibreRelativeQuarterTurn {n : ℕ} (hn : 0<n) :
   let e := equilibriumMeasurableCoordinates n hn
   have hE : MeasurePreserving e (ginibreMeasure n)
       (standardComplexGaussianMeasure.prod (recenteredGinibreMeasure n)) :=
-    ⟨e.measurable,equilibrium_jointLaw n hn⟩
+    ⟨e.measurable, equilibrium_jointLaw n hn⟩
   have hP := (MeasurePreserving.id standardComplexGaussianMeasure).prod
     (measurePreserving_recenteredQuarterTurn hn)
   have hInv := MeasurePreserving.symm e hE

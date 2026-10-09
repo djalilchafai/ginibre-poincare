@@ -26,7 +26,7 @@ theorem localDolbeault_locallyL2 {n : ℕ}
       ∃ u : dolbeaultOrdinaryL2 n, ∀ θ : Configuration n → ℂ,
         ContDiff ℝ ∞ θ → HasCompactSupport θ → tsupport θ ⊆ U → ∀ j,
           (∫ p, θ p*α j p) = -(∫ p, dbarComponent θ j p*u p) := by
-  obtain ⟨r,hr,hball⟩ := Metric.isOpen_iff.mp hΩ x hx
+  obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.mp hΩ x hx
   let R := r/2
   have hR : 0 < R := half_pos hr
   let K := closedBall x R
@@ -44,14 +44,14 @@ theorem localDolbeault_locallyL2 {n : ℕ}
       (hc : HasCompactSupport θ) (hs : tsupport θ ⊆ ball x R) (j k : Fin n) :
       (∫ y, dbarComponent θ k y*A j y) = ∫ y, dbarComponent θ j y*A k y :=
     localDolbeault_indicator_closed Ω α hclosed x R hKΩ θ hθ hc hs j k
-  obtain ⟨U,hU,hxU,hUb,u,hsol⟩ := localDolbeault_compactLp_ball A hA hcA x R hR hclosedA
-  refine ⟨U,hU,hxU,hUb.trans (ball_subset_closedBall.trans hKΩ),u,?_⟩
+  obtain ⟨U, hU, hxU, hUb, u, hsol⟩ := localDolbeault_compactLp_ball A hA hcA x R hR hclosedA
+  refine ⟨U, hU, hxU, hUb.trans (ball_subset_closedBall.trans hKΩ), u,?_⟩
   intro θ hθ hc hs j
   have he (p : Configuration n) : θ p*A j p = θ p*α j p := by
     by_cases hp : p ∈ tsupport θ
     · have hpK : p ∈ K := ball_subset_closedBall (hUb (hs hp))
       rw [show A j p = α j p from indicator_of_mem hpK _]
-    · rw [image_eq_zero_of_notMem_tsupport hp,zero_mul,zero_mul]
+    · rw [image_eq_zero_of_notMem_tsupport hp, zero_mul, zero_mul]
   have hl : (∫ p, θ p*A j p) = ∫ p, θ p*α j p := by
     apply integral_congr_ae
     exact ae_of_all _ he
@@ -75,10 +75,10 @@ theorem localDolbeault_locallyL2_representative {n : ℕ}
         ∀ θ : Configuration n → ℂ, ContDiff ℝ ∞ θ → HasCompactSupport θ →
           tsupport θ ⊆ U → ∀ j,
             (∫ p, θ p*α j p) = -(∫ p, dbarComponent θ j p*u p) := by
-  obtain ⟨U,hU,hxU,hUΩ,u,hsol⟩ := localDolbeault_locallyL2 Ω hΩ α hα hclosed x hx
+  obtain ⟨U, hU, hxU, hUΩ, u, hsol⟩ := localDolbeault_locallyL2 Ω hΩ α hα hclosed x hx
   have hu := Lp.memLp u
-  exact ⟨U,hU,hxU,hUΩ,u,hu,hu.locallyIntegrable (by norm_num),
-    fun K _ _ => hu.mono_measure Measure.restrict_le_self,hsol⟩
+  exact ⟨U, hU, hxU, hUΩ, u, hu, hu.locallyIntegrable (by norm_num),
+    fun K _ _ => hu.mono_measure Measure.restrict_le_self, hsol⟩
 
 #print axioms localDolbeault_locallyL2
 #print axioms localDolbeault_locallyL2_representative

@@ -24,7 +24,7 @@ theorem ginibreConfigurationBrownianRealCoordinate_eq {Ω : Type*} (n : ℕ)
     (t : ℝ≥0) (ω : Ω) :
     ginibreConfigurationBrownianRealCoordinate n B α p t ω =
       Real.sqrt (2*α/(n : ℝ)^2)*B p t ω := by
-  rcases p with ⟨j,k⟩
+  rcases p with ⟨j, k⟩
   fin_cases k <;> simp [ginibreConfigurationBrownianRealCoordinate, ginibreConfigurationBrownianNoise,
     Complex.mul_re, Complex.mul_im]
 

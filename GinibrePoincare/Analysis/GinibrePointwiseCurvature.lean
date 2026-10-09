@@ -68,10 +68,10 @@ theorem ginibreHamiltonian_pointwise_curvature_unbounded_below {n : ℕ}
     exact_mod_cast he
   let j : Fin n := ⟨0, by omega⟩
   let k : Fin n := ⟨1, by omega⟩
-  have hkj : k ≠ j := by intro h; have := congrArg Fin.val h; simp [k,j] at this
+  have hkj : k ≠ j := by intro h; have := congrArg Fin.val h; simp [k, j] at this
   have hp := ginibreHamiltonian_imaginary_hessian_le_pair x hx j k hkj
   have hid : (x j-x k)⁻¹ = -L := by
-    dsimp [x,j,k]
+    dsimp [x, j, k]
     simp
   rw [hid] at hp
   refine ⟨fun i => (x i : ℂ), ?_, j, ?_, ?_⟩
@@ -93,8 +93,8 @@ theorem ginibre_pointwise_bakry_emery_curvature_unbounded_below {n : ℕ}
       ∃ j : Fin n, configurationNormSq (imaginaryCoordinateDirection j) = 1 ∧
         (1/(n : ℝ))*secondDirectionalDerivative (ginibreHamiltonian n)
           (imaginaryCoordinateDirection j) z < B := by
-  obtain ⟨z,hz,j,hj,hB⟩ := ginibreHamiltonian_pointwise_curvature_unbounded_below hn ((n : ℝ)*B)
-  refine ⟨z,hz,j,hj,?_⟩
+  obtain ⟨z, hz, j, hj, hB⟩ := ginibreHamiltonian_pointwise_curvature_unbounded_below hn ((n : ℝ)*B)
+  refine ⟨z, hz, j, hj,?_⟩
   have hn' : (0 : ℝ) < n := by exact_mod_cast (show 0<n by omega)
   have h := (div_lt_iff₀ hn').mpr (by simpa [mul_comm] using hB)
   simpa [div_eq_mul_inv, mul_comm] using h

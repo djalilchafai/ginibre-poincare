@@ -15,7 +15,7 @@ theorem ginibreLocalRegularity_weighted_multiplier_restrict_memLp
     (hu : MemLp u 2 (ginibreMeasure n)) (hq : Continuous q)
     (K : Set (Configuration n)) (hK : IsCompact K) (hs : K ⊆ {z | CollisionFree z}) :
     MemLp (fun z => q z*u z) 2 ((volume : Measure (Configuration n)).restrict K) := by
-  obtain ⟨χ,hχ,hχc,hχs,hχone⟩ := ginibreLocalRegularity_exists_compact_interior_cutoff n hn K hK hs
+  obtain ⟨χ, hχ, hχc, hχs, hχone⟩ := ginibreLocalRegularity_exists_compact_interior_cutoff n hn K hK hs
   have hcq : HasCompactSupport (χ*q) := hχc.mul_right
   have htop : MemLp (χ*q) ⊤ ((volume : Measure (Configuration n)).restrict K) :=
     (hχ.continuous.mul hq).memLp_top_of_hasCompactSupport hcq _

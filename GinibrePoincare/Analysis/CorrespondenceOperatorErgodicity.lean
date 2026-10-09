@@ -12,7 +12,7 @@ set_option maxHeartbeats 1600000
 /-- Actual unrestricted complex L² mean as pairing with the literal constant one. -/
 theorem correspondenceOperator_constant_one_inner (n : ℕ) (hn : 0<n)
     (u : GinibreFullComplexL2 n) :
-    inner ℂ (ginibreFullConstant n hn 1).val u=∫z,u z∂ginibreMeasure n := by
+    inner ℂ (ginibreFullConstant n hn 1).val u=∫z, u z∂ginibreMeasure n := by
   rw [L2.inner_def]
   apply integral_congr_ae
   filter_upwards [ginibreFullConstant_ae n hn 1] with z hz
@@ -35,7 +35,7 @@ theorem correspondenceOperator_mean_zero_mem_complement_closure {n : ℕ} (hn : 
   have hAdj : L.adjoint=L := by
     have hR : R.adjoint=R := correspondenceOperatorComplexResolvent_isSelfAdjoint n hn
     change ContinuousLinearMap.adjoint (1-R)=1-R
-    rw [map_sub,ContinuousLinearMap.adjoint_one,hR]
+    rw [map_sub, ContinuousLinearMap.adjoint_one, hR]
   have he := L.orthogonal_ker
   rw [hAdj] at he
   change u∈L.range.topologicalClosure
@@ -44,27 +44,27 @@ theorem correspondenceOperator_mean_zero_mem_complement_closure {n : ℕ} (hn : 
   intro v hv
   have hv0 : v-R v=0 := hv
   have hfixed : R v=v := (sub_eq_zero.mp hv0).symm
-  obtain ⟨a,ha⟩ := (correspondenceOperatorComplexResolvent_fixed_iff_constant hn v).mp hfixed
+  obtain ⟨a, ha⟩ := (correspondenceOperatorComplexResolvent_fixed_iff_constant hn v).mp hfixed
   rw [ha]
   have hconst : (ginibreFullConstant n hn a).val=a • (ginibreFullConstant n hn 1).val := by
     apply Lp.ext
-    filter_upwards [ginibreFullConstant_ae n hn a,ginibreFullConstant_ae n hn 1,
+    filter_upwards [ginibreFullConstant_ae n hn a, ginibreFullConstant_ae n hn 1,
       Lp.coeFn_smul a (ginibreFullConstant n hn 1).val] with z hz h1 hs
-    rw [hs,hz]
-    simp only [Pi.smul_apply,smul_eq_mul,h1,mul_one]
-  rw [hconst,inner_smul_left,hu,mul_zero]
+    rw [hs, hz]
+    simp only [Pi.smul_apply, smul_eq_mul, h1, mul_one]
+  rw [hconst, inner_smul_left, hu, mul_zero]
 
 /-- The actual unrestricted complex semigroup converges strongly to its concrete
 Ginibre mean at all continuous times, without a symmetric-domain restriction. -/
 theorem correspondenceOperatorEvolution_ergodic {n : ℕ} (hn : 0<n)
     (u : GinibreFullComplexL2 n) :
     Tendsto (fun t : ℝ≥0 => correspondenceOperatorEvolution n hn t u) atTop
-      (𝓝 (ginibreFullConstant n hn (∫z,u z∂ginibreMeasure n)).val) := by
-  let a := ∫z,u z∂ginibreMeasure n
+      (𝓝 (ginibreFullConstant n hn (∫z, u z∂ginibreMeasure n)).val) := by
+  let a := ∫z, u z∂ginibreMeasure n
   let c := (ginibreFullConstant n hn a).val
   have hm : inner ℂ (ginibreFullConstant n hn 1).val (u-c)=0 := by
-    rw [inner_sub_right,correspondenceOperator_constant_one_inner,
-      correspondenceOperator_constant_inner,sub_self]
+    rw [inner_sub_right, correspondenceOperator_constant_one_inner,
+      correspondenceOperator_constant_inner, sub_self]
   have hc := correspondenceOperator_mean_zero_mem_complement_closure hn (u-c) hm
   have hlim := correspondenceOperator_ergodic_complement_closure
     (correspondenceOperatorComplexResolvent n hn) (correspondenceOperatorComplexResolvent_isSelfAdjoint n hn)
@@ -74,7 +74,7 @@ theorem correspondenceOperatorEvolution_ergodic {n : ℕ} (hn : 0<n)
   apply hsum.congr
   intro t
   change correspondenceOperatorEvolution n hn t (u-c)+c=correspondenceOperatorEvolution n hn t u
-  rw [map_sub,correspondenceOperatorEvolution_constant]
+  rw [map_sub, correspondenceOperatorEvolution_constant]
   exact sub_add_cancel _ _
 #print axioms correspondenceOperator_constant_one_inner
 #print axioms correspondenceOperator_constant_inner

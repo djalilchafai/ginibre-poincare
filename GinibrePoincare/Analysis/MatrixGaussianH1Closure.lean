@@ -4,6 +4,21 @@ public import GinibrePoincare.Analysis.MatrixGaussianH1LSI
 
 @[expose] public section
 
+/-! # Compact gradient pairs and their Gaussian H¹ completion
+
+`MatrixGaussianSobolevPair` stores a value and one real L² derivative for every
+real matrix entry coordinate. Its H¹ completion is the closure of compact C¹
+pairs in that product topology. The entropy bound extends to this closure using
+the L² entropy limit theorem and continuity of the finite sum of derivative
+norms. The core bound comes from the compact Lipschitz Gaussian inequality.
+
+For a globally C¹ observable with finite value and gradient energy, expanding
+matrix cutoffs give compact C¹ pairs. Their L² value and derivative errors tend
+to zero, proving membership in the completion. Identification with ordinary weak
+entry derivatives is handled by the separate Sobolev transport modules.
+-/
+
+
 open MeasureTheory Filter
 open scoped Topology
 namespace GinibrePoincare
@@ -108,31 +123,31 @@ theorem matrixGaussian_C1_pair_mem_H1Completion (n : ℕ)
   let d := fun i : MatrixRealIndex n => matrixRealCoordinates n (Pi.single i 1)
   have hg (k : ℕ) := matrixSpatialTruncation_contDiff n k F hF
   have hc (k : ℕ) := matrixSpatialTruncation_compact n k F
-  have hvG (k : ℕ) : MemLp (g k) 2 μ := (hg k).continuous.memLp_of_hasCompactSupport (hc k)
-  have hdG (k : ℕ) (i : MatrixRealIndex n) : MemLp (fun A => fderiv ℝ (g k) A (d i)) 2 μ :=
+  have htruncatedValue_memLp (k : ℕ) : MemLp (g k) 2 μ := (hg k).continuous.memLp_of_hasCompactSupport (hc k)
+  have htruncatedDerivative_memLp (k : ℕ) (i : MatrixRealIndex n) : MemLp (fun A => fderiv ℝ (g k) A (d i)) 2 μ :=
     ((hg k).continuous_fderiv one_ne_zero).clm_apply continuous_const
       |>.memLp_of_hasCompactSupport ((hc k).fderiv_apply (𝕜 := ℝ) (d i))
   let P : ℕ → MatrixGaussianSobolevPair n := fun k =>
-    ((hvG k).toLp (g k), fun i => (hdG k i).toLp (fun A => fderiv ℝ (g k) A (d i)))
-  have htV : Tendsto (fun k => (P k).1) atTop (nhds (hv.toLp F)) := by
+    ((htruncatedValue_memLp k).toLp (g k), fun i => (htruncatedDerivative_memLp k i).toLp (fun A => fderiv ℝ (g k) A (d i)))
+  have hvalue_converges : Tendsto (fun k => (P k).1) atTop (nhds (hv.toLp F)) := by
     apply tendsto_iff_dist_tendsto_zero.mpr
-    change Tendsto (fun k => dist ((hvG k).toLp (g k)) (hv.toLp F)) atTop (nhds 0)
+    change Tendsto (fun k => dist ((htruncatedValue_memLp k).toLp (g k)) (hv.toLp F)) atTop (nhds 0)
     simp_rw [matrixL2_toLp_dist_eq_sqrt]
     have hzero : MemLp (fun A : MatrixRealSpace n => fderiv ℝ F A 0) 2 μ := by simp
     simpa [g] using (matrixSpatialTruncation_L2_errors n μ F hF hv 0 hzero).1.sqrt
-  have htD : Tendsto (fun k => (P k).2) atTop
+  have hgradient_converges : Tendsto (fun k => (P k).2) atTop
       (nhds (fun i => (hD i).toLp (fun A => fderiv ℝ F A (d i)))) := by
     apply tendsto_pi_nhds.mpr
     intro i
     apply tendsto_iff_dist_tendsto_zero.mpr
-    change Tendsto (fun k => dist ((hdG k i).toLp (fun A => fderiv ℝ (g k) A (d i)))
+    change Tendsto (fun k => dist ((htruncatedDerivative_memLp k i).toLp (fun A => fderiv ℝ (g k) A (d i)))
       ((hD i).toLp (fun A => fderiv ℝ F A (d i)))) atTop (nhds 0)
     simp_rw [matrixL2_toLp_dist_eq_sqrt]
     simpa [g] using (matrixSpatialTruncation_L2_errors n μ F hF hv (d i) (hD i)).2.sqrt
-  apply isClosed_closure.mem_of_tendsto (htV.prodMk_nhds htD)
+  apply isClosed_closure.mem_of_tendsto (hvalue_converges.prodMk_nhds hgradient_converges)
   apply Eventually.of_forall
   intro k
-  exact subset_closure ⟨g k, hg k, hc k, (hvG k).coeFn_toLp, fun i => (hdG k i).coeFn_toLp⟩
+  exact subset_closure ⟨g k, hg k, hc k, (htruncatedValue_memLp k).coeFn_toLp, fun i => (htruncatedDerivative_memLp k i).coeFn_toLp⟩
 
 #print axioms matrixGaussian_C1_pair_mem_H1Completion
 end

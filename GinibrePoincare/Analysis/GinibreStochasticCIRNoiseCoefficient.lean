@@ -20,9 +20,9 @@ theorem ginibreRecenteredRadialDirection_scaled_coordinate {n : ℕ} (hn : 2 ≤
     intro h
     exact recenteredConfiguration_ne_zero_of_collisionFree hn z hz
       ((configurationEuclideanEquiv n).injective (by simpa using h))
-  simp only [ginibreRecenteredRadialDirection,brownianRadialUnitVector,if_neg hne,
-    PiLp.smul_apply,smul_eq_mul]
-  rw [← mul_assoc,mul_inv_cancel₀ (norm_ne_zero_iff.mpr hne),one_mul]
+  simp only [ginibreRecenteredRadialDirection, brownianRadialUnitVector, if_neg hne,
+    PiLp.smul_apply, smul_eq_mul]
+  rw [← mul_assoc, mul_inv_cancel₀ (norm_ne_zero_iff.mpr hne), one_mul]
 
 theorem ginibreCIR_noise_amplitude_square {n : ℕ} (hn : 0 < n)
     (α : ℝ) (hα : 0 ≤ α) (z : Configuration n) :
@@ -32,7 +32,7 @@ theorem ginibreCIR_noise_amplitude_square {n : ℕ} (hn : 0 < n)
   have hnR : (n : ℝ) ≠ 0 := by exact_mod_cast hn.ne'
   have hs : (Real.sqrt (2*α/(n : ℝ)^2))^2=2*α/(n : ℝ)^2 :=
     Real.sq_sqrt (div_nonneg (by positivity) (sq_nonneg _))
-  rw [mul_pow,mul_pow,mul_pow,hs,ginibre_configurationEuclidean_norm_sq,
+  rw [mul_pow, mul_pow, mul_pow, hs, ginibre_configurationEuclidean_norm_sq,
     pairwiseRadius_eq_radialObservable]
   unfold radialObservable recenteredSqNorm
   field_simp
@@ -43,7 +43,7 @@ theorem ginibreCIR_noise_amplitude {n : ℕ} (hn : 0 < n)
     2*(n : ℝ)*Real.sqrt (2*α/(n : ℝ)^2)*
       ‖configurationEuclideanEquiv n (recenteredConfiguration n z)‖ =
       Real.sqrt ((8*α/(n : ℝ))*pairwiseRadius z) := by
-  rw [← ginibreCIR_noise_amplitude_square hn α hα z,Real.sqrt_sq_eq_abs,
+  rw [← ginibreCIR_noise_amplitude_square hn α hα z, Real.sqrt_sq_eq_abs,
     abs_of_nonneg (by positivity)]
 
 theorem ginibreCIR_noise_coordinate {n : ℕ} (hn : 2 ≤ n)

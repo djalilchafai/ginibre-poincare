@@ -22,7 +22,7 @@ theorem ginibreCenterShiftedDrift_integral (n : ℕ) (α : ℝ)
   calc
     _ = ∫ s in (0 : ℝ)..r, ginibreLampertiCenterDrift n α
         (ginibreCenterSquared n (X (s+(a : ℝ)).toNNReal)) := by
-      simpa only [zero_add,add_zero,NNReal.coe_add,add_comm] using
+      simpa only [zero_add, add_zero, NNReal.coe_add, add_comm] using
         (intervalIntegral.integral_comp_add_right (f := fun s : ℝ => ginibreLampertiCenterDrift n α
           (ginibreCenterSquared n (X s.toNNReal))) (a := 0) (b := (r : ℝ)) (a : ℝ)).symm
     _ = _ := by
@@ -30,7 +30,7 @@ theorem ginibreCenterShiftedDrift_integral (n : ℕ) (α : ℝ)
       intro s hs
       rw [uIcc_of_le r.coe_nonneg] at hs
       dsimp only
-      rw [Real.toNNReal_add hs.1 a.coe_nonneg,Real.toNNReal_coe,add_comm]
+      rw [Real.toNNReal_add hs.1 a.coe_nonneg, Real.toNNReal_coe, add_comm]
 
 theorem ginibreBrownian_center_Lamperti_positive_start_all
     {Ω : Type*} [MeasurableSpace Ω] {n : ℕ} (hn : 2 ≤ n) (α : ℝ≥0) (hα : 0 < α)
@@ -59,14 +59,14 @@ theorem ginibreBrownian_center_Lamperti_positive_start_all
   have hFC : ∀ᵐ ω ∂P, Continuous (fun r => F r ω) := by
     filter_upwards [hX] with ω hx
     have hc : Continuous (fun r : ℝ≥0 => ginibreBrownianMaximalProcess n α z B r ω) := by
-      simpa only [Function.comp_def,Real.toNNReal_coe] using hx.1.comp NNReal.continuous_coe
+      simpa only [Function.comp_def, Real.toNNReal_coe] using hx.1.comp NNReal.continuous_coe
     exact (Real.continuous_sqrt.comp ((contDiff_ginibreCenterSquared n).continuous.comp
       (hc.comp (continuous_const.add continuous_id)))).sub continuous_const
   have hGC : ∀ᵐ ω ∂P, Continuous (fun r => G r ω) := by
-    filter_upwards [hX,hβC,ginibreBrownian_center_all_positive_times_nonzero hn α hα z hz B P hB hind]
+    filter_upwards [hX, hβC, ginibreBrownian_center_all_positive_times_nonzero hn α hα z hz B P hB hind]
       with ω hx hβ hnonzero
     have hc : Continuous (fun r : ℝ≥0 => ginibreBrownianMaximalProcess n α z B r ω) := by
-      simpa only [Function.comp_def,Real.toNNReal_coe] using hx.1.comp NNReal.continuous_coe
+      simpa only [Function.comp_def, Real.toNNReal_coe] using hx.1.comp NNReal.continuous_coe
     have hd : Continuous (fun s : ℝ => ginibreLampertiCenterDrift n α
         (ginibreCenterSquared n (ginibreBrownianMaximalProcess n α z B (a+s.toNNReal) ω))) :=
       (ginibreLampertiCenterDrift_continuousOn n α).comp_continuous
@@ -86,7 +86,7 @@ theorem ginibreBrownian_center_Lamperti_positive_start_all
       (fun r => (hfixed r).mono (fun ω hω _ => hω))
   filter_upwards [ae_all_iff.mpr hm] with ω hω
   intro r
-  obtain ⟨m,hm⟩ := exists_nat_ge (r : ℝ)
+  obtain ⟨m, hm⟩ := exists_nat_ge (r : ℝ)
   exact hω m r (by exact_mod_cast hm)
 
 #print axioms ginibreBrownian_center_Lamperti_positive_start_all

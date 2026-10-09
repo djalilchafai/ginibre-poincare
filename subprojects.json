@@ -174,7 +174,7 @@
         "GinibrePoincare.Concrete.GaussianProbability"
       ],
       "module_count": 164,
-      "physical_lines": 22311,
+      "physical_lines": 22367,
       "direct_dependency_groups": [
         "DeficitsEquality",
         "Endgame",
@@ -327,7 +327,7 @@
         "GinibrePoincare.Concrete.Wirtinger"
       ],
       "module_count": 51,
-      "physical_lines": 10472,
+      "physical_lines": 10505,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "Endgame",
@@ -453,7 +453,7 @@
         "GinibrePoincare.Analysis.GinibreSymmetricWeakPoincare"
       ],
       "module_count": 40,
-      "physical_lines": 5614,
+      "physical_lines": 5646,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "Endgame",
@@ -787,7 +787,7 @@
         "GinibrePoincare.Concrete.Generator"
       ],
       "module_count": 233,
-      "physical_lines": 22505,
+      "physical_lines": 22631,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "DeficitsEquality",
@@ -1038,7 +1038,7 @@
         "GinibrePoincare.Analysis.GinibreStochasticGaussianSquareMoments"
       ],
       "module_count": 231,
-      "physical_lines": 17411,
+      "physical_lines": 17526,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "GaussianLSI",
@@ -1429,7 +1429,7 @@
         "GinibrePoincare.Analysis.IndependentNoiseMixture"
       ],
       "module_count": 375,
-      "physical_lines": 28896,
+      "physical_lines": 29287,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "GeneratorSemigroup",
@@ -1574,7 +1574,7 @@
         "GinibrePoincare.Analysis.MatrixVolumeSimpleSpectrum"
       ],
       "module_count": 128,
-      "physical_lines": 11330,
+      "physical_lines": 11579,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "DeficitsEquality",
@@ -1879,7 +1879,7 @@
         "GinibrePoincare.Analysis.StrongConvexTransportMeasure"
       ],
       "module_count": 288,
-      "physical_lines": 30189,
+      "physical_lines": 30223,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "DeficitsEquality",
@@ -1916,7 +1916,7 @@
         "GinibrePoincare.Endgame.TheoremOneNine"
       ],
       "module_count": 16,
-      "physical_lines": 1652,
+      "physical_lines": 1831,
       "direct_dependency_groups": [
         "ComplexGaussianHermite",
         "DeficitsEquality",

@@ -32,7 +32,7 @@ theorem ginibreHamiltonianOUSublevelStop_eq_horizon_of_stays {Ω : Type*}
     ginibreHamiltonianOUSublevelStop n α z B R T ω = T := by
   have hh : ¬∃ t ∈ Icc (0 : ℝ≥0) T,
       ginibreHamiltonianOUReferenceProcess n α z B t ω ∈ (ginibreHamiltonianOUSublevelDomain n R)ᶜ := by
-    rintro ⟨t,ht,hmem⟩
+    rintro ⟨t, ht, hmem⟩
     exact hmem (hStay t ht.2)
   unfold ginibreHamiltonianOUSublevelStop hittingBtwn
   rw [if_neg hh]
@@ -70,16 +70,16 @@ theorem ginibreHamiltonianOUSublevelStop_mem_complement_of_not_stays {Ω : Type*
   have he : ∃ t ∈ Icc (0 : ℝ≥0) T,
       ginibreHamiltonianOUReferenceProcess n α z B t ω ∈ (ginibreHamiltonianOUSublevelDomain n R)ᶜ := by
     push_neg at hNot
-    obtain ⟨t,ht,hm⟩ := hNot
-    exact ⟨t,⟨zero_le,ht⟩,hm⟩
+    obtain ⟨t, ht, hm⟩ := hNot
+    exact ⟨t, ⟨zero_le, ht⟩, hm⟩
   have hClosed : IsClosed (Icc (0 : ℝ≥0) T ∩
       {t | ginibreHamiltonianOUReferenceProcess n α z B t ω ∈ (ginibreHamiltonianOUSublevelDomain n R)ᶜ}) :=
     isClosed_Icc.inter (hG.isClosed_compl.preimage
       (ginibreHamiltonianOUReferenceProcess_continuous n α z B ω))
   have hNon : (Icc (0 : ℝ≥0) T ∩
       {t | ginibreHamiltonianOUReferenceProcess n α z B t ω ∈ (ginibreHamiltonianOUSublevelDomain n R)ᶜ}).Nonempty := by
-    obtain ⟨t,ht,hm⟩ := he
-    exact ⟨t,ht,hm⟩
+    obtain ⟨t, ht, hm⟩ := he
+    exact ⟨t, ht, hm⟩
   have hm := hClosed.csInf_mem hNon (OrderBot.bddBelow _)
   unfold ginibreHamiltonianOUSublevelStop hittingBtwn
   rw [if_pos he]
@@ -126,12 +126,12 @@ theorem ginibreHamiltonianOU_reference_sublevel_stopped_exists {Ω : Type*} [mAm
   have hθT (ω : Ω) : θ ω ≤ T := hittingBtwn_le ω
   have hθpos (ω : Ω) : 0 < θ ω :=
     drivenContinuous_closed_hitting_pos U Gᶜ hG.isClosed_compl T hT ω (hUC ω)
-      (by simpa [U,ginibreHamiltonianOUReferenceProcess_zero] using hGz)
+      (by simpa [U, ginibreHamiltonianOUReferenceProcess_zero] using hGz)
   let Y : ℝ≥0 → Ω → Configuration n := fun t ω => U (min t (θ ω)) ω
   have hYC (ω : Ω) : Continuous (fun t => Y t ω) := (hUC ω).comp (continuous_id.min continuous_const)
   have hYR (t : ℝ≥0) (ω : Ω) : Y t ω ∈ K :=
     hClosure (ginibreContinuous_mem_closure_until_exit U G T ω (hUC ω)
-      (by simpa [U,ginibreHamiltonianOUReferenceProcess_zero] using hGz) _ (min_le_right t (θ ω)))
+      (by simpa [U, ginibreHamiltonianOUReferenceProcess_zero] using hGz) _ (min_le_right t (θ ω)))
   have hYA : StronglyAdapted (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)) Y := by
     let F := ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)
     intro s
@@ -142,16 +142,16 @@ theorem ginibreHamiltonianOU_reference_sublevel_stopped_exists {Ω : Type*} [mAm
     rw [tendsto_pi_nhds]
     intro ω
     exact (hUC ω).continuousAt.tendsto.comp (tendsto_const_nhds.min (stoppingUpperGrid_tendsto (θ ω)))
-  refine ⟨Y,hYC,hYR,?_,hYA,θ,hStop,
-    fun ω => ⟨hθpos ω,hθT ω⟩,fun t ω => rfl,fun ω => rfl,?_⟩
+  refine ⟨Y, hYC, hYR,?_, hYA, θ, hStop,
+    fun ω => ⟨hθpos ω, hθT ω⟩, fun t ω => rfl, fun ω => rfl,?_⟩
   · intro ω
-    simp [Y,U,ginibreHamiltonianOUReferenceProcess_zero]
+    simp [Y, U, ginibreHamiltonianOUReferenceProcess_zero]
   · filter_upwards [ginibreHamiltonianOUReferenceProcess_original_equation n α z B P hB] with ω hω
     intro t ht
     change U (min t (θ ω)) ω = _
     have huEq : U t ω = z+ginibreConfigurationBrownianNoise n B α ω t+
         ∫ s in (0 : ℝ)..t, (-2*α/(n : ℝ)) • U s.toNNReal ω := hω t
-    rw [min_eq_left ht,huEq]
+    rw [min_eq_left ht, huEq]
     congr 1
     apply intervalIntegral.integral_congr
     intro s hs

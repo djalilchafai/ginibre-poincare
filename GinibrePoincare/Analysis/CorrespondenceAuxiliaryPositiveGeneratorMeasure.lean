@@ -29,8 +29,8 @@ theorem ginibreNegativeGeneratorVectorSpectralMeasure_support (n : ℕ) (hn : 0 
       ({0} ∪ Iic (-2 : ℝ))ᶜ := by
     ext x
     have hneg : (2 : ℝ) ≤ -x ↔ x ≤ -2 := by constructor <;> intro h <;> linarith
-    simp only [mem_preimage,mem_compl_iff,mem_union,mem_singleton_iff,mem_Ici,mem_Iic,
-      neg_eq_zero,hneg]
+    simp only [mem_preimage, mem_compl_iff, mem_union, mem_singleton_iff, mem_Ici, mem_Iic,
+      neg_eq_zero, hneg]
   rw [he]
   exact ginibreGeneratorVectorSpectralMeasure_support n hn u
 

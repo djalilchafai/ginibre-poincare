@@ -9,6 +9,24 @@ public import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
 public import GinibrePoincare.Analysis.MatrixSpectralSobolevLocalIntegrability
 
 @[expose] public section
+
+/-! # From matrix H¹ membership to the intrinsic overlap inequalities
+
+The graph closure initially supplies an L² value and entry-gradient tuple, not
+an identification of that tuple with the derivative of a spectral observable.
+Divide each compact test by the strictly positive Gaussian density: the resulting
+pairing is continuous in Gaussian L², so integration by parts passes from compact
+C¹ pairs to their closure and becomes the ordinary volume weak identity.
+
+On any open set where the represented value is C¹, uniqueness of distributions
+identifies the gradient tuple with its classical derivative almost everywhere.
+Local eigenvalue branches make the symmetric lift C¹ on the open simple-spectrum
+locus, whose complement has Gaussian measure zero. This proves the derivative
+bridge from H¹ membership itself. The overlap-energy identity then proves overlap
+integrability and transports the Gaussian variance and entropy bounds. The final
+endpoint requires only the value-domain predicate `MatrixGaussianH1Function`.
+-/
+
 open MeasureTheory Filter
 open scoped Topology ContDiff ENNReal
 namespace GinibrePoincare
@@ -71,6 +89,7 @@ theorem correspondenceMatrix_H1_weak {n : ℕ} (hn : 0 < n)
   have hD : Continuous (fun A => fderiv ℝ θ A v) :=
     (hθ.continuous_fderiv (by simp)).clm_apply continuous_const
   have hDc : HasCompactSupport (fun A => fderiv ℝ θ A v) := hc.fderiv_apply (𝕜 := ℝ) v
+  -- Weighted L² pairings make the ordinary derivative identity closed.
   have hclosed : IsClosed {q : MatrixGaussianSobolevPair n |
       (∫ A, q.2 i A * (θ A / w A) ∂matrixGaussianMeasure n) =
       -(∫ A, q.1 A * (fderiv ℝ θ A v / w A) ∂matrixGaussianMeasure n)} :=
@@ -175,6 +194,7 @@ theorem correspondenceMatrix_H1_local_derivative {n : ℕ} (hn : 0 < n)
   have hvV := hac.ae_eq hv
   have hD : ContinuousOn (fun A => fderiv ℝ f A v) U :=
     (hf.continuousOn_fderiv_of_isOpen hU (by norm_num)).clm_apply continuousOn_const
+  -- Distributional uniqueness identifies the weak and classical derivatives locally.
   have hz := hU.ae_eq_zero_of_integral_contDiff_smul_eq_zero
     ((hgv.locallyIntegrableOn U).sub (hD.locallyIntegrableOn hU.measurableSet)) ?_
   · filter_upwards [hz] with A hA
@@ -255,6 +275,7 @@ theorem correspondenceMatrix_H1_functional_inequalities {n : ℕ} (hn : 0 < n)
       (2 / (n : ℝ)) * ∫ A, matrixSpectralOverlapEnergy n F A ∂matrixGaussianMeasure n ∧
     squareEntropy (ginibreMeasure n) F ≤
       (4 / (n : ℝ)) * ∫ A, matrixSpectralOverlapEnergy n F A ∂matrixGaussianMeasure n := by
+  -- Derivative identification and finite overlap energy follow from H¹ membership.
   have hd := correspondenceMatrix_H1_derivative hn F hF hsym p hp hv
   have hdF := hF.differentiable one_ne_zero
   obtain ⟨hlog, hlsi⟩ := matrixSpectralLift_H1_lsi hn F hdF hsym p hp hv hd

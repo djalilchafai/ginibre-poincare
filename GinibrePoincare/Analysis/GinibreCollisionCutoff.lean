@@ -26,11 +26,11 @@ theorem contDiff_vandermondeWeight (n : ℕ) :
 theorem vandermondeWeight_symmetric (n : ℕ) : IsSymmetric (vandermondeWeight : Configuration n → ℝ) := by
   intro σ z
   unfold vandermondeWeight
-  rw [vandermonde_permute,map_mul]
+  rw [vandermonde_permute, map_mul]
   have hs : Complex.normSq (permutationSign σ) = 1 := by
     unfold permutationSign
     rcases Int.units_eq_one_or (Equiv.Perm.sign σ) with h | h <;> simp [h]
-  rw [hs,one_mul]
+  rw [hs, one_mul]
 
 def ginibreCollisionCutoff (n m : ℕ) (z : Configuration n) : ℝ :=
   1 - sobolevCutoffBump (((m : ℝ) + 1) * vandermondeWeight z)
@@ -65,11 +65,11 @@ theorem ginibreCollisionCutoff_support_collisionFree (n m : ℕ) :
       simp only [Metric.mem_closedBall, Real.dist_eq, sub_zero, sobolevCutoffBump]
       rw [abs_of_nonneg (mul_nonneg hp.le (vandermondeWeight_nonneg z))]
       nlinarith [(lt_div_iff₀ hp).mp hr]
-    exact hz (by simp [ginibreCollisionCutoff,hb])
+    exact hz (by simp [ginibreCollisionCutoff, hb])
   intro z hz
   apply (vandermonde_ne_zero_iff z).mp
   intro hv
-  have hw : vandermondeWeight z = 0 := by simp [vandermondeWeight,hv]
+  have hw : vandermondeWeight z = 0 := by simp [vandermondeWeight, hv]
   have hp : 0 < 1 / ((m : ℝ) + 1) := by positivity
   have hh := hs hz
   change 1 / ((m : ℝ) + 1) ≤ vandermondeWeight z at hh
@@ -103,7 +103,7 @@ theorem ginibreCollisionCutoff_gradient (n m : ℕ) (z : Configuration n) :
   have hc := (hasFDerivAt_const (1 : ℝ) z).sub he
   change HasFDerivAt (ginibreCollisionCutoff n m) _ z at hc
   ext k
-  rw [ginibreEuclideanGradient_coordinate,hc.fderiv]
+  rw [ginibreEuclideanGradient_coordinate, hc.fderiv]
   simp [ginibreEuclideanGradient_coordinate]
   ring
 
@@ -112,10 +112,10 @@ theorem ginibreCollisionCutoff_weighted_gradient_bound : ∃ C : ℝ, 0 ≤ C �
     ∀ n m (z : Configuration n),
       vandermondeWeight z * ‖ginibreEuclideanGradient (ginibreCollisionCutoff n m) z‖ ^ 2 ≤
         C * complexDirectionalEnergy (vandermonde : Configuration n → ℂ) z := by
-  obtain ⟨M,hM0,hM⟩ := sobolevCutoff_deriv_bound
+  obtain ⟨M, hM0, hM⟩ := sobolevCutoff_deriv_bound
   have hd (x : ℝ) : |deriv (sobolevCutoffBump : ℝ → ℝ) x| ≤ M := by
     simpa [sobolevCutoff_deriv] using hM 0 x
-  refine ⟨16 * M ^ 2,by positivity,?_⟩
+  refine ⟨16 * M ^ 2, by positivity,?_⟩
   intro n m z
   let r := vandermondeWeight z
   let p : ℝ := (m : ℝ) + 1
@@ -125,17 +125,17 @@ theorem ginibreCollisionCutoff_weighted_gradient_bound : ∃ C : ℝ, 0 ≤ C �
   have hE := ginibreEuclideanGradient_complex_normSq_bound (vandermonde : Configuration n → ℂ) (contDiff_vandermonde n) z
   change ‖ginibreEuclideanGradient (vandermondeWeight : Configuration n → ℝ) z‖ ^ 2 ≤
     4 * r * complexDirectionalEnergy vandermonde z at hE
-  rw [ginibreCollisionCutoff_gradient,norm_smul,mul_pow,Real.norm_eq_abs,sq_abs,neg_sq,mul_pow]
+  rw [ginibreCollisionCutoff_gradient, norm_smul, mul_pow, Real.norm_eq_abs, sq_abs, neg_sq, mul_pow]
   change r * (d ^ 2 * p ^ 2 * ‖ginibreEuclideanGradient (vandermondeWeight : Configuration n → ℝ) z‖ ^ 2) ≤ _
   by_cases hs : p * r ∈ tsupport (sobolevCutoffBump : ℝ → ℝ)
   · have hpr : p * r ≤ 2 := by
       rw [sobolevCutoffBump.tsupport_eq] at hs
-      have ha : |p * r| ≤ 2 := by simpa [Metric.mem_closedBall,Real.dist_eq,sobolevCutoffBump] using hs
+      have ha : |p * r| ≤ 2 := by simpa [Metric.mem_closedBall, Real.dist_eq, sobolevCutoffBump] using hs
       exact (le_abs_self _).trans ha
     have hdb : d ^ 2 ≤ M ^ 2 := by
       have hh := hd (p * r)
       dsimp [d]
-      nlinarith [sq_abs (deriv (sobolevCutoffBump : ℝ → ℝ) (p * r)),abs_nonneg (deriv (sobolevCutoffBump : ℝ → ℝ) (p * r))]
+      nlinarith [sq_abs (deriv (sobolevCutoffBump : ℝ → ℝ) (p * r)), abs_nonneg (deriv (sobolevCutoffBump : ℝ → ℝ) (p * r))]
     calc
       _ ≤ r * (d ^ 2 * p ^ 2 * (4 * r * complexDirectionalEnergy vandermonde z)) := by gcongr
       _ = 4 * d ^ 2 * (p * r) ^ 2 * complexDirectionalEnergy vandermonde z := by ring
@@ -145,7 +145,7 @@ theorem ginibreCollisionCutoff_weighted_gradient_bound : ∃ C : ℝ, 0 ≤ C �
         exact mul_le_mul_of_nonneg_right hb (complexDirectionalEnergy_nonneg _ z)
   · have hz : d = 0 := deriv_of_notMem_tsupport hs
     rw [hz]
-    simp only [zero_pow (by norm_num : 2 ≠ 0),zero_mul]
+    simp only [zero_pow (by norm_num : 2 ≠ 0), zero_mul]
     simp [hz]
     exact mul_nonneg (by positivity) (complexDirectionalEnergy_nonneg vandermonde z)
 
@@ -154,18 +154,18 @@ theorem ginibreCollisionCutoff_eventually_one_gradient_zero (n : ℕ) (z : Confi
     (hz : CollisionFree z) : ∀ᶠ m in atTop,
     ginibreCollisionCutoff n m z = 1 ∧ ginibreEuclideanGradient (ginibreCollisionCutoff n m) z = 0 := by
   have hr : 0 < vandermondeWeight z := Complex.normSq_pos.mpr ((vandermonde_ne_zero_iff z).mpr hz)
-  obtain ⟨N,hN⟩ := exists_nat_gt (2 / vandermondeWeight z)
+  obtain ⟨N, hN⟩ := exists_nat_gt (2 / vandermondeWeight z)
   filter_upwards [eventually_ge_atTop N] with m hm
   have hp : 2 < ((m : ℝ) + 1) * vandermondeWeight z := by
     have hnm : (N : ℝ) ≤ m := by exact_mod_cast hm
     nlinarith [(div_lt_iff₀ hr).mp hN]
   have hn : ((m : ℝ) + 1) * vandermondeWeight z ∉ tsupport (sobolevCutoffBump : ℝ → ℝ) := by
     rw [sobolevCutoffBump.tsupport_eq]
-    simp only [Metric.mem_closedBall,Real.dist_eq,sobolevCutoffBump,sub_zero]
+    simp only [Metric.mem_closedBall, Real.dist_eq, sobolevCutoffBump, sub_zero]
     rw [abs_of_pos (by positivity : 0 < ((m : ℝ) + 1) * vandermondeWeight z)]
     exact not_le.mpr hp
-  refine ⟨by simp [ginibreCollisionCutoff,image_eq_zero_of_notMem_tsupport hn],?_⟩
-  rw [ginibreCollisionCutoff_gradient,deriv_of_notMem_tsupport hn]
+  refine ⟨by simp [ginibreCollisionCutoff, image_eq_zero_of_notMem_tsupport hn],?_⟩
+  rw [ginibreCollisionCutoff_gradient, deriv_of_notMem_tsupport hn]
   simp
 end
 end GinibrePoincare

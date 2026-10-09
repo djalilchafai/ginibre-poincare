@@ -5,6 +5,20 @@ public import Mathlib.Analysis.Normed.Group.Bounded
 
 @[expose] public section
 
+/-! # Coordinate derivative bounds under compact localization
+
+Each real or imaginary configuration coordinate direction has norm one.
+The gradient coefficients and Hessian entries are evaluations of the first
+and second Fréchet derivatives on these directions, so C² regularity on
+an open domain gives their continuity there.
+
+Compactness bounds the operator norms of both derivatives. Evaluating on
+unit directions converts those bounds into one nonnegative constant valid
+for every coordinate and every point in the compact set. The diagonal
+Hessian sum identifies the configuration Laplacian, yielding its continuity
+and a compact bound as well. No extension of the test across the complement
+of the open domain is required. -/
+
 open scoped ContDiff
 namespace GinibrePoincare
 noncomputable section
@@ -15,8 +29,8 @@ theorem itoConfigurationDirection_norm {n : ℕ} (i : Fin n × Fin 2) :
   have hn (w : ℂ) : ‖GinibrePoincare.coordinateDirection i.1 w‖ = ‖w‖ := by
     have he : GinibrePoincare.coordinateDirection i.1 w = Pi.single i.1 w := by
       ext j
-      simp [GinibrePoincare.coordinateDirection,Pi.single_apply]
-    rw [he,Pi.norm_single]
+      simp [GinibrePoincare.coordinateDirection, Pi.single_apply]
+    rw [he, Pi.norm_single]
   unfold ginibreCoordinateDirection
   split_ifs
   · change ‖GinibrePoincare.coordinateDirection i.1 1‖ = 1
@@ -30,10 +44,10 @@ theorem itoConfigurationDirection_norm {n : ℕ} (i : Fin n × Fin 2) :
 theorem itoConfigurationHessianEntry_continuousOn {n : ℕ} (f : Configuration n → ℝ)
     (U : Set (Configuration n)) (hU : IsOpen U) (hf : ContDiffOn ℝ 2 f U)
     (i j : Fin n × Fin 2) : ContinuousOn (fun x => itoConfigurationHessianEntry f x i j) U := by
-  have hc := (continuous_eval_const ![ginibreCoordinateDirection i,ginibreCoordinateDirection j]).comp_continuousOn
+  have hc := (continuous_eval_const ![ginibreCoordinateDirection i, ginibreCoordinateDirection j]).comp_continuousOn
     (ContinuousOn.continuousOn_iteratedFDeriv (k := 2) hf hU (by norm_num))
-  simpa only [Function.comp_def,itoConfigurationHessianEntry,iteratedFDeriv_two_apply,
-    Matrix.cons_val_zero,Matrix.cons_val_one] using hc
+  simpa only [Function.comp_def, itoConfigurationHessianEntry, iteratedFDeriv_two_apply,
+    Matrix.cons_val_zero, Matrix.cons_val_one] using hc
 
 /-- Actual local C² gradient coordinate coefficients are continuous. -/
 theorem itoConfigurationGradientEntry_continuousOn {n : ℕ} (f : Configuration n → ℝ)
@@ -50,20 +64,20 @@ theorem itoConfigurationCoefficients_exists_bound {n : ℕ} (f : Configuration n
     ∃ C : ℝ, 0 ≤ C ∧ ∀ x ∈ K,
       (∀ i : Fin n × Fin 2, ‖fderiv ℝ f x (ginibreCoordinateDirection i)‖ ≤ C) ∧
       (∀ i j : Fin n × Fin 2, ‖itoConfigurationHessianEntry f x i j‖ ≤ C) := by
-  obtain ⟨A,hA⟩ := hK.exists_bound_of_continuousOn
+  obtain ⟨A, hA⟩ := hK.exists_bound_of_continuousOn
     ((hf.continuousOn_fderiv_of_isOpen hU (by norm_num)).mono hKU)
-  obtain ⟨B,hB⟩ := hK.exists_bound_of_continuousOn
+  obtain ⟨B, hB⟩ := hK.exists_bound_of_continuousOn
     ((ContinuousOn.continuousOn_iteratedFDeriv (k := 2) hf hU (by norm_num)).mono hKU)
-  refine ⟨max (max A B) 0,le_max_right _ _,fun x hx => ⟨?_,?_⟩⟩
+  refine ⟨max (max A B) 0, le_max_right _ _, fun x hx => ⟨?_,?_⟩⟩
   · intro i
     have he := (fderiv ℝ f x).le_opNorm (ginibreCoordinateDirection i)
-    rw [itoConfigurationDirection_norm,mul_one] at he
+    rw [itoConfigurationDirection_norm, mul_one] at he
     exact he.trans ((hA x hx).trans ((le_max_left A B).trans (le_max_left _ _)))
   · intro i j
     have he := (iteratedFDeriv ℝ 2 f x).le_opNorm
-      ![ginibreCoordinateDirection i,ginibreCoordinateDirection j]
-    simp only [Fin.prod_univ_two,Matrix.cons_val_zero,Matrix.cons_val_one,
-      itoConfigurationDirection_norm,mul_one,iteratedFDeriv_two_apply] at he
+      ![ginibreCoordinateDirection i, ginibreCoordinateDirection j]
+    simp only [Fin.prod_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one,
+      itoConfigurationDirection_norm, mul_one, iteratedFDeriv_two_apply] at he
     exact he.trans ((hB x hx).trans ((le_max_right A B).trans (le_max_left _ _)))
 
 /-- The actual local configuration Laplacian is continuous, without requiring

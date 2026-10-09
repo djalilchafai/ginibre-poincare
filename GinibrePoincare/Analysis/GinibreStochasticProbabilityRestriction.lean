@@ -22,8 +22,8 @@ theorem ginibre_tendstoInMeasure_indicator {Ω : Type*} [MeasurableSpace Ω]
       {ω | ε ≤ ‖E.indicator (f n) ω-E.indicator g ω‖} ⊆ {ω | ε ≤ ‖f n ω-g ω‖} from by
         intro ω hω
         by_cases he : ω ∈ E
-        · simpa only [Set.mem_setOf_eq,Set.indicator_of_mem he] using hω
-        · simp only [Set.mem_setOf_eq,Set.indicator_of_notMem he,sub_self,norm_zero] at hω
+        · simpa only [Set.mem_setOf_eq, Set.indicator_of_mem he] using hω
+        · simp only [Set.mem_setOf_eq, Set.indicator_of_notMem he, sub_self, norm_zero] at hω
           exact False.elim (not_le.mpr hε hω)))
     (hf ε hε)
 end

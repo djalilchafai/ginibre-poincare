@@ -24,7 +24,7 @@ theorem ginibreLocalRegularity_weighted_resolvent_density_cutoff_gradient
       ∀ k (θ : Configuration n → ℝ), ContDiff ℝ ∞ θ → HasCompactSupport θ →
         (∫ z, θ z*g k z) = -(∫ z, fderiv ℝ θ z (ginibreCoordinateDirection k)*
           (η z*(ginibreLebesgueDensityReal n z*u z))) := by
-  obtain ⟨hw,hH,hF⟩ := ginibreLocalRegularity_density_resolvent_data_memLp n hn ℓ u f hu hf K hK hs
+  obtain ⟨hw, hH, hF⟩ := ginibreLocalRegularity_density_resolvent_data_memLp n hn ℓ u f hu hf K hK hs
   have hF' (k : Fin n × Fin 2) : MemLp
       (fun z => u z*fderiv ℝ (ginibreLebesgueDensityReal n) z (ginibreCoordinateDirection k)) 2 (volume.restrict K) := by
     have he : (fun z => u z*fderiv ℝ (ginibreLebesgueDensityReal n) z (ginibreCoordinateDirection k)) =

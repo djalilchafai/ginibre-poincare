@@ -13,7 +13,7 @@ noncomputable section
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 
 @[simp] theorem itoUniformNNTime_zero (T : ℝ≥0) (N : ℕ) : itoUniformNNTime T N 0 = 0 := by
-  simp [itoUniformNNTime,itoUniformTime]
+  simp [itoUniformNNTime, itoUniformTime]
 
 /-- Exact discrete chain identity on the actual Brownian sampling grid. -/
 theorem itoUniformPathTaylor_identity (f : E → ℝ) (z : ℝ≥0 → E) (T : ℝ≥0) (n : ℕ) :
@@ -26,10 +26,10 @@ theorem itoUniformPathTaylor_identity (f : E → ℝ) (z : ℝ≥0 → E) (T : �
         (z (ginibreUniformBrownianTime T n (i.val+1))-z (ginibreUniformBrownianTime T n i))) := by
   have h := itoTaylor_partition_identity f (fun i => z (itoUniformNNTime T (n+1) i)) (n+1)
   have hzero : ginibreUniformBrownianTime T n 0 = 0 := by
-    simp [ginibreUniformBrownianTime,ginibreUniformTime]
+    simp [ginibreUniformBrownianTime, ginibreUniformTime]
   simp only [itoUniformNNTime_end T (n+1) (Nat.succ_pos n),
     itoUniformNNTime_eq_brownianTime] at h
-  simpa only [← Fin.sum_univ_eq_sum_range,hzero] using h
+  simpa only [← Fin.sum_univ_eq_sum_range, hzero] using h
 
 /-- The actual Volterra equation identifies each actual increment with noise plus drift. -/
 theorem itoVolterra_uniform_increment (z W : ℝ≥0 → E) (b : ℝ → E) (T : ℝ≥0)
@@ -40,8 +40,8 @@ theorem itoVolterra_uniform_increment (z W : ℝ≥0 → E) (b : ℝ → E) (T :
     z (ginibreUniformBrownianTime T n (i.val+1))-z (ginibreUniformBrownianTime T n i) =
       (W (ginibreUniformBrownianTime T n (i.val+1))-W (ginibreUniformBrownianTime T n i)) +
         itoUniformDriftIncrement b T n i := by
-  rw [hz _ ⟨bot_le,ginibreUniformBrownianTime_le_end T n _ (Nat.succ_le_of_lt i.is_lt)⟩,
-    hz _ ⟨bot_le,ginibreUniformBrownianTime_le_end T n _ (Nat.le_of_lt i.is_lt)⟩,
+  rw [hz _ ⟨bot_le, ginibreUniformBrownianTime_le_end T n _ (Nat.succ_le_of_lt i.is_lt)⟩,
+    hz _ ⟨bot_le, ginibreUniformBrownianTime_le_end T n _ (Nat.le_of_lt i.is_lt)⟩,
     ← itoUniformDriftIncrement_eq_volterra_difference b T hb n i]
   abel
 

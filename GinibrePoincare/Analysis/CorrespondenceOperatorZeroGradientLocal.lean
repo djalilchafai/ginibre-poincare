@@ -15,21 +15,21 @@ theorem correspondenceOperator_zero_gradient_local_constant {n : ℕ} (hn : 0<n)
     (u : GinibreFullValueL2 n) (hu : IsGinibreDistributionalGradient n u 0)
     (x : Configuration n) (r : ℝ) (hr : 0<r)
     (hball : closedBall x (3*r)⊆{z | CollisionFree z}) :
-    ∃ c : ℝ,∀ᵐ y ∂(volume:Measure (Configuration n)),y∈ball x r→u y=c := by
-  obtain ⟨η,hη,hcη,hsη,hηone⟩ := ginibreLocalRegularity_exists_compact_interior_cutoff
+    ∃ c : ℝ,∀ᵐ y ∂(volume : Measure (Configuration n)), y∈ball x r→u y=c := by
+  obtain ⟨η, hη, hcη, hsη, hηone⟩ := ginibreLocalRegularity_exists_compact_interior_cutoff
     n hn (closedBall x (3*r)) (isCompact_closedBall _ _) hball
   let v : Configuration n→ℝ := fun y => u y*η y
   have hv : LocallyIntegrable v volume :=
     (integrable_mul_collisionFree_test _ η hu.1 hη.continuous hcη hsη).locallyIntegrable
-  let φ : ℕ→ContDiffBump (0:Configuration n) := fun m =>
-    ⟨r/(2*((m:ℝ)+1)),r/((m:ℝ)+1),by positivity,by
-      have hm : 0<(m:ℝ)+1 := by positivity
+  let φ : ℕ→ContDiffBump (0 : Configuration n) := fun m =>
+    ⟨r/(2*((m : ℝ)+1)), r/((m : ℝ)+1), by positivity, by
+      have hm : 0<(m : ℝ)+1 := by positivity
       apply (div_lt_div_iff₀ (by positivity) hm).mpr
       nlinarith⟩
   let V : ℕ→Configuration n→ℝ := fun m =>
-    v ⋆[ContinuousLinearMap.lsmul ℝ ℝ,volume] (φ m).normed volume
+    v ⋆[ContinuousLinearMap.lsmul ℝ ℝ, volume] (φ m).normed volume
   have hrad (m : ℕ) : (φ m).rOut≤r := by
-    change r/((m:ℝ)+1)≤r
+    change r/((m : ℝ)+1)≤r
     apply (div_le_iff₀ (by positivity)).mpr
     nlinarith [Nat.cast_nonneg (α := ℝ) m]
   have hVs (m : ℕ) : ContDiff ℝ ∞ (V m) :=
@@ -38,12 +38,12 @@ theorem correspondenceOperator_zero_gradient_local_constant {n : ℕ} (hn : 0<n)
     have hsupport : tsupport (fun y => (φ m).normed volume (a-y))⊆closedBall x (3*r) := by
       have he : tsupport (fun y => (φ m).normed volume (a-y))=
           (Homeomorph.subLeft a) ⁻¹' tsupport ((φ m).normed volume) :=
-        by simpa only [Function.comp_def,Homeomorph.subLeft_apply] using
+        by simpa only [Function.comp_def, Homeomorph.subLeft_apply] using
           tsupport_comp_eq_preimage ((φ m).normed volume) (Homeomorph.subLeft a)
-      rw [he,(φ m).tsupport_normed_eq]
+      rw [he, (φ m).tsupport_normed_eq]
       intro y hy
       have hy' : dist a y≤(φ m).rOut := by
-        simpa only [mem_preimage,Homeomorph.subLeft_apply,mem_closedBall,dist_zero_right,
+        simpa only [mem_preimage, Homeomorph.subLeft_apply, mem_closedBall, dist_zero_right,
           ← dist_eq_norm] using hy
       have hax : dist a x<r := ha
       have hdist := dist_triangle y a x
@@ -61,23 +61,23 @@ theorem correspondenceOperator_zero_gradient_local_constant {n : ℕ} (hn : 0<n)
       ((hVs m).differentiable (by simp)).differentiableOn (hVd m) ha hb
   have hradlim : Tendsto (fun m => (φ m).rOut) atTop (𝓝 0) := by
     have hh := (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)).const_mul r
-    simpa only [φ,mul_one_div,mul_zero] using hh
-  have hratio : ∀ᶠ m in atTop,(φ m).rOut≤2*(φ m).rIn := by
+    simpa only [φ, mul_one_div, mul_zero] using hh
+  have hratio : ∀ᶠ m in atTop, (φ m).rOut≤2*(φ m).rIn := by
     apply Eventually.of_forall
     intro m
     dsimp [φ]
-    have hm : (m:ℝ)+1≠0 := by positivity
+    have hm : (m : ℝ)+1≠0 := by positivity
     field_simp
     <;> linarith
-  have hconv : ∀ᵐ y ∂(volume:Measure (Configuration n)),
+  have hconv : ∀ᵐ y ∂(volume : Measure (Configuration n)),
       Tendsto (fun m => V m y) atTop (𝓝 (v y)) := by
     have hh := ContDiffBump.ae_convolution_tendsto_right_of_locallyIntegrable hradlim hratio hv
     have hflip : (ContinuousLinearMap.lsmul ℝ ℝ).flip=ContinuousLinearMap.lsmul ℝ ℝ := by
       ext
-      simp only [ContinuousLinearMap.flip_apply,ContinuousLinearMap.lsmul_apply,smul_eq_mul,mul_comm]
-    simpa only [V,convolution_symm (ContinuousLinearMap.lsmul ℝ ℝ) hflip] using hh
-  obtain ⟨a,ha,hconvA⟩ := Measure.exists_mem_of_measure_ne_zero_of_ae
-    (measure_ball_pos (volume:Measure (Configuration n)) x hr).ne'
+      simp only [ContinuousLinearMap.flip_apply, ContinuousLinearMap.lsmul_apply, smul_eq_mul, mul_comm]
+    simpa only [V, convolution_symm (ContinuousLinearMap.lsmul ℝ ℝ) hflip] using hh
+  obtain ⟨a, ha, hconvA⟩ := Measure.exists_mem_of_measure_ne_zero_of_ae
+    (measure_ball_pos (volume : Measure (Configuration n)) x hr).ne'
     (ae_restrict_of_ae hconv)
   refine ⟨v a,?_⟩
   filter_upwards [hconv] with y hy hxy
@@ -86,7 +86,7 @@ theorem correspondenceOperator_zero_gradient_local_constant {n : ℕ} (hn : 0<n)
   have hvy : v y=v a := tendsto_nhds_unique hy hlim
   have hηy : η y=1 := (hηone y (ball_subset_closedBall (show y∈ball x (3*r) from
     ball_subset_ball (by linarith) hxy))).eq_of_nhds
-  simpa only [v,hηy,mul_one] using hvy
+  simpa only [v, hηy, mul_one] using hvy
 #print axioms correspondenceOperator_zero_gradient_local_constant
 end
 end GinibrePoincare

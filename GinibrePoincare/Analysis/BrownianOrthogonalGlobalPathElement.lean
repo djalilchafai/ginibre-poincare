@@ -16,9 +16,9 @@ theorem ginibreDriven_global_joint_measurableSet {n : ℕ} (hn : 0 < n) (α : �
       ginibreDrivenMaximalLifetime n α p.2.val p.1.val = ⊤} := by
   have he : {p : {z : Configuration n // CollisionFree z} × GinibreContinuousNoise n |
       ginibreDrivenMaximalLifetime n α p.2.val p.1.val = ⊤} =
-      ⋂ k : ℕ, {p | ((k:ℝ≥0):ℝ≥0∞) < ginibreDrivenMaximalLifetime n α p.2.val p.1.val} := by
+      ⋂ k : ℕ, {p | ((k : ℝ≥0) : ℝ≥0∞) < ginibreDrivenMaximalLifetime n α p.2.val p.1.val} := by
     ext p
-    simp only [mem_setOf_eq,mem_iInter]
+    simp only [mem_setOf_eq, mem_iInter]
     constructor
     · intro h k
       rw [h]
@@ -36,7 +36,7 @@ theorem ginibreDriven_global_joint_measurableSet {n : ℕ} (hn : 0 < n) (α : �
  nonglobal inputs use the constant initial path. -/
 def ginibreDrivenGlobalPathElement {n : ℕ} (α : ℝ)
     (p : {z : Configuration n // CollisionFree z} × GinibreContinuousNoise n) :
-    C(ℝ,Configuration n) := by
+    C(ℝ, Configuration n) := by
   classical
   exact if h : ginibreDrivenMaximalLifetime n α p.2.val p.1.val = ⊤ then
     ⟨fun t => ginibreDrivenMaximalValue n α p.2.val p.1.val (Real.toNNReal t),
@@ -47,10 +47,10 @@ def ginibreDrivenGlobalPathElement {n : ℕ} (α : ℝ)
 
 /-- Genuine joint Borel measurability of the actual global canonical path element. -/
 theorem ginibreDrivenGlobalPathElement_measurable {n : ℕ} (hn : 0 < n) (α : ℝ) :
-    @Measurable _ C(ℝ,Configuration n) _ (borel _) (ginibreDrivenGlobalPathElement α) := by
+    @Measurable _ C(ℝ, Configuration n) _ (borel _) (ginibreDrivenGlobalPathElement α) := by
   classical
-  letI : MeasurableSpace C(ℝ,Configuration n) := borel _
-  letI : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+  letI : MeasurableSpace C(ℝ, Configuration n) := borel _
+  letI : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
   apply ginibre_measurable_continuousMap_of_evaluations
   intro t
   have hm : Measurable (fun p : {z : Configuration n // CollisionFree z} × GinibreContinuousNoise n =>

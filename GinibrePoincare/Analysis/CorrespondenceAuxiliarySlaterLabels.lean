@@ -19,7 +19,7 @@ private theorem strictMono_fin_nat_lower {n : ℕ} (f : Fin n → ℕ)
   | succ k ih =>
     have hkn : k < n := by omega
     have hprev := ih hkn
-    have hlt := hf (show (⟨k,hkn⟩ : Fin n) < ⟨k+1,hk⟩ by simp)
+    have hlt := hf (show (⟨k, hkn⟩ : Fin n) < ⟨k+1, hk⟩ by simp)
     simp only [Fin.val_mk] at hprev ⊢
     omega
 
@@ -52,7 +52,7 @@ theorem slater_minimal_orbital_labels_iff {n : ℕ} (p : Fin n → ℕ)
     simp_rw [he]
     ext k
     simp only [Finset.mem_image, Finset.mem_univ, true_and, Finset.mem_range]
-    exact ⟨fun ⟨i, hi⟩ => hi ▸ i.isLt, fun hk => ⟨⟨k,hk⟩,rfl⟩⟩
+    exact ⟨fun ⟨i, hi⟩ => hi ▸ i.isLt, fun hk => ⟨⟨k, hk⟩, rfl⟩⟩
   · intro h
     calc
       _ = ∑ k ∈ Finset.univ.image p, k := (Finset.sum_image hp.injOn).symm

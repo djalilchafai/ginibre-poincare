@@ -31,7 +31,7 @@ theorem ginibreLocalRegularity_scalar_weak_product
   have he := hw (q*θ) (hq.mul hθ) hqc.mul_right
   have hD (x) : fderiv ℝ (q*θ) x v = q x*fderiv ℝ θ x v+θ x*fderiv ℝ q x v := by
     rw [fderiv_mul (hq.differentiable (by simp) x) (hθ.differentiable (by simp) x)]
-    simp only [smul_apply,add_apply,smul_eq_mul]
+    simp only [smul_apply, add_apply, smul_eq_mul]
   have hi (f : E → ℝ) (hf : MemLp f 2 volume) (a : E → ℝ) (ha : Continuous a) (hac : HasCompactSupport a) :
       Integrable (fun x => a x*f x) volume := by
     have hh := hf.locallyIntegrable (by norm_num) |>.integrable_smul_right_of_hasCompactSupport ha hac
@@ -50,7 +50,7 @@ theorem ginibreLocalRegularity_scalar_weak_product
       _ = _ := integral_add h1 h2
   have hright : (∫ x, fderiv ℝ (q*θ) x v*u x) =
       (∫ x, q x*fderiv ℝ θ x v*u x)+(∫ x, θ x*fderiv ℝ q x v*u x) := by
-    simp_rw [hD,add_mul]
+    simp_rw [hD, add_mul]
     exact integral_add h3 h2
   rw [hright] at he
   rw [hleft]

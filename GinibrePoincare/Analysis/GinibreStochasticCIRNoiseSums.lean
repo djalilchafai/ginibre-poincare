@@ -22,14 +22,14 @@ theorem ginibreConfigurationBrownianGradientSum_radius {Ω : Type*} {n : ℕ}
         (fun s ω => Real.sqrt ((8*α/(n : ℝ))*pairwiseRadius (X s ω))*
           ginibreRecenteredRadialDirection n e (X s ω) i) T (k+1) ω := by
   classical
-  rw [ginibreConfigurationBrownianGradientSum_eq,Finset.mul_sum]
+  rw [ginibreConfigurationBrownianGradientSum_eq, Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro i hi
   unfold brownianUniformLeftSum
   rw [Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro j hj
-  rw [← mul_assoc,ginibreCIR_noise_coordinate hn α hα _ (hX _ ω) e i]
+  rw [← mul_assoc, ginibreCIR_noise_coordinate hn α hα _ (hX _ ω) e i]
 
 end
 end GinibrePoincare

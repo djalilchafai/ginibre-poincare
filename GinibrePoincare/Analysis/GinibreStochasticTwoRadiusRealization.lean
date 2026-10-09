@@ -42,26 +42,26 @@ theorem ginibreBrownian_two_radius_independent_CIR_realization
               ∫ s in (0 : ℝ)..t, (4*(α : ℝ)/(n : ℝ))*
                 ((recenteredGammaShape n : ℝ)-pairwiseRadius (X s.toNNReal ω))) := by
   classical
-  let i₀ : Fin n × Fin 2 := (⟨0,by omega⟩,0)
+  let i₀ : Fin n × Fin 2 := (⟨0, by omega⟩, 0)
   let e : EuclideanSpace ℝ (Fin n × Fin 2) := EuclideanSpace.single i₀ 1
-  have he : ‖e‖=1 := by simp [e,PiLp.norm_single]
-  obtain ⟨βS,hβS,hβSM,hβSL,hβS0,hβSLim,hβSShift,hβSFresh⟩ :=
+  have he : ‖e‖=1 := by simp [e, PiLp.norm_single]
+  obtain ⟨βS, hβS, hβSM, hβSL, hβS0, hβSLim, hβSShift, hβSFresh⟩ :=
     ginibreBrownianMaximalProcess_center_Brownian_exists hn α z hz hcenter B P hB hind
-  obtain ⟨βR,hβR,hβRM,hβRL,hβR0,hβRLim,hβRShift,hβRFresh⟩ :=
+  obtain ⟨βR, hβR, hβRM, hβRL, hβR0, hβRLim, hβRShift, hβRFresh⟩ :=
     ginibreBrownianMaximalProcess_radial_Brownian_exists hn α z hz B P hB hind
-  refine ⟨βS,βR,hβS,hβR,?_,?_⟩
+  refine ⟨βS, βR, hβS, hβR,?_,?_⟩
   · exact ginibreBrownian_center_radial_Brownian_drivers_independent hn α hα z hz hcenter
       B P hB hind e e βS βR hβS.cont hβSLim hβR.cont hβRLim
   · intro R hR T
-    obtain ⟨JS,hJSM,hJSC,hJSL,hJS0,hJSMS,hJSLim,hSIto⟩ :=
+    obtain ⟨JS, hJSM, hJSC, hJSL, hJS0, hJSMS, hJSLim, hSIto⟩ :=
       ginibreBrownianMaximalProcess_local_center_CIR_Brownian_integral hn α z hz hcenter
         B P hB hind e he βS hβSL hβSLim R hR T
-    obtain ⟨JR,hJRM,hJRC,hJRL,hJR0,hJRMS,hJRLim,hRIto⟩ :=
+    obtain ⟨JR, hJRM, hJRC, hJRL, hJR0, hJRMS, hJRLim, hRIto⟩ :=
       ginibreBrownianMaximalProcess_local_CIR_Brownian_integral hn α z hz B P hB hind
         e he βR hβRL hβRLim R hR T
-    refine ⟨JS,JR,hJSM,hJRM,hJSC,hJRC,hJSMS,hJRMS,?_⟩
-    filter_upwards [hSIto,hRIto] with ω hs hr
-    exact fun t ht => ⟨hs t ht,hr t ht⟩
+    refine ⟨JS, JR, hJSM, hJRM, hJSC, hJRC, hJSMS, hJRMS,?_⟩
+    filter_upwards [hSIto, hRIto] with ω hs hr
+    exact fun t ht => ⟨hs t ht, hr t ht⟩
 
 #print axioms ginibreBrownian_two_radius_independent_CIR_realization
 end

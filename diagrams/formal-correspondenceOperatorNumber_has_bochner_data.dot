@@ -1,0 +1,27 @@
+digraph formal_dependencies {
+rankdir=TB;
+graph [bgcolor="white", pad="0.3", nodesep="0.25", ranksep="0.7", label="Exact direct local declaration references\nCompiled references; statement review recorded separately", labelloc=t, fontname="sans-serif"];
+node [shape=box, style="rounded,filled", fillcolor="#f8fafc", color="#64748b", fontname="sans-serif", fontsize=11];
+edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
+"GinibrePoincare.Configuration" [label="Configuration"];
+"GinibrePoincare.GaussianNumberBochnerData" [label="GaussianNumberBochnerData"];
+"GinibrePoincare.GaussianNumberBochnerData.mk" [label="GaussianNumberBochnerData.mk"];
+"GinibrePoincare.IsGaussianWeakDbar" [label="IsGaussianWeakDbar"];
+"GinibrePoincare.complexGaussianMeasure" [label="complexGaussianMeasure"];
+"GinibrePoincare.correspondenceOperatorNumber" [label="correspondenceOperatorNumber"];
+"GinibrePoincare.correspondenceOperatorNumber_full_bochner_kodaira" [label="correspondenceOperatorNumber_full_bochner_kodaira"];
+"GinibrePoincare.correspondenceOperatorNumber_has_bochner_data" [label="correspondenceOperatorNumber_has_bochner_data", fillcolor="#dbeafe", color="#2563eb", penwidth=2];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.correspondenceOperatorNumber_has_bochner_data" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.GaussianNumberBochnerData" -> "GinibrePoincare.correspondenceOperatorNumber_has_bochner_data" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.GaussianNumberBochnerData.mk" -> "GinibrePoincare.correspondenceOperatorNumber_has_bochner_data" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.IsGaussianWeakDbar" -> "GinibrePoincare.correspondenceOperatorNumber_has_bochner_data" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.complexGaussianMeasure" -> "GinibrePoincare.correspondenceOperatorNumber_has_bochner_data" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.correspondenceOperatorNumber" -> "GinibrePoincare.correspondenceOperatorNumber_has_bochner_data" [color="#7e22ce", tooltip="both"];
+"GinibrePoincare.correspondenceOperatorNumber_full_bochner_kodaira" -> "GinibrePoincare.correspondenceOperatorNumber_has_bochner_data" [color="#2563eb", tooltip="value"];
+"GinibrePoincare.Configuration" -> "GinibrePoincare.GaussianNumberBochnerData" [style=invis];
+"GinibrePoincare.GaussianNumberBochnerData" -> "GinibrePoincare.GaussianNumberBochnerData.mk" [style=invis];
+"GinibrePoincare.GaussianNumberBochnerData.mk" -> "GinibrePoincare.IsGaussianWeakDbar" [style=invis];
+"GinibrePoincare.IsGaussianWeakDbar" -> "GinibrePoincare.complexGaussianMeasure" [style=invis];
+"GinibrePoincare.complexGaussianMeasure" -> "GinibrePoincare.correspondenceOperatorNumber" [style=invis];
+"GinibrePoincare.correspondenceOperatorNumber" -> "GinibrePoincare.correspondenceOperatorNumber_full_bochner_kodaira" [style=invis];
+}

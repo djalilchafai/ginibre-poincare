@@ -28,14 +28,14 @@ theorem ginibreBrownianMaximalProcess_centerDirection_punctured_properties
     (∀ t ω, ‖u t ω‖=1) ∧
       (∀ᵐ ω ∂P, ContinuousOn (fun t => u t ω) (Ioi (0 : ℝ≥0))) := by
   dsimp only
-  obtain ⟨hAdapt,hPath⟩ := ginibreBrownianMaximalProcess_global_original_solution
+  obtain ⟨hAdapt, hPath⟩ := ginibreBrownianMaximalProcess_global_original_solution
     (by omega) α z hz B P hB hind
   refine ⟨fun t => (ginibreCenterRadialDirection_measurable n e).comp
-    (hAdapt t).measurable,fun t ω => ginibreCenterRadialDirection_norm n e he _,?_⟩
-  filter_upwards [hPath,ginibreBrownian_center_all_positive_times_nonzero hn α hα z hz B P hB hind]
+    (hAdapt t).measurable, fun t ω => ginibreCenterRadialDirection_norm n e he _,?_⟩
+  filter_upwards [hPath, ginibreBrownian_center_all_positive_times_nonzero hn α hα z hz B P hB hind]
     with ω hω hnonzero
   have hX : Continuous (fun t : ℝ≥0 => ginibreBrownianMaximalProcess n α z B t ω) := by
-    simpa only [Function.comp_def,Real.toNNReal_coe] using hω.1.comp NNReal.continuous_coe
+    simpa only [Function.comp_def, Real.toNNReal_coe] using hω.1.comp NNReal.continuous_coe
   intro t ht
   have hd : ContinuousAt (fun s : ℝ≥0 => ginibreCenterRadialDirection n e
       (ginibreBrownianMaximalProcess n α z B s ω)) t :=
@@ -59,10 +59,10 @@ theorem ginibreBrownian_center_positive_interval_lower_bound
   intro a b ha hab
   let r := fun t : ℝ≥0 => ginibreCenterSquared n (ginibreBrownianMaximalProcess n α z B t ω)
   have hc : Continuous r := (contDiff_ginibreCenterSquared n).continuous.comp
-    (by simpa only [Function.comp_def,Real.toNNReal_coe] using hsolution.1.comp NNReal.continuous_coe)
-  obtain ⟨t,ht,hmin⟩ := isCompact_Icc.exists_isMinOn
-    (show (Icc a b).Nonempty from ⟨a,le_rfl,hab⟩) hc.continuousOn
-  refine ⟨r t,?_,hmin⟩
+    (by simpa only [Function.comp_def, Real.toNNReal_coe] using hsolution.1.comp NNReal.continuous_coe)
+  obtain ⟨t, ht, hmin⟩ := isCompact_Icc.exists_isMinOn
+    (show (Icc a b).Nonempty from ⟨a, le_rfl, hab⟩) hc.continuousOn
+  refine ⟨r t,?_, hmin⟩
   exact lt_of_le_of_ne (Complex.normSq_nonneg _) (Ne.symm (hnonzero t (ha.trans_le ht.1)))
 
 #print axioms ginibreBrownianMaximalProcess_centerDirection_punctured_properties

@@ -27,7 +27,7 @@ theorem ginibreBrownian_center_local_zero_hitting_null
   let X := ginibreBrownianHamiltonianStoppedProcess n α z B R T
   let σ := ginibreBrownianHamiltonianBoundedStop n α z B R T
   let E := {ω | ∃ t ≤ σ ω, ginibreCenterSquared n (X t ω)=0}
-  obtain ⟨D,hD,hDb,hθ,hθT,hHit⟩ := ginibreBrownian_center_small_stopping_exists (by omega) α z hz B P hB R hR T 0
+  obtain ⟨D, hD, hDb, hθ, hθT, hHit⟩ := ginibreBrownian_center_small_stopping_exists (by omega) α z hz B P hB R hR T 0
   let u := fun t ω => D-ginibreCenterSquared n (X t ω)
   let θ := hittingBtwn u {x : ℝ | D ≤ ‖x‖} 0 T
   have hθ' : IsStoppingTime (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal))
@@ -41,7 +41,7 @@ theorem ginibreBrownian_center_local_zero_hitting_null
         {ω | (θ ω : WithTop ℝ≥0) ≤ t} ∪
           {ω | (ginibreBrownianHamiltonianBoundedStop n α z B R T ω : WithTop ℝ≥0) ≤ t} := by
       ext ω
-      simp only [Set.mem_setOf_eq,Set.mem_union,WithTop.coe_le_coe]
+      simp only [Set.mem_setOf_eq, Set.mem_union, WithTop.coe_le_coe]
       change min (θ ω) (σ ω) ≤ t ↔ θ ω ≤ t ∨ σ ω ≤ t
       exact min_le_iff
     rw [he]
@@ -50,14 +50,14 @@ theorem ginibreBrownian_center_local_zero_hitting_null
   have hτσ : ∀ ω, τ ω ≤ σ ω := fun ω => min_le_right _ _
   have hSubset : E ⊆ {ω | ginibreCenterSquared n (X (τ ω) ω) ≤ 0} := by
     intro ω hω
-    obtain ⟨t,ht,he⟩ := hω
-    have hh := hHit ω ⟨t,ht,he.le⟩
+    obtain ⟨t, ht, he⟩ := hω
+    have hh := hHit ω ⟨t, ht, he.le⟩
     simp only [sub_zero] at hh
     have hτe : τ ω=θ ω := min_eq_left hh.1
     change ginibreCenterSquared n (X (τ ω) ω) ≤ 0
     rw [hτe]
     exact hh.2
-  obtain ⟨C,hC,hProb⟩ := ginibreBrownian_center_small_stopped_probability hn α z hz B P hB hind R hR T
+  obtain ⟨C, hC, hProb⟩ := ginibreBrownian_center_small_stopped_probability hn α z hz B P hB hind R hR T
   have hp : P.real E=0 := ginibre_probability_zero_of_log_barriers (measureReal_nonneg) hC hcenter
     (fun ε hε => by
       have h := hProb 0 le_rfl hC ε hε τ hτ hτσ

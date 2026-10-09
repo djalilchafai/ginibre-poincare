@@ -38,7 +38,7 @@ theorem monotoneGrid_duration_sum (τ : ℕ → ℝ≥0) (hτ : Monotone τ)
   apply NNReal.coe_injective
   simp only [NNReal.coe_sum]
   simp_rw [NNReal.coe_sub (hτ (Nat.le_succ _))]
-  rw [Finset.sum_range_sub (fun k => (τ k : ℝ)) n,h0]
+  rw [Finset.sum_range_sub (fun k => (τ k : ℝ)) n, h0]
   simp
 
 /-- Genuine Gaussian endpoint law for the literal sum of coordinate Brownian
@@ -56,11 +56,11 @@ theorem brownianUnitField_uniform_sum_gaussian
       (gaussianReal 0 T) P := by
   let τ := itoUniformNNTime T N
   have hτ : Monotone τ := itoUniformNNTime_mono T N
-  have hzero : τ 0 = 0 := by simp [τ,itoUniformNNTime,itoUniformTime]
+  have hzero : τ 0 = 0 := by simp [τ, itoUniformNNTime, itoUniformTime]
   have hl := brownianUnitGridPrefix_gaussian B P hB hind (fun k => u (τ k)) τ hτ
     (fun k => hu (τ k)) (fun k => hunit (τ k)) i N
   have hEnd : τ N = T := itoUniformNNTime_end T N hN
-  rw [monotoneGrid_duration_sum τ hτ hzero N,hEnd] at hl
+  rw [monotoneGrid_duration_sum τ hτ hzero N, hEnd] at hl
   have he : brownianUnitGridPrefix B (fun k => u (τ k)) τ N =
       (fun ω => ∑ j, brownianUniformLeftSum (B j) (fun s ω => u s ω j) T N ω) := by
     funext ω
@@ -69,7 +69,7 @@ theorem brownianUnitField_uniform_sum_gaussian
     rw [Finset.sum_comm]
     apply Finset.sum_congr rfl
     intro k hk
-    simp [τ,PiLp.inner_apply,Real.inner_apply,mul_comm]
+    simp [τ, PiLp.inner_apply, Real.inner_apply, mul_comm]
   rwa [he] at hl
 
 end

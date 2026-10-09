@@ -49,14 +49,14 @@ theorem ginibreHamiltonianOU_reference_interaction_action_density_exists {Ω : T
         Real.exp (ginibreInteractionPotential n z) *
           (ginibreHamiltonianGradientPathWeight n α (t : ℝ) (fun s => Y s.toNNReal ω) /
             ginibreQuadraticGradientPathWeight n α (t : ℝ) (fun s => Y s.toNNReal ω)) := by
-  obtain ⟨K,hK,hCF,Y,hYC,hYR,hY0,hY,θ,hStop,hθ,hStopped,hEq,J,hJM,hJC,hJL,hJ0,hLimit,hIto⟩ :=
+  obtain ⟨K, hK, hCF, Y, hYC, hYR, hY0, hY, θ, hStop, hθ, hStopped, hEq, J, hJM, hJC, hJL, hJ0, hLimit, hIto⟩ :=
     ginibreHamiltonianOU_reference_interaction_ito_exists n B P hB hind α z hz T hT
-  obtain ⟨M,hM,hDi,hD1⟩ := ginibreInteractionBrownianTilt_exponential_exists
+  obtain ⟨M, hM, hDi, hD1⟩ := ginibreInteractionBrownianTilt_exponential_exists
     n B P hB hind α Y hY hYC K hK hCF hYR T
   have hSum := ginibreInteractionBrownianTilt_integrals_eq_gradient n B P hB hind α Y hY
     K hK hCF hYR T J hJC hLimit M (fun i => (hM i).2.1) (fun i => (hM i).2.2.2.2)
-  refine ⟨K,hK,hCF,Y,hYC,hYR,hY0,hY,θ,hStop,hθ,hStopped,hEq,M,hM,hDi,hD1,?_⟩
-  filter_upwards [hSum,hIto] with ω hSumω hItoω
+  refine ⟨K, hK, hCF, Y, hYC, hYR, hY0, hY, θ, hStop, hθ, hStopped, hEq, M, hM, hDi, hD1,?_⟩
+  filter_upwards [hSum, hIto] with ω hSumω hItoω
   intro t ht
   have hMt := hSumω t (ht.trans (hθ ω).2)
   have hIt := hItoω t ht
@@ -72,8 +72,8 @@ theorem ginibreHamiltonianOU_reference_interaction_action_density_exists {Ω : T
     (fun s : ℝ => Y s.toNNReal ω) hx (fun s hs => hCF _ (hYR _ _))
   rw [hex]
   unfold brownianVectorExponentialIntegralDensity
-  rw [hMt,hEnergy,← Real.exp_add]
-  rw [Real.toNNReal_zero,hY0,Real.toNNReal_coe]
+  rw [hMt, hEnergy,← Real.exp_add]
+  rw [Real.toNNReal_zero, hY0, Real.toNNReal_coe]
   apply congrArg Real.exp
   rw [← hIt]
   ring

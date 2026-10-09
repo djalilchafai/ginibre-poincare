@@ -32,7 +32,7 @@ private theorem singleHermite_expansion (p q : ℕ) :
   apply Lp.ext
   have hm (p q : ℕ) : (singleMonomial p q : Configuration 1 → ℂ) =ᵐ[complexGaussianMeasure 1]
       (fun z => z 0 ^ p * conj (z 0) ^ q) := by
-    simpa only [singleMonomial,multivariateMixedMonomialL2,Fin.prod_univ_one] using
+    simpa only [singleMonomial, multivariateMixedMonomialL2, Fin.prod_univ_one] using
       (memLp_two_multivariateMixedMonomial 1 (by decide) (fun _ => p) (fun _ => q)).coeFn_toLp
   have hs := Lp.coeFn_smul (hermiteScale p q : ℂ)
     (∑ k ∈ Finset.range (min p q+1), rawScalar p q k • singleMonomial (p-k) (q-k))
@@ -46,19 +46,19 @@ private theorem singleHermite_expansion (p q : ℕ) :
     filter_upwards [Lp.coeFn_smul (rawScalar p q k) (singleMonomial (p-k) (q-k)),
       hm (p-k) (q-k)] with z h1 h2
     rw [h1]
-    simp only [Pi.smul_apply,smul_eq_mul,h2]
+    simp only [Pi.smul_apply, smul_eq_mul, h2]
   filter_upwards [multivariateNormalizedL2_coeFn 1 (by decide) (fun _ => p) (fun _ => q),
-    hs,hsum,hall] with z hg hs hsum hall
+    hs, hsum, hall] with z hg hs hsum hall
   change (multivariateNormalizedL2 1 (by decide) (fun _ => p) (fun _ => q) : Configuration 1 → ℂ) z = _
-  rw [hg,hs]
-  simp only [Pi.smul_apply,smul_eq_mul,hsum,Fin.prod_univ_one,multivariateNormalized]
+  rw [hg, hs]
+  simp only [Pi.smul_apply, smul_eq_mul, hsum, Fin.prod_univ_one, multivariateNormalized]
   rw [normalizedEval_eq_sum]
   change (hermiteScale p q : ℂ) * _ = (hermiteScale p q : ℂ) * _
   congr 1
   apply Finset.sum_congr rfl
   intro k hk
   rw [hall k]
-  simp [rawScalar,mul_assoc]
+  simp [rawScalar, mul_assoc]
 
 private theorem singleMonomial_mem_rectangle (p q : ℕ) :
     singleMonomial p q ∈ Submodule.span ℂ
@@ -70,11 +70,11 @@ private theorem singleMonomial_mem_rectangle (p q : ℕ) :
     intro f h
     induction h using Submodule.span_induction with
     | mem f h =>
-      obtain ⟨r,hr,s,hs,rfl⟩ := h
+      obtain ⟨r, hr, s, hs, rfl⟩ := h
       have he : (fun z : Configuration 1 => normalizedEval 1 (by decide) r s (z 0)) =
           multivariateNormalized 1 (by decide) (fun _ => r) (fun _ => s) := by
         funext z
-        simp [multivariateNormalized,Fin.prod_univ_one]
+        simp [multivariateNormalized, Fin.prod_univ_one]
       have hm : MemLp (fun z : Configuration 1 => normalizedEval 1 (by decide) r s (z 0))
           2 (complexGaussianMeasure 1) := by
         rw [he]
@@ -82,35 +82,35 @@ private theorem singleMonomial_mem_rectangle (p q : ℕ) :
       refine ⟨hm,?_⟩
       have heLp : hm.toLp _ = singleHermite r s := by
         apply Lp.ext
-        filter_upwards [hm.coeFn_toLp,multivariateNormalizedL2_coeFn 1 (by decide)
+        filter_upwards [hm.coeFn_toLp, multivariateNormalizedL2_coeFn 1 (by decide)
           (fun _ => r) (fun _ => s)] with z h1 h2
         rw [h1]
-        simpa [singleHermite,multivariateNormalized,Fin.prod_univ_one] using h2.symm
+        simpa [singleHermite, multivariateNormalized, Fin.prod_univ_one] using h2.symm
       rw [heLp]
-      exact Submodule.subset_span ⟨r,hr,s,hs,rfl⟩
-    | zero => exact ⟨MemLp.zero,by simp⟩
+      exact Submodule.subset_span ⟨r, hr, s, hs, rfl⟩
+    | zero => exact ⟨MemLp.zero, by simp⟩
     | add f g hf hg ihf ihg =>
-      obtain ⟨hfm,hfs⟩ := ihf
-      obtain ⟨hgm,hgs⟩ := ihg
+      obtain ⟨hfm, hfs⟩ := ihf
+      obtain ⟨hgm, hgs⟩ := ihg
       refine ⟨hfm.add hgm,?_⟩
       change (hfm.add hgm).toLp ((fun z : Configuration 1 => f (z 0)) +
         (fun z : Configuration 1 => g (z 0))) ∈ S
       rw [MemLp.toLp_add hfm hgm]
       exact S.add_mem hfs hgs
     | smul c f hf ih =>
-      obtain ⟨hfm,hfs⟩ := ih
+      obtain ⟨hfm, hfs⟩ := ih
       refine ⟨hfm.const_smul c,?_⟩
       change (hfm.const_smul c).toLp (c • (fun z : Configuration 1 => f (z 0))) ∈ S
       rw [MemLp.toLp_const_smul c hfm]
       exact S.smul_mem c hfs
-  obtain ⟨hm,hs⟩ := lift (mixedMonomial_mem_normalizedEvalRectangleSpan 1 (by decide) p q)
+  obtain ⟨hm, hs⟩ := lift (mixedMonomial_mem_normalizedEvalRectangleSpan 1 (by decide) p q)
   have he : hm.toLp _ = singleMonomial p q := by
     apply Lp.ext
     filter_upwards [hm.coeFn_toLp,
       (memLp_two_multivariateMixedMonomial 1 (by decide) (fun _ => p) (fun _ => q)).coeFn_toLp]
       with z h1 h2
     rw [h1]
-    simpa [singleMonomial,multivariateMixedMonomialL2,Fin.prod_univ_one] using h2.symm
+    simpa [singleMonomial, multivariateMixedMonomialL2, Fin.prod_univ_one] using h2.symm
   simpa [he] using hs
 
 private def pairedHermite (i : ℕ) := singleHermite (Nat.unpair i).1 (Nat.unpair i).2
@@ -121,7 +121,7 @@ private theorem singleMonomial_mem_previous (p q k : ℕ)
     singleMonomial (p-k) (q-k) ∈ Submodule.span ℂ
       (pairedHermite '' Set.Iio (Nat.pair p q)) := by
   apply Submodule.span_mono _ (singleMonomial_mem_rectangle (p-k) (q-k))
-  rintro v ⟨r,hr,s,hs,rfl⟩
+  rintro v ⟨r, hr, s, hs, rfl⟩
   refine ⟨Nat.pair r s,?_,?_⟩
   · have hleft : Nat.pair r s ≤ Nat.pair (p-k) s :=
       (show StrictMono (fun a => Nat.pair a s) from
@@ -130,7 +130,7 @@ private theorem singleMonomial_mem_previous (p q k : ℕ)
       (show StrictMono (fun b => Nat.pair (p-k) b) from
         fun _ _ h => Nat.pair_lt_pair_right (p-k) h).monotone (hs.trans (Nat.sub_le q k))
     exact lt_of_le_of_lt (hleft.trans hright) (Nat.pair_lt_pair_left q (by omega))
-  · simp [pairedHermite,Nat.unpair_pair]
+  · simp [pairedHermite, Nat.unpair_pair]
 
 private theorem pairedMonomial_triangular (i : ℕ) :
     pairedMonomial i - ((hermiteScale (Nat.unpair i).1 (Nat.unpair i).2 : ℝ) : ℂ)⁻¹ • pairedHermite i ∈
@@ -146,19 +146,19 @@ private theorem pairedMonomial_triangular (i : ℕ) :
     have hkr := Finset.mem_range.mp (Finset.mem_erase.mp hk).2
     have hk0 := (Finset.mem_erase.mp hk).1
     have h := singleMonomial_mem_previous p q k (by omega) (by omega) (by omega)
-    simpa [p,q,Nat.pair_unpair] using h
+    simpa [p, q, Nat.pair_unpair] using h
   have hg : singleHermite p q = (hermiteScale p q : ℂ) • (singleMonomial p q+rest) := by
     rw [singleHermite_expansion]
     congr 1
     have hz : 0 ∈ Finset.range (min p q+1) := by simp
     rw [← Finset.add_sum_erase _ _ hz]
-    simp [rawScalar,rest]
+    simp [rawScalar, rest]
   have he : pairedMonomial i - ((hermiteScale p q : ℝ) : ℂ)⁻¹ • pairedHermite i = -rest := by
     change singleMonomial p q - ((hermiteScale p q : ℝ) : ℂ)⁻¹ • singleHermite p q = _
     rw [hg]
     rw [smul_smul]
     simp only [inv_mul_cancel₀
-      (Complex.ofReal_ne_zero.mpr (hermiteScale_pos p q).ne'),one_smul]
+      (Complex.ofReal_ne_zero.mpr (hermiteScale_pos p q).ne'), one_smul]
     abel
   rw [he]
   exact Submodule.neg_mem _ hrest
@@ -174,7 +174,7 @@ theorem gaussian_one_mixed_monomial_gramSchmidt (i : ℕ) :
         (fun _ => (Nat.unpair i).1) (fun _ => (Nat.unpair i).2) := by
   have hg : Orthonormal ℂ pairedHermite := by
     let e : ℕ → HermiteMultiIndex 1 := fun i =>
-      ((fun _ => (Nat.unpair i).1),(fun _ => (Nat.unpair i).2))
+      ((fun _ => (Nat.unpair i).1), (fun _ => (Nat.unpair i).2))
     have he : Function.Injective e := by
       intro i j hij
       have hp := congrArg (fun x : HermiteMultiIndex 1 => x.1 0) hij

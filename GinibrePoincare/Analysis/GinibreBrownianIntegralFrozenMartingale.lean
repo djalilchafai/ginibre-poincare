@@ -60,7 +60,7 @@ theorem brownianUniformPartialSum_martingale {Ω ι : Type*}
       ∑ i ∈ Finset.range N, brownianFrozenStep (B j) (F (itoUniformNNTime T N i))
         (itoUniformNNTime T N i) (itoUniformNNTime T N (i+1)) := by
     funext t ω
-    simp only [brownianUniformPartialSum,Finset.sum_apply]
+    simp only [brownianUniformPartialSum, Finset.sum_apply]
   rw [he]
   exact hsum
 

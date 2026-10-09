@@ -20,8 +20,8 @@ theorem ginibreLocalRegularity_local_compact_test_integrable
   exact ae_of_all volume fun x => by
     dsimp only
     by_cases hx : x ∈ tsupport q
-    · simp only [Set.indicator_of_mem hx,smul_eq_mul]
-    · simp only [Set.indicator_of_notMem hx,image_eq_zero_of_notMem_tsupport hx,smul_eq_mul,mul_zero]
+    · simp only [Set.indicator_of_mem hx, smul_eq_mul]
+    · simp only [Set.indicator_of_notMem hx, image_eq_zero_of_notMem_tsupport hx, smul_eq_mul, mul_zero]
 
 #print axioms ginibreLocalRegularity_local_compact_test_integrable
 end

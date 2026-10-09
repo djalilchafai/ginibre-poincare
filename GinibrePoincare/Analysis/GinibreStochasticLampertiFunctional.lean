@@ -16,7 +16,7 @@ set_option maxHeartbeats 1600000
 
 theorem pairwiseRadius_recentered (n : ℕ) (z : Configuration n) :
     pairwiseRadius (recenteredConfiguration n z)=pairwiseRadius z := by
-  simp only [pairwiseRadius_eq_radialObservable,radialObservable,recenteredSqNorm,recentered_idempotent]
+  simp only [pairwiseRadius_eq_radialObservable, radialObservable, recenteredSqNorm, recentered_idempotent]
 
 def ginibreLampertiRiemannFunctional (n : ℕ) (α : ℝ) (z : Configuration n)
     (k : ℕ) (p : ℝ≥0 → Configuration n) (t : ℝ≥0) : ℝ :=
@@ -66,7 +66,7 @@ theorem ginibreLampertiPathFunctional_eq_integral (n : ℕ) (α : ℝ) (z : Conf
         ∫ s in (0 : ℝ)..t, w s)/Real.sqrt (2*α/(n : ℝ)))) := by
     have hc : Tendsto (fun _ : ℕ => Real.sqrt (pairwiseRadius (p t))-Real.sqrt (pairwiseRadius z))
         atTop (𝓝 (Real.sqrt (pairwiseRadius (p t))-Real.sqrt (pairwiseRadius z))) := tendsto_const_nhds
-    simpa only [ginibreLampertiRiemannFunctional,w,Real.toNNReal_coe] using
+    simpa only [ginibreLampertiRiemannFunctional, w, Real.toNNReal_coe] using
       (hc.sub h).div_const (Real.sqrt (2*α/(n : ℝ)))
   exact hl.limUnder_eq
 end

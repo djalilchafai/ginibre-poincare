@@ -40,7 +40,7 @@ theorem brownianContinuousIntegral_horizon_limit {Ω ι : Type*}
   have hm := actualMeanSquareLimit_transfer P _ _ I
     (fun n => brownianUniformPartialSum_memLp_two B P hB hind j F hF hFi T (n+1) t)
     hR hI hcomp hlim
-  exact ⟨hm,ginibre_tendstoInMeasure_of_meanSquare P _ I
+  exact ⟨hm, ginibre_tendstoInMeasure_of_meanSquare P _ I
     (fun n => ((hR n).sub hI).integrable_sq) hm⟩
 
 /-- The actual continuous integral has a genuine uniform left-sum limit on
@@ -61,9 +61,9 @@ theorem brownianContinuousIntegral_exists_all_horizons {Ω ι : Type*}
       M 0 =ᵐ[P] (fun _ => 0) ∧
       (∀ t, TendstoInMeasure P (fun n => brownianUniformPartialSum (B j) F T (n+1) t) atTop (M t)) ∧
       ∀ t ≤ T, TendstoInMeasure P (fun n => brownianUniformLeftSum (B j) F t (n+1)) atTop (M t) := by
-  obtain ⟨M,hM,hMC,hML,hM0,hMP,hMS⟩ :=
+  obtain ⟨M, hM, hMC, hML, hM0, hMP, hMS⟩ :=
     brownianContinuousIntegral_exists B P hB hind j F hF T hc C hC hbound
-  refine ⟨M,hM,hMC,hML,hM0,hMP,?_⟩
+  refine ⟨M, hM, hMC, hML, hM0, hMP,?_⟩
   intro t ht
   exact (brownianContinuousIntegral_horizon_limit B P
     (fun i => (hB i).toIsPreBrownianReal) hind j F hF T t ht hc C hC hbound

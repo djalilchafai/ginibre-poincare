@@ -76,7 +76,7 @@ theorem ginibreBrownian_augmented_linear_disjoint_orthogonal {Ω ι : Type*}
     _ = ∫ ω, H ω*(B j (r+v) ω-B j r ω) ∂P := by
       apply integral_congr_ae
       exact Eventually.of_forall (fun ω => by dsimp [H]; ring)
-    _ = 0 := by rw [hp,hMean,mul_zero]
+    _ = 0 := by rw [hp, hMean, mul_zero]
 
 end
 end GinibrePoincare

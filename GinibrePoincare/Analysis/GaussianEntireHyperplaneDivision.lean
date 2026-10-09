@@ -5,6 +5,20 @@ public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 @[expose] public section
 
+/-! # Entire division by a linear functional
+
+Choose `v` with `ℓ v = 1` and project `z` onto `ker ℓ` by
+`P z = z - ℓ z • v`. The path `A t z = P z + t • (ℓ z • v)` joins the
+hyperplane to `z`. Integrating the directional derivative of `f` along this path
+defines the quotient everywhere, including where `ℓ z = 0`.
+
+Entire differentiability of the directional derivative and differentiation of a
+parameter integral prove that the quotient is entire. The fundamental theorem
+of calculus recovers `f z = ℓ z * g z`, since `f (P z) = 0`. This construction
+avoids defining a quotient by pointwise division at the hyperplane.
+-/
+
+
 open MeasureTheory
 open scoped Topology ContDiff
 namespace GinibrePoincare

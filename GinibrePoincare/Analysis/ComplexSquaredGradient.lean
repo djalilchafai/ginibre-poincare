@@ -34,7 +34,7 @@ theorem fderiv_complex_normSq {n : ℕ} (F : Configuration n → ℂ)
       (fun w => (F w).re * (F w).re + (F w).im * (F w).im) := by
     funext w; simp [Complex.normSq_apply]
   change HasFDerivAt (fun w => (F w).re * (F w).re + (F w).im * (F w).im) _ z at hd
-  rw [he,hd.fderiv]
+  rw [he, hd.fderiv]
   simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
     ContinuousLinearMap.comp_apply, Complex.reCLM_apply, Complex.imCLM_apply, Function.comp_apply, smul_eq_mul]
   ring
@@ -46,12 +46,12 @@ theorem ginibreEuclideanGradient_complex_normSq_bound {n : ℕ} (F : Configurati
     ‖ginibreEuclideanGradient (fun w => Complex.normSq (F w)) z‖ ^ 2 ≤
       4 * Complex.normSq (F z) * complexDirectionalEnergy F z := by
   rw [PiLp.norm_sq_eq_of_L2]
-  simp only [Real.norm_eq_abs,sq_abs]
+  simp only [Real.norm_eq_abs, sq_abs]
   unfold complexDirectionalEnergy
   rw [Finset.mul_sum]
   apply Finset.sum_le_sum
   intro k _
-  rw [ginibreEuclideanGradient_coordinate,fderiv_complex_normSq F hF]
+  rw [ginibreEuclideanGradient_coordinate, fderiv_complex_normSq F hF]
   simp only [Complex.normSq_apply]
   nlinarith [sq_nonneg ((F z).re * (fderiv ℝ F z (ginibreCoordinateDirection k)).im -
     (F z).im * (fderiv ℝ F z (ginibreCoordinateDirection k)).re)]

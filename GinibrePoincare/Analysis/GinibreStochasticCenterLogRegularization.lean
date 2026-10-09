@@ -33,7 +33,7 @@ theorem ginibre_log_shift_derivatives {ε r : ℝ} (h : 0 < r+ε) :
   have he : deriv (fun x => Real.log (x+ε)) =ᶠ[nhds r] (fun x => (x+ε)⁻¹) := by
     filter_upwards [((continuous_id.add continuous_const).continuousAt.eventually_ne h.ne')] with x hx
     exact (hd x hx).deriv
-  simpa only [id_eq,one_div,neg_div,one_mul] using ((((hasDerivAt_id r).add_const ε).inv h.ne').congr_of_eventuallyEq he).deriv
+  simpa only [id_eq, one_div, neg_div, one_mul] using ((((hasDerivAt_id r).add_const ε).inv h.ne').congr_of_eventuallyEq he).deriv
 
 theorem ginibreRealPaperSpeedGenerator_centerLogBarrier {n : ℕ} (hn : 2 ≤ n)
     (α : ℝ) {ε : ℝ} (hε : 0 < ε) (z : Configuration n) (hz : CollisionFree z) :
@@ -52,12 +52,12 @@ theorem ginibreRealPaperSpeedGenerator_centerLogBarrier {n : ℕ} (hn : 2 ≤ n)
     (fun x : ℝ => -Real.log (x+ε)) z hf hφ.neg
   change ginibreRealPaperSpeedGenerator n α ((-(fun x : ℝ => Real.log (x+ε))) ∘ ginibreCenterSquared n) z = _ at hg
   have hneg : (fun x : ℝ => -Real.log (x+ε)) = -(fun x : ℝ => Real.log (x+ε)) := rfl
-  rw [hneg,deriv.neg'] at hg
+  rw [hneg, deriv.neg'] at hg
   have hneg2 : (fun x : ℝ => -deriv (fun y => Real.log (y+ε)) x) =
       -(deriv (fun y : ℝ => Real.log (y+ε))) := rfl
-  rw [hneg2,deriv.neg] at hg
+  rw [hneg2, deriv.neg] at hg
   simp only [Pi.neg_apply] at hg
-  rw [hd.1,hd.2,neg_neg] at hg
+  rw [hd.1, hd.2, neg_neg] at hg
   rw [ginibreRealPaperSpeedGenerator_centerSquared hn α z hz,
     ginibre_centerSquared_gradient_normSq] at hg
   have hnR : (n : ℝ) ≠ 0 := by exact_mod_cast (show n ≠ 0 by omega)

@@ -19,8 +19,8 @@ theorem ginibreBrownian_continuous_noise_family_law_eq {Ω : Type*} [MeasurableS
     (hindC : iIndepFun (fun i ω t => C i t ω) P) (α : ℝ) :
     P.map (ginibreBrownianFullContinuousNoise n C α) =
       P.map (ginibreBrownianFullContinuousNoise n B α) := by
-  letI : MeasurableSpace C(ℝ,Configuration n) := borel _
-  letI : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+  letI : MeasurableSpace C(ℝ, Configuration n) := borel _
+  letI : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
   let X := ginibreBrownianFullContinuousNoise n C α
   let Y := ginibreBrownianFullContinuousNoise n B α
   have hshift := hC
@@ -53,7 +53,7 @@ theorem ginibreBrownian_continuous_noise_family_law_eq {Ω : Type*} [MeasurableS
     apply continuousMap_law_eq_of_whole_path_law_eq P (fun ω => (X ω).val) (fun ω => (Y ω).val)
       (hval.measurable.comp hX) (hval.measurable.comp hY)
     exact (Measure.map_congr hXL).symm.trans (hraw.trans (Measure.map_congr hYL))
-  have hclosed : IsClosed {f : C(ℝ,Configuration n) | f 0 = 0} :=
+  have hclosed : IsClosed {f : C(ℝ, Configuration n) | f 0 = 0} :=
     isClosed_eq (continuous_eval_const 0) continuous_const
   have hec : Topology.IsClosedEmbedding (fun f : GinibreContinuousNoise n => f.val) :=
     hclosed.isClosedEmbedding_subtypeVal
@@ -64,20 +64,20 @@ theorem ginibreBrownian_continuous_noise_family_law_eq {Ω : Type*} [MeasurableS
 
 def ginibreParticleBrownianRelabel {Ω : Type*} {n : ℕ} (σ : ParticlePermutation n)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ :=
-  fun i => B (σ i.1,i.2)
+  fun i => B (σ i.1, i.2)
 
 def ginibreContinuousNoisePermute {n : ℕ} (σ : ParticlePermutation n)
     (N : GinibreContinuousNoise n) : GinibreContinuousNoise n :=
-  ⟨(⟨ginibreParticlePermutationCLM σ,(ginibreParticlePermutationCLM σ).continuous⟩ :
-    C(Configuration n,Configuration n)).comp N.val, by
+  ⟨(⟨ginibreParticlePermutationCLM σ, (ginibreParticlePermutationCLM σ).continuous⟩ :
+    C(Configuration n, Configuration n)).comp N.val, by
       change ginibreParticlePermutationCLM σ (N.val 0)=0
-      rw [N.property,map_zero]⟩
+      rw [N.property, map_zero]⟩
 
 theorem ginibreContinuousNoisePermute_continuous {n : ℕ} (σ : ParticlePermutation n) :
     Continuous (ginibreContinuousNoisePermute σ) := by
   apply Continuous.subtype_mk
-  exact ((⟨ginibreParticlePermutationCLM σ,(ginibreParticlePermutationCLM σ).continuous⟩ :
-    C(Configuration n,Configuration n)).continuous_postcomp).comp continuous_subtype_val
+  exact ((⟨ginibreParticlePermutationCLM σ, (ginibreParticlePermutationCLM σ).continuous⟩ :
+    C(Configuration n, Configuration n)).continuous_postcomp).comp continuous_subtype_val
 
 theorem ginibreBrownian_relabel_independent {Ω : Type*} [MeasurableSpace Ω] {n : ℕ}
     (σ : ParticlePermutation n) (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (P : Measure Ω)
@@ -90,14 +90,14 @@ theorem ginibreBrownian_relabel_continuous_noise_ae {Ω : Type*} [MeasurableSpac
     (P : Measure Ω) (hB : ∀ i, IsBrownianReal (B i) P) (α : ℝ) :
     ginibreBrownianFullContinuousNoise n (ginibreParticleBrownianRelabel σ B) α =ᵐ[P]
       (fun ω => ginibreContinuousNoisePermute σ (ginibreBrownianFullContinuousNoise n B α ω)) := by
-  have hC : ∀ i, IsBrownianReal (ginibreParticleBrownianRelabel σ B i) P := fun i => hB (σ i.1,i.2)
+  have hC : ∀ i, IsBrownianReal (ginibreParticleBrownianRelabel σ B i) P := fun i => hB (σ i.1, i.2)
   filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB α,
     ginibreBrownianFullContinuousNoise_ae n _ P hC α] with ω hω hω'
   apply Subtype.ext
   ext t j
   change (ginibreBrownianFullContinuousNoise n _ α ω).val t j=
     (ginibreParticlePermutationCLM σ ((ginibreBrownianFullContinuousNoise n B α ω).val t)) j
-  rw [ginibreParticlePermutationCLM_apply,hω,hω']
+  rw [ginibreParticlePermutationCLM_apply, hω, hω']
   rfl
 
 theorem ginibreBrownian_continuous_noise_permute_law {Ω : Type*} [MeasurableSpace Ω] {n : ℕ}
@@ -108,7 +108,7 @@ theorem ginibreBrownian_continuous_noise_permute_law {Ω : Type*} [MeasurableSpa
       P.map (ginibreBrownianFullContinuousNoise n B α) := by
   rw [← Measure.map_congr (ginibreBrownian_relabel_continuous_noise_ae σ B P hB α)]
   exact ginibreBrownian_continuous_noise_family_law_eq n B (ginibreParticleBrownianRelabel σ B) P hB
-    (fun i => hB (σ i.1,i.2)) hi (ginibreBrownian_relabel_independent σ B P hi) α
+    (fun i => hB (σ i.1, i.2)) hi (ginibreBrownian_relabel_independent σ B P hi) α
 
 #print axioms ginibreBrownian_continuous_noise_permute_law
 #print axioms ginibreBrownian_continuous_noise_family_law_eq

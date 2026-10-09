@@ -33,7 +33,7 @@ theorem ginibreCompactProcess_continuous_gradient_integral_exists
       TendstoInMeasure P (ginibreConfigurationBrownianGradientSum n B α X f T) atTop (J T) := by
   classical
   let F := ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)
-  obtain ⟨C,hC,hG,hH⟩ := ginibreCompactProcess_test_coefficients n F X hX hCont
+  obtain ⟨C, hC, hG, hH⟩ := ginibreCompactProcess_test_coefficients n F X hX hCont
     f U K hU hf hK hKU hRange
   let A := fun (i : Fin n × Fin 2) t ω => fderiv ℝ f (X t ω) (ginibreCoordinateDirection i)
   have hex (i : Fin n × Fin 2) := brownianContinuousIntegral_exists B P hB hind i (A i)
@@ -44,7 +44,7 @@ theorem ginibreCompactProcess_continuous_gradient_integral_exists
   let σ := Real.sqrt (2*α/(n : ℝ)^2)
   let J : ℝ≥0 → Ω → ℝ := σ • ∑ i : Fin n × Fin 2, M i
   have hJe (t : ℝ≥0) (ω : Ω) : J t ω=σ*∑ i : Fin n × Fin 2, M i t ω := by
-    simp only [J,Pi.smul_apply,Finset.sum_apply,smul_eq_mul]
+    simp only [J, Pi.smul_apply, Finset.sum_apply, smul_eq_mul]
   have hsum (S : Finset (Fin n × Fin 2)) : Martingale (∑ i ∈ S, M i) F P := by
     induction S using Finset.induction_on with
     | empty => simpa using martingale_zero ℝ F P
@@ -62,7 +62,7 @@ theorem ginibreCompactProcess_continuous_gradient_integral_exists
   have hz : J 0 =ᵐ[P] (fun _ => 0) := by
     have hall := ae_all_iff.mpr hM0
     filter_upwards [hall] with ω hω
-    simp [J,hω]
+    simp [J, hω]
   have hp (t : ℝ≥0) : TendstoInMeasure P (fun k ω => σ*
       ∑ i : Fin n × Fin 2, brownianUniformPartialSum (B i) (A i) T (k+1) t ω)
       atTop (J t) := by
@@ -77,7 +77,7 @@ theorem ginibreCompactProcess_continuous_gradient_integral_exists
     convert! ginibre_tendstoInMeasure_const_mul P _ _ σ hh using 1
     funext ω
     exact hJe t ω
-  refine ⟨J,hJ,hJC,hJL,hz,hp,?_⟩
+  refine ⟨J, hJ, hJC, hJL, hz, hp,?_⟩
   convert! hp T using 1
   funext k ω
   rw [ginibreConfigurationBrownianGradientSum_eq]

@@ -35,12 +35,12 @@ theorem correspondenceBrownian_finite_stopping_fresh_noise
     have he : E s = (A ∩ {ω | (τ ω : WithTop ℝ≥0) ≤ s}) ∩
         {ω | (τ ω : WithTop ℝ≥0) = s} := by
       ext ω
-      simp only [E,mem_inter_iff,mem_setOf_eq,WithTop.coe_eq_coe,WithTop.coe_le_coe]
+      simp only [E, mem_inter_iff, mem_setOf_eq, WithTop.coe_eq_coe, WithTop.coe_le_coe]
       constructor
-      · rintro ⟨hA,hτ⟩
-        exact ⟨⟨hA,hτ.le⟩,hτ⟩
-      · rintro ⟨⟨hA,_⟩,hτ⟩
-        exact ⟨hA,hτ⟩
+      · rintro ⟨hA, hτ⟩
+        exact ⟨⟨hA, hτ.le⟩, hτ⟩
+      · rintro ⟨⟨hA, _⟩, hτ⟩
+        exact ⟨hA, hτ⟩
     rw [he]
     exact h1.inter h2
   have hEambient (s : ℝ≥0) : MeasurableSet (E s) := F.le s _ (hE s)
@@ -55,11 +55,11 @@ theorem correspondenceBrownian_finite_stopping_fresh_noise
       n B P hB hind α s Y hY
     have he : Y ⁻¹' ({1} : Set ℝ) = E s := by
       ext ω
-      by_cases hω : ω ∈ E s <;> simp [Y,hω]
+      by_cases hω : ω ∈ E s <;> simp [Y, hω]
     have hh := hi.measure_inter_preimage_eq_mul C {1} hC (measurableSet_singleton 1)
     rw [he] at hh
     have hl := brownianFamily_shift_continuous_noise_law_eq n B P hB hind α s
-    rw [← hl,Measure.map_apply (hN s) hC]
+    rw [← hl, Measure.map_apply (hN s) hC]
     exact hh
   have hdisj : Pairwise (fun s t => Disjoint (E s) (E t)) := by
     intro s t hst
@@ -70,28 +70,28 @@ theorem correspondenceBrownian_finite_stopping_fresh_noise
     ext ω
     constructor
     · intro hω
-      exact mem_iUnion.mpr ⟨τ ω,mem_iUnion.mpr ⟨hrange ω,⟨hω,rfl⟩⟩⟩
+      exact mem_iUnion.mpr ⟨τ ω, mem_iUnion.mpr ⟨hrange ω, ⟨hω, rfl⟩⟩⟩
     · intro hω
-      obtain ⟨s,hω⟩ := mem_iUnion.mp hω
-      obtain ⟨_,hω⟩ := mem_iUnion.mp hω
+      obtain ⟨s, hω⟩ := mem_iUnion.mp hω
+      obtain ⟨_, hω⟩ := mem_iUnion.mp hω
       exact hω.1
   have hu2 : {ω | ginibreBrownianFullContinuousNoise n (brownianFamilyShift B (τ ω)) α ω ∈ C} ∩ A =
       ⋃ s ∈ S, (N s) ⁻¹' C ∩ E s := by
     ext ω
     constructor
     · intro hω
-      refine mem_iUnion.mpr ⟨τ ω,mem_iUnion.mpr ⟨hrange ω,?_⟩⟩
-      exact ⟨hω.1,hω.2,rfl⟩
+      refine mem_iUnion.mpr ⟨τ ω, mem_iUnion.mpr ⟨hrange ω,?_⟩⟩
+      exact ⟨hω.1, hω.2, rfl⟩
     · intro hω
-      obtain ⟨s,hω⟩ := mem_iUnion.mp hω
-      obtain ⟨_,hω⟩ := mem_iUnion.mp hω
-      refine ⟨?_,hω.2.1⟩
+      obtain ⟨s, hω⟩ := mem_iUnion.mp hω
+      obtain ⟨_, hω⟩ := mem_iUnion.mp hω
+      refine ⟨?_, hω.2.1⟩
       change ginibreBrownianFullContinuousNoise n (brownianFamilyShift B (τ ω)) α ω ∈ C
       rw [hω.2.2]
       exact hω.1
-  rw [hu2,measure_biUnion_finset]
+  rw [hu2, measure_biUnion_finset]
   · simp_rw [hpiece]
-    rw [← Finset.mul_sum,hu,measure_biUnion_finset]
+    rw [← Finset.mul_sum, hu, measure_biUnion_finset]
     · exact fun s hs t ht hst => hdisj hst
     · exact fun s hs => hEambient s
   · intro s hs t ht hst

@@ -18,8 +18,8 @@ set_option maxHeartbeats 600000
 /-- The concrete scalar value truncations have a common Lipschitz constant. -/
 theorem sobolevValueTruncation_lipschitz : ∃ B : ℝ≥0, ∀ m,
     LipschitzWith B (sobolevValueTruncation m) := by
-  obtain ⟨B,hB0,hB⟩ := sobolevValueTruncation_deriv_bound
-  refine ⟨⟨B,hB0⟩, fun m => lipschitzWith_of_nnnorm_deriv_le
+  obtain ⟨B, hB0, hB⟩ := sobolevValueTruncation_deriv_bound
+  refine ⟨⟨B, hB0⟩, fun m => lipschitzWith_of_nnnorm_deriv_le
     ((sobolevValueTruncation_smooth m).differentiable (by simp)) ?_⟩
   intro x
   exact_mod_cast hB m x
@@ -29,7 +29,7 @@ theorem ginibreValueTruncation_continuous (n m : ℕ) :
     Continuous (fun u : Lp ℝ 2 (ginibreMeasure n) =>
       (ginibreValueTruncation_memLp n m u (Lp.memLp u)).toLp
         (fun z => sobolevValueTruncation m (u z))) := by
-  obtain ⟨B,hB⟩ := sobolevValueTruncation_lipschitz
+  obtain ⟨B, hB⟩ := sobolevValueTruncation_lipschitz
   have he : (fun u : Lp ℝ 2 (ginibreMeasure n) =>
       (ginibreValueTruncation_memLp n m u (Lp.memLp u)).toLp
         (fun z => sobolevValueTruncation m (u z))) =
@@ -58,8 +58,8 @@ theorem ginibreValueTruncation_chain_of_smooth_limits (n : ℕ) (hn : 0 < n) (m 
         (fun z => sobolevValueTruncation m (u z)))
       ((ginibreValueTruncation_vector_memLp n m u (Lp.aestronglyMeasurable u) g (Lp.memLp g)).toLp
         (fun z => deriv (sobolevValueTruncation m) (u z) • g z)) := by
-  obtain ⟨ns,hns,hnae⟩ := (tendstoInMeasure_of_tendsto_Lp htv).exists_seq_tendsto_ae
-  obtain ⟨B,hB0,hB⟩ := sobolevValueTruncation_deriv_bound
+  obtain ⟨ns, hns, hnae⟩ := (tendstoInMeasure_of_tendsto_Lp htv).exists_seq_tendsto_ae
+  obtain ⟨B, hB0, hB⟩ := sobolevValueTruncation_deriv_bound
   let a j z := deriv (sobolevValueTruncation m) (v (ns j) z)
   let c z := deriv (sobolevValueTruncation m) (u z)
   have ha (j : ℕ) : AEStronglyMeasurable (a j) (ginibreMeasure n) :=
@@ -99,7 +99,7 @@ theorem ginibreValueTruncation_chain_of_smooth_limits (n : ℕ) (hn : 0 < n) (m 
       change q j z = _ at h1
       rw [h1]
       dsimp only [a]
-      rw [h2,h3,ginibreValueTruncation_smooth_gradient n m (f (ns j)) (hs (ns j))]
+      rw [h2, h3, ginibreValueTruncation_smooth_gradient n m (f (ns j)) (hs (ns j))]
   · exact (ginibreValueTruncation_continuous n m).continuousAt.tendsto.comp
       (htv.comp hns.tendsto_atTop)
   · exact hq

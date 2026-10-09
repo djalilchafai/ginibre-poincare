@@ -35,7 +35,7 @@ theorem ginibreBoundedField_continuous_integral_exists
   choose M hM hMC hML hM0 hMP hMS using hex
   let J : ℝ≥0 → Ω → ℝ := ∑ i, M i
   have hJe (t : ℝ≥0) (ω : Ω) : J t ω=∑ i, M i t ω := by
-    simp only [J,Finset.sum_apply]
+    simp only [J, Finset.sum_apply]
   have hsum (S : Finset ι) : Martingale (∑ i ∈ S, M i) F P := by
     induction S using Finset.induction_on with
     | empty => simpa using martingale_zero ℝ F P
@@ -51,8 +51,8 @@ theorem ginibreBoundedField_continuous_integral_exists
     exact memLp_finsetSum Finset.univ (fun i hi => hML i t)
   have hz : J 0 =ᵐ[P] (fun _ => 0) := by
     filter_upwards [ae_all_iff.mpr hM0] with ω hω
-    simp [J,hω]
-  refine ⟨J,hJ,hJC,hJL,hz,?_⟩
+    simp [J, hω]
+  refine ⟨J, hJ, hJC, hJL, hz,?_⟩
   intro t ht
   have hFi (i : ι) (s : ℝ≥0) : MemLp (A i s) 2 P := MemLp.of_bound
     ((hA i s).mono (F.le s) le_rfl).aestronglyMeasurable

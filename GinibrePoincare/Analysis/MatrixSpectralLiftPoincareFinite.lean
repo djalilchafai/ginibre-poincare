@@ -5,6 +5,15 @@ public import GinibrePoincare.Analysis.GinibreC1WeakPoincare
 
 @[expose] public section
 
+/-! # Poincaré from finite matrix overlap energy
+
+First derive L² membership of the ordinary Ginibre gradient from the overlap
+bound. Apply the symmetric C¹ finite-energy Poincaré theorem, then insert the
+factor-four overlap bound. Multiplying by the Ginibre coefficient 1/(2n)
+gives the matrix coefficient 2/n. This route passes through the Ginibre weak
+domain; AlternativeMatrixPoincare gives the independent Gaussian matrix route.
+-/
+
 open MeasureTheory
 namespace GinibrePoincare
 noncomputable section

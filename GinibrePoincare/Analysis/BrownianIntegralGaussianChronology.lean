@@ -56,7 +56,7 @@ theorem chronologicalFresh_iIndepFun {Ω : Type*} [MeasurableSpace Ω]
           have hi := hFresh n Y hY
           have hp : Y ⁻¹' ({1} : Set ℝ) = A := by
             ext ω
-            by_cases hω : ω ∈ A <;> simp [Y,hω]
+            by_cases hω : ω ∈ A <;> simp [Y, hω]
           have hprob := hi.measure_inter_preimage_eq_mul ({1} : Set ℝ) (sets n)
             (measurableSet_singleton 1) (hm n hn)
           rw [hp] at hprob
@@ -66,7 +66,7 @@ theorem chronologicalFresh_iIndepFun {Ω : Type*} [MeasurableSpace Ω]
           have hbi : (⋂ j ∈ insert n R, Z j ⁻¹' sets j) = (Z n ⁻¹' sets n) ∩ A := by
             ext ω
             simp [A]
-          rw [hbi,Finset.prod_insert (Finset.notMem_erase n S),Set.inter_comm]
+          rw [hbi, Finset.prod_insert (Finset.notMem_erase n S), Set.inter_comm]
           calc
             _ = P A * P (Z n ⁻¹' sets n) := hprob
             _ = (∏ j ∈ R, P (Z j ⁻¹' sets j)) * P (Z n ⁻¹' sets n) := by rw [hprior]

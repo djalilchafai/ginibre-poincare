@@ -34,9 +34,9 @@ theorem ginibreResolventVectorSpectralMeasure_support (n : ℕ) (hn : 0 < n)
   have he : (Subtype.val : spectrum ℝ (ginibreFullComplexResolvent n hn) → ℝ) ⁻¹'
       (Icc (0 : ℝ) (1/3) ∪ {1})ᶜ = ∅ := by
     ext r
-    simp only [mem_preimage,mem_compl_iff,mem_empty_iff_false,iff_false,not_not]
+    simp only [mem_preimage, mem_compl_iff, mem_empty_iff_false, iff_false, not_not]
     exact spectral_ginibre_resolvent_spectrum_support n hn r.property
-  rw [he,measure_empty]
+  rw [he, measure_empty]
 
 #print axioms ginibreResolventVectorSpectralMeasure
 #print axioms ginibreResolventVectorSpectralMeasure_mass

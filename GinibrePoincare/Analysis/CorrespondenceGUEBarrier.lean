@@ -50,12 +50,12 @@ private theorem continuous_splice {a : ℝ} {f g : ℝ → ℝ}
   apply continuous_if
   · intro y hy
     change y ∈ frontier (Iic a) at hy
-    have he : y=a := by simpa only [frontier_Iic,mem_singleton_iff] using hy
+    have he : y=a := by simpa only [frontier_Iic, mem_singleton_iff] using hy
     simpa [he] using hfg
   · change ContinuousOn f (closure (Iic a))
     simpa only [closure_Iic] using hf.continuousOn (s := Iic a)
   · change ContinuousOn g (closure ((Iic a)ᶜ))
-    simpa only [compl_Iic,closure_Ioi] using hg
+    simpa only [compl_Iic, closure_Ioi] using hg
 
 /-- C² convex extension of -log from [ε,∞), used to approximate the ordered
 GUE's singular chamber potential without altering its curvature. -/
@@ -78,7 +78,7 @@ theorem gueLogBarrier_hasDerivAt {ε : ℝ} (hε : 0<ε) (u : ℝ) :
       ((((hasDerivAt_id x).sub_const ε).pow 2).div_const (2*ε^2)) using 1 <;>
       (try funext y) <;> dsimp <;> field_simp [hε.ne'] <;> ring
   · intro x hx
-    convert (Real.hasDerivAt_log (ne_of_gt (hε.trans_le hx))).neg using 1 <;> simp [one_div,neg_div]
+    convert (Real.hasDerivAt_log (ne_of_gt (hε.trans_le hx))).neg using 1 <;> simp [one_div, neg_div]
   · simp
   · simp
 
@@ -100,9 +100,9 @@ theorem gueLogBarrier_contDiff {ε : ℝ} (hε : 0<ε) : ContDiff ℝ 2 (gueLogB
     funext (fun u => (gueLogBarrier_hasDerivAt hε u).deriv)
   have he2 : deriv (gueLogBarrierDeriv ε)=gueLogBarrierDerivTwo ε :=
     funext (fun u => (gueLogBarrierDeriv_hasDerivAt hε u).deriv)
-  rw [show (2 : ℕ∞ω) = 1+1 from rfl,contDiff_succ_iff_deriv]
-  refine ⟨fun u => (gueLogBarrier_hasDerivAt hε u).differentiableAt,by simp,?_⟩
-  rw [he,contDiff_one_iff_deriv,he2]
+  rw [show (2 : ℕ∞ω) = 1+1 from rfl, contDiff_succ_iff_deriv]
+  refine ⟨fun u => (gueLogBarrier_hasDerivAt hε u).differentiableAt, by simp,?_⟩
+  rw [he, contDiff_one_iff_deriv, he2]
   refine ⟨fun u => (gueLogBarrierDeriv_hasDerivAt hε u).differentiableAt,?_⟩
   unfold gueLogBarrierDerivTwo
   apply continuous_splice continuous_const
@@ -120,7 +120,7 @@ theorem gueLogBarrier_convex {ε : ℝ} (hε : 0<ε) : ConvexOn ℝ univ (gueLog
     exact fun u _ => (gueLogBarrierDeriv_hasDerivAt hε u).differentiableAt.differentiableWithinAt
   · intro u hu
     change 0 ≤ deriv (deriv (gueLogBarrier ε)) u
-    rw [he,(gueLogBarrierDeriv_hasDerivAt hε u).deriv]
+    rw [he, (gueLogBarrierDeriv_hasDerivAt hε u).deriv]
     unfold gueLogBarrierDerivTwo
     split_ifs <;> positivity
 

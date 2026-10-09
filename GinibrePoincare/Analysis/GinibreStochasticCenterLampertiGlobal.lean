@@ -50,18 +50,18 @@ theorem ginibreBrownianMaximalProcess_global_center_Lamperti_identity
     · have hh := ginibreBrownianMaximalProcess_local_center_Lamperti_identity hn α z hz B P hB hind
         e β hβC hβLim (ginibreHamiltonian n z+k) (hR k) k (C k) (1/((k : ℝ)+1))
         (by positivity) (by simpa [div_eq_mul_inv] using hk) (hC k)
-      simpa only [X,θ,div_eq_mul_inv,one_mul] using hh.mono (fun ω hω _ => hω)
+      simpa only [X, θ, div_eq_mul_inv, one_mul] using hh.mono (fun ω hω _ => hω)
     · exact ae_of_all P (fun ω h => (hk h).elim)
   have hinit : ∀ᶠ k : ℕ in atTop, 2/((k : ℝ)+1) ≤ ginibreCenterSquared n z := by
     have hl : Tendsto (fun k : ℕ => 2/((k : ℝ)+1)) atTop (𝓝 0) := by
-      simpa only [mul_zero,mul_one_div] using
+      simpa only [mul_zero, mul_one_div] using
         (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)).const_mul 2
     exact (hl.eventually (gt_mem_nhds hcenter)).mono (fun k hk => hk.le)
   filter_upwards [ae_all_iff.mpr hLocal,
     ginibreBrownian_center_small_stops_exhaust_ae hn α z hz hcenter B P hB hind]
     with ω hω hExhaust
   intro t
-  obtain ⟨k,hk,hkt⟩ := (hinit.and ((hExhaust t).mono (fun k hk => hk (C k) (hC k)))).exists
+  obtain ⟨k, hk, hkt⟩ := (hinit.and ((hExhaust t).mono (fun k hk => hk (C k) (hC k)))).exists
   have hh := hω k hk t hkt
   have hσ : t ≤ ginibreBrownianHamiltonianBoundedStop n α z B (ginibreHamiltonian n z+k) k ω :=
     hkt.trans (min_le_left _ _)
@@ -82,7 +82,7 @@ theorem ginibreBrownianMaximalProcess_global_center_Lamperti_identity
     rw [min_eq_left (hst.trans hσ)]
   change (ginibreSquareRootCenter n) (ginibreBrownianHamiltonianStoppedProcess n α z B
     (ginibreHamiltonian n z+k) k t ω)-(ginibreSquareRootCenter n) z = _ at hh
-  rw [hXt,hInt] at hh
+  rw [hXt, hInt] at hh
   exact hh
 #print axioms ginibreBrownianMaximalProcess_global_center_Lamperti_identity
 end

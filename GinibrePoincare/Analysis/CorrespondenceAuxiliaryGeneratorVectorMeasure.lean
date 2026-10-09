@@ -55,13 +55,13 @@ theorem ginibreGeneratorVectorSpectralMeasure_support (n : ℕ) (hn : 0 < n)
         linarith
       · left
         change r=1 at hs
-        simp [inverseResolventSpectralCoordinate,hs]
+        simp [inverseResolventSpectralCoordinate, hs]
   apply le_antisymm _ bot_le
   calc
     _ ≤ μ ({0} ∪ (Icc (0 : ℝ) (1/3) ∪ {1})ᶜ) := measure_mono hsub
     _ ≤ μ {0} + μ (Icc (0 : ℝ) (1/3) ∪ {1})ᶜ := measure_union_le _ _
     _ = 0 := by rw [ginibreResolventVectorSpectralMeasure_zero_atom,
-      ginibreResolventVectorSpectralMeasure_support,add_zero]
+      ginibreResolventVectorSpectralMeasure_support, add_zero]
 
 #print axioms ginibreGeneratorVectorSpectralMeasure
 #print axioms ginibreGeneratorVectorSpectralMeasure_mass

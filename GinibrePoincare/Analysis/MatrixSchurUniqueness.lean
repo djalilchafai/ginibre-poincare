@@ -4,6 +4,18 @@ public import GinibrePoincare.Analysis.MatrixSchurFullJacobian
 
 @[expose] public section
 
+/-! # Uniqueness of ordered Schur representations modulo phases
+
+For two upper triangular matrices with the same distinct diagonal, the lower
+entries of an intertwiner solve a homogeneous Sylvester system. Ordering those
+entries by column and decreasing row makes its matrix triangular, with nonzero
+eigenvalue differences on the diagonal. Invertibility forces every lower entry
+to vanish. A unitary upper triangular matrix must be diagonal: its inverse is
+both upper triangular and its conjugate transpose. Applying this to the change
+of Schur basis proves that ordered representations differ only by diagonal phases.
+-/
+
+
 open Matrix Order OrderDual
 open scoped BigOperators
 namespace GinibrePoincare

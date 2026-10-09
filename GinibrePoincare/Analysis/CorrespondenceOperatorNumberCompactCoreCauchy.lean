@@ -9,7 +9,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1600000
 
 def correspondenceNumberTestSub {n : ℕ} (f g : BKCompactTest n) : BKCompactTest n :=
-  ⟨fun z=>f z-g z,f.smooth.sub g.smooth,f.compact.sub g.compact⟩
+  ⟨fun z=>f z-g z, f.smooth.sub g.smooth, f.compact.sub g.compact⟩
 
 theorem correspondenceNumber_dbar_sub {n : ℕ} (f g : Configuration n→ℂ)
     (hf : ContDiff ℝ ∞ f) (hg : ContDiff ℝ ∞ g) (j : Fin n) :
@@ -23,8 +23,8 @@ theorem correspondenceNumber_dbar_sub {n : ℕ} (f g : Configuration n→ℂ)
 theorem correspondenceNumberTestSub_l2 {n : ℕ} (f g : BKCompactTest n) :
     (correspondenceNumberTestSub f g).l2=f.l2-g.l2 := by
   apply Lp.ext
-  filter_upwards [(correspondenceNumberTestSub f g).l2_coe,Lp.coeFn_sub f.l2 g.l2,f.l2_coe,g.l2_coe] with z h0 h1 h2 h3
-  rw [h0,h1,Pi.sub_apply,h2,h3]
+  filter_upwards [(correspondenceNumberTestSub f g).l2_coe, Lp.coeFn_sub f.l2 g.l2, f.l2_coe, g.l2_coe] with z h0 h1 h2 h3
+  rw [h0, h1, Pi.sub_apply, h2, h3]
   rfl
 
 theorem correspondenceNumberTestSub_dbar {n : ℕ} (f g : BKCompactTest n) (j : Fin n) :
@@ -48,14 +48,14 @@ operator values to be Cauchy, through the literal compact identity (6.8). -/
 theorem correspondenceNumber_compact_number_cauchy {n : ℕ} (hn : 0<n)
     (F : ℕ→BKCompactTest n)
     (D : Fin n→BKGaussianL2 n) (Q : Fin n→Fin n→BKGaussianL2 n)
-    (hD : ∀j,Tendsto (fun m=>(F m|>.dbar j).l2) atTop (𝓝 (D j)))
-    (hQ : ∀j k,Tendsto (fun m=>((F m|>.dbar j).dbar k).l2) atTop (𝓝 (Q j k))) :
+    (hD : ∀j, Tendsto (fun m=>(F m|>.dbar j).l2) atTop (𝓝 (D j)))
+    (hQ : ∀j k, Tendsto (fun m=>((F m|>.dbar j).dbar k).l2) atTop (𝓝 (Q j k))) :
     CauchySeq (fun m=>bkCompactNumberL2 (F m)) := by
   have he (a b : ℕ) : ‖bkCompactNumberL2 (F a)-bkCompactNumberL2 (F b)‖^2=
-      (∑j : Fin n,∑k : Fin n,‖((F a|>.dbar j).dbar k).l2-((F b|>.dbar j).dbar k).l2‖^2)+
-        (n:ℝ)*∑j : Fin n,‖(F a|>.dbar j).l2-(F b|>.dbar j).l2‖^2 := by
+      (∑j : Fin n,∑k : Fin n, ‖((F a|>.dbar j).dbar k).l2-((F b|>.dbar j).dbar k).l2‖^2)+
+        (n : ℝ)*∑j : Fin n, ‖(F a|>.dbar j).l2-(F b|>.dbar j).l2‖^2 := by
     have h := bkCompact_integrated_identity hn (correspondenceNumberTestSub (F a) (F b))
-    simpa only [correspondenceNumberTestSub_number hn,correspondenceNumberTestSub_dbar,
+    simpa only [correspondenceNumberTestSub_number hn, correspondenceNumberTestSub_dbar,
       correspondenceNumberTestSub_l2] using h
   have hfst : Tendsto (Prod.fst : ℕ×ℕ→ℕ) atTop atTop := by
     rw [← prod_atTop_atTop_eq]; exact tendsto_fst
@@ -66,12 +66,12 @@ theorem correspondenceNumber_compact_number_cauchy {n : ℕ} (hn : 0<n)
   have hQt j k : Tendsto (fun p : ℕ×ℕ=>‖((F p.1|>.dbar j).dbar k).l2-((F p.2|>.dbar j).dbar k).l2‖^2) atTop (𝓝 0) := by
     simpa using ((((hQ j k).comp hfst).sub ((hQ j k).comp hsnd)).norm).pow 2
   have ht := (tendsto_finsetSum Finset.univ (fun j _=>tendsto_finsetSum Finset.univ (fun k _=>hQt j k))).add
-    ((tendsto_finsetSum Finset.univ (fun j _=>hDt j)).const_mul (n:ℝ))
+    ((tendsto_finsetSum Finset.univ (fun j _=>hDt j)).const_mul (n : ℝ))
   have htN : Tendsto (fun p : ℕ×ℕ=>‖bkCompactNumberL2 (F p.1)-bkCompactNumberL2 (F p.2)‖^2) atTop (𝓝 0) := by
-    simpa only [he,Finset.sum_const_zero,mul_zero,add_zero] using ht
+    simpa only [he, Finset.sum_const_zero, mul_zero, add_zero] using ht
   apply cauchySeq_iff_tendsto_dist_atTop_0.mpr
   have hnorm := htN.sqrt
-  simpa only [Real.sqrt_sq_eq_abs,abs_of_nonneg (norm_nonneg _),Real.sqrt_zero,dist_eq_norm] using hnorm
+  simpa only [Real.sqrt_sq_eq_abs, abs_of_nonneg (norm_nonneg _), Real.sqrt_zero, dist_eq_norm] using hnorm
 
 #print axioms correspondenceNumber_compact_number_cauchy
 end

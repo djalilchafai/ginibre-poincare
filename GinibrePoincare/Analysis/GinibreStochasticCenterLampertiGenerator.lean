@@ -43,7 +43,7 @@ theorem ginibreRealPaperSpeedGenerator_squareRootCenter {n : ℕ} (hn : 2 ≤ n)
   have hφ : ContDiffAt ℝ 2 Real.sqrt (ginibreCenterSquared n z) := Real.contDiffAt_sqrt hρ.ne'
   change ginibreRealPaperSpeedGenerator n α (fun w => Real.sqrt (ginibreCenterSquared n w)) z = _
   rw [ginibreRealPaperSpeedGenerator_scalar_comp α (ginibreCenterSquared n) Real.sqrt z hf hφ,
-    (Real.hasDerivAt_sqrt hρ.ne').deriv,ginibre_deriv_deriv_sqrt hρ,
+    (Real.hasDerivAt_sqrt hρ.ne').deriv, ginibre_deriv_deriv_sqrt hρ,
     ginibreRealPaperSpeedGenerator_centerSquared hn α z hz]
   have hg : realGradientNormSq (ginibreCenterSquared n) z=4*(n : ℝ)*ginibreCenterSquared n z :=
     ginibre_centerSquared_gradient_normSq n z

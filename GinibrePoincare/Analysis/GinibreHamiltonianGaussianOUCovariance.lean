@@ -40,9 +40,9 @@ theorem ginibreBrownianOU_zero_covariance_step {Ω : Type*} [MeasurableSpace Ω]
   rw [covariance_add_right hX (hX.const_smul _) hY, covariance_smul_right]
   have hi : covariance X Y P = 0 :=
     (ginibreBrownianOUInnovation_independent_value B P hB rate s t 0).symm.covariance_eq_zero hX hY
-  rw [hi,add_zero,covariance_self hX.aemeasurable]
+  rw [hi, add_zero, covariance_self hX.aemeasurable]
   have hv := (ginibreBrownianOU_zero_hasLaw B P hB rate s).variance_eq
-  simpa [X,id_def,ginibreOUTransition] using congrArg (fun v : ℝ => ginibreOUDecay rate t * v) hv
+  simpa [X, id_def, ginibreOUTransition] using congrArg (fun v : ℝ => ginibreOUDecay rate t * v) hv
 
 theorem ginibreBrownianOU_zero_independent_initial {Ω : Type*} [MeasurableSpace Ω]
     (B : ℝ≥0 → Ω → ℝ) (P : Measure Ω) (hB : IsBrownianReal B P)
@@ -75,17 +75,17 @@ theorem ginibreBrownianOU_stationary_covariance_step {Ω : Type*} [MeasurableSpa
     rfl
   have hst := hs (s+t)
   simp only [NNReal.coe_add] at hst
-  rw [hs s,hst,covariance_add_left (hZm.const_smul _) (hX s)
+  rw [hs s, hst, covariance_add_left (hZm.const_smul _) (hX s)
     ((hZm.const_smul _).add (hX (s+t))),
     covariance_add_right (hZm.const_smul _) (hZm.const_smul _) (hX (s+t)),
     covariance_add_right (hX s) (hZm.const_smul _) (hX (s+t))]
-  rw [covariance_smul_left,covariance_smul_right,covariance_self hZm.aemeasurable,hvar,
-    covariance_smul_left,hcross, mul_zero,covariance_smul_right,
-    covariance_comm (X s) Z,hcross,mul_zero]
+  rw [covariance_smul_left, covariance_smul_right, covariance_self hZm.aemeasurable, hvar,
+    covariance_smul_left, hcross, mul_zero, covariance_smul_right,
+    covariance_comm (X s) Z, hcross, mul_zero]
   have hc : covariance (X s) (X (s+t)) P = ginibreOUDecay rate t * (ginibreOUVariance rate s : ℝ) := by
-    simpa [X,NNReal.coe_add] using ginibreBrownianOU_zero_covariance_step B P hB rate s t
+    simpa [X, NNReal.coe_add] using ginibreBrownianOU_zero_covariance_step B P hB rate s t
   rw [hc,
-    ginibreOUDecay_add,ginibreOUVariance_coe]
+    ginibreOUDecay_add, ginibreOUVariance_coe]
   ring
 
 theorem ginibreBrownianOU_stationary_mean {Ω : Type*} [MeasurableSpace Ω]
@@ -99,13 +99,13 @@ theorem ginibreBrownianOU_stationary_mean {Ω : Type*} [MeasurableSpace Ω]
     change drivenOUPath rate (Z ω) (ginibreBrownianNoise B (Real.sqrt (rate : ℝ)) ω) t = _
     rw [drivenOUPath_initial_split]
     rfl
-  rw [he,integral_add (hZ.hasGaussianLaw.integrable.const_mul _)
+  rw [he, integral_add (hZ.hasGaussianLaw.integrable.const_mul _)
     ((ginibreBrownianOU_zero_isGaussianProcess B P hB rate).hasGaussianLaw_eval t).integrable,
     integral_const_mul]
   have hm : (∫ ω, Z ω ∂P)=0 := by simpa using hZ.integral_eq
   have hmX : (∫ ω, ginibreBrownianOU B rate (Real.sqrt (rate : ℝ)) 0 t ω ∂P)=0 := by
     simpa [ginibreOUTransition] using (ginibreBrownianOU_zero_hasLaw B P hB rate t).integral_eq
-  rw [hm,hmX,mul_zero,add_zero]
+  rw [hm, hmX, mul_zero, add_zero]
 
 theorem ginibreBrownianOU_stationary_covariance {Ω : Type*} [MeasurableSpace Ω]
     (B : ℝ≥0 → Ω → ℝ) (P : Measure Ω) [IsProbabilityMeasure P]
@@ -117,13 +117,13 @@ theorem ginibreBrownianOU_stationary_covariance {Ω : Type*} [MeasurableSpace Ω
   rcases le_total s t with h | h
   · have ht : s+(t-s)=t := add_tsub_cancel_of_le h
     have hx := ginibreBrownianOU_stationary_covariance_step B P hB Z hZ hind rate s (t-s)
-    rw [← NNReal.coe_add,ht] at hx
-    simpa [max_eq_right h,min_eq_left h] using hx
+    rw [← NNReal.coe_add, ht] at hx
+    simpa [max_eq_right h, min_eq_left h] using hx
   · rw [covariance_comm]
     have ht : t+(s-t)=s := add_tsub_cancel_of_le h
     have hx := ginibreBrownianOU_stationary_covariance_step B P hB Z hZ hind rate t (s-t)
-    rw [← NNReal.coe_add,ht] at hx
-    simpa [max_eq_left h,min_eq_right h] using hx
+    rw [← NNReal.coe_add, ht] at hx
+    simpa [max_eq_left h, min_eq_right h] using hx
 
 end
 end GinibrePoincare

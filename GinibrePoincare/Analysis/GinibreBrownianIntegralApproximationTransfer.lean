@@ -20,7 +20,7 @@ theorem nonnegative_error_tendsto_of_approximation
   · intro b hb
     exact Eventually.of_forall fun k => hb.trans_le (hu k)
   · intro b hb
-    obtain ⟨n,hn⟩ := (ha.eventually (eventually_lt_nhds hb)).exists
+    obtain ⟨n, hn⟩ := (ha.eventually (eventually_lt_nhds hb)).exists
     filter_upwards [(hv n).eventually (eventually_lt_nhds hn)] with k hk
     exact (hbound n k).trans_lt hk
 
@@ -42,14 +42,14 @@ theorem actualMeanSquareLimit_initial_cutoff_transfer {Ω : Type*} [MeasurableSp
   · intro n k
     have hh := actualMeanSquare_difference_le_four_errors P (S k) (A n k) (M n) I I
       (hS k) (hA n k) (hM n) hI hI
-    simp only [sub_self,zero_pow (by decide : (2 : ℕ) ≠ 0),integral_zero,add_zero] at hh
+    simp only [sub_self, zero_pow (by decide : (2 : ℕ) ≠ 0), integral_zero, add_zero] at hh
     exact hh.trans (by dsimp only [v]; gcongr; exact hb n k)
   · intro n
     have hh := (((hd.const_add (e n)).add (hlim n)).add_const
       (∫ ω, (M n ω-I ω)^2 ∂P)).const_mul 4
-    simpa only [v,a,add_zero] using hh
+    simpa only [v, a, add_zero] using hh
   · have hh := (he.add hm).const_mul 4
-    simpa only [a,add_zero,mul_zero] using hh
+    simpa only [a, add_zero, mul_zero] using hh
 
 #print axioms actualMeanSquareLimit_initial_cutoff_transfer
 #print axioms nonnegative_error_tendsto_of_approximation

@@ -39,9 +39,9 @@ theorem metropolisReversibleKernel_apply {E : Type*} [MeasurableSpace E]
       metropolisRejectionMass μ q x • Measure.dirac x := by
   have hr : Measurable (Function.uncurry (fun x (_ : E) => metropolisRejectionMass μ q x)) :=
     (metropolisRejectionMass_measurable μ q hq).comp measurable_fst
-  rw [metropolisReversibleKernel,Kernel.add_apply,
-    Kernel.withDensity_apply _ (metropolisAcceptedFlux_measurable q hq),Kernel.const_apply,
-    Kernel.withDensity_apply _ hr,Kernel.id_apply,dirac_withDensity' measurable_const]
+  rw [metropolisReversibleKernel, Kernel.add_apply,
+    Kernel.withDensity_apply _ (metropolisAcceptedFlux_measurable q hq), Kernel.const_apply,
+    Kernel.withDensity_apply _ hr, Kernel.id_apply, dirac_withDensity' measurable_const]
 
 theorem metropolisReversibleKernel_isMarkov {E : Type*} [MeasurableSpace E]
     (μ : Measure E) [SFinite μ] (q : E → E → ℝ≥0∞)
@@ -50,8 +50,8 @@ theorem metropolisReversibleKernel_isMarkov {E : Type*} [MeasurableSpace E]
   constructor
   intro x
   constructor
-  rw [metropolisReversibleKernel_apply μ q hq,Measure.add_apply,withDensity_apply' _ univ,
-    Measure.smul_apply,Measure.dirac_apply_of_mem (mem_univ x),smul_eq_mul,mul_one,setLIntegral_univ,
+  rw [metropolisReversibleKernel_apply μ q hq, Measure.add_apply, withDensity_apply' _ univ,
+    Measure.smul_apply, Measure.dirac_apply_of_mem (mem_univ x), smul_eq_mul, mul_one, setLIntegral_univ,
     metropolisRejectionMass]
   exact add_tsub_cancel_of_le (by
     calc
@@ -66,7 +66,7 @@ theorem metropolisAcceptedFlux_balance {E : Type*} [MeasurableSpace E]
     (fun p => metropolisAcceptedFlux q p.1 p.2*φ p)]
   apply lintegral_congr
   intro p
-  simp only [metropolisAcceptedFlux,Prod.fst_swap,Prod.snd_swap,min_comm]
+  simp only [metropolisAcceptedFlux, Prod.fst_swap, Prod.snd_swap, min_comm]
 
 end
 end GinibrePoincare

@@ -25,7 +25,7 @@ theorem ginibreTransitionAnalytic_vanishing_energy_cutoffs {n : ℕ} (hn : 0 < n
   letI := ginibreMeasure_isProbabilityMeasure hn
   have hs (m : ℕ) := ginibreSpatialCutoff_smooth n m
   have hbound (m : ℕ) (z : Configuration n) : ‖ginibreSpatialCutoff n m z‖ ≤ 1 := by
-    rw [Real.norm_eq_abs,abs_of_nonneg (ginibreSpatialCutoff_mem_unit n m z).1]
+    rw [Real.norm_eq_abs, abs_of_nonneg (ginibreSpatialCutoff_mem_unit n m z).1]
     exact (ginibreSpatialCutoff_mem_unit n m z).2
   have hex (m : ℕ) : ∃ k : ℕ, m ≤ k ∧
       (∫ z, ‖ginibreSpatialCutoff n m z • ginibreEuclideanGradient (ginibreCollisionCutoff n k) z‖^2
@@ -33,25 +33,25 @@ theorem ginibreTransitionAnalytic_vanishing_energy_cutoffs {n : ℕ} (hn : 0 < n
     have hh := ginibreCollisionCutoff_bounded_gradient_energy_tendsto n hn (ginibreSpatialCutoff n m)
       (hs m).continuous.aestronglyMeasurable (ginibreSpatialCutoff_compact n m) 1 (by norm_num) (hbound m)
     have he := hh.eventually (eventually_lt_nhds (by positivity : (0 : ℝ)<1/((m : ℝ)+1)))
-    obtain ⟨k,hk⟩ := (he.and (eventually_ge_atTop m)).exists
-    exact ⟨k,hk.2,hk.1.le⟩
+    obtain ⟨k, hk⟩ := (he.and (eventually_ge_atTop m)).exists
+    exact ⟨k, hk.2, hk.1.le⟩
   choose k hk henergy using hex
   let η := fun m z => ginibreCollisionCutoff n (k m) z*ginibreSpatialCutoff n m z
   have hcore (m : ℕ) : IsTheoremOneNineCore (η m) :=
     ginibreCollisionCutoff_mul_core n (k m) (ginibreSpatialCutoff n m)
-      ⟨hs m,ginibreSpatialCutoff_compact n m,ginibreSpatialCutoff_symmetric n m⟩
-  refine ⟨η,hcore,?_,?_,?_⟩
+      ⟨hs m, ginibreSpatialCutoff_compact n m, ginibreSpatialCutoff_symmetric n m⟩
+  refine ⟨η, hcore,?_,?_,?_⟩
   · intro m z
-    obtain ⟨ha,hb⟩ := ginibreCollisionCutoff_mem_unit n (k m) z
-    obtain ⟨hc,hd⟩ := ginibreSpatialCutoff_mem_unit n m z
-    exact ⟨mul_nonneg ha hc,(mul_le_mul hb hd hc (by norm_num)).trans_eq (one_mul 1)⟩
+    obtain ⟨ha, hb⟩ := ginibreCollisionCutoff_mem_unit n (k m) z
+    obtain ⟨hc, hd⟩ := ginibreSpatialCutoff_mem_unit n m z
+    exact ⟨mul_nonneg ha hc, (mul_le_mul hb hd hc (by norm_num)).trans_eq (one_mul 1)⟩
   · intro z hz
     have hkTop : Tendsto k atTop atTop := tendsto_atTop_mono hk tendsto_id
     have hh := (ginibreCollisionCutoff_eventually_one_gradient_zero n z hz).mono fun m hm => hm.1
     have hc : Tendsto (fun m => ginibreCollisionCutoff n m z) atTop (𝓝 1) :=
       tendsto_const_nhds.congr' (hh.mono fun m hm => hm.symm)
-    simpa only [η,one_mul,Function.comp_def] using (hc.comp hkTop).mul (ginibreSpatialCutoff_tendsto n z)
-  · obtain ⟨C,hC,hgrad⟩ := ginibreSpatialCutoff_gradient_bound
+    simpa only [η, one_mul, Function.comp_def] using (hc.comp hkTop).mul (ginibreSpatialCutoff_tendsto n z)
+  · obtain ⟨C, hC, hgrad⟩ := ginibreSpatialCutoff_gradient_bound
     have hηL (m : ℕ) := (ginibreFull_smoothCompact_memLp n hn (η m) (hcore m).1 (hcore m).2.1).2
     have hBL (m : ℕ) := ginibreCollisionCutoff_bounded_gradient_memLp n hn (ginibreSpatialCutoff n m)
       (hs m).continuous.aestronglyMeasurable (ginibreSpatialCutoff_compact n m) 1 (hbound m) (k m)
@@ -63,7 +63,7 @@ theorem ginibreTransitionAnalytic_vanishing_energy_cutoffs {n : ℕ} (hn : 0 < n
       change ginibreEuclideanGradient (η m) z = _ at he
       have hA : ‖ginibreCollisionCutoff n (k m) z • ginibreEuclideanGradient (ginibreSpatialCutoff n m) z‖ ≤
           ‖ginibreEuclideanGradient (ginibreSpatialCutoff n m) z‖ := by
-        rw [norm_smul,Real.norm_eq_abs,abs_of_nonneg (ginibreCollisionCutoff_mem_unit n (k m) z).1]
+        rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg (ginibreCollisionCutoff_mem_unit n (k m) z).1]
         exact mul_le_of_le_one_left (norm_nonneg _) (ginibreCollisionCutoff_mem_unit n (k m) z).2
       have ht : ‖ginibreEuclideanGradient (η m) z‖ ≤
           ‖ginibreEuclideanGradient (ginibreSpatialCutoff n m) z‖+
@@ -80,8 +80,8 @@ theorem ginibreTransitionAnalytic_vanishing_energy_cutoffs {n : ℕ} (hn : 0 < n
         ((integrable_const (2*(C/((m : ℝ)+1)))).add ((hBL m).norm.integrable_sq.const_mul 2)) (hb m)
       have hi := integral_add (integrable_const (2*(C/((m : ℝ)+1)))) ((hBL m).norm.integrable_sq.const_mul 2)
       simp only [Pi.add_apply] at hh hi
-      rw [hi,integral_const,integral_const_mul] at hh
-      simp only [Measure.real,measure_univ,ENNReal.toReal_one,smul_eq_mul,one_mul] at hh
+      rw [hi, integral_const, integral_const_mul] at hh
+      simp only [Measure.real, measure_univ, ENNReal.toReal_one, smul_eq_mul, one_mul] at hh
       calc
         _ ≤ 2*(C/((m : ℝ)+1))+2*(∫ z, ‖ginibreSpatialCutoff n m z •
             ginibreEuclideanGradient (ginibreCollisionCutoff n (k m)) z‖^2 ∂ginibreMeasure n) := hh

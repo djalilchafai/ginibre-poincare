@@ -1,18 +1,35 @@
 # Full-paper correspondence review — 2026-10-08
 
-## Current independent follow-up: reviewed mathematical inventory resolved
+## Readability revision — 2026-10-09
+
+The [independent semantic diff review](verification/readability-semantic-review.md)
+inspected the readability changes, including definition bodies, and found no
+changed mathematical meaning. The [fresh mechanical verification](verification/readability-final-check.txt)
+passes 5,814 build jobs, 6,920 public axiom queries and the all-local audit of
+14,592 declarations. The refreshed compiled export and local diagrams include
+the named interfaces. These checks do not constitute a new paper correspondence
+review; the independent mathematical findings below retain their 2026-10-08 dates
+and inspected snapshots. The public registry now confirms
+[PALOMAR-2026-10-09-000001 v1](https://data.palomar-registry.org/entries/PALOMAR-2026-10-09-000001-v1.json),
+registered at `2026-10-09T00:48:41Z` for source snapshot
+`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`. This is the historical Theorem 1.1
+submission, distinct from publication of the later full-paper/readability
+revision. [The registry record](verification/registry-publication-check.md)
+retains the receipt and dated earlier observations.
+
+## Independent mathematical follow-up — 2026-10-08: reviewed inventory resolved
 
 New concrete proofs resolve the historical matrix H¹, literal integrated pointwise Γ₂, unrestricted operator/form, global CIR, invariant-law uniqueness, GUE and Section 6 spectral-calculus findings. The [independent extension/dynamics follow-up](verification/correspondence-extensions-followup.md) gives an affirmative verdict for its assigned partition after inspecting the final operator additions. The [independent main follow-up](verification/correspondence-main-followup.md) gives an affirmative verdict for its assigned main/auxiliary/Appendix A–B inventory, including the final classical locally Lipschitz Brascamp–Lieb domain and genuine ordinary weak-gradient extension. Neither independent reviewer identified a remaining concrete mathematical conclusion gap in the assigned inventories. These are independent agent source-correspondence findings, not human certification, proof-route fidelity inferred from compilation, or a registry receipt. The final single-thread `make check` passed 5,814 build jobs, 6,865 public axiom queries and the all-local audit of 14,499 declarations, using only `propext`, `Classical.choice` and `Quot.sound`. Source audit covers all 1,719 library modules and seven root files; the only authorized proof hole is the independent Challenge, excluded from the proof audit closure. Focused `TestImport` and offline Palomar structural preflight passed; the latter scanned 1,727 Lean files with zero blockers. These mechanical results remain distinct from independent statement correspondence.
 
 Domains remain explicit: GUE uses the actual smooth compact symmetric ordinary-gradient H¹ completion, with a separately proved C¹ endpoint; local Dolbeault covers ordinary locally-L² distributional coefficients, not arbitrary currents. The classical real Brascamp–Lieb statement uses an actual C² potential with everywhere positive Hessian and integrable Gibbs density, locally Lipschitz L² tests and finite actual inverse-Hessian derivative energy. No uniform curvature bound, global Lipschitz assumption or global ordinary-gradient L² assumption replaces those hypotheses. The separately proved ordinary distributional weak-gradient statement is a domain extension. The paper’s cited physical application descriptions do not specify additional Hamiltonian/vortex-model theorem statements, and no such external model theorem is claimed.
 
-Registry publication remains unconfirmed. The latest public GET at **2026-10-08 16:11:40 UTC** returned HTTP 200 with no Ginibre entries (revision 190; 471 results, 383 projects), and the canonical repository record returned HTTP 404. An earlier authenticated status GET at `2026-10-08T12:42:55Z` returned HTTP 403; no cause is inferred. Accepted registration consent is not a public receipt. See [live evidence](verification/registry-publication-check.md).
+At the 2026-10-08 checkpoint, registry publication was unconfirmed. The public GET at **2026-10-08 16:11:40 UTC** returned HTTP 200 with no Ginibre entries (revision 190; 471 results, 383 projects), and the canonical repository record returned HTTP 404. An earlier authenticated status GET at `2026-10-08T12:42:55Z` returned HTTP 403; no cause is inferred. Accepted registration consent is not a public receipt. See [live evidence](verification/registry-publication-check.md).
 
-## Final verification and generated evidence
+## Historical verification and generated evidence — 2026-10-08
 
-The fresh compiled declaration export contains 14,499 local declarations, 12,546 theorems, 1,721 compiled local modules, 9,091 external boundary declarations and 1,240,777 direct reference pairs. Its SHA-256 is `907a3a29fcc34eee823a55d2f0c284b6f0ab486ab02ea22e95dd167bdede4aa9`. The source import graph has 1,726 nodes and 6,442 edges. The regenerated views include 27 endpoint SVGs and twelve thematic SVGs; all ten requested compiled route-independence checks pass from this export.
+The 2026-10-08 compiled declaration export contains 14,499 local declarations, 12,546 theorems, 1,721 compiled local modules, 9,091 external boundary declarations and 1,240,777 direct reference pairs. Its SHA-256 is `907a3a29fcc34eee823a55d2f0c284b6f0ab486ab02ea22e95dd167bdede4aa9`. The source import graph has 1,726 nodes and 6,442 edges. The regenerated views include 27 endpoint SVGs and twelve thematic SVGs; all ten requested compiled route-independence checks pass from this export.
 
-Refreshed source counts: **185,400 project Lean lines in 1,727 files**, plus **1,256,051 transitively imported Mathlib lines in 3,813 modules**, totaling **1,441,451 lines in 5,540 files/modules**. Comments and blank lines are included; each imported Mathlib module is counted once in full. See [STATUS.md](STATUS.md) for the complete dashboard and verification evidence. Problems 1.11, 1.15 and 1.16 remain open; Appendix C is outside theorem certification. The remaining external publication step is confirmation of the exact versioned public registry entry and source-preservation receipt.
+Source counts at the 2026-10-08 checkpoint: **185,400 project Lean lines in 1,727 files**, plus **1,256,051 transitively imported Mathlib lines in 3,813 modules**, totaling **1,441,451 lines in 5,540 files/modules**. Comments and blank lines are included; each imported Mathlib module is counted once in full. See [STATUS.md](STATUS.md) for the complete dashboard and verification evidence. Problems 1.11, 1.15 and 1.16 remain open; Appendix C is outside theorem certification. At this historical checkpoint the remaining external publication step was confirmation of the exact versioned public registry entry and source-preservation receipt; consult STATUS.md and the registry record for subsequent observations.
 
 ## Historical initial review (superseded by the follow-up above)
 

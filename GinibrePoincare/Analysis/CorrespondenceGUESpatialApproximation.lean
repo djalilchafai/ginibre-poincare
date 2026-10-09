@@ -17,8 +17,8 @@ abbrev gueSpatialCutoff_derivative_bound (n : ℕ) := bakryBoundedSpatialCutoff_
 
 theorem gueSpatialCutoff_derivative_tendsto (n : ℕ) (A H : EuclideanSpace ℝ (Fin n)) :
     Tendsto (fun k => fderiv ℝ (gueSpatialCutoff n k) A H) atTop (nhds 0) := by
-  obtain ⟨M,hM0,hM⟩ := gueSpatialCutoff_derivative_bound n
-  have hi : Tendsto (fun k : ℕ => ((k:ℝ)+1)⁻¹) atTop (nhds 0) :=
+  obtain ⟨M, hM0, hM⟩ := gueSpatialCutoff_derivative_bound n
+  have hi : Tendsto (fun k : ℕ => ((k : ℝ)+1)⁻¹) atTop (nhds 0) :=
     tendsto_inv_atTop_zero.comp (tendsto_atTop_add_const_right atTop 1 tendsto_natCast_atTop_atTop)
   apply tendsto_zero_iff_norm_tendsto_zero.mpr
   apply squeeze_zero (fun _ => norm_nonneg _) (fun k => by simpa using hM k A H)

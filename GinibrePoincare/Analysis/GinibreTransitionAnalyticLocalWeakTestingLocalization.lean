@@ -27,14 +27,14 @@ theorem ginibreLocalWeak_cutoff_pair_memLp {n : ℕ} (hn : 0 < n)
     MemLp (fun z => η z*u z) 2 (ginibreMeasure n) ∧
     MemLp (fun z => η z • g z + u z • ginibreEuclideanGradient η z) 2 (ginibreMeasure n) := by
   have hG := ginibreLocalWeak_compact_gradient_memLp hn g (tsupport η) hc hg
-  obtain ⟨hv,hh⟩ := configuration_weak_multiplier_memLp n (ginibreMeasure n)
+  obtain ⟨hv, hh⟩ := configuration_weak_multiplier_memLp n (ginibreMeasure n)
     u ((tsupport η).indicator g) hu hG η hη hc
-  refine ⟨hv,hh.ae_eq (ae_of_all _ ?_)⟩
+  refine ⟨hv, hh.ae_eq (ae_of_all _ ?_)⟩
   intro z
   by_cases hz : z ∈ tsupport η
   · simp [hz]
   · have he : η z = 0 := image_eq_zero_of_notMem_tsupport hz
-    simp [hz,he]
+    simp [hz, he]
 
 theorem ginibreLocalWeak_compact_smul_memLp {n : ℕ} {V : Type*}
     [NormedAddCommGroup V] [NormedSpace ℝ V]
@@ -42,7 +42,7 @@ theorem ginibreLocalWeak_compact_smul_memLp {n : ℕ} {V : Type*}
     (hη : Continuous η) (hc : HasCompactSupport η)
     (v : Configuration n → V) (hv : MemLp v 2 μ) :
     MemLp (fun z => η z • v z) 2 μ := by
-  obtain ⟨A,hA⟩ := hη.bounded_above_of_compact_support hc
+  obtain ⟨A, hA⟩ := hη.bounded_above_of_compact_support hc
   apply hv.of_le_mul (c := A) (hη.aestronglyMeasurable.smul hv.aestronglyMeasurable)
   exact ae_of_all μ (fun z => by
     change ‖η z • v z‖ ≤ A * ‖v z‖
@@ -56,7 +56,7 @@ theorem ginibreLocalWeak_cutoff_inner_memLp {n : ℕ} (hn : 0 < n)
     MemLp (fun z => inner ℝ (g z) (ginibreEuclideanGradient η z)) 2 (ginibreMeasure n) := by
   let G := (tsupport η).indicator g
   have hG := ginibreLocalWeak_compact_gradient_memLp hn g (tsupport η) hc hg
-  obtain ⟨A,hA⟩ := (continuous_ginibreEuclideanGradient η hη).bounded_above_of_compact_support
+  obtain ⟨A, hA⟩ := (continuous_ginibreEuclideanGradient η hη).bounded_above_of_compact_support
     (compactSupport_ginibreEuclideanGradient η hc)
   have hh : MemLp (fun z => inner ℝ (G z) (ginibreEuclideanGradient η z)) 2 (ginibreMeasure n) := by
     apply hG.of_le_mul (c := A)
@@ -69,11 +69,11 @@ theorem ginibreLocalWeak_cutoff_inner_memLp {n : ℕ} (hn : 0 < n)
   apply ae_of_all
   intro z
   by_cases hz : z ∈ tsupport η
-  · simp [G,hz]
+  · simp [G, hz]
   · have hd : fderiv ℝ η z = 0 := fderiv_of_notMem_tsupport ℝ hz
     have he : ginibreEuclideanGradient η z = 0 := by
       ext k
-      simp only [ginibreEuclideanGradient_coordinate,hd,ContinuousLinearMap.zero_apply,PiLp.zero_apply]
+      simp only [ginibreEuclideanGradient_coordinate, hd, ContinuousLinearMap.zero_apply, PiLp.zero_apply]
     simp [he]
 
 theorem ginibreLocalWeak_cutoff_gradient_memLp {n : ℕ} (hn : 0 < n)
@@ -89,7 +89,7 @@ theorem ginibreLocalWeak_cutoff_gradient_memLp {n : ℕ} (hn : 0 < n)
   intro z
   by_cases hz : z ∈ tsupport η
   · simp [hz]
-  · simp [hz,image_eq_zero_of_notMem_tsupport hz]
+  · simp [hz, image_eq_zero_of_notMem_tsupport hz]
 
 #print axioms ginibreLocalWeak_cutoff_pair_memLp
 end

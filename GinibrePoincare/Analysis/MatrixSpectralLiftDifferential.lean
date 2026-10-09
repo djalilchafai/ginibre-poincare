@@ -5,6 +5,18 @@ public import Mathlib.Analysis.Calculus.FDeriv.RestrictScalars
 
 @[expose] public section
 
+/-! # Differentiating a local spectral observable
+
+Each local eigenvalue branch satisfies the characteristic-root equation. The
+one-root derivative theorem identifies its differential with the trace pairing
+against the canonical eigenvalue projector. Differentiation of the finite tuple
+assembles these component derivatives. Restricting scalars to the reals and
+applying the chain rule then gives the derivative of a real eigenvalue observable.
+The statements are local on simple spectrum and do not differentiate an arbitrary
+measurable enumeration of eigenvalues.
+-/
+
+
 open Matrix Filter
 open scoped Topology
 namespace GinibrePoincare

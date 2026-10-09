@@ -9,7 +9,7 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 variable (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E]
-def bakryBoundedSpatialBump  : ContDiffBump (0 : E) :=
+def bakryBoundedSpatialBump : ContDiffBump (0 : E) :=
   ⟨1, 2, by norm_num, by norm_num⟩
 
 def bakryBoundedSpatialCutoff (k : ℕ) (A : E) : ℝ :=
@@ -95,11 +95,11 @@ theorem bakryEmery_boundedC1_lsi_of_compact {ι : Type*} [Fintype ι]
     calc
       _ = |bakryBoundedSpatialCutoff E n x| * ‖f x‖ := norm_mul _ _
       _ ≤ 1 * C := mul_le_mul (by simpa [abs_of_nonneg hu.1] using hu.2) (hC x)
-        (norm_nonneg _) (by linarith [norm_nonneg (f x),hC x])
+        (norm_nonneg _) (by linarith [norm_nonneg (f x), hC x])
       _ = C := one_mul C
   have hlim x : Tendsto (fun n => F n x) atTop (𝓝 (f x)) := by
     simpa [F] using (bakryBoundedSpatialCutoff_tendsto E x).mul_const (f x)
-  obtain ⟨M,hM0,hM⟩ := bakryBoundedSpatialCutoff_derivative_bound E
+  obtain ⟨M, hM0, hM⟩ := bakryBoundedSpatialCutoff_derivative_bound E
   have hD n x i : fderiv ℝ (F n) x (d i) =
       f x * fderiv ℝ (bakryBoundedSpatialCutoff E n) x (d i) +
       bakryBoundedSpatialCutoff E n x * fderiv ℝ f x (d i) := by
@@ -108,14 +108,14 @@ theorem bakryEmery_boundedC1_lsi_of_compact {ι : Type*} [Fintype ι]
       (hf.differentiable one_ne_zero x)]
     simp [ContinuousLinearMap.add_apply]
     ring
-  have hDb n x i : |fderiv ℝ (F n) x (d i)| ≤ (C*M+(K:ℝ))*‖d i‖ := by
+  have hDb n x i : |fderiv ℝ (F n) x (d i)| ≤ (C*M+(K : ℝ))*‖d i‖ := by
     have hu := bakryBoundedSpatialCutoff_mem_unit E n x
     have hd := hM n x (d i)
-    have hinv : M / ((n:ℝ)+1) ≤ M := by
+    have hinv : M / ((n : ℝ)+1) ≤ M := by
       apply (div_le_iff₀ (by positivity)).2
       nlinarith [Nat.cast_nonneg (α := ℝ) n]
     have hd' := hd.trans (mul_le_mul_of_nonneg_right hinv (norm_nonneg (d i)))
-    have hdf : |fderiv ℝ f x (d i)| ≤ (K:ℝ)*‖d i‖ := by
+    have hdf : |fderiv ℝ f x (d i)| ≤ (K : ℝ)*‖d i‖ := by
       exact ((fderiv ℝ f x).le_opNorm _).trans
         (mul_le_mul_of_nonneg_right (norm_fderiv_le_of_lipschitz ℝ hK) (norm_nonneg _))
     rw [hD]
@@ -125,26 +125,26 @@ theorem bakryEmery_boundedC1_lsi_of_compact {ι : Type*} [Fintype ι]
         simpa [abs_mul] using abs_add_le
           (f x*fderiv ℝ (bakryBoundedSpatialCutoff E n) x (d i))
           (bakryBoundedSpatialCutoff E n x*fderiv ℝ f x (d i))
-      _ ≤ C*(M*‖d i‖)+1*((K:ℝ)*‖d i‖) := add_le_add
+      _ ≤ C*(M*‖d i‖)+1*((K : ℝ)*‖d i‖) := add_le_add
         (mul_le_mul (by simpa [Real.norm_eq_abs] using hC x) hd' (abs_nonneg _)
-          (by linarith [hC x,norm_nonneg (f x)]))
+          (by linarith [hC x, norm_nonneg (f x)]))
         (mul_le_mul (by simpa [abs_of_nonneg hu.1] using hu.2) hdf (abs_nonneg _) (by norm_num))
       _ = _ := by ring
-  have hmass : Tendsto (fun n => ∫ x,F n x^2 ∂μ) atTop (𝓝 (∫ x,f x^2 ∂μ)) := by
+  have hmass : Tendsto (fun n => ∫ x, F n x^2 ∂μ) atTop (𝓝 (∫ x, f x^2 ∂μ)) := by
     apply tendsto_integral_of_dominated_convergence (fun _ => C^2)
       (fun n => ((hF n).continuous.pow 2).aestronglyMeasurable) (integrable_const _)
     · intro n
       exact Eventually.of_forall (fun x => by
         have hb := hFb n x
         rw [Real.norm_eq_abs] at hb
-        rw [Real.norm_eq_abs,abs_of_nonneg (sq_nonneg _)]
+        rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)]
         change F n x ^ 2 ≤ C ^ 2
-        nlinarith [sq_abs (F n x),abs_nonneg (F n x)])
+        nlinarith [sq_abs (F n x), abs_nonneg (F n x)])
     · exact Eventually.of_forall (fun x => (hlim x).pow 2)
-  have he : Tendsto (fun n => ∫ x,directionalEnergy d (F n) x ∂μ) atTop
-      (𝓝 (∫ x,directionalEnergy d f x ∂μ)) := by
+  have he : Tendsto (fun n => ∫ x, directionalEnergy d (F n) x ∂μ) atTop
+      (𝓝 (∫ x, directionalEnergy d f x ∂μ)) := by
     apply tendsto_integral_of_dominated_convergence
-      (fun _ => ∑ i,((C*M+(K:ℝ))*‖d i‖)^2)
+      (fun _ => ∑ i, ((C*M+(K : ℝ))*‖d i‖)^2)
     · intro n
       apply Continuous.aestronglyMeasurable
       exact continuous_finsetSum _ (fun i hi =>
@@ -153,12 +153,12 @@ theorem bakryEmery_boundedC1_lsi_of_compact {ι : Type*} [Fintype ι]
     · intro n
       apply Eventually.of_forall
       intro x
-      rw [Real.norm_eq_abs,abs_of_nonneg (Finset.sum_nonneg (fun _ _ => sq_nonneg _))]
+      rw [Real.norm_eq_abs, abs_of_nonneg (Finset.sum_nonneg (fun _ _ => sq_nonneg _))]
       apply Finset.sum_le_sum
       intro i hi
       have hb := hDb n x i
-      have hp : 0 ≤ (C*M+(K:ℝ))*‖d i‖ := (abs_nonneg _).trans hb
-      nlinarith [sq_abs (fderiv ℝ (F n) x (d i)),abs_nonneg (fderiv ℝ (F n) x (d i))]
+      have hp : 0 ≤ (C*M+(K : ℝ))*‖d i‖ := (abs_nonneg _).trans hb
+      nlinarith [sq_abs (fderiv ℝ (F n) x (d i)), abs_nonneg (fderiv ℝ (F n) x (d i))]
     · apply Eventually.of_forall
       intro x
       apply tendsto_finsetSum
@@ -188,7 +188,7 @@ theorem bakryEmery_boundedLipschitz_gradient_lsi_of_compact
     squareEntropy μ f ≤ c * ∫ x, ‖gradient f x‖^2 ∂μ := by
   let b := stdOrthonormalBasis ℝ E
   have hc : ∀ g : E → ℝ, ContDiff ℝ 1 g → HasCompactSupport g →
-      squareEntropy μ g ≤ c * ∫ x,directionalEnergy b g x ∂μ := by
+      squareEntropy μ g ≤ c * ∫ x, directionalEnergy b g x ∂μ := by
     intro g hg hgc
     simpa only [bakryEmery_directionalEnergy_orthonormalBasis] using hcore g hg hgc
   have hb := boundedLipschitz_lsi_of_C1 η μ hac b c

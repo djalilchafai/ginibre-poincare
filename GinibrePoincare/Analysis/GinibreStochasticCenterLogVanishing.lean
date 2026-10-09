@@ -16,7 +16,7 @@ theorem ginibre_probability_zero_of_log_barriers {p C r d : ℝ}
       (Real.log (C+ε)-Real.log (r+ε)+d)/(Real.log (C+ε)-Real.log ε)) : p=0 := by
   by_contra hn
   have hpp : 0 < p := lt_of_le_of_ne hp (Ne.symm hn)
-  obtain ⟨k,hk⟩ := exists_nat_gt ((Real.log (C+1)-Real.log r+d-p*Real.log C)/p)
+  obtain ⟨k, hk⟩ := exists_nat_gt ((Real.log (C+1)-Real.log r+d-p*Real.log C)/p)
   let ε := Real.exp (-(k : ℝ))
   have hε : 0 < ε := Real.exp_pos _
   have hε1 : ε ≤ 1 := Real.exp_le_one_iff.mpr (neg_nonpos.mpr (Nat.cast_nonneg k))

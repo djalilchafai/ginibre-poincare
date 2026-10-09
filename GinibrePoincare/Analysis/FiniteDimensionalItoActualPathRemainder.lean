@@ -4,6 +4,21 @@ public import GinibrePoincare.Analysis.FiniteDimensionalItoPathMesh
 
 @[expose] public section
 
+/-! # Taylor remainder sums along a continuous path
+
+On a finite horizon, the path image is compact and contained in its open
+C² domain. The uniform local Taylor estimate and vanishing path mesh bound
+the total remainder by an arbitrarily small factor times the sum of squared
+increments.
+
+The first theorem assumes those quadratic sums are bounded and concludes
+that the unnormalized remainder tends to zero. The next two normalize by
+the quadratic sum, or by one plus that sum, and require no such bound. In
+the zero-denominator branch the quotient is Lean's totalized zero quotient;
+otherwise the positive denominator cancels the quadratic factor in the
+error bound. The `1 + quadratic` version avoids this branch and feeds the
+convergence-in-measure estimates for stochastic remainder terms. -/
+
 open Filter Metric
 open scoped Topology NNReal
 namespace GinibrePoincare

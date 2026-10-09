@@ -26,7 +26,7 @@ theorem ginibreTransitionAnalytic_bounded_adjoint_identification
         (∫ z, f.val z*θ z ∂ginibreMeasure n)) :
     hu.toLp u = (ginibreFullSymmetricResolvent n hn f).val := by
   have hf : MemLp (f.val : Configuration n → ℝ) 2 (ginibreMeasure n) := Lp.memLp _
-  obtain ⟨g,hgm,hlocal,hraw⟩ := ginibreTransitionAnalytic_compact_adjoint_exists_local_gradient n hn u f.val hu hf heq
+  obtain ⟨g, hgm, hlocal, hraw⟩ := ginibreTransitionAnalytic_compact_adjoint_exists_local_gradient n hn u f.val hu hf heq
   have hw : ∀ k (θ : Configuration n → ℝ), ContDiff ℝ ∞ θ → HasCompactSupport θ →
       tsupport θ ⊆ {z | CollisionFree z} →
       (∫ z, g z k*θ z) = -(∫ z, u z*fderiv ℝ θ z (ginibreCoordinateDirection k)) := by
@@ -57,27 +57,27 @@ theorem ginibreTransitionAnalytic_bounded_adjoint_identification
   have hcompact : ∀ p ∈ ginibreInteriorSmoothPair n,
       inner ℝ (hu.toLp u) p.1+(1/(n : ℝ))*inner ℝ (hg.toLp g) p.2=inner ℝ f.val p.1 := by
     intro p hp
-    obtain ⟨θ,hθ,hθc,hθs,hpval,hpgrad⟩ := hp
+    obtain ⟨θ, hθ, hθc, hθs, hpval, hpgrad⟩ := hp
     have huv : inner ℝ (hu.toLp u) p.1 = ∫ z, u z*θ z ∂ginibreMeasure n := by
       rw [L2.inner_def]
       apply integral_congr_ae
-      filter_upwards [hu.coeFn_toLp,hpval] with z hz hv
+      filter_upwards [hu.coeFn_toLp, hpval] with z hz hv
       change p.1 z*(hu.toLp u) z = u z*θ z
-      rw [hz,hv,mul_comm]
+      rw [hz, hv, mul_comm]
     have hgv : inner ℝ (hg.toLp g) p.2 =
         ∫ z, inner ℝ (g z) (ginibreEuclideanGradient θ z) ∂ginibreMeasure n := by
       rw [L2.inner_def]
       apply integral_congr_ae
-      filter_upwards [hg.coeFn_toLp,hpgrad] with z hz hv
+      filter_upwards [hg.coeFn_toLp, hpgrad] with z hz hv
       change inner ℝ ((hg.toLp g) z) (p.2 z) = _
-      rw [hz,hv]
+      rw [hz, hv]
     have hfv : inner ℝ f.val p.1 = ∫ z, f.val z*θ z ∂ginibreMeasure n := by
       rw [L2.inner_def]
       apply integral_congr_ae
       filter_upwards [hpval] with z hv
       change p.1 z*f.val z = f.val z*θ z
-      rw [hv,mul_comm]
-    rw [huv,hgv,hfv]
+      rw [hv, mul_comm]
+    rw [huv, hgv, hfv]
     simpa only [one_mul] using hgrad θ hθ hθc hθs
   apply ginibreFullSymmetricResolvent_unique_unrestricted_weak hn f (hu.toLp u) (hg.toLp g) hdist
   intro w h hw

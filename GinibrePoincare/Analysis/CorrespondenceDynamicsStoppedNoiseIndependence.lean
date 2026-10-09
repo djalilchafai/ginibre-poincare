@@ -26,16 +26,16 @@ theorem correspondenceBrownian_stopped_noise_independent
   have hN : Measurable N := (correspondenceNoiseShift_continuous n).measurable.comp
     (htm.prodMk (ginibreBrownianFullContinuousNoise_measurable n B P hB α))
   have hLaw : P.map N = P.map (ginibreBrownianFullContinuousNoise n B α) := by
-    simpa only [Measure.restrict_univ,measure_univ,one_smul] using
+    simpa only [Measure.restrict_univ, measure_univ, one_smul] using
       correspondenceBrownian_stopping_fresh_noise n B P hB hind α τ hτ univ MeasurableSet.univ
-  refine ⟨hN,hLaw,?_⟩
+  refine ⟨hN, hLaw,?_⟩
   apply (indepFun_iff_measure_inter_preimage_eq_mul).mpr
   intro C D hC hD
   have hh := correspondenceBrownian_stopping_fresh_noise n B P hB hind α τ hτ (Y ⁻¹' D) (hY hD)
   have hh' := congrArg (fun μ : Measure (GinibreContinuousNoise n) => μ C) hh
-  rw [Measure.map_apply hN hC,Measure.restrict_apply (hN hC),Measure.smul_apply,
-    ← hLaw,Measure.map_apply hN hC] at hh'
-  simpa only [N,smul_eq_mul,mul_comm] using hh'
+  rw [Measure.map_apply hN hC, Measure.restrict_apply (hN hC), Measure.smul_apply,
+    ← hLaw, Measure.map_apply hN hC] at hh'
+  simpa only [N, smul_eq_mul, mul_comm] using hh'
 
 #print axioms correspondenceBrownian_stopped_noise_independent
 end

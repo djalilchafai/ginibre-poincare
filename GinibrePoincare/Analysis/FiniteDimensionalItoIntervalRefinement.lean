@@ -24,18 +24,18 @@ theorem itoIntervalClamp_increment_comm {E : Type*} [AddCommGroup E]
     by_cases hbc : b ≤ c
     · have hbd := hbc.trans hcd
       have had := hac.trans hcd
-      simp [itoIntervalClamp,min_eq_left hbd,min_eq_left hbc,
-        min_eq_right had,min_eq_right hbd,max_eq_right hab,max_eq_left hac,max_eq_left hbc]
+      simp [itoIntervalClamp, min_eq_left hbd, min_eq_left hbc,
+        min_eq_right had, min_eq_right hbd, max_eq_right hab, max_eq_left hac, max_eq_left hbc]
     · have hcb : c ≤ b := le_of_not_ge hbc
       have had := hac.trans hcd
       by_cases hdb : d ≤ b
-      · simp [itoIntervalClamp,min_eq_right hdb,min_eq_right hcb,
-          min_eq_right had,min_eq_left hdb,max_eq_right hac,max_eq_right had,
-          max_eq_right hcd,max_eq_left hac]
+      · simp [itoIntervalClamp, min_eq_right hdb, min_eq_right hcb,
+          min_eq_right had, min_eq_left hdb, max_eq_right hac, max_eq_right had,
+          max_eq_right hcd, max_eq_left hac]
       · have hbd : b ≤ d := le_of_not_ge hdb
-        simp [itoIntervalClamp,min_eq_left hbd,min_eq_right hcb,
-          min_eq_right had,min_eq_right hbd,max_eq_right hab,max_eq_right hac,
-          max_eq_left hac,max_eq_right hcb]
+        simp [itoIntervalClamp, min_eq_left hbd, min_eq_right hcb,
+          min_eq_right had, min_eq_right hbd, max_eq_right hab, max_eq_right hac,
+          max_eq_left hac, max_eq_right hcb]
   rcases le_total a c with hac | hca
   · exact aux a b c d hab hcd hac
   · exact (aux c d a b hcd hab hca).symm
@@ -47,7 +47,7 @@ theorem itoIntervalClamp_increment_sum {E : Type*} [AddCommGroup E]
     (∑ j ∈ Finset.range N,
       (B (itoIntervalClamp a b (c (j+1)))-B (itoIntervalClamp a b (c j)))) = B b-B a := by
   rw [Finset.sum_range_sub (fun j => B (itoIntervalClamp a b (c j))) N]
-  simp [hcN,hc0,itoIntervalClamp,min_eq_left hbT,max_eq_right hab]
+  simp [hcN, hc0, itoIntervalClamp, min_eq_left hbT, max_eq_right hab]
 
 /-- Difference of two actual weighted left sums equals the double sum over
 intersection increments. Grids may be noncommensurate and nonuniform. -/
@@ -67,7 +67,7 @@ theorem itoWeightedIntervalSums_difference_refinement
           B (itoIntervalClamp (a i) (a (i+1)) (c j))) := by
     apply Finset.sum_congr rfl
     intro i hi
-    rw [←Finset.mul_sum,itoIntervalClamp_increment_sum B (a i) (a (i+1)) T
+    rw [←Finset.mul_sum, itoIntervalClamp_increment_sum B (a i) (a (i+1)) T
       (ha (Nat.le_succ i)) (by rw [←haN];exact ha (Nat.succ_le_of_lt (Finset.mem_range.mp hi)))
       c M hc0 hcM]
   have hright : (∑ j ∈ Finset.range M, G j*(B (c (j+1))-B (c j))) =
@@ -78,10 +78,10 @@ theorem itoWeightedIntervalSums_difference_refinement
     apply Finset.sum_congr rfl
     intro j hj
     simp_rw [itoIntervalClamp_increment_comm B _ _ _ _ (ha (Nat.le_succ _)) (hc (Nat.le_succ _))]
-    rw [←Finset.mul_sum,itoIntervalClamp_increment_sum B (c j) (c (j+1)) T
+    rw [←Finset.mul_sum, itoIntervalClamp_increment_sum B (c j) (c (j+1)) T
       (hc (Nat.le_succ j)) (by rw [←hcM];exact hc (Nat.succ_le_of_lt (Finset.mem_range.mp hj)))
       a N ha0 haN]
-  rw [hleft,hright,←Finset.sum_sub_distrib]
+  rw [hleft, hright,←Finset.sum_sub_distrib]
   apply Finset.sum_congr rfl
   intro i hi
   rw [←Finset.sum_sub_distrib]
@@ -99,12 +99,12 @@ theorem itoIntervalClamp_increment_eq_intersection {E : Type*} [AddCommGroup E]
   · have hbd := hbc.trans hcd
     have hac := hab.trans hbc
     have hm : min b d ≤ c := (min_le_left _ _).trans hbc
-    simp [itoIntervalClamp,min_eq_left hbc,min_eq_left hbd,max_eq_right hab,
-      max_eq_right hac,max_eq_left hbc]
+    simp [itoIntervalClamp, min_eq_left hbc, min_eq_left hbd, max_eq_right hab,
+      max_eq_right hac, max_eq_left hbc]
   · have hcb : c ≤ b := le_of_not_ge hbc
     have hm : c ≤ min b d := le_min hcb hcd
-    simp only [itoIntervalClamp,min_eq_right hcb]
-    rw [max_assoc,max_eq_right hm]
+    simp only [itoIntervalClamp, min_eq_right hcb]
+    rw [max_assoc, max_eq_right hm]
 
 /-- Exact refinement using literal nonnegative intersection endpoints. -/
 theorem itoWeightedIntervalSums_difference_intersections

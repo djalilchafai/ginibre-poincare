@@ -14,24 +14,24 @@ noncomputable section
 set_option maxHeartbeats 1600000
 set_option backward.isDefEq.respectTransparency false
 
-def ginibrePositiveCenterPaths (n : ℕ) : Set C(ℝ,Configuration n) :=
+def ginibrePositiveCenterPaths (n : ℕ) : Set C(ℝ, Configuration n) :=
   {p | ∀ t : ℝ, 0 ≤ t → 0 < ginibreCenterSquared n (p t)}
 
 theorem ginibrePositiveCenterPaths_measurable (n : ℕ) :
-    @MeasurableSet C(ℝ,Configuration n) (borel _) (ginibrePositiveCenterPaths n) := by
-  letI : MeasurableSpace C(ℝ,Configuration n) := borel _
-  letI : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+    @MeasurableSet C(ℝ, Configuration n) (borel _) (ginibrePositiveCenterPaths n) := by
+  letI : MeasurableSpace C(ℝ, Configuration n) := borel _
+  letI : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
   have he : ginibrePositiveCenterPaths n =
-      ⋂ k : ℕ, {p : C(ℝ,Configuration n) | MapsTo p (Icc (0 : ℝ) k)
+      ⋂ k : ℕ, {p : C(ℝ, Configuration n) | MapsTo p (Icc (0 : ℝ) k)
         {z | 0 < ginibreCenterSquared n z}} := by
     ext p
-    simp only [ginibrePositiveCenterPaths,mem_setOf_eq,mem_iInter,MapsTo,mem_Icc]
+    simp only [ginibrePositiveCenterPaths, mem_setOf_eq, mem_iInter, MapsTo, mem_Icc]
     constructor
     · intro hp k t ht
       exact hp t ht.1
     · intro hp t ht
-      obtain ⟨k,hk⟩ := exists_nat_ge t
-      exact hp k ⟨ht,hk⟩
+      obtain ⟨k, hk⟩ := exists_nat_ge t
+      exact hp k ⟨ht, hk⟩
   rw [he]
   apply MeasurableSet.iInter
   intro k
@@ -45,10 +45,10 @@ theorem ginibreDrivenGlobalPathElement_center_nonhitting_noise_ae
     [IsProbabilityMeasure P] [P.IsComplete] (hB : ∀ i, IsBrownianReal (B i) P)
     (hind : iIndepFun (fun i ω t => B i t ω) P) :
     ∀ᵐ N ∂P.map (ginibreBrownianFullContinuousNoise n B α),
-      ginibreDrivenGlobalPathElement α (z,N) ∈ ginibrePositiveCenterPaths n := by
+      ginibreDrivenGlobalPathElement α (z, N) ∈ ginibrePositiveCenterPaths n := by
   have hm := ginibreBrownianFullContinuousNoise_measurable n B P hB α
-  have hPath : @Measurable _ C(ℝ,Configuration n) _ (borel _)
-      (fun N : GinibreContinuousNoise n => ginibreDrivenGlobalPathElement α (z,N)) :=
+  have hPath : @Measurable _ C(ℝ, Configuration n) _ (borel _)
+      (fun N : GinibreContinuousNoise n => ginibreDrivenGlobalPathElement α (z, N)) :=
     (ginibreDrivenGlobalPathElement_measurable (by omega) α).comp measurable_prodMk_left
   rw [ae_map_iff hm.aemeasurable
     (hPath (ginibrePositiveCenterPaths_measurable n))]
@@ -57,9 +57,9 @@ theorem ginibreDrivenGlobalPathElement_center_nonhitting_noise_ae
     with ω hnonzero htop
   intro t ht
   change 0 < ginibreCenterSquared n
-    (ginibreDrivenGlobalPathElement α (z,ginibreBrownianFullContinuousNoise n B α ω) t)
+    (ginibreDrivenGlobalPathElement α (z, ginibreBrownianFullContinuousNoise n B α ω) t)
   unfold ginibreBrownianMaximalLifetime at htop
-  simp only [ginibreDrivenGlobalPathElement,Prod.fst,Prod.snd,dif_pos htop,
+  simp only [ginibreDrivenGlobalPathElement, Prod.fst, Prod.snd, dif_pos htop,
     ContinuousMap.coe_mk]
   exact lt_of_le_of_ne (Complex.normSq_nonneg _) (Ne.symm (hnonzero t.toNNReal))
 

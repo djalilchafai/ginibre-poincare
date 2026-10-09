@@ -20,7 +20,7 @@ theorem ginibreLocalWeak_pairing_limit {n : ℕ}
       Lp (EuclideanSpace ℝ (Fin n × Fin 2)) 2 (ginibreMeasure n))
     (v : Lp ℝ 2 (ginibreMeasure n))
     (G : Lp (EuclideanSpace ℝ (Fin n × Fin 2)) 2 (ginibreMeasure n))
-    (hq : Tendsto q atTop (𝓝 (v,G)))
+    (hq : Tendsto q atTop (𝓝 (v, G)))
     (heq : ∀ m, ℓ*inner ℝ A (q m).1+c*inner ℝ B (q m).2+
       c*inner ℝ H (q m).1=inner ℝ C (q m).1) :
     ℓ*inner ℝ A v+c*inner ℝ B G+c*inner ℝ H v=inner ℝ C v := by

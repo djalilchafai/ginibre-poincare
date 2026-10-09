@@ -25,9 +25,9 @@ theorem brownianUniformPartialSum_difference_horizon_refinement {Ω : Type*}
   exact itoWeightedIntervalSums_difference_intersections (fun s => B s ω) t
     (fun i => min t (itoUniformNNTime T N i)) (itoUniformNNTime t M) N M
     (monotone_const.min (itoUniformNNTime_mono T N)) (itoUniformNNTime_mono t M)
-    (by simp [itoUniformNNTime,itoUniformTime])
-    (by rw [itoUniformNNTime_end T N hN,min_eq_left ht])
-    (by simp [itoUniformNNTime,itoUniformTime]) (itoUniformNNTime_end t M hM)
+    (by simp [itoUniformNNTime, itoUniformTime])
+    (by rw [itoUniformNNTime_end T N hN, min_eq_left ht])
+    (by simp [itoUniformNNTime, itoUniformTime]) (itoUniformNNTime_end t M hM)
     (fun i => F (itoUniformNNTime T N i) ω) (fun j => G (itoUniformNNTime t M j) ω)
 
 end

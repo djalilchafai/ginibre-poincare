@@ -57,15 +57,15 @@ theorem brownianPredictableVectorGaussianDensity_terminal_fresh_increment
   have hmapW : (Q N).map W=(Q (k+1)).map W :=
     brownianPredictableVectorGaussianDensity_past_map B P hB hind h τ hτ hh
       (k+1) N (Nat.succ_le_of_lt hkN) W hW
-  have hmapPair : (Q N).map (fun ω => (Y ω,W ω))=
-      (Q (k+1)).map (fun ω => (Y ω,W ω)) :=
+  have hmapPair : (Q N).map (fun ω => (Y ω, W ω))=
+      (Q (k+1)).map (fun ω => (Y ω, W ω)) :=
     brownianPredictableVectorGaussianDensity_past_map B P hB hind h τ hτ hh
       (k+1) N (Nat.succ_le_of_lt hkN) _ (hYnext.prodMk hW)
   have hf := brownianPredictableVectorGaussianDensity_fresh_increment B P hB hind h τ hτ hh k Y hY
   dsimp only at hf
-  refine ⟨⟨hWa.aemeasurable,hmapW.trans hf.1.map_eq⟩,?_⟩
+  refine ⟨⟨hWa.aemeasurable, hmapW.trans hf.1.map_eq⟩,?_⟩
   apply (indepFun_iff_map_prod_eq_prod_map_map hYa.aemeasurable hWa.aemeasurable).mpr
-  rw [hmapPair,hmapY,hmapW]
+  rw [hmapPair, hmapY, hmapW]
   exact hf.2.map_prod_eq_prod_map_map hYa.aemeasurable hWa.aemeasurable
 
 end

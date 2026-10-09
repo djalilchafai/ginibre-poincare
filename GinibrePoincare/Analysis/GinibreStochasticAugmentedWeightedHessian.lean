@@ -47,21 +47,21 @@ theorem ginibreBrownianAugmentedWeightedHessian_tendstoInProbability {Ω ι : Ty
     ext ω
     simp [W]
   have hW (p : ι × ι) : TendstoInMeasure P (W p) atTop (L p) := by
-    rcases p with ⟨i,j⟩
+    rcases p with ⟨i, j⟩
     by_cases hij : i=j
     · subst j
       convert! ginibreBrownianAugmentedWeightedDiagonal_tendstoInProbability B P hB hind i t (A i i)
           (hA i i) (hc i i) C (hbound i i) using 1
-      all_goals simp [W,L,ginibreBrownianAugmentedWeightedDiagonal,pow_two]
-      all_goals funext n ω; simp [ginibreBrownianAugmentedWeightedDiagonal,pow_two]
+      all_goals simp [W, L, ginibreBrownianAugmentedWeightedDiagonal, pow_two]
+      all_goals funext n ω; simp [ginibreBrownianAugmentedWeightedDiagonal, pow_two]
     · convert! ginibreBrownianAugmentedMixedError_tendstoInProbability B P hB hind i j hij t
         (fun n l => A i j (ginibreUniformBrownianTime t n l))
         (fun n l => (hA _ _ _).measurable) C (fun n l ω => hbound _ _ _ ω) using 1
-      all_goals simp [W,L,hij,ginibreBrownianAugmentedMixedError]
+      all_goals simp [W, L, hij, ginibreBrownianAugmentedMixedError]
   have h := itoTendstoInMeasure_finset_sum P Finset.univ W L hWm hW
   convert! h using 1
   ext ω
-  simp [L,Fintype.sum_prod_type]
+  simp [L, Fintype.sum_prod_type]
 
 end
 end GinibrePoincare

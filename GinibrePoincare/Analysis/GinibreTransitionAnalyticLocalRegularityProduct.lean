@@ -23,7 +23,7 @@ theorem ginibreLocalRegularityDirectional_product
       f x*ginibreLocalRegularityDirectional v g x+g x*ginibreLocalRegularityDirectional v f x := by
   unfold ginibreLocalRegularityDirectional
   rw [fderiv_mul (hf.differentiable (by simp)).differentiableAt (hg.differentiable (by simp)).differentiableAt]
-  simp only [add_apply,smul_apply,smul_eq_mul]
+  simp only [add_apply, smul_apply, smul_eq_mul]
 
 theorem ginibreLocalRegularityDirectional_second_product
     (f g : E → ℂ) (hf : ContDiff ℝ ∞ f) (hg : ContDiff ℝ ∞ g) (v x : E) :
@@ -59,7 +59,7 @@ theorem ginibreLocalRegularityLaplacian_product
         2*∑ i, ginibreLocalRegularityDirectional (v i) f x*ginibreLocalRegularityDirectional (v i) g x := by
   unfold ginibreLocalRegularityLaplacian
   simp_rw [ginibreLocalRegularityDirectional_second_product f g hf hg,
-    Finset.sum_add_distrib,← Finset.mul_sum,mul_assoc]
+    Finset.sum_add_distrib,← Finset.mul_sum, mul_assoc]
   rw [← Finset.mul_sum]
 
 theorem ginibreLocalRegularityDirectional_smooth (f : E → ℂ) (hf : ContDiff ℝ ∞ f) (v : E) :
@@ -93,7 +93,7 @@ theorem ginibreLocalRegularityLaplacian_compact {ι : Type*} [Fintype ι]
           ginibreLocalRegularityDirectional (v i) (ginibreLocalRegularityDirectional (v i) f)+
           (fun x => ∑ j ∈ s, ginibreLocalRegularityDirectional (v j) (ginibreLocalRegularityDirectional (v j) f) x) := by
         funext x
-        simp only [Finset.sum_insert hi,Pi.add_apply]
+        simp only [Finset.sum_insert hi, Pi.add_apply]
       rw [he]
       exact hdi.add ih
   exact hsum Finset.univ

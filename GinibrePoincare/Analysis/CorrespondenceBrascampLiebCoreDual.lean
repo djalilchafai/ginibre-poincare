@@ -14,15 +14,15 @@ set_option backward.isDefEq.respectTransparency false
     inner ℝ (hf.toLp f) (hg.toLp g) = ∫ x, f x * g x ∂μ := by
   rw [L2.inner_def]
   apply integral_congr_ae
-  filter_upwards [hf.coeFn_toLp,hg.coeFn_toLp] with x hfx hgx
-  rw [hfx,hgx]
+  filter_upwards [hf.coeFn_toLp, hg.coeFn_toLp] with x hfx hgx
+  rw [hfx, hgx]
   simp [mul_comm]
 
  theorem correspondenceBrascampLieb_toLp_norm_sq
     {X : Type*} [MeasurableSpace X] (μ : Measure X) (f : X → ℝ)
     (hf : MemLp f 2 μ) :
     ‖hf.toLp f‖^2 = ∫ x, f x^2 ∂μ := by
-  rw [← real_inner_self_eq_norm_sq,correspondenceBrascampLieb_toLp_inner μ f f hf hf]
+  rw [← real_inner_self_eq_norm_sq, correspondenceBrascampLieb_toLp_inner μ f f hf hf]
   simp only [pow_two]
 
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
@@ -43,7 +43,7 @@ variable {ι : Type*} [Fintype ι] [DecidableEq ι]
       ∂correspondenceBrascampLiebMeasure W) *
     ‖correspondenceBrascampLiebCoreL2 W b hW f‖^2 := by
   unfold correspondenceBrascampLiebCoreL2
-  rw [correspondenceBrascampLieb_toLp_inner,correspondenceBrascampLieb_toLp_norm_sq]
+  rw [correspondenceBrascampLieb_toLp_inner, correspondenceBrascampLieb_toLp_norm_sq]
   exact correspondenceBrascampLieb_compact_generator_bound W g f.val b hW hg
     (f.smooth.of_le (by norm_num)) f.compact hpos hgE
 

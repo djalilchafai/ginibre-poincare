@@ -14,7 +14,7 @@ theorem correspondenceOperatorNumberResolvent_denseRange (n : ℕ) (hn : 0<n) :
   have hk : R.ker=⊥ := LinearMap.ker_eq_bot.mpr
     (correspondenceOperatorNumberResolvent_injective n hn)
   have he := R.orthogonal_ker
-  rw [hR,hk,Submodule.bot_orthogonal_eq_top] at he
+  rw [hR, hk, Submodule.bot_orthogonal_eq_top] at he
   change Dense (Set.range R)
   rw [dense_iff_closure_eq]
   change closure (R.range : Set (Lp ℂ 2 (complexGaussianMeasure n))) = Set.univ
@@ -23,7 +23,7 @@ theorem correspondenceOperatorNumberResolvent_denseRange (n : ℕ) (hn : 0<n) :
 
 theorem correspondenceOperatorNumber_range_pair (n : ℕ) (hn : 0<n)
     (x : Lp ℂ 2 (complexGaussianMeasure n)) :
-    (correspondenceOperatorNumberResolvent n hn x,x-correspondenceOperatorNumberResolvent n hn x)∈
+    (correspondenceOperatorNumberResolvent n hn x, x-correspondenceOperatorNumberResolvent n hn x)∈
       (correspondenceOperatorNumber n hn).graph := by
   rw [correspondenceOperatorNumber_graph_iff_resolvent]
   simp only [add_sub_cancel]
@@ -31,7 +31,7 @@ theorem correspondenceOperatorNumber_range_pair (n : ℕ) (hn : 0<n)
 theorem correspondenceOperatorNumber_dense_domain (n : ℕ) (hn : 0<n) :
     Dense ((correspondenceOperatorNumber n hn).domain : Set (Lp ℂ 2 (complexGaussianMeasure n))) := by
   apply (correspondenceOperatorNumberResolvent_denseRange n hn).mono
-  rintro _ ⟨x,rfl⟩
+  rintro _ ⟨x, rfl⟩
   exact LinearPMap.mem_domain_of_mem_graph (correspondenceOperatorNumber_range_pair n hn x)
 
 theorem correspondenceOperatorNumberGraph_symmetric (n : ℕ) (hn : 0<n)
@@ -48,7 +48,7 @@ theorem correspondenceOperatorNumberGraph_symmetric (n : ℕ) (hn : 0<n)
     ((correspondenceOperatorNumber_graph n hn) ▸ hq)
   change inner ℂ (correspondenceOperatorNumberResolvent n hn (p.1+p.2)) (q.1+q.2)=
     inner ℂ (p.1+p.2) (correspondenceOperatorNumberResolvent n hn (q.1+q.2)) at h
-  rw [hpR,hqR,inner_add_left,inner_add_right] at h
+  rw [hpR, hqR, inner_add_left, inner_add_right] at h
   linear_combination -h
 
 theorem correspondenceOperatorNumberGraph_adjoint (n : ℕ) (hn : 0<n) :
@@ -73,7 +73,7 @@ theorem correspondenceOperatorNumberGraph_adjoint (n : ℕ) (hn : 0<n) :
     rw [inner_add_right] at he
     linear_combination -he-h
   · intro hp a b hab
-    exact sub_eq_zero.mpr (correspondenceOperatorNumberGraph_symmetric n hn (a,b) p hab hp)
+    exact sub_eq_zero.mpr (correspondenceOperatorNumberGraph_symmetric n hn (a, b) p hab hp)
 
 /-- The maximal Gaussian number operator is genuinely self-adjoint. -/
 theorem correspondenceOperatorNumber_isSelfAdjoint (n : ℕ) (hn : 0<n) :
@@ -81,7 +81,7 @@ theorem correspondenceOperatorNumber_isSelfAdjoint (n : ℕ) (hn : 0<n) :
   rw [LinearPMap.isSelfAdjoint_def]
   apply LinearPMap.eq_of_eq_graph
   rw [LinearPMap.adjoint_graph_eq_graph_adjoint (correspondenceOperatorNumber_dense_domain n hn),
-    correspondenceOperatorNumber_graph,correspondenceOperatorNumberGraph_adjoint]
+    correspondenceOperatorNumber_graph, correspondenceOperatorNumberGraph_adjoint]
 #print axioms correspondenceOperatorNumber_dense_domain
 #print axioms correspondenceOperatorNumber_isSelfAdjoint
 end

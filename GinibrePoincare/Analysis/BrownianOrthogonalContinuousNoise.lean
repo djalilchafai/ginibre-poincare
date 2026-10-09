@@ -22,7 +22,7 @@ theorem indepFun_of_measurable_embeddings {Ω A B C D : Type*}
   rw [indepFun_iff_measure_inter_preimage_eq_mul] at hi ⊢
   intro S T hS hT
   have hh := hi (f '' S) (g '' T) (hf.measurableSet_image.mpr hS) (hg.measurableSet_image.mpr hT)
-  simpa only [Set.preimage_comp,Set.preimage_image_eq _ hf.injective,
+  simpa only [Set.preimage_comp, Set.preimage_image_eq _ hf.injective,
     Set.preimage_image_eq _ hg.injective] using hh
 
 /-- Whole-path independence in the evaluation sigma algebra gives independence
@@ -31,13 +31,13 @@ theorem indepFun_continuousMap_of_path_independence {Ω E F : Type*}
     [MeasurableSpace Ω] [TopologicalSpace E] [SecondCountableTopology E] [T2Space E]
     [MeasurableSpace E] [BorelSpace E] [TopologicalSpace F] [SecondCountableTopology F] [T2Space F]
     [MeasurableSpace F] [BorelSpace F]
-    [MeasurableSpace C(ℝ,E)] [BorelSpace C(ℝ,E)] [PolishSpace C(ℝ,E)]
-    [MeasurableSpace C(ℝ,F)] [BorelSpace C(ℝ,F)] [PolishSpace C(ℝ,F)]
-    (P : Measure Ω) (X : Ω → C(ℝ,E)) (Y : Ω → C(ℝ,F))
+    [MeasurableSpace C(ℝ, E)] [BorelSpace C(ℝ, E)] [PolishSpace C(ℝ, E)]
+    [MeasurableSpace C(ℝ, F)] [BorelSpace C(ℝ, F)] [PolishSpace C(ℝ, F)]
+    (P : Measure Ω) (X : Ω → C(ℝ, E)) (Y : Ω → C(ℝ, F))
     (hi : IndepFun (fun ω t => X ω t) (fun ω t => Y ω t) P) : IndepFun X Y P := by
   let d := TopologicalSpace.denseSeq ℝ
-  let f : C(ℝ,E) → ℕ → E := fun x k => x (d k)
-  let g : C(ℝ,F) → ℕ → F := fun y k => y (d k)
+  let f : C(ℝ, E) → ℕ → E := fun x k => x (d k)
+  let g : C(ℝ, F) → ℕ → F := fun y k => y (d k)
   have hf : MeasurableEmbedding f :=
     (continuous_pi (fun k => continuous_eval_const (d k))).measurableEmbedding (by
       intro x y h
@@ -65,19 +65,19 @@ theorem brownianFamily_actual_continuous_center_recenter_noise_independent {Ω :
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (P : Measure Ω) [IsProbabilityMeasure P]
     (hB : ∀ i, IsBrownianReal (B i) P) (hind : iIndepFun (fun i ω t => B i t ω) P)
     (α : ℝ) :
-    @IndepFun Ω C(ℝ,ℂ) (GinibreContinuousNoise n) _ (borel _) _
+    @IndepFun Ω C(ℝ, ℂ) (GinibreContinuousNoise n) _ (borel _) _
       (fun ω => ginibreContinuousNoiseCenter n (ginibreBrownianFullContinuousNoise n B α ω))
       (fun ω => ginibreContinuousNoiseRecenter n (ginibreBrownianFullContinuousNoise n B α ω)) P := by
-  letI : MeasurableSpace C(ℝ,ℂ) := borel _
-  letI : BorelSpace C(ℝ,ℂ) := ⟨rfl⟩
-  letI : MeasurableSpace C(ℝ,Configuration n) := borel _
-  letI : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+  letI : MeasurableSpace C(ℝ, ℂ) := borel _
+  letI : BorelSpace C(ℝ, ℂ) := ⟨rfl⟩
+  letI : MeasurableSpace C(ℝ, Configuration n) := borel _
+  letI : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
   let X := fun ω => ginibreContinuousNoiseCenter n (ginibreBrownianFullContinuousNoise n B α ω)
   let Y := fun ω => ginibreContinuousNoiseRecenter n (ginibreBrownianFullContinuousNoise n B α ω)
   have hsum : Measurable (fun f : ℝ → Configuration n => fun t => coordinateSum (f t)) := by
     apply measurable_pi_lambda
     intro t
-    simpa only [Function.comp_def,coordinateSumCLM_apply] using
+    simpa only [Function.comp_def, coordinateSumCLM_apply] using
       (coordinateSumCLM n).continuous.measurable.comp (measurable_pi_apply (X := fun _ : ℝ => Configuration n) t)
   have hraw := (brownianFamily_actual_center_recenter_noise_independent n B P hB hind α).comp
     hsum measurable_id
@@ -86,16 +86,16 @@ theorem brownianFamily_actual_continuous_center_recenter_noise_independent {Ω :
     filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB α] with ω hω
     funext t
     change coordinateSum (projectToCenterLine n _) = coordinateSumCLM n _
-    rw [coordinateSum_projectToCenterLine n hn,coordinateSumCLM_apply,hω t]
+    rw [coordinateSum_projectToCenterLine n hn, coordinateSumCLM_apply, hω t]
   have hy : (fun ω t => recenteredConfiguration n
       (ginibreConfigurationBrownianNoise n B α ω t)) =ᵐ[P] (fun ω t => (Y ω).val t) := by
     filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB α] with ω hω
     funext t
     change recenteredConfiguration n _ = recenteredCLM n _
-    rw [recenteredCLM_apply,hω t]
+    rw [recenteredCLM_apply, hω t]
   have hc : IndepFun X (fun ω => (Y ω).val) P :=
     indepFun_continuousMap_of_path_independence P X (fun ω => (Y ω).val) (hraw.congr hx hy)
-  have hclosed : IsClosed {N : C(ℝ,Configuration n) | N 0 = 0} :=
+  have hclosed : IsClosed {N : C(ℝ, Configuration n) | N 0 = 0} :=
     isClosed_eq (continuous_eval_const 0) continuous_const
   have hec : Topology.IsClosedEmbedding (fun N : GinibreContinuousNoise n => N.val) :=
     hclosed.isClosedEmbedding_subtypeVal

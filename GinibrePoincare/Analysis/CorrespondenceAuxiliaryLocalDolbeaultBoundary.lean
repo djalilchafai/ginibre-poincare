@@ -18,7 +18,7 @@ theorem planarDbar_tsupport_subset (χ : ℂ → ℂ) : tsupport (planarDbar χ)
   by_contra h
   apply hz
   change planarDbar χ z = 0
-  simp [planarDbar,fderiv_of_notMem_tsupport ℝ h]
+  simp [planarDbar, fderiv_of_notMem_tsupport ℝ h]
 
 def configurationCauchyGreenBoundary {n : ℕ} (j : Fin n) (χ : ℂ → ℂ)
     (a : Configuration n → ℂ) : Configuration n → ℂ :=
@@ -33,38 +33,38 @@ theorem configurationCauchyGreenBoundary_contDiff {n : ℕ} (j : Fin n)
 
 theorem configurationCauchyGreenPotential_congr_on_support {n : ℕ} (j : Fin n)
     (χ : ℂ → ℂ) (a b : Configuration n → ℂ) (p : Configuration n)
-    (he : ∀ z ∈ tsupport χ, a (dolbeaultReplaceCoordinate j (p,z)) =
-      b (dolbeaultReplaceCoordinate j (p,z))) :
+    (he : ∀ z ∈ tsupport χ, a (dolbeaultReplaceCoordinate j (p, z)) =
+      b (dolbeaultReplaceCoordinate j (p, z))) :
     configurationCauchyGreenPotential j χ a p = configurationCauchyGreenPotential j χ b p := by
   change (∫ y : ℂ, cauchyGreenKernel y *
-      (χ (p j-y)*a (dolbeaultReplaceCoordinate j (p,p j-y)))) =
-    ∫ y : ℂ, cauchyGreenKernel y * (χ (p j-y)*b (dolbeaultReplaceCoordinate j (p,p j-y)))
+      (χ (p j-y)*a (dolbeaultReplaceCoordinate j (p, p j-y)))) =
+    ∫ y : ℂ, cauchyGreenKernel y * (χ (p j-y)*b (dolbeaultReplaceCoordinate j (p, p j-y)))
   apply integral_congr_ae
   exact Filter.Eventually.of_forall (fun y => by
-    change cauchyGreenKernel y * (χ (p j-y)*a (dolbeaultReplaceCoordinate j (p,p j-y))) =
-      cauchyGreenKernel y * (χ (p j-y)*b (dolbeaultReplaceCoordinate j (p,p j-y)))
+    change cauchyGreenKernel y * (χ (p j-y)*a (dolbeaultReplaceCoordinate j (p, p j-y))) =
+      cauchyGreenKernel y * (χ (p j-y)*b (dolbeaultReplaceCoordinate j (p, p j-y)))
     by_cases hy : p j-y ∈ tsupport χ
     · rw [he _ hy]
-    · rw [image_eq_zero_of_notMem_tsupport hy,zero_mul,zero_mul])
+    · rw [image_eq_zero_of_notMem_tsupport hy, zero_mul, zero_mul])
 
 theorem dolbeaultCylinder_replace {n : ℕ} (W V : Fin n → Set ℂ)
     (s : Finset (Fin n)) (j : Fin n) (hjs : j ∉ s) (p : Configuration n)
     (hp : p ∈ dolbeaultCylinder W Finset.univ ∩ dolbeaultCylinder V s)
     (z : ℂ) (hz : z ∈ W j) :
-    dolbeaultReplaceCoordinate j (p,z) ∈ dolbeaultCylinder W Finset.univ ∩ dolbeaultCylinder V s := by
+    dolbeaultReplaceCoordinate j (p, z) ∈ dolbeaultCylinder W Finset.univ ∩ dolbeaultCylinder V s := by
   constructor
   · intro k _
     by_cases hk : k = j
     · subst k; simpa [dolbeaultReplaceCoordinate_apply] using hz
-    · simpa only [dolbeaultReplaceCoordinate_apply,if_neg hk] using hp.1 k (Finset.mem_univ k)
+    · simpa only [dolbeaultReplaceCoordinate_apply, if_neg hk] using hp.1 k (Finset.mem_univ k)
   · intro k hk
     have hkj : k ≠ j := by intro he; subst k; exact hjs hk
-    simpa only [dolbeaultReplaceCoordinate_apply,if_neg hkj] using hp.2 k hk
+    simpa only [dolbeaultReplaceCoordinate_apply, if_neg hkj] using hp.2 k hk
 
 def smoothDolbeaultBoundaryComposition {n : ℕ} (χ : Fin n → ℂ → ℂ) :
     List (Fin n) → (Configuration n → ℂ) → Configuration n → ℂ
-  | [],a => a
-  | j::l,a => configurationCauchyGreenBoundary j (χ j) (smoothDolbeaultBoundaryComposition χ l a)
+  | [], a => a
+  | j::l, a => configurationCauchyGreenBoundary j (χ j) (smoothDolbeaultBoundaryComposition χ l a)
 
 def smoothDolbeaultPrimitive {n : ℕ} (χ : Fin n → ℂ → ℂ)
     (α : Fin n → Configuration n → ℂ) : List (Fin n) → Configuration n → ℂ

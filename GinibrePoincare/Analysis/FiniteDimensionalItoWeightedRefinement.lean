@@ -16,7 +16,7 @@ theorem brownianUniformPartialSum_grid_endpoint {Ω : Type*}
       ∑ k ∈ Finset.range l, F (itoUniformNNTime T N k) ω*
         (B (itoUniformNNTime T N (k+1)) ω-B (itoUniformNNTime T N k) ω) := by
   unfold brownianUniformPartialSum
-  rw [show N=l+(N-l) by omega,Finset.sum_range_add]
+  rw [show N=l+(N-l) by omega, Finset.sum_range_add]
   have hfirst : (∑ k ∈ Finset.range l,
       brownianFrozenStep B (F (itoUniformNNTime T (l+(N-l)) k))
         (itoUniformNNTime T (l+(N-l)) k) (itoUniformNNTime T (l+(N-l)) (k+1))
@@ -42,8 +42,8 @@ theorem brownianUniformPartialSum_grid_endpoint {Ω : Type*}
     have hnxt : l ≤ l+k+1 := by omega
     simp only [brownianFrozenStep,
       min_eq_left (itoUniformNNTime_mono T _ hnxt),
-      max_eq_left (itoUniformNNTime_mono T _ hkle),sub_self,mul_zero]
-  rw [hzero,add_zero,Nat.add_sub_of_le hl]
+      max_eq_left (itoUniformNNTime_mono T _ hkle), sub_self, mul_zero]
+  rw [hzero, add_zero, Nat.add_sub_of_le hl]
 
 
 theorem brownianUniformPartialSum_grid_increment {Ω : Type*}
@@ -54,7 +54,7 @@ theorem brownianUniformPartialSum_grid_increment {Ω : Type*}
     F (itoUniformNNTime T N k) ω*
       (B (itoUniformNNTime T N (k+1)) ω-B (itoUniformNNTime T N k) ω) := by
   rw [brownianUniformPartialSum_grid_endpoint B F T N (k+1) (by omega) ω,
-    brownianUniformPartialSum_grid_endpoint B F T N k hk.le ω,Finset.sum_range_succ]
+    brownianUniformPartialSum_grid_endpoint B F T N k hk.le ω, Finset.sum_range_succ]
   ring
 
 theorem brownianUniformPartialSum_weighted_coarse_refinement {Ω : Type*}

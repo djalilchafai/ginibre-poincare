@@ -17,7 +17,7 @@ abbrev SchurStrictUpperIndex (n : ℕ) := {p : SchurUpperIndex n // p.val.1 ≠ 
 def schurUpperDiagonalEquiv (n : ℕ) :
     {p : SchurUpperIndex n // p.val.1 = p.val.2} ≃ Fin n where
   toFun p := p.val.val.1
-  invFun i := ⟨⟨(i,i), le_refl i⟩, rfl⟩
+  invFun i := ⟨⟨(i, i), le_refl i⟩, rfl⟩
   left_inv p := by
     apply Subtype.ext
     apply Subtype.ext
@@ -26,7 +26,7 @@ def schurUpperDiagonalEquiv (n : ℕ) :
 
 def schurUpperSplit (n : ℕ) : (SchurUpperIndex n → ℂ) →
     (Fin n → ℂ) × (SchurStrictUpperIndex n → ℂ) :=
-  fun y => (fun i => y ⟨(i,i), le_refl i⟩, fun p => y p.val)
+  fun y => (fun i => y ⟨(i, i), le_refl i⟩, fun p => y p.val)
 
 theorem schurUpperSplit_volume_preserving (n : ℕ) :
     MeasurePreserving (schurUpperSplit n)
@@ -69,7 +69,7 @@ theorem schurUpperSplit_sorted_preimage (n : ℕ) :
       schurUpperCombination y i i := by
     intro i
     simp only [Matrix.diagonal_apply_eq, schurUpperSplit]
-    exact (schurUpperCombination_entry y ⟨(i,i), le_refl i⟩).symm
+    exact (schurUpperCombination_entry y ⟨(i, i), le_refl i⟩).symm
   unfold matrixSchurOrderedDiagonal
   simp only [hd]
 

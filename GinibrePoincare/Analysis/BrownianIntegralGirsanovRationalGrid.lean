@@ -28,24 +28,24 @@ theorem brownianRationalRefinementIndex_tendsto (q : ℕ) (hq : 0<q) :
 /-- Exact alignment of a rational prefix with its own refined uniform mesh. -/
 theorem brownianUniformNNTime_rational_prefix (T : ℝ≥0) (p q m k : ℕ)
     (hp : 0<p) (hq : 0<q) (hm : 0<m) :
-    itoUniformNNTime T (q*m) k = itoUniformNNTime (T*(p:ℝ≥0)/(q:ℝ≥0)) (p*m) k := by
+    itoUniformNNTime T (q*m) k = itoUniformNNTime (T*(p : ℝ≥0)/(q : ℝ≥0)) (p*m) k := by
   apply NNReal.coe_injective
-  simp only [itoUniformNNTime_coe,itoUniformTime,NNReal.coe_div,NNReal.coe_mul,
-    NNReal.coe_natCast,Nat.cast_mul]
-  have hp' : (p:ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hp)
-  have hq' : (q:ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hq)
-  have hm' : (m:ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hm)
+  simp only [itoUniformNNTime_coe, itoUniformTime, NNReal.coe_div, NNReal.coe_mul,
+    NNReal.coe_natCast, Nat.cast_mul]
+  have hp' : (p : ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hp)
+  have hq' : (q : ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hq)
+  have hm' : (m : ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hm)
   field_simp
   <;> ring
 
 theorem brownianUniformNNTime_rational_endpoint (T : ℝ≥0) (p q m : ℕ)
     (hq : 0<q) (hm : 0<m) :
-    itoUniformNNTime T (q*m) (p*m)=T*(p:ℝ≥0)/(q:ℝ≥0) := by
+    itoUniformNNTime T (q*m) (p*m)=T*(p : ℝ≥0)/(q : ℝ≥0) := by
   apply NNReal.coe_injective
-  simp only [itoUniformNNTime_coe,itoUniformTime,NNReal.coe_div,NNReal.coe_mul,
-    NNReal.coe_natCast,Nat.cast_mul]
-  have hq' : (q:ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hq)
-  have hm' : (m:ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hm)
+  simp only [itoUniformNNTime_coe, itoUniformTime, NNReal.coe_div, NNReal.coe_mul,
+    NNReal.coe_natCast, Nat.cast_mul]
+  have hq' : (q : ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hq)
+  have hm' : (m : ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hm)
   field_simp
   <;> ring
 
@@ -53,25 +53,25 @@ theorem brownianUniformNNTime_rational_endpoint (T : ℝ≥0) (p q m : ℕ)
 of the fixed terminal horizon. -/
 theorem brownianRationalPrefix_drift_tendsto (T : ℝ≥0) (p q : ℕ)
     (hp : 0<p) (hq : 0<q) (F : ℝ≥0 → ℝ)
-    (hc : ContinuousOn F (Set.Icc 0 (T*(p:ℝ≥0)/(q:ℝ≥0)))) :
+    (hc : ContinuousOn F (Set.Icc 0 (T*(p : ℝ≥0)/(q : ℝ≥0)))) :
     Tendsto (fun n => ∑ k ∈ Finset.range (p*(n+1)),
-      F (itoUniformNNTime T (q*(n+1)) k)*((T:ℝ)/(q*(n+1):ℕ))) atTop
-      (𝓝 (∫ s in (0:ℝ)..(T*(p:ℝ≥0)/(q:ℝ≥0):ℝ≥0), F (Real.toNNReal s))) := by
-  let t := T*(p:ℝ≥0)/(q:ℝ≥0)
-  have hfc : ContinuousOn (fun s : ℝ => F (Real.toNNReal s)) (Set.Icc 0 (t:ℝ)) :=
+      F (itoUniformNNTime T (q*(n+1)) k)*((T : ℝ)/(q*(n+1) : ℕ))) atTop
+      (𝓝 (∫ s in (0 : ℝ)..(T*(p : ℝ≥0)/(q : ℝ≥0) : ℝ≥0), F (Real.toNNReal s))) := by
+  let t := T*(p : ℝ≥0)/(q : ℝ≥0)
+  have hfc : ContinuousOn (fun s : ℝ => F (Real.toNNReal s)) (Set.Icc 0 (t : ℝ)) :=
     hc.comp continuous_real_toNNReal.continuousOn (by
       intro s hs
-      exact ⟨by positivity,by simpa only [Real.toNNReal_coe] using Real.toNNReal_le_toNNReal hs.2⟩)
+      exact ⟨by positivity, by simpa only [Real.toNNReal_coe] using Real.toNNReal_le_toNNReal hs.2⟩)
   have ht := (itoContinuousScalarRiemann_fin_tendsto (fun s : ℝ => F (Real.toNNReal s)) t hfc).comp
     (brownianRationalRefinementIndex_tendsto p hp)
   have heq (n : ℕ) :
       (∑ k : Fin (brownianRationalRefinementIndex p n+1),
         F (Real.toNNReal (ginibreUniformBrownianTime t (brownianRationalRefinementIndex p n) k))*
-        ((t:ℝ)/((brownianRationalRefinementIndex p n:ℝ)+1))) =
-      ∑ k ∈ Finset.range (p*(n+1)), F (itoUniformNNTime T (q*(n+1)) k)*((T:ℝ)/(q*(n+1):ℕ)) := by
+        ((t : ℝ)/((brownianRationalRefinementIndex p n : ℝ)+1))) =
+      ∑ k ∈ Finset.range (p*(n+1)), F (itoUniformNNTime T (q*(n+1)) k)*((T : ℝ)/(q*(n+1) : ℕ)) := by
     simp only [Real.toNNReal_coe]
     rw [Fin.sum_univ_eq_sum_range (fun k : ℕ => F (ginibreUniformBrownianTime t
-      (brownianRationalRefinementIndex p n) k)*((t:ℝ)/((brownianRationalRefinementIndex p n:ℝ)+1)))
+      (brownianRationalRefinementIndex p n) k)*((t : ℝ)/((brownianRationalRefinementIndex p n : ℝ)+1)))
       (brownianRationalRefinementIndex p n+1)]
     simp_rw [← itoUniformNNTime_eq_ginibreUniformBrownianTime,
       brownianRationalRefinementIndex_succ p n hp]
@@ -79,17 +79,17 @@ theorem brownianRationalPrefix_drift_tendsto (T : ℝ≥0) (p q : ℕ)
     intro k hk
     rw [brownianUniformNNTime_rational_prefix T p q (n+1) k hp hq (Nat.succ_pos n)]
     congr 1
-    have hi := congrArg (fun m : ℕ => (m:ℝ)) (brownianRationalRefinementIndex_succ p n hp)
-    simp only [Nat.cast_add,Nat.cast_one,Nat.cast_mul] at hi
+    have hi := congrArg (fun m : ℕ => (m : ℝ)) (brownianRationalRefinementIndex_succ p n hp)
+    simp only [Nat.cast_add, Nat.cast_one, Nat.cast_mul] at hi
     rw [hi]
     dsimp only [t]
-    simp only [NNReal.coe_div,NNReal.coe_mul,NNReal.coe_natCast,Nat.cast_mul,Nat.cast_add,Nat.cast_one]
-    have hp' : (p:ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hp)
-    have hq' : (q:ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hq)
-    have hn' : (n:ℝ)+1≠0 := by positivity
+    simp only [NNReal.coe_div, NNReal.coe_mul, NNReal.coe_natCast, Nat.cast_mul, Nat.cast_add, Nat.cast_one]
+    have hp' : (p : ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hp)
+    have hq' : (q : ℝ)≠0 := Nat.cast_ne_zero.mpr (Nat.ne_of_gt hq)
+    have hn' : (n : ℝ)+1≠0 := by positivity
     field_simp
     <;> ring
-  simpa only [Function.comp_def,heq] using ht
+  simpa only [Function.comp_def, heq] using ht
 
 end
 end GinibrePoincare

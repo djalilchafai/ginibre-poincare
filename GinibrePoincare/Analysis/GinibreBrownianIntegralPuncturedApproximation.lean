@@ -49,7 +49,7 @@ theorem brownianPuncturedIntegral_continuous_approximants {Ω ι : Type*}
       (brownianUniformLeftSum (B j) (A n) t (k+1) ω-M n t ω)^2 ∂P) atTop (𝓝 0) :=
     (brownianContinuousIntegral_horizon_limit B P (fun i => (hB i).toIsPreBrownianReal)
       hind j (A n) (ha n) T t ht (hac n) C hC (hab n) (M n t) (hML n t) (hMS n t)).1
-  refine ⟨M,hM,hMC,hML,hM0,hleft,?_⟩
+  refine ⟨M, hM, hMC, hML, hM0, hleft,?_⟩
   apply brownianInitialCutoff_integral_limits_cauchy B P
     (fun i => (hB i).toIsPreBrownianReal) hind j F hF C hC hb T hT
     (fun n => M n T) (fun n => hML n T)
@@ -57,7 +57,7 @@ theorem brownianPuncturedIntegral_continuous_approximants {Ω ι : Type*}
   convert hleft n T le_rfl using 1
   funext k
   apply integral_congr_ae
-  exact ae_of_all P fun ω => by dsimp [A,ε]; ring
+  exact ae_of_all P fun ω => by dsimp [A, ε]; ring
 
 #print axioms brownianPuncturedIntegral_continuous_approximants
 end

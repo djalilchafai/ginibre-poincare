@@ -21,7 +21,7 @@ theorem dolbeaultOrdinaryL2_integrable_compact {n : ℕ} (u : dolbeaultOrdinaryL
   filter_upwards [hu] with z hz
   by_cases h : z∈K
   · simp [Set.indicator_of_mem h]
-  · simp [Set.indicator_of_notMem h,hz h]
+  · simp [Set.indicator_of_notMem h, hz h]
 
 theorem dolbeaultCoordinateConvolution_test_fubini {n : ℕ} (j : Fin n)
     (k : ℂ → ℂ) (hk : Integrable k volume) (u : dolbeaultOrdinaryL2 n)
@@ -38,7 +38,7 @@ theorem dolbeaultCoordinateConvolution_test_fubini {n : ℕ} (j : Fin n)
     · subst l
       simpa using continuous_fst
     · simpa [Pi.single_eq_of_ne hl] using (continuous_const : Continuous (fun _ : ℂ × Configuration n => (0 : ℂ)))
-  obtain ⟨C,hC⟩ := (hc.isCompact_range hψ).isBounded.exists_norm_le
+  obtain ⟨C, hC⟩ := (hc.isCompact_range hψ).isBounded.exists_norm_le
   have hj : Integrable (fun p : ℂ × Configuration n =>
       k p.1*ψ (p.2+Pi.single j p.1)*u p.2) (volume.prod volume) := by
     have hm := (hk.aestronglyMeasurable.comp_fst.mul hψj.aestronglyMeasurable).mul
@@ -46,8 +46,8 @@ theorem dolbeaultCoordinateConvolution_test_fubini {n : ℕ} (j : Fin n)
     apply ((hk.norm.mul_prod hu.norm).const_mul C).mono' hm
     exact ae_of_all _ (fun p => by
       change ‖k p.1*ψ (p.2+Pi.single j p.1)*u p.2‖ ≤ _
-      rw [norm_mul,norm_mul]
-      have hb := hC (ψ (p.2+Pi.single j p.1)) ⟨_,rfl⟩
+      rw [norm_mul, norm_mul]
+      have hb := hC (ψ (p.2+Pi.single j p.1)) ⟨_, rfl⟩
       calc
         _ ≤ ‖k p.1‖*C*‖u p.2‖ := mul_le_mul_of_nonneg_right
           (mul_le_mul_of_nonneg_left hb (norm_nonneg _)) (norm_nonneg _)
@@ -64,7 +64,7 @@ theorem dolbeaultCoordinateConvolution_test_fubini {n : ℕ} (j : Fin n)
     congr 1
     funext w
     ring
-  simp_rw [hs,he]
+  simp_rw [hs, he]
   rw [integral_integral_swap hj]
   simp_rw [integral_mul_const]
 

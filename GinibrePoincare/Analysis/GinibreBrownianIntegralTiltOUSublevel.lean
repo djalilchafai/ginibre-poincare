@@ -38,8 +38,8 @@ theorem ginibreActualOU_sublevel_tilted_canonical_prefix_exists {Ω : Type*} [Me
         (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) T (fun i => M i T) ω ∂P)=1 ∧
       let Q := P.withDensity (fun ω => ENNReal.ofReal (brownianVectorExponentialIntegralDensity
         (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) T (fun i => M i T) ω))
-      Q.map (fun ω (t : Icc (0:ℝ≥0) T) i => ginibreInteractionCorrectedBrownian n α B Y i t.val ω)=
-        P.map (fun ω (t : Icc (0:ℝ≥0) T) i => B i t.val ω-B i 0 ω) ∧
+      Q.map (fun ω (t : Icc (0 : ℝ≥0) T) i => ginibreInteractionCorrectedBrownian n α B Y i t.val ω)=
+        P.map (fun ω (t : Icc (0 : ℝ≥0) T) i => B i t.val ω-B i 0 ω) ∧
       (∀ᵐ ω ∂Q, ∀ t : ℝ≥0, t≤θ ω → ginibreDrivenMaximalValue n α
         (ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω) z t=Y t ω) ∧
       ∀ᵐ ω ∂Q, ∀ t≤θ ω, brownianVectorExponentialIntegralDensity
@@ -48,12 +48,12 @@ theorem ginibreActualOU_sublevel_tilted_canonical_prefix_exists {Ω : Type*} [Me
           (ginibreHamiltonianGradientPathWeight n α t (fun s => Y s.toNNReal ω)/
             ginibreQuadraticGradientPathWeight n α t (fun s => Y s.toNNReal ω)) := by
   classical
-  obtain ⟨K,hK,hCF,Y,hYC,hYR,hY0,hY,θ,hStop,hθ,hStopped,hθActual,hEq,M,hM,hDi,hD1,hAction⟩ :=
+  obtain ⟨K, hK, hCF, Y, hYC, hYR, hY0, hY, θ, hStop, hθ, hStopped, hθActual, hEq, M, hM, hDi, hD1, hAction⟩ :=
     ginibreHamiltonianOU_sublevel_interaction_action_density_exists hn B P hB hind α z hz R hR T hT
   let F := fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i
   let Q := P.withDensity (fun ω => ENNReal.ofReal (brownianVectorExponentialIntegralDensity F T (fun i => M i T) ω))
   have hQP : Q ≪ P := withDensity_absolutelyContinuous P _
-  obtain ⟨C,hC,hb⟩ := ginibreInteractionBrownianTilt_compact_bound n α K hK hCF
+  obtain ⟨C, hC, hb⟩ := ginibreInteractionBrownianTilt_compact_bound n α K hK hCF
   have hF (i : Fin n × Fin 2) (r : ℝ≥0) : @Measurable Ω ℝ
       (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal) r) _ (F i r) :=
     (ginibreInteractionBrownianTilt_measurable n α i).comp (hY r).measurable
@@ -72,11 +72,11 @@ theorem ginibreActualOU_sublevel_tilted_canonical_prefix_exists {Ω : Type*} [Me
     (fun i k => (brownianUniformLeftSum_memLp_two B P (fun i => (hB i).toIsPreBrownianReal)
       hind i (F i) (hF i) (hFi i) T (k+1)).aestronglyMeasurable)
     (fun i => M i T) (fun i => (hM i).2.2.2.2 T le_rfl)
-  refine ⟨Y,hYC,fun r ω => hCF _ (hYR r ω),hY0,θ,hStop,hθ,hStopped,hθActual,M,
-    fun i t ht => (hM i).2.2.2.2 t ht,hDi,hD1,hLaw.2.2.1,?_,hQP.ae_le hAction⟩
+  refine ⟨Y, hYC, fun r ω => hCF _ (hYR r ω), hY0, θ, hStop, hθ, hStopped, hθActual, M,
+    fun i t ht => (hM i).2.2.2.2 t ht, hDi, hD1, hLaw.2.2.1,?_, hQP.ae_le hAction⟩
   apply hQP.ae_le
   have hBcont := ae_all_iff.mpr (fun i => (hB i).cont)
-  filter_upwards [hEq,ginibreConfigurationBrownianNoise_actual n B P hB α,hBcont] with ω hEqω hNω hBω
+  filter_upwards [hEq, ginibreConfigurationBrownianNoise_actual n B P hB α, hBcont] with ω hEqω hNω hBω
   let y := fun s : ℝ => Y s.toNNReal ω
   let N := ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω
   have hVol := ginibreOUPath_correctedBrownian_original_volterra n α α.property B Y ω z (θ ω)
@@ -88,15 +88,15 @@ theorem ginibreActualOU_sublevel_tilted_canonical_prefix_exists {Ω : Type*} [Me
       ((hYC ω).comp continuous_real_toNNReal).continuousAt
   have hseg : GinibreDrivenSegment n α N z (θ ω) y := by
     refine ⟨((hYC ω).comp continuous_real_toNNReal).continuousOn,?_,?_⟩
-    · simpa only [y,Real.toNNReal_zero] using hY0 ω
+    · simpa only [y, Real.toNNReal_zero] using hY0 ω
     · intro s hs
-      refine ⟨hCF _ (hYR _ ω),hD.intervalIntegrable 0 s,?_⟩
+      refine ⟨hCF _ (hYR _ ω), hD.intervalIntegrable 0 s,?_⟩
       have he := hVol s.toNNReal (Real.toNNReal_le_iff_le_coe.mpr hs.2)
-      simpa only [y,N,Real.coe_toNNReal _ hs.1] using he
+      simpa only [y, N, Real.coe_toNNReal _ hs.1] using he
   have hN := ginibreInteractionCorrectedBrownian_noise_continuous n α B Y ω hBω (hYC ω) (fun t => hCF _ (hYR t ω))
   have hL := hseg.horizon_lt_lifetime hN.1 hN.2
   intro t ht
-  simpa only [y,N,Real.toNNReal_coe] using
+  simpa only [y, N, Real.toNNReal_coe] using
     ginibreDrivenMaximalValue_eq_segment hseg t ht ((ENNReal.coe_le_coe.mpr ht).trans_lt hL)
 
 end

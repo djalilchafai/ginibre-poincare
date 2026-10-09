@@ -15,9 +15,9 @@ theorem boundedTransitionMean_laplace_fubini {E : Type*} [MeasurableSpace E]
     (μ : Measure E) [SFinite μ] (f : E → ℝ) (hf : Integrable f μ)
     (m : ℝ × E → ℝ) (hm : Measurable m) (C : ℝ) (hC : ∀ p, ‖m p‖≤C)
     {c : ℝ} (hc : 0<c) :
-    (∫ t in Ioi (0:ℝ), ∫ z, f z*(Real.exp (-c*t)*m (t,z)) ∂μ)=
-      ∫ z, f z*(∫ t in Ioi (0:ℝ), Real.exp (-c*t)*m (t,z)) ∂μ := by
-  let ν := volume.restrict (Ioi (0:ℝ))
+    (∫ t in Ioi (0 : ℝ), ∫ z, f z*(Real.exp (-c*t)*m (t, z)) ∂μ)=
+      ∫ z, f z*(∫ t in Ioi (0 : ℝ), Real.exp (-c*t)*m (t, z)) ∂μ := by
+  let ν := volume.restrict (Ioi (0 : ℝ))
   have he : Integrable (fun t : ℝ => Real.exp (-c*t)) ν :=
     integrableOn_exp_mul_Ioi (show -c<0 by linarith) 0
   have hs : AEStronglyMeasurable (fun p : ℝ × E => f p.2*(Real.exp (-c*p.1)*m p)) (ν.prod μ) :=

@@ -24,8 +24,8 @@ theorem actualL2Limit_eq_pathwise_subsequence_ae
   have hp : TendstoInMeasure P (fun n => S (s n)) atTop (fun ω => I ω) :=
     (tendstoInMeasure_of_tendsto_Lp hsub).congr
       (fun n => (hs (s n)).coeFn_toLp) EventuallyEq.rfl
-  obtain ⟨r,hr,ha⟩ := hp.exists_seq_tendsto_ae
-  filter_upwards [hL,ha] with ω hl hi
+  obtain ⟨r, hr, ha⟩ := hp.exists_seq_tendsto_ae
+  filter_upwards [hL, ha] with ω hl hi
   exact tendsto_nhds_unique (hl.comp hr.tendsto_atTop) hi
 
 /-- At every earlier time, terminal mean-square Cauchy estimates control the

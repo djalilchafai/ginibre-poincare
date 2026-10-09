@@ -35,9 +35,9 @@ theorem ginibreBrownianFamilyFiltration_square_conditional {Ω ι : Type*}
   let G : ((ι × Set.Iic s) → ℝ) × ℝ → ℝ :=
     fun p => (p.1 (i, ⟨s, by change s ≤ s; exact le_rfl⟩)+p.2)^2
   have hG : Measurable G := by fun_prop
-  have hEq : (fun ω => G (Past ω,Z ω)) =ᵐ[P] (fun ω => (B i t ω)^2) :=
+  have hEq : (fun ω => G (Past ω, Z ω)) =ᵐ[P] (fun ω => (B i t ω)^2) :=
     Filter.Eventually.of_forall fun ω => by dsimp [G, Past, Z]; ring
-  have hGi : Integrable (fun ω => G (Past ω,Z ω)) P :=
+  have hGi : Integrable (fun ω => G (Past ω, Z ω)) P :=
     ((hB i).isGaussianProcess.hasGaussianLaw_eval t).memLp_two.integrable_sq.congr hEq.symm
   have hCondω := ae_of_ae_map hPast.aemeasurable (ginibreIndependent_condDistrib P Past Z hPast ν hZ hInd')
   have hCE := condExp_prod_ae_eq_integral_condDistrib hPast hZ.aemeasurable hG.stronglyMeasurable hGi
@@ -65,7 +65,7 @@ theorem ginibreBrownianFamilyFiltration_square_martingale {Ω ι : Type*}
   rw [condExp_const (ginibreBrownianFamilyFiltration B P hB |>.le s)] at hSub
   simp only [Pi.sub_def] at hSub
   have hCE := ginibreBrownianFamilyFiltration_square_conditional B P hB hind i s t hst
-  filter_upwards [hSub,hCE] with ω hω he
+  filter_upwards [hSub, hCE] with ω hω he
   rw [NNReal.coe_sub hst] at he
   linarith
 

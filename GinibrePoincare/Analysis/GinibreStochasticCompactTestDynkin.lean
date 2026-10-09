@@ -53,17 +53,17 @@ theorem ginibreBrownian_stopped_compact_test_expectation
   let A := fun ω => ∫ s in (0 : ℝ)..(σ ω : ℝ), ginibreRealPaperSpeedGenerator n α f (X s.toNNReal ω)
   have hf2 : ContDiffOn ℝ 2 f {x | CollisionFree x} :=
     (hf.1.of_le (WithTop.coe_le_coe.mpr (show (2 : ENat) ≤ ⊤ from le_top))).contDiffOn
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hEq,hEnd⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hEq, hEnd⟩ :=
     ginibreBrownianMaximalProcess_local_test_ito_martingale_exists hn α z hz B P hB hind R hR T f hf2
   have hσ := ginibreBrownianHamiltonianBoundedStop_isStoppingTime hn α z hz B P hB R hR T
   have hσT (ω : Ω) : σ ω ≤ T := ginibreDrivenHamiltonianBoundedStop_le n α _ z R T
   have hStop := continuous_martingale_bounded_stopping_integral hJM (ae_of_all P hJC) hσ hσT
   have hJmean : (∫ ω, J (σ ω) ω ∂P)=0 := by
-    rw [hStop.2,integral_congr_ae hJ0]
+    rw [hStop.2, integral_congr_ae hJ0]
     simp
   have hXmeas : Measurable (X T) :=
     ((ginibreBrownianHamiltonianStoppedProcess_stronglyAdapted hn α z hz B P hB R hR T T).mono (F.le T)).measurable
-  obtain ⟨C,hC⟩ := hf.2.1.exists_bound_of_continuous hf.1.continuous
+  obtain ⟨C, hC⟩ := hf.2.1.exists_bound_of_continuous hf.1.continuous
   have hY : Integrable Y P := (integrable_const C).mono'
     (hf.1.continuous.measurable.comp hXmeas).aestronglyMeasurable
     (ae_of_all P (fun ω => hC (X T ω)))
@@ -77,7 +77,7 @@ theorem ginibreBrownian_stopped_compact_test_expectation
   rw [integral_add (f := fun ω => f z+J (σ ω) ω) (g := A)
       ((integrable_const (f z)).add hStop.1) hA,
     integral_add (f := fun _ => f z) (g := fun ω => J (σ ω) ω)
-      (integrable_const (f z)) hStop.1,hJmean] at hInt
+      (integrable_const (f z)) hStop.1, hJmean] at hInt
   simpa using hInt
 
 
@@ -102,14 +102,14 @@ theorem ginibreBrownian_compact_test_expectation_with_integrability
   let A := fun m ω => ∫ s in (0 : ℝ)..(σ m ω : ℝ), ginibreRealPaperSpeedGenerator n α f (X m s.toNNReal ω)
   let Ylim := fun ω => f (ginibreBrownianMaximalProcess n α z B T ω)
   let Alim := fun ω => ∫ s in (0 : ℝ)..(T : ℝ), ginibreRealPaperSpeedGenerator n α f (ginibreBrownianMaximalProcess n α z B s.toNNReal ω)
-  obtain ⟨C,hC⟩ := hf.2.1.exists_bound_of_continuous hf.1.continuous
+  obtain ⟨C, hC⟩ := hf.2.1.exists_bound_of_continuous hf.1.continuous
   have hLf : Continuous (ginibreRealPaperSpeedGenerator n α f) :=
     (continuous_ginibrePregenerator_of_compact_test hf).const_mul _
   have hLc : HasCompactSupport (ginibreRealPaperSpeedGenerator n α f) :=
     by
       change HasCompactSupport ((fun _ => (α : ℝ)/(n : ℝ))*ginibrePregenerator n f)
       exact (hasCompactSupport_ginibrePregenerator hf.2.1).mul_left
-  obtain ⟨D,hD⟩ := hLc.exists_bound_of_continuous hLf
+  obtain ⟨D, hD⟩ := hLc.exists_bound_of_continuous hLf
   have hD0 : 0 ≤ D := (norm_nonneg _).trans (hD z)
   have hYm (m : ℕ) : Integrable (Y m) P := by
     have hXa : Measurable (X m T) :=
@@ -122,7 +122,7 @@ theorem ginibreBrownian_compact_test_expectation_with_integrability
     (ginibreBrownian_stopped_compact_test_expectation hn α z hz B P hB hind (R m) (hR m) T f hf).2
   have hσlim : ∀ᵐ ω ∂P, ∀ᶠ m in atTop, σ m ω=T := by
     filter_upwards [ginibreBrownianMaximalLifetime_top_ae hn α z hz B P hB hind] with ω hω
-    obtain ⟨c,hc⟩ := ginibreDrivenHamiltonianBoundedStop_eventually_eq_cap hn α
+    obtain ⟨c, hc⟩ := ginibreDrivenHamiltonianBoundedStop_eventually_eq_cap hn α
       (ginibreBrownianFullContinuousNoise n B α ω) z hz hω T
     have hr : Tendsto R atTop atTop := tendsto_const_nhds.add_atTop tendsto_natCast_atTop_atTop
     filter_upwards [hr.eventually (eventually_gt_atTop c)] with m hm
@@ -132,24 +132,24 @@ theorem ginibreBrownian_compact_test_expectation_with_integrability
     apply tendsto_const_nhds.congr'
     filter_upwards [hω] with m hm
     dsimp only [σ] at hm
-    simp only [Y,Ylim,X,ginibreBrownianHamiltonianStoppedProcess,hm,min_self]
+    simp only [Y, Ylim, X, ginibreBrownianHamiltonianStoppedProcess, hm, min_self]
   have hAlim : ∀ᵐ ω ∂P, Tendsto (fun m => A m ω) atTop (𝓝 (Alim ω)) := by
     filter_upwards [hσlim] with ω hω
     apply tendsto_const_nhds.congr'
     filter_upwards [hω] with m hm
-    dsimp only [A,Alim]
+    dsimp only [A, Alim]
     rw [hm]
     apply intervalIntegral.integral_congr
     intro s hs
     rw [uIcc_of_le (show (0 : ℝ) ≤ T from T.property)] at hs
     have hsT : s.toNNReal ≤ T := (Real.toNNReal_le_iff_le_coe).mpr hs.2
     dsimp only [σ] at hm
-    simp only [X,ginibreBrownianHamiltonianStoppedProcess,hm,min_eq_left hsT]
+    simp only [X, ginibreBrownianHamiltonianStoppedProcess, hm, min_eq_left hsT]
   have hAbound (m : ℕ) : ∀ᵐ ω ∂P, ‖A m ω‖ ≤ D*(T : ℝ) := ae_of_all P (fun ω => by
     have hb : ‖A m ω‖ ≤ D*|(σ m ω : ℝ)-0| :=
       intervalIntegral.norm_integral_le_of_norm_le_const (fun s hs => hD (X m s.toNNReal ω))
     have hσT : σ m ω ≤ T := ginibreDrivenHamiltonianBoundedStop_le n α _ z (R m) T
-    exact hb.trans (by simpa only [sub_zero,abs_of_nonneg (show (0 : ℝ) ≤ (σ m ω : ℝ) from (σ m ω).property)] using
+    exact hb.trans (by simpa only [sub_zero, abs_of_nonneg (show (0 : ℝ) ≤ (σ m ω : ℝ) from (σ m ω).property)] using
       mul_le_mul_of_nonneg_left (show (σ m ω : ℝ) ≤ T from hσT) hD0))
   have hYT := tendsto_integral_of_dominated_convergence (fun _ : Ω => C)
     (fun m => (hYm m).aestronglyMeasurable) (integrable_const C)
@@ -161,7 +161,7 @@ theorem ginibreBrownian_compact_test_expectation_with_integrability
   have hAlimMeas : AEStronglyMeasurable Alim P :=
     aestronglyMeasurable_of_tendsto_ae atTop (fun m => (hAm m).aestronglyMeasurable) hAlim
   have hAlimBound : ∀ᵐ ω ∂P, ‖Alim ω‖ ≤ D*(T : ℝ) := by
-    filter_upwards [hAlim,ae_all_iff.mpr hAbound] with ω hω hb
+    filter_upwards [hAlim, ae_all_iff.mpr hAbound] with ω hω hb
     exact le_of_tendsto hω.norm (Eventually.of_forall hb)
   refine ⟨(integrable_const (D*(T : ℝ))).mono' hAlimMeas hAlimBound,?_⟩
   exact tendsto_nhds_unique hYT (tendsto_const_nhds.add hAT)

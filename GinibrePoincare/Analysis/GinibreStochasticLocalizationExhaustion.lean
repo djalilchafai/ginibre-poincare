@@ -4,8 +4,19 @@ public import GinibrePoincare.Analysis.GinibreStochasticNoncollision
 
 @[expose] public section
 
-/-! The actual Hamiltonian localization exhausts the entire time axis, using
-the proved infinite lifetime and actual continuous Hamiltonian path. -/
+/-! # Hamiltonian stopping times exhaust time
+
+The localizations use energy levels `ginibreHamiltonian n z + k` and time caps
+`k`. First-hit times are monotone in the energy level; taking their minimum
+with the cap preserves monotonicity in both parameters.
+
+For a path of infinite lifetime and a fixed horizon `b`, its continuous
+Hamiltonian path is bounded on `[0, b]`. Choose `k` larger than both `b` and
+this bound minus the initial Hamiltonian. The energy level cannot be reached
+before `b`, and the cap cannot stop the path there either. This deterministic
+argument is applied on the full-measure event of infinite Brownian lifetime.
+The conclusion is eventual domination of every finite horizon, which is the
+exhaustion property used by the global local-martingale and CIR endpoints. -/
 open Set MeasureTheory ProbabilityTheory Filter
 open scoped Topology NNReal ENNReal
 namespace GinibrePoincare
@@ -17,11 +28,11 @@ theorem ginibreDrivenHamiltonianFirstLevel_mono_level (n : ℕ) (α : ℝ)
     Monotone (ginibreDrivenHamiltonianFirstLevel n α N z) := by
   intro R S hRS
   by_cases hS : (ginibreDrivenLevelHit n α N z S).Nonempty
-  · obtain ⟨t,he,ht⟩ := ginibreDrivenHamiltonianFirstLevel_attained hS
+  · obtain ⟨t, he, ht⟩ := ginibreDrivenHamiltonianFirstLevel_attained hS
     rw [he]
     apply (ginibreDrivenHamiltonianFirstLevel_le_iff t).mpr
-    exact ⟨t,⟨ht.1,hRS.trans ht.2⟩,le_rfl⟩
-  · simp only [ginibreDrivenHamiltonianFirstLevel,dif_neg hS]
+    exact ⟨t, ⟨ht.1, hRS.trans ht.2⟩, le_rfl⟩
+  · simp only [ginibreDrivenHamiltonianFirstLevel, dif_neg hS]
     exact le_top
 
 theorem ginibreDrivenHamiltonianBoundedStop_mono_level_cap (n : ℕ) (α : ℝ)
@@ -30,7 +41,7 @@ theorem ginibreDrivenHamiltonianBoundedStop_mono_level_cap (n : ℕ) (α : ℝ)
     ginibreDrivenHamiltonianBoundedStop n α N z R T ≤
       ginibreDrivenHamiltonianBoundedStop n α N z S U := by
   apply ENNReal.coe_le_coe.mp
-  rw [ginibreDrivenHamiltonianBoundedStop_coe,ginibreDrivenHamiltonianBoundedStop_coe]
+  rw [ginibreDrivenHamiltonianBoundedStop_coe, ginibreDrivenHamiltonianBoundedStop_coe]
   exact min_le_min (ENNReal.coe_le_coe.mpr hTU)
     (ginibreDrivenHamiltonianFirstLevel_mono_level n α N z hRS)
 
@@ -52,8 +63,8 @@ theorem ginibreDrivenHamiltonianBoundedStop_exhausts_of_lifetime_top
       b ≤ ginibreDrivenHamiltonianBoundedStop n α N z (ginibreHamiltonian n z+k) k := by
   have hb : (b : ℝ≥0∞) < ginibreDrivenMaximalLifetime n α N z := by simp [hlife]
   have hc := ginibreDrivenHamiltonianPrefix_continuous b hb
-  obtain ⟨C,hC,hBound⟩ := ((isCompact_Icc : IsCompact (Icc (0 : ℝ≥0) b)).image hc).isBounded.exists_pos_norm_le
-  obtain ⟨k₀,hk₀⟩ := exists_nat_gt (max (b : ℝ) (C-ginibreHamiltonian n z))
+  obtain ⟨C, hC, hBound⟩ := ((isCompact_Icc : IsCompact (Icc (0 : ℝ≥0) b)).image hc).isBounded.exists_pos_norm_le
+  obtain ⟨k₀, hk₀⟩ := exists_nat_gt (max (b : ℝ) (C-ginibreHamiltonian n z))
   filter_upwards [eventually_ge_atTop k₀] with k hk
   have hkReal : (k₀ : ℝ) ≤ k := by exact_mod_cast hk
   have hbK : b ≤ (k : ℝ≥0) := by
@@ -66,10 +77,10 @@ theorem ginibreDrivenHamiltonianBoundedStop_exhausts_of_lifetime_top
   have hFirst : (b : ℝ≥0∞) ≤ ginibreDrivenHamiltonianFirstLevel n α N z (ginibreHamiltonian n z+k) := by
     apply le_of_not_gt
     intro hlt
-    obtain ⟨s,hs,hsb⟩ := (ginibreDrivenHamiltonianFirstLevel_le_iff b).mp hlt.le
+    obtain ⟨s, hs, hsb⟩ := (ginibreDrivenHamiltonianFirstLevel_le_iff b).mp hlt.le
     have hAbs : ‖ginibreHamiltonian n (ginibreDrivenMaximalValue n α N z s)‖ ≤ C := by
       apply hBound _
-      refine ⟨s,⟨bot_le,hsb⟩,?_⟩
+      refine ⟨s, ⟨bot_le, hsb⟩,?_⟩
       simp only [min_eq_left hsb]
     have hVal : ginibreHamiltonian n (ginibreDrivenMaximalValue n α N z s) ≤ C :=
       (le_abs_self _).trans hAbs

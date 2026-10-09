@@ -11,11 +11,11 @@ set_option backward.isDefEq.respectTransparency false
 
 theorem dolbeaultReplaceCoordinate_shift {n : ℕ} (j : Fin n)
     (p : Configuration n) (y : ℂ) :
-    dolbeaultReplaceCoordinate j (p,p j-y) = p-Pi.single j y := by
+    dolbeaultReplaceCoordinate j (p, p j-y) = p-Pi.single j y := by
   ext k
   by_cases hk : k = j
   · subst k; simp [dolbeaultReplaceCoordinate_apply]
-  · simp [dolbeaultReplaceCoordinate_apply,hk]
+  · simp [dolbeaultReplaceCoordinate_apply, hk]
 
 def dolbeaultTruncatedCutoff {n : ℕ} (j : Fin n) (R : ℝ) (χ : ℂ → ℂ)
     (a : Configuration n → ℂ) : Configuration n → ℂ :=
@@ -28,20 +28,20 @@ theorem dolbeaultTruncatedCutoff_eq {n : ℕ} (j : Fin n) (R : ℝ) (χ : ℂ �
     dolbeaultTruncatedCutoff j R χ a p = configurationCauchyGreenPotential j χ a p := by
   change (∫ y : ℂ, dolbeaultTruncatedCauchyGreen R y *
       (χ ((p-Pi.single j y : Configuration n) j)*a (p-Pi.single j y))) =
-    ∫ y : ℂ, cauchyGreenKernel y * (χ (p j-y)*a (dolbeaultReplaceCoordinate j (p,p j-y)))
+    ∫ y : ℂ, cauchyGreenKernel y * (χ (p j-y)*a (dolbeaultReplaceCoordinate j (p, p j-y)))
   apply integral_congr_ae
   exact ae_of_all _ (fun y => by
     change dolbeaultTruncatedCauchyGreen R y *
       (χ ((p-Pi.single j y : Configuration n) j)*a (p-Pi.single j y)) =
-        cauchyGreenKernel y * (χ (p j-y)*a (dolbeaultReplaceCoordinate j (p,p j-y)))
+        cauchyGreenKernel y * (χ (p j-y)*a (dolbeaultReplaceCoordinate j (p, p j-y)))
     rw [dolbeaultReplaceCoordinate_shift]
-    simp only [Pi.sub_apply,Pi.single_eq_same]
+    simp only [Pi.sub_apply, Pi.single_eq_same]
     by_cases hy : p j-y ∈ tsupport χ
     · have hb : y ∈ closedBall (0 : ℂ) R := by
         have hh := hR (p j-y) hy
-        simpa only [sub_sub_cancel,mem_closedBall,dist_zero_right] using hh
-      rw [dolbeaultTruncatedCauchyGreen,indicator_of_mem hb]
-    · rw [image_eq_zero_of_notMem_tsupport hy,zero_mul,mul_zero,mul_zero])
+        simpa only [sub_sub_cancel, mem_closedBall, dist_zero_right] using hh
+      rw [dolbeaultTruncatedCauchyGreen, indicator_of_mem hb]
+    · rw [image_eq_zero_of_notMem_tsupport hy, zero_mul, mul_zero, mul_zero])
 
 theorem dolbeaultTruncatedCutoff_smooth_compact {n : ℕ} (j : Fin n) (R : ℝ)
     (χ : ℂ → ℂ) (a : Configuration n → ℂ)
@@ -72,13 +72,13 @@ theorem dolbeaultCutoffLpOperator_smooth_representative {n : ℕ} (j : Fin n) (R
       ((hχ.continuous.comp (continuous_apply j)).aestronglyMeasurable)
       (dolbeaultCompactBound χ hχ.continuous hcχ)
       (ae_of_all _ (fun p => dolbeaultCompactBound_spec χ hχ.continuous hcχ (p j))) (hm.toLp a)
-    filter_upwards [hb,hm.coeFn_toLp,hmf.coeFn_toLp] with p h1 h2 h3
+    filter_upwards [hb, hm.coeFn_toLp, hmf.coeFn_toLp] with p h1 h2 h3
     change (dolbeaultBoundedMultiplierValue (fun p : Configuration n => χ (p j))
       ((hχ.continuous.comp (continuous_apply j)).aestronglyMeasurable)
       (dolbeaultCompactBound χ hχ.continuous hcχ)
       (ae_of_all _ (fun p => dolbeaultCompactBound_spec χ hχ.continuous hcχ (p j)))
         (hm.toLp a)) p = (hmf.toLp f) p
-    rw [h1,h3,h2]
+    rw [h1, h3, h2]
   change (dolbeaultCauchyGreenL2 j R
     (dolbeaultCutoffLpMultiplier j χ hχ.continuous hcχ (hm.toLp a)) : Configuration n → ℂ) =ᵐ[volume] _
   rw [he]

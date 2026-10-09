@@ -25,9 +25,9 @@ def ginibreFullSymmetricBoundedTruncation (n m : ℕ) (u : ginibreFullSymmetricV
   have hvc := (ginibre_measurePreserving_permute σ).quasiMeasurePreserving.ae_eq hv
   have hup := ginibreRealPermutationL2_ae σ u.val
   rw [u.property σ] at hup
-  filter_upwards [ginibreRealPermutationL2_ae σ v,hvc,hv,hup] with z hp hc hz hu
+  filter_upwards [ginibreRealPermutationL2_ae σ v, hvc, hv, hup] with z hp hc hz hu
   dsimp only [Function.comp_apply] at hc
-  rw [hp,hc,hz,← hu]
+  rw [hp, hc, hz,← hu]
 
 theorem ginibreFullSymmetricBoundedTruncation_ae (n m : ℕ) (u : ginibreFullSymmetricValues n) :
     ((ginibreFullSymmetricBoundedTruncation n m u).val : Configuration n → ℝ) =ᵐ[ginibreMeasure n]
@@ -78,7 +78,7 @@ theorem ginibreFullSymmetric_operators_eq_of_bounded_values (n : ℕ)
   have ht := ginibreFullSymmetricBoundedTruncation_tendsto n u
   have hh (m : ℕ) : R (ginibreFullSymmetricBoundedTruncation n m u)=
       S (ginibreFullSymmetricBoundedTruncation n m u) :=
-    heq _ ⟨2*((m : ℝ)+1),ginibreFullSymmetricBoundedTruncation_bound n m u⟩
+    heq _ ⟨2*((m : ℝ)+1), ginibreFullSymmetricBoundedTruncation_bound n m u⟩
   have hRt : Tendsto (fun m => R (ginibreFullSymmetricBoundedTruncation n m u)) atTop (𝓝 (R u)) :=
     R.continuous.tendsto u |>.comp ht
   have hSt : Tendsto (fun m => R (ginibreFullSymmetricBoundedTruncation n m u)) atTop (𝓝 (S u)) := by

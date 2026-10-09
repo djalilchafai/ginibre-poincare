@@ -19,8 +19,8 @@ def ginibreParticlePermutationCLM {n : ℕ} (σ : ParticlePermutation n) :
 theorem ginibreParticlePermutationCLM_apply {n : ℕ} (σ : ParticlePermutation n) (z : Configuration n) :
     ginibreParticlePermutationCLM σ z=permute σ z := by
   funext i
-  simp [ginibreParticlePermutationCLM,ContinuousLinearEquiv.piCongrLeft,LinearEquiv.piCongrLeft,
-    Equiv.piCongrLeft_apply,permute]
+  simp [ginibreParticlePermutationCLM, ContinuousLinearEquiv.piCongrLeft, LinearEquiv.piCongrLeft,
+    Equiv.piCongrLeft_apply, permute]
 
 theorem ginibreCoulombInteraction_permute {n : ℕ} (σ : ParticlePermutation n) (z : Configuration n) :
     ginibreCoulombInteraction n (permute σ z)=permute σ (ginibreCoulombInteraction n z) := by
@@ -31,7 +31,7 @@ theorem ginibreLangevinDrift_permute {n : ℕ} (σ : ParticlePermutation n) (α 
     ginibreLangevinDrift n α (permute σ z)=permute σ (ginibreLangevinDrift n α z) := by
   rw [show ginibreLangevinDrift n α (permute σ z)=
     fun i => -(2*α/(n : ℝ)) • permute σ z i+(2*α/(n : ℝ)^2) •
-      ginibreCoulombInteraction n (permute σ z) i from rfl,ginibreCoulombInteraction_permute]
+      ginibreCoulombInteraction n (permute σ z) i from rfl, ginibreCoulombInteraction_permute]
   rfl
 
 theorem ginibreCollisionFree_permute {n : ℕ} (σ : ParticlePermutation n) {z : Configuration n}
@@ -47,19 +47,19 @@ theorem ginibreDrivenSegment_permute {n : ℕ} {α : ℝ} {N X : ℝ → Configu
   let P := ginibreParticlePermutationCLM σ
   have hP : ∀ w, P w=permute σ w := ginibreParticlePermutationCLM_apply σ
   refine ⟨?_,?_,?_⟩
-  · simpa only [Function.comp_def,hP] using P.continuous.comp_continuousOn hX.1
+  · simpa only [Function.comp_def, hP] using P.continuous.comp_continuousOn hX.1
   · change permute σ (X 0)=permute σ z
     rw [hX.2.1]
   · intro t ht
-    obtain ⟨hcf,hInt,hEq⟩ := hX.2.2 t ht
+    obtain ⟨hcf, hInt, hEq⟩ := hX.2.2 t ht
     refine ⟨ginibreCollisionFree_permute σ hcf,?_,?_⟩
     · have hi : IntervalIntegrable (fun s => P (ginibreLangevinDrift n α (X s))) volume 0 t :=
-        ⟨P.integrable_comp hInt.1,P.integrable_comp hInt.2⟩
-      simpa only [hP,ginibreLangevinDrift_permute] using hi
+        ⟨P.integrable_comp hInt.1, P.integrable_comp hInt.2⟩
+      simpa only [hP, ginibreLangevinDrift_permute] using hi
     · have he := congrArg P hEq
-      rw [map_add,map_add] at he
+      rw [map_add, map_add] at he
       rw [← P.intervalIntegral_comp_comm hInt] at he
-      simpa only [hP,ginibreLangevinDrift_permute] using he
+      simpa only [hP, ginibreLangevinDrift_permute] using he
 
 #print axioms ginibreDrivenSegment_permute
 #print axioms ginibreLangevinDrift_permute

@@ -24,7 +24,7 @@ theorem correspondenceBrascampLieb_constants_orthogonal
       (correspondenceBrascampLiebCoreRange W b hW)ᗮ := by
   apply (Submodule.span_singleton_le_iff_mem _ _).mpr
   rw [Submodule.mem_orthogonal]
-  rintro _ ⟨f,rfl⟩
+  rintro _ ⟨f, rfl⟩
   unfold correspondenceBrascampLiebOneL2 correspondenceBrascampLiebCoreL2
   rw [correspondenceBrascampLieb_toLp_inner]
   simp only [mul_one]
@@ -57,7 +57,7 @@ theorem correspondenceBrascampLieb_closed_core_bound
     simpa only [star_trivial] using
       (hpos x).posSemidef.inv.dotProduct_mulVec_nonneg (correspondenceBrascampLiebGradient g b x)
   · exact hu
-  · rintro _ ⟨f,rfl⟩
+  · rintro _ ⟨f, rfl⟩
     exact correspondenceBrascampLieb_core_dual_bound W g b hW hg hpos hgL2 hgE f
 
 #print axioms correspondenceBrascampLieb_constants_orthogonal

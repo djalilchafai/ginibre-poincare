@@ -28,15 +28,15 @@ theorem ginibreBrownian_family_increment_independent_past {Ω ι : Type*}
     intro q
     cases q with
     | inl i =>
-      refine ⟨{(i,s+t),(i,s)},
-        { toFun := fun v => v ⟨(i,s+t), by simp⟩-v ⟨(i,s), by simp⟩
+      refine ⟨{(i, s+t), (i, s)},
+        { toFun := fun v => v ⟨(i, s+t), by simp⟩-v ⟨(i, s), by simp⟩
           map_add' := by intros; simp only [Pi.add_apply]; ring
           map_smul' := by intros; simp only [Pi.smul_apply, smul_eq_mul, RingHom.id_apply]; ring }, ?_⟩
       intro ω
       rfl
     | inr p =>
-      refine ⟨{(p.1,(p.2 : ℝ≥0))},
-        { toFun := fun v => v ⟨(p.1,(p.2 : ℝ≥0)), by simp⟩
+      refine ⟨{(p.1, (p.2 : ℝ≥0))},
+        { toFun := fun v => v ⟨(p.1, (p.2 : ℝ≥0)), by simp⟩
           map_add' := by intros; rfl
           map_smul' := by intros; rfl }, ?_⟩
       intro ω
@@ -45,11 +45,11 @@ theorem ginibreBrownian_family_increment_independent_past {Ω ι : Type*}
     (fun i => (hB i).aemeasurable (s+t) |>.sub ((hB i).aemeasurable s))
     (fun p => (hB p.1).aemeasurable p.2)
   intro i p
-  rcases p with ⟨j,v⟩
+  rcases p with ⟨j, v⟩
   have hXi : MemLp (X i) 2 P :=
     ((hB i).isGaussianProcess.hasGaussianLaw_eval (s+t)).memLp_two.sub
       ((hB i).isGaussianProcess.hasGaussianLaw_eval s).memLp_two
-  have hYj : MemLp (Y (j,v)) 2 P := ((hB j).isGaussianProcess.hasGaussianLaw_eval v).memLp_two
+  have hYj : MemLp (Y (j, v)) 2 P := ((hB j).isGaussianProcess.hasGaussianLaw_eval v).memLp_two
   by_cases hij : i = j
   · subst j
     have hi := (ginibreBrownian_increment_whole_past_independent (B i) P (hB i) s t).comp

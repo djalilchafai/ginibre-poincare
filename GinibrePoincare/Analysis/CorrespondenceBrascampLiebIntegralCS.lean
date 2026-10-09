@@ -19,7 +19,7 @@ theorem correspondenceBrascampLieb_integral_quadratic
   have hy (t : ℝ) :
       2 * t * (∫ x, h x ∂μ) ≤ (∫ x, a x ∂μ) + t ^ 2 * (∫ x, b x ∂μ) := by
     have hp : ∀ᵐ x ∂μ, (2*t)*h x ≤ a x + t^2*b x := by
-      filter_upwards [ha0,hb0,hcs] with x hax hbx hcx
+      filter_upwards [ha0, hb0, hcs] with x hax hbx hcx
       have hs : (t*h x)^2 ≤ a x*(t^2*b x) := by
         nlinarith [mul_nonneg (sq_nonneg t) (sub_nonneg.mpr hcx)]
       have he := two_mul_le_add_of_sq_le_mul hax
@@ -31,8 +31,8 @@ theorem correspondenceBrascampLieb_integral_quadratic
     rw [integral_add ha (hb.const_mul (t^2)), integral_const_mul,
       integral_const_mul] at he
     exact he
-  have hd := discrim_le_zero (a := ∫ x,b x ∂μ)
-    (b := -2*(∫ x,h x ∂μ)) (c := ∫ x,a x ∂μ) (fun t => by
+  have hd := discrim_le_zero (a := ∫ x, b x ∂μ)
+    (b := -2*(∫ x, h x ∂μ)) (c := ∫ x, a x ∂μ) (fun t => by
       have ht := hy t
       nlinarith)
   unfold discrim at hd

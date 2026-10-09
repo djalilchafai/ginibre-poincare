@@ -14,22 +14,22 @@ def correspondenceWeightedEllipticMeasure (ρ : E→ℝ) : Measure E :=
   volume.withDensity (fun x=>ENNReal.ofReal (ρ x))
 
 theorem correspondenceWeightedElliptic_volume_ac (ρ : E→ℝ)
-    (hρ : Continuous ρ) (hp : ∀x,0<ρ x) :
+    (hρ : Continuous ρ) (hp : ∀x, 0<ρ x) :
     (volume : Measure E) ≪ correspondenceWeightedEllipticMeasure ρ := by
   apply withDensity_absolutelyContinuous' (hρ.measurable.ennreal_ofReal.aemeasurable)
   exact ae_of_all volume (fun x=>ne_of_gt (ENNReal.ofReal_pos.mpr (hp x)))
 
 theorem correspondenceWeightedElliptic_integrable_density (ρ f : E→ℝ)
-    (hρ : Continuous ρ) (hp : ∀x,0<ρ x) :
+    (hρ : Continuous ρ) (hp : ∀x, 0<ρ x) :
     Integrable f (correspondenceWeightedEllipticMeasure ρ) ↔
       Integrable (fun x=>ρ x*f x) volume := by
   unfold correspondenceWeightedEllipticMeasure
   rw [integrable_withDensity_iff_integrable_smul' hρ.measurable.ennreal_ofReal
     (ae_of_all volume (fun _=>ENNReal.ofReal_lt_top))]
-  simp only [ENNReal.toReal_ofReal (le_of_lt (hp _)),smul_eq_mul]
+  simp only [ENNReal.toReal_ofReal (le_of_lt (hp _)), smul_eq_mul]
 
 theorem correspondenceWeightedElliptic_memLp_compact {V : Type*} [NormedAddCommGroup V]
-    (ρ : E→ℝ) (hρ : Continuous ρ) (hp : ∀x,0<ρ x) (f : E→V)
+    (ρ : E→ℝ) (hρ : Continuous ρ) (hp : ∀x, 0<ρ x) (f : E→V)
     (hf : MemLp f 2 (correspondenceWeightedEllipticMeasure ρ))
     (K : Set E) (hK : IsCompact K) : MemLp f 2 (volume.restrict K) := by
   have hm := hf.aestronglyMeasurable.mono_ac (correspondenceWeightedElliptic_volume_ac ρ hρ hp)
@@ -45,10 +45,10 @@ theorem correspondenceWeightedElliptic_memLp_compact {V : Type*} [NormedAddCommG
   exact hl.integrableOn_isCompact hK
 
 theorem correspondenceWeightedElliptic_compact_multiplier_memLp
-    (ρ : E→ℝ) (hρ : Continuous ρ) (hp : ∀x,0<ρ x) (u q : E→ℝ)
+    (ρ : E→ℝ) (hρ : Continuous ρ) (hp : ∀x, 0<ρ x) (u q : E→ℝ)
     (hu : MemLp u 2 (correspondenceWeightedEllipticMeasure ρ)) (hq : Continuous q)
     (K : Set E) (hK : IsCompact K) : MemLp (fun x=>q x*u x) 2 (volume.restrict K) := by
-  obtain ⟨χ,hχ,hχc,hχone⟩ := ginibreLocalRegularity_exists_compact_cutoff K hK
+  obtain ⟨χ, hχ, hχc, hχone⟩ := ginibreLocalRegularity_exists_compact_cutoff K hK
   have htop : MemLp (χ*q) ⊤ ((volume : Measure E).restrict K) :=
     (hχ.continuous.mul hq).memLp_top_of_hasCompactSupport (hχc.mul_right) _
   have hm := htop.fun_mul (r:=2) (correspondenceWeightedElliptic_memLp_compact ρ hρ hp u hu K hK)
@@ -60,7 +60,7 @@ theorem correspondenceWeightedElliptic_compact_multiplier_memLp
   simp
 
 theorem correspondenceWeightedElliptic_locallyIntegrable
-    (ρ : E→ℝ) (hρ : Continuous ρ) (hp : ∀x,0<ρ x) (u : E→ℝ)
+    (ρ : E→ℝ) (hρ : Continuous ρ) (hp : ∀x, 0<ρ x) (u : E→ℝ)
     [IsFiniteMeasure (correspondenceWeightedEllipticMeasure ρ)]
     (hu : MemLp u 2 (correspondenceWeightedEllipticMeasure ρ)) : LocallyIntegrable u volume := by
   have hi := (correspondenceWeightedElliptic_integrable_density ρ u hρ hp).mp
@@ -73,15 +73,15 @@ theorem correspondenceWeightedElliptic_locallyIntegrable
   rwa [he] at hl
 
 theorem correspondenceWeightedElliptic_integral_density (ρ f : E→ℝ)
-    (hρ : Continuous ρ) (hp : ∀x,0<ρ x) :
-    (∫x,f x∂correspondenceWeightedEllipticMeasure ρ)=∫x,ρ x*f x := by
+    (hρ : Continuous ρ) (hp : ∀x, 0<ρ x) :
+    (∫x, f x∂correspondenceWeightedEllipticMeasure ρ)=∫x, ρ x*f x := by
   unfold correspondenceWeightedEllipticMeasure
   rw [integral_withDensity_eq_integral_toReal_smul hρ.measurable.ennreal_ofReal
     (ae_of_all volume (fun _=>ENNReal.ofReal_lt_top))]
-  simp only [ENNReal.toReal_ofReal (le_of_lt (hp _)),smul_eq_mul]
+  simp only [ENNReal.toReal_ofReal (le_of_lt (hp _)), smul_eq_mul]
 
 theorem correspondenceWeightedElliptic_compact_value_memLp
-    (ρ : E→ℝ) (hρ : Continuous ρ) (hp : ∀x,0<ρ x) (f η : E→ℝ)
+    (ρ : E→ℝ) (hρ : Continuous ρ) (hp : ∀x, 0<ρ x) (f η : E→ℝ)
     (hf : MemLp f 2 (correspondenceWeightedEllipticMeasure ρ))
     (hη : Continuous η) (hc : HasCompactSupport η) :
     MemLp (fun x=>η x*f x) 2 (volume : Measure E) := by
@@ -91,7 +91,7 @@ theorem correspondenceWeightedElliptic_compact_value_memLp
   exact ae_of_all volume fun x=>by
     by_cases hx : x∈tsupport η
     · simp [Set.indicator_of_mem hx]
-    · simp [Set.indicator_of_notMem hx,image_eq_zero_of_notMem_tsupport hx]
+    · simp [Set.indicator_of_notMem hx, image_eq_zero_of_notMem_tsupport hx]
 #print axioms correspondenceWeightedElliptic_compact_value_memLp
 #print axioms correspondenceWeightedElliptic_integral_density
 #print axioms correspondenceWeightedElliptic_locallyIntegrable

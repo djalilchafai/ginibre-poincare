@@ -31,8 +31,8 @@ theorem brownianUnitInnovation_gaussian_independent
     (hY : @Measurable Ω A (ginibreBrownianAugmentedFiltration B P hB s) _ Y) (i : ι) :
     HasLaw (brownianUnitInnovation B u s t) (gaussianReal 0 t) P ∧
       IndepFun Y (brownianUnitInnovation B u s t) P := by
-  let W := fun ω => (Y ω,u ω)
-  obtain ⟨hl,hi,hcoord,hindcoord,he⟩ := brownianFamily_augmented_radial_fresh_increment
+  let W := fun ω => (Y ω, u ω)
+  obtain ⟨hl, hi, hcoord, hindcoord, he⟩ := brownianFamily_augmented_radial_fresh_increment
     B P hB hind s t W (hY.prodMk hu) (fun p : A × EuclideanSpace ℝ ι => p.2)
     measurable_snd i
   have heq : (fun ω => (brownianRadialFrame (u ω) (EuclideanSpace.single i 1)
@@ -44,14 +44,14 @@ theorem brownianUnitInnovation_gaussian_independent
       have := hunit ω
       simp [hh] at this
     have hh := he ω
-    simpa [W,brownianRadialUnitVector,hu0,hunit ω,brownianUnitInnovation] using hh
+    simpa [W, brownianRadialUnitVector, hu0, hunit ω, brownianUnitInnovation] using hh
   constructor
   · have hc := hcoord i
     change HasLaw (fun ω => (brownianRadialFrame (u ω) (EuclideanSpace.single i 1)
       (WithLp.toLp 2 (fun j => B j (s+t) ω-B j s ω))) i) (gaussianReal 0 t) P at hc
     rwa [heq] at hc
   · have hh := hi.comp measurable_fst (show Measurable (fun x : EuclideanSpace ℝ ι => x i) by fun_prop)
-    simpa only [Function.comp_def,W,heq] using hh
+    simpa only [Function.comp_def, W, heq] using hh
 
 end
 end GinibrePoincare

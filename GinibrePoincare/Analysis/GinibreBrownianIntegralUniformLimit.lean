@@ -22,7 +22,7 @@ theorem brownianUniformPartialSum_exists_continuous_uniform_limit {Ω ι : Type*
     (hFi : ∀ t, MemLp (F t) 2 P) (T : ℝ≥0)
     (hc : ∀ᵐ ω ∂P, ContinuousOn (fun s => F s ω) (Set.Icc 0 T))
     (C : ℝ) (hC : 0 ≤ C) (hbound : ∀ s ∈ Set.Icc 0 T, ∀ ω, ‖F s ω‖ ≤ C) :
-    ∃ s : ℕ → ℕ, StrictMono s ∧ ∃ L : Ω → C(Set.Icc 0 T,ℝ),
+    ∃ s : ℕ → ℕ, StrictMono s ∧ ∃ L : Ω → C(Set.Icc 0 T, ℝ),
       ∀ᵐ ω ∂P, TendstoUniformly (fun n (t : Set.Icc 0 T) => brownianUniformPartialSum (B j) F T (s n+1) t ω)
         (L ω) atTop := by
   let hb := fun i => (hB i).toIsPreBrownianReal

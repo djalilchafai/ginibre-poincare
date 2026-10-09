@@ -171,7 +171,7 @@ theorem bakryEmeryLangevin_polygonal_noise_response
   let Y := fun s => Y₀ s + σ • bakryEmeryPolygonalNoise m h y s
   let U := fun s => X s - Y s
   let a : ℕ → EuclideanSpace ℝ ι := fun j => if hj : j < m then
-    σ • WithLp.toLp 2 (fun i => x (⟨j,hj⟩,i) - y (⟨j,hj⟩,i)) else 0
+    σ • WithLp.toLp 2 (fun i => x (⟨j, hj⟩, i) - y (⟨j, hj⟩, i)) else 0
   have hU : ContinuousOn U (Icc 0 ((m : ℝ)*h)) :=
     (hY₁.add ((bakryEmeryPolygonalNoise_continuous m h x).const_smul σ).continuousOn).sub
       (hY₀.add ((bakryEmeryPolygonalNoise_continuous m h y).const_smul σ).continuousOn)
@@ -187,16 +187,16 @@ theorem bakryEmeryLangevin_polygonal_noise_response
     have hs' : s ∈ Ioo 0 ((m : ℝ)*h) := ⟨
       (by positivity : 0 ≤ (j : ℝ)*h).trans_lt hs.1,
       hs.2.trans_le (mul_le_mul_of_nonneg_right (by exact_mod_cast hj) hh.le)⟩
-    have hx := (bakryEmeryPolygonalNoise_hasDerivAt m h hh x ⟨j,hj⟩ s hs).const_smul σ
-    have hy := (bakryEmeryPolygonalNoise_hasDerivAt m h hh y ⟨j,hj⟩ s hs).const_smul σ
+    have hx := (bakryEmeryPolygonalNoise_hasDerivAt m h hh x ⟨j, hj⟩ s hs).const_smul σ
+    have hy := (bakryEmeryPolygonalNoise_hasDerivAt m h hh y ⟨j, hj⟩ s hs).const_smul σ
     have hd := ((hEq₁ s hs').add hx).sub ((hEq₀ s hs').add hy)
     convert hd using 1
     dsimp only [X, Y, a]
     rw [dif_pos hj]
     have he : (Real.sqrt h)⁻¹ • (σ • WithLp.toLp 2
-        (fun i => x (⟨j,hj⟩,i) - y (⟨j,hj⟩,i))) =
-        σ • WithLp.toLp 2 (fun i => x (⟨j,hj⟩,i) / Real.sqrt h) -
-        σ • WithLp.toLp 2 (fun i => y (⟨j,hj⟩,i) / Real.sqrt h) := by
+        (fun i => x (⟨j, hj⟩, i) - y (⟨j, hj⟩, i))) =
+        σ • WithLp.toLp 2 (fun i => x (⟨j, hj⟩, i) / Real.sqrt h) -
+        σ • WithLp.toLp 2 (fun i => y (⟨j, hj⟩, i) / Real.sqrt h) := by
       ext i
       simp only [PiLp.smul_apply, PiLp.sub_apply, PiLp.toLp_apply, smul_eq_mul]
       ring

@@ -30,7 +30,7 @@ theorem ginibre_center_noise_scaling {n : ℕ} (hn : 0 < n) (α : ℝ≥0) :
   have hc := Real.sq_sqrt hnR.le
   have hsq : (Real.sqrt (ginibreCenterOURate n α : ℝ)*(Real.sqrt (n : ℝ))⁻¹)^2 =
       2*(α : ℝ)/(n : ℝ)^2 := by
-    rw [mul_pow,inv_pow,hb,hc,ginibreCenterOURate_coe]
+    rw [mul_pow, inv_pow, hb, hc, ginibreCenterOURate_coe]
     field_simp
     <;> ring
   nlinarith [Real.sqrt_nonneg (2*(α : ℝ)/(n : ℝ)^2),
@@ -55,21 +55,21 @@ theorem ginibreBrownian_center_real_OU
         (Real.sqrt (ginibreCenterOURate n α : ℝ)) ω := by
     funext s
     change (coordinateSumCLM n ((ginibreBrownianFullContinuousNoise n B α ω).val s)).re = _
-    rw [coordinateSumCLM_apply,hnoise s]
+    rw [coordinateSumCLM_apply, hnoise s]
     have hnR : 0 < (n : ℝ) := by exact_mod_cast hn
     have hns : Real.sqrt (n : ℝ)/(n : ℝ) = (Real.sqrt (n : ℝ))⁻¹ := by
       have hs := (Real.sqrt_pos.mpr hnR).ne'
       field_simp
       nlinarith [Real.sq_sqrt hnR.le]
-    simp [hns,coordinateSum,ginibreConfigurationBrownianNoise,ginibreBrownianNoise,
-      ginibreNormalizedCenterBrownian,← Finset.mul_sum,ginibre_center_noise_scaling hn α,
+    simp [hns, coordinateSum, ginibreConfigurationBrownianNoise, ginibreBrownianNoise,
+      ginibreNormalizedCenterBrownian,← Finset.mul_sum, ginibre_center_noise_scaling hn α,
       mul_assoc]
   intro t
   rw [hcenter t]
   have hh := drivenOUPath_continuousLinearMap Complex.reCLM (2*(α : ℝ)/(n : ℝ))
     (coordinateSum z) N N.continuous (t : ℝ)
   rw [he] at hh
-  simpa [ginibreCenterOUValue,N,ginibreBrownianOU,ginibreCenterOURate_coe,Complex.reCLM] using hh
+  simpa [ginibreCenterOUValue, N, ginibreBrownianOU, ginibreCenterOURate_coe, Complex.reCLM] using hh
 
 theorem ginibreBrownian_center_imag_OU
     {Ω : Type*} [MeasurableSpace Ω] {n : ℕ} (hn : 0 < n) (α : ℝ≥0)
@@ -90,21 +90,21 @@ theorem ginibreBrownian_center_imag_OU
         (Real.sqrt (ginibreCenterOURate n α : ℝ)) ω := by
     funext s
     change (coordinateSumCLM n ((ginibreBrownianFullContinuousNoise n B α ω).val s)).im = _
-    rw [coordinateSumCLM_apply,hnoise s]
+    rw [coordinateSumCLM_apply, hnoise s]
     have hnR : 0 < (n : ℝ) := by exact_mod_cast hn
     have hns : Real.sqrt (n : ℝ)/(n : ℝ) = (Real.sqrt (n : ℝ))⁻¹ := by
       have hs := (Real.sqrt_pos.mpr hnR).ne'
       field_simp
       nlinarith [Real.sq_sqrt hnR.le]
-    simp [hns,coordinateSum,ginibreConfigurationBrownianNoise,ginibreBrownianNoise,
-      ginibreNormalizedCenterBrownian,← Finset.mul_sum,ginibre_center_noise_scaling hn α,
+    simp [hns, coordinateSum, ginibreConfigurationBrownianNoise, ginibreBrownianNoise,
+      ginibreNormalizedCenterBrownian,← Finset.mul_sum, ginibre_center_noise_scaling hn α,
       mul_assoc]
   intro t
   rw [hcenter t]
   have hh := drivenOUPath_continuousLinearMap Complex.imCLM (2*(α : ℝ)/(n : ℝ))
     (coordinateSum z) N N.continuous (t : ℝ)
   rw [he] at hh
-  simpa [ginibreCenterOUValue,N,ginibreBrownianOU,ginibreCenterOURate_coe,Complex.imCLM] using hh
+  simpa [ginibreCenterOUValue, N, ginibreBrownianOU, ginibreCenterOURate_coe, Complex.imCLM] using hh
 
 #print axioms ginibreBrownian_center_real_OU
 #print axioms ginibreBrownian_center_imag_OU

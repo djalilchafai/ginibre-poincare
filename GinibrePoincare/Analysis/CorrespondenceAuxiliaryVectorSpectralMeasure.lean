@@ -18,11 +18,11 @@ def vectorSpectralPositiveFunctional (R : H →L[ℂ] H) (hR : IsSelfAdjoint R) 
   toFun f := (inner ℂ u ((cfcHom hR) f.toContinuousMap u)).re
   map_add' f g := by
     change (inner ℂ u ((cfcHom hR) (f.toContinuousMap+g.toContinuousMap) u)).re = _
-    rw [map_add,ContinuousLinearMap.add_apply,inner_add_right,Complex.add_re]
+    rw [map_add, ContinuousLinearMap.add_apply, inner_add_right, Complex.add_re]
   map_smul' c f := by
     change (inner ℂ u ((cfcHom hR) (c • f.toContinuousMap) u)).re = _
-    rw [map_smul,ContinuousLinearMap.smul_apply]
-    rw [RCLike.real_smul_eq_coe_smul (K := ℂ),inner_smul_right]
+    rw [map_smul, ContinuousLinearMap.smul_apply]
+    rw [RCLike.real_smul_eq_coe_smul (K := ℂ), inner_smul_right]
     simp
   monotone' f g hfg := by
     have hfc : f.toContinuousMap ≤ g.toContinuousMap := hfg
@@ -30,7 +30,7 @@ def vectorSpectralPositiveFunctional (R : H →L[ℂ] H) (hR : IsSelfAdjoint R) 
     have hpos := ContinuousLinearMap.nonneg_iff_isPositive.mp (sub_nonneg.mpr hp)
     have h := hpos.re_inner_nonneg_right u
     change 0 ≤ (inner ℂ u (((cfcHom hR) g.toContinuousMap-(cfcHom hR) f.toContinuousMap) u)).re at h
-    simpa only [ContinuousLinearMap.sub_apply,inner_sub_right,Complex.sub_re,sub_nonneg] using h
+    simpa only [ContinuousLinearMap.sub_apply, inner_sub_right, Complex.sub_re, sub_nonneg] using h
 
 /-- A literal scalar vector spectral measure on the compact real spectrum
 of a bounded self-adjoint operator; no measure is supplied as a hypothesis. -/
@@ -55,17 +55,17 @@ instance vectorSpectralMeasure_finite (R : H →L[ℂ] H) (hR : IsSelfAdjoint R)
 squared Hilbert norm. -/
 theorem vectorSpectralMeasure_mass (R : H →L[ℂ] H) (hR : IsSelfAdjoint R)
     (u : H) : (vectorSpectralMeasure R hR u) Set.univ = ENNReal.ofReal (‖u‖^2) := by
-  let oneTest : C_c(spectrum ℝ R, ℝ) := ⟨1,HasCompactSupport.of_compactSpace 1⟩
+  let oneTest : C_c(spectrum ℝ R, ℝ) := ⟨1, HasCompactSupport.of_compactSpace 1⟩
   have h := integral_vectorSpectralMeasure R hR u oneTest
   have hone : oneTest.toContinuousMap = 1 := rfl
-  rw [hone,map_one] at h
+  rw [hone, map_one] at h
   simp only [ContinuousLinearMap.one_apply] at h
   have hre : (inner ℂ u u).re = ‖u‖^2 := (norm_sq_eq_re_inner (𝕜 := ℂ) u).symm
   rw [hre] at h
   change (∫ _ : spectrum ℝ R, (1 : ℝ) ∂vectorSpectralMeasure R hR u) = ‖u‖^2 at h
   simp only [integral_const,
-    smul_eq_mul,mul_one,measureReal_def] at h
-  rw [← h,ENNReal.ofReal_toReal]
+    smul_eq_mul, mul_one, measureReal_def] at h
+  rw [← h, ENNReal.ofReal_toReal]
   exact measure_ne_top _ _
 
 #print axioms vectorSpectralMeasure_mass

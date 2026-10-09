@@ -18,7 +18,7 @@ theorem ginibreEquality_conjugate_polynomial_degree_bound {n : ℕ} (hn : 0<n)
     (hh : (h : Configuration n → ℂ) =ᵐ[ginibreMeasure n]
       fun z => (groundStateNormalization n : ℂ) * MvPolynomial.eval z Q)
     (c : HermiteMultiIndex n →₀ ℂ) (K : ℕ)
-    (hc : ∀ pq ∈ c.support,totalAntiDegree pq ≤ K)
+    (hc : ∀ pq ∈ c.support, totalAntiDegree pq ≤ K)
     (hfinite : normalizedVandermondeL2 n hn (star h) = finiteHermiteCombination n hn c) :
     Q.totalDegree ≤ K := by
   let P := ginibreMixedFiniteHermitePolynomial n hn c
@@ -34,16 +34,16 @@ theorem ginibreEquality_conjugate_polynomial_degree_bound {n : ℕ} (hn : 0<n)
     have hc' := finiteHermiteCombination_coeFn n hn c
     have hN : (groundStateNormalization n : ℂ) ≠ 0 :=
       Complex.ofReal_ne_zero.mpr (groundStateNormalization_ne_zero_of_pos hn)
-    filter_upwards [hh',hs,hv,hc'] with z hh hs hv hc'
+    filter_upwards [hh', hs, hv, hc'] with z hh hs hv hc'
     rw [ginibreMixedFiniteHermitePolynomial_eval]
-    rw [←hc',hv,hs]
+    rw [←hc', hv, hs]
     simp only [Pi.star_apply]
     rw [hh]
     unfold ginibreMixedPolynomialEval
     rw [map_mul]
-    rw [←ginibreMixedPolynomialEval,ginibreMixedHolomorphicLift_eval,eval_polynomialVandermonde,
-      ←ginibreMixedPolynomialEval,ginibreMixedAntiholomorphicLift_eval]
-    simp [normalizedVandermondeMultiplier,star_mul]
+    rw [←ginibreMixedPolynomialEval, ginibreMixedHolomorphicLift_eval, eval_polynomialVandermonde,
+      ←ginibreMixedPolynomialEval, ginibreMixedAntiholomorphicLift_eval]
+    simp [normalizedVandermondeMultiplier, star_mul]
     field_simp
   let z : Configuration n := fun j => ((j : ℕ) : ℂ)
   have hz : MvPolynomial.eval z (polynomialVandermonde n) ≠ 0 := by

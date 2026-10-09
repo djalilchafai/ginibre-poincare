@@ -24,19 +24,19 @@ def rodriguesCoordinateSequence {m : ℕ} (bar : Bool) (a : Fin m → ℕ)
   l.foldr (fun j G => (rodriguesCoordinateOperator bar j)^[a j] G) F
 
  theorem rodriguesCoordinate_tensor_iterate {m : ℕ} (bar : Bool)
-    (f : Fin m → ℂ → ℂ) (hf : ∀ i,Differentiable ℝ (f i)) (j : Fin m) (r : ℕ)
-    (hiter : ∀ k≤r,Differentiable ℝ ((rodriguesOneOperator bar)^[k] (f j))) :
-    (rodriguesCoordinateOperator bar j)^[r] (fun z => ∏ i,f i (z i)) =
-      fun z => ((rodriguesOneOperator bar)^[r] (f j)) (z j)*∏ i∈Finset.univ.erase j,f i (z i) := by
+    (f : Fin m → ℂ → ℂ) (hf : ∀ i, Differentiable ℝ (f i)) (j : Fin m) (r : ℕ)
+    (hiter : ∀ k≤r, Differentiable ℝ ((rodriguesOneOperator bar)^[k] (f j))) :
+    (rodriguesCoordinateOperator bar j)^[r] (fun z => ∏ i, f i (z i)) =
+      fun z => ((rodriguesOneOperator bar)^[r] (f j)) (z j)*∏ i∈Finset.univ.erase j, f i (z i) := by
   cases bar
   · exact dholComponent_tensor_iterate f hf j r hiter
   · exact dbarComponent_tensor_iterate f hf j r hiter
 
  theorem rodriguesCoordinateSequence_tensor {m : ℕ} (bar : Bool)
     (a : Fin m → ℕ) (f : Fin m → ℂ → ℂ)
-    (hf : ∀ i k,Differentiable ℝ ((rodriguesOneOperator bar)^[k] (f i)))
+    (hf : ∀ i k, Differentiable ℝ ((rodriguesOneOperator bar)^[k] (f i)))
     (l : List (Fin m)) (hl : l.Nodup) :
-    rodriguesCoordinateSequence bar a l (fun z => ∏ i,f i (z i)) =
+    rodriguesCoordinateSequence bar a l (fun z => ∏ i, f i (z i)) =
       fun z => ∏ i, ((rodriguesOneOperator bar)^[if i∈l then a i else 0] (f i)) (z i) := by
   induction l with
   | nil => simp [rodriguesCoordinateSequence]
@@ -44,7 +44,7 @@ def rodriguesCoordinateSequence {m : ℕ} (bar : Bool) (a : Fin m → ℕ)
     have hj : j ∉ l := (List.nodup_cons.mp hl).1
     have hl' := (List.nodup_cons.mp hl).2
     change (rodriguesCoordinateOperator bar j)^[a j]
-      (rodriguesCoordinateSequence bar a l (fun z => ∏ i,f i (z i))) = _
+      (rodriguesCoordinateSequence bar a l (fun z => ∏ i, f i (z i))) = _
     rw [ih hl']
     rw [rodriguesCoordinate_tensor_iterate bar _ (fun i => hf i _) j (a j)]
     · funext z
@@ -61,10 +61,10 @@ def rodriguesCoordinateSequence {m : ℕ} (bar : Bool) (a : Fin m → ℕ)
 
 /-- The actual normalized Gaussian before differentiation. -/
 def rodriguesMultivariateGaussian (n : ℕ) (z : Configuration n) : ℂ :=
-  (Real.exp (-(n:ℝ)*configurationNormSq z):ℂ)
+  (Real.exp (-(n : ℝ)*configurationNormSq z) : ℂ)
 
  theorem rodriguesMultivariateGaussian_eq_product (n : ℕ) :
-    rodriguesMultivariateGaussian n = fun z => ∏ i,rodriguesGaussian n (z i) := by
+    rodriguesMultivariateGaussian n = fun z => ∏ i, rodriguesGaussian n (z i) := by
   funext z
   unfold rodriguesMultivariateGaussian rodriguesGaussian configurationNormSq
   rw [← Complex.ofReal_prod,← Real.exp_sum]
@@ -79,26 +79,26 @@ def rodriguesMultivariateDerivative (n : ℕ) (p q : Fin n → ℕ) : Configurat
  theorem rodriguesMultivariateDerivative_eq_product (n : ℕ) (hn : 0<n)
     (p q : Fin n → ℕ) :
     rodriguesMultivariateDerivative n p q =
-      fun z => ∏ i,(dbarOnePublic^[p i] (dholOne^[q i] (rodriguesGaussian n))) (z i) := by
+      fun z => ∏ i, (dbarOnePublic^[p i] (dholOne^[q i] (rodriguesGaussian n))) (z i) := by
   unfold rodriguesMultivariateDerivative
   rw [rodriguesMultivariateGaussian_eq_product,
     rodriguesCoordinateSequence_tensor false q _
       (fun i k => (contDiff_iterate_dhol_gaussian n k).differentiable (by simp))
       (List.finRange n) (List.nodup_finRange n)]
-  simp only [List.mem_finRange,if_true,rodriguesOneOperator,Bool.false_eq_true,if_false]
+  simp only [List.mem_finRange, if_true, rodriguesOneOperator, Bool.false_eq_true, if_false]
   rw [rodriguesCoordinateSequence_tensor true p _
       (fun i k => (contDiff_iterate_mixed_gaussian n hn k (q i)).differentiable (by simp))
       (List.finRange n) (List.nodup_finRange n)]
-  simp only [List.mem_finRange,if_true,rodriguesOneOperator]
+  simp only [List.mem_finRange, if_true, rodriguesOneOperator]
 
  theorem rodriguesMultivariate_normalization_product (n : ℕ) (p q : Fin n → ℕ) :
-    (∏ i, (-1:ℂ)^(p i + q i)/
-      ((Real.sqrt ((p i).factorial*(q i).factorial:ℕ):ℂ)*(Real.sqrt (n:ℝ):ℂ)^(p i + q i))) =
-      (-1:ℂ)^(∑ i : Fin n, (p i + q i))/
-        ((Real.sqrt ((∏ i : Fin n,(p i).factorial)*(∏ i : Fin n,(q i).factorial):ℕ):ℂ)*
-          (Real.sqrt (n:ℝ):ℂ)^(∑ i : Fin n, (p i + q i))) := by
-  rw [Finset.prod_div_distrib,Finset.prod_mul_distrib,
-    Finset.prod_pow_eq_pow_sum,Finset.prod_pow_eq_pow_sum]
+    (∏ i, (-1 : ℂ)^(p i + q i)/
+      ((Real.sqrt ((p i).factorial*(q i).factorial : ℕ) : ℂ)*(Real.sqrt (n : ℝ) : ℂ)^(p i + q i))) =
+      (-1 : ℂ)^(∑ i : Fin n, (p i + q i))/
+        ((Real.sqrt ((∏ i : Fin n, (p i).factorial)*(∏ i : Fin n, (q i).factorial) : ℕ) : ℂ)*
+          (Real.sqrt (n : ℝ) : ℂ)^(∑ i : Fin n, (p i + q i))) := by
+  rw [Finset.prod_div_distrib, Finset.prod_mul_distrib,
+    Finset.prod_pow_eq_pow_sum, Finset.prod_pow_eq_pow_sum]
   congr 2
   rw [← Complex.ofReal_prod]
   rw [← Real.sqrt_prod Finset.univ (fun i _ => Nat.cast_nonneg ((p i).factorial*(q i).factorial))]
@@ -111,14 +111,14 @@ ordered coordinate derivatives of exp(−n|z|²), with no regularity assumptions
  theorem multivariateNormalized_rodrigues (n : ℕ) (hn : 0<n)
     (p q : Fin n → ℕ) (z : Configuration n) :
     multivariateNormalized n hn p q z =
-      (-1:ℂ)^(∑ i : Fin n, (p i + q i))/
-        ((Real.sqrt ((∏ i : Fin n,(p i).factorial)*(∏ i : Fin n,(q i).factorial):ℕ):ℂ)*
-          (Real.sqrt (n:ℝ):ℂ)^(∑ i : Fin n, (p i + q i)))*
-      (Real.exp ((n:ℝ)*configurationNormSq z):ℂ)*
+      (-1 : ℂ)^(∑ i : Fin n, (p i + q i))/
+        ((Real.sqrt ((∏ i : Fin n, (p i).factorial)*(∏ i : Fin n, (q i).factorial) : ℕ) : ℂ)*
+          (Real.sqrt (n : ℝ) : ℂ)^(∑ i : Fin n, (p i + q i)))*
+      (Real.exp ((n : ℝ)*configurationNormSq z) : ℂ)*
       rodriguesMultivariateDerivative n p q z := by
   unfold multivariateNormalized
   simp_rw [normalizedEval_rodrigues_factorial n hn]
-  rw [Finset.prod_mul_distrib,Finset.prod_mul_distrib,
+  rw [Finset.prod_mul_distrib, Finset.prod_mul_distrib,
     rodriguesMultivariate_normalization_product]
   rw [rodriguesMultivariateDerivative_eq_product n hn]
   congr 1
@@ -137,7 +137,7 @@ theorem multivariateNormalized_single_coordinate (n : ℕ) (hn : 0<n)
   rw [Finset.prod_eq_single j]
   · simp
   · intro i hi hij
-    simp [Pi.single_apply,hij]
+    simp [Pi.single_apply, hij]
   · simp
 
 #print axioms multivariateNormalized_rodrigues

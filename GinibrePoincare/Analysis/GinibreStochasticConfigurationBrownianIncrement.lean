@@ -15,7 +15,7 @@ set_option backward.isDefEq.respectTransparency false
 
 def ginibreConfigurationBrownianEmbedding (n : ℕ) (α : ℝ) :
     ((Fin n × Fin 2) → ℝ) → Configuration n := fun v j =>
-  Real.sqrt (2*α/(n : ℝ)^2) • ((v (j,0) : ℂ)+Complex.I*(v (j,1) : ℂ))
+  Real.sqrt (2*α/(n : ℝ)^2) • ((v (j, 0) : ℂ)+Complex.I*(v (j, 1) : ℂ))
 
 theorem ginibreConfigurationBrownianEmbedding_measurable (n : ℕ) (α : ℝ) :
     Measurable (ginibreConfigurationBrownianEmbedding n α) := by
@@ -48,7 +48,7 @@ theorem ginibreConfigurationBrownianNoise_increment_hasLaw {Ω : Type*} [Measura
       (ginibreConfigurationBrownianIncrementLaw n α t) P := by
   have hE : HasLaw (ginibreConfigurationBrownianEmbedding n α)
       (ginibreConfigurationBrownianIncrementLaw n α t) (Measure.pi (fun _ : Fin n × Fin 2 => gaussianReal 0 t)) :=
-    ⟨(ginibreConfigurationBrownianEmbedding_measurable n α).aemeasurable,rfl⟩
+    ⟨(ginibreConfigurationBrownianEmbedding_measurable n α).aemeasurable, rfl⟩
   have h := hE.comp (ginibreBrownian_family_increment_hasLaw B P hB hind s t)
   simpa only [Function.comp_def, id_eq, ginibreConfigurationBrownianNoise_increment_eq] using h
 

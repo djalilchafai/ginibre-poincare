@@ -23,9 +23,9 @@ theorem contractions_tendsto_on_dense_range {E F D : Type*}
   intro u
   apply Metric.tendsto_atTop.mpr
   intro ε hε
-  obtain ⟨d,hd⟩ := hv.exists_dist_lt u (by positivity : 0<ε/4)
-  obtain ⟨N,hN⟩ := Metric.tendsto_atTop.mp (ht d) (ε/2) (by positivity)
-  refine ⟨N,fun k hk => ?_⟩
+  obtain ⟨d, hd⟩ := hv.exists_dist_lt u (by positivity : 0<ε/4)
+  obtain ⟨N, hN⟩ := Metric.tendsto_atTop.mp (ht d) (ε/2) (by positivity)
+  refine ⟨N, fun k hk => ?_⟩
   have hmiddle := hN k hk
   rw [dist_eq_norm] at hd hmiddle ⊢
   have hdecomp : A k u-R u = A k (u-v d)+(A k (v d)-R (v d))+R (v d-u) := by
@@ -62,21 +62,21 @@ theorem stationaryEndpointL2Pullback_tendsto {Ω E : Type*}
   let u := BoundedContinuousFunction.toLp 2 μ ℝ f
   have hrep := BoundedContinuousFunction.coeFn_toLp (p := 2) (μ := μ) (𝕜 := ℝ) f
   have hnorm (k : ℕ) : ‖A k u-R u‖^2 = ∫ ω, (f (X k ω)-f (Y ω))^2 ∂P := by
-    rw [← real_inner_self_eq_norm_sq,L2.inner_def]
+    rw [← real_inner_self_eq_norm_sq, L2.inner_def]
     apply integral_congr_ae
     have hrX := (hX k).quasiMeasurePreserving.ae_eq_comp hrep
     have hrY := hY.quasiMeasurePreserving.ae_eq_comp hrep
-    filter_upwards [Lp.coeFn_sub (A k u) (R u),Lp.coeFn_compMeasurePreserving u (hX k),
-      Lp.coeFn_compMeasurePreserving u hY,hrX,hrY] with ω hsub hx hy hfx hfy
+    filter_upwards [Lp.coeFn_sub (A k u) (R u), Lp.coeFn_compMeasurePreserving u (hX k),
+      Lp.coeFn_compMeasurePreserving u hY, hrX, hrY] with ω hsub hx hy hfx hfy
     change (A k u-R u) ω*(A k u-R u) ω=_
     rw [hsub]
     change (Lp.compMeasurePreserving (X k) (hX k) u ω-Lp.compMeasurePreserving Y hY u ω)*
       (Lp.compMeasurePreserving (X k) (hX k) u ω-Lp.compMeasurePreserving Y hY u ω)=_
-    rw [hx,hy]
+    rw [hx, hy]
     change (u (X k ω)-u (Y ω))*(u (X k ω)-u (Y ω))=_
     change u (X k ω)=f (X k ω) at hfx
     change u (Y ω)=f (Y ω) at hfy
-    rw [hfx,hfy]
+    rw [hfx, hfy]
     ring
   have ht : Tendsto (fun k => ∫ ω, (f (X k ω)-f (Y ω))^2 ∂P) atTop (𝓝 0) := by
     have hh := tendsto_integral_of_dominated_convergence (μ := P)
@@ -88,10 +88,10 @@ theorem stationaryEndpointL2Pullback_tendsto {Ω E : Type*}
     · simpa using hh
     · intro k
       exact ae_of_all P fun ω => by
-        rw [Real.norm_eq_abs,abs_of_nonneg (sq_nonneg _)]
+        rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)]
         have hb : ‖f (X k ω)-f (Y ω)‖ ≤ 2*‖f‖ :=
-          (norm_sub_le _ _).trans (by linarith [f.norm_coe_le_norm (X k ω),f.norm_coe_le_norm (Y ω)])
-        simpa [Real.norm_eq_abs,sq_abs] using pow_le_pow_left₀ (norm_nonneg _) hb 2
+          (norm_sub_le _ _).trans (by linarith [f.norm_coe_le_norm (X k ω), f.norm_coe_le_norm (Y ω)])
+        simpa [Real.norm_eq_abs, sq_abs] using pow_le_pow_left₀ (norm_nonneg _) hb 2
     · filter_upwards [hpoint] with ω hω
       have hf := f.continuous.continuousAt.tendsto.comp hω
       simpa using (hf.sub (tendsto_const_nhds (x := f (Y ω)))).pow 2
@@ -99,7 +99,7 @@ theorem stationaryEndpointL2Pullback_tendsto {Ω E : Type*}
     simpa only [hnorm] using ht
   have hnormlim : Tendsto (fun k => ‖A k u-R u‖) atTop (𝓝 0) := by
     have hh := Real.continuous_sqrt.continuousAt.tendsto.comp hsq
-    simpa only [Function.comp_def,Real.sqrt_sq_eq_abs,abs_of_nonneg (norm_nonneg _),Real.sqrt_zero] using hh
+    simpa only [Function.comp_def, Real.sqrt_sq_eq_abs, abs_of_nonneg (norm_nonneg _), Real.sqrt_zero] using hh
   exact tendsto_iff_norm_sub_tendsto_zero.mpr hnormlim
 
 /-- Genuine endpoint operators inherit strong continuity from stationary

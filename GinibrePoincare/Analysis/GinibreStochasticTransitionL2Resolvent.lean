@@ -18,7 +18,7 @@ def ginibreOriginalStochasticL2Resolvent {Ω : Type*} [MeasurableSpace Ω]
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (hB : ∀ i, IsBrownianReal (B i) P)
     (hiB : iIndepFun (fun i ω t => B i t ω) P) (c : ℝ)
     (u : Lp ℝ 2 (ginibreMeasure n)) : Lp ℝ 2 (ginibreMeasure n) :=
-  ∫ t in Ioi (0:ℝ), (c * Real.exp (-c*t)) •
+  ∫ t in Ioi (0 : ℝ), (c * Real.exp (-c*t)) •
     ginibreOriginalStochasticL2Operator hn α P B hB hiB t.toNNReal u
 
 theorem ginibreOriginalStochasticL2Resolvent_integrable {Ω : Type*} [MeasurableSpace Ω]
@@ -50,7 +50,7 @@ theorem ginibreOriginalStochasticL2Resolvent_pairing {Ω : Type*} [MeasurableSpa
     (hiB : iIndepFun (fun i ω t => B i t ω) P) {c : ℝ} (hc : 0<c)
     (f u : Lp ℝ 2 (ginibreMeasure n)) :
     inner ℝ f (ginibreOriginalStochasticL2Resolvent hn α P B hB hiB c u) =
-      ∫ t in Ioi (0:ℝ), (c*Real.exp (-c*t)) *
+      ∫ t in Ioi (0 : ℝ), (c*Real.exp (-c*t)) *
         inner ℝ f (ginibreOriginalStochasticL2Operator hn α P B hB hiB t.toNNReal u) := by
   rw [ginibreOriginalStochasticL2Resolvent,
     ← integral_inner (ginibreOriginalStochasticL2Resolvent_integrable hn α P B hB hiB hc u) f]

@@ -14,12 +14,12 @@ theorem bakryEmeryGibbs_gradient_action_congr {E : Type*} (T : ℝ) (hT : 0 ≤ 
   have hi : (∫ s in (0 : ℝ)..T, A (x s)) = ∫ s in (0 : ℝ)..T, A (y s) :=
     intervalIntegral.integral_congr (fun s hs => congrArg A (hxy (by simpa [uIcc_of_le hT] using hs)))
   simp only [gradientPathReversalWeight,
-    hxy (show (0 : ℝ) ∈ Icc 0 T from ⟨le_rfl,hT⟩),
-    hxy (show T ∈ Icc 0 T from ⟨hT,le_rfl⟩), hi]
+    hxy (show (0 : ℝ) ∈ Icc 0 T from ⟨le_rfl, hT⟩),
+    hxy (show T ∈ Icc 0 T from ⟨hT, le_rfl⟩), hi]
 
 theorem bakryEmeryGibbsOUAction_of_agrees {n : ℕ} (W : Configuration n → ℝ)
-    (T : ℝ) (hT : 0 ≤ T) (x : C(Icc (0 : ℝ) T,Configuration n))
-    (y : ℝ → Configuration n) (hy : ∀ s (hs : s ∈ Icc 0 T), y s = x ⟨s,hs⟩) :
+    (T : ℝ) (hT : 0 ≤ T) (x : C(Icc (0 : ℝ) T, Configuration n))
+    (y : ℝ → Configuration n) (hy : ∀ s (hs : s ∈ Icc 0 T), y s = x ⟨s, hs⟩) :
     bakryEmeryGibbsOUAction W T hT x = gradientPathReversalWeight T
       (bakryEmeryGibbsRelativePotential W) (bakryEmeryGibbsOUActionIntegrand W) y := by
   letI : Fact ((0 : ℝ) ≤ T) := ⟨hT⟩

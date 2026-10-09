@@ -28,7 +28,7 @@ theorem correspondence_constantLaw_ae_limit {Ω E : Type*} [MeasurableSpace Ω]
     · filter_upwards [hl] with ω hω
       exact b.continuous.continuousAt.tendsto.comp hω
   have he' (m : ℕ) : (∫ ω, b (X m ω) ∂P) = ∫ y, b y ∂ν := by
-    rw [← he m,integral_map (hX m).aemeasurable b.continuous.aestronglyMeasurable]
+    rw [← he m, integral_map (hX m).aemeasurable b.continuous.aestronglyMeasurable]
   exact (tendsto_nhds_unique ht (by simpa only [he'] using
     (tendsto_const_nhds : Tendsto (fun _ : ℕ => ∫ y, b y ∂ν) atTop (𝓝 (∫ y, b y ∂ν)))))
 

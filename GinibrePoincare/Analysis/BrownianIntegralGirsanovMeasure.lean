@@ -14,7 +14,7 @@ theorem gaussianDensity_isProbabilityMeasure_of_lintegral_one
     (hD : (∫⁻ ω, ENNReal.ofReal (D ω) ∂P)=1) :
     IsProbabilityMeasure (P.withDensity (fun ω => ENNReal.ofReal (D ω))) := by
   constructor
-  rw [withDensity_apply _ MeasurableSet.univ,Measure.restrict_univ]
+  rw [withDensity_apply _ MeasurableSet.univ, Measure.restrict_univ]
   exact hD
 
 theorem gaussianDensity_isProbabilityMeasure_of_integral_one
@@ -22,7 +22,7 @@ theorem gaussianDensity_isProbabilityMeasure_of_integral_one
     (hDi : Integrable D P) (hDp : 0≤ᵐ[P] D) (hD : (∫ ω, D ω ∂P)=1) :
     IsProbabilityMeasure (P.withDensity (fun ω => ENNReal.ofReal (D ω))) := by
   apply gaussianDensity_isProbabilityMeasure_of_lintegral_one
-  rw [← ofReal_integral_eq_lintegral_ofReal hDi hDp,hD,ENNReal.ofReal_one]
+  rw [← ofReal_integral_eq_lintegral_ofReal hDi hDp, hD, ENNReal.ofReal_one]
 
 /-- The original predictable vector RN density defines an actual probability
 measure at every finite chronological grid. -/

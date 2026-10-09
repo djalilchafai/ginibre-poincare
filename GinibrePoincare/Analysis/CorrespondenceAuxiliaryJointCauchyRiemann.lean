@@ -12,8 +12,8 @@ theorem configuration_real_basis_expansion {n : ℕ} (z : Configuration n) :
     z = ∑ j : Fin n, ((z j).re • (realCoordinateDirection j : Configuration n) +
       (z j).im • (imaginaryCoordinateDirection j : Configuration n)) := by
   funext k
-  simp [Finset.sum_apply,realCoordinateDirection,imaginaryCoordinateDirection,
-    coordinateDirection,Pi.add_apply,Pi.smul_apply,Finset.sum_add_distrib,eq_comm,Complex.re_add_im]
+  simp [Finset.sum_apply, realCoordinateDirection, imaginaryCoordinateDirection,
+    coordinateDirection, Pi.add_apply, Pi.smul_apply, Finset.sum_add_distrib, eq_comm, Complex.re_add_im]
 
 /-- The actual joint complex derivative constructed from the real coordinate
 partials. -/
@@ -29,17 +29,17 @@ theorem jointComplexDerivative_restrictScalars {n : ℕ}
   ext z
   change (jointComplexDerivative L) z = L z
   unfold jointComplexDerivative
-  simp only [ContinuousLinearMap.sum_apply,ContinuousLinearMap.smulRight_apply,
-    ContinuousLinearMap.proj_apply,smul_eq_mul]
+  simp only [ContinuousLinearMap.sum_apply, ContinuousLinearMap.smulRight_apply,
+    ContinuousLinearMap.proj_apply, smul_eq_mul]
   conv_rhs => rw [configuration_real_basis_expansion z]
   rw [map_sum]
-  simp only [map_add,map_smul,hL]
+  simp only [map_add, map_smul, hL]
   apply Finset.sum_congr rfl
   intro j hj
   change z j * L (realCoordinateDirection j) =
     (z j).re • L (realCoordinateDirection j) +
       (z j).im • (Complex.I * L (realCoordinateDirection j))
-  rw [RCLike.real_smul_eq_coe_smul (K := ℂ),RCLike.real_smul_eq_coe_smul (K := ℂ)]
+  rw [RCLike.real_smul_eq_coe_smul (K := ℂ), RCLike.real_smul_eq_coe_smul (K := ℂ)]
   simp only [smul_eq_mul]
   conv_lhs => rw [← Complex.re_add_im (z j)]
   simp only [add_mul]

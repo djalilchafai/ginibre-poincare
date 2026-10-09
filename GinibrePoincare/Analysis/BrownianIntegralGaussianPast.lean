@@ -13,14 +13,14 @@ set_option backward.isDefEq.respectTransparency false
 
 def chronologicalPrependFiltration {Ω : Type*} [MeasurableSpace Ω]
     (ℱ : Filtration ℕ ‹MeasurableSpace Ω›) : Filtration ℕ ‹MeasurableSpace Ω› :=
-  ⟨fun n => Nat.casesOn n ⊥ (fun k => ℱ k),by
+  ⟨fun n => Nat.casesOn n ⊥ (fun k => ℱ k), by
     intro i j hij
     cases i with
     | zero => exact bot_le
     | succ i =>
         cases j with
         | zero => omega
-        | succ j => exact ℱ.mono (Nat.succ_le_succ_iff.mp hij),by
+        | succ j => exact ℱ.mono (Nat.succ_le_succ_iff.mp hij), by
     intro n
     cases n with
     | zero => exact bot_le
@@ -60,7 +60,7 @@ theorem chronologicalFresh_initial_prefix_independent
   have he : (∑ k ∈ S, X k) = (fun ω => ∑ k ∈ Finset.range N, Z k ω) := by
     rw [Finset.sum_image (fun a ha b hb hab => Nat.succ_injective hab)]
     funext ω
-    simp [X,Finset.sum_apply]
+    simp [X, Finset.sum_apply]
   rw [he] at hh
   exact hh.symm
 
@@ -91,7 +91,7 @@ theorem brownianUnitGridPrefix_independent_past
     V hV N
   have hp : V ⁻¹' ({1} : Set ℝ) = Y ⁻¹' A := by
     ext ω
-    by_cases hω : Y ω ∈ A <;> simp [V,hω]
+    by_cases hω : Y ω ∈ A <;> simp [V, hω]
   have hh := hi.measure_inter_preimage_eq_mul ({1} : Set ℝ) C (measurableSet_singleton 1) hC
   rw [hp] at hh
   exact hh

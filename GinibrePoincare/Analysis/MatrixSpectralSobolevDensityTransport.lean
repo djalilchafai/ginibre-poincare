@@ -5,7 +5,14 @@ public import GinibrePoincare.Analysis.MatrixSpectralSobolevDensity
 
 @[expose] public section
 
-/-! # Actual Gaussian density and probability transport through entry coordinates -/
+/-! # Actual Gaussian density and probability transport through entry coordinates
+
+Entry reindexing preserves ordinary volume. The general with-density transport
+lemma then shows it preserves the Gaussian laws as well, because the density
+on entry coordinates is exactly the pulled-back matrix density. Probability,
+strict positivity, continuity, and a finite upper bound for that density are
+established here for the later weak-domain approximation argument.
+-/
 open MeasureTheory Matrix Filter
 open scoped ENNReal
 namespace GinibrePoincare

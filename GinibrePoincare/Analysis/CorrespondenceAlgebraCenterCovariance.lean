@@ -10,13 +10,13 @@ set_option backward.isDefEq.respectTransparency false
 theorem correspondence_standardGaussian_cross_moment :
     (∫ z : ℂ, z.re*z.im ∂standardComplexGaussianMeasure) = 0 := by
   have hi : Integrable (fun z : ℂ => z^2) standardComplexGaussianMeasure := by
-    simpa [standardComplexGaussianMeasure,complexGaussianMixedMoment] using
+    simpa [standardComplexGaussianMeasure, complexGaussianMixedMoment] using
       integrable_mixedComplexMonomial 1 2 0
   have hm : (∫ z : ℂ, z^2 ∂standardComplexGaussianMeasure) = 0 := by
     have h := complexGaussianMixedMoment_formula (by norm_num : (0 : ℕ) < 1) 2 0
-    simpa [standardComplexGaussianMeasure,complexGaussianMixedMoment] using h
+    simpa [standardComplexGaussianMeasure, complexGaussianMixedMoment] using h
   have he (z : ℂ) : z.re*z.im = (1/2 : ℝ)*(z^2).im := by
-    simp [pow_two,Complex.mul_im]
+    simp [pow_two, Complex.mul_im]
     ring
   simp_rw [he]
   rw [integral_const_mul]
@@ -34,7 +34,7 @@ theorem correspondence_coordinateSum_cross_covariance (n : ℕ) (hn : 0 < n) :
     (measurable_coordinateSum n).aemeasurable
     (Complex.continuous_re.mul Complex.continuous_im).aestronglyMeasurable
   change (∫ z : Configuration n, (Complex.re * Complex.im) (coordinateSum z) ∂ginibreMeasure n) = 0
-  rw [← hm,coordinateSum_ginibre_gaussian n hn]
+  rw [← hm, coordinateSum_ginibre_gaussian n hn]
   exact correspondence_standardGaussian_cross_moment
 
 #print axioms correspondence_coordinateSum_cross_covariance

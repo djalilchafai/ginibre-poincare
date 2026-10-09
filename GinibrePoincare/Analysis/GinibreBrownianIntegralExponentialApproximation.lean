@@ -15,12 +15,12 @@ set_option maxHeartbeats 800000
 
 def brownianVectorTimeEnergy {Ω ι : Type*} [Fintype ι]
     (F : ι → ℝ≥0 → Ω → ℝ) (T : ℝ≥0) (ω : Ω) : ℝ :=
-  ∫ s in (0:ℝ)..(T:ℝ), ∑ i, (F i (Real.toNNReal s) ω)^2
+  ∫ s in (0 : ℝ)..(T : ℝ), ∑ i, (F i (Real.toNNReal s) ω)^2
 
 def brownianVectorTimeEnergyUniformSum {Ω ι : Type*} [Fintype ι]
     (F : ι → ℝ≥0 → Ω → ℝ) (T : ℝ≥0) (n : ℕ) (ω : Ω) : ℝ :=
   ∑ k : Fin (n+1), (∑ i, (F i (ginibreUniformBrownianTime T n k) ω)^2)*
-    ((T:ℝ)/((n:ℝ)+1))
+    ((T : ℝ)/((n : ℝ)+1))
 
 /-- Actual vector energy Riemann sums converge almost surely to the time integral. -/
 theorem brownianVectorTimeEnergyUniformSum_tendsto_ae {Ω ι : Type*}
@@ -31,17 +31,17 @@ theorem brownianVectorTimeEnergyUniformSum_tendsto_ae {Ω ι : Type*}
       atTop (𝓝 (brownianVectorTimeEnergy F T ω)) := by
   have hall : ∀ᵐ ω ∂P, ∀ i, ContinuousOn (fun s => F i s ω) (Icc 0 T) := ae_all_iff.mpr hc
   filter_upwards [hall] with ω hω
-  have hfi (i : ι) : ContinuousOn (fun s : ℝ => F i (Real.toNNReal s) ω) (Icc 0 (T:ℝ)) :=
+  have hfi (i : ι) : ContinuousOn (fun s : ℝ => F i (Real.toNNReal s) ω) (Icc 0 (T : ℝ)) :=
     (hω i).comp continuous_real_toNNReal.continuousOn (by
       intro s hs
       constructor
       · positivity
       · simpa only [Real.toNNReal_coe] using Real.toNNReal_le_toNNReal hs.2)
-  have he : ContinuousOn (fun s : ℝ => ∑ i, (F i (Real.toNNReal s) ω)^2) (Icc 0 (T:ℝ)) :=
+  have he : ContinuousOn (fun s : ℝ => ∑ i, (F i (Real.toNNReal s) ω)^2) (Icc 0 (T : ℝ)) :=
     continuousOn_finset_sum Finset.univ fun i _ => (hfi i).pow 2
   have ht := itoContinuousScalarRiemann_fin_tendsto
     (fun s : ℝ => ∑ i, (F i (Real.toNNReal s) ω)^2) T he
-  simpa only [Real.toNNReal_coe,brownianVectorTimeEnergyUniformSum,brownianVectorTimeEnergy] using ht
+  simpa only [Real.toNNReal_coe, brownianVectorTimeEnergyUniformSum, brownianVectorTimeEnergy] using ht
 
 theorem brownianVectorTimeEnergyUniformSum_measurable {Ω ι : Type*}
     [MeasurableSpace Ω] [Fintype ι] (F : ι → ℝ≥0 → Ω → ℝ) (T : ℝ≥0)

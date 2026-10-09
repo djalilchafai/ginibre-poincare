@@ -19,7 +19,7 @@ theorem ginibreBrownianTransitionKernel_center_relative_product
     [IsProbabilityMeasure P] [P.IsComplete] (hB : ∀ i, IsBrownianReal (B i) P)
     (hind : iIndepFun (fun i ω t => B i t ω) P) (t : ℝ≥0) :
     (ginibreBrownianTransitionKernel hn α B P t).map
-      (fun z : Configuration n => (coordinateSum z,recenteredConfiguration n z)) =
+      (fun z : Configuration n => (coordinateSum z, recenteredConfiguration n z)) =
       ((ginibreBrownianTransitionKernel hn α B P t).map coordinateSum) ×ₖ
         ((ginibreBrownianTransitionKernel hn α B P t).map (recenteredConfiguration n)) := by
   let K := ginibreBrownianTransitionKernel hn α B P t
@@ -38,16 +38,16 @@ theorem ginibreBrownianTransitionKernel_center_relative_product
   letI : IsMarkovKernel (K.map coordinateSum) := Kernel.IsMarkovKernel.map K hS
   letI : IsMarkovKernel (K.map (recenteredConfiguration n)) := Kernel.IsMarkovKernel.map K hW
   ext1 z
-  rw [Kernel.map_apply _ (hS.prodMk hW),Kernel.prod_apply,
-    Kernel.map_apply _ hS,Kernel.map_apply _ hW]
-  change (K z).map (fun x => (coordinateSum x,recenteredConfiguration n x)) =
+  rw [Kernel.map_apply _ (hS.prodMk hW), Kernel.prod_apply,
+    Kernel.map_apply _ hS, Kernel.map_apply _ hW]
+  change (K z).map (fun x => (coordinateSum x, recenteredConfiguration n x)) =
     ((K z).map coordinateSum).prod ((K z).map (recenteredConfiguration n))
   have hX : Measurable (ginibreBrownianMaximalProcess n α z.val B t) :=
     (ginibreDrivenMaximalValue_measurable hn α z.val t).comp
       (ginibreBrownianFullContinuousNoise_measurable n B P hB α)
   rw [show K z=P.map (ginibreBrownianMaximalProcess n α z.val B t) from
     ginibreBrownianTransitionKernel_apply_eq_process_law hn α B P hB t z,
-    Measure.map_map (hS.prodMk hW) hX,Measure.map_map hS hX,Measure.map_map hW hX]
+    Measure.map_map (hS.prodMk hW) hX, Measure.map_map hS hX, Measure.map_map hW hX]
   have hi := (ginibreBrownian_center_relative_processes_independent hn α z.val z.property B P hB hind).comp
     (measurable_pi_apply t) (measurable_pi_apply t)
   exact hi.map_prod_eq_prod_map_map (hS.comp hX).aemeasurable (hW.comp hX).aemeasurable

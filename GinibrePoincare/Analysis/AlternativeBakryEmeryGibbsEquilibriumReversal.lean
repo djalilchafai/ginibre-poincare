@@ -61,7 +61,7 @@ theorem bakryEmeryGibbsEquilibriumWeightedPathLaw_reverse {Ω : Type*} [Measurab
     funext x
     rfl
   dsimp only at hRef
-  rw [hA,ginibre_map_completion ν O hO] at hRef
+  rw [hA, ginibre_map_completion ν O hO] at hRef
   exact hRef
 
 theorem bakryEmeryGibbsEquilibriumWeightedPathLaw_endpoint {Ω : Type*} [MeasurableSpace Ω]
@@ -73,9 +73,9 @@ theorem bakryEmeryGibbsEquilibriumWeightedPathLaw_endpoint {Ω : Type*} [Measura
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (hB : ∀ i, IsBrownianReal (B i) P)
     (hiB : iIndepFun (fun i ω t => B i t ω) P) (T : ℝ≥0) (hT : 0 < T) :
     (bakryEmeryGibbsEquilibriumWeightedPathLaw W hW κ hκ hc T P B).map
-      (fun x => x ⟨T,T.property,le_rfl⟩) =
+      (fun x => x ⟨T, T.property, le_rfl⟩) =
     (bakryEmeryGibbsEquilibriumWeightedPathLaw W hW κ hκ hc T P B).map
-      (fun x => x ⟨0,le_rfl,T.property⟩) :=
+      (fun x => x ⟨0, le_rfl, T.property⟩) :=
   ginibreHamiltonian_reversal_endpoint_marginal n T T.property _
     (bakryEmeryGibbsEquilibriumWeightedPathLaw_reverse hn W hW κ hκ hc P B hB hiB T hT)
 

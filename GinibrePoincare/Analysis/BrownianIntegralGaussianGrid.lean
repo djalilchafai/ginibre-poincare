@@ -24,7 +24,7 @@ theorem brownianUnitGridInnovation_eq {Ω ι : Type*} [Fintype ι]
     (τ : ℕ → ℝ≥0) (hτ : Monotone τ) (k : ℕ) (ω : Ω) :
     brownianUnitGridInnovation B u τ k ω =
       inner ℝ (u k ω) (WithLp.toLp 2 (fun j => B j (τ (k+1)) ω-B j (τ k) ω)) := by
-  simp only [brownianUnitGridInnovation,brownianUnitInnovation,
+  simp only [brownianUnitGridInnovation, brownianUnitInnovation,
     add_tsub_cancel_of_le (hτ (Nat.le_succ k))]
 
 theorem brownianUnitGridInnovation_measurable_at_end

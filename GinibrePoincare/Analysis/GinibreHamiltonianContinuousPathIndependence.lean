@@ -14,11 +14,11 @@ theorem ginibre_iIndepFun_continuousMap_of_raw_paths
     [TopologicalSpace.SeparableSpace D] [Nonempty D]
     [TopologicalSpace E] [SecondCountableTopology E] [T2Space E]
     [MeasurableSpace E] [BorelSpace E]
-    [MeasurableSpace C(D,E)] [BorelSpace C(D,E)] [PolishSpace C(D,E)] [Nonempty C(D,E)]
-    (P : Measure Ω) (X : ι → Ω → C(D,E))
+    [MeasurableSpace C(D, E)] [BorelSpace C(D, E)] [PolishSpace C(D, E)] [Nonempty C(D, E)]
+    (P : Measure Ω) (X : ι → Ω → C(D, E))
     (h : iIndepFun (fun i ω t => X i ω t) P) : iIndepFun X P := by
   let d := TopologicalSpace.denseSeq D
-  let e : C(D,E) → ℕ → E := fun x k => x (d k)
+  let e : C(D, E) → ℕ → E := fun x k => x (d k)
   have he : MeasurableEmbedding e :=
     (continuous_pi (fun k => continuous_eval_const (d k))).measurableEmbedding (by
       intro x y hxy
@@ -32,10 +32,10 @@ theorem ginibre_iIndepFun_continuousMap_of_raw_paths
   funext i ω
   exact (he.leftInverse_invFun (X i ω)).symm
 
-local instance ginibreScalarBrownianCMMeasurable : MeasurableSpace C(ℝ≥0,ℝ) := borel _
-local instance ginibreScalarBrownianCMBorel : BorelSpace C(ℝ≥0,ℝ) := ⟨rfl⟩
+local instance ginibreScalarBrownianCMMeasurable : MeasurableSpace C(ℝ≥0, ℝ) := borel _
+local instance ginibreScalarBrownianCMBorel : BorelSpace C(ℝ≥0, ℝ) := ⟨rfl⟩
 
-def ginibreScalarBrownianDenseEvaluation : C(ℝ≥0,ℝ) → ℕ → ℝ :=
+def ginibreScalarBrownianDenseEvaluation : C(ℝ≥0, ℝ) → ℕ → ℝ :=
   fun x k => x (TopologicalSpace.denseSeq ℝ≥0 k)
 
 theorem ginibreScalarBrownianDenseEvaluation_embedding :
@@ -46,7 +46,7 @@ theorem ginibreScalarBrownianDenseEvaluation_embedding :
     exact (TopologicalSpace.denseRange_denseSeq ℝ≥0).equalizer x.continuous y.continuous hxy)
 
 /-- A globally measurable normalization from the raw product path space. -/
-def ginibreScalarBrownianNormalize (x : ℝ≥0 → ℝ) : C(ℝ≥0,ℝ) :=
+def ginibreScalarBrownianNormalize (x : ℝ≥0 → ℝ) : C(ℝ≥0, ℝ) :=
   ginibreScalarBrownianDenseEvaluation_embedding.invFun
     (fun k => x (TopologicalSpace.denseSeq ℝ≥0 k))
 
@@ -56,8 +56,8 @@ theorem ginibreScalarBrownianNormalize_measurable : Measurable ginibreScalarBrow
 
 theorem ginibreScalarBrownianNormalize_continuous (x : ℝ≥0 → ℝ) (hx : Continuous x) :
     ∀ t, ginibreScalarBrownianNormalize x t = x t := by
-  have he := ginibreScalarBrownianDenseEvaluation_embedding.leftInverse_invFun (⟨x,hx⟩ : C(ℝ≥0,ℝ))
-  exact fun t => congrArg (fun y : C(ℝ≥0,ℝ) => y t) he
+  have he := ginibreScalarBrownianDenseEvaluation_embedding.leftInverse_invFun (⟨x, hx⟩ : C(ℝ≥0, ℝ))
+  exact fun t => congrArg (fun y : C(ℝ≥0, ℝ) => y t) he
 
 #print axioms ginibreScalarBrownianNormalize_measurable
 #print axioms ginibreScalarBrownianNormalize_continuous

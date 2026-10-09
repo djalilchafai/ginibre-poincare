@@ -35,21 +35,21 @@ theorem gaussianVectorPredictableTilt_centered_fresh {Ω α ι : Type*}
   let W := fun ω i => X ω i-H (Y ω) i*(v : ℝ)
   have hW : Measurable W := by fun_prop
   have hνn : ν Set.univ=1 := by
-    rw [withDensity_apply _ MeasurableSet.univ,Measure.restrict_univ,lintegral_map hZ hY]
+    rw [withDensity_apply _ MeasurableSet.univ, Measure.restrict_univ, lintegral_map hZ hY]
     exact hZn
   letI : IsProbabilityMeasure ν := ⟨hνn⟩
   have hQn : Q Set.univ=1 := by
-    rw [withDensity_apply _ MeasurableSet.univ,Measure.restrict_univ]
+    rw [withDensity_apply _ MeasurableSet.univ, Measure.restrict_univ]
     exact (gaussianVectorPredictableTilt_lintegral P Y X hY.aemeasurable v hX hind H Z hH hZ).trans hZn
   letI : IsProbabilityMeasure Q := ⟨hQn⟩
-  have hPair : HasLaw (fun ω => (Y ω,W ω)) (ν.prod γ) Q :=
+  have hPair : HasLaw (fun ω => (Y ω, W ω)) (ν.prod γ) Q :=
     ⟨(hY.prodMk hW).aemeasurable,
       gaussianVectorPredictableTilt_centered_map P Y X hY hXm v hX hind H Z hH hZ⟩
-  have hfst : HasLaw (Prod.fst : α×(ι→ℝ) → α) ν (ν.prod γ) := ⟨by fun_prop,by simp [γ]⟩
-  have hsnd : HasLaw (Prod.snd : α×(ι→ℝ) → (ι→ℝ)) γ (ν.prod γ) := ⟨by fun_prop,by simp⟩
+  have hfst : HasLaw (Prod.fst : α×(ι→ℝ) → α) ν (ν.prod γ) := ⟨by fun_prop, by simp [γ]⟩
+  have hsnd : HasLaw (Prod.snd : α×(ι→ℝ) → (ι→ℝ)) γ (ν.prod γ) := ⟨by fun_prop, by simp⟩
   have hYL : HasLaw Y ν Q := hfst.fun_comp hPair
   have hWL : HasLaw W γ Q := hsnd.fun_comp hPair
-  exact ⟨hYL,hWL,(indepFun_iff_hasLaw_prodMk_prod hYL hWL).mpr hPair⟩
+  exact ⟨hYL, hWL, (indepFun_iff_hasLaw_prodMk_prod hYL hWL).mpr hPair⟩
 
 end
 end GinibrePoincare

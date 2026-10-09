@@ -30,7 +30,7 @@ theorem correspondencePolynomial_gaussian_memLp (n : ℕ) (P : GinibreMixedPolyn
     (ginibreMixedPolynomialEval_continuous _).aestronglyMeasurable
   apply (memLp_two_iff_integrable_sq_norm hm).mpr
   have hi := (integrable_prod_norm_pow_complexGaussianMeasure n
-    (fun j => 2 * (d (j,0) + d (j,1)))).const_mul (‖P.coeff d‖ ^ 2)
+    (fun j => 2 * (d (j, 0) + d (j, 1)))).const_mul (‖P.coeff d‖ ^ 2)
   convert hi using 1
   funext z
   simp only [ginibreMixedPolynomialEval, MvPolynomial.eval_monomial, norm_mul,

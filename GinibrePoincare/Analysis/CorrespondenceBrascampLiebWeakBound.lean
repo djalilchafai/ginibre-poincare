@@ -23,7 +23,7 @@ def correspondenceBrascampLiebWeakInverseEnergy (W : E → ℝ) (G : E → ι �
   apply (correspondenceWeightedElliptic_integrable_density (bakryEmeryGibbsWeight W) _ hρ
     (fun _ => Real.exp_pos _)).mpr
   have he := (correspondenceBrascampLieb_localL2_locallyIntegrable G hG).integrable_smul_right_of_hasCompactSupport (hρ.mul hθ) hc.mul_left
-  simpa only [Pi.mul_apply,smul_eq_mul,mul_comm,mul_left_comm,mul_assoc] using he
+  simpa only [Pi.mul_apply, smul_eq_mul, mul_comm, mul_left_comm, mul_assoc] using he
 
  theorem correspondenceBrascampLieb_weak_compact_bound
     (W u f : E → ℝ) (G : E → ι → ℝ) (b : ι → E) (hW : ContDiff ℝ 2 W)
@@ -62,7 +62,7 @@ def correspondenceBrascampLiebWeakInverseEnergy (W : E → ℝ) (G : E → ι �
     integral_nonneg fun x => by
       change 0 ≤ G x ⬝ᵥ (H x)⁻¹ *ᵥ G x
       simpa only [star_trivial] using (hpos x).posSemidef.inv.dotProduct_mulVec_nonneg (G x)
-  rw [correspondenceBrascampLieb_weak_dirichlet W u f G b hW hu hG hw hf hc,neg_sq]
+  rw [correspondenceBrascampLieb_weak_dirichlet W u f G b hW hu hG hw hf hc, neg_sq]
   exact hCS.trans (mul_le_mul_of_nonneg_left hco he0)
 
 #print axioms correspondenceBrascampLieb_weak_compact_bound

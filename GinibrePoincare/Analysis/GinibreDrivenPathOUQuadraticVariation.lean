@@ -30,7 +30,7 @@ theorem drivenOUPath_quadratic_variation_noise (κ x : ℝ) (N : ℝ → ℝ)
       (fun s hs => by exact_mod_cast (show ‖-κ • drivenOUPath κ x N s‖ ≤ C by simpa only [smul_eq_mul] using hC s hs))
   have hAc : Continuous (drivenOUCorrection κ x N) :=
     continuous_iff_continuousAt.mpr fun s => (drivenOUCorrection_hasDerivAt κ x N hN s).continuousAt
-  have h := ginibreUniformQuadraticVariation_add_lipschitz (drivenOUCorrection κ x N) N t ht ⟨C,hC0⟩ hLip hAc hN
+  have h := ginibreUniformQuadraticVariation_add_lipschitz (drivenOUCorrection κ x N) N t ht ⟨C, hC0⟩ hLip hAc hN
   simpa only [Pi.add_apply, drivenOUPath, add_comm] using h
 
 theorem ginibreBrownianOU_quadratic_variation_noise {Ω : Type*} [MeasurableSpace Ω]

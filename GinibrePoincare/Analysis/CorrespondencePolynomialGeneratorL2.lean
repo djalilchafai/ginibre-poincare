@@ -101,7 +101,7 @@ theorem correspondencePolynomial_confinement_memLp {n : ℕ} (hn : 0 < n)
     (P : GinibreMixedPolynomial n) (T : ℂ →L[ℝ] ℝ) (j : Fin n) :
     MemLp (fun z => fderiv ℝ (fun y => T (ginibreMixedPolynomialEval P y)) z
       (coordinateDirection j (z j))) 2 (ginibreMeasure n) := by
-  let X : GinibreMixedPolynomial n := MvPolynomial.X (j,(0 : Fin 2))
+  let X : GinibreMixedPolynomial n := MvPolynomial.X (j, (0 : Fin 2))
   have hr := correspondencePolynomial_projected_product_memLp hn X
     (correspondencePolynomialDerivative P (realCoordinateDirection j)) Complex.reCLM T
   have hi := correspondencePolynomial_projected_product_memLp hn X

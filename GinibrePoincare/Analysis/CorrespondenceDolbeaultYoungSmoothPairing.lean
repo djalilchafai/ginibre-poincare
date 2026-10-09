@@ -44,7 +44,7 @@ theorem dolbeaultCoordinatePointwise_compact_test {n : ℕ} (j : Fin n)
     (θ : Configuration n → ℂ) (hθ : Continuous θ) (hc : HasCompactSupport θ) :
     (∫ x : Configuration n, θ x*dolbeaultCoordinateConvolutionPointwise j k f x) =
       ∫ y : ℂ, k y*(∫ x : Configuration n, θ x*f (x-Pi.single j y)) := by
-  obtain ⟨C,hC⟩ := hθ.bounded_above_of_compact_support hc
+  obtain ⟨C, hC⟩ := hθ.bounded_above_of_compact_support hc
   have hi : Integrable (fun p : ℂ × Configuration n =>
       k p.1*f (p.2-Pi.single j p.1)*θ p.2) (volume.prod volume) :=
     (dolbeaultCoordinatePointwise_integrable_prod j k hk f hf hfi).mul_bdd
@@ -61,7 +61,7 @@ theorem dolbeaultCoordinatePointwise_compact_test {n : ℕ} (j : Fin n)
       k y*f (x-Pi.single j y)*θ x)) (volume.prod volume) := by
     convert hi.swap using 1
     funext p
-    rcases p with ⟨x,y⟩
+    rcases p with ⟨x, y⟩
     rfl
   rw [integral_integral_swap hi']
   apply integral_congr_ae

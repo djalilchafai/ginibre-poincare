@@ -1,11 +1,12 @@
 # Formal Lean dependency graph
 
-Updated after the 2026-10-08 [independent correspondence review](CORRESPONDENCE_REVIEW.md).
+Regenerated on 2026-10-09 after the readability revision. Mathematical correspondence
+findings remain the 2026-10-08 [independent review](CORRESPONDENCE_REVIEW.md).
 Independent main/auxiliary and extension/dynamics follow-ups resolve the
 historical mathematical correspondence findings, including matrix H¹, pointwise
 Γ₂, unrestricted operators and the classical locally Lipschitz Brascamp–Lieb
-domain. Final full-tree verification passes 5,814 build jobs, 6,865 public axiom
-queries and 14,499 all-local declarations; details are in STATUS.md. Registry publication
+domain. Final full-tree verification passes 5,814 build jobs, 6,920 public axiom
+queries and 14,592 all-local declarations; details are in STATUS.md. Registry publication
 remains unconfirmed. These diagrams show compiled references, not source
 correspondence or a publication receipt. The matrix preset selects the literal matrix H¹ theorem; the earlier finite-overlap
 endpoint remains a separately searchable declaration.
@@ -113,7 +114,7 @@ The fresh export also supplies direct-reference graphs for the new literal endpo
 | Specific PI / pointwise Γ₂ equivalence | [Graph](diagrams/formal-correspondence_poincare_iff_integrated_pointwise_curvature.svg) |
 | Locally Lipschitz Brascamp–Lieb | [Graph](diagrams/formal-correspondenceBrascampLieb_localLipschitz_probability_variance.svg) |
 
-All 27 selected endpoint SVGs and twelve thematic SVGs are regenerated. Their
+All 32 selected endpoint SVGs and twelve thematic SVGs are regenerated. Their
 edges record compiled references, not proof fidelity or publication receipts.
 
 ## Complete graph data
@@ -129,13 +130,28 @@ edges record compiled references, not proof fidelity or publication receipts.
 - [Thematic import diagrams](DEPENDENCIES.md): the existing twelve-group views,
   which describe imports and can have cycles after grouping distinct modules.
 
-The declaration export has 14,499 local declarations, including 12,546 theorems,
+The declaration export has 14,592 local declarations, including 12,588 theorems,
 2,300 private declarations and 9,091 referenced external boundary constants.
 It covers 1,721 compiled local modules. The source import graph has 1,726 nodes
-and 6,442 edges; the extra source nodes are audit/compatibility/Challenge roots.
+and 6,443 edges; the extra source nodes are audit/compatibility/Challenge roots.
 The source import graph excludes the graph-export tooling under `scripts`; the
 full-project source counter includes that tooling separately.
 Reference counts and selected-theorem counts are recorded in the summary JSON.
+
+## Named result interfaces
+
+The [reading guide](HUMAN_READABILITY.md) explains how to use these five
+interfaces. Their graphs trace the adapters to the original concrete proofs:
+
+- [Generator deficits and equality](diagrams/formal-fullTheoremOneNine_named.svg).
+- [Differential deficits and weak derivatives](diagrams/formal-fullTheoremOneTen_named.svg).
+- [Matrix variance and entropy bounds](diagrams/formal-fullMatrixLift_named.svg).
+- [Maximal-domain Gaussian Bochner data](diagrams/formal-correspondenceOperatorNumber_has_bochner_data.svg).
+- [Relative-radius stopped CIR realization](diagrams/formal-ginibreBrownianMaximalProcess_CIR_realization_named.svg).
+
+There are now 32 selected endpoint views, alongside the twelve thematic views.
+The GitHub Pages workflow deploys the online explorer from the repository;
+the offline explorer in this repository contains the same generated data.
 
 ## Reproduce
 

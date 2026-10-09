@@ -39,24 +39,24 @@ theorem localDolbeault_compactLp_ball {n : ℕ}
     (hs j).trans (closedBall_subset_ball (by change r/8 < r/4; linarith))
   have hχone (j : Fin n) (z : ℂ) (hz : z ∈ V j) : χ j z = 1 := by
     change Complex.ofReal (b j z) = 1
-    rw [(b j).one_of_mem_closedBall (ball_subset_closedBall hz),Complex.ofReal_one]
+    rw [(b j).one_of_mem_closedBall (ball_subset_closedBall hz), Complex.ofReal_one]
   have hR (j : Fin n) (p : Configuration n) (hp : p ∈ dolbeaultCylinder W Finset.univ)
       (z : ℂ) (hz : z ∈ tsupport (χ j)) : ‖p j-z‖ ≤ r := by
     have h1 := hp j (Finset.mem_univ j)
     have h2 := hs j hz
     have ht := dist_triangle (p j) (x j) z
     rw [dist_comm (x j) z] at ht
-    simp only [W,mem_ball] at h1
+    simp only [W, mem_ball] at h1
     simp only [mem_closedBall] at h2
     rw [← dist_eq_norm]
     linarith
   let l : List (Fin n) := List.ofFn (fun j : Fin n => j)
   have hl : l.Nodup := List.nodup_ofFn_ofInjective (fun _ _ h => h)
-  have hlj (j : Fin n) : j ∈ l := List.mem_ofFn.mpr ⟨j,rfl⟩
+  have hlj (j : Fin n) : j ∈ l := List.mem_ofFn.mpr ⟨j, rfl⟩
   let U := dolbeaultCylinder W Finset.univ ∩ dolbeaultCylinder V l.toFinset
   have hU : IsOpen U := (dolbeaultCylinder_isOpen W (fun _ => isOpen_ball) _).inter
     (dolbeaultCylinder_isOpen V (fun _ => isOpen_ball) _)
-  have hxU : x ∈ U := ⟨fun _ _ => mem_ball_self (by positivity),fun _ _ => mem_ball_self (by positivity)⟩
+  have hxU : x ∈ U := ⟨fun _ _ => mem_ball_self (by positivity), fun _ _ => mem_ball_self (by positivity)⟩
   have hWdist (p : Configuration n) (hp : p ∈ dolbeaultCylinder W Finset.univ) : dist p x < r/4 :=
     (dist_pi_lt_iff (by positivity)).mpr (fun j => hp j (Finset.mem_univ j))
   have hUb : U ⊆ ball x r := fun p hp => by
@@ -66,7 +66,7 @@ theorem localDolbeault_compactLp_ball {n : ℕ}
   let φ : ℕ → ContDiffBump (0 : ℂ) := planarPiShrinkingBump
   have hφ := planarPiShrinkingBump_rOut_tendsto
   let A : ℕ → Fin n → Configuration n → ℂ := fun m j =>
-    piPlanarBump n (φ m) ⋆[ContinuousLinearMap.lsmul ℝ ℝ,volume] α j
+    piPlanarBump n (φ m) ⋆[ContinuousLinearMap.lsmul ℝ ℝ, volume] α j
   have hA (m : ℕ) (j : Fin n) : ContDiff ℝ ∞ (A m j) :=
     dolbeaultPiBump_convolution_smooth n (φ m) (α j) (hα j)
   have hcA (m : ℕ) (j : Fin n) : HasCompactSupport (A m j) :=
@@ -81,7 +81,7 @@ theorem localDolbeault_compactLp_ball {n : ℕ}
   have huM : Tendsto uM atTop (𝓝 u) := dolbeaultPrimitiveLp_tendsto r χ hχ hcχ aM a haM l
   have hsmall : ∀ᶠ m in atTop, (φ m).rOut < r/4 :=
     (tendsto_order.mp hφ).2 _ (by positivity)
-  refine ⟨U,hU,hxU,hUb,u,?_⟩
+  refine ⟨U, hU, hxU, hUb, u,?_⟩
   intro θ hθ hcθ hsθ j
   have hident : ∀ᶠ m in atTop,
       (∫ p, θ p*aM m j p) = -(∫ p, dbarComponent θ j p*uM m p) := by
@@ -109,7 +109,7 @@ theorem localDolbeault_compactLp_ball {n : ℕ}
       apply integral_congr_ae
       filter_upwards [dolbeaultPrimitiveLp_ae r χ hχ hcχ (A m) (hA m) (hcA m) l] with p hp
       exact congrArg (fun z => dbarComponent θ j p*z) hp
-    rw [hleft,hright]
+    rw [hleft, hright]
     exact he
   have he := dolbeault_weak_identity_of_eventual_strong_limit uM (fun m => aM m j)
     u (a j) huM (haM j) θ hθ hcθ j hident

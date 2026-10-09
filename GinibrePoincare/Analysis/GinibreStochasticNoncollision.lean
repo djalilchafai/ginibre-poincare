@@ -5,8 +5,20 @@ public import GinibrePoincare.Analysis.BrownianStoppingExitHamiltonianGlobalSolu
 
 @[expose] public section
 
-/-! Global noncollision and nonexplosion of the actual original Ginibre Brownian SDE.
-The Hamiltonian martingales and their Itô identities are constructed internally. -/
+/-! # Infinite lifetime and the global original equation
+
+The construction of the maximal Brownian solution and the criterion turning
+stopped Hamiltonian martingales into infinite lifetime are imported from
+`BrownianStoppingExitHamiltonianGlobalSolution`. This module supplies those
+martingales using `GinibreStochasticHamiltonianIto`, including their identities
+at the bounded stopping times.
+
+The first theorem concludes that the maximal lifetime is infinite almost
+surely. The second retains the strongly adapted process together with a
+single full-measure event on which the path is continuous, starts at `z`,
+remains collision-free, and solves the original driven equation at every
+nonnegative time. Independence of the Brownian coordinates is used in the
+construction of the Hamiltonian Itô martingales. -/
 open Set MeasureTheory ProbabilityTheory Filter
 open scoped Topology NNReal
 namespace GinibrePoincare
@@ -22,9 +34,9 @@ theorem ginibreBrownianMaximalLifetime_top_ae
     ∀ᵐ ω ∂P, ginibreBrownianMaximalLifetime n α z B ω=⊤ := by
   apply ginibreBrownianMaximalLifetime_top_ae_of_stopped_martingales hn α α.coe_nonneg z hz B P hB
   intro T R hR
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hLocal,hTerminal⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hLocal, hTerminal⟩ :=
     ginibreBrownianHamiltonian_continuous_ito_martingale_exists hn α z hz B P hB hind R hR.le T
-  exact ⟨J,hJM,Filter.Eventually.of_forall hJC,hJ0,hTerminal⟩
+  exact ⟨J, hJM, Filter.Eventually.of_forall hJC, hJ0, hTerminal⟩
 
 theorem ginibreBrownianMaximalProcess_global_original_solution
     {Ω : Type*} [MeasurableSpace Ω] {n : ℕ} (hn : 0 < n) (α : ℝ≥0)
@@ -44,8 +56,8 @@ theorem ginibreBrownianMaximalProcess_global_original_solution
   apply ginibreBrownianMaximalProcess_global_original_solution_ae_of_stopped_martingales
     hn α α.coe_nonneg z hz B P hB
   intro T R hR
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hLocal,hTerminal⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hLocal, hTerminal⟩ :=
     ginibreBrownianHamiltonian_continuous_ito_martingale_exists hn α z hz B P hB hind R hR.le T
-  exact ⟨J,hJM,Filter.Eventually.of_forall hJC,hJ0,hTerminal⟩
+  exact ⟨J, hJM, Filter.Eventually.of_forall hJC, hJ0, hTerminal⟩
 end
 end GinibrePoincare

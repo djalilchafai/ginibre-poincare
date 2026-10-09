@@ -65,7 +65,7 @@ theorem ginibreLocalRegularity_localize_elliptic_equation
         intro x
         dsimp only
         rw [ginibreLocalRegularityLaplacian_product v η θ hη hθ]
-        dsimp only [A,B,C]
+        dsimp only [A, B, C]
         rw [mul_add, mul_add]
         simp_rw [Finset.mul_sum]
         congr 1
@@ -85,11 +85,11 @@ theorem ginibreLocalRegularity_localize_elliptic_equation
         exact ae_of_all volume fun x => by
           dsimp only
           rw [ginibreLocalRegularityDirectional_product η θ hη hθ]
-          dsimp only [E',G]
+          dsimp only [E', G]
           ring
       _ = _ := integral_add (hE i) (hG i)
   rw [hl] at he
-  simp_rw [hr,Finset.sum_add_distrib] at he
+  simp_rw [hr, Finset.sum_add_distrib] at he
   have hd : (∫ x, h x*(η*θ) x)=∫ x, D x := rfl
   rw [hd] at he
   have hMain : (∫ x, (η x*u x)*ginibreLocalRegularityLaplacian v θ x)=∫ x, A x := by
@@ -104,7 +104,7 @@ theorem ginibreLocalRegularity_localize_elliptic_equation
         apply ae_of_all
         intro x
         dsimp only
-        dsimp only [D,G,B]
+        dsimp only [D, G, B]
         rw [sub_mul, sub_mul, Finset.sum_mul]
         congr 1
         · congr 1
@@ -123,10 +123,10 @@ theorem ginibreLocalRegularity_localize_elliptic_equation
     calc
       _ = ∫ x, E' i x+2*C i x := by
         apply integral_congr_ae
-        exact ae_of_all volume fun x => by dsimp [E',C]; ring
-      _ = _ := by rw [integral_add (hE i) ((hC i).const_mul 2),integral_const_mul]
-  rw [hMain,hH]
-  simp_rw [hV,Finset.sum_add_distrib,← Finset.mul_sum]
+        exact ae_of_all volume fun x => by dsimp [E', C]; ring
+      _ = _ := by rw [integral_add (hE i) ((hC i).const_mul 2), integral_const_mul]
+  rw [hMain, hH]
+  simp_rw [hV, Finset.sum_add_distrib,← Finset.mul_sum]
   linear_combination he
 
 #print axioms ginibreLocalRegularity_localize_elliptic_equation

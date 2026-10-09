@@ -29,11 +29,11 @@ theorem correspondenceCollisionProduct_support_collisionFree (n : ℕ) (ε : ℝ
   intro z hz j k he
   by_contra hjk
   rcases lt_or_gt_of_ne hjk with h|h
-  · have hb := correspondenceCollisionProduct_support_separated n ε hε ⟨(j,k),h⟩ hz
-    simp only [Set.mem_setOf_eq,he,sub_self,norm_zero] at hb
+  · have hb := correspondenceCollisionProduct_support_separated n ε hε ⟨(j, k), h⟩ hz
+    simp only [Set.mem_setOf_eq, he, sub_self, norm_zero] at hb
     linarith
-  · have hb := correspondenceCollisionProduct_support_separated n ε hε ⟨(k,j),h⟩ hz
-    simp only [Set.mem_setOf_eq,he,sub_self,norm_zero] at hb
+  · have hb := correspondenceCollisionProduct_support_separated n ε hε ⟨(k, j), h⟩ hz
+    simp only [Set.mem_setOf_eq, he, sub_self, norm_zero] at hb
     linarith
 
 /-- The literal product cutoff gives a smooth compact test supported away from collisions. -/
@@ -42,7 +42,7 @@ theorem correspondenceCollisionProduct_compact_test (n : ℕ) (ε : ℝ) (hε : 
     ContDiff ℝ ∞ (fun z => f z*correspondenceCollisionProduct n ε z) ∧
     HasCompactSupport (fun z => f z*correspondenceCollisionProduct n ε z) ∧
     tsupport (fun z => f z*correspondenceCollisionProduct n ε z) ⊆ {z | CollisionFree z} := by
-  refine ⟨hf.mul (correspondenceCollisionProduct_smooth n ε),hc.mul_right,?_⟩
+  refine ⟨hf.mul (correspondenceCollisionProduct_smooth n ε), hc.mul_right,?_⟩
   exact tsupport_mul_subset_right.trans
     (correspondenceCollisionProduct_support_collisionFree n ε hε)
 

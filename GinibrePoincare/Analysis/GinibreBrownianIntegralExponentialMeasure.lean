@@ -32,7 +32,7 @@ theorem brownianVectorExponentialIntegralDensity_measure_properties {Ω ι : Typ
     (ENNReal.measurable_ofReal.comp_aemeasurable hi.aestronglyMeasurable.aemeasurable) hpos
   refine ⟨gaussianDensity_isProbabilityMeasure_of_integral_one P _ hi
     (Eventually.of_forall fun ω => (brownianVectorExponentialIntegralDensity_pos F T I ω).le) h1,
-    withDensity_absolutelyContinuous _ _,hPQ,?_⟩
+    withDensity_absolutelyContinuous _ _, hPQ,?_⟩
   apply Measure.isComplete_iff.mpr
   intro s hs
   exact measurableSet_of_null (hPQ hs)

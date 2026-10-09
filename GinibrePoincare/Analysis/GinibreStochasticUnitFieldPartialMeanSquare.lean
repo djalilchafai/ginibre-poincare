@@ -36,7 +36,7 @@ theorem ginibreUnitField_partial_meanSquare_of_horizon_limits
   have hA (i : ι) (s : ℝ≥0) : @Measurable Ω ℝ (F s) _ (A i s) :=
     (PiLp.continuous_apply 2 (fun _ : ι => ℝ) i).measurable.comp (hu s)
   have hb (i : ι) (s : ℝ≥0) (ω : Ω) : ‖A i s ω‖ ≤ 1 := by
-    simpa only [A,hunit s ω] using PiLp.norm_apply_le (u s ω) i
+    simpa only [A, hunit s ω] using PiLp.norm_apply_le (u s ω) i
   have hAc (i : ι) : ∀ᵐ ω ∂P, ContinuousOn (fun s => A i s ω) (Icc 0 T) :=
     hc.mono (fun ω hω => ((PiLp.continuous_apply 2 (fun _ : ι => ℝ) i).comp hω).continuousOn)
   have hAL (i : ι) (s : ℝ≥0) : MemLp (A i s) 2 P := MemLp.of_bound
@@ -65,7 +65,7 @@ theorem ginibreUnitField_partial_meanSquare_of_horizon_limits
       ∫ ω, (∑ i, (brownianUniformPartialSum (B i) (A i) T (k+1) t ω-M i t ω))^2 ∂P := by
     apply integral_congr_ae
     filter_upwards [he] with ω hω
-    rw [← hω,Finset.sum_sub_distrib]
+    rw [← hω, Finset.sum_sub_distrib]
   simp_rw [hEq]
   exact hz
 end

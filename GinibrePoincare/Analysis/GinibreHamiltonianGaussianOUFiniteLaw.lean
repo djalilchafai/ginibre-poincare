@@ -26,12 +26,12 @@ theorem gaussianEuclidean_law_eq_of_coordinate_mean_covariance
     (hY.map (PiLp.proj 2 (fun _ : ι => ℝ) i : EuclideanSpace ℝ ι →L[ℝ] ℝ)).memLp_two
   apply Measure.ext_of_charFun
   funext v
-  rw [hX.charFun_map_eq,hY.charFun_map_eq]
+  rw [hX.charFun_map_eq, hY.charFun_map_eq]
   have hm' : (∫ ω, inner ℝ v (X ω) ∂P)=(∫ ω, inner ℝ v (Y ω) ∂P) := by
-    simp only [PiLp.inner_apply,Real.inner_apply]
+    simp only [PiLp.inner_apply, Real.inner_apply]
     rw [integral_finsetSum _ (fun i _ => ((hx i).integrable (by simp)).const_mul _),
       integral_finsetSum _ (fun i _ => ((hy i).integrable (by simp)).const_mul _)]
-    simp_rw [integral_const_mul,hm]
+    simp_rw [integral_const_mul, hm]
   have hv : variance (fun ω => inner ℝ v (X ω)) P =
       variance (fun ω => inner ℝ v (Y ω)) P := by
     have hXi : AEMeasurable (fun ω => inner ℝ v (X ω)) P := by
@@ -39,11 +39,11 @@ theorem gaussianEuclidean_law_eq_of_coordinate_mean_covariance
     have hYi : AEMeasurable (fun ω => inner ℝ v (Y ω)) P := by
       simpa [Function.comp_def] using (hY.map (innerSL ℝ v)).aemeasurable
     rw [← covariance_self hXi,← covariance_self hYi]
-    simp only [PiLp.inner_apply,Real.inner_apply]
+    simp only [PiLp.inner_apply, Real.inner_apply]
     rw [covariance_fun_sum_fun_sum (fun i => (hx i).const_mul (v i)) (fun i => (hx i).const_mul (v i)),
       covariance_fun_sum_fun_sum (fun i => (hy i).const_mul (v i)) (fun i => (hy i).const_mul (v i))]
-    simp_rw [covariance_const_mul_left,covariance_const_mul_right,hc]
-  rw [hm',hv]
+    simp_rw [covariance_const_mul_left, covariance_const_mul_right, hc]
+  rw [hm', hv]
 
 theorem gaussianProcess_finite_euclidean_hasGaussianLaw
     {Ω ι T : Type*} [MeasurableSpace Ω] [Fintype ι]
@@ -52,7 +52,7 @@ theorem gaussianProcess_finite_euclidean_hasGaussianLaw
   classical
   let I : Finset T := Finset.univ.image t
   let L : (I → ℝ) →L[ℝ] EuclideanSpace ℝ ι :=
-    { toFun := fun v => WithLp.toLp 2 (fun i => v ⟨t i,Finset.mem_image.mpr ⟨i,Finset.mem_univ _,rfl⟩⟩)
+    { toFun := fun v => WithLp.toLp 2 (fun i => v ⟨t i, Finset.mem_image.mpr ⟨i, Finset.mem_univ _, rfl⟩⟩)
       map_add' := by intro x y; ext i; rfl
       map_smul' := by intro c x; ext i; rfl }
   exact (hX.hasGaussianLaw I).map L
@@ -82,10 +82,10 @@ theorem ginibreBrownianOU_stationary_finite_law_reversal
     congr 2
     rcases le_total (t i) (t j) with h | h
     · have hr : T-t j ≤ T-t i := tsub_le_tsub_left h T
-      rw [max_eq_right h,min_eq_left h,max_eq_left hr,min_eq_right hr,
+      rw [max_eq_right h, min_eq_left h, max_eq_left hr, min_eq_right hr,
         tsub_tsub_tsub_cancel_left (ht j)]
     · have hr : T-t i ≤ T-t j := tsub_le_tsub_left h T
-      rw [max_eq_left h,min_eq_right h,max_eq_right hr,min_eq_left hr,
+      rw [max_eq_left h, min_eq_right h, max_eq_right hr, min_eq_left hr,
         tsub_tsub_tsub_cancel_left (ht i)]
 
 end

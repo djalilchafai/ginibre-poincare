@@ -23,13 +23,13 @@ theorem actualMeanSquareCauchy_exists_L2_limit {Ω : Type*} [MeasurableSpace Ω]
       apply integral_congr_ae
       filter_upwards [Lp.coeFn_sub (Z q.1) (Z q.2), (hs q.1).coeFn_toLp, (hs q.2).coeFn_toLp]
         with ω hω h1 h2
-      simp only [hω,Pi.sub_apply]
+      simp only [hω, Pi.sub_apply]
       dsimp only [Z]
-      rw [h1,h2]
-    rw [hh,Real.sqrt_sq_eq_abs,abs_of_nonneg (norm_nonneg _),dist_eq_norm]
+      rw [h1, h2]
+    rw [hh, Real.sqrt_sq_eq_abs, abs_of_nonneg (norm_nonneg _), dist_eq_norm]
   have hcz : CauchySeq Z := by
     apply cauchySeq_iff_tendsto_dist_atTop_0.mpr
-    simpa only [he,Real.sqrt_zero] using hc.sqrt
+    simpa only [he, Real.sqrt_zero] using hc.sqrt
   exact cauchySeq_tendsto_of_complete hcz
 
 theorem brownianUniformPartialSum_exists_L2_limit {Ω ι : Type*}
@@ -53,8 +53,8 @@ theorem actualMeanSquareCauchy_exists_L2_limit_inProbability {Ω : Type*} [Measu
     (hc : Tendsto (fun q : ℕ×ℕ => ∫ ω, (S q.1 ω-S q.2 ω)^2 ∂P) atTop (𝓝 0)) :
     ∃ I : Lp ℝ 2 P, Tendsto (fun n => (hs n).toLp (S n)) atTop (𝓝 I) ∧
       TendstoInMeasure P S atTop (fun ω => I ω) := by
-  obtain ⟨I,hI⟩ := actualMeanSquareCauchy_exists_L2_limit P S hs hc
-  exact ⟨I,hI,(tendstoInMeasure_of_tendsto_Lp hI).congr (fun n => (hs n).coeFn_toLp) EventuallyEq.rfl⟩
+  obtain ⟨I, hI⟩ := actualMeanSquareCauchy_exists_L2_limit P S hs hc
+  exact ⟨I, hI, (tendstoInMeasure_of_tendsto_Lp hI).congr (fun n => (hs n).coeFn_toLp) EventuallyEq.rfl⟩
 
 end
 end GinibrePoincare

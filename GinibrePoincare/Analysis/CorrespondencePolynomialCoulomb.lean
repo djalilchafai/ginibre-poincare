@@ -24,8 +24,8 @@ polynomial after Vandermonde multiplication, hence truly Ginibre L². -/
 theorem correspondencePolynomial_inverse_pair_memLp {n : ℕ} (hn : 0 < n)
     (P : GinibreMixedPolynomial n) (i j : Fin n) (hij : i < j) :
     MemLp (fun z => ginibreMixedPolynomialEval P z / (z j-z i)) 2 (ginibreMeasure n) := by
-  obtain ⟨Q,hQ⟩ := correspondencePolynomial_pair_factor i j hij
-  let R : GinibreMixedPolynomial n := MvPolynomial.rename (fun k : Fin n => (k,(0 : Fin 2))) Q
+  obtain ⟨Q, hQ⟩ := correspondencePolynomial_pair_factor i j hij
+  let R : GinibreMixedPolynomial n := MvPolynomial.rename (fun k : Fin n => (k, (0 : Fin 2))) Q
   have hR (z : Configuration n) : ginibreMixedPolynomialEval R z = MvPolynomial.eval z Q := by
     unfold ginibreMixedPolynomialEval R
     rw [MvPolynomial.eval_rename]
@@ -37,7 +37,7 @@ theorem correspondencePolynomial_inverse_pair_memLp {n : ℕ} (hn : 0 < n)
     rw [show {a : Configuration n | ¬ a ∉ collisionSet n} = collisionSet n by ext a; simp]
     exact complexGaussianMeasure_collisionSet n
   filter_upwards [hcf] with z hz
-  have hne : z j-z i ≠ 0 := sub_ne_zero.mpr (fun h => hz ⟨j,i,h,hij.ne.symm⟩)
+  have hne : z j-z i ≠ 0 := sub_ne_zero.mpr (fun h => hz ⟨j, i, h, hij.ne.symm⟩)
   have hv : vandermonde z = (z j-z i) * MvPolynomial.eval z Q := by
     rw [← eval_polynomialVandermonde n z, hQ]
     simp only [map_mul, map_sub, MvPolynomial.eval_X]

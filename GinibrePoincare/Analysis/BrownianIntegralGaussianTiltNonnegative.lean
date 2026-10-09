@@ -14,7 +14,7 @@ theorem gaussianExponentialTilt_sq_integrable (h : ℝ) (v : ℝ≥0) :
     Integrable (fun x => (gaussianExponentialTilt h v x)^2) (gaussianReal 0 v) := by
   have he (x : ℝ) : (gaussianExponentialTilt h v x)^2 =
       Real.exp (-h^2*(v : ℝ))*Real.exp ((2*h)*x) := by
-    rw [gaussianExponentialTilt,pow_two,← Real.exp_add,← Real.exp_add]
+    rw [gaussianExponentialTilt, pow_two,← Real.exp_add,← Real.exp_add]
     congr 1
     ring
   simp_rw [he]
@@ -23,7 +23,7 @@ theorem gaussianExponentialTilt_sq_integrable (h : ℝ) (v : ℝ≥0) :
 theorem gaussianExponentialTilt_lintegral (h : ℝ) (v : ℝ≥0) :
     (∫⁻ x, ENNReal.ofReal (gaussianExponentialTilt h v x) ∂gaussianReal 0 v)=1 := by
   rw [← ofReal_integral_eq_lintegral_ofReal (gaussianExponentialTilt_integrable h v)
-    (Eventually.of_forall fun x => (Real.exp_pos _).le),gaussianExponentialTilt_integral]
+    (Eventually.of_forall fun x => (Real.exp_pos _).le), gaussianExponentialTilt_integral]
   exact ENNReal.ofReal_one
 
 theorem gaussianExponentialTilt_lintegral_sq (h : ℝ) (v : ℝ≥0) :
@@ -34,7 +34,7 @@ theorem gaussianExponentialTilt_lintegral_sq (h : ℝ) (v : ℝ≥0) :
     (ENNReal.ofReal_pow (show 0≤gaussianExponentialTilt h v x from (Real.exp_pos _).le) 2).symm
   simp_rw [he]
   rw [← ofReal_integral_eq_lintegral_ofReal (gaussianExponentialTilt_sq_integrable h v)
-    (Eventually.of_forall fun x => sq_nonneg _),gaussianExponentialTilt_integral_sq]
+    (Eventually.of_forall fun x => sq_nonneg _), gaussianExponentialTilt_integral_sq]
 
 /-- Exact predictable nonnegative normalization on the product law of past
 and fresh Gaussian innovation. No boundedness or integrability is assumed. -/
@@ -46,9 +46,9 @@ theorem gaussianExponentialTilt_product_lintegral {α : Type*} [MeasurableSpace 
   rw [lintegral_prod]
   · congr 1
     funext a
-    simp only [Prod.fst,Prod.snd]
+    simp only [Prod.fst, Prod.snd]
     rw [lintegral_const_mul _ (by unfold gaussianExponentialTilt; fun_prop),
-      gaussianExponentialTilt_lintegral,mul_one]
+      gaussianExponentialTilt_lintegral, mul_one]
   · unfold gaussianExponentialTilt
     fun_prop
 
@@ -62,7 +62,7 @@ theorem gaussianExponentialTilt_product_lintegral_sq {α : Type*} [MeasurableSpa
   rw [lintegral_prod]
   · congr 1
     funext a
-    simp only [Prod.fst,Prod.snd]
+    simp only [Prod.fst, Prod.snd]
     rw [lintegral_const_mul _ (by unfold gaussianExponentialTilt; fun_prop),
       gaussianExponentialTilt_lintegral_sq]
   · unfold gaussianExponentialTilt

@@ -32,7 +32,7 @@ theorem cauchyGreenKernel_fundamental_identity (θ : ℂ → ℂ)
   have he : (fun τ : ℝ => ∫ z : ℂ, cauchyGreenRegularizedKernel τ z * planarDbar θ z)
       =ᶠ[𝓝[>] 0] (fun τ : ℝ => -(∫ z : ℂ, correspondenceLogKernel τ z • θ z)) := by
     filter_upwards [self_mem_nhdsWithin] with τ hτ
-    simpa only [correspondenceLogKernel,Complex.real_smul] using
+    simpa only [correspondenceLogKernel, Complex.real_smul] using
       cauchyGreenRegularizedKernel_test_identity τ hτ θ hθ hc
   exact tendsto_nhds_unique hl (hr.congr' he.symm)
 

@@ -21,7 +21,7 @@ theorem ginibreRadialL2Value_tendsto (n : ℕ)
   simp only [IsGinibreRadialL2Value] at hv ⊢
   choose f hs hr hf using hv
   choose F hF using hr
-  obtain ⟨ns,hns,hnae⟩ := (tendstoInMeasure_of_tendsto_Lp ht).exists_seq_tendsto_ae
+  obtain ⟨ns, hns, hnae⟩ := (tendstoInMeasure_of_tendsto_Lp ht).exists_seq_tendsto_ae
   let l (z : Configuration n) := limUnder atTop (fun j => f (ns j) z)
   refine ⟨l, ?_, ?_, ?_⟩
   · intro σ z

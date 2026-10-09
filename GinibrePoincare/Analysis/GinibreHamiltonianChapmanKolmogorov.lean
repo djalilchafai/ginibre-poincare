@@ -26,9 +26,9 @@ theorem ginibreBrownianStateTransitionKernel_apply_eq_process_law
   letI : IsProbabilityMeasure (P.map (ginibreBrownianFullContinuousNoise n B α)) :=
     (by infer_instance)
   unfold ginibreBrownianStateTransitionKernel
-  have hf : Measurable (fun N => ginibreCanonicalStateValue (α : ℝ) t (z,N)) :=
+  have hf : Measurable (fun N => ginibreCanonicalStateValue (α : ℝ) t (z, N)) :=
     (ginibreCanonicalStateValue_measurable hn α t).comp (measurable_const.prodMk measurable_id)
-  rw [ginibreCanonicalStateTransitionKernel_apply hn,Measure.map_map hf hm]
+  rw [ginibreCanonicalStateTransitionKernel_apply hn, Measure.map_map hf hm]
   rfl
 
 theorem ginibreBrownian_state_future_law {Ω : Type*} [MeasurableSpace Ω] {n : ℕ}
@@ -50,7 +50,7 @@ theorem ginibreBrownian_state_future_law {Ω : Type*} [MeasurableSpace Ω] {n : 
     n B P hB hind α s Z hZpast).symm
   have hLaw := hi.map_prod_eq_prod_map_map hZa.aemeasurable hNa.aemeasurable
   rw [← brownianFamily_shift_continuous_noise_law_eq n B P hB hind α s,
-    ← hLaw,Measure.map_map (ginibreCanonicalStateValue_measurable hn α t) (hZa.prodMk hNa)]
+    ← hLaw, Measure.map_map (ginibreCanonicalStateValue_measurable hn α t) (hZa.prodMk hNa)]
   exact Measure.map_congr (ginibreBrownian_state_restart_ae hn α z B P hB hind s t)
 
 theorem ginibreBrownianStateTransitionKernel_chapmanKolmogorov
@@ -65,7 +65,7 @@ theorem ginibreBrownianStateTransitionKernel_chapmanKolmogorov
   let μ := P.map (ginibreBrownianFullContinuousNoise n B α)
   letI : IsProbabilityMeasure μ := (by infer_instance)
   ext z a ha
-  rw [Kernel.comp_apply' _ _ z ha,ginibreBrownianStateTransitionKernel_apply_eq_process_law hn α B P hB (s+t),
+  rw [Kernel.comp_apply' _ _ z ha, ginibreBrownianStateTransitionKernel_apply_eq_process_law hn α B P hB (s+t),
     ginibreBrownian_state_future_law hn α z B P hB hind s t,
     ginibreBrownianStateTransitionKernel_apply_eq_process_law hn α B P hB s]
   rw [Measure.map_apply (ginibreCanonicalStateValue_measurable hn α t) ha,
@@ -75,7 +75,7 @@ theorem ginibreBrownianStateTransitionKernel_chapmanKolmogorov
   change μ (Prod.mk y ⁻¹' (ginibreCanonicalStateValue (α : ℝ) t ⁻¹' a)) =
     ginibreCanonicalStateTransitionKernel (α : ℝ) t μ y a
   rw [ginibreCanonicalStateTransitionKernel_apply hn]
-  have hf : Measurable (fun N => ginibreCanonicalStateValue (α : ℝ) t (y,N)) :=
+  have hf : Measurable (fun N => ginibreCanonicalStateValue (α : ℝ) t (y, N)) :=
     (ginibreCanonicalStateValue_measurable hn α t).comp (measurable_const.prodMk measurable_id)
   rw [Measure.map_apply hf ha]
   rfl
@@ -93,9 +93,9 @@ theorem ginibreBrownianStateTransitionKernel_zero
     apply Subtype.ext
     let N := ginibreBrownianFullContinuousNoise n B α ω
     change ginibreDrivenMaximalValue n α N.val z.val 0=z.val
-    simpa only [ginibreDrivenMaximalPath,Real.toNNReal_zero] using
+    simpa only [ginibreDrivenMaximalPath, Real.toNNReal_zero] using
       ginibreDrivenMaximalPath_initial n α N.val N.val.continuous N.property z.val z.property
-  rw [he,Measure.map_const]
+  rw [he, Measure.map_const]
   simp [Kernel.id_apply]
 
 

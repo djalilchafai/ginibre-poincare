@@ -5,6 +5,20 @@ public import GinibrePoincare.Analysis.GinibreStochasticTransitionMarkovMean
 
 @[expose] public section
 
+/-! # Chapman–Kolmogorov on the full stochastic L² space
+
+The tested transition means satisfy the semigroup identity by the Brownian
+restart and future-independence results. To extend this to L², the proof
+first checks equality on bounded continuous representatives, translating
+each of the three operators to its transition mean almost everywhere in
+the initial Ginibre state.
+
+Bounded continuous functions have dense image in L². Since the stochastic
+operators and their compositions are continuous, equality on that dense
+image implies equality of the operators. This argument handles arbitrary
+L² equivalence classes without choosing pointwise versions of their
+transition formulas. -/
+
 open MeasureTheory ProbabilityTheory Set Filter
 open scoped NNReal ENNReal Topology
 namespace GinibrePoincare
@@ -24,7 +38,7 @@ theorem ginibreOriginalStochasticL2Operator_semigroup {Ω : Type*} [MeasurableSp
   letI := ginibreMeasure_isProbabilityMeasure hn
   let A := ginibreOriginalStochasticL2Operator hn α P B hB hiB
   have he : (fun u => A (s+t) u)=(fun u => A s (A t u)) := by
-    apply (BoundedContinuousFunction.toLp_denseRange ℝ (ginibreMeasure n) ℝ (by norm_num : (2:ℝ≥0∞)≠∞)).equalizer
+    apply (BoundedContinuousFunction.toLp_denseRange ℝ (ginibreMeasure n) ℝ (by norm_num : (2 : ℝ≥0∞)≠∞)).equalizer
       (A (s+t)).continuous ((A s).continuous.comp (A t).continuous)
     funext v
     let g := BoundedContinuousFunction.toLp 2 (ginibreMeasure n) ℝ v
@@ -32,15 +46,15 @@ theorem ginibreOriginalStochasticL2Operator_semigroup {Ω : Type*} [MeasurableSp
     have hC (z : Configuration n) : ‖v z‖≤‖v‖ := v.norm_coe_le_norm z
     have ht := ginibreOriginalStochasticL2Operator_bounded_representative hn α P B hB hiB t g v hg v.continuous.measurable ‖v‖ hC
     have hs := ginibreOriginalStochasticL2Operator_bounded_representative hn α P B hB hiB s (A t g)
-      (fun z => ginibreStationaryContinuousTransitionMean α B P v (t:ℝ) z)
+      (fun z => ginibreStationaryContinuousTransitionMean α B P v (t : ℝ) z)
       ht.2.2 ht.1 ‖v‖ ht.2.1
     have hst := ginibreOriginalStochasticL2Operator_bounded_representative hn α P B hB hiB (s+t) g v hg v.continuous.measurable ‖v‖ hC
     change A (s+t) g=A s (A t g)
     apply Lp.ext
-    filter_upwards [ginibre_ae_collisionFree n hn,hst.2.2,hs.2.2] with z hz hleft hright
+    filter_upwards [ginibre_ae_collisionFree n hn, hst.2.2, hs.2.2] with z hz hleft hright
     change (ginibreOriginalStochasticL2Operator hn α P B hB hiB (s+t) g) z=
       (ginibreOriginalStochasticL2Operator hn α P B hB hiB s (A t g)) z
-    rw [hleft,hright]
+    rw [hleft, hright]
     exact ginibreStationaryContinuousTransitionMean_semigroup hn α P B hB hiB z hz s t v v.continuous.measurable ‖v‖ hC
   apply ContinuousLinearMap.ext
   intro u

@@ -22,14 +22,14 @@ theorem gaussianPredictableTilt_lintegral {Ω α : Type*}
     (∫⁻ ω, Z (Y ω)*ENNReal.ofReal (gaussianExponentialTilt (H (Y ω)) v (X ω)) ∂P) =
       ∫⁻ ω, Z (Y ω) ∂P := by
   let μ := P.map Y
-  have hYL : HasLaw Y μ P := ⟨hY,rfl⟩
+  have hYL : HasLaw Y μ P := ⟨hY, rfl⟩
   have hpair := IndepFun.hasLaw_prod hYL hX hind
   have hm : Measurable (fun z : α×ℝ => Z z.1*
       ENNReal.ofReal (gaussianExponentialTilt (H z.1) v z.2)) := by
     unfold gaussianExponentialTilt
     fun_prop
   have hh := hpair.lintegral_comp hm.aemeasurable
-  simp only [Prod.fst,Prod.snd] at hh
+  simp only [Prod.fst, Prod.snd] at hh
   rw [gaussianExponentialTilt_product_lintegral μ H Z hH hZ v] at hh
   exact hh.trans (hYL.lintegral_comp hZ.aemeasurable).symm
 
@@ -42,14 +42,14 @@ theorem gaussianPredictableTilt_lintegral_sq {Ω α : Type*}
     (∫⁻ ω, Z (Y ω)*ENNReal.ofReal (gaussianExponentialTilt (H (Y ω)) v (X ω))^2 ∂P) =
       ∫⁻ ω, Z (Y ω)*ENNReal.ofReal (Real.exp ((H (Y ω))^2*(v : ℝ))) ∂P := by
   let μ := P.map Y
-  have hYL : HasLaw Y μ P := ⟨hY,rfl⟩
+  have hYL : HasLaw Y μ P := ⟨hY, rfl⟩
   have hpair := IndepFun.hasLaw_prod hYL hX hind
   have hm : Measurable (fun z : α×ℝ => Z z.1*
       ENNReal.ofReal (gaussianExponentialTilt (H z.1) v z.2)^2) := by
     unfold gaussianExponentialTilt
     fun_prop
   have hh := hpair.lintegral_comp hm.aemeasurable
-  simp only [Prod.fst,Prod.snd] at hh
+  simp only [Prod.fst, Prod.snd] at hh
   rw [gaussianExponentialTilt_product_lintegral_sq μ H Z hH hZ v] at hh
   exact hh.trans (hYL.lintegral_comp (by fun_prop)).symm
 

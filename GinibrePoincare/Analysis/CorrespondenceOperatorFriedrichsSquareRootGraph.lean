@@ -14,57 +14,57 @@ def correspondenceSquareRootGraph (B C : H→L[ℂ]H) : Submodule ℂ (H×H) :=
   (B.comp (ContinuousLinearMap.snd ℂ H H)-C.comp (ContinuousLinearMap.fst ℂ H H)).ker
 
 theorem correspondenceSquareRootGraph_mem (B C : H→L[ℂ]H) (u v : H) :
-    (u,v)∈correspondenceSquareRootGraph B C ↔ B v=C u := by
+    (u, v)∈correspondenceSquareRootGraph B C ↔ B v=C u := by
   change B v-C u=0 ↔ _
   exact sub_eq_zero
 
 theorem correspondenceSquareRootGraph_parametrize (B C : H→L[ℂ]H)
-    (hcomm : Commute B C) (hs : ∀x,B (B x)+C (C x)=x) (u v : H) :
-    (u,v)∈correspondenceSquareRootGraph B C ↔ ∃x,B x=u ∧ C x=v := by
+    (hcomm : Commute B C) (hs : ∀x, B (B x)+C (C x)=x) (u v : H) :
+    (u, v)∈correspondenceSquareRootGraph B C ↔ ∃x, B x=u ∧ C x=v := by
   have hc x : B (C x)=C (B x) := congrArg (fun L : H→L[ℂ]H=>L x) hcomm.eq
   rw [correspondenceSquareRootGraph_mem]
   constructor
   · intro h
     refine ⟨B u+C v,?_,?_⟩
-    · rw [map_add,hc, h,hs]
-    · rw [map_add,← hc,← h,hs]
-  · rintro ⟨x,rfl,rfl⟩
+    · rw [map_add, hc, h, hs]
+    · rw [map_add,← hc,← h, hs]
+  · rintro ⟨x, rfl, rfl⟩
     exact hc x
 
 theorem correspondenceSquareRootGraph_singleValued (B C : H→L[ℂ]H)
     (hB : Function.Injective B) (p : H×H)
     (hp : p∈correspondenceSquareRootGraph B C) (hz : p.1=0) : p.2=0 := by
   have he := (correspondenceSquareRootGraph_mem B C p.1 p.2).mp hp
-  rw [hz,map_zero] at he
+  rw [hz, map_zero] at he
   exact hB (he.trans (map_zero B).symm)
 
 theorem correspondenceSquareRootGraph_adjoint (B C : H→L[ℂ]H)
     (hB : B.adjoint=B) (hC : C.adjoint=C)
-    (hcomm : Commute B C) (hs : ∀x,B (B x)+C (C x)=x) :
+    (hcomm : Commute B C) (hs : ∀x, B (B x)+C (C x)=x) :
     (correspondenceSquareRootGraph B C).adjoint=correspondenceSquareRootGraph B C := by
   ext p
-  rw [Submodule.mem_adjoint_iff,correspondenceSquareRootGraph_mem]
+  rw [Submodule.mem_adjoint_iff, correspondenceSquareRootGraph_mem]
   constructor
   · intro hp
     apply ext_inner_left ℂ
     intro x
-    have hpx : (B x,C x)∈correspondenceSquareRootGraph B C :=
-      (correspondenceSquareRootGraph_parametrize B C hcomm hs _ _).mpr ⟨x,rfl,rfl⟩
+    have hpx : (B x, C x)∈correspondenceSquareRootGraph B C :=
+      (correspondenceSquareRootGraph_parametrize B C hcomm hs _ _).mpr ⟨x, rfl, rfl⟩
     have h := hp (B x) (C x) hpx
     have h1 := B.adjoint_inner_right x p.2
     have h2 := C.adjoint_inner_right x p.1
     rw [hB] at h1
     rw [hC] at h2
-    rw [h1,h2]
+    rw [h1, h2]
     exact (sub_eq_zero.mp h).symm
   · intro hp a b hab
-    obtain ⟨x,hx,hx'⟩ := (correspondenceSquareRootGraph_parametrize B C hcomm hs a b).mp hab
+    obtain ⟨x, hx, hx'⟩ := (correspondenceSquareRootGraph_parametrize B C hcomm hs a b).mp hab
     rw [← hx,← hx']
     have h1 := B.adjoint_inner_right x p.2
     have h2 := C.adjoint_inner_right x p.1
     rw [hB] at h1
     rw [hC] at h2
-    rw [← h1,← h2,hp,sub_self]
+    rw [← h1,← h2, hp, sub_self]
 
 end Generic
 
@@ -83,8 +83,8 @@ theorem correspondenceFriedrichsSquareRoot_graph (n : ℕ) (hn : 0<n) :
 
 theorem correspondenceFriedrichsSquareRoot_graph_parametrize (n : ℕ) (hn : 0<n)
     (u v : GinibreFullComplexL2 n) :
-    (u,v)∈(correspondenceFriedrichsSquareRoot n hn).graph ↔
-      ∃x,correspondenceFriedrichsResolventSqrt n hn x=u ∧ correspondenceFriedrichsComplementSqrt n hn x=v := by
+    (u, v)∈(correspondenceFriedrichsSquareRoot n hn).graph ↔
+      ∃x, correspondenceFriedrichsResolventSqrt n hn x=u ∧ correspondenceFriedrichsComplementSqrt n hn x=v := by
   rw [correspondenceFriedrichsSquareRoot_graph]
   exact correspondenceSquareRootGraph_parametrize _ _ (correspondenceFriedrichsSquareRoots_commute n hn)
     (correspondenceFriedrichsSquareRoots_sum_squares n hn) u v
@@ -95,12 +95,12 @@ theorem correspondenceFriedrichsSquareRoot_domain (n : ℕ) (hn : 0<n) :
   ext u
   constructor
   · intro hu
-    have hg := (correspondenceFriedrichsSquareRoot n hn).mem_graph ⟨u,hu⟩
-    obtain ⟨x,hx,_⟩ := (correspondenceFriedrichsSquareRoot_graph_parametrize n hn _ _).mp hg
-    exact ⟨x,hx⟩
-  · rintro ⟨x,rfl⟩
+    have hg := (correspondenceFriedrichsSquareRoot n hn).mem_graph ⟨u, hu⟩
+    obtain ⟨x, hx, _⟩ := (correspondenceFriedrichsSquareRoot_graph_parametrize n hn _ _).mp hg
+    exact ⟨x, hx⟩
+  · rintro ⟨x, rfl⟩
     exact LinearPMap.mem_domain_of_mem_graph
-      ((correspondenceFriedrichsSquareRoot_graph_parametrize n hn _ _).mpr ⟨x,rfl,rfl⟩)
+      ((correspondenceFriedrichsSquareRoot_graph_parametrize n hn _ _).mpr ⟨x, rfl, rfl⟩)
 
 theorem correspondenceFriedrichsSquareRoot_dense_domain (n : ℕ) (hn : 0<n) :
     Dense ((correspondenceFriedrichsSquareRoot n hn).domain : Set (GinibreFullComplexL2 n)) := by

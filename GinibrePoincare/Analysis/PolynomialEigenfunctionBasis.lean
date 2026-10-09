@@ -63,7 +63,7 @@ theorem polynomialEigenfunction_linearIndependent (n : ℕ) (hn : 2 ≤ n) :
     apply Finset.sum_eq_single_of_mem i hi
     intro j hj hji
     have hindices : ¬ (i.a = j.a ∧ i.b = j.b ∧ i.m = j.m) := by
-      rintro ⟨ha,hb,hm⟩
+      rintro ⟨ha, hb, hm⟩
       apply hji
       cases i; cases j
       simp_all
@@ -88,8 +88,8 @@ theorem polynomialEigenfunction_unique_finite_expansion (n : ℕ) (hn : 2 ≤ n)
     (f : Configuration n → ℂ) (hf : IsPolynomialInSConjSR f) :
     ∃! c : PolynomialEigenfunctionData n →₀ ℂ,
       ∀ z, f z = c.sum (fun ped coeff => coeff * polynomialEigenfunction n ped z) := by
-  obtain ⟨c,hc⟩ := polynomialEigenfunction_finite_expansion n f hf
-  refine ⟨c,hc,?_⟩
+  obtain ⟨c, hc⟩ := polynomialEigenfunction_finite_expansion n f hf
+  refine ⟨c, hc,?_⟩
   intro d hd
   apply (polynomialEigenfunction_linearIndependent n hn)
   ext z

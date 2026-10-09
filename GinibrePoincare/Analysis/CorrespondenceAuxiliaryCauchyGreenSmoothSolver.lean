@@ -21,7 +21,7 @@ theorem cauchyGreenPotential_solves_dbar (a : ℂ → ℂ)
   have h := cauchyGreenKernel_fundamental_identity θ hθ hcθ
   have hder (y : ℂ) : planarDbar θ y = -planarDbar a (z-y) :=
     planarDbar_sub_left a (ha.differentiable (by simp)) z y
-  simp_rw [hder,mul_neg,integral_neg] at h
+  simp_rw [hder, mul_neg, integral_neg] at h
   rw [cauchyGreenPotential_dbar_integral a ha hc z]
   have hh := neg_injective h
   simpa [θ] using hh
@@ -29,7 +29,7 @@ theorem cauchyGreenPotential_solves_dbar (a : ℂ → ℂ)
 theorem cauchyGreenSmooth_compact_solvability (a : ℂ → ℂ)
     (ha : ContDiff ℝ ∞ a) (hc : HasCompactSupport a) :
     ∃ u : ℂ → ℂ, ContDiff ℝ ∞ u ∧ ∀ z, planarDbar u z = a z :=
-  ⟨cauchyGreenPotential a,cauchyGreenPotential_contDiff a ha hc,
+  ⟨cauchyGreenPotential a, cauchyGreenPotential_contDiff a ha hc,
     cauchyGreenPotential_solves_dbar a ha hc⟩
 
 #print axioms cauchyGreenPotential_solves_dbar

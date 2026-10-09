@@ -34,7 +34,7 @@ theorem ginibreLocalWeak_global_distributional_pair {n : ℕ} (hn : 0 < n)
       apply integral_congr_ae
       filter_upwards [hu'] with z hz
       rw [hz]
-    rw [hl,hr]
+    rw [hl, hr]
     exact hw k θ hθ hc hs
 
 #print axioms ginibreLocalWeak_global_distributional_pair

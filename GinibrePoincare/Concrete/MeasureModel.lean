@@ -45,7 +45,9 @@ def complexGaussianDensityMeasure (n : ℕ) : Measure (Configuration n) :=
   (configurationVolume n).withDensity (complexGaussianDensity n)
 
 /-- Identification of the product Gaussian law with its explicit Lebesgue
- density.  This is the remaining Gaussian density theorem. -/
+density. This proposition is proved as `complexGaussianDensityIdentification`
+in `Analysis/ComplexGaussianDensity.lean`; it is defined separately here to
+keep the measure construction independent of its density proof. -/
 def ComplexGaussianDensityIdentificationStatement : Prop :=
   ∀ n : ℕ, 0 < n →
     complexGaussianMeasure n = complexGaussianDensityMeasure n

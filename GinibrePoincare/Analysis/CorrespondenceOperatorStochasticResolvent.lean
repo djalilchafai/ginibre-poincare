@@ -18,7 +18,7 @@ theorem correspondenceOperator_bounded_adjoint_identification
         (∫ z, f z*θ z ∂ginibreMeasure n)) :
     hu.toLp u = correspondenceOperatorValueResolvent n hn f := by
   have hf : MemLp (f : Configuration n → ℝ) 2 (ginibreMeasure n) := Lp.memLp _
-  obtain ⟨g,hgm,hlocal,hraw⟩ := ginibreTransitionAnalytic_compact_adjoint_exists_local_gradient n hn u f hu hf heq
+  obtain ⟨g, hgm, hlocal, hraw⟩ := ginibreTransitionAnalytic_compact_adjoint_exists_local_gradient n hn u f hu hf heq
   have hw : ∀ k (θ : Configuration n → ℝ), ContDiff ℝ ∞ θ → HasCompactSupport θ →
       tsupport θ ⊆ {z | CollisionFree z} →
       (∫ z, g z k*θ z) = -(∫ z, u z*fderiv ℝ θ z (ginibreCoordinateDirection k)) := by
@@ -49,27 +49,27 @@ theorem correspondenceOperator_bounded_adjoint_identification
   have hcompact : ∀ p ∈ ginibreInteriorSmoothPair n,
       inner ℝ (hu.toLp u) p.1+(1/(n : ℝ))*inner ℝ (hg.toLp g) p.2=inner ℝ f p.1 := by
     intro p hp
-    obtain ⟨θ,hθ,hθc,hθs,hpval,hpgrad⟩ := hp
+    obtain ⟨θ, hθ, hθc, hθs, hpval, hpgrad⟩ := hp
     have huv : inner ℝ (hu.toLp u) p.1 = ∫ z, u z*θ z ∂ginibreMeasure n := by
       rw [L2.inner_def]
       apply integral_congr_ae
-      filter_upwards [hu.coeFn_toLp,hpval] with z hz hv
+      filter_upwards [hu.coeFn_toLp, hpval] with z hz hv
       change p.1 z*(hu.toLp u) z = u z*θ z
-      rw [hz,hv,mul_comm]
+      rw [hz, hv, mul_comm]
     have hgv : inner ℝ (hg.toLp g) p.2 =
         ∫ z, inner ℝ (g z) (ginibreEuclideanGradient θ z) ∂ginibreMeasure n := by
       rw [L2.inner_def]
       apply integral_congr_ae
-      filter_upwards [hg.coeFn_toLp,hpgrad] with z hz hv
+      filter_upwards [hg.coeFn_toLp, hpgrad] with z hz hv
       change inner ℝ ((hg.toLp g) z) (p.2 z) = _
-      rw [hz,hv]
+      rw [hz, hv]
     have hfv : inner ℝ f p.1 = ∫ z, f z*θ z ∂ginibreMeasure n := by
       rw [L2.inner_def]
       apply integral_congr_ae
       filter_upwards [hpval] with z hv
       change p.1 z*f z = f z*θ z
-      rw [hv,mul_comm]
-    rw [huv,hgv,hfv]
+      rw [hv, mul_comm]
+    rw [huv, hgv, hfv]
     simpa only [one_mul] using hgrad θ hθ hθc hθs
   have h := correspondenceOperatorGenerator_resolvent_unique n hn f (hu.toLp u) (hg.toLp g) hdist (by
     intro w h hw
@@ -78,22 +78,22 @@ theorem correspondenceOperator_bounded_adjoint_identification
   exact h.1
 
 theorem correspondenceOperator_stochastic_resolvent_eq_bounded {Ω : Type*} [MeasurableSpace Ω]
-    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α:ℝ)) (P : Measure Ω)
+    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α : ℝ)) (P : Measure Ω)
     [IsProbabilityMeasure P] [P.IsComplete]
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (hB : ∀ i, IsBrownianReal (B i) P)
     (hiB : iIndepFun (fun i x t => B i t x) P) (f : GinibreFullValueL2 n)
     (A : ℝ) (hb : ∀ᵐ z ∂ginibreMeasure n, ‖f z‖≤A) :
-    ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α:ℝ)/(n:ℝ)) f =
+    ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α : ℝ)/(n : ℝ)) f =
       correspondenceOperatorValueResolvent n hn f := by
   let := ginibreMeasure_isProbabilityMeasure hn
-  have hc : 0<(α:ℝ)/(n:ℝ) := div_pos hα (Nat.cast_pos.mpr hn)
-  obtain ⟨v,hv,hvb,hfv⟩ := ginibreBoundedLp_measurable_version hn f A hb
-  obtain ⟨hrm,hrb,hRr⟩ := ginibreOriginalStochasticL2Resolvent_bounded_representative
+  have hc : 0<(α : ℝ)/(n : ℝ) := div_pos hα (Nat.cast_pos.mpr hn)
+  obtain ⟨v, hv, hvb, hfv⟩ := ginibreBoundedLp_measurable_version hn f A hb
+  obtain ⟨hrm, hrb, hRr⟩ := ginibreOriginalStochasticL2Resolvent_bounded_representative
     hn α P B hB hiB hc f v hfv hv (max A 0) hvb
-  let r := fun z => ∫ t in Ioi (0:ℝ), ((α:ℝ)/(n:ℝ))*Real.exp (-((α:ℝ)/(n:ℝ))*t)*
+  let r := fun z => ∫ t in Ioi (0 : ℝ), ((α : ℝ)/(n : ℝ))*Real.exp (-((α : ℝ)/(n : ℝ))*t)*
     ginibreStationaryContinuousTransitionMean α B P v t z
   have hr : MemLp r 2 (ginibreMeasure n) := MemLp.of_bound hrm.aestronglyMeasurable (max A 0) (ae_of_all _ hrb)
-  have hRp : ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α:ℝ)/(n:ℝ)) f=hr.toLp r := by
+  have hRp : ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α : ℝ)/(n : ℝ)) f=hr.toLp r := by
     apply Lp.ext
     exact hRr.trans hr.coeFn_toLp.symm
   have heq : ∀ θ : Configuration n → ℝ, ContDiff ℝ ∞ θ → HasCompactSupport θ →
@@ -101,13 +101,13 @@ theorem correspondenceOperator_stochastic_resolvent_eq_bounded {Ω : Type*} [Mea
       (∫ z, r z*θ z ∂ginibreMeasure n)-(∫ z, r z*ginibrePregenerator n θ z ∂ginibreMeasure n)=
         ∫ z, f z*θ z ∂ginibreMeasure n := by
     intro θ hθ hcθ hs
-    have htest : IsGinibreCollisionFreeCompactTest θ := ⟨hθ,hcθ,by
+    have htest : IsGinibreCollisionFreeCompactTest θ := ⟨hθ, hcθ, by
       intro z hz
       exact (collisionFree_iff_not_mem_collisionSet z).mp (hs hz)⟩
     have he := ginibreOriginalStochasticL2Resolvent_compact_adjoint_integral hn α hα P B hB hiB f θ htest
-    have h1 : (∫ z, ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α:ℝ)/(n:ℝ)) f z*θ z ∂ginibreMeasure n)=
+    have h1 : (∫ z, ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α : ℝ)/(n : ℝ)) f z*θ z ∂ginibreMeasure n)=
         ∫ z, r z*θ z ∂ginibreMeasure n := integral_congr_ae (hRr.mono fun z hz => by dsimp only; rw [hz])
-    have h2 : (∫ z, ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α:ℝ)/(n:ℝ)) f z*ginibrePregenerator n θ z ∂ginibreMeasure n)=
+    have h2 : (∫ z, ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α : ℝ)/(n : ℝ)) f z*ginibrePregenerator n θ z ∂ginibreMeasure n)=
         ∫ z, r z*ginibrePregenerator n θ z ∂ginibreMeasure n := integral_congr_ae (hRr.mono fun z hz => by dsimp only; rw [hz])
     exact h1 ▸ h2 ▸ he
   rw [hRp]
@@ -116,21 +116,21 @@ theorem correspondenceOperator_stochastic_resolvent_eq_bounded {Ω : Type*} [Mea
 /-- The original stochastic normalized resolvent equals the unrestricted
 ordinary weak-form resolvent on every actual real L² observable. -/
 theorem correspondenceOperator_stochastic_resolvent_eq {Ω : Type*} [MeasurableSpace Ω]
-    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α:ℝ)) (P : Measure Ω)
+    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α : ℝ)) (P : Measure Ω)
     [IsProbabilityMeasure P] [P.IsComplete]
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (hB : ∀ i, IsBrownianReal (B i) P)
     (hiB : iIndepFun (fun i x t => B i t x) P) (f : GinibreFullValueL2 n) :
-    ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α:ℝ)/(n:ℝ)) f =
+    ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α : ℝ)/(n : ℝ)) f =
       correspondenceOperatorValueResolvent n hn f := by
-  have hc : 0<(α:ℝ)/(n:ℝ) := div_pos hα (Nat.cast_pos.mpr hn)
-  let R := ginibreOriginalStochasticL2ResolventOperator hn α P B hB hiB ((α:ℝ)/(n:ℝ)) hc
+  have hc : 0<(α : ℝ)/(n : ℝ) := div_pos hα (Nat.cast_pos.mpr hn)
+  let R := ginibreOriginalStochasticL2ResolventOperator hn α P B hB hiB ((α : ℝ)/(n : ℝ)) hc
   let S := correspondenceOperatorValueResolvent n hn
   let q (m : ℕ) := (ginibreValueTruncation_memLp n m f (Lp.memLp f)).toLp
     (fun z => sobolevValueTruncation m (f z))
   have ht : Tendsto q atTop (𝓝 f) := ginibreValueTruncation_L2_tendsto n f
   have hh (m : ℕ) : R (q m)=S (q m) := by
     apply correspondenceOperator_stochastic_resolvent_eq_bounded hn α hα P B hB hiB
-      (q m) (2*((m:ℝ)+1))
+      (q m) (2*((m : ℝ)+1))
     filter_upwards [(ginibreValueTruncation_memLp n m f (Lp.memLp f)).coeFn_toLp] with z hz
     change q m z = sobolevValueTruncation m (f z) at hz
     rw [hz]

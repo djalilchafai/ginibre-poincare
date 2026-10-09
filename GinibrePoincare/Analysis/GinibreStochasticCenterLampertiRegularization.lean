@@ -29,7 +29,7 @@ theorem contDiff_ginibreCenterSquareRootRegularized (n : ℕ) {δ : ℝ} (hδ : 
     have hp : 0 < ginibreCenterSquared n z +
         δ * Real.smoothTransition (2 - 2 * ginibreCenterSquared n z / δ) := by
       by_cases hz : ginibreCenterSquared n z = 0
-      · simp only [hz,mul_zero,zero_div,sub_zero,zero_add]
+      · simp only [hz, mul_zero, zero_div, sub_zero, zero_add]
         rw [Real.smoothTransition.one_of_one_le (by norm_num : (1 : ℝ) ≤ 2)]
         simpa using hδ
       · exact add_pos_of_pos_of_nonneg (lt_of_le_of_ne hr (Ne.symm hz)) (mul_nonneg hδ.le hs)
@@ -41,7 +41,7 @@ theorem ginibreCenterSquareRootRegularized_eq {n : ℕ} {δ : ℝ} (hδ : 0 < δ
   have hh : 2 - 2 * ginibreCenterSquared n z / δ ≤ 0 := by
     have h := (le_div_iff₀ hδ).mpr (show 2 * δ ≤ 2 * ginibreCenterSquared n z by linarith)
     linarith
-  simp [ginibreCenterSquareRootRegularized,ginibreSquareRootCenter,
+  simp [ginibreCenterSquareRootRegularized, ginibreSquareRootCenter,
     Real.smoothTransition.zero_of_nonpos hh]
 
 theorem ginibreCenterSquareRootRegularized_eventuallyEq {n : ℕ} {δ : ℝ} (hδ : 0 < δ)
@@ -62,7 +62,7 @@ theorem ginibrePregenerator_congr_of_eventuallyEq {n : ℕ}
       filter_upwards [h.fderiv (𝕜 := ℝ)] with x hx
       rw [hx]
     rw [he.fderiv_eq]
-  simp only [ginibrePregenerator,configurationLaplacian,hd,hdd]
+  simp only [ginibrePregenerator, configurationLaplacian, hd, hdd]
 
 theorem ginibreCenterSquareRootRegularized_generator {n : ℕ} (hn : 2 ≤ n)
     (α : ℝ) {δ : ℝ} (hδ : 0 < δ) (z : Configuration n)

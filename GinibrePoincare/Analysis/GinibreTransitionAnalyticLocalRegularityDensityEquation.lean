@@ -57,7 +57,7 @@ theorem ginibreLocalRegularity_density_resolvent_elliptic_equation
       (hρd.continuous.mul (hD k).continuous) (hc.fderiv_apply ℝ _).mul_left
       (tsupport_mul_subset_right.trans ((hDs k).trans hs))
     apply hi.congr
-    exact ae_of_all volume fun z => by dsimp only [C,Pi.mul_apply]; ring
+    exact ae_of_all volume fun z => by dsimp only [C, Pi.mul_apply]; ring
   have hCS : Integrable (fun z => ∑ k : Fin n × Fin 2, C k z) volume :=
     integrable_finsetSum _ (fun k hk => hCi k)
   have hflux : (n : ℝ)*(∫ z, ρ z*u z*ginibrePregenerator n θ z) =
@@ -68,8 +68,8 @@ theorem ginibreLocalRegularity_density_resolvent_elliptic_equation
         apply integral_congr_ae
         filter_upwards [(volume_absolutelyContinuous_ginibreMeasure n hn).ae_le (ginibre_ae_collisionFree n hn)] with z hz
         have hp := congrArg (fun a : ℝ => u z*a) (ginibreLocalRegularity_density_generator_pointwise n hn θ hθ z hz)
-        dsimp only [A,C,DD,D,ρ]
-        rw [mul_add,Finset.mul_sum] at hp
+        dsimp only [A, C, DD, D, ρ]
+        rw [mul_add, Finset.mul_sum] at hp
         simp_rw [Finset.mul_sum] at hp ⊢
         convert hp using 1
         · ring
@@ -80,7 +80,7 @@ theorem ginibreLocalRegularity_density_resolvent_elliptic_equation
           · apply Finset.sum_congr rfl
             intro k hk
             ring
-      _ = _ := by rw [integral_add hA hCS,integral_finsetSum _ (fun k hk => hCi k)]
+      _ = _ := by rw [integral_add hA hCS, integral_finsetSum _ (fun k hk => hCi k)]
   have he := congrArg (fun a : ℝ => (n : ℝ)*a) (heq θ hθ hc hs)
   change (n : ℝ)*(∫ z, ρ z*u z*ginibrePregenerator n θ z) = _ at he
   rw [hflux,← integral_const_mul] at he

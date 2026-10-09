@@ -7,11 +7,11 @@ public import GinibrePoincare.Analysis.BrownianOrthogonalJointOUFunctional
 open MeasureTheory ProbabilityTheory
 namespace GinibrePoincare
 noncomputable section
-local instance : MeasurableSpace C(ℝ,ℂ) := borel _
-local instance : BorelSpace C(ℝ,ℂ) := ⟨rfl⟩
+local instance : MeasurableSpace C(ℝ, ℂ) := borel _
+local instance : BorelSpace C(ℝ, ℂ) := ⟨rfl⟩
 
-def ginibreOUPathElement (n : ℕ) (α : ℝ) (p : ℂ × C(ℝ,ℂ)) : C(ℝ,ℂ) :=
-  ⟨fun t => drivenOUPath (2*α/(n:ℝ)) p.1 p.2 (Real.toNNReal t),
+def ginibreOUPathElement (n : ℕ) (α : ℝ) (p : ℂ × C(ℝ, ℂ)) : C(ℝ, ℂ) :=
+  ⟨fun t => drivenOUPath (2*α/(n : ℝ)) p.1 p.2 (Real.toNNReal t),
     (drivenOUPath_continuous _ _ _ p.2.continuous).comp
       (NNReal.continuous_coe.comp continuous_real_toNNReal)⟩
 

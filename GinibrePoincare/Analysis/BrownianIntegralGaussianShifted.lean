@@ -21,7 +21,7 @@ def brownianUnitShiftedUniformSum {Ω ι : Type*} [Fintype ι]
 theorem monotoneGrid_duration_sum_from_start (τ : ℕ → ℝ≥0) (hτ : Monotone τ) (n : ℕ) :
     (∑ k ∈ Finset.range n, (τ (k+1)-τ k)) = τ n-τ 0 := by
   apply NNReal.coe_injective
-  simp only [NNReal.coe_sum,NNReal.coe_sub (hτ (Nat.zero_le n))]
+  simp only [NNReal.coe_sum, NNReal.coe_sub (hτ (Nat.zero_le n))]
   simp_rw [NNReal.coe_sub (hτ (Nat.le_succ _))]
   exact Finset.sum_range_sub (fun k => (τ k : ℝ)) n
 
@@ -39,7 +39,7 @@ theorem brownianUnitShiftedUniformSum_eq_prefix {Ω ι : Type*} [Fintype ι]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro k hk
-  simp [PiLp.inner_apply,mul_comm]
+  simp [PiLp.inner_apply, mul_comm]
 
 /-- Exact shifted Gaussian law and independence of the entire actual initial
 completed past, before taking any stochastic integral limit. -/
@@ -58,14 +58,14 @@ theorem brownianUnitShiftedUniformSum_gaussian_independent
       IndepFun Y (brownianUnitShiftedUniformSum B u s t N) P := by
   let τ := fun k => s+itoUniformNNTime t N k
   have hτ : Monotone τ := monotone_const.add (itoUniformNNTime_mono t N)
-  have h0 : τ 0 = s := by simp [τ,itoUniformNNTime,itoUniformTime]
-  have hEnd : τ N = s+t := by rw [show τ N=s+itoUniformNNTime t N N from rfl,itoUniformNNTime_end t N hN]
+  have h0 : τ 0 = s := by simp [τ, itoUniformNNTime, itoUniformTime]
+  have hEnd : τ N = s+t := by rw [show τ N=s+itoUniformNNTime t N N from rfl, itoUniformNNTime_end t N hN]
   have hl := brownianUnitGridPrefix_gaussian B P hB hind (fun k => u (τ k)) τ hτ
     (fun k => hu (τ k)) (fun k => hunit (τ k)) i N
   have hi := brownianUnitGridPrefix_independent_past B P hB hind (fun k => u (τ k)) τ hτ
     (fun k => hu (τ k)) (fun k => hunit (τ k)) i Y (by rwa [h0]) N
-  rw [monotoneGrid_duration_sum_from_start τ hτ N,hEnd,h0,add_tsub_cancel_left] at hl
-  simpa only [brownianUnitShiftedUniformSum_eq_prefix] using ⟨hl,hi⟩
+  rw [monotoneGrid_duration_sum_from_start τ hτ N, hEnd, h0, add_tsub_cancel_left] at hl
+  simpa only [brownianUnitShiftedUniformSum_eq_prefix] using ⟨hl, hi⟩
 
 /-- The genuine probability limit of the original shifted sums has its exact
 Gaussian law and is independent of any original completed-past variable. -/

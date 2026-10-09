@@ -35,7 +35,7 @@ theorem correspondenceOperatorRootCoordinate_eval (a x : ℝ) (hx : 0≤x) :
   have he : 1-(a+1)*(1+x)⁻¹=(x-a)/(1+x) := by
     field_simp
     ring
-  rw [he,Real.sqrt_inv,Real.sqrt_div' _ (le_of_lt hy)]
+  rw [he, Real.sqrt_inv, Real.sqrt_div' _ (le_of_lt hy)]
   field_simp
 
 /-- The maximal shifted square-root resolvent is actual Mathlib continuous

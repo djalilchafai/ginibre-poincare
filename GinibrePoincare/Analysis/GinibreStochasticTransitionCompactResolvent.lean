@@ -38,26 +38,26 @@ theorem ginibreCompactTestPregenerator_ae {n : ℕ} (hn : 0<n) (φ : Configurati
 /-- Genuine unit resolvent identity on the concrete smooth collision-free core,
 derived from the actual stochastic Dynkin formula. -/
 theorem ginibreOriginalStochasticL2Resolvent_compact_test {Ω : Type*} [MeasurableSpace Ω]
-    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α:ℝ)) (P : Measure Ω)
+    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α : ℝ)) (P : Measure Ω)
     [IsProbabilityMeasure P] [P.IsComplete]
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (hB : ∀ i, IsBrownianReal (B i) P)
     (hiB : iIndepFun (fun i ω t => B i t ω) P)
     (φ : Configuration n → ℝ) (hφ : IsGinibreCollisionFreeCompactTest φ) :
-    ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α:ℝ)/(n:ℝ))
+    ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α : ℝ)/(n : ℝ))
       (ginibreCompactTestValue hn φ hφ-ginibreCompactTestPregenerator hn φ hφ)=
         ginibreCompactTestValue hn φ hφ := by
-  let c : ℝ := (α:ℝ)/(n:ℝ)
+  let c : ℝ := (α : ℝ)/(n : ℝ)
   have hc : 0<c := div_pos hα (by exact_mod_cast hn)
   have hpc := continuous_ginibrePregenerator_of_compact_test hφ
-  obtain ⟨C,hC⟩ := hφ.2.1.exists_bound_of_continuous hφ.1.continuous
-  obtain ⟨D,hD⟩ := (hasCompactSupport_ginibrePregenerator hφ.2.1).exists_bound_of_continuous hpc
+  obtain ⟨C, hC⟩ := hφ.2.1.exists_bound_of_continuous hφ.1.continuous
+  obtain ⟨D, hD⟩ := (hasCompactSupport_ginibrePregenerator hφ.2.1).exists_bound_of_continuous hpc
   refine ginibreOriginalStochasticL2Resolvent_of_bounded_point_identity hn α P B hB hiB hc
     _ _ (fun z => φ z-ginibrePregenerator n φ z) ?_ ?_ (C+D) ?_ ?_
   · filter_upwards [Lp.coeFn_sub (ginibreCompactTestValue hn φ hφ) (ginibreCompactTestPregenerator hn φ hφ),
-      ginibreCompactTestValue_ae hn φ hφ,ginibreCompactTestPregenerator_ae hn φ hφ] with z hsub hv hp
+      ginibreCompactTestValue_ae hn φ hφ, ginibreCompactTestPregenerator_ae hn φ hφ] with z hsub hv hp
     rw [hsub]
     change (ginibreCompactTestValue hn φ hφ) z-(ginibreCompactTestPregenerator hn φ hφ) z=_
-    rw [hv,hp]
+    rw [hv, hp]
   · exact (hφ.1.continuous.sub hpc).measurable
   · intro z
     exact (norm_sub_le _ _).trans (add_le_add (hC z) (hD z))
@@ -73,7 +73,7 @@ theorem ginibreOriginalStochasticL2Resolvent_compact_test {Ω : Type*} [Measurab
     exact ae_of_all _ fun t => by
       dsimp only
       rw [ginibreStationaryContinuousTransitionMean_sub hn α P B hB φ (ginibrePregenerator n φ)
-        hφ.1.continuous.measurable hpc.measurable C D hC hD t z,ha t,hb t]
+        hφ.1.continuous.measurable hpc.measurable C D hC hD t z, ha t, hb t]
       change c*Real.exp (-c*t)*(_-_) = Real.exp (-c*t)*(c*_-∫ ω,
         ginibreRealPaperSpeedGenerator n α φ (ginibreBrownianMaximalProcess n α z B t.toNNReal ω) ∂P)
       simp only [ginibreRealPaperSpeedGenerator]
@@ -82,19 +82,19 @@ theorem ginibreOriginalStochasticL2Resolvent_compact_test {Ω : Type*} [Measurab
       ring
 
 theorem ginibreOriginalStochasticL2Resolvent_compact_adjoint_equation {Ω : Type*} [MeasurableSpace Ω]
-    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α:ℝ)) (P : Measure Ω)
+    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α : ℝ)) (P : Measure Ω)
     [IsProbabilityMeasure P] [P.IsComplete]
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (hB : ∀ i, IsBrownianReal (B i) P)
     (hiB : iIndepFun (fun i ω t => B i t ω) P) (f : Lp ℝ 2 (ginibreMeasure n))
     (φ : Configuration n → ℝ) (hφ : IsGinibreCollisionFreeCompactTest φ) :
-    let u := ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α:ℝ)/(n:ℝ)) f
+    let u := ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α : ℝ)/(n : ℝ)) f
     inner ℝ u (ginibreCompactTestValue hn φ hφ)-inner ℝ u (ginibreCompactTestPregenerator hn φ hφ)=
       inner ℝ f (ginibreCompactTestValue hn φ hφ) := by
-  have hc : 0<(α:ℝ)/(n:ℝ) := div_pos hα (by exact_mod_cast hn)
+  have hc : 0<(α : ℝ)/(n : ℝ) := div_pos hα (by exact_mod_cast hn)
   have he := ginibreOriginalStochasticL2Resolvent_symmetric hn α P B hB hiB hc
     (ginibreCompactTestValue hn φ hφ-ginibreCompactTestPregenerator hn φ hφ) f
   rw [ginibreOriginalStochasticL2Resolvent_compact_test hn α hα P B hB hiB φ hφ] at he
-  simpa only [inner_sub_left,real_inner_comm] using he
+  simpa only [inner_sub_left, real_inner_comm] using he
 
 
 theorem ginibreCompactTestValue_pairing {n : ℕ} (hn : 0<n)
@@ -104,7 +104,7 @@ theorem ginibreCompactTestValue_pairing {n : ℕ} (hn : 0<n)
   rw [L2.inner_def]
   apply integral_congr_ae
   filter_upwards [ginibreCompactTestValue_ae hn φ hφ] with z hz
-  simp [hz,mul_comm]
+  simp [hz, mul_comm]
 
 theorem ginibreCompactTestPregenerator_pairing {n : ℕ} (hn : 0<n)
     (f : Lp ℝ 2 (ginibreMeasure n)) (φ : Configuration n → ℝ)
@@ -114,19 +114,19 @@ theorem ginibreCompactTestPregenerator_pairing {n : ℕ} (hn : 0<n)
   rw [L2.inner_def]
   apply integral_congr_ae
   filter_upwards [ginibreCompactTestPregenerator_ae hn φ hφ] with z hz
-  simp [hz,mul_comm]
+  simp [hz, mul_comm]
 
 theorem ginibreOriginalStochasticL2Resolvent_compact_adjoint_integral {Ω : Type*} [MeasurableSpace Ω]
-    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α:ℝ)) (P : Measure Ω)
+    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α : ℝ)) (P : Measure Ω)
     [IsProbabilityMeasure P] [P.IsComplete]
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (hB : ∀ i, IsBrownianReal (B i) P)
     (hiB : iIndepFun (fun i ω t => B i t ω) P) (f : Lp ℝ 2 (ginibreMeasure n))
     (φ : Configuration n → ℝ) (hφ : IsGinibreCollisionFreeCompactTest φ) :
-    let u := ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α:ℝ)/(n:ℝ)) f
+    let u := ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α : ℝ)/(n : ℝ)) f
     (∫ z, u z*φ z ∂ginibreMeasure n)-(∫ z, u z*ginibrePregenerator n φ z ∂ginibreMeasure n)=
       ∫ z, f z*φ z ∂ginibreMeasure n := by
   have h := ginibreOriginalStochasticL2Resolvent_compact_adjoint_equation hn α hα P B hB hiB f φ hφ
-  simpa only [ginibreCompactTestValue_pairing,ginibreCompactTestPregenerator_pairing] using h
+  simpa only [ginibreCompactTestValue_pairing, ginibreCompactTestPregenerator_pairing] using h
 
 #print axioms ginibreOriginalStochasticL2Resolvent_compact_adjoint_integral
 #print axioms ginibreOriginalStochasticL2Resolvent_compact_test

@@ -36,10 +36,10 @@ theorem brownianUnitField_actual_integral_isBrownian
       u hu hunit i 0 t _ (hlim 0 t) (fun _ => (0 : ℝ)) measurable_const).1
     apply hh.congr
     filter_upwards [hM0] with ω hω
-    simp only [zero_add,hω,sub_zero]
+    simp only [zero_add, hω, sub_zero]
   have hincr : HasIndepIncrements M P := by
     intro n τ hτ
-    let τe : ℕ → ℝ≥0 := fun k => τ ⟨min k n,Nat.lt_succ_of_le (min_le_right _ _)⟩
+    let τe : ℕ → ℝ≥0 := fun k => τ ⟨min k n, Nat.lt_succ_of_le (min_le_right _ _)⟩
     have hτe : Monotone τe := by
       intro a b hab
       apply hτ
@@ -56,13 +56,13 @@ theorem brownianUnitField_actual_integral_isBrownian
       intro k Y hY
       have hh := (brownianUnitShiftedUniformSum_limit_gaussian_independent B P hB hind
         u hu hunit i (τe k) (τe (k+1)-τe k) _ (hlim _ _) Y hY).2
-      simpa only [add_tsub_cancel_of_le (hτe (Nat.le_succ k)),Z] using hh
+      simpa only [add_tsub_cancel_of_le (hτe (Nat.le_succ k)), Z] using hh
     have hf := hi.precomp (g := fun k : Fin n => k.val) Fin.val_injective
     convert hf using 1
     funext k ω
-    simp only [Z,τe,min_eq_left (Nat.succ_le_of_lt k.is_lt),min_eq_left k.is_lt.le]
+    simp only [Z, τe, min_eq_left (Nat.succ_le_of_lt k.is_lt), min_eq_left k.is_lt.le]
     rfl
-  exact ⟨hincr.isPreBrownianReal_of_hasLaw hlaw,hMC⟩
+  exact ⟨hincr.isPreBrownianReal_of_hasLaw hlaw, hMC⟩
 
 end
 end GinibrePoincare

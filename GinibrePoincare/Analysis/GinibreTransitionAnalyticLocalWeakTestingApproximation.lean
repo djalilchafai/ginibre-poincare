@@ -19,7 +19,7 @@ theorem ginibreLocalWeak_gradient_tsupport {n : ℕ} (η : Configuration n → �
   have hd : fderiv ℝ η z = 0 := fderiv_of_notMem_tsupport ℝ hn
   apply hz
   ext k
-  simp only [ginibreEuclideanGradient_coordinate,hd,ContinuousLinearMap.zero_apply,PiLp.zero_apply]
+  simp only [ginibreEuclideanGradient_coordinate, hd, ContinuousLinearMap.zero_apply, PiLp.zero_apply]
 
 theorem ginibreLocalWeak_cutoff_smooth_sequence {n : ℕ} (hn : 0 < n)
     (u : Configuration n → ℝ) (g : Configuration n → EuclideanSpace ℝ (Fin n × Fin 2))

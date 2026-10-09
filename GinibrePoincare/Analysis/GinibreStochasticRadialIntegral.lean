@@ -21,7 +21,7 @@ theorem ginibreBrownianMaximalProcess_radial_integral_exists
     (hind : iIndepFun (fun i ω t => B i t ω) P) (T : ℝ≥0) :
     ∃ (u : ℝ≥0 → Ω → EuclideanSpace ℝ (Fin n × Fin 2)) (J : ℝ≥0 → Ω → ℝ),
       (∀ t ω, u t ω = ginibreRecenteredRadialDirection n
-        (EuclideanSpace.single (⟨0,by omega⟩,0) 1)
+        (EuclideanSpace.single (⟨0, by omega⟩, 0) 1)
         (ginibreBrownianMaximalProcess n α z B t ω)) ∧
       Martingale J (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)) P ∧
       (∀ ω, Continuous (fun t => J t ω)) ∧ (∀ t, MemLp (J t) 2 P) ∧
@@ -30,15 +30,15 @@ theorem ginibreBrownianMaximalProcess_radial_integral_exists
         brownianUniformLeftSum (B i) (fun s ω => u s ω i) t (k+1) ω) atTop (J t)) ∧
       (∀ t ≤ T, HasLaw (J t) (gaussianReal 0 t) P) := by
   classical
-  let i₀ : Fin n × Fin 2 := (⟨0,by omega⟩,0)
+  let i₀ : Fin n × Fin 2 := (⟨0, by omega⟩, 0)
   let e : EuclideanSpace ℝ (Fin n × Fin 2) := EuclideanSpace.single i₀ 1
-  have he : ‖e‖=1 := by simp [e,PiLp.norm_single]
+  have he : ‖e‖=1 := by simp [e, PiLp.norm_single]
   let u := fun t ω => ginibreRecenteredRadialDirection n e
     (ginibreBrownianMaximalProcess n α z B t ω)
-  obtain ⟨hu,hunit,hc⟩ := ginibreBrownianMaximalProcess_radialDirection_properties
+  obtain ⟨hu, hunit, hc⟩ := ginibreBrownianMaximalProcess_radialDirection_properties
     hn α z hz B P hB hind e he
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hJS,hJlaw⟩ := ginibreUnitField_continuous_integral_exists
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hJS, hJlaw⟩ := ginibreUnitField_continuous_integral_exists
     B P hB hind u hu hunit T (hc.mono (fun ω hω => hω.continuousOn)) i₀
-  exact ⟨u,J,fun t ω => rfl,hJM,hJC,hJL,hJ0,hJS,hJlaw⟩
+  exact ⟨u, J, fun t ω => rfl, hJM, hJC, hJL, hJ0, hJS, hJlaw⟩
 end
 end GinibrePoincare

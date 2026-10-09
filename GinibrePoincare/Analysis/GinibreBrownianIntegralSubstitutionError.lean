@@ -52,12 +52,12 @@ theorem brownianSubstitutionCoarseApproximation_frozen_error_tendsto_meanSquare
       (((hA c).mono ((ginibreBrownianAugmentedFiltration B P hB).mono
         (itoUniformNNTime_coarse_le_fine T (n+1) (m n+1) k (Nat.succ_pos _))) le_rfl).sub (hA a)).mul (hu i a)
     have hGi : MemLp G 2 P := by
-      simpa only [G,mul_comm,Pi.sub_apply] using actualBoundedMultiplier_memLp_two P
+      simpa only [G, mul_comm, Pi.sub_apply] using actualBoundedMultiplier_memLp_two P
         (u i a) _ (hum i a).aestronglyMeasurable ((hAi c).sub (hAi a)) U (hub i a)
     have hh := brownianFrozenStep_memLp_two B P hB hind i G a b b hG hGi
     have he : brownianFrozenStep (B i) G a b b = (fun ω => G ω*(B i b ω-B i a ω)) := by
       funext ω
-      simp [brownianFrozenStep,a,b,max_eq_right (itoUniformNNTime_mono T _ (Nat.le_succ k.val))]
+      simp [brownianFrozenStep, a, b, max_eq_right (itoUniformNNTime_mono T _ (Nat.le_succ k.val))]
     rw [he] at hh
     exact hh
   have hmesh := brownianFrozenMultiplierMesh_tendsto_meanSquare P A hAm T m hc C hC hAb
@@ -73,7 +73,7 @@ theorem brownianSubstitutionCoarseApproximation_frozen_error_tendsto_meanSquare
           T ((n+1)*(m n+1)) ω) := by
     funext n ω
     rw [brownianSubstitutionCoarseApproximation_refinement B u A T (n+1) (m n+1) (Nat.succ_pos _) ω]
-    simp only [E,brownianUniformLeftSum,← Finset.sum_sub_distrib]
+    simp only [E, brownianUniformLeftSum,← Finset.sum_sub_distrib]
     apply Finset.sum_congr rfl
     intro i hi
     simp only [← Fin.sum_univ_eq_sum_range]

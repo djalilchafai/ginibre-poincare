@@ -13,9 +13,9 @@ noncomputable section
 set_option maxHeartbeats 2400000
 set_option backward.isDefEq.respectTransparency false
 local instance ginibreOriginalEquilibrium_pathMeasurable (n : ℕ) (T : ℝ≥0) :
-    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ),Configuration n) := borel _
+    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := borel _
 local instance ginibreOriginalEquilibrium_pathBorel (n : ℕ) (T : ℝ≥0) :
-    BorelSpace C(Icc (0 : ℝ) (T : ℝ),Configuration n) := ⟨rfl⟩
+    BorelSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := ⟨rfl⟩
 
 /-- The genuine canonical original Ginibre path with independently sampled
 Gaussian coordinates and original Brownian noise, weighted by the actual
@@ -23,7 +23,7 @@ normalized Vandermonde initial density. -/
 def ginibreOriginalEquilibriumPathLaw {Ω : Type*} [MeasurableSpace Ω]
     (n : ℕ) (α : ℝ) (T : ℝ≥0) (P : Measure Ω)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) :
-    Measure C(Icc (0 : ℝ) (T : ℝ),Configuration n) :=
+    Measure C(Icc (0 : ℝ) (T : ℝ), Configuration n) :=
   (ginibreNormalizingMass n)⁻¹ •
     (((Measure.pi (fun _ : Fin n × Fin 2 => gaussianReal 0 (1/2))).prod P).withDensity
       (fun x => vandermondeDensity (ginibreHamiltonianOUCoordinateAssembly n x.1))).map
@@ -47,11 +47,11 @@ theorem ginibreOriginalEquilibriumPathLaw_reverse {Ω : Type*} [MeasurableSpace 
   let μ := (ν.withDensity (fun x => vandermondeDensity (ginibreHamiltonianOUCoordinateAssembly n x.1))).map C
   have hC := ginibreGaussianInitialOriginalPath_measurable hn α T B P hB
   have hO := ginibreGaussianInitialOUPath_measurable n α T B P hB
-  have hCFset : MeasurableSet {x : C(Icc (0 : ℝ) (T : ℝ),Configuration n) | ∀ t, CollisionFree (x t)} := by
-    have he : {x : C(Icc (0 : ℝ) (T : ℝ),Configuration n) | ∀ t, CollisionFree (x t)} =
+  have hCFset : MeasurableSet {x : C(Icc (0 : ℝ) (T : ℝ), Configuration n) | ∀ t, CollisionFree (x t)} := by
+    have he : {x : C(Icc (0 : ℝ) (T : ℝ), Configuration n) | ∀ t, CollisionFree (x t)} =
         ⋃ k : ℕ, ginibreHamiltonianCompactSurvival n (T : ℝ) (k : ℝ) := by
       ext x
-      simp only [Set.mem_setOf_eq,Set.mem_iUnion,ginibreHamiltonianCompactSurvival,Set.mem_setOf_eq]
+      simp only [Set.mem_setOf_eq, Set.mem_iUnion, ginibreHamiltonianCompactSurvival, Set.mem_setOf_eq]
       exact (ginibreHamiltonian_compact_path_survival_exhaustion_iff (T : ℝ) x).symm
     rw [he]
     exact MeasurableSet.iUnion (fun k => ginibreHamiltonianCompactSurvival_measurableSet n (T : ℝ) k)
@@ -76,7 +76,7 @@ theorem ginibreOriginalEquilibriumPathLaw_reverse {Ω : Type*} [MeasurableSpace 
       funext x
       rfl
     dsimp only at hRef
-    rw [hA,ginibre_map_completion ν O hO] at hRef
+    rw [hA, ginibre_map_completion ν O hO] at hRef
     exact hRef
   have hFull := ginibreHamiltonian_full_reverse_of_actual_killed_reversals n (T : ℝ) T.property μ hCF hKilled
   unfold ginibreOriginalEquilibriumPathLaw

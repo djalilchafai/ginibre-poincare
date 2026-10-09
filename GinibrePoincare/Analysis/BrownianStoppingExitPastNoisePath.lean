@@ -15,7 +15,7 @@ set_option backward.isDefEq.respectTransparency false
 
 def ginibreBrownianFullPastRawPath {Ω : Type*} (n : ℕ)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (α : ℝ) (s : ℝ≥0) (ω : Ω) :
-    C(ℝ,Configuration n) :=
+    C(ℝ, Configuration n) :=
   ContinuousMap.mkD (fun t => ginibreConfigurationBrownianNoise n B α ω (min t (s : ℝ))) 0
 
 theorem ginibreBrownianFullPastRawPath_ae {Ω : Type*} [MeasurableSpace Ω]
@@ -28,15 +28,15 @@ theorem ginibreBrownianFullPastRawPath_ae {Ω : Type*} [MeasurableSpace Ω]
   intro t
   have hc : Continuous (fun t : ℝ => ginibreConfigurationBrownianNoise n B α ω (min (t : ℝ) (s : ℝ))) :=
     hω.1.comp (continuous_id.min continuous_const)
-  simp [ginibreBrownianFullPastRawPath,ContinuousMap.mkD,hc]
+  simp [ginibreBrownianFullPastRawPath, ContinuousMap.mkD, hc]
 
 theorem ginibreBrownianFullPastRawPath_measurable {Ω : Type*} [mAmbient : MeasurableSpace Ω]
     (n : ℕ) (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (P : Measure Ω) [P.IsComplete]
     (hB : ∀ i, IsBrownianReal (B i) P) (α : ℝ) (s : ℝ≥0) :
     @Measurable _ _ (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal) s)
-      (borel C(ℝ,Configuration n)) (ginibreBrownianFullPastRawPath n B α s) := by
-  letI : MeasurableSpace C(ℝ,Configuration n) := borel _
-  letI : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+      (borel C(ℝ, Configuration n)) (ginibreBrownianFullPastRawPath n B α s) := by
+  letI : MeasurableSpace C(ℝ, Configuration n) := borel _
+  letI : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
   let hpre := fun i => (hB i).toIsPreBrownianReal
   have hm0 := ginibreBrownianFamilyPastSpace_le B P hpre s
   have hAdapt0 := ginibreBrownianFamilyFiltration_coordinate_stronglyAdapted B P hpre
@@ -62,8 +62,8 @@ theorem ginibreBrownianFullPastRawPath_measurable {Ω : Type*} [mAmbient : Measu
       (fun ω => ginibreConfigurationBrownianNoise n B α ω (min (t : ℝ) (s : ℝ))) := by
     apply measurable_pi_lambda
     intro j
-    exact ((hCoord (j,0)).complex_ofReal.add
-      (measurable_const.mul (hCoord (j,1)).complex_ofReal)).const_smul (Real.sqrt (2*α/(n : ℝ)^2))
+    exact ((hCoord (j, 0)).complex_ofReal.add
+      (measurable_const.mul (hCoord (j, 1)).complex_ofReal)).const_smul (Real.sqrt (2*α/(n : ℝ)^2))
   apply hNoise.aemeasurable.congr
   have hAE := ginibreNullAugmentation_ae_transfer (mAmbient := mAmbient) P mPast hm _
     hAEPath
@@ -93,8 +93,8 @@ theorem ginibreBrownianFullPastRawPath_measurable {Ω : Type*} [mAmbient : Measu
     (hB : ∀ i, IsBrownianReal (B i) P) (α : ℝ) (s : ℝ≥0) :
     @Measurable _ _ (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal) s)
       (borel (GinibreContinuousNoise n)) (ginibreBrownianFullPastContinuousNoise n B α s) := by
-  letI : MeasurableSpace C(ℝ,Configuration n) := borel _
-  letI : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+  letI : MeasurableSpace C(ℝ, Configuration n) := borel _
+  letI : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
   exact (ginibreContinuousNoiseNormalize_continuous n).measurable.comp
     (ginibreBrownianFullPastRawPath_measurable n B P hB α s)
 

@@ -43,7 +43,7 @@ theorem planarPartial_compact_integrationByParts (f θ : ℂ → ℂ)
       funext z
       unfold planarPartial
       ring
-    rw [he,integral_const_mul,integral_sub (hi1 1) ((hi1 Complex.I).const_mul Complex.I),
+    rw [he, integral_const_mul, integral_sub (hi1 1) ((hi1 Complex.I).const_mul Complex.I),
       integral_const_mul]
   have hright : (∫ z : ℂ, planarPartial f z * θ z) =
       (1/2 : ℂ) * ((∫ z : ℂ, fderiv ℝ f z 1 * θ z) -
@@ -54,9 +54,9 @@ theorem planarPartial_compact_integrationByParts (f θ : ℂ → ℂ)
       funext z
       unfold planarPartial
       ring
-    rw [he,integral_const_mul,integral_sub (hi2 1) ((hi2 Complex.I).const_mul Complex.I),
+    rw [he, integral_const_mul, integral_sub (hi2 1) ((hi2 Complex.I).const_mul Complex.I),
       integral_const_mul]
-  rw [hleft,hright,hibp 1,hibp Complex.I]
+  rw [hleft, hright, hibp 1, hibp Complex.I]
   ring
 
 def correspondenceLogRegularized (τ : ℝ) (z : ℂ) : ℝ :=
@@ -93,16 +93,16 @@ theorem correspondenceLogRegularized_partial (τ : ℝ) (hτ : 0 < τ) (z : ℂ)
   change (1/2 : ℂ)*(fderiv ℝ (Complex.ofRealCLM ∘ correspondenceLogRegularized τ) z 1 -
     Complex.I*fderiv ℝ (Complex.ofRealCLM ∘ correspondenceLogRegularized τ) z Complex.I) = _
   rw [h.fderiv]
-  simp only [ContinuousLinearMap.comp_apply,ContinuousLinearMap.smul_apply,
-    ContinuousLinearMap.add_apply,Complex.ofRealCLM_apply,Complex.reCLM_apply,
-    Complex.imCLM_apply,Complex.one_re,Complex.one_im,Complex.I_re,Complex.I_im,
-    smul_eq_mul,mul_one,mul_zero,zero_add,add_zero]
+  simp only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.smul_apply,
+    ContinuousLinearMap.add_apply, Complex.ofRealCLM_apply, Complex.reCLM_apply,
+    Complex.imCLM_apply, Complex.one_re, Complex.one_im, Complex.I_re, Complex.I_im,
+    smul_eq_mul, mul_one, mul_zero, zero_add, add_zero]
   unfold cauchyGreenRegularizedKernel
   apply Complex.ext <;>
-    simp only [Complex.mul_re,Complex.mul_im,Complex.sub_re,Complex.sub_im,
-      Complex.ofReal_re,Complex.ofReal_im,Complex.I_re,Complex.I_im,
-      Complex.div_re,Complex.div_im,Complex.normSq_ofReal,Complex.conj_re,Complex.conj_im]
-  all_goals field_simp [hd,Real.pi_ne_zero]
+    simp only [Complex.mul_re, Complex.mul_im, Complex.sub_re, Complex.sub_im,
+      Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im,
+      Complex.div_re, Complex.div_im, Complex.normSq_ofReal, Complex.conj_re, Complex.conj_im]
+  all_goals field_simp [hd, Real.pi_ne_zero]
   all_goals norm_num
   all_goals ring
 

@@ -28,6 +28,9 @@ select full symmetric weak-H¹ Theorem 1.1 and its exhaustive affine equality
 classification. This is the current registry comparison surface, not a restriction
 of the full proof-library objective or a comparison of every paper endpoint.
 Use REPORT.md for numbered coverage and STATUS.md for current verification evidence.
+Palomar v1 is published as PALOMAR-2026-10-09-000001 at the immutable
+`fb58b4fd765f19a65c46cb82fb647fb0d94e28ca` snapshot. Updated source must use
+an ordinary new submission with that existing registry ID; preserve v1 evidence.
 
 ## Soundness requirements
 

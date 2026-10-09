@@ -14,7 +14,7 @@ set_option linter.style.haveILetI false
 Lebesgue density, with arbitrary positive variance. -/
 theorem correspondencePolynomial_realGaussian_density_integrable {ι : Type*}
     [Fintype ι] [DecidableEq ι] (v : ℝ≥0) (hv : v≠0) (P : MvPolynomial ι ℝ) :
-    Integrable (fun x : ι → ℝ => Real.exp (-(∑ i, (x i)^2)/(2*(v:ℝ))) * MvPolynomial.eval x P) volume := by
+    Integrable (fun x : ι → ℝ => Real.exp (-(∑ i, (x i)^2)/(2*(v : ℝ))) * MvPolynomial.eval x P) volume := by
   let μ : Measure (ι → ℝ) := Measure.pi (fun _ : ι => gaussianReal 0 v)
   have hi : Integrable (fun x => MvPolynomial.eval x P) μ := by
     have he : (fun x => MvPolynomial.eval x P) = fun x =>
@@ -33,9 +33,9 @@ theorem correspondencePolynomial_realGaussian_density_integrable {ι : Type*}
     apply (integrable_norm_iff (MvPolynomial.continuous_eval _).aestronglyMeasurable).mp
     convert hnorm.const_mul (‖P.coeff d‖) using 1
     funext x
-    simp only [MvPolynomial.eval_monomial,norm_mul]
+    simp only [MvPolynomial.eval_monomial, norm_mul]
     rw [Finsupp.prod_fintype _ _ (by intro i; simp)]
-    simp only [norm_prod,norm_pow]
+    simp only [norm_prod, norm_pow]
   letI : SigmaFinite ((volume : Measure ℝ).withDensity (gaussianPDF 0 v)) := by
     rw [← gaussianReal_of_var_ne_zero 0 hv]
     infer_instance
@@ -48,26 +48,26 @@ theorem correspondencePolynomial_realGaussian_density_integrable {ι : Type*}
     rw [Measure.pi_withDensity _ _ (fun _ => measurable_gaussianPDF 0 v), ← volume_pi]
   rw [hμ] at hi
   have hprod (x : ι→ℝ) : (∏ i, gaussianPDF 0 v (x i)).toReal =
-      ((Real.sqrt (2*Real.pi*(v:ℝ)))⁻¹)^(Fintype.card ι) *
-        Real.exp (-(∑ i, (x i)^2)/(2*(v:ℝ))) := by
-    simp only [ENNReal.toReal_prod,gaussianPDF]
+      ((Real.sqrt (2*Real.pi*(v : ℝ)))⁻¹)^(Fintype.card ι) *
+        Real.exp (-(∑ i, (x i)^2)/(2*(v : ℝ))) := by
+    simp only [ENNReal.toReal_prod, gaussianPDF]
     simp only [ENNReal.toReal_ofReal (gaussianPDFReal_nonneg _ _ _)]
-    simp only [gaussianPDFReal,sub_zero]
-    rw [Finset.prod_mul_distrib,Finset.prod_const,Finset.card_univ,← Real.exp_sum]
+    simp only [gaussianPDFReal, sub_zero]
+    rw [Finset.prod_mul_distrib, Finset.prod_const, Finset.card_univ,← Real.exp_sum]
     congr 2
     rw [← Finset.sum_div,← Finset.sum_neg_distrib]
   have he := (integrable_withDensity_iff
     (by fun_prop : Measurable (fun x : ι→ℝ => ∏ i, gaussianPDF 0 v (x i)))
     (ae_of_all _ fun x => ENNReal.prod_lt_top (fun i _ => gaussianPDF_lt_top))).mp hi
   simp only [hprod] at he
-  have hc : ((Real.sqrt (2*Real.pi*(v:ℝ)))⁻¹)^(Fintype.card ι) ≠ 0 := by
+  have hc : ((Real.sqrt (2*Real.pi*(v : ℝ)))⁻¹)^(Fintype.card ι) ≠ 0 := by
     apply pow_ne_zero
     apply inv_ne_zero
     apply Real.sqrt_ne_zero'.mpr
-    have hvR : 0<(v:ℝ) := NNReal.coe_pos.mpr (pos_iff_ne_zero.mpr hv)
+    have hvR : 0<(v : ℝ) := NNReal.coe_pos.mpr (pos_iff_ne_zero.mpr hv)
     positivity
-  have hmul : Integrable (fun x : ι→ℝ => ((Real.sqrt (2*Real.pi*(v:ℝ)))⁻¹)^(Fintype.card ι) *
-      (Real.exp (-(∑ i, (x i)^2)/(2*(v:ℝ))) * MvPolynomial.eval x P)) volume := by
+  have hmul : Integrable (fun x : ι→ℝ => ((Real.sqrt (2*Real.pi*(v : ℝ)))⁻¹)^(Fintype.card ι) *
+      (Real.exp (-(∑ i, (x i)^2)/(2*(v : ℝ))) * MvPolynomial.eval x P)) volume := by
     convert he using 1
     funext x
     ring

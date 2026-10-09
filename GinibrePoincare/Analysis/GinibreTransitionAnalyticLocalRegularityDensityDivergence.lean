@@ -27,16 +27,16 @@ theorem ginibreLocalRegularity_density_generator_pointwise
     change fderiv ℝ ((ginibreLebesgueDensityReal n)*(fun y => fderiv ℝ θ y v)) z v = _
     rw [fderiv_mul ((contDiff_ginibreLebesgueDensityReal n).differentiable (by simp) z)
       (hd.differentiable (by simp) z)]
-    simp only [smul_apply,add_apply,smul_eq_mul]
+    simp only [smul_apply, add_apply, smul_eq_mul]
     ring
   have he := ginibreLebesgueDensityReal_mul_pregenerator_eq_divergence hn θ hθ z hz
   have hn0 : (n : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr hn.ne'
   field_simp [hn0] at he
-  rw [Fintype.sum_prod_type,Fintype.sum_prod_type]
-  simp only [Fin.sum_univ_two,ginibreCoordinateDirection,ite_true,ite_false,one_ne_zero]
+  rw [Fintype.sum_prod_type, Fintype.sum_prod_type]
+  simp only [Fin.sum_univ_two, ginibreCoordinateDirection, ite_true, ite_false, one_ne_zero]
   simp_rw [hprod] at he
   rw [show (n : ℝ)*ginibreLebesgueDensityReal n z*ginibrePregenerator n θ z =
-      ginibreLebesgueDensityReal n z*ginibrePregenerator n θ z*(n : ℝ) by ring,he,Finset.mul_sum,← Finset.sum_add_distrib]
+      ginibreLebesgueDensityReal n z*ginibrePregenerator n θ z*(n : ℝ) by ring, he, Finset.mul_sum,← Finset.sum_add_distrib]
   apply Finset.sum_congr rfl
   intro j hj
   ring

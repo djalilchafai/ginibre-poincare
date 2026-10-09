@@ -26,7 +26,7 @@ theorem ginibreContinuous_closed_exit_isStoppingTime {Ω E : Type*} [mAmbient : 
     have hmem (x : E) : x ∈ S ↔ 1 ≤ ‖f x‖ := by
       rw [hS.mem_iff_infDist_zero hne]
       change Metric.infDist x S = 0 ↔ 1 ≤ ‖Real.exp (-Metric.infDist x S)‖
-      rw [Real.norm_eq_abs,abs_of_pos (Real.exp_pos _),Real.one_le_exp_iff]
+      rw [Real.norm_eq_abs, abs_of_pos (Real.exp_pos _), Real.one_le_exp_iff]
       constructor
       · intro h; simp [h]
       · intro h; linarith [Metric.infDist_nonneg (x := x) (s := S)]
@@ -37,14 +37,14 @@ theorem ginibreContinuous_closed_exit_isStoppingTime {Ω E : Type*} [mAmbient : 
     have he : hittingBtwn u S 0 T = hittingBtwn v {x | (1 : ℝ) ≤ ‖x‖} 0 T := by
       funext ω
       unfold hittingBtwn
-      simp only [v,Set.mem_setOf_eq]
+      simp only [v, Set.mem_setOf_eq]
       simp_rw [← hmem]
     simpa only [he] using hstop
   · have he : S = ∅ := not_nonempty_iff_eq_empty.mp hne
     subst S
     intro t
-    simp only [hittingBtwn,Set.mem_empty_iff_false,Set.setOf_false,exists_false,and_false,
-      not_false_eq_true,↓reduceIte,WithTop.coe_le_coe]
+    simp only [hittingBtwn, Set.mem_empty_iff_false, Set.setOf_false, exists_false, and_false,
+      not_false_eq_true,↓reduceIte, WithTop.coe_le_coe]
     exact MeasurableSet.const _
 
 theorem ginibreContinuous_mem_closure_until_exit {Ω E : Type*} [TopologicalSpace E]
@@ -70,7 +70,7 @@ theorem ginibreContinuous_mem_closure_until_exit {Ω E : Type*} [TopologicalSpac
     apply tendsto_iff_dist_tendsto_zero.mpr
     apply squeeze_zero (fun k => dist_nonneg) _ (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ))
     intro k
-    rw [NNReal.dist_eq,Real.coe_toNNReal _ (hqpos k),abs_of_nonpos (sub_nonpos.mpr (hq k).2.le)]
+    rw [NNReal.dist_eq, Real.coe_toNNReal _ (hqpos k), abs_of_nonpos (sub_nonpos.mpr (hq k).2.le)]
     have hh := le_max_right 0 ((t : ℝ)-1/((k : ℝ)+1))
     linarith [(hq k).1]
   apply isClosed_closure.mem_of_tendsto (hu.tendsto t |>.comp hseq)
@@ -78,7 +78,7 @@ theorem ginibreContinuous_mem_closure_until_exit {Ω E : Type*} [TopologicalSpac
   intro k
   apply subset_closure
   have hqtime : (q k : ℝ).toNNReal < t := by
-    rw [← NNReal.coe_lt_coe,Real.coe_toNNReal _ (hqpos k)]
+    rw [← NNReal.coe_lt_coe, Real.coe_toNNReal _ (hqpos k)]
     exact (hq k).2
   by_contra hn
   have hh : u (q k : ℝ).toNNReal ω ∈ Gᶜ := hn

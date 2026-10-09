@@ -62,7 +62,7 @@ theorem ginibreCenterScalarLampertiPathFunctional_eq_integral (n : ℕ) (α : �
         ∫ s in (0 : ℝ)..t, w s)/Real.sqrt (2*α/(n : ℝ)))) := by
     have hc : Tendsto (fun _ : ℕ => Real.sqrt (Complex.normSq (p t))-Real.sqrt (ginibreCenterSquared n z))
         atTop (𝓝 (Real.sqrt (Complex.normSq (p t))-Real.sqrt (ginibreCenterSquared n z))) := tendsto_const_nhds
-    simpa only [ginibreCenterScalarLampertiRiemannFunctional,w,Real.toNNReal_coe] using
+    simpa only [ginibreCenterScalarLampertiRiemannFunctional, w, Real.toNNReal_coe] using
       (hc.sub h).div_const (Real.sqrt (2*α/(n : ℝ)))
   exact hl.limUnder_eq
 #print axioms ginibreCenterScalarLampertiPathFunctional_eq_integral

@@ -117,7 +117,7 @@ theorem bakryEmeryGibbsOUAction_measurable {n : ℕ} {W : Configuration n → �
     Measurable (bakryEmeryGibbsOUAction W T hT) := by
   letI : Fact ((0 : ℝ) ≤ T) := ⟨hT⟩
   exact (bakryEmeryGibbsOUFullAction_measurable hW T).comp
-    (ContinuousMap.IccExtendCM : C(C(Icc (0 : ℝ) T,Configuration n), C(ℝ,Configuration n))).continuous.measurable
+    (ContinuousMap.IccExtendCM : C(C(Icc (0 : ℝ) T, Configuration n), C(ℝ, Configuration n))).continuous.measurable
 
 theorem bakryEmeryGibbsOUAction_reverse {n : ℕ} (W : Configuration n → ℝ)
     (T : ℝ) (hT : 0 ≤ T) (x : C(Icc (0 : ℝ) T, Configuration n)) :

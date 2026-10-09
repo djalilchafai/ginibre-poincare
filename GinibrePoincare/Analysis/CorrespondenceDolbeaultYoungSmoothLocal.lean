@@ -28,7 +28,7 @@ theorem dolbeaultCoordinateConvolution_truncation_local {n : ℕ} (j : Fin n)
             _ ≤ ‖x j‖+‖(x-Pi.single j y : Configuration n) j‖ := norm_sub_le _ _
             _ ≤ _ := add_le_add (norm_le_pi_norm _ j) (norm_le_pi_norm _ j)
         apply hy
-        simp only [Metric.mem_closedBall,dist_zero_right]
+        simp only [Metric.mem_closedBall, dist_zero_right]
         linarith
       rw [hz]
       simp)
@@ -44,13 +44,13 @@ theorem dolbeaultCoordinateConvolution_configurationPotential {n : ℕ} (j : Fin
   unfold MeasureTheory.convolution
   congr 1
   funext y
-  have he : dolbeaultReplaceCoordinate j (x,x j-y)=x-Pi.single j y := by
+  have he : dolbeaultReplaceCoordinate j (x, x j-y)=x-Pi.single j y := by
     ext l
     by_cases hl : l=j
     · subst l
       simp [dolbeaultReplaceCoordinate_apply]
-    · simp [dolbeaultReplaceCoordinate_apply,hl]
-  simp only [he,Pi.sub_apply,Pi.single_eq_same]
+    · simp [dolbeaultReplaceCoordinate_apply, hl]
+  simp only [he, Pi.sub_apply, Pi.single_eq_same]
   rfl
 
 #print axioms dolbeaultCoordinateConvolution_configurationPotential

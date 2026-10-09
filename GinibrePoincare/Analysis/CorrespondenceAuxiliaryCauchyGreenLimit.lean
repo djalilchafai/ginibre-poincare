@@ -12,30 +12,30 @@ set_option backward.isDefEq.respectTransparency false
 theorem cauchyGreenRegularizedKernel_norm_le (τ : ℝ) (hτ : 0 < τ) (z : ℂ) :
     ‖cauchyGreenRegularizedKernel τ z‖ ≤ ‖cauchyGreenKernel z‖ := by
   by_cases hz : z = 0
-  · simp [cauchyGreenRegularizedKernel,cauchyGreenKernel,hz]
+  · simp [cauchyGreenRegularizedKernel, cauchyGreenKernel, hz]
   have hr : 0 < ‖z‖ := norm_pos_iff.mpr hz
   have hden : 0 < Real.pi*(Complex.normSq z+τ) :=
     mul_pos Real.pi_pos ((Complex.normSq_nonneg z).trans_lt (lt_add_of_pos_right _ hτ))
   have hs : 0 < Complex.normSq z+τ :=
     (Complex.normSq_nonneg z).trans_lt (lt_add_of_pos_right _ hτ)
-  simp only [cauchyGreenRegularizedKernel,cauchyGreenKernel,norm_div,norm_mul,norm_inv,
-    Complex.norm_conj,Complex.norm_real,Real.norm_eq_abs,abs_of_pos hden,abs_of_pos hs,
+  simp only [cauchyGreenRegularizedKernel, cauchyGreenKernel, norm_div, norm_mul, norm_inv,
+    Complex.norm_conj, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hden, abs_of_pos hs,
     abs_of_pos Real.pi_pos]
-  rw [div_le_iff₀ hden,Complex.normSq_eq_norm_sq]
-  field_simp [hr.ne',Real.pi_ne_zero]
+  rw [div_le_iff₀ hden, Complex.normSq_eq_norm_sq]
+  field_simp [hr.ne', Real.pi_ne_zero]
   nlinarith
 
 theorem cauchyGreenRegularizedKernel_tendsto (z : ℂ) :
     Tendsto (fun τ : ℝ => cauchyGreenRegularizedKernel τ z) (𝓝[>] 0)
       (𝓝 (cauchyGreenKernel z)) := by
   by_cases hz : z = 0
-  · simp only [hz,cauchyGreenRegularizedKernel,cauchyGreenKernel,map_zero,zero_div,inv_zero,mul_zero]
+  · simp only [hz, cauchyGreenRegularizedKernel, cauchyGreenKernel, map_zero, zero_div, inv_zero, mul_zero]
     exact tendsto_const_nhds
   have hden : ((Real.pi*Complex.normSq z : ℝ) : ℂ) ≠ 0 :=
     Complex.ofReal_ne_zero.mpr (mul_ne_zero Real.pi_ne_zero (Complex.normSq_pos.mpr hz).ne')
   have hl : Tendsto (fun τ : ℝ => Real.pi*(Complex.normSq z+τ)) (𝓝[>] 0)
       (𝓝 (Real.pi*Complex.normSq z)) := by
-    simpa only [add_zero,id_eq] using!
+    simpa only [add_zero, id_eq] using!
       (((tendsto_const_nhds : Tendsto (fun _ : ℝ => Complex.normSq z) (𝓝[>] 0)
         (𝓝 (Complex.normSq z))).add
         ((tendsto_id : Tendsto (fun τ : ℝ => τ) (𝓝 0) (𝓝 0)).mono_left
@@ -43,11 +43,11 @@ theorem cauchyGreenRegularizedKernel_tendsto (z : ℂ) :
   have h := (tendsto_const_nhds : Tendsto (fun _ : ℝ => conj z) (𝓝[>] 0) (𝓝 (conj z))).div
     (Complex.continuous_ofReal.continuousAt.tendsto.comp hl) hden
   have he : cauchyGreenKernel z = conj z / ((Real.pi*Complex.normSq z : ℝ) : ℂ) := by
-    rw [cauchyGreenKernel,Complex.inv_def z]
+    rw [cauchyGreenKernel, Complex.inv_def z]
     push_cast
     field_simp
   rw [he]
-  simpa only [cauchyGreenRegularizedKernel,Function.comp_def,Pi.div_apply] using! h
+  simpa only [cauchyGreenRegularizedKernel, Function.comp_def, Pi.div_apply] using! h
 
 /-- Genuine compact-test convergence of the locally integrable singular
 Cauchy–Green kernel under positive radial regularization. -/
@@ -58,8 +58,8 @@ theorem cauchyGreenRegularizedKernel_integral_tendsto (φ : ℂ → ℂ)
   have hi : Integrable (fun z => ‖cauchyGreenKernel z‖ * ‖φ z‖) volume := by
     have hn : LocallyIntegrable (fun z => ‖cauchyGreenKernel z‖) volume := by
       intro z
-      obtain ⟨s,hs,hi⟩ := cauchyGreenKernel_locallyIntegrable z
-      exact ⟨s,hs,hi.norm⟩
+      obtain ⟨s, hs, hi⟩ := cauchyGreenKernel_locallyIntegrable z
+      exact ⟨s, hs, hi.norm⟩
     simpa only [smul_eq_mul] using hn.integrable_smul_right_of_hasCompactSupport
       hφ.norm (hc.comp_left norm_zero)
   apply tendsto_integral_filter_of_dominated_convergence (fun z => ‖cauchyGreenKernel z‖*‖φ z‖)

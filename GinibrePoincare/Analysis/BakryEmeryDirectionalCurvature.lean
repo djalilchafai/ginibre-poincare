@@ -23,11 +23,11 @@ theorem bakryEmery_convex_support {F : E → ℝ} (hF : ConvexOn ℝ univ F)
     (x y : E) (hd : DifferentiableAt ℝ F x) :
     (fderiv ℝ F x) (y-x) ≤ F y - F x := by
   have hl : HasDerivAt (fun t : ℝ => x + t • (y-x)) (y-x) 0 := by
-    simpa using (hasDerivAt_id (0:ℝ)).smul_const (y-x) |>.const_add x
+    simpa using (hasDerivAt_id (0 : ℝ)).smul_const (y-x) |>.const_add x
   have h := (convex_line hF x (y-x)).le_slope_of_hasDerivAt
     (mem_univ 0) (mem_univ 1) (by norm_num)
     (by
-      have hd' : HasFDerivAt F (fderiv ℝ F x) (x + (0:ℝ) • (y-x)) := by simpa using hd.hasFDerivAt
+      have hd' : HasFDerivAt F (fderiv ℝ F x) (x + (0 : ℝ) • (y-x)) := by simpa using hd.hasFDerivAt
       exact hd'.comp_hasDerivAt 0 hl)
   simpa [slope, div_eq_mul_inv] using h
 
@@ -49,11 +49,11 @@ theorem bakryEmery_gradient_strong_monotonicity (W : E → ℝ) (κ : ℝ)
     smul_eq_mul, innerSL_apply_apply, two_smul] at ha hb
   have hlin : (fderiv ℝ W y) (x-y) = -(fderiv ℝ W y) (y-x) := by
     rw [show x-y = -(y-x) by abel, map_neg]
-  have hi : ⟪y, x-y⟫_ℝ = -⟪y,y-x⟫_ℝ := by
+  have hi : ⟪y, x-y⟫_ℝ = -⟪y, y-x⟫_ℝ := by
     rw [show x-y = -(y-x) by abel, inner_neg_right]
-  have hn : ⟪y,y-x⟫_ℝ - ⟪x,y-x⟫_ℝ = ‖y-x‖^2 := by
+  have hn : ⟪y, y-x⟫_ℝ - ⟪x, y-x⟫_ℝ = ‖y-x‖^2 := by
     rw [← inner_sub_left, real_inner_self_eq_norm_sq]
-  rw [hlin,hi] at hb
+  rw [hlin, hi] at hb
   change _ ≤ R y - R x at ha
   change _ ≤ R x - R y at hb
   rw [← hn]

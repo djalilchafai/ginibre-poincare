@@ -31,7 +31,7 @@ theorem ginibreBrownian_center_small_stopping_exists
         θ ω ≤ ginibreBrownianHamiltonianBoundedStop n α z B R T ω ∧
           ginibreCenterSquared n (X (θ ω) ω) ≤ δ) := by
   classical
-  obtain ⟨C,hC,hBound⟩ := ginibreHamiltonianSublevel_centerSquared_bound hn R
+  obtain ⟨C, hC, hBound⟩ := ginibreHamiltonianSublevel_centerSquared_bound hn R
   let X := ginibreBrownianHamiltonianStoppedProcess n α z B R T
   have hCX : ∀ t ω, ginibreCenterSquared n (X t ω) ≤ C := fun t ω =>
     hBound _ (ginibreBrownianHamiltonianStoppedProcess_range hn α z hz B R hR T t ω)
@@ -48,13 +48,13 @@ theorem ginibreBrownian_center_small_stopping_exists
   let S := {x : ℝ | C-δ ≤ ‖x‖}
   have hS : IsClosed S := isClosed_le continuous_const continuous_norm
   let θ := hittingBtwn u S 0 T
-  refine ⟨C,hC,hCX,ginibreContinuous_norm_exit_isStoppingTime _ u huA huC (C-δ) T,
+  refine ⟨C, hC, hCX, ginibreContinuous_norm_exit_isStoppingTime _ u huA huC (C-δ) T,
     fun ω => hittingBtwn_le ω,?_⟩
   intro ω hh
-  obtain ⟨t,ht,hr⟩ := hh
+  obtain ⟨t, ht, hr⟩ := hh
   have htT : t ≤ T := ht.trans (ginibreDrivenHamiltonianBoundedStop_le n α _ z R T)
   have hit : u t ω ∈ S := by change C-δ ≤ ‖u t ω‖; rw [huNorm]; linarith
-  have hHit : ∃ t ∈ Icc 0 T, u t ω ∈ S := ⟨t,⟨bot_le,htT⟩,hit⟩
+  have hHit : ∃ t ∈ Icc 0 T, u t ω ∈ S := ⟨t, ⟨bot_le, htT⟩, hit⟩
   refine ⟨(hittingBtwn_le_of_mem (u := u) (s := S) (bot_le : 0 ≤ t) htT hit).trans ht,?_⟩
   have hm := drivenContinuous_closed_hitting_mem u S hS T ω (huC ω) hHit
   change C-δ ≤ ‖u (θ ω) ω‖ at hm

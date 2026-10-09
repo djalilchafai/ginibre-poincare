@@ -8,6 +8,19 @@ public import Mathlib.Analysis.Convex.Basic
 
 @[expose] public section
 
+/-! # Deterministic C² Taylor estimates for Itô sums
+
+`itoDirectionalHessian f x h` evaluates the second Fréchet derivative twice
+on the increment `h`. The exact integral Taylor formula subtracts its
+value at `x` to express the quadratic remainder through Hessian oscillation.
+This avoids any assumption of a third derivative.
+
+The operator-norm oscillation bound gives a remainder bounded by
+`ε * ‖h‖²`. On a compact convex set, uniform continuity of the Hessian
+provides a single increment threshold `δ`; convexity keeps the connecting
+segments inside the set. These deterministic estimates are used when
+controlling the remainder in stochastic partition sums. -/
+
 open MeasureTheory
 namespace GinibrePoincare
 noncomputable section

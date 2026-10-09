@@ -92,7 +92,7 @@ private theorem complex_mixed_green {n : ℕ} (hn : 0 < n) {f : Configuration n 
     have hrr : (∫ z, (ginibrePregenerator n f z : ℂ) * g z ∂ginibreMeasure n).re =
         ∫ z, ((ginibrePregenerator n f z : ℂ) * g z).re ∂ginibreMeasure n := by
       simpa using (integral_re hr).symm
-    rw [hrl,hrr]
+    rw [hrl, hrr]
     simpa [complexGinibrePregenerator, Complex.mul_re, mul_comm, Function.comp_def, Complex.reCLM_apply] using
       ginibre_mixed_green_identity hn hf (Complex.reCLM.contDiff.comp hg)
   · have hil : (∫ z, (f z : ℂ) * complexGinibrePregenerator n g z ∂ginibreMeasure n).im =
@@ -101,7 +101,7 @@ private theorem complex_mixed_green {n : ℕ} (hn : 0 < n) {f : Configuration n 
     have hir : (∫ z, (ginibrePregenerator n f z : ℂ) * g z ∂ginibreMeasure n).im =
         ∫ z, ((ginibrePregenerator n f z : ℂ) * g z).im ∂ginibreMeasure n := by
       simpa using (integral_im hr).symm
-    rw [hil,hir]
+    rw [hil, hir]
     simpa [complexGinibrePregenerator, Complex.mul_im, mul_comm, Function.comp_def, Complex.imCLM_apply] using
       ginibre_mixed_green_identity hn hf (Complex.imCLM.contDiff.comp hg)
 
@@ -118,7 +118,7 @@ theorem polynomialEigenfunction_full_core_weak_equation (n : ℕ) (hn : 2 ≤ n)
       apply integral_congr_ae
       filter_upwards [coreObservableL2_coeFn (by omega) f hf,
         closedPolynomialGenerator_agrees_concrete n hn i] with z hf hg
-      rw [hf,hg,RCLike.inner_apply,Complex.conj_ofReal]
+      rw [hf, hg, RCLike.inner_apply, Complex.conj_ofReal]
       ring
     _ = ∫ z, (ginibrePregenerator n f z : ℂ) * polynomialEigenfunction n i z ∂ginibreMeasure n :=
       complex_mixed_green (by omega) hf (contDiff_polynomialEigenfunction n i)
@@ -128,7 +128,7 @@ theorem polynomialEigenfunction_full_core_weak_equation (n : ℕ) (hn : 2 ≤ n)
       apply integral_congr_ae
       filter_upwards [ginibrePregeneratorL2_coeFn (by omega) f hf,
         polynomialEigenfunctionL2_coeFn n hn i] with z hf hg
-      rw [hf,hg,RCLike.inner_apply,Complex.conj_ofReal]
+      rw [hf, hg, RCLike.inner_apply, Complex.conj_ofReal]
       ring
 
 /-- The full test-core weak graph; this is a relation until core density is proved. -/
@@ -137,8 +137,8 @@ def ginibreWeakCoreGraph (n : ℕ) (hn : 0 < n) :
   carrier := {p | ∀ (f : Configuration n → ℝ) (hf : IsTheoremOneNineCore f),
     inner ℂ (coreObservableL2 hn f hf) p.2 = inner ℂ (ginibrePregeneratorL2 hn f hf) p.1}
   zero_mem' := by intro f hf; simp
-  add_mem' := by intro p q hp hq f hf; simp [inner_add_right,hp f hf,hq f hf]
-  smul_mem' := by intro c p hp f hf; simp [inner_smul_right,hp f hf]
+  add_mem' := by intro p q hp hq f hf; simp [inner_add_right, hp f hf, hq f hf]
+  smul_mem' := by intro c p hp f hf; simp [inner_smul_right, hp f hf]
 
 /-- All full-core weak constraints survive L² graph limits. -/
 theorem ginibreWeakCoreGraph_isClosed (n : ℕ) (hn : 0 < n) :
@@ -158,7 +158,7 @@ theorem closedPolynomialGenerator_graph_le_weakCoreGraph (n : ℕ) (hn : 2 ≤ n
   rw [closedPolynomialGenerator_graph]
   apply Submodule.topologicalClosure_minimal _ ?_ (ginibreWeakCoreGraph_isClosed n (by omega))
   apply Submodule.span_le.mpr
-  rintro p ⟨i,rfl⟩
+  rintro p ⟨i, rfl⟩
   intro f hf
   have he := polynomialEigenfunction_full_core_weak_equation n hn i f hf
   rw [closedPolynomialGenerator_eigenvalue] at he

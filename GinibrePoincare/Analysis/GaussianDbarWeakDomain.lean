@@ -6,6 +6,23 @@ public import GinibrePoincare.Analysis.HermiteSecondDbarWeakClosure
 
 @[expose] public section
 
+/-! # Ordinary weak derivatives and Hermite lowering coefficients
+
+The weak derivative is independently defined using compact distributional tests.
+To test it against a Hermite polynomial, this module multiplies that polynomial
+by expanding spatial cutoffs. Dominated convergence removes the cutoff, while
+the derivative-of-cutoff term vanishes. The Gaussian formal adjoint acts by
+raising the Hermite index, giving the coefficient relation for the derivative.
+
+For the reverse implication, finite Hermite approximations converge in both
+value and derivative L² norms. Closedness of the weak graph then recovers the
+compact-test identity. These two directions provide uniqueness, simultaneous
+finite approximation, and the exact square-summability criterion for existence
+of a weak derivative. Thus the coefficient graph is proved equivalent to the
+ordinary distributional graph rather than used as its definition.
+-/
+
+
 open MeasureTheory Filter
 open scoped Topology ContDiff ComplexConjugate BigOperators
 namespace GinibrePoincare

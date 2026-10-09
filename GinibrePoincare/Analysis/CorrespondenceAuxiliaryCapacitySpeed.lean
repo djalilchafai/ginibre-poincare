@@ -24,7 +24,7 @@ def ginibreCapacityAtSpeed (n : ℕ) (α : ℝ) (C : Set (Configuration n)) : �
 private theorem costsAtSpeed_nonneg (n : ℕ) (α : ℝ) (hα : 0 ≤ α)
     (C : Set (Configuration n)) {r : ℝ}
     (hr : r ∈ ginibreCapacityCostsAtSpeed n α C) : 0 ≤ r := by
-  obtain ⟨u,g,hu,hg,hw,hU,rfl⟩ := hr
+  obtain ⟨u, g, hu, hg, hw, hU, rfl⟩ := hr
   exact add_nonneg (integral_nonneg (fun z => sq_nonneg _))
     (mul_nonneg (div_nonneg hα (sq_nonneg _))
       (integral_nonneg (fun z => sq_nonneg _)))
@@ -37,39 +37,39 @@ theorem ginibreCollisionSet_capacity_zero_atSpeed (n : ℕ) (hn : 0 < n)
   have hnR : (0 : ℝ) < n := by exact_mod_cast hn
   have hM : 0 < M := lt_of_lt_of_le zero_lt_one (le_max_left _ _)
   have hb : BddBelow (ginibreCapacityCosts n C) :=
-    ⟨0,fun r hr => ginibreCapacityCosts_nonnegative n C hr⟩
+    ⟨0, fun r hr => ginibreCapacityCosts_nonnegative n C hr⟩
   have hex : ∀ r ∈ ginibreCapacityCosts n C,
       ∃ q ∈ ginibreCapacityCostsAtSpeed n α C, q ≤ M*r := by
     intro r hr
-    obtain ⟨u,g,hu,hg,hw,hU,rfl⟩ := hr
+    obtain ⟨u, g, hu, hg, hw, hU, rfl⟩ := hr
     let A := ∫ z, u z^2 ∂ginibreMeasure n
     let B := ∫ z, ‖g z‖^2 ∂ginibreMeasure n
-    refine ⟨A+(α/(n : ℝ)^2)*B,⟨u,g,hu,hg,hw,hU,rfl⟩,?_⟩
+    refine ⟨A+(α/(n : ℝ)^2)*B, ⟨u, g, hu, hg, hw, hU, rfl⟩,?_⟩
     have ha : 0 ≤ A := integral_nonneg fun z => sq_nonneg _
     have hb0 : 0 ≤ B := integral_nonneg fun z => sq_nonneg _
     have hm1 : 1 ≤ M := le_max_left _ _
     have hmα : α/(n : ℝ) ≤ M := le_max_right _ _
     have hc : α/(n : ℝ)^2 ≤ M*(1/(n : ℝ)) := by
       have h := mul_le_mul_of_nonneg_right hmα (le_of_lt (inv_pos.mpr hnR))
-      simpa only [div_eq_mul_inv,pow_two,inv_mul_cancel₀ hnR.ne',one_mul,
-        mul_inv_rev,mul_assoc] using h
+      simpa only [div_eq_mul_inv, pow_two, inv_mul_cancel₀ hnR.ne', one_mul,
+        mul_inv_rev, mul_assoc] using h
     change A+α/(n : ℝ)^2*B ≤ M*(A+(1/(n : ℝ))*B)
     calc
       _ ≤ M*A+(M*(1/(n : ℝ)))*B :=
         add_le_add (by nlinarith) (mul_le_mul_of_nonneg_right hc hb0)
       _ = _ := by ring
-  obtain ⟨r,hr⟩ := ginibreCapacityCosts_nonempty hn C
-  obtain ⟨q,hq,hbound⟩ := hex r hr
+  obtain ⟨r, hr⟩ := ginibreCapacityCosts_nonempty hn C
+  obtain ⟨q, hq, hbound⟩ := hex r hr
   have hbelow : BddBelow (ginibreCapacityCostsAtSpeed n α C) :=
-    ⟨0,fun q hq => costsAtSpeed_nonneg n α hα.le C hq⟩
-  have hnonempty : (ginibreCapacityCostsAtSpeed n α C).Nonempty := ⟨q,hq⟩
+    ⟨0, fun q hq => costsAtSpeed_nonneg n α hα.le C hq⟩
+  have hnonempty : (ginibreCapacityCostsAtSpeed n α C).Nonempty := ⟨q, hq⟩
   apply le_antisymm
   · apply le_of_forall_pos_le_add
     intro ε hε
     have hsinf : sInf (ginibreCapacityCosts n C) = 0 := ginibreCollisionSet_capacity_zero hn
     have hlt : sInf (ginibreCapacityCosts n C) < ε/M := by rw [hsinf]; exact div_pos hε hM
-    obtain ⟨r,hr,hrlt⟩ := (csInf_lt_iff hb (ginibreCapacityCosts_nonempty hn C)).mp hlt
-    obtain ⟨q,hq,hqr⟩ := hex r hr
+    obtain ⟨r, hr, hrlt⟩ := (csInf_lt_iff hb (ginibreCapacityCosts_nonempty hn C)).mp hlt
+    obtain ⟨q, hq, hqr⟩ := hex r hr
     have hcost : ginibreCapacityAtSpeed n α C ≤ q := csInf_le hbelow hq
     have hbound : M*r < ε := (lt_div_iff₀ hM).mp hrlt |> fun h => by simpa [mul_comm] using h
     dsimp [C] at hcost

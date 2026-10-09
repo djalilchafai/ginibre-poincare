@@ -230,9 +230,9 @@ def correspondenceOperatorGenerator (n : ℕ) (hn : 0 < n) :
 
 theorem correspondenceOperatorGenerator_graph_iff (n : ℕ) (hn : 0 < n)
     (u v : GinibreFullComplexL2 n) :
-    (u,v) ∈ (correspondenceOperatorGenerator n hn).graph ↔
+    (u, v) ∈ (correspondenceOperatorGenerator n hn).graph ↔
       correspondenceOperatorComplexResolvent n hn (u-v)=u := by
-  rw [correspondenceOperatorGenerator,resolventGenerator_graph _
+  rw [correspondenceOperatorGenerator, resolventGenerator_graph _
     (correspondenceOperatorComplexResolvent_injective n hn)]
   rfl
 

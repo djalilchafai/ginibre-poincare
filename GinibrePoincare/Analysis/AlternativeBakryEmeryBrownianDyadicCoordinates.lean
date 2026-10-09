@@ -35,7 +35,7 @@ theorem bakryBrownianDyadic_coordinate_fourth_integrable (i : BakryBrownianDyadi
     Integrable (fun ω : BakryBrownianDyadicSample => |ω i|^4) bakryBrownianDyadicMeasure := by
   have h := ((memLp_id_gaussianReal (μ := 0) (v := 1) (4 : ℝ≥0)).integrable_norm_pow
     (p := 4) (by decide))
-  simpa only [Real.norm_eq_abs,id_eq,Function.comp_def] using
+  simpa only [Real.norm_eq_abs, id_eq, Function.comp_def] using
     (bakryBrownianDyadic_coordinate_law i).integrable_comp h
 
 #print axioms bakryBrownianDyadic_coordinate_law

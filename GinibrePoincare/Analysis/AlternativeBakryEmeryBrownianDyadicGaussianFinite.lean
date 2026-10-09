@@ -15,7 +15,7 @@ abbrev BakryBrownianFiniteDyadicIndex (N : ℕ) := Option (Σ n : Fin N, Fin (2^
 
 def bakryBrownianFiniteDyadicEmbed (N : ℕ) : BakryBrownianFiniteDyadicIndex N → BakryBrownianDyadicIndex
   | none => none
-  | some ⟨n,k⟩ => some ⟨n.val,k⟩
+  | some ⟨n, k⟩ => some ⟨n.val, k⟩
 
 theorem bakryBrownianFiniteDyadicEmbed_injective (N : ℕ) :
     Function.Injective (bakryBrownianFiniteDyadicEmbed N) := by
@@ -54,16 +54,16 @@ def bakryBrownianFiniteDyadicEvaluation (N : ℕ) (t : Icc (0 : ℝ) 1) :
     (BakryBrownianFiniteDyadicIndex N → ℝ) →L[ℝ] ℝ :=
   t.val • ContinuousLinearMap.proj none + ∑ n : Fin N, ∑ k : Fin (2^n.val),
     ((1/Real.sqrt 2)^n.val * bakryBrownianDyadicTent n.val k t) •
-      ContinuousLinearMap.proj (some ⟨n,k⟩)
+      ContinuousLinearMap.proj (some ⟨n, k⟩)
 
 theorem bakryBrownianFiniteDyadicEvaluation_apply (N : ℕ) (t : Icc (0 : ℝ) 1)
     (x : BakryBrownianFiniteDyadicIndex N → ℝ) :
     bakryBrownianFiniteDyadicEvaluation N t x = x none*t.val +
-      ∑ n : Fin N, (1/Real.sqrt 2)^n.val * ∑ k : Fin (2^n.val), x (some ⟨n,k⟩) *
+      ∑ n : Fin N, (1/Real.sqrt 2)^n.val * ∑ k : Fin (2^n.val), x (some ⟨n, k⟩) *
         bakryBrownianDyadicTent n.val k t := by
-  simp only [bakryBrownianFiniteDyadicEvaluation,ContinuousLinearMap.add_apply,
-    ContinuousLinearMap.smul_apply,ContinuousLinearMap.proj_apply,
-    ContinuousLinearMap.sum_apply,smul_eq_mul]
+  simp only [bakryBrownianFiniteDyadicEvaluation, ContinuousLinearMap.add_apply,
+    ContinuousLinearMap.smul_apply, ContinuousLinearMap.proj_apply,
+    ContinuousLinearMap.sum_apply, smul_eq_mul]
   rw [mul_comm t.val]
   congr 1
   apply Finset.sum_congr rfl
@@ -79,14 +79,14 @@ theorem bakryBrownianFiniteDyadic_evaluations_gaussian {ι : Type*} [Fintype ι]
     (N : ℕ) (t : ι → Icc (0 : ℝ) 1) :
     HasGaussianLaw (fun sample : BakryBrownianDyadicSample => fun a : ι =>
       sample none*(t a).val + ∑ n : Fin N, (1/Real.sqrt 2)^n.val *
-        ∑ k : Fin (2^n.val), sample (some ⟨n.val,k⟩)*bakryBrownianDyadicTent n.val k (t a))
+        ∑ k : Fin (2^n.val), sample (some ⟨n.val, k⟩)*bakryBrownianDyadicTent n.val k (t a))
       bakryBrownianDyadicMeasure := by
   let L : (BakryBrownianFiniteDyadicIndex N → ℝ) →L[ℝ] (ι → ℝ) :=
     ContinuousLinearMap.pi (fun a => bakryBrownianFiniteDyadicEvaluation N (t a))
   have h := (bakryBrownianFiniteDyadic_coordinates_gaussian N).map_fun L
   convert h using 1
   funext sample a
-  simp only [L,ContinuousLinearMap.pi_apply,bakryBrownianFiniteDyadicEvaluation_apply,
+  simp only [L, ContinuousLinearMap.pi_apply, bakryBrownianFiniteDyadicEvaluation_apply,
     bakryBrownianFiniteDyadicEmbed]
 
 #print axioms bakryBrownianFiniteDyadicEmbed_injective

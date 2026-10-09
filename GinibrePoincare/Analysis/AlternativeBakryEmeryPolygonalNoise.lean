@@ -21,7 +21,7 @@ def bakryEmeryPolygonalRamp (h : ℝ) (j : ℕ) (t : ℝ) : ℝ :=
 
 def bakryEmeryPolygonalNoise (m : ℕ) (h : ℝ)
     (x : (Fin m × ι) → ℝ) (t : ℝ) : EuclideanSpace ℝ ι :=
-  WithLp.toLp 2 (fun i => ∑ j : Fin m, bakryEmeryPolygonalRamp h j.val t * x (j,i))
+  WithLp.toLp 2 (fun i => ∑ j : Fin m, bakryEmeryPolygonalRamp h j.val t * x (j, i))
 
 theorem bakryEmeryPolygonalRamp_continuous (h : ℝ) (j : ℕ) :
     Continuous (bakryEmeryPolygonalRamp h j) := by
@@ -49,7 +49,7 @@ theorem bakryEmeryPolygonalNoise_zero (m : ℕ) (h : ℝ) (hh : 0 ≤ h)
 
 theorem bakryEmeryPolygonalRamp_on_interval (h : ℝ) (hh : 0 ≤ h)
     (j : ℕ) (t : ℝ) (ht : (j : ℝ)*h ≤ t) (ht' : t ≤ (j+1 : ℕ)*h) :
-    bakryEmeryPolygonalRamp h j t = (t-(j:ℝ)*h)/Real.sqrt h := by
+    bakryEmeryPolygonalRamp h j t = (t-(j : ℝ)*h)/Real.sqrt h := by
   unfold bakryEmeryPolygonalRamp
   rw [max_eq_left (by linarith), min_eq_left]
   push_cast at ht'
@@ -72,23 +72,23 @@ theorem bakryEmeryPolygonalRamp_after (h : ℝ) (hh : 0 < h)
   exact (Real.mul_self_sqrt hh.le).symm
 
 theorem bakryEmeryPolygonalRamp_hasDerivAt (h : ℝ) (hh : 0 < h)
-    (j : ℕ) (t : ℝ) (ht : t ∈ Set.Ioo ((j:ℝ)*h) ((j+1:ℕ)*h)) :
+    (j : ℕ) (t : ℝ) (ht : t ∈ Set.Ioo ((j : ℝ)*h) ((j+1 : ℕ)*h)) :
     HasDerivAt (bakryEmeryPolygonalRamp h j) (1 / Real.sqrt h) t := by
   have heq : bakryEmeryPolygonalRamp h j =ᶠ[nhds t]
-      (fun s => (s-(j:ℝ)*h)/Real.sqrt h) := by
+      (fun s => (s-(j : ℝ)*h)/Real.sqrt h) := by
     filter_upwards [IsOpen.mem_nhds isOpen_Ioo ht] with s hs
     exact bakryEmeryPolygonalRamp_on_interval h hh.le j s hs.1.le hs.2.le
-  exact (((hasDerivAt_id t).sub_const ((j:ℝ)*h)).div_const (Real.sqrt h)).congr_of_eventuallyEq heq
+  exact (((hasDerivAt_id t).sub_const ((j : ℝ)*h)).div_const (Real.sqrt h)).congr_of_eventuallyEq heq
 
 theorem bakryEmeryPolygonalRamp_hasDerivAt_on_other_interval
     (h : ℝ) (hh : 0 < h) (j k : ℕ) (hjk : j ≠ k)
-    (t : ℝ) (ht : t ∈ Set.Ioo ((k:ℝ)*h) ((k+1:ℕ)*h)) :
+    (t : ℝ) (ht : t ∈ Set.Ioo ((k : ℝ)*h) ((k+1 : ℕ)*h)) :
     HasDerivAt (bakryEmeryPolygonalRamp h j) 0 t := by
   rcases lt_or_gt_of_ne hjk with hlt | hgt
   · have heq : bakryEmeryPolygonalRamp h j =ᶠ[nhds t] (fun _ => Real.sqrt h) := by
       filter_upwards [IsOpen.mem_nhds isOpen_Ioo ht] with z hz
       apply bakryEmeryPolygonalRamp_after h hh
-      have hj : (j+1 : ℝ) ≤ (k:ℝ) := by exact_mod_cast hlt
+      have hj : (j+1 : ℝ) ≤ (k : ℝ) := by exact_mod_cast hlt
       push_cast
       have hz0 := hz.1
       nlinarith [mul_le_mul_of_nonneg_right hj hh.le]
@@ -96,33 +96,33 @@ theorem bakryEmeryPolygonalRamp_hasDerivAt_on_other_interval
   · have heq : bakryEmeryPolygonalRamp h j =ᶠ[nhds t] (fun _ => 0) := by
       filter_upwards [IsOpen.mem_nhds isOpen_Ioo ht] with z hz
       apply bakryEmeryPolygonalRamp_before h hh.le
-      have hj : (k+1 : ℝ) ≤ (j:ℝ) := by exact_mod_cast hgt
+      have hj : (k+1 : ℝ) ≤ (j : ℝ) := by exact_mod_cast hgt
       push_cast at hz
       have hz1 := hz.2
       nlinarith [mul_le_mul_of_nonneg_right hj hh.le]
-    exact (hasDerivAt_const t (0:ℝ)).congr_of_eventuallyEq heq
+    exact (hasDerivAt_const t (0 : ℝ)).congr_of_eventuallyEq heq
 
 /-- The literal polygon has the desired constant velocity on each open grid interval. -/
 theorem bakryEmeryPolygonalNoise_hasDerivAt (m : ℕ) (h : ℝ) (hh : 0 < h)
     (x : (Fin m × ι) → ℝ) (k : Fin m) (t : ℝ)
-    (ht : t ∈ Set.Ioo ((k.val:ℝ)*h) ((k.val+1:ℕ)*h)) :
+    (ht : t ∈ Set.Ioo ((k.val : ℝ)*h) ((k.val+1 : ℕ)*h)) :
     HasDerivAt (bakryEmeryPolygonalNoise m h x)
-      (WithLp.toLp 2 (fun i => x (k,i)/Real.sqrt h)) t := by
+      (WithLp.toLp 2 (fun i => x (k, i)/Real.sqrt h)) t := by
   have hg : HasDerivAt
-      (fun s => fun i => ∑ j : Fin m, bakryEmeryPolygonalRamp h j.val s * x (j,i))
-      (fun i => x (k,i)/Real.sqrt h) t := by
+      (fun s => fun i => ∑ j : Fin m, bakryEmeryPolygonalRamp h j.val s * x (j, i))
+      (fun i => x (k, i)/Real.sqrt h) t := by
     apply hasDerivAt_pi.mpr
     intro i
     have hd (j : Fin m) : HasDerivAt
-        (fun s => bakryEmeryPolygonalRamp h j.val s * x (j,i))
-        (if j = k then x (k,i)/Real.sqrt h else 0) t := by
+        (fun s => bakryEmeryPolygonalRamp h j.val s * x (j, i))
+        (if j = k then x (k, i)/Real.sqrt h else 0) t := by
       by_cases hj : j = k
       · subst j
         simpa [mul_comm, div_eq_mul_inv] using
-          (bakryEmeryPolygonalRamp_hasDerivAt h hh k.val t ht).mul_const (x (k,i))
+          (bakryEmeryPolygonalRamp_hasDerivAt h hh k.val t ht).mul_const (x (k, i))
       · have hjv : j.val ≠ k.val := fun he => hj (Fin.ext he)
         simpa [hj] using
-          (bakryEmeryPolygonalRamp_hasDerivAt_on_other_interval h hh j.val k.val hjv t ht).mul_const (x (j,i))
+          (bakryEmeryPolygonalRamp_hasDerivAt_on_other_interval h hh j.val k.val hjv t ht).mul_const (x (j, i))
     simpa using (HasDerivAt.fun_sum (u := Finset.univ) (fun j _ => hd j))
   exact ((PiLp.continuousLinearEquiv 2 ℝ (fun _ : ι => ℝ)).symm.hasFDerivAt.comp_hasDerivAt t hg)
 
@@ -138,7 +138,7 @@ theorem bakryEmeryPolygonalNoise_joint_continuous (m : ℕ) (h : ℝ) :
   apply continuous_finsetSum
   intro j _
   exact ((bakryEmeryPolygonalRamp_continuous h j.val).comp continuous_snd).mul
-    ((continuous_apply (j,i)).comp continuous_fst)
+    ((continuous_apply (j, i)).comp continuous_fst)
 
 #print axioms bakryEmeryPolygonalNoise_joint_continuous
 

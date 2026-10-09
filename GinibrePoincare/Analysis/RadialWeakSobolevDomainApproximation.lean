@@ -40,7 +40,7 @@ theorem ginibreWeakValueTruncation_distributional (n : ℕ) (hn : 0 < n)
 theorem ginibreWeakValueTruncation_tendsto (n : ℕ)
     (u : Lp ℝ 2 (ginibreMeasure n))
     (g : Lp (EuclideanSpace ℝ (Fin n × Fin 2)) 2 (ginibreMeasure n)) :
-    Tendsto (ginibreWeakValueTruncation n u g) atTop (𝓝 (u,g)) :=
+    Tendsto (ginibreWeakValueTruncation n u g) atTop (𝓝 (u, g)) :=
   (ginibreValueTruncation_L2_tendsto n u).prodMk_nhds
     (ginibreValueTruncation_vector_L2_tendsto n u g)
 
@@ -50,8 +50,8 @@ theorem radial_weak_mem_sobolevClosure (n : ℕ) (hn : 0 < n)
     (u : Lp ℝ 2 (ginibreMeasure n))
     (g : Lp (EuclideanSpace ℝ (Fin n × Fin 2)) 2 (ginibreMeasure n))
     (hg : IsGinibreDistributionalGradient n u g)
-    (hr : IsGinibreRadialL2Value n u) : (u,g) ∈ radialSobolevClosure n := by
-  obtain ⟨f,hs,hfr,hf⟩ := hr
+    (hr : IsGinibreRadialL2Value n u) : (u, g) ∈ radialSobolevClosure n := by
+  obtain ⟨f, hs, hfr, hf⟩ := hr
   have hm (m : ℕ) : ginibreWeakValueTruncation n u g m ∈ radialSobolevClosure n := by
     refine radial_bounded_weak_mem_sobolevClosure n hn _ _
       (ginibreWeakValueTruncation_distributional n hn u g hg m)
@@ -68,7 +68,7 @@ theorem radial_weak_mem_sobolevClosure (n : ℕ) (hn : 0 < n)
 /-- Full reverse inclusion of the independently defined radial weak-H¹ graph. -/
 theorem ginibreRadialWeakSobolevPairs_subset_sobolevClosure (n : ℕ) (hn : 0 < n) :
     ginibreRadialWeakSobolevPairs n ⊆ radialSobolevClosure n := by
-  rintro p ⟨hg,hr⟩
+  rintro p ⟨hg, hr⟩
   exact radial_weak_mem_sobolevClosure n hn p.1 p.2 hg hr
 
 /-- Sharp LSI and entropy integrability on the full independently radial weak
@@ -79,7 +79,7 @@ theorem ginibre_radial_weak_lsi (n : ℕ) (hn : 0 < n)
     (hg : IsGinibreDistributionalGradient n u g) (hr : IsGinibreRadialL2Value n u) :
     Integrable (fun z => u z ^ 2 * Real.log (u z ^ 2)) (ginibreMeasure n) ∧
       ginibreSquareEntropy n u ≤ (1 / (n : ℝ)) * ‖g‖ ^ 2 :=
-  radial_sobolev_lsi n hn (u,g) (radial_weak_mem_sobolevClosure n hn u g hg hr)
+  radial_sobolev_lsi n hn (u, g) (radial_weak_mem_sobolevClosure n hn u g hg hr)
 
 /-- Genuine radial smooth core sequences converge to every independent radial
 weak value-gradient pair. -/
@@ -89,7 +89,7 @@ theorem radial_weak_exists_core_sequence (n : ℕ) (hn : 0 < n)
     (hg : IsGinibreDistributionalGradient n u g) (hr : IsGinibreRadialL2Value n u) :
     ∃ q : ℕ → Lp ℝ 2 (ginibreMeasure n) ×
       Lp (EuclideanSpace ℝ (Fin n × Fin 2)) 2 (ginibreMeasure n),
-      (∀ m, q m ∈ radialSobolevCorePairs n) ∧ Tendsto q atTop (𝓝 (u,g)) :=
+      (∀ m, q m ∈ radialSobolevCorePairs n) ∧ Tendsto q atTop (𝓝 (u, g)) :=
   mem_closure_iff_seq_limit.mp (radial_weak_mem_sobolevClosure n hn u g hg hr)
 end
 end GinibrePoincare

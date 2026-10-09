@@ -59,7 +59,7 @@ theorem correspondence_global_CIR_integral_of_local
   apply correspondence_tendstoInMeasure_of_exhaustion P E _ _ hbad
   intro k
   by_cases ht : t ≤ (k : ℝ≥0)
-  · obtain ⟨J,hp,hi⟩ := hloc _ (le_add_of_nonneg_right (Nat.cast_nonneg k)) k
+  · obtain ⟨J, hp, hi⟩ := hloc _ (le_add_of_nonneg_right (Nat.cast_nonneg k)) k
     have hX (ω : Ω) (hω : ω ∈ E k) (s : ℝ≥0) (hs : s ≤ t) :
         ginibreBrownianHamiltonianStoppedProcess n α z B (ginibreHamiltonian n z+k) k s ω =
           ginibreBrownianMaximalProcess n α z B s ω := by
@@ -95,7 +95,7 @@ theorem correspondence_global_CIR_integral_of_local
             D (ginibreBrownianMaximalProcess n α z B s ω))) t (j+1) ω) := by
       funext ω
       by_cases he : ω ∈ E k
-      · simp only [indicator_of_mem he,brownianUniformLeftSum]
+      · simp only [indicator_of_mem he, brownianUniformLeftSum]
         apply Finset.sum_congr rfl
         intro i hi
         rw [hX ω he _ (itoUniformNNTime_le_end t (j+1) i (by omega)
@@ -105,11 +105,11 @@ theorem correspondence_global_CIR_integral_of_local
       (fun j => Eventually.of_forall (fun ω => congrFun (hleft j) ω)) heq
   · have hE : E k = ∅ := by
       ext ω
-      simp only [E,mem_ofPred_eq,mem_empty_iff_false,iff_false]
+      simp only [E, mem_ofPred_eq, mem_empty_iff_false, iff_false]
       intro hω
       apply ht
       exact hω.trans (ginibreDrivenHamiltonianBoundedStop_le n α _ z _ k)
-    simp only [hE,indicator_empty]
+    simp only [hE, indicator_empty]
     intro ε hε
     simp [not_le.mpr hε]
 
@@ -135,14 +135,14 @@ theorem correspondence_ginibre_global_independent_CIR_integrals
           (ginibreBrownianMaximalProcess n α z B s ω))) t (j+1))
         atTop (correspondenceCIRIntegral α z B pairwiseRadius (recenteredGammaShape n) t)) := by
   classical
-  let i₀ : Fin n × Fin 2 := (⟨0,by omega⟩,0)
+  let i₀ : Fin n × Fin 2 := (⟨0, by omega⟩, 0)
   let e : EuclideanSpace ℝ (Fin n × Fin 2) := EuclideanSpace.single i₀ 1
-  have he : ‖e‖=1 := by simp [e,PiLp.norm_single]
-  obtain ⟨βS,hβS,hβSM,hβSL,hβS0,hβSLim,hβSShift,hβSFresh⟩ :=
+  have he : ‖e‖=1 := by simp [e, PiLp.norm_single]
+  obtain ⟨βS, hβS, hβSM, hβSL, hβS0, hβSLim, hβSShift, hβSFresh⟩ :=
     ginibreBrownianMaximalProcess_center_unrestricted_Brownian_exists hn α hα z hz B P hB hind
-  obtain ⟨βR,hβR,hβRM,hβRL,hβR0,hβRLim,hβRShift,hβRFresh⟩ :=
+  obtain ⟨βR, hβR, hβRM, hβRL, hβR0, hβRLim, hβRShift, hβRFresh⟩ :=
     ginibreBrownianMaximalProcess_radial_Brownian_exists hn α z hz B P hB hind
-  refine ⟨βS,βR,hβS,hβR,?_,?_,?_⟩
+  refine ⟨βS, βR, hβS, hβR,?_,?_,?_⟩
   · exact ginibreBrownian_unrestricted_center_radial_drivers_independent hn α hα z hz
       B P hB hind e e βS βR hβS.cont hβS0 hβSShift hβR.cont hβRLim
   · apply correspondence_global_CIR_integral_of_local (by omega) α z hz B P hB hind
@@ -153,14 +153,14 @@ theorem correspondence_ginibre_global_independent_CIR_integrals
       ginibreBrownianMaximalProcess_local_center_CIR_Brownian_integral hn α z hz
         (lt_of_le_of_ne (ginibreCenterSquared_nonneg n z) (Ne.symm hcenter))
         B P hB hind e he βS hβSL hβSLim R hR T
-    obtain ⟨J,hJM,hJC,hJL,hJ0,hJMS,hJP,hJI⟩ := hc
-    exact ⟨J,hJP,hJI⟩
+    obtain ⟨J, hJM, hJC, hJL, hJ0, hJMS, hJP, hJI⟩ := hc
+    exact ⟨J, hJP, hJI⟩
   · apply correspondence_global_CIR_integral_of_local (by omega) α z hz B P hB hind
     intro R hR T
-    obtain ⟨J,hJM,hJC,hJL,hJ0,hJMS,hJP,hJI⟩ :=
+    obtain ⟨J, hJM, hJC, hJL, hJ0, hJMS, hJP, hJI⟩ :=
       ginibreBrownianMaximalProcess_local_CIR_Brownian_integral hn α z hz B P hB hind
         e he βR hβRL hβRLim R hR T
-    exact ⟨J,hJP,hJI⟩
+    exact ⟨J, hJP, hJI⟩
 
 /-- Literal global CIR equations and independent Brownian driving noises,
 with both stochastic integrals verified by unstopped Brownian left sums. -/
@@ -187,11 +187,11 @@ theorem correspondence_ginibre_global_independent_CIR_equations
         JR t ω+∫ s in (0 : ℝ)..t, (4*(α : ℝ)/(n : ℝ))*
           ((recenteredGammaShape n : ℝ)-pairwiseRadius
             (ginibreBrownianMaximalProcess n α z B s.toNNReal ω))) := by
-  obtain ⟨βS,βR,hS,hR,hi,hSI,hRI⟩ :=
+  obtain ⟨βS, βR, hS, hR, hi, hSI, hRI⟩ :=
     correspondence_ginibre_global_independent_CIR_integrals hn α hα z hz B P hB hind
-  refine ⟨βS,βR,correspondenceCIRIntegral α z B (ginibreCenterSquared n) 1,
+  refine ⟨βS, βR, correspondenceCIRIntegral α z B (ginibreCenterSquared n) 1,
     correspondenceCIRIntegral α z B pairwiseRadius (recenteredGammaShape n),
-    hS,hR,hi,hSI,hRI,?_,?_⟩ <;> intro ω t <;> unfold correspondenceCIRIntegral <;> ring
+    hS, hR, hi, hSI, hRI,?_,?_⟩ <;> intro ω t <;> unfold correspondenceCIRIntegral <;> ring
 
 #print axioms correspondence_ginibre_global_independent_CIR_equations
 #print axioms correspondence_ginibre_global_independent_CIR_integrals

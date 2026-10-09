@@ -41,14 +41,14 @@ theorem positiveWeightCompactPairing_eq_integral {n : ℕ} (w : Configuration n 
   have he : (∫ z in tsupport φ, inner ℂ (g z) ((R u) z)) =
       ∫ z in tsupport φ, φ z * u z := by
     apply integral_congr_ae
-    filter_upwards [hm.coeFn_toLp,positiveWeightLocalRestriction_coe volume w
+    filter_upwards [hm.coeFn_toLp, positiveWeightLocalRestriction_coe volume w
       (isClosed_tsupport φ).measurableSet hcw.1 hcw.2 u] with z hg hr
-    rw [hg,hr]
-    simp [RCLike.inner_apply,mul_comm]
+    rw [hg, hr]
+    simp [RCLike.inner_apply, mul_comm]
   rw [he]
   apply setIntegral_eq_integral_of_forall_compl_eq_zero
   intro z hz
-  rw [image_eq_zero_of_notMem_tsupport hz,zero_mul]
+  rw [image_eq_zero_of_notMem_tsupport hz, zero_mul]
 
 #print axioms positiveWeightCompactPairing_eq_integral
 end

@@ -30,9 +30,9 @@ theorem ginibreLocalRegularity_compact_adjoint_density
   have he := heq θ hθ hc hs
   simp_rw [integral_ginibreMeasure_eq_density_volume hn] at he
   have hm0 : (ginibreNormalizingMass n).toReal ≠ 0 :=
-    ENNReal.toReal_ne_zero.mpr ⟨(ginibreMassEvaluation n hn).1.ne',(ginibreMassEvaluation n hn).2.ne⟩
+    ENNReal.toReal_ne_zero.mpr ⟨(ginibreMassEvaluation n hn).1.ne', (ginibreMassEvaluation n hn).2.ne⟩
   have he' := congrArg (fun a : ℝ => (ginibreNormalizingMass n).toReal*a) he
-  simp only [mul_sub,← mul_assoc,mul_inv_cancel₀ hm0,one_mul] at he'
+  simp only [mul_sub,← mul_assoc, mul_inv_cancel₀ hm0, one_mul] at he'
   have hright : (∫ z, ginibreLebesgueDensityReal n z*(1*u z-f z)*θ z) =
       (∫ z, ginibreLebesgueDensityReal n z*(u z*θ z))-
       (∫ z, ginibreLebesgueDensityReal n z*(f z*θ z)) := by

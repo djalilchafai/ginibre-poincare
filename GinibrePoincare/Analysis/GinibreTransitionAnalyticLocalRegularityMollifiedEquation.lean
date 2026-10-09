@@ -38,7 +38,7 @@ theorem ginibreLocalRegularity_mollified_elliptic_equation
     ((hD i).fderiv_right (by simp)).clm_apply contDiff_const
   have hi (i : ι) : Integrable (fun y => u y*
       fderiv ℝ (fun z => fderiv ℝ φ z (v i)) (x-y) (v i)) μ := by
-    simpa only [smul_eq_mul,Function.comp_def,Pi.sub_apply,id_eq] using hu.integrable_smul_right_of_hasCompactSupport
+    simpa only [smul_eq_mul, Function.comp_def, Pi.sub_apply, id_eq] using hu.integrable_smul_right_of_hasCompactSupport
       ((hDD i).continuous.comp (continuous_const.sub continuous_id))
       (((hc.fderiv_apply ℝ (v i)).fderiv_apply ℝ (v i)).comp_homeomorph (Homeomorph.subLeft x))
   have he := heq θ ht htc
@@ -47,7 +47,7 @@ theorem ginibreLocalRegularity_mollified_elliptic_equation
   have heθθ (i : ι) (y : E) : fderiv ℝ (fun z => fderiv ℝ θ z (v i)) y (v i) =
       fderiv ℝ (fun z => fderiv ℝ φ z (v i)) (x-y) (v i) :=
     ginibreLocalRegularity_reflected_second φ hφ x y (v i)
-  simp_rw [heθθ,heθ,mul_neg,integral_neg,Finset.sum_neg_distrib,sub_neg_eq_add] at he
+  simp_rw [heθθ, heθ, mul_neg, integral_neg, Finset.sum_neg_distrib, sub_neg_eq_add] at he
   simp only [θ] at he
   have hs : (∫ y, u y*(∑ i, fderiv ℝ (fun z => fderiv ℝ φ z (v i)) (x-y) (v i)) ∂μ) =
       ∑ i, ∫ y, u y*fderiv ℝ (fun z => fderiv ℝ φ z (v i)) (x-y) (v i) ∂μ := by

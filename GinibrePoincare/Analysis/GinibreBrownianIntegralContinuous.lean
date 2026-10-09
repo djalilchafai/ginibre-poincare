@@ -44,7 +44,7 @@ theorem brownianContinuousIntegral_exists {Ω ι : Type*}
     funext q
     apply integral_congr_ae
     exact Eventually.of_forall (fun ω => by dsimp [S]; ring)
-  obtain ⟨M,hM,hMC,hML,hMP,hMS⟩ := realMartingale_terminal_cauchy_exists_continuous_martingale P ℱ
+  obtain ⟨M, hM, hMC, hML, hMP, hMS⟩ := realMartingale_terminal_cauchy_exists_continuous_martingale P ℱ
     (ginibreBrownianFamilyPastSpace B) (ginibreBrownianFamilyPastSpace_le B P hb) (fun t => rfl)
     S hSM T hST hSC (fun n t ω => (brownianUniformPartialSum_time_cap (B j) F T (n+1) t ω).symm) hterm
   have hp0 : TendstoInMeasure P (fun _ : ℕ => (fun _ : Ω => (0 : ℝ))) atTop (M 0) := by
@@ -54,7 +54,7 @@ theorem brownianContinuousIntegral_exists {Ω ι : Type*}
   have hz : TendstoInMeasure P (fun _ : ℕ => (fun _ : Ω => (0 : ℝ))) atTop (fun _ => 0) :=
     tendstoInMeasure_of_tendsto_ae (fun _ => aestronglyMeasurable_const)
       (Eventually.of_forall fun _ => tendsto_const_nhds)
-  exact ⟨M,hM,hMC,hML,tendstoInMeasure_ae_unique hp0 hz,hMP,hMS⟩
+  exact ⟨M, hM, hMC, hML, tendstoInMeasure_ae_unique hp0 hz, hMP, hMS⟩
 
 end
 end GinibrePoincare

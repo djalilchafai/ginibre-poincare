@@ -59,7 +59,7 @@ theorem ginibreCompactProcess_gradient_integral_exists {Ω : Type*} [MeasurableS
       TendstoInMeasure P (ginibreConfigurationBrownianGradientSum n B α X f T) atTop
         (fun ω => Real.sqrt (2*α/(n : ℝ)^2)*∑ i, I i ω) := by
   classical
-  obtain ⟨C,hC,hG,hH⟩ := ginibreCompactProcess_test_coefficients n
+  obtain ⟨C, hC, hG, hH⟩ := ginibreCompactProcess_test_coefficients n
     (ginibreBrownianAugmentedFiltration B P hB) X hX hCont f U K hU hf hK hKU hRange
   let A := fun (i : Fin n × Fin 2) t ω => fderiv ℝ f (X t ω) (ginibreCoordinateDirection i)
   have hm (i : Fin n × Fin 2) (t : ℝ≥0) :

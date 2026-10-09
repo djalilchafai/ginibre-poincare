@@ -39,7 +39,7 @@ theorem ginibreConfigurationTestCompensator_eq_generator {Ω : Type*} {n : ℕ} 
     funext (fun s => (ginibreLangevin_fderiv_generator hn α f (X s.toNNReal ω) (hCF _ _)).symm)
   have hc : Continuous (fun s : ℝ => (α/(n : ℝ)^2)*configurationLaplacian f (X s.toNNReal ω)) :=
     continuous_const.mul hl
-  rw [he,intervalIntegral.integral_add (hd.intervalIntegrable _ _) (hc.intervalIntegrable _ _),
+  rw [he, intervalIntegral.integral_add (hd.intervalIntegrable _ _) (hc.intervalIntegrable _ _),
     intervalIntegral.integral_const_mul]
   unfold ginibreConfigurationTestCompensator
   ring

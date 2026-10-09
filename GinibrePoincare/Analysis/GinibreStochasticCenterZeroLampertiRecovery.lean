@@ -55,9 +55,9 @@ theorem ginibreCenterPuncturedLampertiRecovery_measurable (n : ℕ) (α : ℝ) :
   apply measurable_pi_lambda
   intro t
   by_cases ht : t=0
-  · simp only [ginibreCenterPuncturedLampertiRecovery,ht,ite_true]
+  · simp only [ginibreCenterPuncturedLampertiRecovery, ht, ite_true]
     exact measurable_const
-  · simp only [ginibreCenterPuncturedLampertiRecovery,ht,ite_false]
+  · simp only [ginibreCenterPuncturedLampertiRecovery, ht, ite_false]
     exact (StronglyMeasurable.limUnder (fun k =>
       (ginibreCenterPositiveStartLamperti_measurable n α k t).stronglyMeasurable)).measurable
 
@@ -82,7 +82,7 @@ theorem ginibreCenterPositiveStartLamperti_eq_integral (n : ℕ) (α : ℝ) (k :
     funext m
     apply Finset.sum_congr rfl
     intro i hi
-    simp only [w,Real.toNNReal_coe]
+    simp only [w, Real.toNNReal_coe]
     rw [mul_div_assoc]
   rw [← he] at hl
   unfold ginibreCenterPositiveStartLamperti
@@ -102,17 +102,17 @@ theorem ginibreCenterPuncturedLampertiRecovery_eq (n : ℕ) (α : ℝ)
     ginibreCenterPuncturedLampertiRecovery n α p = β := by
   funext t
   by_cases ht : t=0
-  · simp [ginibreCenterPuncturedLampertiRecovery,ht,hβ0]
+  · simp [ginibreCenterPuncturedLampertiRecovery, ht, hβ0]
   · have htpos : 0 < t := lt_of_le_of_ne bot_le (Ne.symm ht)
     have hsmall := ginibreCenterPositiveStart_tendsto_zero.eventually (gt_mem_nhds htpos)
     have hlim : Tendsto (fun k => ginibreCenterPositiveStartLamperti n α k p t) atTop (𝓝 (β t)) := by
       have hc : Tendsto (fun _ : ℕ => β t) atTop (𝓝 (β t)) := tendsto_const_nhds
       have hl := hc.sub (hβ.continuousAt.tendsto.comp ginibreCenterPositiveStart_tendsto_zero)
-      rw [hβ0,sub_zero] at hl
+      rw [hβ0, sub_zero] at hl
       apply hl.congr'
       filter_upwards [hsmall] with k hk
       exact (hinc k t hk.le).symm
-    simp only [ginibreCenterPuncturedLampertiRecovery,ht,ite_false]
+    simp only [ginibreCenterPuncturedLampertiRecovery, ht, ite_false]
     exact hlim.limUnder_eq
 
 #print axioms ginibreCenterPositiveStartLamperti_eq_integral

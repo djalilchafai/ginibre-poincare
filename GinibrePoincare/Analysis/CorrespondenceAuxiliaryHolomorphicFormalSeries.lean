@@ -30,15 +30,15 @@ theorem holomorphicHermiteFormalSeries_diagonal (n : ℕ) (hn : 0 < n)
         c p * ComplexHermite.multivariateNormalized n hn p 0 z := by
   letI := (finite_holomorphic_degree_fiber n k).fintype
   unfold holomorphicHermiteFormalSeries
-  simp only [ContinuousMultilinearMap.sum_apply,ContinuousMultilinearMap.smul_apply,
-    ContinuousMultilinearMap.domDomCongr_apply,Function.comp_def,smul_eq_mul,
+  simp only [ContinuousMultilinearMap.sum_apply, ContinuousMultilinearMap.smul_apply,
+    ContinuousMultilinearMap.domDomCongr_apply, Function.comp_def, smul_eq_mul,
     holomorphicMonomialMultilinear_diagonal]
   rw [Finset.sum_subtype (p := fun p : Fin n → ℕ => ∑ i, p i = k)
     (finite_holomorphic_degree_fiber n k).toFinset (by simp)
     (fun p => c p * ComplexHermite.multivariateNormalized n hn p 0 z)]
   apply Finset.sum_congr rfl
   intro p hp
-  rw [ComplexHermite.multivariateNormalized_zero_right,Finset.prod_mul_distrib]
+  rw [ComplexHermite.multivariateNormalized_zero_right, Finset.prod_mul_distrib]
   ring
 
 theorem holomorphicHermiteFormalSeries_norm_le (n : ℕ)
@@ -54,12 +54,12 @@ theorem holomorphicHermiteFormalSeries_norm_le (n : ℕ)
   apply (norm_sum_le _ _).trans
   apply Finset.sum_le_sum
   intro p hp
-  rw [norm_smul,ContinuousMultilinearMap.norm_domDomCongr,norm_mul,norm_prod]
+  rw [norm_smul, ContinuousMultilinearMap.norm_domDomCongr, norm_mul, norm_prod]
   have hnorm : ∏ i, ‖(ComplexHermite.oneDimNormalization n (p.val i) : ℂ)‖ =
       ∏ i, ComplexHermite.oneDimNormalization n (p.val i) := by
     apply Finset.prod_congr rfl
     intro i hi
-    rw [Complex.norm_real,Real.norm_eq_abs,abs_of_nonneg]
+    rw [Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg]
     unfold ComplexHermite.oneDimNormalization
     positivity
   rw [hnorm]
@@ -98,7 +98,7 @@ theorem holomorphicHermiteFormalSeries_radius (n : ℕ)
   intro p hp
   have hpk : ∑ i, p i = k := (finite_holomorphic_degree_fiber n k).mem_toFinset.mp hp
   unfold B
-  rw [Finset.prod_mul_distrib,Finset.prod_pow_eq_pow_sum,hpk]
+  rw [Finset.prod_mul_distrib, Finset.prod_pow_eq_pow_sum, hpk]
   have hpnon : 0 ≤ ∏ i, ComplexHermite.oneDimNormalization n (p i) := by
     unfold ComplexHermite.oneDimNormalization
     positivity

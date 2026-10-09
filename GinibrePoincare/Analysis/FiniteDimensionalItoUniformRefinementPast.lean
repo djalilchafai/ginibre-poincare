@@ -12,7 +12,7 @@ noncomputable section
 
 /-- Actual restriction of a fine past history to an earlier past. -/
 def itoPastRestriction {X : Type*} (s t : ℝ≥0) (hst : s ≤ t)
-    (p : Set.Iic t → X) : Set.Iic s → X := fun u => p ⟨u.val,u.property.trans hst⟩
+    (p : Set.Iic t → X) : Set.Iic s → X := fun u => p ⟨u.val, u.property.trans hst⟩
 
 theorem itoPastRestriction_measurable {X : Type*} [MeasurableSpace X]
     (s t : ℝ≥0) (hst : s ≤ t) : Measurable (itoPastRestriction (X := X) s t hst) := by
@@ -22,7 +22,7 @@ theorem itoPastRestriction_measurable {X : Type*} [MeasurableSpace X]
 
 /-- The true coarse block index of a fine interval. -/
 def itoUniformCoarseIndex (N M : ℕ) (hM : 0 < M) (k : Fin (N*M)) : Fin N :=
-  ⟨k.val/M,(Nat.div_lt_iff_lt_mul hM).mpr k.is_lt⟩
+  ⟨k.val/M, (Nat.div_lt_iff_lt_mul hM).mpr k.is_lt⟩
 
 /-- Genuine common-refinement predictable coefficient, using actual past restriction. -/
 def itoUniformRefinedCoefficient {X : Type*} (T : ℝ≥0) (N M : ℕ) (hM : 0 < M)

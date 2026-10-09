@@ -32,8 +32,8 @@ theorem ginibreBrownianHamiltonianStoppedProcess_center_CIR_amplitude_properties
   have hCont := ginibreBrownianHamiltonianStoppedProcess_continuous hn α z hz B R hR T
   refine ⟨fun t => (hf.measurable.comp (hAdapt t).measurable).stronglyMeasurable,
     fun ω => hf.comp (hCont ω),?_⟩
-  obtain ⟨C,hC,hb⟩ := ((ginibreHamiltonianSublevel_isCompact hn R).image hf).isBounded.exists_pos_norm_le
-  refine ⟨C,hC,fun t ω => hb _ ?_⟩
-  exact ⟨_,ginibreBrownianHamiltonianStoppedProcess_range hn α z hz B R hR T t ω,rfl⟩
+  obtain ⟨C, hC, hb⟩ := ((ginibreHamiltonianSublevel_isCompact hn R).image hf).isBounded.exists_pos_norm_le
+  refine ⟨C, hC, fun t ω => hb _ ?_⟩
+  exact ⟨_, ginibreBrownianHamiltonianStoppedProcess_range hn α z hz B R hR T t ω, rfl⟩
 end
 end GinibrePoincare

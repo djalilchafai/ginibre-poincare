@@ -27,7 +27,7 @@ theorem memLp_restrict_of_weight_lower_bound {X : Type*} [MeasurableSpace X]
   have hct : ENNReal.ofReal c ≠ ⊤ := ENNReal.ofReal_ne_top
   have hinv : (ENNReal.ofReal c)⁻¹ ≠ ⊤ := ENNReal.inv_ne_top.mpr hc0
   have hb := hm.smul_measure hinv
-  simpa only [smul_smul,ENNReal.inv_mul_cancel hc0 hct,one_smul] using hb
+  simpa only [smul_smul, ENNReal.inv_mul_cancel hc0 hct, one_smul] using hb
 
 /-- Weighted square-integrability for a weight bounded below on compact sets
 implies genuine ordinary local integrability in every configuration dimension. -/
@@ -39,7 +39,7 @@ theorem locallyIntegrable_of_positive_compact_weight (n : ℕ)
     LocallyIntegrable f volume := by
   rw [locallyIntegrable_iff]
   intro K hK
-  obtain ⟨c,hc,hcw⟩ := hw K hK
+  obtain ⟨c, hc, hcw⟩ := hw K hK
   have hm := memLp_restrict_of_weight_lower_bound hK.measurableSet hc hcw hf
   letI : IsFiniteMeasure (volume.restrict K) := ⟨by
     rw [Measure.restrict_apply_univ]
@@ -62,7 +62,7 @@ theorem measure_restrict_le_weight_multiple {X : Type*} [MeasurableSpace X]
       (ENNReal.ofReal c)⁻¹ • μ.withDensity (fun x => ENNReal.ofReal (w x)) := by
     gcongr
   have hc0 : ENNReal.ofReal c ≠ 0 := (ENNReal.ofReal_pos.mpr hc).ne'
-  simpa only [smul_smul,ENNReal.inv_mul_cancel hc0 ENNReal.ofReal_ne_top,one_smul] using hb
+  simpa only [smul_smul, ENNReal.inv_mul_cancel hc0 ENNReal.ofReal_ne_top, one_smul] using hb
 
 /-- Canonical continuous ordinary-local L² restriction from the actual
 arbitrarily weighted L² space; no supplied restriction operator. -/

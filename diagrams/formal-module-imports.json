@@ -22594,6 +22594,10 @@
     ],
     [
       "GinibrePoincare.Analysis.GinibreStochasticCIRRealization",
+      "GinibrePoincare.Analysis.DynamicalFactorization"
+    ],
+    [
+      "GinibrePoincare.Analysis.GinibreStochasticCIRRealization",
       "GinibrePoincare.Subprojects.StochasticDynamics"
     ],
     [

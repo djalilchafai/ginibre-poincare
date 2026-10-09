@@ -31,8 +31,8 @@ theorem ginibreBrownian_family_mixed_increment_mean {Ω ι : Type*} [MeasurableS
     (hLaw i).aemeasurable.aestronglyMeasurable (hLaw j).aemeasurable.aestronglyMeasurable
   simp only [Pi.mul_apply] at hp
   have hm := (hLaw i).integral_comp (show AEStronglyMeasurable id (gaussianReal 0 t) by fun_prop)
-  simp only [Function.comp_def,id_eq,integral_id_gaussianReal] at hm
-  rw [hp,hm,zero_mul]
+  simp only [Function.comp_def, id_eq, integral_id_gaussianReal] at hm
+  rw [hp, hm, zero_mul]
 
 theorem ginibreBrownian_family_mixed_increment_secondMoment {Ω ι : Type*} [MeasurableSpace Ω]
     (B : ι → ℝ≥0 → Ω → ℝ) (P : Measure Ω) [IsProbabilityMeasure P]
@@ -46,9 +46,9 @@ theorem ginibreBrownian_family_mixed_increment_secondMoment {Ω ι : Type*} [Mea
     (measurable_id.pow_const 2) (measurable_id.pow_const 2)).integral_mul_eq_mul_integral
     (by convert! (hLaw i).aemeasurable.aestronglyMeasurable.pow 2 using 1)
     (by convert! (hLaw j).aemeasurable.aestronglyMeasurable.pow 2 using 1)
-  simp only [Pi.mul_apply,Function.comp_apply,id_eq] at hp
+  simp only [Pi.mul_apply, Function.comp_apply, id_eq] at hp
   simp_rw [mul_pow]
-  rw [hp,ginibreGaussian_hasLaw_square_mean P _ t (hLaw i),ginibreGaussian_hasLaw_square_mean P _ t (hLaw j),pow_two]
+  rw [hp, ginibreGaussian_hasLaw_square_mean P _ t (hLaw i), ginibreGaussian_hasLaw_square_mean P _ t (hLaw j), pow_two]
 
 theorem ginibreBrownian_augmented_mixed_secondMoment {Ω ι : Type*}
     [MeasurableSpace Ω] [Fintype ι]
@@ -69,13 +69,13 @@ theorem ginibreBrownian_augmented_mixed_secondMoment {Ω ι : Type*}
         (aemeasurable_iff_measurable.mp ((hB j).aemeasurable s)))
   have hp := (hInd.symm.comp (measurable_id.pow_const 2) (measurable_id.pow_const 2)).integral_mul_eq_mul_integral
     (hFM.pow_const 2).aestronglyMeasurable (hZ.pow_const 2).aestronglyMeasurable
-  simp only [Pi.mul_apply,Function.comp_apply,id_eq] at hp
+  simp only [Pi.mul_apply, Function.comp_apply, id_eq] at hp
   calc
     _ = ∫ ω, (F ω)^2*((B i (s+t) ω-B i s ω)*(B j (s+t) ω-B j s ω))^2 ∂P := by
       apply integral_congr_ae
       exact Eventually.of_forall (fun ω => by ring)
     _ = _ := by
-      rw [hp,ginibreBrownian_family_mixed_increment_secondMoment B P hB hind s t i j hij]
+      rw [hp, ginibreBrownian_family_mixed_increment_secondMoment B P hB hind s t i j hij]
       ring
 
 
@@ -113,10 +113,10 @@ theorem ginibreBrownian_augmented_mixed_memLp_two {Ω ι : Type*}
   apply (memLp_two_iff_integrable_sq (hFi.aestronglyMeasurable.mul hCross.aestronglyMeasurable)).mpr
   have h := (hInd.symm.comp (measurable_id.pow_const 2) (measurable_id.pow_const 2)).integrable_mul
     (by convert! hFi.integrable_sq using 1) (by convert! hCross.integrable_sq using 1)
-  simp only [Function.comp_def,id_eq,Pi.mul_apply] at h
+  simp only [Function.comp_def, id_eq, Pi.mul_apply] at h
   convert! h using 1
   ext ω
-  dsimp only [Pi.mul_apply,Pi.pow_apply]
+  dsimp only [Pi.mul_apply, Pi.pow_apply]
   ring
 
 end

@@ -11,8 +11,8 @@ variable {E Ω : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
 
 lemma bakryEmery_compactObservable_bound (g : E → ℝ) (hg : Continuous g)
     (hs : HasCompactSupport g) : ∃ C : ℝ, ∀ x, |g x| ≤ C := by
-  obtain ⟨C,hC⟩ := (hs.isCompact_range hg).exists_bound_of_continuousOn continuous_id.continuousOn
-  exact ⟨C, fun x => by simpa only [id_eq,Real.norm_eq_abs] using hC (g x) (mem_range_self x)⟩
+  obtain ⟨C, hC⟩ := (hs.isCompact_range hg).exists_bound_of_continuousOn continuous_id.continuousOn
+  exact ⟨C, fun x => by simpa only [id_eq, Real.norm_eq_abs] using hC (g x) (mem_range_self x)⟩
 
 /-- Equilibrium closure for a concrete synchronous coupling. This is the
 limit lemma; the stationary marginal and finite-time inequalities are supplied
@@ -35,10 +35,10 @@ theorem bakryEmery_stationaryCoupling_square_lsi_limit
   have hs2 := hs.comp_left (g := fun x : ℝ => x^2) (by simp)
   have hsl := hs.comp_left (g := fun x : ℝ => x^2*Real.log (x^2)) (by simp)
   have hse := hgs.comp_left (g := fun x : E => ‖x‖^2) (by simp)
-  obtain ⟨Cs,hCs⟩ := bakryEmery_compactObservable_bound (fun x => f x^2) (hf.continuous.pow 2) hs2
-  obtain ⟨Cl,hCl⟩ := bakryEmery_compactObservable_bound (fun x => f x^2*Real.log (f x^2))
+  obtain ⟨Cs, hCs⟩ := bakryEmery_compactObservable_bound (fun x => f x^2) (hf.continuous.pow 2) hs2
+  obtain ⟨Cl, hCl⟩ := bakryEmery_compactObservable_bound (fun x => f x^2*Real.log (f x^2))
     (continuous_square_mul_log hf.continuous) hsl
-  obtain ⟨Ce,hCe⟩ := bakryEmery_compactObservable_bound (fun x => ‖gradient f x‖^2)
+  obtain ⟨Ce, hCe⟩ := bakryEmery_compactObservable_bound (fun x => ‖gradient f x‖^2)
     (hgrad.norm.pow 2) hse
   have huc := bakryEmery_compactSquareEntropy_uniformContinuous f hf.continuous hs
   have hmass := bakryEmery_stationaryCoupling_expectation_tendsto P ν

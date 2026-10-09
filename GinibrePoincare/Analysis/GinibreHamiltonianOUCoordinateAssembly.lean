@@ -13,12 +13,12 @@ noncomputable section
 def ginibreHamiltonianOUCoordinateAssembly (n : ℕ) :
     ((Fin n × Fin 2) → ℝ) →L[ℝ] Configuration n :=
   { toLinearMap :=
-      { toFun := fun x j => ((x (j,0) : ℂ) + Complex.I*(x (j,1) : ℂ))/Real.sqrt n
-        map_add' := by intro x y; ext j; simp only [Pi.add_apply,Complex.ofReal_add]; ring
+      { toFun := fun x j => ((x (j, 0) : ℂ) + Complex.I*(x (j, 1) : ℂ))/Real.sqrt n
+        map_add' := by intro x y; ext j; simp only [Pi.add_apply, Complex.ofReal_add]; ring
         map_smul' := by
           intro c x
           ext j
-          simp only [Pi.smul_apply, smul_eq_mul, Complex.real_smul,Complex.ofReal_mul,RingHom.id_apply]
+          simp only [Pi.smul_apply, smul_eq_mul, Complex.real_smul, Complex.ofReal_mul, RingHom.id_apply]
           ring }
     cont := by apply continuous_pi; intro j; fun_prop }
 
@@ -57,8 +57,8 @@ theorem ginibreHamiltonianOU_noise_coefficient {n : ℕ} (hn : 0 < n)
   have hnR : 0 < (n : ℝ) := by exact_mod_cast hn
   have hs : 0 < Real.sqrt (n : ℝ) := Real.sqrt_pos.mpr hnR
   apply (sq_eq_sq₀ (div_nonneg (Real.sqrt_nonneg _) hs.le) (Real.sqrt_nonneg _)).mp
-  rw [div_pow,Real.sq_sqrt (div_nonneg (mul_nonneg (by norm_num) hα) hnR.le),
-    Real.sq_sqrt hnR.le,Real.sq_sqrt (div_nonneg (mul_nonneg (by norm_num) hα) (sq_nonneg _))]
+  rw [div_pow, Real.sq_sqrt (div_nonneg (mul_nonneg (by norm_num) hα) hnR.le),
+    Real.sq_sqrt hnR.le, Real.sq_sqrt (div_nonneg (mul_nonneg (by norm_num) hα) (sq_nonneg _))]
   field_simp
   <;> ring
 
@@ -71,9 +71,9 @@ theorem ginibreHamiltonianOUCoordinateAssembly_noise {Ω : Type*}
   ext j
   have he := ginibreHamiltonianOU_noise_coefficient hn α hα
   simp only [ginibreHamiltonianOUCoordinateAssembly, ContinuousLinearMap.coe_mk',
-    LinearMap.coe_mk,AddHom.coe_mk,ginibreBrownianNoise,ginibreConfigurationBrownianNoise,
-    Complex.ofReal_mul,Complex.real_smul]
-  rw [← he,Complex.ofReal_div]
+    LinearMap.coe_mk, AddHom.coe_mk, ginibreBrownianNoise, ginibreConfigurationBrownianNoise,
+    Complex.ofReal_mul, Complex.real_smul]
+  rw [← he, Complex.ofReal_div]
   ring
 
 /-- The genuine original-Brownian configuration reference equals the assembled
@@ -89,7 +89,7 @@ theorem ginibreHamiltonianOUReferenceProcess_scalar_assembly {Ω : Type*} [Measu
           (Real.sqrt (2*α/(n : ℝ))) (Z ω i) (t : ℝ) ω) := by
   have hCont : ∀ᵐ ω ∂P, ∀ i, Continuous (fun t => B i t ω) :=
     ae_all_iff.mpr (fun i => (hB i).cont)
-  filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB α,hCont] with ω hω hc
+  filter_upwards [ginibreBrownianFullContinuousNoise_ae n B P hB α, hCont] with ω hω hc
   intro t
   let N : ℝ → (Fin n × Fin 2) → ℝ :=
     fun s i => ginibreBrownianNoise (B i) (Real.sqrt (2*α/(n : ℝ))) ω s
@@ -110,7 +110,7 @@ theorem ginibreHamiltonianOUReference_horizon_scalar_assembly {Ω : Type*} [Meas
     (hB : ∀ i, IsBrownianReal (B i) P) (Z : Ω → (Fin n × Fin 2) → ℝ) (T : ℝ≥0) :
     ∀ᵐ ω ∂P,
       ginibreHamiltonianOUJointHorizonPath n α T
-        (ginibreHamiltonianOUCoordinateAssembly n (Z ω),ginibreBrownianFullContinuousNoise n B α ω) =
+        (ginibreHamiltonianOUCoordinateAssembly n (Z ω), ginibreBrownianFullContinuousNoise n B α ω) =
       ginibreConfigurationOUAssemble n T
         (fun i => ginibreBrownianOUHorizonPath (B i) (fun ω => Z ω i) (2*α/(n : ℝ)).toNNReal T ω) := by
   have hnR : 0 < (n : ℝ) := by exact_mod_cast hn
@@ -121,7 +121,7 @@ theorem ginibreHamiltonianOUReference_horizon_scalar_assembly {Ω : Type*} [Meas
         (Real.sqrt ((2*α/(n : ℝ)).toNNReal : ℝ)) (Z ω i) t.val ω :=
     ae_all_iff.mpr (fun i => ginibreBrownianOUHorizonPath_ae (B i) P (hB i)
       (fun ω => Z ω i) _ T)
-  filter_upwards [ginibreHamiltonianOUReferenceProcess_scalar_assembly hn α hα B P hB Z,hs] with ω hω hsω
+  filter_upwards [ginibreHamiltonianOUReferenceProcess_scalar_assembly hn α hα B P hB Z, hs] with ω hω hsω
   apply DFunLike.ext
   intro t
   have hh := hω t.val.toNNReal
@@ -129,9 +129,9 @@ theorem ginibreHamiltonianOUReference_horizon_scalar_assembly {Ω : Type*} [Meas
     (ginibreHamiltonianOUCoordinateAssembly n (Z ω)) B t.val.toNNReal ω = _
   rw [hh]
   ext j
-  simp only [ginibreConfigurationOUAssemble,ContinuousMap.coe_mk,hsω,
-    Real.coe_toNNReal _ hr,ginibreOURealHorizonToNNReal,
-    ginibreHamiltonianOUCoordinateAssembly,ContinuousLinearMap.coe_mk',LinearMap.coe_mk,AddHom.coe_mk]
+  simp only [ginibreConfigurationOUAssemble, ContinuousMap.coe_mk, hsω,
+    Real.coe_toNNReal _ hr, ginibreOURealHorizonToNNReal,
+    ginibreHamiltonianOUCoordinateAssembly, ContinuousLinearMap.coe_mk', LinearMap.coe_mk, AddHom.coe_mk]
 
 #print axioms ginibreHamiltonianOUReference_horizon_scalar_assembly
 #print axioms ginibreHamiltonianOUReferenceProcess_scalar_assembly

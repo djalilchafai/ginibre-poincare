@@ -12,8 +12,8 @@ namespace GinibrePoincare
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1200000
-local instance stochasticDuhamelFullPathMeasurable (n : ℕ) : MeasurableSpace C(ℝ,Configuration n) := borel _
-local instance stochasticDuhamelFullPathBorel (n : ℕ) : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+local instance stochasticDuhamelFullPathMeasurable (n : ℕ) : MeasurableSpace C(ℝ, Configuration n) := borel _
+local instance stochasticDuhamelFullPathBorel (n : ℕ) : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
 
 /-- The genuine original Brownian Dynkin equation as a time integral of
 actual transition expectations. All martingale identities and the Fubini
@@ -25,18 +25,18 @@ theorem ginibreBrownian_core_test_transition_duhamel {Ω : Type*} [MeasurableSpa
     (hind : iIndepFun (fun i ω t => B i t ω) P) (T : ℝ≥0)
     (f : Configuration n → ℝ) (hf : IsTheoremOneNineCore f) :
     (∫ ω, f (ginibreBrownianMaximalProcess n α z B T ω) ∂P)=f z+
-      ∫ s in (0:ℝ)..(T:ℝ), (∫ ω, ginibreRealPaperSpeedGenerator n α f
+      ∫ s in (0 : ℝ)..(T : ℝ), (∫ ω, ginibreRealPaperSpeedGenerator n α f
         (ginibreBrownianMaximalProcess n α z B s.toNNReal ω) ∂P) := by
   let L := ginibreRealPaperSpeedGenerator n α f
-  let X := fun ω => ginibreDrivenGlobalPathElement α (⟨z,hz⟩,ginibreBrownianFullContinuousNoise n B α ω)
+  let X := fun ω => ginibreDrivenGlobalPathElement α (⟨z, hz⟩, ginibreBrownianFullContinuousNoise n B α ω)
   have hXm : Measurable X := (ginibreDrivenGlobalPathElement_measurable hn α).comp
     (measurable_const.prodMk (ginibreBrownianFullContinuousNoise_measurable n B P hB α))
   have hLc : Continuous L := (continuous_ginibrePregenerator_of_core hf).const_mul _
   have hLs : HasCompactSupport L := by
-    change HasCompactSupport ((fun _ => (α:ℝ)/(n:ℝ))*ginibrePregenerator n f)
+    change HasCompactSupport ((fun _ => (α : ℝ)/(n : ℝ))*ginibrePregenerator n f)
     exact (hasCompactSupport_ginibrePregenerator hf.2.1).mul_left
-  obtain ⟨D,hD⟩ := hLs.exists_bound_of_continuous hLc
-  let ν := volume.restrict (Ioc (0:ℝ) (T:ℝ))
+  obtain ⟨D, hD⟩ := hLs.exists_bound_of_continuous hLc
+  let ν := volume.restrict (Ioc (0 : ℝ) (T : ℝ))
   have hjm : Measurable (fun p : ℝ × Ω => L (X p.2 p.1)) := hLc.measurable.comp
     (continuous_eval.measurable.comp ((hXm.comp measurable_snd).prodMk measurable_fst))
   have hji : Integrable (fun p : ℝ × Ω => L (X p.2 p.1)) (ν.prod P) :=
@@ -47,26 +47,26 @@ theorem ginibreBrownian_core_test_transition_duhamel {Ω : Type*} [MeasurableSpa
     filter_upwards [htop] with ω hω
     intro s
     have hd : ginibreDrivenMaximalLifetime n α (ginibreBrownianFullContinuousNoise n B α ω).val z=⊤ := hω
-    simp only [X,ginibreDrivenGlobalPathElement,dif_pos hd,ContinuousMap.coe_mk,
+    simp only [X, ginibreDrivenGlobalPathElement, dif_pos hd, ContinuousMap.coe_mk,
       ginibreBrownianMaximalProcess]
-  have hLeft : (∫ ω, (∫ s in (0:ℝ)..(T:ℝ), L (ginibreBrownianMaximalProcess n α z B s.toNNReal ω)) ∂P)=
-      ∫ ω, (∫ s in (0:ℝ)..(T:ℝ), L (X ω s)) ∂P := by
+  have hLeft : (∫ ω, (∫ s in (0 : ℝ)..(T : ℝ), L (ginibreBrownianMaximalProcess n α z B s.toNNReal ω)) ∂P)=
+      ∫ ω, (∫ s in (0 : ℝ)..(T : ℝ), L (X ω s)) ∂P := by
     apply integral_congr_ae
     filter_upwards [hEq] with ω hω
     apply intervalIntegral.integral_congr
     intro s hs
     exact (hω s).symm
-  have hRight : (∫ s in (0:ℝ)..(T:ℝ), (∫ ω, L (X ω s) ∂P))=
-      ∫ s in (0:ℝ)..(T:ℝ), (∫ ω, L (ginibreBrownianMaximalProcess n α z B s.toNNReal ω) ∂P) := by
+  have hRight : (∫ s in (0 : ℝ)..(T : ℝ), (∫ ω, L (X ω s) ∂P))=
+      ∫ s in (0 : ℝ)..(T : ℝ), (∫ ω, L (ginibreBrownianMaximalProcess n α z B s.toNNReal ω) ∂P) := by
     apply intervalIntegral.integral_congr
     intro s hs
     apply integral_congr_ae
     exact hEq.mono (fun ω hω => hω s)
-  rw [ginibreBrownian_core_test_expectation hn α z hz B P hB hind T f hf,hLeft]
+  rw [ginibreBrownian_core_test_expectation hn α z hz B P hB hind T f hf, hLeft]
   congr 1
-  have heSwap : (∫ ω, (∫ s in (0:ℝ)..(T:ℝ), L (X ω s)) ∂P)=
-      ∫ s in (0:ℝ)..(T:ℝ), (∫ ω, L (X ω s) ∂P) := by
-    simp_rw [intervalIntegral.integral_of_le (show (0:ℝ)≤(T:ℝ) from T.property)]
+  have heSwap : (∫ ω, (∫ s in (0 : ℝ)..(T : ℝ), L (X ω s)) ∂P)=
+      ∫ s in (0 : ℝ)..(T : ℝ), (∫ ω, L (X ω s) ∂P) := by
+    simp_rw [intervalIntegral.integral_of_le (show (0 : ℝ)≤(T : ℝ) from T.property)]
     exact hSwap.symm
   exact heSwap.trans hRight
 
@@ -78,7 +78,7 @@ theorem ginibreBrownian_bounded_continuous_transition_mean_continuous {Ω : Type
     (hind : iIndepFun (fun i ω t => B i t ω) P)
     (f : Configuration n → ℝ) (hf : Continuous f) (C : ℝ) (hC : ∀ z, ‖f z‖≤C) :
     Continuous (fun s : ℝ => ∫ ω, f (ginibreBrownianMaximalProcess n α z B s.toNNReal ω) ∂P) := by
-  let X := fun ω => ginibreDrivenGlobalPathElement α (⟨z,hz⟩,ginibreBrownianFullContinuousNoise n B α ω)
+  let X := fun ω => ginibreDrivenGlobalPathElement α (⟨z, hz⟩, ginibreBrownianFullContinuousNoise n B α ω)
   have hXm : Measurable X := (ginibreDrivenGlobalPathElement_measurable hn α).comp
     (measurable_const.prodMk (ginibreBrownianFullContinuousNoise_measurable n B P hB α))
   have hc : Continuous (fun s : ℝ => ∫ ω, f (X ω s) ∂P) := continuous_of_dominated
@@ -91,7 +91,7 @@ theorem ginibreBrownian_bounded_continuous_transition_mean_continuous {Ω : Type
     apply integral_congr_ae
     filter_upwards [ginibreBrownianMaximalLifetime_top_ae hn α z hz B P hB hind] with ω hω
     have hd : ginibreDrivenMaximalLifetime n α (ginibreBrownianFullContinuousNoise n B α ω).val z=⊤ := hω
-    simp only [X,ginibreDrivenGlobalPathElement,dif_pos hd,ContinuousMap.coe_mk,ginibreBrownianMaximalProcess]
+    simp only [X, ginibreDrivenGlobalPathElement, dif_pos hd, ContinuousMap.coe_mk, ginibreBrownianMaximalProcess]
   rw [← he]
   exact hc
 

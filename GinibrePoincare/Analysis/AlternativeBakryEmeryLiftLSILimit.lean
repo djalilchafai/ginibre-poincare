@@ -22,18 +22,18 @@ theorem bakryEmeryRegularizedLift_square_lsi_of_Brownian {Ω : Type*} [Measurabl
     (ε : ℝ) (hε : 0 < ε) (f : EuclideanSpace ℝ (Fin d × Fin 2) → ℝ)
     (hf : ContDiff ℝ 1 f) (hs : HasCompactSupport f) :
     squareEntropy (bakryEmeryNormalizedGibbs volume (bakryEmeryRegularizedLiftPotential n V ε)) f ≤
-      (2/((n:ℝ)*ρ)) * ∫ x, ‖gradient f x‖^2 ∂bakryEmeryNormalizedGibbs volume
+      (2/((n : ℝ)*ρ)) * ∫ x, ‖gradient f x‖^2 ∂bakryEmeryNormalizedGibbs volume
         (bakryEmeryRegularizedLiftPotential n V ε) := by
   let W := bakryEmeryRegularizedConfigurationPotential n d V ε
   have hWe := bakryEmeryRegularizedConfigurationPotential_euclidean_contDiff n d V ε hV hε
   have hW : ContDiff ℝ 2 W := by
     have h := hWe.comp (configurationEuclideanEquiv d).contDiff
-    simpa [Function.comp_def,W] using h
-  have hκ : 0 < (n:ℝ)*ρ := mul_pos (Nat.cast_pos.mpr hn) hρ
+    simpa [Function.comp_def, W] using h
+  have hκ : 0 < (n : ℝ)*ρ := mul_pos (Nat.cast_pos.mpr hn) hρ
   have h := bakryEmeryConfigurationGibbs_square_lsi_of_Brownian d hd W hW _ hκ
     (bakryEmeryRegularizedConfigurationPotential_euclidean_strongConvex n d ρ ε V hrot hc)
     B P hB hind f hf hs
-  simpa only [W,bakryEmeryRegularizedConfigurationPotential_euclidean] using h
+  simpa only [W, bakryEmeryRegularizedConfigurationPotential_euclidean] using h
 
 /-- Passage to the unregularized Euclidean lift. Both entropy and actual
 gradient expectations converge under internally proved Gaussian domination. -/
@@ -47,7 +47,7 @@ theorem bakryEmeryEuclideanLift_square_lsi_of_Brownian {Ω : Type*} [MeasurableS
     (f : EuclideanSpace ℝ (Fin d × Fin 2) → ℝ)
     (hf : ContDiff ℝ 1 f) (hs : HasCompactSupport f) :
     squareEntropy (bakryEmeryNormalizedGibbs volume (bakryEmeryEuclideanLiftPotential n V)) f ≤
-      (2/((n:ℝ)*ρ)) * ∫ x, ‖gradient f x‖^2 ∂bakryEmeryNormalizedGibbs volume
+      (2/((n : ℝ)*ρ)) * ∫ x, ‖gradient f x‖^2 ∂bakryEmeryNormalizedGibbs volume
         (bakryEmeryEuclideanLiftPotential n V) := by
   have he := bakryEmeryRegularizedLift_volume_entropy_tendsto n hn ρ hρ V hV.continuous hrot hc f hf.continuous hs
   have hg : Continuous (gradient f) :=
@@ -59,7 +59,7 @@ theorem bakryEmeryEuclideanLift_square_lsi_of_Brownian {Ω : Type*} [MeasurableS
       (g := fun x : EuclideanSpace ℝ (Fin d × Fin 2) => ‖x‖^2) (by simp)
   have hi := bakryEmeryRegularizedLift_volume_expectation_tendsto n hn ρ hρ V hV.continuous hrot hc
     (fun x => ‖gradient f x‖^2) (hg.norm.pow 2) hgs
-  let ε : ℕ → ℝ := fun m => 1/(m+1:ℝ)
+  let ε : ℕ → ℝ := fun m => 1/(m+1 : ℝ)
   have hε : Tendsto ε atTop (𝓝 0) := by
     simpa only [ε] using (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ))
   exact le_of_tendsto_of_tendsto (he.comp hε) ((tendsto_const_nhds.mul hi).comp hε)
@@ -75,7 +75,7 @@ theorem bakryEmeryEuclideanLift_square_lsi
     (f : EuclideanSpace ℝ (Fin d × Fin 2) → ℝ)
     (hf : ContDiff ℝ 1 f) (hs : HasCompactSupport f) :
     squareEntropy (bakryEmeryNormalizedGibbs volume (bakryEmeryEuclideanLiftPotential n V)) f ≤
-      (2/((n:ℝ)*ρ)) * ∫ x, ‖gradient f x‖^2 ∂bakryEmeryNormalizedGibbs volume
+      (2/((n : ℝ)*ρ)) * ∫ x, ‖gradient f x‖^2 ∂bakryEmeryNormalizedGibbs volume
         (bakryEmeryEuclideanLiftPotential n V) := by
   exact bakryEmeryEuclideanLift_square_lsi_of_Brownian n d hn hd ρ hρ V hV hrot hc
     (bakryBrownianCoordinateProcess (Fin d × Fin 2))

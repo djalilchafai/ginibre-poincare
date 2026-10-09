@@ -43,7 +43,7 @@ set_option backward.isDefEq.respectTransparency false
     exact ((hF.comp measurable_fst).mul ((measurable_snd.pow_const 2).sub measurable_const))
   have hSq : Integrable (fun ω => (Z ω)^2) P :=
     (ginibreGaussian_hasLaw_square_memLp_two P Z t hZ).integrable (by norm_num)
-  have hGint : Integrable (fun ω => G (Past ω,Z ω)) P :=
+  have hGint : Integrable (fun ω => G (Past ω, Z ω)) P :=
     (hSq.sub (integrable_const (t : ℝ))).bdd_mul
       (hF.comp hPast).aestronglyMeasurable (Filter.Eventually.of_forall fun ω => hbound (Past ω))
   have hCE := condExp_prod_ae_eq_integral_condDistrib hPast hZ.aemeasurable hG.stronglyMeasurable hGint
@@ -82,7 +82,7 @@ set_option backward.isDefEq.respectTransparency false
     (ginibreGaussian_hasLaw_square_memLp_two P Z t hZ).integrable (by norm_num)
   have hIndWeight : IndepFun (fun ω => F (Past ω)) (fun ω => (Z ω)^2-(t : ℝ)) P :=
     hInd.symm.comp hF (show Measurable (fun x : ℝ => x^2-(t : ℝ)) by fun_prop)
-  have hGint : Integrable (fun ω => G (Past ω,Z ω)) P :=
+  have hGint : Integrable (fun ω => G (Past ω, Z ω)) P :=
     hIndWeight.integrable_mul hWeight (hSq.sub (integrable_const (t : ℝ)))
   have hCE := condExp_prod_ae_eq_integral_condDistrib hPast hZ.aemeasurable hG.stronglyMeasurable hGint
   apply hCE.trans

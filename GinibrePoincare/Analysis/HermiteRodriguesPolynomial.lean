@@ -13,7 +13,7 @@ theorem rodrigues_dbar_add {f g : ℂ → ℂ} (hf : Differentiable ℝ f)
     (hg : Differentiable ℝ g) (z : ℂ) :
     dbarOnePublic (fun w => f w+g w) z=dbarOnePublic f z+dbarOnePublic g z := by
   change dbarOnePublic (f+g) z = _
-  rw [dbarOnePublic,dbarOnePublic,dbarOnePublic,fderiv_add (hf z) (hg z)]
+  rw [dbarOnePublic, dbarOnePublic, dbarOnePublic, fderiv_add (hf z) (hg z)]
   simp only [add_apply]
   ring
 
@@ -75,19 +75,19 @@ theorem rodrigues_dbar_diagonalEvalPublic (P : Poly) (z : ℂ) :
 
 
  theorem rodrigues_dbar_raw (ρ : ℝ) (p q : ℕ) (z : ℂ) :
-    dbarOnePublic (eval ρ p q) z = (q:ℂ)*eval ρ p (q-1) z := by
+    dbarOnePublic (eval ρ p q) z = (q : ℂ)*eval ρ p (q-1) z := by
   change dbarOnePublic (diagonalEvalPublic (raw ρ p q)) z = _
-  rw [rodrigues_dbar_diagonalEvalPublic,pderiv_W_raw]
-  simp [diagonalEvalPublic,eval]
+  rw [rodrigues_dbar_diagonalEvalPublic, pderiv_W_raw]
+  simp [diagonalEvalPublic, eval]
 
  theorem rodrigues_dbar_weighted_raw (n p q : ℕ) (z : ℂ) :
-    dbarOnePublic (fun w => eval ((n:ℝ)⁻¹) p q w*rodriguesGaussian n w) z =
-      ((q:ℂ)*eval ((n:ℝ)⁻¹) p (q-1) z-
-        (n:ℂ)*z*eval ((n:ℝ)⁻¹) p q z)*rodriguesGaussian n z := by
-  have hP : Differentiable ℝ (eval ((n:ℝ)⁻¹) p q) :=
-    (contDiff_diagonalEvalPublic (raw ((n:ℝ)⁻¹) p q)).differentiable (by simp)
+    dbarOnePublic (fun w => eval ((n : ℝ)⁻¹) p q w*rodriguesGaussian n w) z =
+      ((q : ℂ)*eval ((n : ℝ)⁻¹) p (q-1) z-
+        (n : ℂ)*z*eval ((n : ℝ)⁻¹) p q z)*rodriguesGaussian n z := by
+  have hP : Differentiable ℝ (eval ((n : ℝ)⁻¹) p q) :=
+    (contDiff_diagonalEvalPublic (raw ((n : ℝ)⁻¹) p q)).differentiable (by simp)
   have hG := (contDiff_rodriguesGaussian n).differentiable (by simp)
-  rw [dbarOnePublic_mul hP hG,rodrigues_dbar_raw,dbarOne_rodriguesGaussian]
+  rw [dbarOnePublic_mul hP hG, rodrigues_dbar_raw, dbarOne_rodriguesGaussian]
   ring
 
 end

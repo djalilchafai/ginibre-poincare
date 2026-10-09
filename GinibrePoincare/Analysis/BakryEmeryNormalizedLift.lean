@@ -30,7 +30,7 @@ theorem bakryEmeryBlockHilbert_volume (k : ℕ) :
   let e := bakryEmeryBlockHilbertEquiv k
   let μ := (volume : Measure (Configuration (k+1))).map e
   letI : IsAddHaarMeasure μ := e.isAddHaarMeasure_map volume
-  refine ⟨addHaarScalarFactor μ volume,addHaarScalarFactor_pos_of_isAddHaarMeasure μ volume,?_⟩
+  refine ⟨addHaarScalarFactor μ volume, addHaarScalarFactor_pos_of_isAddHaarMeasure μ volume,?_⟩
   exact isAddLeftInvariant_eq_smul μ volume
 
 /-- Every literal normalized Gibbs expectation agrees in the two coordinate
@@ -42,13 +42,13 @@ theorem bakryEmeryBlockHilbert_normalized_integral (k : ℕ)
       (fun z => W (bakryEmeryBlockHilbertEquiv k z))) =
       ∫ x, f x ∂bakryEmeryNormalizedGibbs volume W := by
   let e := bakryEmeryBlockHilbertEquiv k
-  obtain ⟨c,hc,he⟩ := bakryEmeryBlockHilbert_volume k
+  obtain ⟨c, hc, he⟩ := bakryEmeryBlockHilbert_volume k
   have hInt (q : BakryEmeryHilbertBlock k → ℝ) :
-      (∫ z : Configuration (k+1), q (e z)) = (c:ℝ) * ∫ x, q x := by
+      (∫ z : Configuration (k+1), q (e z)) = (c : ℝ) * ∫ x, q x := by
     have h := integral_map_equiv (μ := (volume : Measure (Configuration (k+1))))
       e.toHomeomorph.toMeasurableEquiv q
     change (∫ x, q x ∂(volume : Measure (Configuration (k+1))).map e) = _ at h
-    rw [he,integral_smul_nnreal_measure] at h
+    rw [he, integral_smul_nnreal_measure] at h
     simpa [NNReal.smul_def, smul_eq_mul] using h.symm
   have hcomp : Continuous (fun z => W (e z)) := hW.comp e.continuous
   change (∫ z, f (e z) ∂bakryEmeryNormalizedGibbs volume (fun z => W (e z))) = _
@@ -56,8 +56,8 @@ theorem bakryEmeryBlockHilbert_normalized_integral (k : ℕ)
     (fun z => W (e z)) hcomp (fun z => f (e z)),
     bakryEmeryNormalizedGibbs_integral (volume : Measure (BakryEmeryHilbertBlock k)) W hW f]
   change (∫ z, (Real.exp (-W (e z))*f (e z))) / (∫ z, Real.exp (-W (e z))) = _
-  rw [hInt (fun x => Real.exp (-W x)*f x),hInt (fun x => Real.exp (-W x))]
-  exact mul_div_mul_left _ _ (by exact_mod_cast hc.ne' : (c:ℝ) ≠ 0)
+  rw [hInt (fun x => Real.exp (-W x)*f x), hInt (fun x => Real.exp (-W x))]
+  exact mul_div_mul_left _ _ (by exact_mod_cast hc.ne' : (c : ℝ) ≠ 0)
 
 /-- Actual square entropy agrees between physical and Hilbert coordinates. -/
 theorem bakryEmeryBlockHilbert_normalized_entropy (k : ℕ)
@@ -85,7 +85,7 @@ theorem bakryEmeryBlockLift_eq_normalizedGibbs
       Real.sqrt_sq (norm_nonneg _)] using
       bakryEmeryRegularizedLift_density_integrable (E := BakryEmeryHilbertBlock k)
         n hn ρ hρ V hV hrot hc 0
-  obtain ⟨c,hc',he⟩ := bakryEmeryBlockHilbert_volume k
+  obtain ⟨c, hc', he⟩ := bakryEmeryBlockHilbert_volume k
   have hIm : Integrable (fun x => Real.exp (-W x))
       ((volume : Measure (Configuration (k+1))).map e) := by
     rw [he]
@@ -99,15 +99,15 @@ theorem bakryEmeryBlockLift_eq_normalizedGibbs
     congr 1
     funext z
     have hp := bakryEmeryBlock_profile_eq_hilbert_potential n k V z
-    change (n:ℝ)*potentialSquaredRadiusProfile V (gaussianBlockRadius 1 (k+1) z) = W (e z) at hp
-    rw [neg_mul,hp]
+    change (n : ℝ)*potentialSquaredRadiusProfile V (gaussianBlockRadius 1 (k+1) z) = W (e z) at hp
+    rw [neg_mul, hp]
   have hm : bakryEmeryRawBlockLift n k V univ =
       ENNReal.ofReal (∫ z, Real.exp (-W (e z))) := by
-    rw [hraw,withDensity_apply _ MeasurableSet.univ,setLIntegral_univ,
+    rw [hraw, withDensity_apply _ MeasurableSet.univ, setLIntegral_univ,
       ← ofReal_integral_eq_lintegral_ofReal hIs
         (Eventually.of_forall (fun z => Real.exp_nonneg _))]
   unfold bakryEmeryBlockLift bakryEmeryNormalizedGibbs
-  rw [hm,hraw]
+  rw [hm, hraw]
 
 /-- The literal radial block entropy equals the normalized Hilbert Gibbs
 entropy, with all normalization and confinement integrability proved internally. -/

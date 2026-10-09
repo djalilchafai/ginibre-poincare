@@ -23,11 +23,11 @@ theorem correspondence_configurationNormSq_hessian {n : ℕ} (z v w : Configurat
         (ContinuousLinearMap.proj j : Configuration n →L[ℝ] ℂ))))
   have heL : (fun x : Configuration n => 2*∑ j, (conj (x j)*w j).re) = L := by
     funext x
-    simp [L,mul_comm]
+    simp [L, mul_comm]
   rw [heL]
   unfold bochnerDirectionalDerivative
   rw [L.fderiv]
-  simp [L,mul_comm]
+  simp [L, mul_comm]
 
 theorem correspondence_hamiltonian_interaction_hessian {n : ℕ}
     (z v w : Configuration n) (hz : CollisionFree z) :
@@ -39,7 +39,7 @@ theorem correspondence_hamiltonian_interaction_hessian {n : ℕ}
   have hH : ginibreHamiltonian n =
       fun x => (n : ℝ)*configurationNormSq x + ginibreInteractionPotential n x := by
     funext x
-    simp only [ginibreHamiltonian,ginibreInteractionPotential,sub_eq_add_neg]
+    simp only [ginibreHamiltonian, ginibreInteractionPotential, sub_eq_add_neg]
   have he : fderiv ℝ (ginibreHamiltonian n) =ᶠ[𝓝 z]
       (fun x => (n : ℝ) • fderiv ℝ configurationNormSq x +
         fderiv ℝ (ginibreInteractionPotential n) x) := by
@@ -47,13 +47,13 @@ theorem correspondence_hamiltonian_interaction_hessian {n : ℕ}
     rw [hH]
     have hh := ((hQ.differentiable (by simp)).differentiableAt.hasFDerivAt.fun_const_smul (n : ℝ)).fun_add
       (((ginibreInteractionPotential_contDiffAt n x hx).differentiableAt (by simp)).hasFDerivAt)
-    simpa only [Pi.add_apply,smul_eq_mul] using hh.fderiv
+    simpa only [Pi.add_apply, smul_eq_mul] using hh.fderiv
   rw [he.fderiv_eq]
   have hQD := (hQ.contDiffAt.fderiv_right (m := ∞) (by simp)).differentiableAt (x := z) (by simp)
   have hID := (hI.fderiv_right (m := ∞) (by simp)).differentiableAt (by simp)
   rw [fderiv_fun_add (hQD.fun_const_smul (n : ℝ)) hID,
     fderiv_fun_const_smul hQD (n : ℝ)]
-  simp only [ContinuousLinearMap.add_apply,ContinuousLinearMap.smul_apply,smul_eq_mul]
+  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply, smul_eq_mul]
   rw [correspondence_configurationNormSq_hessian]
   ring
 

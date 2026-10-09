@@ -8,17 +8,17 @@ noncomputable section
 /-- Uniform decay after multiplication by the resolvent complement, with no
 spectral gap assumption. -/
 theorem correspondenceOperator_ergodic_multiplier_bound {t r : ℝ} (ht : 0≤t)
-    (hr : r∈Icc (0:ℝ) 1) :
+    (hr : r∈Icc (0 : ℝ) 1) :
     ‖resolventEvolutionMultiplier t r*(1-r)‖≤1/(1+t) := by
   by_cases ht0 : t=0
   · subst t
-    simp only [resolventEvolutionMultiplier_zero,one_mul,add_zero,div_one,Real.norm_eq_abs]
+    simp only [resolventEvolutionMultiplier_zero, one_mul, add_zero, div_one, Real.norm_eq_abs]
     rw [abs_of_nonneg (sub_nonneg.mpr hr.2)]
     linarith [hr.1]
   have htpos : 0<t := lt_of_le_of_ne ht (Ne.symm ht0)
   by_cases hr0 : r=0
   · subst r
-    rw [resolventEvolutionMultiplier_nonpositive htpos le_rfl,zero_mul,norm_zero]
+    rw [resolventEvolutionMultiplier_nonpositive htpos le_rfl, zero_mul, norm_zero]
     positivity
   have hrpos : 0<r := lt_of_le_of_ne hr.1 (Ne.symm hr0)
   rw [resolventEvolutionMultiplier_positive_formula htpos hrpos]
@@ -34,7 +34,7 @@ theorem correspondenceOperator_ergodic_multiplier_bound {t r : ℝ} (ht : 0≤t)
       (Real.exp_pos (-t*(1-r))).le
     rw [← Real.exp_add] at hh
     have hz : t*(1-r)+ -t*(1-r)=0 := by ring
-    rw [hz,Real.exp_zero] at hh
+    rw [hz, Real.exp_zero] at hh
     simpa only [add_comm] using hh
   have hp : 0<1+t := by linarith
   apply (le_div_iff₀ hp).mpr
@@ -48,14 +48,14 @@ resolvent, including spectral accumulation at both zero and one. -/
 theorem correspondenceOperator_ergodic_range_norm_bound
     {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
     (R : H→L[ℂ] H) (hR : IsSelfAdjoint R)
-    (hSpec : ∀r∈spectrum ℝ R,r∈Icc (0:ℝ) 1) (t : ℝ≥0) :
-    ‖resolventCfcEvolution R t*(1-R)‖≤1/(1+(t:ℝ)) := by
-  let f := resolventEvolutionMultiplier (t:ℝ)
+    (hSpec : ∀r∈spectrum ℝ R, r∈Icc (0 : ℝ) 1) (t : ℝ≥0) :
+    ‖resolventCfcEvolution R t*(1-R)‖≤1/(1+(t : ℝ)) := by
+  let f := resolventEvolutionMultiplier (t : ℝ)
   have hf : ContinuousOn f (spectrum ℝ R) := (resolventEvolutionMultiplier_continuous _).continuousOn
   have he : cfc (fun r : ℝ => f r*(1-r)) R=resolventCfcEvolution R t*(1-R) := by
     rw [cfc_mul f (fun r : ℝ => 1-r) R hf (continuousOn_const.sub continuousOn_id),
       cfc_sub (fun _ : ℝ => 1) (fun r : ℝ => r) R continuousOn_const continuousOn_id,
-      cfc_const_one (R := ℝ) (a := R),cfc_id' ℝ R hR]
+      cfc_const_one (R := ℝ) (a := R), cfc_id' ℝ R hR]
     rfl
   rw [← he]
   apply norm_cfc_le (by positivity)

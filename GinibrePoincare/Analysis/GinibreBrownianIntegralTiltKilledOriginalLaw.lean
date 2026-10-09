@@ -13,9 +13,9 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 2000000
 local instance killedOriginalPathMeasurable (n : ℕ) (T : ℝ≥0) :
-    MeasurableSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := borel _
+    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := borel _
 local instance killedOriginalPathBorel (n : ℕ) (T : ℝ≥0) :
-    BorelSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := ⟨rfl⟩
+    BorelSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := ⟨rfl⟩
 
 /-- The actual original Ginibre Brownian path law killed on a Hamiltonian
 sublevel is precisely the actual OU reference law with its literal killed
@@ -36,7 +36,7 @@ theorem ginibreBrownian_original_killed_compact_path_law {Ω : Type*}
         (ginibreHamiltonianOUReferenceHorizon n α z B T ω)))).map
           (ginibreHamiltonianOUReferenceHorizon n α z B T) := by
   classical
-  obtain ⟨Y,M,hM,hDi,hD1,hPath,hCouple⟩ :=
+  obtain ⟨Y, M, hM, hDi, hD1, hPath, hCouple⟩ :=
     ginibreActualOU_sublevel_canonical_compact_path_law_exists hn B P hB hind α z hz R hR T hT
   let F := fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i
   let D := brownianVectorExponentialIntegralDensity F T (fun i => M i T)
@@ -45,7 +45,7 @@ theorem ginibreBrownian_original_killed_compact_path_law {Ω : Type*}
   let N := fun ω => ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω
   let C := ginibreCanonicalCompactPath n α z T N
   let O := ginibreHamiltonianOUReferenceHorizon n α z B T
-  let G := ginibreHamiltonianCompactSurvival n (T:ℝ) R
+  let G := ginibreHamiltonianCompactSurvival n (T : ℝ) R
   let S := O ⁻¹' G
   let e := fun ω => ENNReal.ofReal (Real.exp (ginibreInteractionPotential n z)*
     ginibreHamiltonianOUActionWeight n α T T.property (O ω))
@@ -59,18 +59,18 @@ theorem ginibreBrownian_original_killed_compact_path_law {Ω : Type*}
       ginibreHamiltonianOUReferenceProcess n α z B t ω ∈ ginibreHamiltonianOUSublevelDomain n R := by
     constructor
     · intro h t ht
-      have hh := h (⟨t,⟨t.property,by exact_mod_cast ht⟩⟩ : Icc (0:ℝ) (T:ℝ))
-      change ginibreHamiltonianOUReferenceProcess n α z B (t:ℝ).toNNReal ω∈_ at hh
+      have hh := h (⟨t, ⟨t.property, by exact_mod_cast ht⟩⟩ : Icc (0 : ℝ) (T : ℝ))
+      change ginibreHamiltonianOUReferenceProcess n α z B (t : ℝ).toNNReal ω∈_ at hh
       simpa only [Real.toNNReal_coe] using hh
     · intro h t
       exact h t.val.toNNReal (Real.toNNReal_le_iff_le_coe.mpr t.property.2)
   have hSetEq : C ⁻¹' G=ᵐ[Q] S := by
-    filter_upwards [hPath.1,hCouple] with ω hAlive hω
+    filter_upwards [hPath.1, hCouple] with ω hAlive hω
     apply propext
     exact (ginibreCanonicalCompactPath_forall_iff_of_alive n α z T N ω hAlive
       (ginibreHamiltonianOUSublevelDomain n R)).trans (hω.1.trans (hOStay ω).symm)
   have hCO : ∀ᵐ ω ∂Q, ω∈S → C ω=O ω := by
-    filter_upwards [hPath.1,hCouple] with ω hAlive hω
+    filter_upwards [hPath.1, hCouple] with ω hAlive hω
     intro hSω
     have hCan := (hω.2 ((hOStay ω).mp hSω)).1
     apply ContinuousMap.ext
@@ -89,17 +89,17 @@ theorem ginibreBrownian_original_killed_compact_path_law {Ω : Type*}
       (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) T (fun i => M i T) ω)=
       ENNReal.ofReal (Real.exp (ginibreInteractionPotential n z)*
         ginibreHamiltonianOUActionWeight n α T T.property (O ω))
-    rw [hh.2.2,hLocal]
+    rw [hh.2.2, hLocal]
   have hdeP : ∀ᵐ ω ∂P, ω∈S → d ω=e ω := hPQ.ae_le hdeQ
   have hIndicator : S.indicator e=fun ω => ENNReal.ofReal (Real.exp (ginibreInteractionPotential n z)*
       ginibreHamiltonianKilledOUActionWeight n α T R T.property (O ω)) := by
     funext ω
     by_cases hmem : ω∈S
     · have hm : O ω∈ginibreHamiltonianCompactSurvival n T R := hmem
-      simp only [indicator_of_mem hmem,e,ginibreHamiltonianKilledOUActionWeight,indicator_of_mem hm]
+      simp only [indicator_of_mem hmem, e, ginibreHamiltonianKilledOUActionWeight, indicator_of_mem hm]
     · have hm : O ω∉ginibreHamiltonianCompactSurvival n T R := hmem
-      simp only [indicator_of_notMem hmem,ginibreHamiltonianKilledOUActionWeight,indicator_of_notMem hm,mul_zero,ENNReal.ofReal_zero]
-  rw [← hPath.2.2.2,Measure.restrict_map hPath.2.1 hG,Measure.restrict_congr_set hSetEq]
+      simp only [indicator_of_notMem hmem, ginibreHamiltonianKilledOUActionWeight, indicator_of_notMem hm, mul_zero, ENNReal.ofReal_zero]
+  rw [← hPath.2.2.2, Measure.restrict_map hPath.2.1 hG, Measure.restrict_congr_set hSetEq]
   have hMap := actualTiltedKilledPath_map P d e S hS C O hCO hdeP
   rw [hIndicator] at hMap
   exact hMap

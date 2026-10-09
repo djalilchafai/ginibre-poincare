@@ -12,21 +12,21 @@ open scoped ComplexConjugate
 set_option maxHeartbeats 600000
 
 def ginibreMixedHolomorphicLift {n : ℕ} (P : ConfigurationPolynomial n) : GinibreMixedPolynomial n :=
-  MvPolynomial.rename (fun j => (j,0)) P
+  MvPolynomial.rename (fun j => (j, 0)) P
 
 def ginibreMixedAntiholomorphicLift {n : ℕ} (P : ConfigurationPolynomial n) : GinibreMixedPolynomial n :=
-  MvPolynomial.rename (fun j => (j,1)) (MvPolynomial.map (starRingEnd ℂ) P)
+  MvPolynomial.rename (fun j => (j, 1)) (MvPolynomial.map (starRingEnd ℂ) P)
 
 theorem ginibreMixedPolynomialSpecialize_holomorphic {n : ℕ}
     (P : ConfigurationPolynomial n) (z : Configuration n) :
     ginibreMixedPolynomialSpecialize z (ginibreMixedHolomorphicLift P) = C (MvPolynomial.eval z P) := by
   induction P using MvPolynomial.induction_on with
-  | C a => simp [ginibreMixedHolomorphicLift,ginibreMixedPolynomialSpecialize]
-  | add P Q hp hq => simpa [ginibreMixedHolomorphicLift,map_add] using congrArg₂ (·+·) hp hq
+  | C a => simp [ginibreMixedHolomorphicLift, ginibreMixedPolynomialSpecialize]
+  | add P Q hp hq => simpa [ginibreMixedHolomorphicLift, map_add] using congrArg₂ (·+·) hp hq
   | mul_X P j hp =>
-    simp only [ginibreMixedHolomorphicLift,map_mul,MvPolynomial.rename_X]
-    simp only [ginibreMixedPolynomialSpecialize,MvPolynomial.aeval_X]
-    simp only [ginibreMixedHolomorphicLift,ginibreMixedPolynomialSpecialize] at hp
+    simp only [ginibreMixedHolomorphicLift, map_mul, MvPolynomial.rename_X]
+    simp only [ginibreMixedPolynomialSpecialize, MvPolynomial.aeval_X]
+    simp only [ginibreMixedHolomorphicLift, ginibreMixedPolynomialSpecialize] at hp
     rw [hp]
     simp
 
@@ -36,7 +36,7 @@ theorem ginibreMixedPolynomialSpecialize_antiholomorphic {n : ℕ}
       MvPolynomial.map (starRingEnd ℂ) P := by
   unfold ginibreMixedPolynomialSpecialize ginibreMixedAntiholomorphicLift
   rw [MvPolynomial.aeval_rename]
-  simpa only [Function.comp_def,show (1:Fin 2)≠0 by decide,if_false] using MvPolynomial.aeval_X_left_apply (MvPolynomial.map (starRingEnd ℂ) P)
+  simpa only [Function.comp_def, show (1 : Fin 2)≠0 by decide, if_false] using MvPolynomial.aeval_X_left_apply (MvPolynomial.map (starRingEnd ℂ) P)
 
 /-- A nonzero holomorphic factor preserves the specialized conjugate degree. -/
 theorem ginibreEquality_mixed_factor_degree_bound_of_specialize {n : ℕ}
@@ -54,12 +54,12 @@ theorem ginibreEquality_mixed_factor_degree_bound_of_specialize {n : ℕ}
       (show Function.Injective (starRingEnd ℂ) from star_injective)
     simpa using hz
   have he := hdegree
-  rw [hfactor,map_mul,ginibreMixedPolynomialSpecialize_holomorphic,
+  rw [hfactor, map_mul, ginibreMixedPolynomialSpecialize_holomorphic,
     ginibreMixedPolynomialSpecialize_antiholomorphic,
     MvPolynomial.totalDegree_mul_of_isDomain (MvPolynomial.C_ne_zero.mpr hV) hm,
-    MvPolynomial.totalDegree_C,zero_add] at he
+    MvPolynomial.totalDegree_C, zero_add] at he
   have hd : (MvPolynomial.map (starRingEnd ℂ) Q).totalDegree = Q.totalDegree := by
-    simp only [MvPolynomial.totalDegree,MvPolynomial.support_map_of_injective Q (show Function.Injective (starRingEnd ℂ) from star_injective)]
+    simp only [MvPolynomial.totalDegree, MvPolynomial.support_map_of_injective Q (show Function.Injective (starRingEnd ℂ) from star_injective)]
   rwa [hd] at he
 
 
@@ -68,7 +68,7 @@ theorem ginibreEquality_mixed_factor_degree_bound_of_specialize {n : ℕ}
 theorem ginibreEquality_mixed_factor_degree_bound {n : ℕ}
     (V Q : ConfigurationPolynomial n) (P : GinibreMixedPolynomial n)
     (z : Configuration n) (hV : MvPolynomial.eval z V ≠ 0) (K : ℕ)
-    (hP : ∀ d ∈ P.support,ginibreMixedAntiDegree d ≤ K)
+    (hP : ∀ d ∈ P.support, ginibreMixedAntiDegree d ≤ K)
     (hfactor : P = ginibreMixedHolomorphicLift V * ginibreMixedAntiholomorphicLift Q) :
     Q.totalDegree ≤ K := by
   exact ginibreEquality_mixed_factor_degree_bound_of_specialize V Q P z hV K
@@ -85,14 +85,14 @@ theorem ginibreMixedAntiholomorphicLift_eval {n : ℕ} (P : ConfigurationPolynom
     (z : Configuration n) : ginibreMixedPolynomialEval (ginibreMixedAntiholomorphicLift P) z =
       conj (MvPolynomial.eval z P) := by
   induction P using MvPolynomial.induction_on with
-  | C a => simp [ginibreMixedPolynomialEval,ginibreMixedAntiholomorphicLift]
+  | C a => simp [ginibreMixedPolynomialEval, ginibreMixedAntiholomorphicLift]
   | add P Q hp hq =>
-    simpa only [ginibreMixedPolynomialEval,ginibreMixedAntiholomorphicLift,map_add] using
+    simpa only [ginibreMixedPolynomialEval, ginibreMixedAntiholomorphicLift, map_add] using
       congrArg₂ (·+·) hp hq
   | mul_X P j hp =>
-    simp only [ginibreMixedPolynomialEval,ginibreMixedAntiholomorphicLift,map_mul,
-      MvPolynomial.map_X,MvPolynomial.rename_X,MvPolynomial.eval_X]
-    simp only [ginibreMixedPolynomialEval,ginibreMixedAntiholomorphicLift] at hp
+    simp only [ginibreMixedPolynomialEval, ginibreMixedAntiholomorphicLift, map_mul,
+      MvPolynomial.map_X, MvPolynomial.rename_X, MvPolynomial.eval_X]
+    simp only [ginibreMixedPolynomialEval, ginibreMixedAntiholomorphicLift] at hp
     rw [hp]
     simp
 

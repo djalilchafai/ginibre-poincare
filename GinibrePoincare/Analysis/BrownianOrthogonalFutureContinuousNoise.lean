@@ -15,11 +15,11 @@ set_option backward.isDefEq.respectTransparency false
 theorem indepFun_continuousMap_left_of_path_independence {Ω E A : Type*}
     [MeasurableSpace Ω] [TopologicalSpace E] [SecondCountableTopology E] [T2Space E]
     [MeasurableSpace E] [BorelSpace E] [MeasurableSpace A]
-    [MeasurableSpace C(ℝ,E)] [BorelSpace C(ℝ,E)] [PolishSpace C(ℝ,E)]
-    (P : Measure Ω) (X : Ω → C(ℝ,E)) (Y : Ω → A)
+    [MeasurableSpace C(ℝ, E)] [BorelSpace C(ℝ, E)] [PolishSpace C(ℝ, E)]
+    (P : Measure Ω) (X : Ω → C(ℝ, E)) (Y : Ω → A)
     (hi : IndepFun (fun ω t => X ω t) Y P) : IndepFun X Y P := by
   let d := TopologicalSpace.denseSeq ℝ
-  let f : C(ℝ,E) → ℕ → E := fun x k => x (d k)
+  let f : C(ℝ, E) → ℕ → E := fun x k => x (d k)
   have hf : MeasurableEmbedding f :=
     (continuous_pi (fun k => continuous_eval_const (d k))).measurableEmbedding (by
       intro x y h
@@ -42,20 +42,20 @@ theorem brownianFamily_future_continuous_noise_independent_augmented_variable
     (hY : @Measurable Ω A (ginibreBrownianAugmentedFiltration B P
       (fun i => (hB i).toIsPreBrownianReal) s) _ Y) :
     IndepFun (ginibreBrownianFullContinuousNoise n (brownianFamilyShift B s) α) Y P := by
-  letI : MeasurableSpace C(ℝ,Configuration n) := borel _
-  letI : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+  letI : MeasurableSpace C(ℝ, Configuration n) := borel _
+  letI : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
   let N := ginibreBrownianFullContinuousNoise n (brownianFamilyShift B s) α
   let H : ((Fin n × Fin 2) → ℝ≥0 → ℝ) → ℝ → Configuration n :=
     fun p t j => Real.sqrt (2*α/(n : ℝ)^2) •
-      ((p (j,0) t.toNNReal : ℂ)+Complex.I*(p (j,1) t.toNNReal : ℂ))
+      ((p (j, 0) t.toNNReal : ℂ)+Complex.I*(p (j, 1) t.toNNReal : ℂ))
   have hH : Measurable H := by
     apply measurable_pi_lambda
     intro t
     apply measurable_pi_lambda
     intro j
-    exact ((((measurable_pi_apply t.toNNReal).comp (measurable_pi_apply (j,0))).complex_ofReal).add
+    exact ((((measurable_pi_apply t.toNNReal).comp (measurable_pi_apply (j, 0))).complex_ofReal).add
       (measurable_const.mul (((measurable_pi_apply t.toNNReal).comp
-        (measurable_pi_apply (j,1))).complex_ofReal))).const_smul (Real.sqrt (2*α/(n : ℝ)^2))
+        (measurable_pi_apply (j, 1))).complex_ofReal))).const_smul (Real.sqrt (2*α/(n : ℝ)^2))
   have hfresh := brownianFamily_future_independent_augmented_variable B P
     (fun i => (hB i).toIsPreBrownianReal) hind s Y hY
   have hraw := hfresh.comp hH measurable_id
@@ -68,7 +68,7 @@ theorem brownianFamily_future_continuous_noise_independent_augmented_variable
   have hCM : IndepFun (fun ω => (N ω).val) Y P :=
     indepFun_continuousMap_left_of_path_independence P (fun ω => (N ω).val) Y
       (hraw.congr heq Filter.EventuallyEq.rfl)
-  have hclosed : IsClosed {f : C(ℝ,Configuration n) | f 0 = 0} :=
+  have hclosed : IsClosed {f : C(ℝ, Configuration n) | f 0 = 0} :=
     isClosed_eq (continuous_eval_const 0) continuous_const
   have hec : Topology.IsClosedEmbedding (fun f : GinibreContinuousNoise n => f.val) :=
     hclosed.isClosedEmbedding_subtypeVal

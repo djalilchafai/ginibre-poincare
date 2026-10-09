@@ -38,7 +38,7 @@ def correspondenceBrascampLiebCoreRange
     simp only [bakryEmeryGibbsGenerator, hd]
     simp
   add_mem' := by
-    rintro _ _ ⟨f,rfl⟩ ⟨g,rfl⟩
+    rintro _ _ ⟨f, rfl⟩ ⟨g, rfl⟩
     let fg : CorrespondenceBrascampLiebCompactTest E :=
       ⟨f.val+g.val, f.smooth.add g.smooth, f.compact.add g.compact⟩
     refine ⟨fg, ?_⟩
@@ -48,12 +48,12 @@ def correspondenceBrascampLiebCoreRange
       correspondenceBrascampLieb_core_ae W b hW g,
       Lp.coeFn_add (correspondenceBrascampLiebCoreL2 W b hW f)
         (correspondenceBrascampLiebCoreL2 W b hW g)] with x hfg hfx hgx ha
-    rw [hfg,ha]
-    simp only [Pi.add_apply,hfx,hgx]
+    rw [hfg, ha]
+    simp only [Pi.add_apply, hfx, hgx]
     exact congrFun (correspondenceBrascampLieb_generator_add W f.val g.val b
       (f.smooth.of_le (by norm_num)) (g.smooth.of_le (by norm_num))) x
   smul_mem' := by
-    rintro c _ ⟨f,rfl⟩
+    rintro c _ ⟨f, rfl⟩
     let cf : CorrespondenceBrascampLiebCompactTest E :=
       ⟨c • f.val, f.smooth.const_smul c, f.compact.smul_left⟩
     refine ⟨cf, ?_⟩
@@ -61,8 +61,8 @@ def correspondenceBrascampLiebCoreRange
     filter_upwards [correspondenceBrascampLieb_core_ae W b hW cf,
       correspondenceBrascampLieb_core_ae W b hW f,
       Lp.coeFn_smul c (correspondenceBrascampLiebCoreL2 W b hW f)] with x hcf hfx hs
-    rw [hcf,hs]
-    simp only [Pi.smul_apply,hfx,smul_eq_mul]
+    rw [hcf, hs]
+    simp only [Pi.smul_apply, hfx, smul_eq_mul]
     exact congrFun (correspondenceBrascampLieb_generator_smul W f.val b
       (f.smooth.of_le (by norm_num)) c) x
 

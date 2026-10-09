@@ -31,8 +31,8 @@ theorem ginibreConfigurationBrownianNoise_measurable {Ω : Type*} [MeasurableSpa
   apply measurable_pi_lambda
   intro j
   exact (measurable_const : Measurable (fun _ : Ω => Real.sqrt (2*α/(n : ℝ)^2))).smul
-    ((Complex.continuous_ofReal.measurable.comp (hm (j,0))).add
-      (measurable_const.mul (Complex.continuous_ofReal.measurable.comp (hm (j,1)))))
+    ((Complex.continuous_ofReal.measurable.comp (hm (j, 0))).add
+      (measurable_const.mul (Complex.continuous_ofReal.measurable.comp (hm (j, 1)))))
 
 theorem ginibreCompactVolterra_restricted_drift_riemann_tendstoInProbability
     {Ω : Type*} [MeasurableSpace Ω] (n : ℕ)

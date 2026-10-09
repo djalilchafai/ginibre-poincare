@@ -37,11 +37,11 @@ theorem ginibreBrownianAugmentedQuadraticError_secondMoment_le {Ω ι : Type*}
     exact ginibreUniformBrownianTime_mono t n (Nat.succ_le_of_lt hik)
   have h := ginibreBrownian_augmented_quadratic_sum_secondMoment_le B P hB hind j (n+1) s d hc F hF C hbound
   simp only [hend] at h
-  dsimp only [d,s] at h
+  dsimp only [d, s] at h
   simp only [ginibreBrownianUniformTime_increment_coe] at h
   change (∫ ω, (ginibreBrownianAugmentedQuadraticError (B j) t n F ω)^2 ∂P) ≤ _ at h
   convert h using 1
-  simp only [Finset.sum_const,Finset.card_univ,Fintype.card_fin,nsmul_eq_mul,Nat.cast_add,Nat.cast_one]
+  simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, Nat.cast_add, Nat.cast_one]
   have hn : (n : ℝ)+1 ≠ 0 := by positivity
   field_simp <;> ring
 
@@ -57,7 +57,7 @@ theorem ginibreBrownianAugmentedQuadraticError_tendsto_meanSquare {Ω ι : Type*
   apply squeeze_zero (fun n => integral_nonneg fun ω => sq_nonneg _)
     (fun n => ginibreBrownianAugmentedQuadraticError_secondMoment_le B P hB hind j t n (F n) (hF n) C (hbound n))
   have h := (tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)).const_mul (2*C^2*(t : ℝ)^2)
-  simpa only [mul_zero,mul_one_div] using h
+  simpa only [mul_zero, mul_one_div] using h
 
 
 theorem ginibreBrownianAugmentedQuadraticError_memLp_two {Ω ι : Type*}
@@ -78,7 +78,7 @@ theorem ginibreBrownianAugmentedQuadraticError_memLp_two {Ω ι : Type*}
     have hW : MemLp (F i) 2 P := MemLp.of_bound hFM.aestronglyMeasurable C (Eventually.of_forall (hbound i))
     have h := ginibreBrownian_augmented_quadratic_memLp_two B P hB hind a d j (F i) (hF i) hW
     rw [hend] at h
-    simpa only [d,a,ginibreBrownianUniformTime_increment_coe] using h
+    simpa only [d, a, ginibreBrownianUniformTime_increment_coe] using h
   convert! memLp_finsetSum Finset.univ (fun i _ => hX i) using 1
 
 theorem ginibreBrownianAugmentedQuadraticError_tendstoInProbability {Ω ι : Type*}

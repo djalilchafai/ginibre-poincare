@@ -5,8 +5,14 @@ public import GinibrePoincare.Analysis.GinibreStochasticCIRGenerator
 
 @[expose] public section
 
-/-! The actual original Ginibre SDE has a strictly positive adapted continuous
-radial path, derived from its proved collision-free global realization. -/
+/-! # Positivity and continuity of the relative radius
+
+The global original solution is adapted, continuous and collision-free almost
+surely. Composing it with the smooth polynomial `pairwiseRadius` gives
+adaptation and continuity. For `2 ≤ n`, collision-freeness implies that this
+radius is strictly positive; the initial value follows from the initial
+condition of the original solution. All path properties hold on one event of
+full measure for every time, rather than separately almost surely at each time. -/
 open Set MeasureTheory ProbabilityTheory
 open scoped Topology NNReal
 namespace GinibrePoincare
@@ -24,7 +30,7 @@ theorem ginibreBrownianMaximalProcess_radius_path_properties
     ∀ᵐ ω ∂P, Continuous (fun t : ℝ≥0 => pairwiseRadius (ginibreBrownianMaximalProcess n α z B t ω)) ∧
       (∀ t, 0 < pairwiseRadius (ginibreBrownianMaximalProcess n α z B t ω)) ∧
       pairwiseRadius (ginibreBrownianMaximalProcess n α z B 0 ω)=pairwiseRadius z := by
-  obtain ⟨hAdapt,hPath⟩ := ginibreBrownianMaximalProcess_global_original_solution
+  obtain ⟨hAdapt, hPath⟩ := ginibreBrownianMaximalProcess_global_original_solution
     (by omega) α z hz B P hB hind
   have hr := (ginibre_contDiff_pairwiseRadius n).continuous
   refine ⟨fun t => (hr.measurable.comp (hAdapt t).measurable).stronglyMeasurable,?_⟩

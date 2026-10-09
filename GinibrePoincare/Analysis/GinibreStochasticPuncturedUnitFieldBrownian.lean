@@ -37,7 +37,7 @@ theorem ginibrePuncturedUnitField_Brownian_exists
         IndepFun Y (fun ω => β (s+t) ω-β s ω) P) := by
   classical
   let F := ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)
-  obtain ⟨β,hβ,hβC,hβL,hβ0,hβS,hβLaw⟩ :=
+  obtain ⟨β, hβ, hβC, hβL, hβ0, hβS, hβLaw⟩ :=
     ginibrePuncturedUnitField_global_continuous_integral_exists B P hB hind u hu hunit hc i₀
   have hbnd (t : ℝ≥0) (ω : Ω) (i : ι) : ‖u t ω i‖ ≤ 1 := by
     simpa only [hunit t ω] using PiLp.norm_apply_le (u t ω) i
@@ -49,7 +49,7 @@ theorem ginibrePuncturedUnitField_Brownian_exists
     s t (β (s+t)) (β s) (hβS (s+t)) (hβS s)
   have hBrown := brownianUnitField_actual_integral_isBrownian B P
     (fun i => (hB i).toIsPreBrownianReal) hind u hu hunit i₀ β hβ.1 hβ0 hβC hshift
-  refine ⟨β,hBrown,hβ,hβL,hβ0,hβS,hshift,?_⟩
+  refine ⟨β, hBrown, hβ, hβL, hβ0, hβS, hshift,?_⟩
   intro s t Y hY
   exact (brownianUnitShiftedUniformSum_limit_gaussian_independent B P
     (fun i => (hB i).toIsPreBrownianReal) hind u hu hunit i₀ s t _ (hshift s t) Y hY).2

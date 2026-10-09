@@ -28,7 +28,7 @@ theorem ginibreLocalRegularity_compact_elliptic_exists_weak_derivatives
       ContDiff ℝ ∞ θ → HasCompactSupport θ →
       (∫ x, θ x*g i x) = -(∫ x, fderiv ℝ θ x (b i)*u x) := by
   have he := ginibreLocalRegularity_compact_tests_tempered_equation b u h F hu hh hF hui hhi hFi heq
-  obtain ⟨g,hg⟩ := ginibreLocalRegularity_elliptic_exists_weak_derivatives
+  obtain ⟨g, hg⟩ := ginibreLocalRegularity_elliptic_exists_weak_derivatives
     (hui.toLp u) (hhi.toLp h) (fun i => (hFi i).toLp (F i)) (fun i => b i) he
   refine ⟨g,?_⟩
   intro i θ hθ hc

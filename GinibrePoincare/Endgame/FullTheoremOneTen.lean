@@ -12,6 +12,18 @@ public import GinibrePoincare.Analysis.HermiteSecondDbarInfiniteEnergy
 The vector is the inverse square root of the antiholomorphic number operator
 applied to the positive-mode projection of the actual centered Vandermonde
 transform. Its weak derivatives follow from the concrete Ginibre weak gradient.
+
+## Proof organization
+
+Centering preserves the ordinary weak gradient. The transformed gradient gives
+the Hermite coefficient lowering identities, from which inverse-square-root
+synthesis constructs both weak derivatives. Parseval identifies their summed
+second-derivative energy with `n` times the Hermite tail. Substituting this
+identity in Theorem 1.9 yields the coefficients `4 / n` and `8 / n` below.
+
+`fullTheoremOneTen_named` exposes the conclusions as named fields. The
+Schwartz version at the end uses the proved equivalence between the compact
+weak-test definition and ordinary distributional Wirtinger derivatives.
 -/
 open MeasureTheory
 open scoped BigOperators
@@ -121,20 +133,69 @@ theorem fullTheoremOneTen {n : ℕ} (hn : 0 < n)
       (ginibreWeakEnergy n g = 2 * ginibreL2Variance n hn u.val ↔
         ∃ (a : ℝ) (c : ℂ), (u.val : Configuration n → ℝ) =ᵐ[ginibreMeasure n]
           fun z => a + 2 * (c * coordinateSum z).re) := by
-  obtain ⟨g, hu, hs, _, hfirst, hsecond, hequality⟩ := fullTheoremOneNine hn u v hgraph
-  obtain ⟨hd, hdd⟩ := ginibreDifferentialDeficit_weak_derivatives hn u.val g hu hs
-  have hE := ginibreDifferentialSecondEnergy_eq_tail hn u.val g hu hs
-  have hn0 : (n : ℝ) ≠ 0 := by exact_mod_cast hn.ne'
-  have h4 : (4 / (n : ℝ)) * ginibreDifferentialSecondEnergy n hn g =
+  obtain ⟨g, deficits⟩ := fullTheoremOneNine_named hn u v hgraph
+  obtain ⟨hfirstDerivative, hsecondDerivative⟩ :=
+    ginibreDifferentialDeficit_weak_derivatives hn u.val g
+      deficits.distributional_gradient deficits.symmetric_gradient
+  have hsecondEnergy := ginibreDifferentialSecondEnergy_eq_tail hn u.val g
+    deficits.distributional_gradient deficits.symmetric_gradient
+  have hnNonzero : (n : ℝ) ≠ 0 := by exact_mod_cast hn.ne'
+  have hfirstCoefficient : (4 / (n : ℝ)) * ginibreDifferentialSecondEnergy n hn g =
       4 * modeTail (positiveHermiteModeMass hn (ginibreFullCenteredTransform n hn u.val)) := by
-    rw [hE]
+    rw [hsecondEnergy]
     field_simp
-  have h8 : (8 / (n : ℝ)) * ginibreDifferentialSecondEnergy n hn g =
+  have hsecondCoefficient : (8 / (n : ℝ)) * ginibreDifferentialSecondEnergy n hn g =
       8 * modeTail (positiveHermiteModeMass hn (ginibreFullCenteredTransform n hn u.val)) := by
-    rw [hE]
+    rw [hsecondEnergy]
     field_simp
-  exact ⟨g, hu, hs, hd, hdd, by rw [h4]; exact hfirst,
-    by rw [h8]; exact hsecond, hequality⟩
+  refine ⟨g, deficits.distributional_gradient, deficits.symmetric_gradient,
+    hfirstDerivative, hsecondDerivative, ?_, ?_, deficits.equality_iff_affine⟩
+  · rw [hfirstCoefficient]
+    exact deficits.poincare_deficit
+  · rw [hsecondCoefficient]
+    exact deficits.generator_deficit
+
+/-- Named differential conclusions for the same value, generator value, and
+ordinary weak gradient. The derivatives refer to the explicit synthesis
+functions defined above. -/
+structure GinibreDifferentialDeficits {n : ℕ} (hn : 0 < n)
+    (u v : ginibreFullSymmetricValues n) (g : GinibreFullGradientL2 n) : Prop where
+  /-- The value has this ordinary distributional gradient. -/
+  distributional_gradient : IsGinibreDistributionalGradient n u.val g
+  /-- Particle symmetry holds for the value-gradient pair. -/
+  symmetric_gradient : IsGinibreSymmetricWeakPair (u.val, g)
+  /-- First weak Wirtinger derivatives of the inverse-square-root vector. -/
+  first_derivatives : ∀ j,
+    IsGaussianWeakDbar n (ginibreDifferentialDeficitVector n hn u.val)
+      (ginibreDifferentialFirstDerivative n hn g j) j
+  /-- Second weak Wirtinger derivatives, for every ordered coordinate pair. -/
+  second_derivatives : ∀ j k,
+    IsGaussianWeakDbar n (ginibreDifferentialFirstDerivative n hn g j)
+      (ginibreDifferentialSecondDerivative n hn g j k) k
+  /-- The Poincaré deficit in terms of the summed second-derivative energy. -/
+  poincare_deficit : ginibreWeakEnergy n g - 2 * ginibreL2Variance n hn u.val =
+    2 * ‖ginibreFullHolomorphicRemainder n hn u.val‖ ^ 2 +
+      (4 / (n : ℝ)) * ginibreDifferentialSecondEnergy n hn g
+  /-- The generator deficit using the same second-derivative energy. -/
+  generator_deficit : ‖v.val‖ ^ 2 - 2 * ginibreWeakEnergy n g =
+    ‖v.val + (2 : ℝ) • ginibreFullCenter n hn u.val‖ ^ 2 +
+      4 * ‖ginibreFullHolomorphicRemainder n hn u.val‖ ^ 2 +
+      (8 / (n : ℝ)) * ginibreDifferentialSecondEnergy n hn g
+  /-- The exhaustive almost-everywhere affine equality classification. -/
+  equality_iff_affine : ginibreWeakEnergy n g = 2 * ginibreL2Variance n hn u.val ↔
+    ∃ (a : ℝ) (c : ℂ), (u.val : Configuration n → ℝ) =ᵐ[ginibreMeasure n]
+      fun z => a + 2 * (c * coordinateSum z).re
+
+/-- Theorem 1.10 with field access to its derivative and deficit conclusions. -/
+theorem fullTheoremOneTen_named {n : ℕ} (hn : 0 < n)
+    (u v : ginibreFullSymmetricValues n)
+    (hgraph : (ginibreFullSymmetricOfReal n u, ginibreFullSymmetricOfReal n v) ∈
+      (ginibreFullGenerator n hn).graph) :
+    ∃ g : GinibreFullGradientL2 n, GinibreDifferentialDeficits hn u v g := by
+  obtain ⟨g, hgradient, hsymmetry, hfirstDerivative, hsecondDerivative,
+    hpoincare, hgenerator, hequality⟩ := fullTheoremOneTen hn u v hgraph
+  exact ⟨g, ⟨hgradient, hsymmetry, hfirstDerivative, hsecondDerivative,
+    hpoincare, hgenerator, hequality⟩⟩
 
 /-- Theorem 1.10 with literal ordinary Schwartz distributional derivatives. -/
 theorem fullTheoremOneTenSchwartz {n : ℕ} (hn : 0 < n)
@@ -158,11 +219,11 @@ theorem fullTheoremOneTenSchwartz {n : ℕ} (hn : 0 < n)
       (ginibreWeakEnergy n g = 2 * ginibreL2Variance n hn u.val ↔
         ∃ (a : ℝ) (c : ℂ), (u.val : Configuration n → ℝ) =ᵐ[ginibreMeasure n]
           fun z => a + 2 * (c * coordinateSum z).re) := by
-  obtain ⟨g, hu, hs, hd, hdd, hfirst, hsecond, heq⟩ := fullTheoremOneTen hn u v hgraph
-  exact ⟨g, hu, hs,
-    fun j => (gaussianSchwartzDbar_iff_weak hn _ _ j).mpr (hd j),
-    fun j k => (gaussianSchwartzDbar_iff_weak hn _ _ k).mpr (hdd j k),
-    hfirst, hsecond, heq⟩
+  obtain ⟨g, deficits⟩ := fullTheoremOneTen_named hn u v hgraph
+  exact ⟨g, deficits.distributional_gradient, deficits.symmetric_gradient,
+    fun j => (gaussianSchwartzDbar_iff_weak hn _ _ j).mpr (deficits.first_derivatives j),
+    fun j k => (gaussianSchwartzDbar_iff_weak hn _ _ k).mpr (deficits.second_derivatives j k),
+    deficits.poincare_deficit, deficits.generator_deficit, deficits.equality_iff_affine⟩
 
 end
 end GinibrePoincare

@@ -39,8 +39,8 @@ set_option backward.isDefEq.respectTransparency false
     (n : ℕ) (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (P : Measure Ω) [P.IsComplete]
     (hB : ∀ i, IsBrownianReal (B i) P) (α : ℝ) :
     Measurable (ginibreBrownianFullContinuousNoise n B α) := by
-  letI : MeasurableSpace C(ℝ,Configuration n) := borel _
-  letI : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+  letI : MeasurableSpace C(ℝ, Configuration n) := borel _
+  letI : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
   apply (ginibreContinuousNoiseNormalize_continuous n).measurable.comp
   apply ginibre_measurable_continuousMap_of_evaluations
   intro t
@@ -48,9 +48,9 @@ set_option backward.isDefEq.respectTransparency false
   have hNoise : Measurable (fun ω => ginibreConfigurationBrownianNoise n B α ω t) := by
     apply measurable_pi_lambda
     intro j
-    exact (((aemeasurable_iff_measurable.mp ((hB (j,0)).aemeasurable t.toNNReal)).complex_ofReal).add
+    exact (((aemeasurable_iff_measurable.mp ((hB (j, 0)).aemeasurable t.toNNReal)).complex_ofReal).add
       (measurable_const.mul ((aemeasurable_iff_measurable.mp
-        ((hB (j,1)).aemeasurable t.toNNReal)).complex_ofReal))).const_smul (Real.sqrt (2*α/(n : ℝ)^2))
+        ((hB (j, 1)).aemeasurable t.toNNReal)).complex_ofReal))).const_smul (Real.sqrt (2*α/(n : ℝ)^2))
   apply hNoise.aemeasurable.congr
   filter_upwards [ginibreConfigurationBrownianNoise_actual n B P hB α] with ω hω
   simp [ContinuousMap.mkD, hω.1]

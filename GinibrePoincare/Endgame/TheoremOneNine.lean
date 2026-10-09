@@ -9,11 +9,14 @@ public import GinibrePoincare.Endgame.GeneratorCompletion
 # The two sum-of-squares identities of Theorem 1.9
 
 This file joins the Hermite-series deficit calculation to the universal
-generator square-completion.  Unlike the former `ModeReduction` result, the
-theorem below proves both displayed identities of Theorem 1.9 simultaneously.
-The hypotheses are precisely the analytic realization data still needed from
-the Ginibre/Hermite construction: Parseval, zero-mode geometry, and the mode
-energy formula.
+generator square-completion. It is an abstract reduction: Parseval, zero-mode
+geometry, and the mode energy formula are explicit hypotheses here.
+`ConcreteTheoremOneNine.lean` realizes the quantities on the smooth core;
+`FullTheoremOneNine.lean` exports the ordinary generator-domain theorem.
+
+First `infinite_deficit_identity` rearranges Parseval and the zero-mode
+Pythagorean identity. Then `completionSquare` rewrites the generator deficit
+in terms of the first deficit. The remaining step is scalar polynomial algebra.
 -/
 
 namespace GinibrePoincare

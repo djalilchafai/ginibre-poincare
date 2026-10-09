@@ -14,8 +14,8 @@ namespace GinibrePoincare
 noncomputable section
 set_option maxHeartbeats 2000000
 set_option backward.isDefEq.respectTransparency false
-local instance centerZeroRestartPathMeasurableSpace (n : ℕ) : MeasurableSpace C(ℝ,Configuration n) := borel _
-local instance centerZeroRestartPathBorelSpace (n : ℕ) : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+local instance centerZeroRestartPathMeasurableSpace (n : ℕ) : MeasurableSpace C(ℝ, Configuration n) := borel _
+local instance centerZeroRestartPathBorelSpace (n : ℕ) : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
 
 theorem ginibreBrownian_center_nonzero_after_positive_restart
     {Ω : Type*} [MeasurableSpace Ω] {n : ℕ} (hn : 2 ≤ n) (α : ℝ≥0) (hα : 0 < α)
@@ -25,11 +25,11 @@ theorem ginibreBrownian_center_nonzero_after_positive_restart
     (hind : iIndepFun (fun i ω t => B i t ω) P) (s : ℝ≥0) (hs : 0 < s) :
     ∀ᵐ ω ∂P, ∀ t : ℝ≥0,
       ginibreCenterSquared n (ginibreBrownianMaximalProcess n α z B (s+t) ω) ≠ 0 := by
-  let Z := ginibreBrownianStateProcess α ⟨z,hz⟩ B s
+  let Z := ginibreBrownianStateProcess α ⟨z, hz⟩ B s
   let N := ginibreBrownianFullContinuousNoise n (brownianFamilyShift B s) α
   let μ := P.map Z
   let ν := P.map (ginibreBrownianFullContinuousNoise n B α)
-  have hZpast := ginibreBrownianStateProcess_adapted (by omega) α ⟨z,hz⟩ B P hB s
+  have hZpast := ginibreBrownianStateProcess_adapted (by omega) α ⟨z, hz⟩ B P hB s
   have hZm : Measurable Z := hZpast.mono
     ((ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)).le s) le_rfl
   have hBs := (brownianFamilyShift_isBrownian_independent B P hB hind s).1
@@ -58,11 +58,11 @@ theorem ginibreBrownian_center_nonzero_after_positive_restart
   have hi := (brownianFamily_future_continuous_noise_independent_augmented_variable
     n B P hB hind α s Z hZpast).symm
   have hLaw := hi.map_prod_eq_prod_map_map hZm.aemeasurable hNm.aemeasurable
-  have hp' : ∀ᵐ ω ∂P, q (Z ω,N ω) := by
+  have hp' : ∀ᵐ ω ∂P, q (Z ω, N ω) := by
     have hν : P.map N = ν := brownianFamily_shift_continuous_noise_law_eq n B P hB hind α s
     rw [← hν,← hLaw] at hp
     exact ae_of_ae_map (hZm.prodMk hNm).aemeasurable hp
-  filter_upwards [hp',ginibreBrownian_center_positive_time_nonzero (by omega) α hα z hz B P hB hind s hs,
+  filter_upwards [hp', ginibreBrownian_center_positive_time_nonzero (by omega) α hα z hz B P hB hind s hs,
     ginibreBrownianMaximalProcess_canonical_restart (by omega) α z hz B P hB hind s]
     with ω hqω hcenter hrestart
   have hpositive : 0 < ginibreCenterSquared n (Z ω).val :=
@@ -71,7 +71,7 @@ theorem ginibreBrownian_center_nonzero_after_positive_restart
   intro t
   have ht := hpath (t : ℝ) t.coe_nonneg
   have htop : ginibreDrivenMaximalLifetime n α (N ω).val (Z ω).val = ⊤ := hrestart.1
-  simp only [ginibreDrivenGlobalPathElement,dif_pos htop,ContinuousMap.coe_mk,
+  simp only [ginibreDrivenGlobalPathElement, dif_pos htop, ContinuousMap.coe_mk,
     Real.toNNReal_coe] at ht
   have hval : (Z ω).val = ginibreBrownianMaximalProcess n α z B s ω := rfl
   rw [hval] at ht
@@ -94,7 +94,7 @@ theorem ginibreBrownian_center_all_positive_times_nonzero
   filter_upwards [ae_all_iff.mpr hlocal] with ω hω
   intro t ht
   have hl := tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)
-  obtain ⟨k,hk⟩ := (hl.eventually (gt_mem_nhds (show 0 < (t : ℝ) from ht))).exists
+  obtain ⟨k, hk⟩ := (hl.eventually (gt_mem_nhds (show 0 < (t : ℝ) from ht))).exists
   have hkt : 1/(k+1 : ℝ≥0) ≤ t := by exact_mod_cast hk.le
   have hh := hω k (t-1/(k+1 : ℝ≥0))
   rw [add_tsub_cancel_of_le hkt] at hh

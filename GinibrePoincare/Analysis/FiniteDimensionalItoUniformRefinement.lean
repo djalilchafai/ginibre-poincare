@@ -61,7 +61,7 @@ def itoUniformNNTime (T : ℝ≥0) (N i : ℕ) : ℝ≥0 := (itoUniformTime T N 
 
 @[simp] theorem itoUniformNNTime_eq_brownianTime (T : ℝ≥0) (n i : ℕ) :
     itoUniformNNTime T (n+1) i = ginibreUniformBrownianTime T n i := by
-  simp [itoUniformNNTime,itoUniformTime,ginibreUniformBrownianTime,ginibreUniformTime]
+  simp [itoUniformNNTime, itoUniformTime, ginibreUniformBrownianTime, ginibreUniformTime]
 
 theorem itoUniformNNWeightedSum_refinement (F B : ℝ≥0 → ℝ) (T : ℝ≥0) (N M : ℕ)
     (hM : 0 < M) :
@@ -108,7 +108,7 @@ theorem itoUniformNNTime_le_end (T : ℝ≥0) (N i : ℕ) (hN : 0 < N) (hi : i �
 /-- Exact fine interval length after taking real coordinates. -/
 theorem itoUniformNNTime_increment_coe (T : ℝ≥0) (N i : ℕ) :
     (itoUniformNNTime T N (i+1) : ℝ) - itoUniformNNTime T N i = (T : ℝ)/(N : ℝ) := by
-  simp only [itoUniformNNTime_coe,itoUniformTime,Nat.cast_add,Nat.cast_one]
+  simp only [itoUniformNNTime_coe, itoUniformTime, Nat.cast_add, Nat.cast_one]
   ring
 
 /-- Exact nonnegative interval length of the actual uniform partition. -/
@@ -130,8 +130,8 @@ theorem itoUniformNNTime_common_samples_mem (T : ℝ≥0) (N M k : ℕ)
   have hc1 := itoUniformNNTime_coarse_le_fine T N M k hM
   have hc2 := itoUniformNNTime_coarse_le_fine T M N k hN
   rw [Nat.mul_comm M N] at hc2
-  exact ⟨⟨bot_le,hc1.trans hf⟩,⟨bot_le,hc2.trans hf⟩,⟨bot_le,hf⟩,
-    ⟨bot_le,itoUniformNNTime_le_end T (N*M) (k+1) hpos (Nat.succ_le_of_lt hk)⟩⟩
+  exact ⟨⟨bot_le, hc1.trans hf⟩, ⟨bot_le, hc2.trans hf⟩, ⟨bot_le, hf⟩,
+    ⟨bot_le, itoUniformNNTime_le_end T (N*M) (k+1) hpos (Nat.succ_le_of_lt hk)⟩⟩
 
 /-- A coarse sample and its fine-grid start are within one coarse time step. -/
 theorem itoUniformNNTime_coarse_dist_le_step (T : ℝ≥0) (N M k : ℕ) (hM : 0 < M) :
@@ -150,7 +150,7 @@ theorem itoUniformNNTime_coarse_dist_le_step (T : ℝ≥0) (N M k : ℕ) (hM : 0
   rw [NNReal.dist_eq, abs_of_nonpos (sub_nonpos.mpr hlowerR)]
   have hstep : (itoUniformNNTime T N (k/M+1) : ℝ) - itoUniformNNTime T N (k/M) =
       (T : ℝ)/(N : ℝ) := by
-    simp only [itoUniformNNTime_coe,itoUniformTime,Nat.cast_add,Nat.cast_one]
+    simp only [itoUniformNNTime_coe, itoUniformTime, Nat.cast_add, Nat.cast_one]
     ring
   linarith
 

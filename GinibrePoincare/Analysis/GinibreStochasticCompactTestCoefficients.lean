@@ -20,7 +20,7 @@ theorem ginibreCompactProcess_scalar_stronglyAdapted {Ω : Type*} [MeasurableSpa
     (g : Configuration n → ℝ) (hg : ContinuousOn g K) :
     StronglyAdapted F (fun t ω => g (X t ω)) := by
   intro t
-  have hm : @Measurable Ω K (F t) _ (fun ω => ⟨X t ω,hRange t ω⟩) := (hX t).measurable.subtype_mk
+  have hm : @Measurable Ω K (F t) _ (fun ω => ⟨X t ω, hRange t ω⟩) := (hX t).measurable.subtype_mk
   exact hg.restrict.comp_stronglyMeasurable hm.stronglyMeasurable
 
 theorem ginibreCompactProcess_test_coefficients {Ω : Type*} [MeasurableSpace Ω]
@@ -39,8 +39,8 @@ theorem ginibreCompactProcess_test_coefficients {Ω : Type*} [MeasurableSpace Ω
         StronglyAdapted F (fun t ω => itoConfigurationHessianEntry f (X t ω) i j) ∧
         (∀ ω, Continuous (fun t => itoConfigurationHessianEntry f (X t ω) i j)) ∧
         ∀ t ω, ‖itoConfigurationHessianEntry f (X t ω) i j‖ ≤ C := by
-  obtain ⟨C,hC,hBound⟩ := itoConfigurationCoefficients_exists_bound f U K hU hf hK hKU
-  refine ⟨C,hC,?_,?_⟩
+  obtain ⟨C, hC, hBound⟩ := itoConfigurationCoefficients_exists_bound f U K hU hf hK hKU
+  refine ⟨C, hC,?_,?_⟩
   · intro i
     have hg := itoConfigurationGradientEntry_continuousOn f U hU hf i
     exact ⟨ginibreCompactProcess_scalar_stronglyAdapted n F X hX K hRange _ (hg.mono hKU),

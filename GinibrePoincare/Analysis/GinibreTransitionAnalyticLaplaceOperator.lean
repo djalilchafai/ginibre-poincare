@@ -17,16 +17,16 @@ def actualContractionLaplaceLinear {E : Type*}
     (hbound : ∀ t u, ‖A t u‖≤‖u‖) (c : ℝ) (hc : 0<c) : E →ₗ[ℝ] E where
   toFun u := ∫ s in Ioi (0 : ℝ), (c*Real.exp (-c*s)) • A s.toNNReal u
   map_add' u v := by
-    simp only [map_add,smul_add]
+    simp only [map_add, smul_add]
     exact integral_add (actualContractionLaplace_integrable A hcont hbound c hc u)
       (actualContractionLaplace_integrable A hcont hbound c hc v)
   map_smul' d u := by
-    simp only [map_smul,RingHom.id_apply]
+    simp only [map_smul, RingHom.id_apply]
     have he : (fun s : ℝ => (c*Real.exp (-c*s)) • d • A s.toNNReal u)=
         (fun s => d • (c*Real.exp (-c*s)) • A s.toNNReal u) := by
       funext s
       exact smul_comm _ _ _
-    rw [he,integral_smul]
+    rw [he, integral_smul]
 
 /-- The literal normalized Laplace operator is a contraction, internally
 bounded using the true mass-one exponential weight. -/

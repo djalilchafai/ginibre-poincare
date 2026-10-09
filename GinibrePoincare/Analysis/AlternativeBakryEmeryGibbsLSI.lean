@@ -31,7 +31,7 @@ theorem bakryEmeryConfigurationGibbs_square_lsi_of_Brownian
   let Q := (μ.prod P).completion
   let Ωc := NullMeasurableSpace (Configuration n×Ω) (μ.prod P)
   haveI : IsProbabilityMeasure Q := ginibre_completion_isProbabilityMeasure (μ.prod P)
-  haveI : Nonempty (Fin n×Fin 2) := ⟨(⟨0,hn⟩,0)⟩
+  haveI : Nonempty (Fin n×Fin 2) := ⟨(⟨0, hn⟩, 0)⟩
   let Bc : (Fin n×Fin 2) → ℝ≥0 → Ωc → ℝ := fun i t p => B i t p.2
   let Z : Ωc → EuclideanSpace ℝ (Fin n×Fin 2) := fun p => configurationEuclideanEquiv n p.1
   have hBc : ∀ i, IsBrownianReal (Bc i) Q :=
@@ -42,7 +42,7 @@ theorem bakryEmeryConfigurationGibbs_square_lsi_of_Brownian
     (W ∘ (configurationEuclideanEquiv n).symm) κ hκ
     (hW.comp (configurationEuclideanEquiv n).symm.contDiff) hc 0 Z Bc Q hBc hiBc ν ?_ f hf hs
   intro m
-  let T : ℝ≥0 := ⟨m+1,by positivity⟩
+  let T : ℝ≥0 := ⟨m+1, by positivity⟩
   let E : Configuration n×Ω → EuclideanSpace ℝ (Fin n×Fin 2) :=
     fun p => configurationEuclideanEquiv n (bakryEmeryGibbsActualEndpoint W hW κ hκ hc T B p)
   have hE : Measurable E := (configurationEuclideanEquiv n).continuous.measurable.comp
@@ -50,7 +50,7 @@ theorem bakryEmeryConfigurationGibbs_square_lsi_of_Brownian
   have hLaw : HasLaw (fun p : Ωc => E p) ν Q := by
     refine ⟨hE.nullMeasurable.measurable'.aemeasurable,?_⟩
     rw [ginibre_map_completion (μ.prod P) E hE]
-    exact bakryEmeryGibbsActualEndpoint_hilbert_stationary hn W hW κ hκ hc P B hB hind T (by change (0 : ℝ) < (m:ℝ)+1; positivity)
+    exact bakryEmeryGibbsActualEndpoint_hilbert_stationary hn W hW κ hκ hc P B hB hind T (by change (0 : ℝ) < (m : ℝ)+1; positivity)
   apply hLaw.congr
   have hAE := (ginibreCompletedProduct_snd_preserving μ P).quasiMeasurePreserving.ae
     (bakryEmeryGibbsActualEndpoint_eq_BrownianEndpoint n hn W hW κ hκ hc B P hB T)

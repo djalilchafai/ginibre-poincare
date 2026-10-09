@@ -82,15 +82,15 @@ theorem ginibreCompactVolterra_restricted_taylor_remainder_tendstoInProbability
           (fun s => b s ω) T (hb ω) M hM (fun s hs => hbound s hs ω) (hω he) k⟩
     · simp only [Q, Set.indicator_of_notMem he]
       refine ⟨le_rfl,?_⟩
-      dsimp [S,N,d,ginibreConfigurationBrownianCoordinateQuadraticSum]
+      dsimp [S, N, d, ginibreConfigurationBrownianCoordinateQuadraticSum]
       positivity
   · apply Filter.Eventually.of_forall
     intro ω
     by_cases he : ω ∈ E
-    · simpa only [R,Q,Set.indicator_of_mem he] using
+    · simpa only [R, Q, Set.indicator_of_mem he] using
         itoActualPathRemainder_div_one_add_quadratic_tendsto f U hU hf (fun t => X t ω) T
           (hCont ω).continuousOn (fun t ht => hKU (hRange t ω))
-    · simpa only [R,Q,Set.indicator_of_notMem he,zero_div] using
+    · simpa only [R, Q, Set.indicator_of_notMem he, zero_div] using
         (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ)) atTop (𝓝 0))
 
 end

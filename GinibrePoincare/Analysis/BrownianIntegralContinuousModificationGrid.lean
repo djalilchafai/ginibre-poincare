@@ -19,7 +19,7 @@ theorem itoUniformNNTime_exists_close (T s : ℝ≥0) (hs : s ≤ T)
   · subst T
     have : s = 0 := le_antisymm hs (bot_le)
     subst s
-    exact ⟨0, Nat.zero_le _, by simp [itoUniformNNTime,itoUniformTime]⟩
+    exact ⟨0, Nat.zero_le _, by simp [itoUniformNNTime, itoUniformTime]⟩
   have hTR : 0 < (T : ℝ) := by exact_mod_cast (pos_iff_ne_zero.mpr hT)
   have hNR : 0 < (N : ℝ) := by exact_mod_cast hN
   let r : ℝ := (s : ℝ)*N/T
@@ -42,8 +42,8 @@ theorem itoUniformNNTime_exists_close (T s : ℝ≥0) (hs : s ≤ T)
     apply (le_div_iff₀ hNR).mpr
     field_simp at *
     nlinarith
-  refine ⟨k,hkN,?_⟩
-  simpa [NNReal.dist_eq,itoUniformNNTime_coe,itoUniformTime,
+  refine ⟨k, hkN,?_⟩
+  simpa [NNReal.dist_eq, itoUniformNNTime_coe, itoUniformTime,
     abs_of_nonpos (sub_nonpos.mpr hleft)] using hright
 
 /-- Sampling a continuous-time martingale on a clipped uniform grid gives the
@@ -61,13 +61,13 @@ theorem realMartingale_uniform_grid_maximal_le {Ω : Type*} [MeasurableSpace Ω]
   have hL : ∀ k, MemLp (M (τ k)) 2 P := fun k =>
     realMartingale_memLp_two_of_le P ℱ M hM T (τ k) (min_le_right _ _) hT
   have hd := realMartingale_finite_maximal_le P _ _ hs hL ε hε N
-  have hτN : τ N = T := by simp [τ,itoUniformNNTime_end T N hN]
+  have hτN : τ N = T := by simp [τ, itoUniformNNTime_end T N hN]
   have he : {ω | ∃ k ≤ N, (ε : ℝ) ≤ ‖M (itoUniformNNTime T N k) ω‖} =
       {ω | ∃ k ≤ N, (ε : ℝ) ≤ ‖M (τ k) ω‖} := by
     ext ω
-    constructor <;> rintro ⟨k,hk,h⟩ <;> refine ⟨k,hk,?_⟩
-    · simpa [τ,min_eq_left (itoUniformNNTime_le_end T N k hN hk)] using h
-    · simpa [τ,min_eq_left (itoUniformNNTime_le_end T N k hN hk)] using h
+    constructor <;> rintro ⟨k, hk, h⟩ <;> refine ⟨k, hk,?_⟩
+    · simpa [τ, min_eq_left (itoUniformNNTime_le_end T N k hN hk)] using h
+    · simpa [τ, min_eq_left (itoUniformNNTime_le_end T N k hN hk)] using h
   rw [he]
   simpa only [hτN] using hd
 
@@ -77,7 +77,7 @@ theorem continuousPath_uniform_grid_detects (T : ℝ≥0) (f : ℝ≥0 → ℝ)
     (hf : ContinuousOn f (Set.Icc 0 T)) (ε : ℝ)
     (h : ∃ s ∈ Set.Icc 0 T, ε < ‖f s‖) :
     ∀ᶠ n : ℕ in atTop, ∃ k ≤ n+1, ε ≤ ‖f (itoUniformNNTime T (n+1) k)‖ := by
-  obtain ⟨s,hs,he⟩ := h
+  obtain ⟨s, hs, he⟩ := h
   have hc := fun n => itoUniformNNTime_exists_close T s hs.2 (n+1) (Nat.succ_pos n)
   choose k hk hd using hc
   let a : ℕ → ℝ≥0 := fun n => itoUniformNNTime T (n+1) (k n)
@@ -87,12 +87,12 @@ theorem continuousPath_uniform_grid_detects (T : ℝ≥0) (f : ℝ≥0 → ℝ)
     exact tendsto_const_nhds.div_atTop
       (tendsto_natCast_atTop_atTop.comp (tendsto_add_atTop_nat 1))
   have ham : ∀ n, a n ∈ Set.Icc 0 T := fun n =>
-    ⟨bot_le,itoUniformNNTime_le_end T (n+1) (k n) (Nat.succ_pos n) (hk n)⟩
+    ⟨bot_le, itoUniformNNTime_le_end T (n+1) (k n) (Nat.succ_pos n) (hk n)⟩
   have hw : Tendsto a atTop (𝓝[Set.Icc 0 T] s) :=
-    tendsto_nhdsWithin_iff.mpr ⟨ha,Eventually.of_forall ham⟩
+    tendsto_nhdsWithin_iff.mpr ⟨ha, Eventually.of_forall ham⟩
   have hn := ((hf s hs).tendsto.comp hw).norm
   filter_upwards [hn.eventually (eventually_gt_nhds he)] with n hn
-  exact ⟨k n,hk n,hn.le⟩
+  exact ⟨k n, hk n, hn.le⟩
 
 end
 end GinibrePoincare

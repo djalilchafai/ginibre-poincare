@@ -30,7 +30,7 @@ theorem brownianUniformLeftSum_memLp_two {Ω ι : Type*}
   have hend : s+d = itoUniformNNTime T N (i+1) :=
     add_tsub_cancel_of_le (itoUniformNNTime_mono T N (Nat.le_succ i))
   have h := ginibreBrownian_augmented_linear_memLp_two B P hB hind s d j (F s) (hF s) (hFi s)
-  simpa only [hend,s] using h
+  simpa only [hend, s] using h
 
 theorem brownianUniformLeftSum_cauchySeq_L2 {Ω ι : Type*}
     [MeasurableSpace Ω] [Fintype ι]
@@ -53,14 +53,14 @@ theorem brownianUniformLeftSum_cauchySeq_L2 {Ω ι : Type*}
       filter_upwards [Lp.coeFn_sub (Z q.1) (Z q.2), (hs q.1).coeFn_toLp, (hs q.2).coeFn_toLp]
         with ω hω h1 h2
       simp only [hω, Pi.sub_apply]
-      dsimp only [Z,S]
-      rw [h1,h2]
-    rw [hh,Real.sqrt_sq_eq_abs,abs_of_nonneg (norm_nonneg _),dist_eq_norm]
+      dsimp only [Z, S]
+      rw [h1, h2]
+    rw [hh, Real.sqrt_sq_eq_abs, abs_of_nonneg (norm_nonneg _), dist_eq_norm]
   change CauchySeq Z
   apply cauchySeq_iff_tendsto_dist_atTop_0.mpr
   have ht := (brownianUniformLeftSum_tendsto_difference_meanSquare B P hB hind j F hF hFi T hc C hC hbound).sqrt
   change Tendsto (fun q : ℕ×ℕ => Real.sqrt (∫ ω, (S q.1 ω-S q.2 ω)^2 ∂P)) atTop (𝓝 (Real.sqrt 0)) at ht
-  simpa only [he,Real.sqrt_zero] using ht
+  simpa only [he, Real.sqrt_zero] using ht
 
 theorem brownianUniformLeftSum_exists_L2_limit {Ω ι : Type*}
     [MeasurableSpace Ω] [Fintype ι]

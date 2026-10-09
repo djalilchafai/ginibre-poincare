@@ -5,7 +5,15 @@ public import GinibrePoincare.Analysis.GinibreHamiltonianPathUniqueness
 
 @[expose] public section
 
-/-! Actual global pathwise uniqueness for the original singular Brownian equation. -/
+/-! # Pathwise uniqueness for the original singular equation
+
+The competing path `Y` is assumed continuous, collision-free, and to solve
+the same driven equation with the same initial state and Brownian noise.
+On the intersection of its full-measure solution event and that of the
+canonical global process, fix any finite nonnegative time `t`. Both paths
+satisfy the same Volterra equation on `[0, t]`; deterministic finite-interval
+uniqueness in `GinibreHamiltonianPathUniqueness` identifies their endpoints.
+Thus the conclusion uses one full-measure event for all nonnegative times. -/
 open Set MeasureTheory ProbabilityTheory
 open scoped Topology NNReal
 namespace GinibrePoincare
@@ -23,7 +31,7 @@ theorem ginibreBrownianMaximalProcess_global_pathwise_unique
       IsGinibreDrivenPath n α (ginibreConfigurationBrownianNoise n B α ω) (fun t => Y t ω)) :
     ∀ᵐ ω ∂P, ∀ t : ℝ, 0 ≤ t → Y t ω=ginibreBrownianMaximalProcess n α z B t.toNNReal ω := by
   have hGlobal := (ginibreBrownianMaximalProcess_global_original_solution hn α z hz B P hB hind).2
-  filter_upwards [hGlobal,hY] with ω hX hY
+  filter_upwards [hGlobal, hY] with ω hX hY
   intro t ht
   let X := fun s : ℝ => ginibreBrownianMaximalProcess n α z B s.toNNReal ω
   have hinit : X 0=z := by simpa [X] using hX.2.1
@@ -42,6 +50,6 @@ theorem ginibreBrownianMaximalProcess_global_pathwise_unique
     exact h
   exact ginibreDrivenPath_finite_interval_unique n α z (ginibreConfigurationBrownianNoise n B α ω)
     (fun s => Y s ω) X t ht hY.1.continuousOn hX.1.continuousOn
-    (fun s hs => hY.2.2.1 s hs.1) (fun s hs => hX.2.2.1 s hs.1) hEqY hEqX ⟨ht,le_rfl⟩
+    (fun s hs => hY.2.2.1 s hs.1) (fun s hs => hX.2.2.1 s hs.1) hEqY hEqX ⟨ht, le_rfl⟩
 end
 end GinibrePoincare

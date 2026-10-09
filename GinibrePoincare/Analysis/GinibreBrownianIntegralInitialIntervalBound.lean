@@ -55,7 +55,7 @@ theorem brownianUniformLeftSum_initial_interval_secondMoment_le {Ω ι : Type*}
   have hiso := ginibreBrownian_augmented_linear_sum_isometry B P hB hind j N s d
     (fun i k hik => by rw [hend]; exact itoUniformNNTime_mono T N (Nat.succ_le_of_lt hik))
     (fun k => F (s k)) (fun k => hF _) (fun k => hFi _)
-  simp only [hend,hd,← Finset.mul_sum] at hiso
+  simp only [hend, hd,← Finset.mul_sum] at hiso
   have he : (∫ ω, (brownianUniformLeftSum (B j) F T N ω)^2 ∂P) =
       (T : ℝ)/(N : ℝ)*∑ k ∈ Finset.range N, ∫ ω, (F (itoUniformNNTime T N k) ω)^2 ∂P := by
     rw [← Fin.sum_univ_eq_sum_range]
@@ -72,12 +72,12 @@ theorem brownianUniformLeftSum_initial_interval_secondMoment_le {Ω ι : Type*}
       _ ≤ ∫ _ω, C^2 ∂P := integral_mono (hFi _).integrable_sq (integrable_const _) (fun ω => by
         have hh := pow_le_pow_left₀ (abs_nonneg (F (itoUniformNNTime T N k) ω))
           (show |F (itoUniformNNTime T N k) ω| ≤ C from hb _ ω) 2
-        simpa only [Real.norm_eq_abs,sq_abs] using hh)
+        simpa only [Real.norm_eq_abs, sq_abs] using hh)
       _ = C^2 := by simp
   have hzero (k : ℕ) (hk : m ≤ k) : (∫ ω, (F (itoUniformNNTime T N k) ω)^2 ∂P)=0 := by
     have hmk : δ*(N : ℝ)/(T : ℝ) ≤ (k : ℝ) := (Nat.le_ceil _).trans (by exact_mod_cast hk)
     have htime : δ ≤ (itoUniformNNTime T N k : ℝ) := by
-      rw [itoUniformNNTime_coe,itoUniformTime]
+      rw [itoUniformNNTime_coe, itoUniformTime]
       have hh := (div_le_iff₀ hTR).mp hmk
       apply (le_div_iff₀ hNR).mpr
       nlinarith

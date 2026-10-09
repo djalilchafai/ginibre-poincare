@@ -63,9 +63,9 @@ theorem integral_radialMixedIntegrand_eq_zero (n : ℕ) (hn : 0 < n)
     (F : (Fin n → ℝ) → ℝ) (a b : Fin n → ℕ) (hab : a ≠ b) :
     (∫ z, radialMixedIntegrand n F a b z ∂complexGaussianMeasure n) = 0 := by
   classical
-  obtain ⟨i,hi⟩ : ∃ i, a i ≠ b i := by
+  obtain ⟨i, hi⟩ : ∃ i, a i ≠ b i := by
     by_contra h; push Not at h; exact hab (funext h)
-  obtain ⟨v,hv,hpow⟩ := exists_unit_phase_pow_ne (a i) (b i) hi
+  obtain ⟨v, hv, hpow⟩ := exists_unit_phase_pow_ne (a i) (b i) hi
   let u : Fin n → ℂ := fun j => if j = i then v else 1
   have hu : ∀ j, ‖u j‖ = 1 := by intro j; dsimp [u]; split_ifs <;> simp [hv]
   have hmp : MeasurePreserving (coordinatePhaseEquiv n u hu)
@@ -78,7 +78,7 @@ theorem integral_radialMixedIntegrand_eq_zero (n : ℕ) (hn : 0 < n)
     calc
       _ = u i ^ a i * conj (u i) ^ b i := by
         apply Finset.prod_eq_single i
-        · intro j hj hji; simp [u,hji]
+        · intro j hj hji; simp [u, hji]
         · simp
       _ = _ := by simp [u]
   rw [hchar] at he

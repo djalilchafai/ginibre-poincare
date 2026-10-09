@@ -66,7 +66,7 @@ theorem ginibreHamiltonian_real_configuration_imaginary_direction {n : ℕ}
 
 /-- A fixed genuine center-zero imaginary direction; its squared Euclidean norm is two. -/
 def ginibreCurvaturePairDirection {n : ℕ} (j k : Fin n) : Configuration n :=
-  fun i => ((if i=j then (1:ℝ) else if i=k then -1 else 0):ℂ)*Complex.I
+  fun i => ((if i=j then (1 : ℝ) else if i=k then -1 else 0) : ℂ)*Complex.I
 
 theorem ginibreCurvaturePairDirection_sum {n : ℕ} (j k : Fin n) (hjk : j ≠ k) :
     coordinateSum (ginibreCurvaturePairDirection j k) = 0 := by
@@ -84,8 +84,8 @@ theorem ginibreCurvaturePairDirection_norm {n : ℕ} (j k : Fin n) (hjk : j ≠ 
     configurationNormSq (ginibreCurvaturePairDirection j k) = 2 := by
   unfold configurationNormSq ginibreCurvaturePairDirection
   have he (i : Fin n) :
-      Complex.normSq (((if i=j then (1:ℝ) else if i=k then -1 else 0):ℂ)*Complex.I) =
-        (if i=j then (1:ℝ) else 0)+(if i=k then (1:ℝ) else 0) := by
+      Complex.normSq (((if i=j then (1 : ℝ) else if i=k then -1 else 0) : ℂ)*Complex.I) =
+        (if i=j then (1 : ℝ) else 0)+(if i=k then (1 : ℝ) else 0) := by
     split_ifs <;> simp_all
   simp_rw [he]
   norm_num [Finset.sum_add_distrib]
@@ -96,14 +96,14 @@ theorem ginibreCurvaturePairDirection_norm {n : ℕ} (j k : Fin n) (hjk : j ≠ 
       (fun i => (x i : ℂ)) ≤ 4*(n : ℝ)-4*((x j-x k)⁻¹)^2 := by
   let u : Fin n → ℝ := fun i => if i=j then 1 else if i=k then -1 else 0
   have hs : (∑ i, (u i)^2) = 2 := by
-    have he (i : Fin n) : (u i)^2 = (if i=j then (1:ℝ) else 0)+(if i=k then 1 else 0) := by
+    have he (i : Fin n) : (u i)^2 = (if i=j then (1 : ℝ) else 0)+(if i=k then 1 else 0) := by
       dsimp [u]
       split_ifs <;> simp_all
     simp_rw [he]
     norm_num [Finset.sum_add_distrib]
-  have he : ginibreCurvaturePairDirection j k = fun i => (u i:ℂ)*Complex.I := by
+  have he : ginibreCurvaturePairDirection j k = fun i => (u i : ℂ)*Complex.I := by
     funext i
-    dsimp [ginibreCurvaturePairDirection,u]
+    dsimp [ginibreCurvaturePairDirection, u]
     split_ifs <;> simp
   rw [he]
   rw [ginibreHamiltonian_real_configuration_imaginary_direction x u hx, hs]
@@ -119,7 +119,7 @@ theorem ginibreCurvaturePairDirection_norm {n : ℕ} (j k : Fin n) (hjk : j ≠ 
     have houter : (∑ l ∈ Finset.univ.erase j, u j*(u j-u l)*((x j-x l)⁻¹)^2) ≤
         ∑ i, ∑ l ∈ Finset.univ.erase i, u i*(u i-u l)*((x i-x l)⁻¹)^2 :=
       Finset.single_le_sum (fun i _ => Finset.sum_nonneg (fun l _ => hn i l)) (Finset.mem_univ j)
-    exact le_trans (by simpa [u,hjk,hjk.symm, show (1:ℝ)+1=2 by norm_num] using hinner) houter
+    exact le_trans (by simpa [u, hjk, hjk.symm, show (1 : ℝ)+1=2 by norm_num] using hinner) houter
   linarith
 
 /-- Even on the genuine center-zero hyperplane, normalized Hessian Rayleigh
@@ -145,15 +145,15 @@ theorem ginibre_recentered_pointwise_curvature_unbounded_below {n : ℕ}
     exact_mod_cast (div_left_inj' hL0).mp he
   let j : Fin n := ⟨0, by omega⟩
   let k : Fin n := ⟨1, by omega⟩
-  have hjk : j ≠ k := by intro h; have := congrArg Fin.val h; simp [j,k] at this
+  have hjk : j ≠ k := by intro h; have := congrArg Fin.val h; simp [j, k] at this
   have hp := ginibreHamiltonian_pair_direction_le x hx j k hjk
   have hid : (x j-x k)⁻¹ = -L := by
-    dsimp [x,j,k]
+    dsimp [x, j, k]
     norm_num only [Nat.cast_zero, Nat.cast_one]
-    rw [show (0 : ℝ)/L-a-((1:ℝ)/L-a) = -(1/L) by ring]
+    rw [show (0 : ℝ)/L-a-((1 : ℝ)/L-a) = -(1/L) by ring]
     simp
   rw [hid] at hp
-  refine ⟨fun i => (x i:ℂ), ginibreCurvaturePairDirection j k, ?_, ?_,
+  refine ⟨fun i => (x i : ℂ), ginibreCurvaturePairDirection j k, ?_, ?_,
     ginibreCurvaturePairDirection_sum j k hjk, ginibreCurvaturePairDirection_norm j k hjk, ?_⟩
   · intro i k h
     exact hx (Complex.ofReal_injective h)
@@ -168,7 +168,7 @@ theorem ginibre_recentered_pointwise_curvature_unbounded_below {n : ℕ}
     field_simp
     ring
   · rw [ginibreCurvaturePairDirection_norm j k hjk]
-    apply (div_lt_iff₀ (mul_pos hnpos (by norm_num : (0:ℝ)<2))).mpr
+    apply (div_lt_iff₀ (mul_pos hnpos (by norm_num : (0 : ℝ)<2))).mpr
     have hC : -|C| ≤ C := neg_abs_le C
     have hL1 : 1 ≤ L := by dsimp [L]; nlinarith [abs_nonneg C]
     have hsq : L ≤ L^2 := by nlinarith

@@ -52,7 +52,7 @@ theorem correspondenceOperatorContractionSemigroup_eq_from_actual_laplace {n : �
   have hComm (u : GinibreFullValueL2 n) (t : ℝ≥0) :
       correspondenceOperatorValueResolvent n hn (A t u)=A t (correspondenceOperatorValueResolvent n hn u) := by
     have hh := actualContractionLaplace_commutes A hcont hbound hadd (c : ℝ) hcp u t
-    rw [hLap u,hLap (A t u)] at hh
+    rw [hLap u, hLap (A t u)] at hh
     exact hh.symm
   apply correspondenceOperator_operators_eq_on_resolvent_range hn
   intro u
@@ -83,9 +83,9 @@ theorem correspondenceOperatorContractionSemigroup_eq_from_actual_laplace {n : �
     (fun s hs => correspondenceOperatorRealEvolution_preserves_graph hn (R u) (R u-u) hinit (c*s.toNNReal))
     (by
       change A (Real.toNNReal 0) (R u)=correspondenceOperatorRealEvolution n hn (c*Real.toNNReal 0) (R u)
-      simp only [Real.toNNReal_zero,mul_zero,hzero,correspondenceOperatorRealEvolution_zero_apply hn])
-  have he := hh (T : ℝ) ⟨T.property,le_rfl⟩
-  simpa only [x,y,Real.toNNReal_coe] using he
+      simp only [Real.toNNReal_zero, mul_zero, hzero, correspondenceOperatorRealEvolution_zero_apply hn])
+  have he := hh (T : ℝ) ⟨T.property, le_rfl⟩
+  simpa only [x, y, Real.toNNReal_coe] using he
 
 
 #print axioms correspondenceOperatorContractionSemigroup_eq_from_actual_laplace

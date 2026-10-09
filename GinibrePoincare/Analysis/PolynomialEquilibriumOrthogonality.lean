@@ -75,7 +75,7 @@ private theorem continuous_laguerreInner (k m l : ℕ) : Continuous (laguerreInn
   fun_prop
 
 private theorem eigenfunction_inner_eq (n a b m c d l : ℕ) (z : Configuration n) :
-    conj (polynomialEigenfunction n ⟨a,b,m⟩ z) * polynomialEigenfunction n ⟨c,d,l⟩ z =
+    conj (polynomialEigenfunction n ⟨a, b, m⟩ z) * polynomialEigenfunction n ⟨c, d, l⟩ z =
       hermiteInner a b c d (coordinateSum z) *
         laguerreInner (recenteredGammaShape n) m l (pairwiseRadius z) := by
   simp only [polynomialEigenfunction, S_observable, R_poly, map_mul,
@@ -85,8 +85,8 @@ private theorem eigenfunction_inner_eq (n a b m c d l : ℕ) (z : Configuration 
 /-- Every pair of concrete eigenfunctions has an integrable equilibrium inner product. -/
 theorem integrable_polynomialEigenfunction_inner (n : ℕ) (hn : 2 ≤ n)
     (a b m c d l : ℕ) :
-    Integrable (fun z : Configuration n => conj (polynomialEigenfunction n ⟨a,b,m⟩ z) *
-      polynomialEigenfunction n ⟨c,d,l⟩ z) (ginibreMeasure n) := by
+    Integrable (fun z : Configuration n => conj (polynomialEigenfunction n ⟨a, b, m⟩ z) *
+      polynomialEigenfunction n ⟨c, d, l⟩ z) (ginibreMeasure n) := by
   simp_rw [eigenfunction_inner_eq]
   exact integrable_sum_radius_product n hn _ _ (continuous_hermiteInner a b c d)
     (continuous_laguerreInner _ m l)
@@ -96,8 +96,8 @@ theorem integrable_polynomialEigenfunction_inner (n : ℕ) (hn : 2 ≤ n)
 /-- The exact equilibrium inner product reduces to the classical Laguerre inner product. -/
 theorem integral_polynomialEigenfunction_inner (n : ℕ) (hn : 2 ≤ n)
     (a b m c d l : ℕ) :
-    (∫ z : Configuration n, conj (polynomialEigenfunction n ⟨a,b,m⟩ z) *
-      polynomialEigenfunction n ⟨c,d,l⟩ z ∂ginibreMeasure n) =
+    (∫ z : Configuration n, conj (polynomialEigenfunction n ⟨a, b, m⟩ z) *
+      polynomialEigenfunction n ⟨c, d, l⟩ z ∂ginibreMeasure n) =
       (if a = c ∧ b = d then (1 : ℂ) else 0) *
         (Complex.ofReal (∫ r : ℝ, (Laguerre.polynomial (recenteredGammaShape n) m).eval r *
           (Laguerre.polynomial (recenteredGammaShape n) l).eval r
@@ -116,8 +116,8 @@ theorem integral_polynomialEigenfunction_inner (n : ℕ) (hn : 2 ≤ n)
 /-- Distinct Hermite–Laguerre indices are orthogonal under the actual Ginibre law. -/
 theorem polynomialEigenfunction_equilibrium_orthogonal (n : ℕ) (hn : 2 ≤ n)
     (a b m c d l : ℕ) (hindices : ¬ (a = c ∧ b = d ∧ m = l)) :
-    (∫ z : Configuration n, conj (polynomialEigenfunction n ⟨a,b,m⟩ z) *
-      polynomialEigenfunction n ⟨c,d,l⟩ z ∂ginibreMeasure n) = 0 := by
+    (∫ z : Configuration n, conj (polynomialEigenfunction n ⟨a, b, m⟩ z) *
+      polynomialEigenfunction n ⟨c, d, l⟩ z ∂ginibreMeasure n) = 0 := by
   rw [integral_polynomialEigenfunction_inner n hn]
   split_ifs with hab
   · have hml : m ≠ l := by intro he; exact hindices ⟨hab.1, hab.2, he⟩
@@ -127,8 +127,8 @@ theorem polynomialEigenfunction_equilibrium_orthogonal (n : ℕ) (hn : 2 ≤ n)
 
 /-- Every member of the concrete family belongs to equilibrium `L²`. -/
 theorem polynomialEigenfunction_memLp_two (n : ℕ) (hn : 2 ≤ n) (a b m : ℕ) :
-    MemLp (polynomialEigenfunction n ⟨a,b,m⟩) 2 (ginibreMeasure n) := by
-  have hc : Continuous (polynomialEigenfunction n ⟨a,b,m⟩) := by
+    MemLp (polynomialEigenfunction n ⟨a, b, m⟩) 2 (ginibreMeasure n) := by
+  have hc : Continuous (polynomialEigenfunction n ⟨a, b, m⟩) := by
     have hH := ComplexHermite.continuous_normalizedEval 1 (by decide) a b
     unfold polynomialEigenfunction S_observable R_poly coordinateSum pairwiseRadius
     fun_prop

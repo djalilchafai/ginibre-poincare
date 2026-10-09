@@ -82,7 +82,7 @@ theorem brownianGirsanovCorrectedPrefix_gaussian
     dsimp only at hg
     have heval : HasLaw (Function.eval i) (gaussianReal 0 (τ (n+1)-τ n))
         (Measure.pi (fun _ : ι => gaussianReal 0 (τ (n+1)-τ n))) :=
-      ⟨(measurable_pi_apply i).aemeasurable,(measurePreserving_eval (fun _ : ι => gaussianReal 0 (τ (n+1)-τ n)) i).map_eq⟩
+      ⟨(measurable_pi_apply i).aemeasurable, (measurePreserving_eval (fun _ : ι => gaussianReal 0 (τ (n+1)-τ n)) i).map_eq⟩
     have hl := heval.comp hg.1
     have hi := hg.2.comp measurable_id (measurable_pi_apply i)
     have hadd := IndepFun.hasLaw_add (ih (Nat.le_of_succ_le hn)) hl hi
@@ -90,12 +90,12 @@ theorem brownianGirsanovCorrectedPrefix_gaussian
       brownianGirsanovCorrectedPrefix B h τ i n +
         (fun ω => B i (τ (n+1)) ω-B i (τ n) ω-h n ω i*((τ (n+1)-τ n : ℝ≥0) : ℝ)) := by
       funext ω
-      simp only [brownianGirsanovCorrectedPrefix,Finset.sum_range_succ,Pi.add_apply]
-    rw [heq,Finset.sum_range_succ]
+      simp only [brownianGirsanovCorrectedPrefix, Finset.sum_range_succ, Pi.add_apply]
+    rw [heq, Finset.sum_range_succ]
     change HasLaw (brownianGirsanovCorrectedPrefix B h τ i n +
       (fun ω => B i (τ (n+1)) ω-B i (τ n) ω-h n ω i*((τ (n+1)-τ n : ℝ≥0) : ℝ)))
       (gaussianReal 0 (∑ k ∈ Finset.range n, (τ (k+1)-τ k)) ∗ gaussianReal 0 (τ (n+1)-τ n)) _ at hadd
-    simpa only [gaussianReal_conv_gaussianReal,zero_add] using hadd
+    simpa only [gaussianReal_conv_gaussianReal, zero_add] using hadd
 
 /-- Literal telescoping identity for the cumulative corrected path. -/
 theorem brownianGirsanovCorrectedPrefix_eq {Ω ι : Type*}
@@ -105,7 +105,7 @@ theorem brownianGirsanovCorrectedPrefix_eq {Ω ι : Type*}
       ∑ k ∈ Finset.range n, h k ω i*((τ (k+1)-τ k : ℝ≥0) : ℝ) := by
   unfold brownianGirsanovCorrectedPrefix
   simp_rw [Finset.sum_sub_distrib]
-  rw [← Finset.sum_sub_distrib,Finset.sum_range_sub (fun k => B i (τ k) ω) n]
+  rw [← Finset.sum_sub_distrib, Finset.sum_range_sub (fun k => B i (τ k) ω) n]
 
 end
 end GinibrePoincare

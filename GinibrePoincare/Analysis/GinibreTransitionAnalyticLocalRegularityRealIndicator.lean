@@ -37,8 +37,8 @@ theorem ginibreLocalRegularity_indicator_real_equation
       dsimp only
       by_cases hx : x ∈ U
       · simp only [Set.indicator_of_mem hx]
-      · simp only [Set.indicator_of_notMem hx,hq x hx,mul_zero]
-  rw [hi u _ hl,hi h _ hz]
+      · simp only [Set.indicator_of_notMem hx, hq x hx, mul_zero]
+  rw [hi u _ hl, hi h _ hz]
   simp_rw [hi (F _) _ (fun x hx => hd x hx _)]
   exact heq θ hθ hc hs
 

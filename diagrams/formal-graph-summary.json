@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "local_declarations": 14499,
-  "local_theorems": 12546,
+  "local_declarations": 14592,
+  "local_theorems": 12588,
   "compiled_local_modules": 1721,
   "external_boundary_constants": 9091,
-  "direct_reference_pairs": 1240777,
+  "direct_reference_pairs": 1246759,
   "source_modules": 1726,
-  "local_import_edges": 6442,
-  "export_sha256": "907a3a29fcc34eee823a55d2f0c284b6f0ab486ab02ea22e95dd167bdede4aa9",
+  "local_import_edges": 6443,
+  "export_sha256": "c3439cab8e7711c3f9309e63f577858245e5a27e883a7e483241ec3d53a700e8",
   "targets": [
     {
       "target": "GinibrePoincare.fullMainAnalyticProof",
@@ -30,9 +30,34 @@
       "direct_external_dependencies": 185
     },
     {
-      "target": "GinibrePoincare.fullTheoremOneTenSchwartz",
+      "target": "GinibrePoincare.fullTheoremOneNine_named",
+      "direct_local_dependencies": 24,
+      "direct_external_dependencies": 184
+    },
+    {
+      "target": "GinibrePoincare.fullTheoremOneTen_named",
       "direct_local_dependencies": 26,
-      "direct_external_dependencies": 187
+      "direct_external_dependencies": 185
+    },
+    {
+      "target": "GinibrePoincare.fullMatrixLift_named",
+      "direct_local_dependencies": 11,
+      "direct_external_dependencies": 79
+    },
+    {
+      "target": "GinibrePoincare.correspondenceOperatorNumber_has_bochner_data",
+      "direct_local_dependencies": 7,
+      "direct_external_dependencies": 84
+    },
+    {
+      "target": "GinibrePoincare.ginibreBrownianMaximalProcess_CIR_realization_named",
+      "direct_local_dependencies": 17,
+      "direct_external_dependencies": 119
+    },
+    {
+      "target": "GinibrePoincare.fullTheoremOneTenSchwartz",
+      "direct_local_dependencies": 34,
+      "direct_external_dependencies": 186
     },
     {
       "target": "PalomarGinibre.theoremOneOne",
@@ -86,8 +111,8 @@
     },
     {
       "target": "GinibrePoincare.fullTheoremOneNinePointwiseGamma",
-      "direct_local_dependencies": 34,
-      "direct_external_dependencies": 175
+      "direct_local_dependencies": 35,
+      "direct_external_dependencies": 163
     },
     {
       "target": "GinibrePoincare.correspondenceMatrix_theorem_1_13",

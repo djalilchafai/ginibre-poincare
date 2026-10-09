@@ -21,13 +21,13 @@ theorem correspondenceOperatorRealEvolution_essential_bound (n : ℕ) (hn : 0<n)
   let B := bakryBrownianCoordinateProcess ι
   have hB := bakryBrownianCoordinate_isBrownian ι
   have hiB := bakryBrownianCoordinate_independent ι
-  obtain ⟨v,hv,hvb,hfv⟩ := ginibreBoundedLp_measurable_version hn f A hf
+  obtain ⟨v, hv, hvb, hfv⟩ := ginibreBoundedLp_measurable_version hn f A hf
   rw [max_eq_left hA] at hvb
-  obtain ⟨hrm,hrb,hfr⟩ := ginibreOriginalStochasticL2Operator_bounded_representative hn
-    (n:ℝ≥0) P B hB hiB t f v hfv hv A hvb
-  have hEq := correspondenceOperator_stochastic_semigroup_eq hn (n:ℝ≥0) P B hB hiB t
-  have hn' : (n:ℝ≥0)≠0 := by exact_mod_cast hn.ne'
-  rw [div_self hn',one_mul] at hEq
+  obtain ⟨hrm, hrb, hfr⟩ := ginibreOriginalStochasticL2Operator_bounded_representative hn
+    (n : ℝ≥0) P B hB hiB t f v hfv hv A hvb
+  have hEq := correspondenceOperator_stochastic_semigroup_eq hn (n : ℝ≥0) P B hB hiB t
+  have hn' : (n : ℝ≥0)≠0 := by exact_mod_cast hn.ne'
+  rw [div_self hn', one_mul] at hEq
   rw [hEq] at hfr
   filter_upwards [hfr] with z hz
   rw [hz]
@@ -39,13 +39,13 @@ theorem correspondenceOperatorRealEvolution_constant (n : ℕ) (hn : 0<n)
     correspondenceOperatorRealEvolution n hn t (ginibreRealConstantL2 n hn c)=
       ginibreRealConstantL2 n hn c := by
   have hc : ginibreFullComplexOfReal n (ginibreRealConstantL2 n hn c)=
-      (ginibreFullConstant n hn (c:ℂ)).val := by
+      (ginibreFullConstant n hn (c : ℂ)).val := by
     apply Lp.ext
     filter_upwards [ginibreFullComplexOfReal_ae n (ginibreRealConstantL2 n hn c),
-      ginibreRealConstantL2_ae n hn c,ginibreFullConstant_ae n hn (c:ℂ)] with z hz hv hh
-    rw [hz,hv,hh]
-  have he := correspondenceOperatorEvolution_constant n hn t (c:ℂ)
-  rw [← hc,correspondenceOperatorEvolution_ofReal] at he
+      ginibreRealConstantL2_ae n hn c, ginibreFullConstant_ae n hn (c : ℂ)] with z hz hv hh
+    rw [hz, hv, hh]
+  have he := correspondenceOperatorEvolution_constant n hn t (c : ℂ)
+  rw [← hc, correspondenceOperatorEvolution_ofReal] at he
   have hr := congrArg (ginibreFullComplexRe n) he
   simpa using hr
 
@@ -60,22 +60,22 @@ theorem correspondenceOperatorRealEvolution_interval (n : ℕ) (hn : 0<n)
   let k := ginibreRealConstantL2 n hn c
   have hr : 0≤r := by dsimp [r]; linarith
   have hbound : ∀ᵐ z ∂ginibreMeasure n, ‖(f-k) z‖≤r := by
-    filter_upwards [hf,Lp.coeFn_sub f k,ginibreRealConstantL2_ae n hn c] with z hz hsub hk
+    filter_upwards [hf, Lp.coeFn_sub f k, ginibreRealConstantL2_ae n hn c] with z hz hsub hk
     change k z=c at hk
-    rw [hsub,Pi.sub_apply,hk,Real.norm_eq_abs]
+    rw [hsub, Pi.sub_apply, hk, Real.norm_eq_abs]
     rw [abs_le]
-    dsimp [r,c]
-    constructor <;> linarith [hz.1,hz.2]
+    dsimp [r, c]
+    constructor <;> linarith [hz.1, hz.2]
   have hout := correspondenceOperatorRealEvolution_essential_bound n hn t (f-k) r hr hbound
   have he : correspondenceOperatorRealEvolution n hn t (f-k)=
       correspondenceOperatorRealEvolution n hn t f-k := by
-    rw [map_sub,correspondenceOperatorRealEvolution_constant]
+    rw [map_sub, correspondenceOperatorRealEvolution_constant]
   rw [he] at hout
-  filter_upwards [hout,Lp.coeFn_sub (correspondenceOperatorRealEvolution n hn t f) k,
+  filter_upwards [hout, Lp.coeFn_sub (correspondenceOperatorRealEvolution n hn t f) k,
     ginibreRealConstantL2_ae n hn c] with z hz hsub hk
   change k z=c at hk
-  rw [hsub,Pi.sub_apply,hk,Real.norm_eq_abs,abs_le] at hz
-  constructor <;> dsimp [r,c] at hz <;> linarith [hz.1,hz.2]
+  rw [hsub, Pi.sub_apply, hk, Real.norm_eq_abs, abs_le] at hz
+  constructor <;> dsimp [r, c] at hz <;> linarith [hz.1, hz.2]
 
 #print axioms correspondenceOperatorRealEvolution_essential_bound
 #print axioms correspondenceOperatorRealEvolution_interval

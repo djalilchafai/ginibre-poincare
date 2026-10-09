@@ -15,7 +15,7 @@ set_option backward.isDefEq.respectTransparency false
 variable (E : Type*) [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
 
 abbrev drivenBoundedNoiseSpace (M : ℝ) :=
-  {N : C(Icc (-1 : ℝ) 1,E) | N ⟨0, by norm_num⟩ = 0 ∧ ∀ s, ‖N s‖ ≤ M}
+  {N : C(Icc (-1 : ℝ) 1, E) | N ⟨0, by norm_num⟩ = 0 ∧ ∀ s, ‖N s‖ ≤ M}
 
 def drivenBoundedNoiseExtension {M : ℝ} (N : drivenBoundedNoiseSpace E M) : ℝ → E :=
   fun t => N.val (Set.projIcc (-1 : ℝ) 1 (by norm_num) t)
@@ -39,22 +39,22 @@ theorem drivenBoundedNoiseExtension_sub_norm_le {M : ℝ} (N Q : drivenBoundedNo
 
 theorem drivenContinuousNoise_continuous_local_flow
     (b : E → E) (K : ℝ≥0) (hb : LipschitzWith K b) (z : E) (M : ℝ) (hM : 0 ≤ M) :
-    ∃ ε : ℝ, ∃ hε : ε > 0, ∃ Φ : drivenBoundedNoiseSpace E M → C(Icc 0 ε,E),
+    ∃ ε : ℝ, ∃ hε : ε > 0, ∃ Φ : drivenBoundedNoiseSpace E M → C(Icc 0 ε, E),
       LipschitzWith ⟨Real.exp ((K : ℝ)*ε), (Real.exp_pos _).le⟩ Φ ∧
-      (∀ N, Φ N ⟨0, ⟨le_rfl,hε.le⟩⟩ = z) ∧
+      (∀ N, Φ N ⟨0, ⟨le_rfl, hε.le⟩⟩ = z) ∧
       ∀ N (t : Icc 0 ε), Φ N t = z+drivenBoundedNoiseExtension E N t+
         ∫ s in (0 : ℝ)..t, b (Φ N (Set.projIcc 0 ε hε.le s)) := by
-  obtain ⟨ε,hε,hExist⟩ := drivenContinuousNoise_lipschitz_uniform_local b K hb z M hM
+  obtain ⟨ε, hε, hExist⟩ := drivenContinuousNoise_lipschitz_uniform_local b K hb z M hM
   have hAll (N : drivenBoundedNoiseSpace E M) : ∃ X : ℝ → E,
       ContinuousOn X (Icc 0 ε) ∧ X 0 = z ∧ ∀ t ∈ Icc 0 ε,
         X t = z+drivenBoundedNoiseExtension E N t+∫ s in (0 : ℝ)..t, b (X s) :=
     hExist _ (drivenBoundedNoiseExtension_continuous N) (drivenBoundedNoiseExtension_zero N)
       (fun t ht => drivenBoundedNoiseExtension_norm_le N t)
   choose X hX hX0 hXEq using hAll
-  let Φ : drivenBoundedNoiseSpace E M → C(Icc 0 ε,E) := fun N =>
+  let Φ : drivenBoundedNoiseSpace E M → C(Icc 0 ε, E) := fun N =>
     { toFun := fun t => X N t
       continuous_toFun := (hX N).comp_continuous continuous_subtype_val (fun t => t.property) }
-  refine ⟨ε,hε,Φ,?_,?_,?_⟩
+  refine ⟨ε, hε, Φ,?_,?_,?_⟩
   · apply LipschitzWith.of_dist_le_mul
     intro N Q
     rw [dist_eq_norm]
@@ -76,14 +76,14 @@ theorem drivenContinuousNoise_continuous_local_flow
     intro s hs
     rw [uIcc_of_le t.property.1] at hs
     dsimp only [Φ]
-    rw [Set.projIcc_of_mem hε.le (show s ∈ Icc 0 ε from ⟨hs.1,hs.2.trans t.property.2⟩)]
+    rw [Set.projIcc_of_mem hε.le (show s ∈ Icc 0 ε from ⟨hs.1, hs.2.trans t.property.2⟩)]
     rfl
 
 
 theorem drivenContinuousNoise_local_flow_causal
     (b : E → E) (K : ℝ≥0) (hb : LipschitzWith K b) (z : E)
     (M ε : ℝ) (hε : 0 ≤ ε)
-    (Φ : drivenBoundedNoiseSpace E M → C(Icc 0 ε,E))
+    (Φ : drivenBoundedNoiseSpace E M → C(Icc 0 ε, E))
     (hEq : ∀ N (t : Icc 0 ε), Φ N t = z+drivenBoundedNoiseExtension E N t+
       ∫ s in (0 : ℝ)..t, b (Φ N (Set.projIcc 0 ε hε s)))
     (N Q : drivenBoundedNoiseSpace E M) (t : Icc 0 ε)
@@ -96,31 +96,31 @@ theorem drivenContinuousNoise_local_flow_causal
   have hEqX (s : ℝ) (hs : s ∈ Icc 0 (t : ℝ)) :
       X s = z+drivenBoundedNoiseExtension E N s+∫ u in (0 : ℝ)..s, b (X u) := by
     have hse : s ∈ Icc 0 ε := ⟨hs.1, hs.2.trans t.property.2⟩
-    simpa only [X, Set.projIcc_of_mem hε hse] using hEq N ⟨s,hse⟩
+    simpa only [X, Set.projIcc_of_mem hε hse] using hEq N ⟨s, hse⟩
   have hEqY (s : ℝ) (hs : s ∈ Icc 0 (t : ℝ)) :
       Y s = z+drivenBoundedNoiseExtension E Q s+∫ u in (0 : ℝ)..s, b (Y u) := by
     have hse : s ∈ Icc 0 ε := ⟨hs.1, hs.2.trans t.property.2⟩
-    simpa only [Y, Set.projIcc_of_mem hε hse] using hEq Q ⟨s,hse⟩
+    simpa only [Y, Set.projIcc_of_mem hε hse] using hEq Q ⟨s, hse⟩
   have h := drivenVolterra_lipschitz_stability_on b K hb z
     (drivenBoundedNoiseExtension E N) (drivenBoundedNoiseExtension E Q) X Y
     t 0 t.property.1 le_rfl hX.continuousOn hY.continuousOn hEqX hEqY
-    (fun s hs => by rw [hPast s hs, sub_self, norm_zero]) t ⟨t.property.1,le_rfl⟩
+    (fun s hs => by rw [hPast s hs, sub_self, norm_zero]) t ⟨t.property.1, le_rfl⟩
   have hz : X t = Y t := sub_eq_zero.mp (norm_eq_zero.mp (le_antisymm (by simpa using h) (norm_nonneg _)))
-  simpa only [X,Y,Set.projIcc_of_mem hε t.property] using hz
+  simpa only [X, Y, Set.projIcc_of_mem hε t.property] using hz
 
 
 theorem drivenContinuousNoise_measurable_local_flow
     (b : E → E) (K : ℝ≥0) (hb : LipschitzWith K b) (z : E) (M : ℝ) (hM : 0 ≤ M) :
-    ∃ ε : ℝ, ∃ hε : ε > 0, ∃ Φ : drivenBoundedNoiseSpace E M → C(Icc 0 ε,E),
-      @Measurable _ _ (borel (drivenBoundedNoiseSpace E M)) (borel C(Icc 0 ε,E)) Φ ∧
-      (∀ N, Φ N ⟨0, ⟨le_rfl,hε.le⟩⟩ = z) ∧
+    ∃ ε : ℝ, ∃ hε : ε > 0, ∃ Φ : drivenBoundedNoiseSpace E M → C(Icc 0 ε, E),
+      @Measurable _ _ (borel (drivenBoundedNoiseSpace E M)) (borel C(Icc 0 ε, E)) Φ ∧
+      (∀ N, Φ N ⟨0, ⟨le_rfl, hε.le⟩⟩ = z) ∧
       (∀ N (t : Icc 0 ε), Φ N t = z+drivenBoundedNoiseExtension E N t+
         ∫ s in (0 : ℝ)..t, b (Φ N (Set.projIcc 0 ε hε.le s))) ∧
       ∀ N Q (t : Icc 0 ε),
         (∀ s ∈ Icc 0 (t : ℝ), drivenBoundedNoiseExtension E N s =
           drivenBoundedNoiseExtension E Q s) → Φ N t = Φ Q t := by
-  obtain ⟨ε,hε,Φ,hLip,hZero,hEq⟩ := drivenContinuousNoise_continuous_local_flow b K hb z M hM
-  exact ⟨ε,hε,Φ,hLip.continuous.borel_measurable,hZero,hEq,
+  obtain ⟨ε, hε, Φ, hLip, hZero, hEq⟩ := drivenContinuousNoise_continuous_local_flow b K hb z M hM
+  exact ⟨ε, hε, Φ, hLip.continuous.borel_measurable, hZero, hEq,
     fun N Q t hPast => drivenContinuousNoise_local_flow_causal b K hb z M ε hε.le Φ hEq N Q t hPast⟩
 
 end

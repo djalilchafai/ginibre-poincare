@@ -29,8 +29,8 @@ theorem ginibreBrownian_zero_speed_transition_integral
 theorem ginibreFullRealPaperEvolution_zero_speed {n : ℕ} (hn : 0 < n) (t : ℝ≥0) :
     ginibreFullRealPaperEvolution n hn 0 t=1 := by
   ext u
-  simp [ginibreFullRealPaperEvolution,ginibrePaperSpeedFactor,ginibreFullRealEvolution,
-    ginibreFullEvolution_zero,ginibreFullSymmetricRe_ofReal]
+  simp [ginibreFullRealPaperEvolution, ginibrePaperSpeedFactor, ginibreFullRealEvolution,
+    ginibreFullEvolution_zero, ginibreFullSymmetricRe_ofReal]
 
 theorem ginibreBrownian_zero_speed_analytic_transition
     {Ω : Type*} [MeasurableSpace Ω] {n : ℕ} (hn : 0 < n)

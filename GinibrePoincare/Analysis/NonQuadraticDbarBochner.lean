@@ -9,6 +9,18 @@ public import Mathlib.Analysis.Calculus.FDeriv.Symmetric
 The weighted adjoint is written in real and imaginary components. The
 identity proves its coercivity from the actual planar Laplacian bound,
 without imposing convexity of the real Hessian.
+
+The proof expands the real and imaginary parts of the two Wirtinger operators.
+Their squared-norm difference is one quarter of the Laplacian-of-potential term
+plus the divergence of an explicit compactly supported flux `(Hx, Hy)`.
+Mixed partials commute because the tests are C². The flux derivatives integrate
+to zero, leaving the weighted identity. Compact support also proves integrability
+of every term before splitting the integral.
+
+The coercivity theorem discards the nonnegative derivative energy and inserts
+the lower bound `4 * κ ≤ planarLaplacian W`. Substituting `W = n * V` yields
+the paper's constant `n * ρ / 2`. The final component identities translate this
+real-coordinate proof back to the usual complex Wirtinger notation.
 -/
 open MeasureTheory
 open scoped ContDiff
@@ -143,6 +155,7 @@ theorem planarDbar_bochner_identity (W a b : ℂ → ℝ)
       ContinuousLinearMap.neg_apply, smul_eq_mul]
     dsimp [Dx, Dy, planarDerivative, S, w]
     ring
+  -- The difference of the two energies is curvature plus a divergence.
   have hpoint (z : ℂ) : Complex.normSq (planarDbarAdjointOfParts W a b z) * w z =
       Complex.normSq (planarDbarOfParts a b z) * w z +
         (1 / 4 : ℝ) * (planarLaplacian W z * S z * w z) + Dx Hx z + Dy Hy z := by
@@ -156,6 +169,7 @@ theorem planarDbar_bochner_identity (W a b : ℂ → ℝ)
       Complex.normSq_apply]
     dsimp [Dx, Dy, S]
     ring
+  -- Compact support removes the flux terms after integration.
   have hDxInt := integral_fderiv_complex_real_eq_zero Hx hHx hHxc
   have hDyInt := integral_fderiv_complex_imag_eq_zero Hy hHy hHyc
   have hDxI : Integrable (Dx Hx) :=

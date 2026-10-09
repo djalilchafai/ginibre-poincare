@@ -38,10 +38,10 @@ private theorem directional_dbar (v : ℂ) {f : ℂ → ℂ}
 theorem correspondencePlanarLaplacian_eq (f : ℂ → ℂ) (hf : ContDiff ℝ ∞ f) (z : ℂ) :
     correspondencePlanarLaplacian f z = 4*planarPartial (planarDbar f) z := by
   unfold planarPartial
-  rw [directional_dbar 1 hf,directional_dbar Complex.I hf]
+  rw [directional_dbar 1 hf, directional_dbar Complex.I hf]
   have hc : fderiv ℝ (fun w => fderiv ℝ f w Complex.I) z 1 =
       fderiv ℝ (fun w => fderiv ℝ f w 1) z Complex.I := by
-    rw [directional_second _ _ hf,directional_second _ _ hf]
+    rw [directional_second _ _ hf, directional_second _ _ hf]
     exact (hf.contDiffAt.isSymmSndFDerivAt (by simp [minSmoothness])).eq 1 Complex.I
   rw [hc]
   unfold correspondencePlanarLaplacian
@@ -66,7 +66,7 @@ theorem correspondenceLogPotential_distributional_laplacian (θ : ℂ → ℂ)
       (fun z : ℂ => 4*((correspondenceLogPotential z : ℂ)*planarPartial (planarDbar θ) z)) := by
     funext z
     ring
-  rw [he,integral_const_mul,correspondenceLogPotential_weak_partial _
+  rw [he, integral_const_mul, correspondenceLogPotential_weak_partial _
     ((planarDbar_contDiff θ hθ).of_le (by simp)) (planarDbar_compact θ hc),
     cauchyGreenKernel_fundamental_identity θ (hθ.of_le (by simp)) hc]
   push_cast
@@ -77,8 +77,8 @@ theorem correspondenceNegativeLog_distributional_superharmonic (θ : ℂ → ℂ
     (hθ : ContDiff ℝ ∞ θ) (hc : HasCompactSupport θ) (hpos : 0 ≤ (θ 0).re) :
     (∫ z : ℂ, (-(correspondenceLogPotential z : ℂ))*correspondencePlanarLaplacian θ z).re ≤ 0 := by
   simp_rw [neg_mul]
-  rw [integral_neg,correspondenceLogPotential_distributional_laplacian θ hθ hc]
-  norm_num [Complex.neg_re,Complex.mul_re,Complex.mul_im]
+  rw [integral_neg, correspondenceLogPotential_distributional_laplacian θ hθ hc]
+  norm_num [Complex.neg_re, Complex.mul_re, Complex.mul_im]
   exact mul_nonneg (mul_nonneg (by norm_num) Real.pi_pos.le) hpos
 
 #print axioms correspondenceNegativeLog_distributional_superharmonic

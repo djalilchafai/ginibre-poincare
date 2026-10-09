@@ -21,7 +21,7 @@ theorem ginibreDrivenMaximalValue_joint_continuousAt_alive {n : ℕ} (hn : 0 < n
       ginibreDrivenMaximalValue n α q.2.val q.1.val T) p := by
   apply Metric.tendsto_nhds.mpr
   intro ε hε
-  obtain ⟨δ,hδ,hstab⟩ := ginibreDrivenMaximalValue_uniform_joint_continuity hn α p.2.val p.1.val T hp ε hε
+  obtain ⟨δ, hδ, hstab⟩ := ginibreDrivenMaximalValue_uniform_joint_continuity hn α p.2.val p.1.val T hp ε hε
   have hc : Continuous (fun q : {z : Configuration n // CollisionFree z} × GinibreContinuousNoise n =>
       ‖p.1.val-q.1.val‖+‖p.2.val.restrict (Icc 0 (T : ℝ))-q.2.val.restrict (Icc 0 (T : ℝ))‖) :=
     (continuous_const.sub (continuous_subtype_val.comp continuous_fst)).norm.add
@@ -30,12 +30,12 @@ theorem ginibreDrivenMaximalValue_joint_continuousAt_alive {n : ℕ} (hn : 0 < n
   have hev : ∀ᶠ q in 𝓝 p,
       ‖p.1.val-q.1.val‖+‖p.2.val.restrict (Icc 0 (T : ℝ))-q.2.val.restrict (Icc 0 (T : ℝ))‖ < δ :=
     (hc.continuousAt (x := p)).eventually (Iio_mem_nhds (by
-      simpa only [sub_self,norm_zero,zero_add] using hδ))
+      simpa only [sub_self, norm_zero, zero_add] using hδ))
   filter_upwards [hev] with q hq
   have hb := hstab q.1.val q.2.val q.1.property q.2.val.continuous q.2.property (fun t ht =>
     (add_le_add_right (ContinuousMap.norm_coe_le_norm
-      (p.2.val.restrict (Icc 0 (T : ℝ))-q.2.val.restrict (Icc 0 (T : ℝ))) ⟨t,ht⟩) _).trans hq.le)
-  simpa only [dist_eq_norm,norm_sub_rev] using hb.2
+      (p.2.val.restrict (Icc 0 (T : ℝ))-q.2.val.restrict (Icc 0 (T : ℝ))) ⟨t, ht⟩) _).trans hq.le)
+  simpa only [dist_eq_norm, norm_sub_rev] using hb.2
 
 theorem ginibreDrivenMaximalLifetime_joint_alive_isOpen {n : ℕ} (hn : 0 < n)
     (α : ℝ) (T : ℝ≥0) :
@@ -43,7 +43,7 @@ theorem ginibreDrivenMaximalLifetime_joint_alive_isOpen {n : ℕ} (hn : 0 < n)
       (T : ℝ≥0∞) < ginibreDrivenMaximalLifetime n α p.2.val p.1.val} := by
   rw [isOpen_iff_mem_nhds]
   intro p hp
-  obtain ⟨δ,hδ,hstab⟩ := ginibreDrivenMaximalValue_uniform_joint_continuity hn α p.2.val p.1.val T hp 1 zero_lt_one
+  obtain ⟨δ, hδ, hstab⟩ := ginibreDrivenMaximalValue_uniform_joint_continuity hn α p.2.val p.1.val T hp 1 zero_lt_one
   have hc : Continuous (fun q : {z : Configuration n // CollisionFree z} × GinibreContinuousNoise n =>
       ‖p.1.val-q.1.val‖+‖p.2.val.restrict (Icc 0 (T : ℝ))-q.2.val.restrict (Icc 0 (T : ℝ))‖) :=
     (continuous_const.sub (continuous_subtype_val.comp continuous_fst)).norm.add
@@ -52,11 +52,11 @@ theorem ginibreDrivenMaximalLifetime_joint_alive_isOpen {n : ℕ} (hn : 0 < n)
   have hev : ∀ᶠ q in 𝓝 p,
       ‖p.1.val-q.1.val‖+‖p.2.val.restrict (Icc 0 (T : ℝ))-q.2.val.restrict (Icc 0 (T : ℝ))‖ < δ :=
     (hc.continuousAt (x := p)).eventually (Iio_mem_nhds (by
-      simpa only [sub_self,norm_zero,zero_add] using hδ))
+      simpa only [sub_self, norm_zero, zero_add] using hδ))
   filter_upwards [hev] with q hq
   exact (hstab q.1.val q.2.val q.1.property q.2.val.continuous q.2.property (fun t ht =>
     (add_le_add_right (ContinuousMap.norm_coe_le_norm
-      (p.2.val.restrict (Icc 0 (T : ℝ))-q.2.val.restrict (Icc 0 (T : ℝ))) ⟨t,ht⟩) _).trans hq.le)).1
+      (p.2.val.restrict (Icc 0 (T : ℝ))-q.2.val.restrict (Icc 0 (T : ℝ))) ⟨t, ht⟩) _).trans hq.le)).1
 
 theorem ginibreDrivenMaximalValue_joint_measurable {n : ℕ} (hn : 0 < n)
     (α : ℝ) (T : ℝ≥0) :

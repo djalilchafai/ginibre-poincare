@@ -29,14 +29,14 @@ theorem ginibreTransitionAnalytic_local_resolvent_global_gradient_memLp
         2*c*(∫ z, inner ℝ (η z • g z) (u z • ginibreEuclideanGradient η z) ∂ginibreMeasure n)) :
     MemLp g 2 (ginibreMeasure n) := by
   let μ := ginibreMeasure n
-  obtain ⟨η,hcore,hunit,hpoint,henergy⟩ := ginibreTransitionAnalytic_vanishing_energy_cutoffs hn
+  obtain ⟨η, hcore, hunit, hpoint, henergy⟩ := ginibreTransitionAnalytic_vanishing_energy_cutoffs hn
   have hev : ∀ᶠ m : ℕ in atTop, (∫ z, ‖ginibreEuclideanGradient (η m) z‖^2 ∂μ) ≤ 1 := by
     exact (henergy.eventually (eventually_lt_nhds (by norm_num : (0 : ℝ)<1))).mono fun m hm => hm.le
-  obtain ⟨N,hN⟩ := eventually_atTop.mp hev
+  obtain ⟨N, hN⟩ := eventually_atTop.mp hev
   let q := fun m : ℕ => N+m
   have hq (m : ℕ) : N ≤ q m := Nat.le_add_right N m
   have hcutbound (m : ℕ) (z : Configuration n) : ‖η (q m) z‖ ≤ 1 := by
-    rw [Real.norm_eq_abs,abs_of_nonneg (hunit (q m) z).1]
+    rw [Real.norm_eq_abs, abs_of_nonneg (hunit (q m) z).1]
     exact (hunit (q m) z).2
   let U := fun m z => η (q m) z*u z
   let F := fun m z => η (q m) z*f z
@@ -45,12 +45,12 @@ theorem ginibreTransitionAnalytic_local_resolvent_global_gradient_memLp
   have hU (m : ℕ) : MemLp (U m) 2 μ := hu.of_le
     ((hcore (q m)).1.continuous.aestronglyMeasurable.mul hu.aestronglyMeasurable)
     (ae_of_all μ fun z => by
-      rw [show U m z=η (q m) z*u z from rfl,norm_mul]
+      rw [show U m z=η (q m) z*u z from rfl, norm_mul]
       exact mul_le_of_le_one_left (norm_nonneg _) (hcutbound m z))
   have hF (m : ℕ) : MemLp (F m) 2 μ := hf.of_le
     ((hcore (q m)).1.continuous.aestronglyMeasurable.mul hf.aestronglyMeasurable)
     (ae_of_all μ fun z => by
-      rw [show F m z=η (q m) z*f z from rfl,norm_mul]
+      rw [show F m z=η (q m) z*f z from rfl, norm_mul]
       exact mul_le_of_le_one_left (norm_nonneg _) (hcutbound m z))
   have hG (m : ℕ) : MemLp (G m) 2 μ := hlocal _ (hcore (q m))
   have hgrad (m : ℕ) := (ginibreFull_smoothCompact_memLp n hn (η (q m))
@@ -58,19 +58,19 @@ theorem ginibreTransitionAnalytic_local_resolvent_global_gradient_memLp
   have hH (m : ℕ) : MemLp (H m) 2 μ := (hgrad m).of_le_mul
     (hu.aestronglyMeasurable.smul (hgrad m).aestronglyMeasurable)
     (ae_of_all μ fun z => by
-      rw [show H m z=u z • ginibreEuclideanGradient (η (q m)) z from rfl,norm_smul]
+      rw [show H m z=u z • ginibreEuclideanGradient (η (q m)) z from rfl, norm_smul]
       exact mul_le_mul_of_nonneg_right (hb z) (norm_nonneg _))
   have hFE (m : ℕ) : (∫ z, (F m z)^2 ∂μ) ≤ ∫ z, (f z)^2 ∂μ := by
     apply integral_mono (hF m).integrable_sq hf.integrable_sq
     intro z
     have hh : ‖F m z‖ ≤ ‖f z‖ := by
-      rw [show F m z=η (q m) z*f z from rfl,norm_mul]
+      rw [show F m z=η (q m) z*f z from rfl, norm_mul]
       exact mul_le_of_le_one_left (norm_nonneg _) (hcutbound m z)
-    simpa only [Real.norm_eq_abs,sq_abs] using pow_le_pow_left₀ (norm_nonneg _) hh 2
+    simpa only [Real.norm_eq_abs, sq_abs] using pow_le_pow_left₀ (norm_nonneg _) hh 2
   have hHE (m : ℕ) : (∫ z, ‖H m z‖^2 ∂μ) ≤ A^2 := by
     have hh := integral_mono (hH m).norm.integrable_sq ((hgrad m).norm.integrable_sq.const_mul (A^2))
       (fun z => by
-        rw [show H m z=u z • ginibreEuclideanGradient (η (q m)) z from rfl,norm_smul,mul_pow]
+        rw [show H m z=u z • ginibreEuclideanGradient (η (q m)) z from rfl, norm_smul, mul_pow]
         have hu2 : ‖u z‖^2 ≤ A^2 := pow_le_pow_left₀ (norm_nonneg _) (hb z) 2
         exact mul_le_mul_of_nonneg_right hu2 (sq_nonneg _))
     rw [integral_const_mul] at hh
@@ -101,7 +101,7 @@ theorem ginibreTransitionAnalytic_local_resolvent_global_gradient_memLp
   apply actualL2Limit_memLp_of_energy_bound μ G g hG hg D hD hGE
   filter_upwards [ginibre_ae_collisionFree n hn] with z hz
   have hqtop : Tendsto q atTop atTop := tendsto_atTop_mono (fun m => Nat.le_add_left m N) tendsto_id
-  simpa only [G,one_smul,Function.comp_def] using ((hpoint z hz).comp hqtop).smul
+  simpa only [G, one_smul, Function.comp_def] using ((hpoint z hz).comp hqtop).smul
     (tendsto_const_nhds : Tendsto (fun _ : ℕ => g z) atTop (𝓝 (g z)))
 
 #print axioms ginibreTransitionAnalytic_local_resolvent_global_gradient_memLp

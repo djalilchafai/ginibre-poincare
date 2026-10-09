@@ -24,7 +24,7 @@ theorem ginibreGeneratorVectorSpectralMeasure_semigroup (n : ℕ) (hn : 0 < n)
   let μ := vectorSpectralMeasure R hR u
   have hmult : (∫ r : spectrum ℝ R, resolventEvolutionMultiplier (t : ℝ) r.val ∂μ) =
       (inner ℂ u (resolventCfcEvolution R t u)).re := by
-    let φ : C_c(spectrum ℝ R,ℝ) :=
+    let φ : C_c(spectrum ℝ R, ℝ) :=
       ⟨⟨fun r => resolventEvolutionMultiplier (t : ℝ) r.val,
         (resolventEvolutionMultiplier_continuous _).comp continuous_subtype_val⟩,
         HasCompactSupport.of_compactSpace _⟩

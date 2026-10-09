@@ -70,7 +70,7 @@ theorem ginibreCollisionCutoff_L2_error_tendsto {V : Type*} [NormedAddCommGroup 
       have he : ginibreCollisionCutoff n m z • f z - f z =
           (ginibreCollisionCutoff n m z - 1) • f z := by rw [sub_smul, one_smul]
       rw [he, norm_smul, mul_pow, Real.norm_eq_abs, sq_abs]
-      obtain ⟨h0,h1⟩ := ginibreCollisionCutoff_mem_unit n m z
+      obtain ⟨h0, h1⟩ := ginibreCollisionCutoff_mem_unit n m z
       have hb : (ginibreCollisionCutoff n m z - 1) ^ 2 ≤ 1 := by nlinarith
       simpa using mul_le_mul_of_nonneg_right hb (sq_nonneg ‖f z‖)))
     ?_
@@ -110,7 +110,7 @@ theorem ginibreCollisionCutoff_energy_tendsto (n : ℕ) (hn : 0 < n)
       ‖ginibreEuclideanGradient (ginibreCollisionCutoff n m) z‖ ^ 2 ∂ginibreMeasure n)
       atTop (𝓝 0) := by
   classical
-  obtain ⟨C,hC0,hC⟩ := ginibreCollisionCutoff_weighted_gradient_bound
+  obtain ⟨C, hC0, hC⟩ := ginibreCollisionCutoff_weighted_gradient_bound
   let q : ℝ := ((n : ℝ) / Real.pi) ^ n
   let D (z : Configuration n) := q * C * gaussianWeight n z *
     complexDirectionalEnergy (vandermonde : Configuration n → ℂ) z
@@ -132,7 +132,7 @@ theorem ginibreCollisionCutoff_energy_tendsto (n : ℕ) (hn : 0 < n)
     exact (hconst.mul hg).mul
       (continuous_complexDirectionalEnergy vandermonde (contDiff_vandermonde n))
   have hDnonneg (z : Configuration n) : 0 ≤ D z := by
-    dsimp [D,q]
+    dsimp [D, q]
     exact mul_nonneg (mul_nonneg (mul_nonneg (by positivity) hC0)
       (gaussianWeight_nonneg n z)) (complexDirectionalEnergy_nonneg _ z)
   have hi : Integrable D (volume.restrict K) := by

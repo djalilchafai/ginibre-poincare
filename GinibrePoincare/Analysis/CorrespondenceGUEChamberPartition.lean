@@ -35,11 +35,11 @@ theorem gueChamber_sorted (n : ℕ) (x : EuclideanSpace ℝ (Fin n))
   exact lt_of_le_of_ne hm (fun he => hij.ne ((Tuple.sort _).injective (hx he)))
 
 theorem gueChamber_density_partition (n : ℕ) (x : EuclideanSpace ℝ (Fin n)) :
-    (∑σ : Equiv.Perm (Fin n),gueOrderedRawDensity n (guePermute n σ x))=gueRawDensity n x := by
+    (∑σ : Equiv.Perm (Fin n), gueOrderedRawDensity n (guePermute n σ x))=gueRawDensity n x := by
   by_cases hx : Injective (fun i => x i)
   · let σ := Tuple.sort (fun i => x i)
     rw [Finset.sum_eq_single σ]
-    · rw [gueOrderedRawDensity_eq_chamber_density,ite_eq_left (gueChamber_sorted n x hx)]
+    · rw [gueOrderedRawDensity_eq_chamber_density, ite_eq_left (gueChamber_sorted n x hx)]
       exact gueRawDensity_symmetric n σ x
     · intro τ hτ ht
       rw [gueOrderedRawDensity_eq_chamber_density]
@@ -49,9 +49,9 @@ theorem gueChamber_density_partition (n : ℕ) (x : EuclideanSpace ℝ (Fin n)) 
     · simp
   · have hz : gueRawDensity n x=0 := by
       rw [gueRawDensity_zero_iff_collision]
-      simp only [Injective,not_forall] at hx
-      obtain ⟨i,j,he,hn⟩ := hx
-      exact ⟨i,j,hn,he⟩
+      simp only [Injective, not_forall] at hx
+      obtain ⟨i, j, he, hn⟩ := hx
+      exact ⟨i, j, hn, he⟩
     rw [hz]
     apply Finset.sum_eq_zero
     intro σ hσ

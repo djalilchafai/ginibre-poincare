@@ -19,7 +19,7 @@ theorem bakryEmeryBrownianNoiseReal_actual (B : ι → ℝ≥0 → Ω → ℝ)
       bakryEmeryBrownianNoiseReal B ω 0=0 := by
   have hc : ∀ᵐ ω ∂P, ∀ i, Continuous (fun t => B i t ω) := ae_all_iff.mpr (fun i => (hB i).cont)
   have hz : ∀ᵐ ω ∂P, ∀ i, B i 0 ω=0 := ae_all_iff.mpr (fun i => (hB i).eval_zero_ae_eq_zero)
-  filter_upwards [hc,hz] with ω hc hz
+  filter_upwards [hc, hz] with ω hc hz
   constructor
   · exact (PiLp.continuous_toLp 2 _).comp (continuous_pi (fun i =>
       (hc i).comp continuous_real_toNNReal))
@@ -39,16 +39,16 @@ theorem bakryEmeryBrownianNoisePath_actual (T : ℝ) (B : ι → ℝ≥0 → Ω 
   intro t
   have hc : Continuous (fun t : Icc 0 T => bakryEmeryBrownianNoiseReal B ω t.val) :=
     hω.1.comp continuous_subtype_val
-  simp [bakryEmeryBrownianNoisePath,ContinuousMap.mkD,hc]
+  simp [bakryEmeryBrownianNoisePath, ContinuousMap.mkD, hc]
 
 theorem bakryEmeryBrownianNoisePath_measurable (T : ℝ) (hT : 0 ≤ T)
     (B : ι → ℝ≥0 → Ω → ℝ) (P : Measure Ω) [P.IsComplete]
     (hB : ∀ i, IsBrownianReal (B i) P) :
-    @Measurable Ω C(Icc 0 T,EuclideanSpace ℝ ι) _ (borel _)
+    @Measurable Ω C(Icc 0 T, EuclideanSpace ℝ ι) _ (borel _)
       (bakryEmeryBrownianNoisePath T B) := by
-  letI : Nonempty (Icc 0 T) := ⟨⟨0,⟨le_rfl,hT⟩⟩⟩
-  letI : MeasurableSpace C(Icc 0 T,EuclideanSpace ℝ ι) := borel _
-  letI : BorelSpace C(Icc 0 T,EuclideanSpace ℝ ι) := ⟨rfl⟩
+  letI : Nonempty (Icc 0 T) := ⟨⟨0, ⟨le_rfl, hT⟩⟩⟩
+  letI : MeasurableSpace C(Icc 0 T, EuclideanSpace ℝ ι) := borel _
+  letI : BorelSpace C(Icc 0 T, EuclideanSpace ℝ ι) := ⟨rfl⟩
   apply ginibre_measurable_continuousMap_of_evaluations
   intro t
   apply (aemeasurable_iff_measurable (μ := P)).mp

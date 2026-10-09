@@ -6,7 +6,15 @@ public import Mathlib.Analysis.Calculus.Deriv.Comp
 
 @[expose] public section
 
-/-! # Actual weak derivatives across polynomial spectral collisions -/
+/-! # Actual weak derivatives across polynomial spectral collisions
+
+A nonzero complex polynomial has only finitely many crossings on almost every
+transverse affine coordinate line, by the imported slicing theorem. Along such
+a line, the observable is continuous and differentiable outside that finite set.
+The finite-exception fundamental theorem then integrates its locally integrable
+derivative across the crossings. Compact support of the scalar test removes
+the endpoint terms and gives the ordinary weak identity on the line.
+-/
 open MeasureTheory Filter MvPolynomial
 namespace GinibrePoincare
 noncomputable section

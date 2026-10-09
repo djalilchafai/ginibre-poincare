@@ -17,12 +17,12 @@ theorem ginibreUniformDriftLeftSum_tendsto_integral (A A' X : ℝ → ℝ)
     Tendsto (fun n => ∑ i ∈ Finset.range (n+1), X (ginibreUniformTime t n i)*
       (A (ginibreUniformTime t n (i+1))-A (ginibreUniformTime t n i))) atTop
       (𝓝 (∫ s in (0 : ℝ)..t, X s*A' s)) := by
-  obtain ⟨C,hC⟩ := isCompact_Icc.exists_bound_of_continuousOn (s := Icc 0 t) hA'.continuousOn
+  obtain ⟨C, hC⟩ := isCompact_Icc.exists_bound_of_continuousOn (s := Icc 0 t) hA'.continuousOn
   have hC0 : 0 ≤ C := (norm_nonneg _).trans (hC 0 ⟨le_rfl, ht⟩)
-  have hLip : LipschitzOnWith ⟨C,hC0⟩ A (Icc 0 t) :=
+  have hLip : LipschitzOnWith ⟨C, hC0⟩ A (Icc 0 t) :=
     (convex_Icc (0 : ℝ) t).lipschitzOnWith_of_nnnorm_hasDerivWithin_le
       (fun s hs => (hA s).hasDerivWithinAt) (fun s hs => by exact_mod_cast hC s hs)
-  have hc := ginibreUniformQuadraticCross_tendsto_zero A X t ht ⟨C,hC0⟩ hLip hX
+  have hc := ginibreUniformQuadraticCross_tendsto_zero A X t ht ⟨C, hC0⟩ hLip hX
   have hw := ginibreWeightedUniformIncrements_tendsto_integral A A' X hA hA' hX t ht
   simp only [smul_eq_mul] at hw
   have h := ((tendsto_const_nhds : Tendsto (fun _ : ℕ => A t*X t-A 0*X 0) atTop

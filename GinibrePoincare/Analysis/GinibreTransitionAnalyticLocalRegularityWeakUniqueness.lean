@@ -31,8 +31,8 @@ theorem ginibreLocalRegularity_local_weak_derivative_unique
     have hhe : Integrable (fun x => θ x*h x) volume := by
       apply hhi.congr
       exact ae_of_all volume fun x => by dsimp only; simp only [smul_eq_mul]; exact mul_comm _ _
-    simp only [Pi.sub_apply,smul_eq_mul,mul_sub]
-    rw [integral_sub hge hhe,hgw θ hθ hc hs,hhw θ hθ hc hs,sub_self])
+    simp only [Pi.sub_apply, smul_eq_mul, mul_sub]
+    rw [integral_sub hge hhe, hgw θ hθ hc hs, hhw θ hθ hc hs, sub_self])
   filter_upwards [hz] with x hx
   intro hu
   exact sub_eq_zero.mp (hx hu)

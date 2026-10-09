@@ -56,7 +56,7 @@ theorem ginibreSymmetricContractionSemigroup_eq_from_actual_laplace {n : ℕ} (h
   have hComm (u : ginibreFullSymmetricValues n) (t : ℝ≥0) :
       ginibreFullSymmetricResolvent n hn (A t u)=A t (ginibreFullSymmetricResolvent n hn u) := by
     have hh := actualContractionLaplace_commutes A hcont hbound hadd (c : ℝ) hcp u t
-    rw [hLap u,hLap (A t u)] at hh
+    rw [hLap u, hLap (A t u)] at hh
     exact hh.symm
   apply ginibreFullSymmetric_operators_eq_on_resolvent_range hn
   intro u
@@ -87,9 +87,9 @@ theorem ginibreSymmetricContractionSemigroup_eq_from_actual_laplace {n : ℕ} (h
     (fun s hs => ginibreFullRealEvolution_preserves_graph hn (R u) (R u-u) hinit (c*s.toNNReal))
     (by
       change A (Real.toNNReal 0) (R u)=ginibreFullRealEvolution n hn (c*Real.toNNReal 0) (R u)
-      simp only [Real.toNNReal_zero,mul_zero,hzero,ginibreFullRealEvolution_zero_apply hn])
-  have he := hh (T : ℝ) ⟨T.property,le_rfl⟩
-  simpa only [x,y,Real.toNNReal_coe] using he
+      simp only [Real.toNNReal_zero, mul_zero, hzero, ginibreFullRealEvolution_zero_apply hn])
+  have he := hh (T : ℝ) ⟨T.property, le_rfl⟩
+  simpa only [x, y, Real.toNNReal_coe] using he
 
 theorem ginibreSymmetricContractionSemigroup_eq_paper_evolution {n : ℕ} (hn : 0 < n)
     (A : ℝ≥0 → ginibreFullSymmetricValues n →L[ℝ] ginibreFullSymmetricValues n)

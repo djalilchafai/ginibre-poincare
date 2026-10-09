@@ -39,7 +39,7 @@ theorem ginibreBrownianMaximalProcess_local_Lamperti_identity
   have hf : ContDiffOn ℝ 2 (ginibreSquareRootRadius : Configuration n → ℝ) {x | CollisionFree x} :=
     (ginibre_contDiffOn_squareRootRadius hn).of_le
       (by exact WithTop.coe_le_coe.mpr (show (2 : ENat) ≤ ⊤ from le_top))
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hJS,hIto,hEnd⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hJS, hIto, hEnd⟩ :=
     ginibreBrownianMaximalProcess_local_test_ito_integral_exists (by omega) α z hz B P hB hind
       R hR T ginibreSquareRootRadius hf
   have heq : ∀ᵐ ω ∂P, ∀ t ≤ ginibreBrownianHamiltonianBoundedStop n α z B R T ω,
@@ -56,7 +56,7 @@ theorem ginibreBrownianMaximalProcess_local_Lamperti_identity
     intro t ht k ω hts
     exact ginibreConfigurationBrownianGradientSum_squareRootRadius_full_direction
       hn α α.coe_nonneg z hz B R hR T e t k ω hts
-  filter_upwards [heq,hIto] with ω hω hItoω
+  filter_upwards [heq, hIto] with ω hω hItoω
   intro t ht
   rw [← hω t ht]
   exact hItoω t ht

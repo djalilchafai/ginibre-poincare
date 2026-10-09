@@ -19,11 +19,11 @@ theorem ginibreStationaryContinuousTransitionMean_permute {Ω : Type*} [Measurab
     (hiB : iIndepFun (fun i ω t => B i t ω) P)
     (v : Configuration n → ℝ) (hv : Measurable v) (T : ℝ≥0)
     (z : Configuration n) (hz : CollisionFree z) :
-    ginibreStationaryContinuousTransitionMean α B P (fun y => v (permute σ y)) (T:ℝ) z=
-      ginibreStationaryContinuousTransitionMean α B P v (T:ℝ) (permute σ z) := by
+    ginibreStationaryContinuousTransitionMean α B P (fun y => v (permute σ y)) (T : ℝ) z=
+      ginibreStationaryContinuousTransitionMean α B P v (T : ℝ) (permute σ z) := by
   rw [ginibreStationaryContinuousTransitionMean_eq_original hn α P B hB hiB _ z hz,
     ginibreStationaryContinuousTransitionMean_eq_original hn α P B hB hiB v (permute σ z)
-      (ginibreCollisionFree_permute σ hz),Real.toNNReal_coe]
+      (ginibreCollisionFree_permute σ hz), Real.toNNReal_coe]
   let F := fun N : GinibreContinuousNoise n =>
     v (ginibreDrivenMaximalValue n α N.val (permute σ z) T)
   have hF : Measurable F := hv.comp (ginibreDrivenMaximalValue_measurable hn α (permute σ z) T)
@@ -43,7 +43,7 @@ theorem ginibreStationaryContinuousTransitionMean_permute {Ω : Type*} [Measurab
       ℝ → Configuration n)=fun s => permute σ ((ginibreBrownianFullContinuousNoise n B α ω).val s) := by
     funext s
     exact ginibreParticlePermutationCLM_apply σ _
-  rw [hNoise,ginibreDrivenMaximalValue_permute]
+  rw [hNoise, ginibreDrivenMaximalValue_permute]
 
 #print axioms ginibreStationaryContinuousTransitionMean_permute
 end

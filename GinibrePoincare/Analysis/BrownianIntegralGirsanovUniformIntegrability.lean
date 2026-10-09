@@ -23,9 +23,9 @@ theorem nonnegativeDensities_uniformIntegrable_of_secondMoment_bound
   · exact ⟨0, fun _ => htop ▸ le_top⟩
   let ε : ℝ := ε'.toReal
   have hε : 0 < ε := ENNReal.toReal_pos hε'.ne' htop
-  let K : ℝ≥0 := ⟨(R+1)/ε,by positivity⟩
+  let K : ℝ≥0 := ⟨(R+1)/ε, by positivity⟩
   have hK : (0 : ℝ)<K := by change 0<(R+1)/ε; positivity
-  refine ⟨K,fun n => ?_⟩
+  refine ⟨K, fun n => ?_⟩
   rw [eLpNorm_one_eq_lintegral_enorm
     ((hm n).aestronglyMeasurable.indicator
       (measurableSet_le measurable_const (hm n).nnnorm))]
@@ -38,10 +38,10 @@ theorem nonnegativeDensities_uniformIntegrable_of_secondMoment_bound
       apply ENNReal.ofReal_le_ofReal
       have hkle : (K : ℝ)≤f n ω := by
         have hh : (K : ℝ)≤‖f n ω‖ := by exact_mod_cast hk
-        simpa only [Real.norm_eq_abs,abs_of_nonneg (hp n ω)] using hh
+        simpa only [Real.norm_eq_abs, abs_of_nonneg (hp n ω)] using hh
       rw [one_div_mul_eq_div]
       exact (le_div_iff₀ hK).mpr (by nlinarith)
-    · rw [Set.indicator_of_notMem hk,enorm_zero]
+    · rw [Set.indicator_of_notMem hk, enorm_zero]
       exact bot_le
   calc
     _ ≤ ∫⁻ ω, ENNReal.ofReal (1/(K : ℝ))*ENNReal.ofReal (f n ω)^2 ∂P := lintegral_mono hpoint

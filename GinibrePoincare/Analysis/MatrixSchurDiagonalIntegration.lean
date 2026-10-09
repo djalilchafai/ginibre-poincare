@@ -37,7 +37,7 @@ theorem matrixSchur_sortedUpper_diagonal_integral {n : ℕ} (hn : 0 < n)
       (fun i => schurUpperCombination y i i) = (schurUpperSplit n y).1 := by
     intro y
     funext i
-    exact schurUpperCombination_entry y ⟨(i,i), le_refl i⟩
+    exact schurUpperCombination_entry y ⟨(i, i), le_refl i⟩
   have hm : Measurable (fun u : SchurStrictUpperIndex n → ℂ => schurStrictUpperGaussianDensity n u) := by
     unfold schurStrictUpperGaussianDensity
     apply Finset.measurable_prod

@@ -5,8 +5,17 @@ public import GinibrePoincare.Analysis.GinibreStochasticProbabilityRestriction
 
 @[expose] public section
 
-/-! Actual continuous integral limits agree simultaneously up to a time when
-their actual finite sums agree; no predictability of the terminal event is needed. -/
+/-! # Identifying continuous integral limits before a random time
+
+For each deterministic `t`, restrict the two approximation sequences to
+`E = {ω | t ≤ σ ω}` by indicators. Their finite sums agree on `E`, and their
+indicator limits therefore agree almost everywhere by uniqueness of limits
+in measure. The terminal event needs no adaptedness or predictability.
+
+The continuous-identity theorem upgrades these individual deterministic-time
+identities to one full-measure event valid for every time up to `σ`. The
+bound `σ ≤ T` lets times beyond the horizon be dismissed and ensures the
+required sequence limits are available for all relevant times. -/
 open Set MeasureTheory Filter
 open scoped Topology NNReal
 namespace GinibrePoincare

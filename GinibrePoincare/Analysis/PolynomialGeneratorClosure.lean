@@ -33,7 +33,7 @@ theorem inner_polynomialEigenfunctionL2 (n : ℕ) (hn : 2 ≤ n) (i j : Polynomi
   apply integral_congr_ae
   filter_upwards [polynomialEigenfunctionL2_coeFn n hn i,
     polynomialEigenfunctionL2_coeFn n hn j] with z hi hj
-  rw [hi,hj,RCLike.inner_apply]
+  rw [hi, hj, RCLike.inner_apply]
   ring
 
 def polynomialGeneratorRate (n : ℕ) (i : PolynomialEigenfunctionData n) : ℂ :=
@@ -55,7 +55,7 @@ private theorem graph_inner (n : ℕ) (hn : 2 ≤ n) (i : PolynomialEigenfunctio
       polynomialGeneratorRate n i * inner ℂ (polynomialEigenfunctionL2 n hn i) p.1 := by
   induction hp using Submodule.span_induction with
   | mem p hp =>
-    obtain ⟨j,rfl⟩ := hp
+    obtain ⟨j, rfl⟩ := hp
     rw [inner_smul_right]
     by_cases hij : i = j
     · subst j; rfl
@@ -63,7 +63,7 @@ private theorem graph_inner (n : ℕ) (hn : 2 ≤ n) (i : PolynomialEigenfunctio
           (polynomialEigenfunctionL2 n hn j) = 0 := by
         rw [inner_polynomialEigenfunctionL2]
         apply polynomialEigenfunction_equilibrium_orthogonal n hn
-        rintro ⟨ha,hb,hm⟩
+        rintro ⟨ha, hb, hm⟩
         apply hij
         cases i; cases j; simp_all
       simp [ho]
@@ -94,10 +94,10 @@ theorem polynomialGeneratorGraph_closure_singleValued (n : ℕ) (hn : 2 ≤ n)
     intro q hq
     induction hq using Submodule.span_induction with
     | mem q hq =>
-      obtain ⟨i,rfl⟩ := hq
+      obtain ⟨i, rfl⟩ := hq
       exact (closedPolynomialSector n hn).smul_mem _
         ((Submodule.span ℂ (Set.range (polynomialEigenfunctionL2 n hn))).le_topologicalClosure
-          (Submodule.subset_span ⟨i,rfl⟩))
+          (Submodule.subset_span ⟨i, rfl⟩))
     | zero => exact (closedPolynomialSector n hn).zero_mem
     | add p q _ _ hp hq => exact (closedPolynomialSector n hn).add_mem hp hq
     | smul c p _ hp => exact (closedPolynomialSector n hn).smul_mem c hp
@@ -110,15 +110,15 @@ theorem polynomialGeneratorGraph_closure_singleValued (n : ℕ) (hn : 2 ≤ n)
     apply closure_minimal ?_ hc hs
     intro x hx
     induction hx using Submodule.span_induction with
-    | mem x hx => obtain ⟨i,rfl⟩ := hx; exact hi i
+    | mem x hx => obtain ⟨i, rfl⟩ := hx; exact hi i
     | zero => simp
     | add x y _ _ hx hy =>
       change inner ℂ x p.2 = 0 at hx
       change inner ℂ y p.2 = 0 at hy
-      simp [inner_add_left,hx,hy]
+      simp [inner_add_left, hx, hy]
     | smul c x _ hx =>
       change inner ℂ x p.2 = 0 at hx
-      simp [inner_smul_left,hx]
+      simp [inner_smul_left, hx]
   exact inner_self_eq_zero.mp hz
 
 /-- The graph-closed realization of the concrete polynomial restriction. -/
@@ -167,7 +167,7 @@ theorem polynomialEigenfunction_mem_closedGenerator_graph (n : ℕ) (hn : 2 ≤ 
       -(eigenvalue n i.a i.b i.m : ℂ) • polynomialEigenfunctionL2 n hn i) ∈
         (closedPolynomialGenerator n hn).graph := by
   rw [closedPolynomialGenerator_graph]
-  exact (polynomialGeneratorGraph n hn).le_topologicalClosure (Submodule.subset_span ⟨i,rfl⟩)
+  exact (polynomialGeneratorGraph n hn).le_topologicalClosure (Submodule.subset_span ⟨i, rfl⟩)
 
 /-- Membership in the actual closed operator domain, not merely an a.e. formula. -/
 theorem polynomialEigenfunction_mem_closedGenerator_domain (n : ℕ) (hn : 2 ≤ n)

@@ -33,7 +33,7 @@ def ginibreCenteredQuadratic (n : ℕ) (z : Configuration n) : ℂ :=
   have hp : 0 ≤ recenteredSqNorm n z := by
     unfold recenteredSqNorm configurationNormSq
     exact Finset.sum_nonneg (fun i _ => Complex.normSq_nonneg _)
-  have hn' : (1:ℝ) ≤ n := by exact_mod_cast hn
+  have hn' : (1 : ℝ) ≤ n := by exact_mod_cast hn
   nlinarith
 
  theorem ginibreCenteredQuadratic_memLp (n : ℕ) (hn : 2≤n) :
@@ -56,17 +56,17 @@ def ginibreCenteredQuadratic (n : ℕ) (z : Configuration n) : ℂ :=
     unfold coordinateSum
     exact Equiv.sum_comp σ z
   unfold ginibreCenteredQuadratic recenteredConfiguration projectToOrthogonal
-  simp only [hS,Function.comp_apply]
-  exact Equiv.sum_comp σ (fun i => (z i-coordinateSum z/(n:ℂ))^2)
+  simp only [hS, Function.comp_apply]
+  exact Equiv.sum_comp σ (fun i => (z i-coordinateSum z/(n : ℂ))^2)
 
  theorem ginibreCenteredQuadratic_not_identically_zero {n : ℕ} (hn : 2≤n) :
     ginibreCenteredQuadratic n ≠ 0 := by
   let j : Fin n := ⟨0, by omega⟩
   let k : Fin n := ⟨1, by omega⟩
-  have hjk : j ≠ k := by intro h; have := congrArg Fin.val h; simp [j,k] at this
+  have hjk : j ≠ k := by intro h; have := congrArg Fin.val h; simp [j, k] at this
   let z : Configuration n := fun i => if i=j then 1 else if i=k then -1 else 0
   have hS : coordinateSum z = 0 := by
-    have he : z = fun i => (if i=j then (1:ℂ) else 0)-(if i=k then (1:ℂ) else 0) := by
+    have he : z = fun i => (if i=j then (1 : ℂ) else 0)-(if i=k then (1 : ℂ) else 0) := by
       funext i
       dsimp [z]
       split_ifs <;> simp_all
@@ -75,7 +75,7 @@ def ginibreCenteredQuadratic (n : ℕ) (z : Configuration n) : ℂ :=
   have hQ : ginibreCenteredQuadratic n z = 2 := by
     unfold ginibreCenteredQuadratic
     rw [recentered_eq_self z hS]
-    have he (i : Fin n) : (z i)^2 = (if i=j then (1:ℂ) else 0)+(if i=k then 1 else 0) := by
+    have he (i : Fin n) : (z i)^2 = (if i=j then (1 : ℂ) else 0)+(if i=k then 1 else 0) := by
       dsimp [z]
       split_ifs <;> simp_all
     simp_rw [he]
@@ -117,10 +117,10 @@ def ginibreCenteredQuadraticL2 (n : ℕ) (hn : 2≤n) : GinibrePolynomialL2 n :=
   have hfun : (fun z => H (T z)) = fun z => -H z := by
     funext z
     dsimp [H]
-    rw [hQ,hFT,map_neg,neg_mul]
-  rw [hfun,integral_neg] at he
+    rw [hQ, hFT, map_neg, neg_mul]
+  rw [hfun, integral_neg] at he
   change ∫ z, H z ∂ginibreMeasure n = 0
-  have htwo : (2:ℂ)*(∫ z, H z ∂ginibreMeasure n)=0 := by linear_combination -he
+  have htwo : (2 : ℂ)*(∫ z, H z ∂ginibreMeasure n)=0 := by linear_combination -he
   exact (mul_eq_zero.mp htwo).resolve_left (by norm_num)
 
  theorem ginibreCenteredQuadraticL2_inner (n : ℕ) (hn : 2≤n)
@@ -132,7 +132,7 @@ def ginibreCenteredQuadraticL2 (n : ℕ) (hn : 2≤n) : GinibrePolynomialL2 n :=
   filter_upwards [(ginibreCenteredQuadratic_memLp n hn).coeFn_toLp,
     polynomialEigenfunctionL2_coeFn n hn i] with z hz hi
   change (ginibreCenteredQuadraticL2 n hn) z = ginibreCenteredQuadratic n z at hz
-  rw [hz,hi,RCLike.inner_apply]
+  rw [hz, hi, RCLike.inner_apply]
   ring
 
  theorem ginibreCenteredQuadraticL2_orthogonal_of_integrals (n : ℕ) (hn : 2≤n)
@@ -144,11 +144,11 @@ def ginibreCenteredQuadraticL2 (n : ℕ) (hn : 2≤n) : GinibrePolynomialL2 n :=
   intro F hF
   induction hF using Submodule.span_induction with
   | mem F h =>
-    obtain ⟨i,rfl⟩ := h
-    rw [ginibreCenteredQuadraticL2_inner,he]
+    obtain ⟨i, rfl⟩ := h
+    rw [ginibreCenteredQuadraticL2_inner, he]
   | zero => simp
-  | add x y _ _ hx hy => simp [inner_add_right,hx,hy]
-  | smul c x _ hx => simp [inner_smul_right,hx]
+  | add x y _ _ hx hy => simp [inner_add_right, hx, hy]
+  | smul c x _ hx => simp [inner_smul_right, hx]
 
  theorem closedPolynomialSector_ne_top_of_quadratic_orthogonal (n : ℕ) (hn : 2≤n)
     (hQ : ginibreCenteredQuadraticL2 n hn ∈ (closedPolynomialSector n hn)ᗮ) :
@@ -162,26 +162,26 @@ def ginibreCenteredQuadraticL2 (n : ℕ) (hn : 2≤n) : GinibrePolynomialL2 n :=
     ginibreCenteredQuadratic n (ginibreRelativeQuarterTurn n z) = -ginibreCenteredQuadratic n z := by
   unfold ginibreCenteredQuadratic
   rw [recentered_ginibreRelativeQuarterTurn hn]
-  simp only [mul_pow,Complex.I_sq,neg_one_mul,Finset.sum_neg_distrib]
+  simp only [mul_pow, Complex.I_sq, neg_one_mul, Finset.sum_neg_distrib]
 
 /-- The paper's quadratic is genuinely orthogonal to every polynomial in S, S̄, R. -/
  theorem ginibreCenteredQuadratic_orthogonal_polynomial {n : ℕ} (hn : 0<n)
     (F : Configuration n → ℂ) (hF : IsPolynomialInSConjSR F) :
     (∫ z, conj (ginibreCenteredQuadratic n z)*F z ∂ginibreMeasure n)=0 := by
-  obtain ⟨P,hP⟩ := hF
+  obtain ⟨P, hP⟩ := hF
   have hcont : Continuous F := by
-    have he : F = fun z => MvPolynomial.eval ![S_observable z,conj (S_observable z),(R_poly z:ℂ)] P := funext hP
+    have he : F = fun z => MvPolynomial.eval ![S_observable z, conj (S_observable z), (R_poly z : ℂ)] P := funext hP
     rw [he]
     apply (MvPolynomial.continuous_eval P).comp
     apply continuous_pi
     intro i
-    fin_cases i <;> simp [S_observable,R_poly] <;> simp only [coordinateSum,pairwiseRadius] <;> fun_prop
+    fin_cases i <;> simp [S_observable, R_poly] <;> simp only [coordinateSum, pairwiseRadius] <;> fun_prop
   apply ginibreCenteredQuadratic_integral_orthogonal_of_preserving n
     (ginibreRelativeQuarterTurn n) (measurePreserving_ginibreRelativeQuarterTurn hn)
     (ginibreCenteredQuadratic_quarterTurn hn) F hcont
   intro z
-  rw [hP,hP]
-  simp only [S_observable,R_poly,coordinateSum_ginibreRelativeQuarterTurn hn,
+  rw [hP, hP]
+  simp only [S_observable, R_poly, coordinateSum_ginibreRelativeQuarterTurn hn,
     pairwiseRadius_ginibreRelativeQuarterTurn]
 
  theorem ginibreCenteredQuadraticL2_orthogonal (n : ℕ) (hn : 2≤n) :
@@ -199,8 +199,8 @@ functions: its nonzero orthogonal witness is the literal symmetric quadratic Q. 
       ginibreCenteredQuadraticL2 n hn ∈ (closedPolynomialSector n hn)ᗮ ∧
       closedPolynomialSector n hn ≠ ⊤ := by
   have hQ := ginibreCenteredQuadraticL2_orthogonal n hn
-  exact ⟨ginibreCenteredQuadraticL2_ne_zero n hn,ginibreCenteredQuadratic_symmetric n,
-    hQ,closedPolynomialSector_ne_top_of_quadratic_orthogonal n hn hQ⟩
+  exact ⟨ginibreCenteredQuadraticL2_ne_zero n hn, ginibreCenteredQuadratic_symmetric n,
+    hQ, closedPolynomialSector_ne_top_of_quadratic_orthogonal n hn hQ⟩
 
 #print axioms polynomialSector_incomplete
 

@@ -12,24 +12,24 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1000000
 local instance actualTransitionPathMeasurable (n : ℕ) (T : ℝ≥0) :
-    MeasurableSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := borel _
+    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := borel _
 local instance actualTransitionPathBorel (n : ℕ) (T : ℝ≥0) :
-    BorelSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := ⟨rfl⟩
+    BorelSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := ⟨rfl⟩
 
 theorem ginibreOriginalEndpointInitialMeasurePreserving {Ω : Type*} [MeasurableSpace Ω]
     {n : ℕ} (hn : 0<n) (α : ℝ) (P : Measure Ω) [IsProbabilityMeasure P] [P.IsComplete]
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (hB : ∀ i, IsBrownianReal (B i) P) (T : ℝ≥0) :
-    MeasurePreserving (fun x : C(Icc (0:ℝ) (T:ℝ),Configuration n) => x ⟨0,⟨le_rfl,T.property⟩⟩)
+    MeasurePreserving (fun x : C(Icc (0 : ℝ) (T : ℝ), Configuration n) => x ⟨0, ⟨le_rfl, T.property⟩⟩)
       (ginibreOriginalEquilibriumPathLaw n α T P B) (ginibreMeasure n) :=
-  ⟨(continuous_eval_const _).measurable,ginibreOriginalEquilibriumPathLaw_initial hn α P B hB T⟩
+  ⟨(continuous_eval_const _).measurable, ginibreOriginalEquilibriumPathLaw_initial hn α P B hB T⟩
 
 theorem ginibreOriginalEndpointTerminalMeasurePreserving {Ω : Type*} [MeasurableSpace Ω]
     {n : ℕ} (hn : 0<n) (α : ℝ≥0) (P : Measure Ω) [IsProbabilityMeasure P] [P.IsComplete]
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (hB : ∀ i, IsBrownianReal (B i) P)
     (hiB : iIndepFun (fun i ω t => B i t ω) P) (T : ℝ≥0) :
-    MeasurePreserving (fun x : C(Icc (0:ℝ) (T:ℝ),Configuration n) => x ⟨T,⟨T.property,le_rfl⟩⟩)
+    MeasurePreserving (fun x : C(Icc (0 : ℝ) (T : ℝ), Configuration n) => x ⟨T, ⟨T.property, le_rfl⟩⟩)
       (ginibreOriginalEquilibriumPathLaw n α T P B) (ginibreMeasure n) :=
-  ⟨(continuous_eval_const _).measurable,ginibreOriginalEquilibriumPathLaw_terminal hn α P B hB hiB T⟩
+  ⟨(continuous_eval_const _).measurable, ginibreOriginalEquilibriumPathLaw_terminal hn α P B hB hiB T⟩
 
 /-- Genuine original stochastic transition operator on the actual Ginibre L²
 space, constructed from actual stationary Brownian endpoint pullbacks. -/
@@ -54,7 +54,7 @@ theorem ginibreOriginalStochasticL2Operator_pairing {Ω : Type*} [MeasurableSpac
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (hB : ∀ i, IsBrownianReal (B i) P)
     (hiB : iIndepFun (fun i ω t => B i t ω) P) (T : ℝ≥0) (f g : Lp ℝ 2 (ginibreMeasure n)) :
     inner ℝ f (ginibreOriginalStochasticL2Operator hn α P B hB hiB T g)=
-      ∫ x, f (x ⟨0,⟨le_rfl,T.property⟩⟩)*g (x ⟨T,⟨T.property,le_rfl⟩⟩)
+      ∫ x, f (x ⟨0, ⟨le_rfl, T.property⟩⟩)*g (x ⟨T, ⟨T.property, le_rfl⟩⟩)
         ∂ginibreOriginalEquilibriumPathLaw n α T P B :=
   stationaryEndpointL2Operator_pairing _ _ _ _ _ _ f g
 

@@ -25,8 +25,8 @@ theorem actualMeanSquare_difference_le_four_errors {Ω : Type*} [MeasurableSpace
   have hbound (ω : Ω) : (I ω-J ω)^2 ≤
       4*((I ω-S ω)^2+(S ω-A ω)^2+(A ω-T ω)^2+(T ω-J ω)^2) := by
     nlinarith [sq_nonneg ((I ω-S ω)-(S ω-A ω)),
-      sq_nonneg ((I ω-S ω)-(A ω-T ω)),sq_nonneg ((I ω-S ω)-(T ω-J ω)),
-      sq_nonneg ((S ω-A ω)-(A ω-T ω)),sq_nonneg ((S ω-A ω)-(T ω-J ω)),
+      sq_nonneg ((I ω-S ω)-(A ω-T ω)), sq_nonneg ((I ω-S ω)-(T ω-J ω)),
+      sq_nonneg ((S ω-A ω)-(A ω-T ω)), sq_nonneg ((S ω-A ω)-(T ω-J ω)),
       sq_nonneg ((A ω-T ω)-(T ω-J ω))]
   have hh := integral_mono (hI.sub hJ).integrable_sq
     (((hIS.add hSA).add hAT).add hTJ |>.const_mul 4) hbound
@@ -36,7 +36,7 @@ theorem actualMeanSquare_difference_le_four_errors {Ω : Type*} [MeasurableSpace
   have he2 := integral_add (hIS.add hSA) hAT
   have he3 := integral_add hIS hSA
   simp only [Pi.add_apply] at hh he1 he2 he3
-  rw [he1,he2,he3] at hh
+  rw [he1, he2, he3] at hh
   exact hh
 
 #print axioms actualMeanSquare_difference_le_four_errors

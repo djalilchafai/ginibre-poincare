@@ -45,7 +45,7 @@ theorem ginibreHamiltonianKilledOUActionWeight_measurable (n : ℕ) (α T R : �
     (ginibreHamiltonianCompactSurvival_measurableSet n T R)
 
 theorem ginibreHamiltonianKilledOUActionWeight_reverse (n : ℕ) (α T R : ℝ) (hT : 0 ≤ T)
-    (x : C(Icc (0 : ℝ) T,Configuration n)) :
+    (x : C(Icc (0 : ℝ) T, Configuration n)) :
     ginibreHamiltonianKilledOUActionWeight n α T R hT
       (x.comp (ginibreHamiltonianCompactReverseTime T hT)) =
       ginibreHamiltonianKilledOUActionWeight n α T R hT x := by
@@ -59,21 +59,21 @@ theorem ginibreHamiltonianKilledOUActionWeight_reverse (n : ℕ) (α T R : ℝ) 
 /-- Initial Ginibre/Gaussian interaction weighting cancels the genuine
 likelihood initial factor, also off survival where both killed densities vanish. -/
 theorem ginibreHamiltonianKilledOUAction_initial_cancellation (n : ℕ) (α T R : ℝ) (hT : 0 ≤ T)
-    (x : C(Icc (0 : ℝ) T,Configuration n)) :
-    vandermondeWeight (x ⟨0,⟨le_rfl,hT⟩⟩) *
+    (x : C(Icc (0 : ℝ) T, Configuration n)) :
+    vandermondeWeight (x ⟨0, ⟨le_rfl, hT⟩⟩) *
       (ginibreHamiltonianCompactSurvival n T R).indicator
-        (fun y => Real.exp (ginibreInteractionPotential n (y ⟨0,⟨le_rfl,hT⟩⟩)) *
+        (fun y => Real.exp (ginibreInteractionPotential n (y ⟨0, ⟨le_rfl, hT⟩⟩)) *
           ginibreHamiltonianOUActionWeight n α T hT y) x =
       ginibreHamiltonianKilledOUActionWeight n α T R hT x := by
   classical
   by_cases hx : x ∈ ginibreHamiltonianCompactSurvival n T R
-  · have h0 := hx (⟨0,⟨le_rfl,hT⟩⟩ : Icc (0 : ℝ) T)
-    have hK : x ⟨0,⟨le_rfl,hT⟩⟩ ∈ ginibreHamiltonianSublevel n R := by
+  · have h0 := hx (⟨0, ⟨le_rfl, hT⟩⟩ : Icc (0 : ℝ) T)
+    have hK : x ⟨0, ⟨le_rfl, hT⟩⟩ ∈ ginibreHamiltonianSublevel n R := by
       rw [ginibreHamiltonianSublevel_eq_weight_superlevel]
-      exact (show Real.exp (-R) < ginibreWeight n (x ⟨0,⟨le_rfl,hT⟩⟩) from h0).le
-    simp only [Set.indicator_of_mem hx,ginibreHamiltonianKilledOUActionWeight]
+      exact (show Real.exp (-R) < ginibreWeight n (x ⟨0, ⟨le_rfl, hT⟩⟩) from h0).le
+    simp only [Set.indicator_of_mem hx, ginibreHamiltonianKilledOUActionWeight]
     exact ginibreInteraction_initial_action_cancellation _ hK.1 _
-  · simp only [Set.indicator_of_notMem hx,ginibreHamiltonianKilledOUActionWeight,mul_zero]
+  · simp only [Set.indicator_of_notMem hx, ginibreHamiltonianKilledOUActionWeight, mul_zero]
 
 /-- Reversal of the actual stationary original-Brownian OU reference with the
 literal killed action. Identification with the killed singular SDE is separate. -/

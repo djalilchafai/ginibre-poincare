@@ -5,6 +5,21 @@ public import Mathlib.MeasureTheory.Function.StronglyMeasurable.Basic
 
 @[expose] public section
 
+/-! # Algebra of scalar convergence in measure for Itô errors
+
+On a finite measure space, convergence in measure is characterized by
+almost-everywhere convergent subsubsequences. The multiplication and addition
+proofs extract a common such subsequence for both factors, then apply the
+ordinary pointwise limit rule. Continuous scalar transformations use the
+same criterion; finite sums follow by induction.
+
+For a normalized error `R / (1 + Q)`, nonnegativity of `Q` prevents division
+by zero. If `Q` converges in measure, multiply the vanishing ratio by the
+convergent factor `1 + Q`. The dominated variant needs only a convergent
+upper bound `S` for `Q`: increasing the denominator reduces the norm of the
+ratio. This is useful when only a scalar bound on configuration quadratic
+variation has been identified. -/
+
 open MeasureTheory Filter
 open scoped Topology
 namespace GinibrePoincare
@@ -18,10 +33,10 @@ theorem itoTendstoInMeasure_mul (f g : ℕ → Ω → ℝ) (F G : Ω → ℝ)
     TendstoInMeasure P (fun n ω => f n ω*g n ω) atTop (fun ω => F ω*G ω) := by
   apply (exists_seq_tendstoInMeasure_atTop_iff (fun n => (hfm n).mul (hgm n))).mpr
   intro ns hns
-  obtain ⟨ms,hms,hmf⟩ := (hf.comp hns.tendsto_atTop).exists_seq_tendsto_ae
-  obtain ⟨ks,hks,hmg⟩ := (hg.comp (hns.tendsto_atTop.comp hms.tendsto_atTop)).exists_seq_tendsto_ae
-  refine ⟨ms ∘ ks,hms.comp hks,?_⟩
-  filter_upwards [hmf,hmg] with ω hωf hωg
+  obtain ⟨ms, hms, hmf⟩ := (hf.comp hns.tendsto_atTop).exists_seq_tendsto_ae
+  obtain ⟨ks, hks, hmg⟩ := (hg.comp (hns.tendsto_atTop.comp hms.tendsto_atTop)).exists_seq_tendsto_ae
+  refine ⟨ms ∘ ks, hms.comp hks,?_⟩
+  filter_upwards [hmf, hmg] with ω hωf hωg
   exact (hωf.comp hks.tendsto_atTop).mul hωg
 
 /-- Actual sums preserve convergence in probability. -/
@@ -31,10 +46,10 @@ theorem itoTendstoInMeasure_add (f g : ℕ → Ω → ℝ) (F G : Ω → ℝ)
     TendstoInMeasure P (fun n ω => f n ω+g n ω) atTop (fun ω => F ω+G ω) := by
   apply (exists_seq_tendstoInMeasure_atTop_iff (fun n => (hfm n).add (hgm n))).mpr
   intro ns hns
-  obtain ⟨ms,hms,hmf⟩ := (hf.comp hns.tendsto_atTop).exists_seq_tendsto_ae
-  obtain ⟨ks,hks,hmg⟩ := (hg.comp (hns.tendsto_atTop.comp hms.tendsto_atTop)).exists_seq_tendsto_ae
-  refine ⟨ms ∘ ks,hms.comp hks,?_⟩
-  filter_upwards [hmf,hmg] with ω hωf hωg
+  obtain ⟨ms, hms, hmf⟩ := (hf.comp hns.tendsto_atTop).exists_seq_tendsto_ae
+  obtain ⟨ks, hks, hmg⟩ := (hg.comp (hns.tendsto_atTop.comp hms.tendsto_atTop)).exists_seq_tendsto_ae
+  refine ⟨ms ∘ ks, hms.comp hks,?_⟩
+  filter_upwards [hmf, hmg] with ω hωf hωg
   exact (hωf.comp hks.tendsto_atTop).add hωg
 
 /-- Actual continuous scalar transformations preserve convergence in probability. -/
@@ -44,8 +59,8 @@ theorem itoTendstoInMeasure_continuous (f : ℕ → Ω → ℝ) (F : Ω → ℝ)
     TendstoInMeasure P (fun n ω => φ (f n ω)) atTop (fun ω => φ (F ω)) := by
   apply (exists_seq_tendstoInMeasure_atTop_iff (fun n => hφ.comp_aestronglyMeasurable (hfm n))).mpr
   intro ns hns
-  obtain ⟨ms,hms,hmf⟩ := (hf.comp hns.tendsto_atTop).exists_seq_tendsto_ae
-  refine ⟨ms,hms,?_⟩
+  obtain ⟨ms, hms, hmf⟩ := (hf.comp hns.tendsto_atTop).exists_seq_tendsto_ae
+  refine ⟨ms, hms,?_⟩
   filter_upwards [hmf] with ω hω
   exact (hφ.tendsto (F ω)).comp hω
 
@@ -88,7 +103,7 @@ theorem itoNormalizedDominatedError_tendstoInMeasure (R Q S : ℕ → Ω → ℝ
   apply squeeze_zero_norm _ hn
   intro n
   have hq : 0 < 1+Q n ω := by linarith [(hqs n).1]
-  have hs : 0 < 1+S n ω := by linarith [(hqs n).1,(hqs n).2]
+  have hs : 0 < 1+S n ω := by linarith [(hqs n).1, (hqs n).2]
   simp only [norm_div, Real.norm_eq_abs, abs_of_nonneg hq.le, abs_of_nonneg hs.le]
   exact div_le_div_of_nonneg_left (abs_nonneg _) hq (by linarith [(hqs n).2])
 

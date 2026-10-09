@@ -40,15 +40,15 @@ theorem ginibreBrownian_center_barrier_stopped_expectation
       (fun ω => by exact_mod_cast hτT ω)
     have ha := (h.mono (F.le T)).measurable
     exact ha
-  obtain ⟨C,hC⟩ := (ginibreHamiltonianSublevel_isCompact (show 0 < n by omega) R).exists_bound_of_continuousOn
+  obtain ⟨C, hC⟩ := (ginibreHamiltonianSublevel_isCompact (show 0 < n by omega) R).exists_bound_of_continuousOn
     (contDiff_ginibreCenterLogBarrier n hε).continuous.continuousOn
   have hY : Integrable (fun ω => ginibreCenterLogBarrier n ε (X (τ ω) ω)) P :=
     (integrable_const C).mono' ((contDiff_ginibreCenterLogBarrier n hε).continuous.measurable.comp hEval).aestronglyMeasurable
       (ae_of_all P (fun ω => hC _ (ginibreBrownianHamiltonianStoppedProcess_range (by omega) α z hz B R hR T (τ ω) ω)))
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hEq⟩ := ginibreBrownian_center_barrier_ito_exists hn α z hz B P hB hind R hR T hε
-  obtain ⟨hJStop,hJInt⟩ := continuous_martingale_bounded_stopping_integral hJM (ae_of_all P hJC) hτ hτT
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hEq⟩ := ginibreBrownian_center_barrier_ito_exists hn α z hz B P hB hind R hR T hε
+  obtain ⟨hJStop, hJInt⟩ := continuous_martingale_bounded_stopping_integral hJM (ae_of_all P hJC) hτ hτT
   have hJInt0 : (∫ ω, J (τ ω) ω ∂P)=0 := by
-    rw [hJInt,integral_congr_ae hJ0]
+    rw [hJInt, integral_congr_ae hJ0]
     simp
   refine ⟨hY,?_⟩
   have hle : (fun ω => ginibreCenterLogBarrier n ε (X (τ ω) ω)) ≤ᵐ[P]
@@ -68,7 +68,7 @@ theorem ginibreBrownian_center_barrier_stopped_expectation
     have he1 := integral_add (hc1.add hJStop) hc2
     have he2 := integral_add hc1 hJStop
     simp only [Pi.add_apply] at he1 he2
-    rw [he1,he2,hJInt0]
+    rw [he1, he2, hJInt0]
     simp
 
   change (∫ ω, ginibreCenterLogBarrier n ε (X (τ ω) ω) ∂P) ≤

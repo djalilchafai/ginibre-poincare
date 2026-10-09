@@ -12,13 +12,13 @@ theorem bakryEmeryEuclideanLift_density_integrable
     (n : ℕ) (hn : 0 < n) (ρ : ℝ) (hρ : 0 < ρ) (V : Potential)
     (hV : Continuous V) (hrot : IsRotationalPotential V) (hc : IsRhoConvexPotential ρ V) :
     Integrable (fun x : E => Real.exp (-bakryEmeryEuclideanLiftPotential n V x)) volume := by
-  have hnR : (0:ℝ) < n := by exact_mod_cast hn
-  have hG : Integrable (fun x : E => Real.exp (-((n:ℝ)*ρ)/2*‖x‖^2)) volume := by
+  have hnR : (0 : ℝ) < n := by exact_mod_cast hn
+  have hG : Integrable (fun x : E => Real.exp (-((n : ℝ)*ρ)/2*‖x‖^2)) volume := by
     simpa only [neg_div] using bakryEmery_gaussian_majorant_integrable (E := E)
-      ((n:ℝ)*ρ/2) (by positivity)
+      ((n : ℝ)*ρ/2) (by positivity)
   have hcont : Continuous (bakryEmeryEuclideanLiftPotential (E := E) n V) :=
     continuous_const.mul (hV.comp (Complex.continuous_ofReal.comp continuous_norm))
-  apply (hG.const_mul (Real.exp (-(n:ℝ)*V 0))).mono' hcont.neg.rexp.aestronglyMeasurable
+  apply (hG.const_mul (Real.exp (-(n : ℝ)*V 0))).mono' hcont.neg.rexp.aestronglyMeasurable
   apply Filter.Eventually.of_forall
   intro x
   have hd := bakryEmeryRegularizedLift_density_domination n ρ 0 hρ.le hrot hc x

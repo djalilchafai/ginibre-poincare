@@ -28,12 +28,12 @@ theorem ginibreBrownian_center_small_stopped_probability
       P.real {ω | ginibreCenterSquared n (ginibreBrownianHamiltonianStoppedProcess n α z B R T (τ ω) ω) ≤ δ} ≤
         (Real.log (C+ε)-Real.log (ginibreCenterSquared n z+ε)+(4*(α : ℝ)/(n : ℝ))*(T : ℝ))/
           (Real.log (C+ε)-Real.log (δ+ε)) := by
-  obtain ⟨C,hC,hBound⟩ := ginibreHamiltonianSublevel_centerSquared_bound (show 0 < n by omega) R
-  refine ⟨C,hC,?_⟩
+  obtain ⟨C, hC, hBound⟩ := ginibreHamiltonianSublevel_centerSquared_bound (show 0 < n by omega) R
+  refine ⟨C, hC,?_⟩
   intro δ hδ hδC ε hε τ hτ hτσ
   let X := ginibreBrownianHamiltonianStoppedProcess n α z B R T
   let Y := fun ω => ginibreCenterLogBarrier n ε (X (τ ω) ω)+Real.log (C+ε)
-  obtain ⟨hY0,hEY⟩ := ginibreBrownian_center_barrier_stopped_expectation hn α z hz B P hB hind R hR T hε τ hτ hτσ
+  obtain ⟨hY0, hEY⟩ := ginibreBrownian_center_barrier_stopped_expectation hn α z hz B P hB hind R hR T hε τ hτ hτσ
   have hY : Integrable Y P := hY0.add (integrable_const _)
   have hnonneg : 0 ≤ᵐ[P] Y := ae_of_all P (fun ω => by
     have hb := hBound _ (ginibreBrownianHamiltonianStoppedProcess_range (by omega) α z hz B R hR T (τ ω) ω)
@@ -55,7 +55,7 @@ theorem ginibreBrownian_center_small_stopped_probability
   have hMean : (∫ ω, Y ω ∂P) ≤ Real.log (C+ε)-Real.log (ginibreCenterSquared n z+ε)+
       (4*(α : ℝ)/(n : ℝ))*(T : ℝ) := by
     have he := integral_add hY0 (integrable_const (Real.log (C+ε)) (μ := P))
-    simp only [Pi.add_apply,integral_const,probReal_univ,one_smul] at he
+    simp only [Pi.add_apply, integral_const, probReal_univ, one_smul] at he
     change (∫ ω, Y ω ∂P) = _ at he
     rw [he]
     unfold ginibreCenterLogBarrier at hEY ⊢

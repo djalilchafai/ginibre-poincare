@@ -31,12 +31,12 @@ theorem spectralSupportComplex_pencil_isUnit (R : H →L[ℂ] H) (hR : IsSelfAdj
     simp at he
   have hu : IsUnit (algebraMap ℂ (H →L[ℂ] H) w - R) := spectrum.notMem_iff.mp hw
   have hs : IsUnit ((z-1) • (algebraMap ℂ (H →L[ℂ] H) w - R)) := by
-    simpa only [Units.smul_def,Units.val_mk0] using IsUnit.smul (Units.mk0 (z-1) hz1) hu
+    simpa only [Units.smul_def, Units.val_mk0] using IsUnit.smul (Units.mk0 (z-1) hz1) hu
   have he : (z-1) • (algebraMap ℂ (H →L[ℂ] H) w - R) = -(1+(z-1) • R) := by
-    rw [smul_sub,Algebra.algebraMap_eq_smul_one,smul_smul]
+    rw [smul_sub, Algebra.algebraMap_eq_smul_one, smul_smul]
     have hw : (z-1)*w = -1 := by dsimp [w];field_simp <;> ring
     rw [hw]
-    simp [sub_eq_add_neg,add_comm]
+    simp [sub_eq_add_neg, add_comm]
   rw [he] at hs
   simpa only [neg_neg] using hs.neg
 

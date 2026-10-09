@@ -45,7 +45,7 @@ theorem brownianPuncturedUnitIntegral_bounded_substitution_of_horizon_limits
   have hProd := brownianAggregateUniformSum_punctured_meanSquare_of_horizon_limit B P hB hind
     (fun i r ω => A r ω*u r ω i) (fun i r => (hA r).mul (hum i r)) T hT
     (fun i => by
-      filter_upwards [hc,huc] with ω hω hωu
+      filter_upwards [hc, huc] with ω hω hωu
       exact hω.continuousOn.mul ((PiLp.continuous_apply 2 (fun _ : ι => ℝ) i).comp_continuousOn hωu))
     C hC (fun i r ω => by
       change ‖A r ω*u r ω i‖ ≤ C

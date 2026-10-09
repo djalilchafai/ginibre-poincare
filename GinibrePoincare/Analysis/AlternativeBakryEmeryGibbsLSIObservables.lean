@@ -48,7 +48,7 @@ theorem bakryEmery_coupledObservable_integral_difference_tendsto
     Tendsto (fun n => ∫ ω, g (X n ω)-g (Y n ω) ∂P) atTop (nhds 0) := by
   have hbound (n : ℕ) (ω : Ω) : ‖g (X n ω)-g (Y n ω)‖ ≤ 2*C := by
     rw [Real.norm_eq_abs]
-    exact (abs_sub (g (X n ω)) (g (Y n ω))).trans (by linarith [hC (X n ω),hC (Y n ω)])
+    exact (abs_sub (g (X n ω)) (g (Y n ω))).trans (by linarith [hC (X n ω), hC (Y n ω)])
   have hh : Tendsto (fun n => ∫ ω, g (X n ω)-g (Y n ω) ∂P) atTop
       (nhds (∫ _ : Ω, (0 : ℝ) ∂P)) := by
     apply tendsto_integral_filter_of_dominated_convergence (fun _ => 2*C)
@@ -85,7 +85,7 @@ theorem bakryEmery_stationaryCoupling_expectation_tendsto
   simp only [zero_add] at ht
   convert ht using 1
   funext n
-  rw [integral_sub (hxi n) (hyi n),he n,sub_add_cancel]
+  rw [integral_sub (hxi n) (hyi n), he n, sub_add_cancel]
 
 #print axioms bakryEmery_stationaryCoupling_expectation_tendsto
 #print axioms bakryEmery_coupledObservable_integral_difference_tendsto

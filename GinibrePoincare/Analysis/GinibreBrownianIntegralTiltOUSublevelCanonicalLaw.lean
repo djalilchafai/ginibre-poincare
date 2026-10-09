@@ -13,15 +13,15 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1600000
 local instance canonicalSublevelFiniteMeasurable (n : ℕ) (T : ℝ≥0) :
-    MeasurableSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := borel _
+    MeasurableSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := borel _
 local instance canonicalSublevelFiniteBorel (n : ℕ) (T : ℝ≥0) :
-    BorelSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := ⟨rfl⟩
+    BorelSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := ⟨rfl⟩
 
 /-- Canonical original path driven by the continuous normalization of a
 literal finite configuration noise path. -/
 def ginibreCanonicalFiniteNoisePath {Ω : Type*} (n : ℕ) (α : ℝ)
-    (z : Configuration n) (T : ℝ≥0) (N : Ω → Icc (0:ℝ) (T:ℝ) → Configuration n)
-    (ω : Ω) (t : Icc (0:ℝ≥0) T) : Configuration n :=
+    (z : Configuration n) (T : ℝ≥0) (N : Ω → Icc (0 : ℝ) (T : ℝ) → Configuration n)
+    (ω : Ω) (t : Icc (0 : ℝ≥0) T) : Configuration n :=
   ginibreDrivenMaximalValue n α
     (ginibreFiniteNoiseExtension n T (ginibreFiniteContinuousNoiseNormalize n T N ω)).val z t.val
 
@@ -46,12 +46,12 @@ theorem ginibreActualOU_sublevel_canonical_whole_path_law_exists {Ω : Type*}
         (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) T (fun i => M i T) ω ∂P)=1 ∧
       let Q := P.withDensity (fun ω => ENNReal.ofReal (brownianVectorExponentialIntegralDensity
         (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) T (fun i => M i T) ω))
-      ((∀ᵐ ω ∂Q, (T:ℝ≥0∞)<ginibreDrivenMaximalLifetime n α
+      ((∀ᵐ ω ∂Q, (T : ℝ≥0∞)<ginibreDrivenMaximalLifetime n α
         (ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω) z) ∧
       IdentDistrib
-        (fun ω (t : Icc (0:ℝ≥0) T) => ginibreDrivenMaximalValue n α
+        (fun ω (t : Icc (0 : ℝ≥0) T) => ginibreDrivenMaximalValue n α
           (ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω) z t.val)
-        (fun ω (t : Icc (0:ℝ≥0) T) => ginibreBrownianMaximalProcess n α z B t.val ω) Q P) ∧
+        (fun ω (t : Icc (0 : ℝ≥0) T) => ginibreBrownianMaximalProcess n α z B t.val ω) Q P) ∧
       ∀ᵐ ω ∂Q,
         let N := ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω
         ((∀ t≤T, ginibreDrivenMaximalValue n α N z t ∈ ginibreHamiltonianOUSublevelDomain n R) ↔
@@ -65,10 +65,10 @@ theorem ginibreActualOU_sublevel_canonical_whole_path_law_exists {Ω : Type*}
               (ginibreHamiltonianGradientPathWeight n α T (fun s => Y s.toNNReal ω)/
                 ginibreQuadraticGradientPathWeight n α T (fun s => Y s.toNNReal ω))) := by
   classical
-  obtain ⟨K,hK,hCF,Y,hYC,hYR,hY0,hY,θ,hStop,hθ,hStopped,hθActual,hEq,M,hM,hDi,hD1,hAction⟩ :=
+  obtain ⟨K, hK, hCF, Y, hYC, hYR, hY0, hY, θ, hStop, hθ, hStopped, hθActual, hEq, M, hM, hDi, hD1, hAction⟩ :=
     ginibreHamiltonianOU_sublevel_interaction_action_density_exists hn B P hB hind α z hz R hR T hT
   let F := fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i
-  obtain ⟨C,hC,hb⟩ := ginibreInteractionBrownianTilt_compact_bound n α K hK hCF
+  obtain ⟨C, hC, hb⟩ := ginibreInteractionBrownianTilt_compact_bound n α K hK hCF
   have hF (i : Fin n × Fin 2) (r : ℝ≥0) : @Measurable Ω ℝ
       (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal) r) _ (F i r) :=
     (ginibreInteractionBrownianTilt_measurable n α i).comp (hY r).measurable
@@ -79,12 +79,12 @@ theorem ginibreActualOU_sublevel_canonical_whole_path_law_exists {Ω : Type*}
     rw [Real.norm_eq_abs]
     apply abs_le_of_sq_le_sq _ hC
     exact (Finset.single_le_sum (fun j _ => sq_nonneg (F j r ω)) (Finset.mem_univ i)).trans (hb _ (hYR r ω))
-  obtain ⟨hNm,hMm,hLaw⟩ := ginibreInteraction_actual_configuration_continuous_noise_law n B P hB hind α
+  obtain ⟨hNm, hMm, hLaw⟩ := ginibreInteraction_actual_configuration_continuous_noise_law n B P hB hind α
     Y hYC (fun r ω => hCF _ (hYR r ω)) hF C hC (fun r ω => hb _ (hYR r ω)) T hT
     (fun i k => (brownianUniformLeftSum_memLp_two B P (fun i => (hB i).toIsPreBrownianReal)
       hind i (F i) (hF i) (hFi i) T (k+1)).aestronglyMeasurable)
     (fun i => M i T) (fun i => (hM i).2.2.2.2 T le_rfl)
-  refine ⟨Y,M,fun i => (hM i).2.2.2.2 T le_rfl,hDi,hD1,?_⟩
+  refine ⟨Y, M, fun i => (hM i).2.2.2.2 T le_rfl, hDi, hD1,?_⟩
   constructor
   · let Q := P.withDensity (fun ω => ENNReal.ofReal (brownianVectorExponentialIntegralDensity F T (fun i => M i T) ω))
     let N := fun ω => ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω
@@ -97,39 +97,39 @@ theorem ginibreActualOU_sublevel_canonical_whole_path_law_exists {Ω : Type*}
     have hNc : ∀ᵐ ω ∂Q, Continuous (N ω) ∧ N ω 0=0 := hQP.ae_le hNcP
     have hBz : ∀ᵐ ω ∂P, ∀ i, B i 0 ω=0 := ae_all_iff.mpr (fun i => (hB i).eval_zero_ae_eq_zero)
     have hBaseEq : ∀ᵐ ω ∂P, L ω=fun s => (ginibreBrownianFullContinuousNoise n B α ω).val s := by
-      filter_upwards [hBz,ginibreBrownianFullContinuousNoise_ae n B P hB α] with ω hz hn
+      filter_upwards [hBz, ginibreBrownianFullContinuousNoise_ae n B P hB α] with ω hz hn
       funext s
       rw [hn s]
       funext j
-      simp [L,ginibreConfigurationBrownianNoise,hz]
+      simp [L, ginibreConfigurationBrownianNoise, hz]
     have hLc : ∀ᵐ ω ∂P, Continuous (L ω) ∧ L ω 0=0 := by
       filter_upwards [hBaseEq] with ω hω
       rw [hω]
       exact ⟨(ginibreBrownianFullContinuousNoise n B α ω).val.continuous,
         (ginibreBrownianFullContinuousNoise n B α ω).property⟩
-    have hAliveL : ∀ᵐ ω ∂P, (T:ℝ≥0∞)<ginibreDrivenMaximalLifetime n α (L ω) z := by
-      filter_upwards [hBaseEq,ginibreBrownianMaximalLifetime_top_ae hn α z hz B P hB hind] with ω hω htop
+    have hAliveL : ∀ᵐ ω ∂P, (T : ℝ≥0∞)<ginibreDrivenMaximalLifetime n α (L ω) z := by
+      filter_upwards [hBaseEq, ginibreBrownianMaximalLifetime_top_ae hn α z hz B P hB hind] with ω hω htop
       rw [hω]
-      change (T:ℝ≥0∞)<ginibreBrownianMaximalLifetime n α z B ω
+      change (T : ℝ≥0∞)<ginibreBrownianMaximalLifetime n α z B ω
       rw [htop]
       exact ENNReal.coe_lt_top
     have hTransfer := ginibreActualFiniteNoise_canonical_whole_path_law hn α z hz T P Q N L
       hNc hLc hAliveL hNm hMm hLaw
     have hIdent := hTransfer.2
-    have heR : (fun ω (t : Icc (0:ℝ≥0) T) => ginibreDrivenMaximalValue n α (L ω) z t.val)=ᵐ[P]
-        (fun ω (t : Icc (0:ℝ≥0) T) => ginibreBrownianMaximalProcess n α z B t.val ω) := by
+    have heR : (fun ω (t : Icc (0 : ℝ≥0) T) => ginibreDrivenMaximalValue n α (L ω) z t.val)=ᵐ[P]
+        (fun ω (t : Icc (0 : ℝ≥0) T) => ginibreBrownianMaximalProcess n α z B t.val ω) := by
       filter_upwards [hBaseEq] with ω hω
       funext t
       rw [hω]
       rfl
-    exact ⟨hTransfer.1,hIdent.aemeasurable_fst,hIdent.aemeasurable_snd.congr heR,
+    exact ⟨hTransfer.1, hIdent.aemeasurable_fst, hIdent.aemeasurable_snd.congr heR,
       hIdent.map_eq.trans (Measure.map_congr heR)⟩
   · let Q := P.withDensity (fun ω => ENNReal.ofReal (brownianVectorExponentialIntegralDensity F T (fun i => M i T) ω))
     have hQP : Q ≪ P := withDensity_absolutelyContinuous P _
     have hCan : ∀ᵐ ω ∂P, ∀ t : ℝ≥0, t≤θ ω → ginibreDrivenMaximalValue n α
         (ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω) z t=Y t ω := by
       have hBcont := ae_all_iff.mpr (fun i => (hB i).cont)
-      filter_upwards [hEq,ginibreConfigurationBrownianNoise_actual n B P hB α,hBcont] with ω hEqω hNω hBω
+      filter_upwards [hEq, ginibreConfigurationBrownianNoise_actual n B P hB α, hBcont] with ω hEqω hNω hBω
       let y := fun s : ℝ => Y s.toNNReal ω
       let N := ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω
       have hVol := ginibreOUPath_correctedBrownian_original_volterra n α α.property B Y ω z (θ ω)
@@ -141,20 +141,20 @@ theorem ginibreActualOU_sublevel_canonical_whole_path_law_exists {Ω : Type*}
           ((hYC ω).comp continuous_real_toNNReal).continuousAt
       have hseg : GinibreDrivenSegment n α N z (θ ω) y := by
         refine ⟨((hYC ω).comp continuous_real_toNNReal).continuousOn,?_,?_⟩
-        · simpa only [y,Real.toNNReal_zero] using hY0 ω
+        · simpa only [y, Real.toNNReal_zero] using hY0 ω
         · intro s hs
-          refine ⟨hCF _ (hYR _ ω),hD.intervalIntegrable 0 s,?_⟩
+          refine ⟨hCF _ (hYR _ ω), hD.intervalIntegrable 0 s,?_⟩
           have he := hVol s.toNNReal (Real.toNNReal_le_iff_le_coe.mpr hs.2)
-          simpa only [y,N,Real.coe_toNNReal _ hs.1] using he
+          simpa only [y, N, Real.coe_toNNReal _ hs.1] using he
       have hN := ginibreInteractionCorrectedBrownian_noise_continuous n α B Y ω hBω (hYC ω) (fun t => hCF _ (hYR t ω))
       have hL := hseg.horizon_lt_lifetime hN.1 hN.2
       intro t ht
-      simpa only [y,N,Real.toNNReal_coe] using
+      simpa only [y, N, Real.toNNReal_coe] using
         ginibreDrivenMaximalValue_eq_segment hseg t ht ((ENNReal.coe_le_coe.mpr ht).trans_lt hL)
     have hCanQ : ∀ᵐ ω ∂Q, ∀ t : ℝ≥0, t≤θ ω → ginibreDrivenMaximalValue n α
         (ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω) z t=Y t ω := hQP.ae_le hCan
     have hActionQ := hQP.ae_le hAction
-    filter_upwards [hCanQ,hActionQ] with ω hC hA
+    filter_upwards [hCanQ, hActionQ] with ω hC hA
     refine ⟨ginibreOU_canonical_survival_iff_reference_survival n α z B R T Y θ
       hStopped hθActual _ ω (hθ ω).2 hC,?_⟩
     intro hStay
@@ -162,8 +162,8 @@ theorem ginibreActualOU_sublevel_canonical_whole_path_law_exists {Ω : Type*}
       hStopped hθActual _ ω hC hStay
     have hθT : θ ω=T := (hθActual ω).trans
       (ginibreHamiltonianOUSublevelStop_eq_horizon_of_stays n α z B R T ω hStay)
-    exact ⟨hEq,(ginibreHamiltonianOUSublevelStopped_eq_reference_of_stays
-      n α z B R T Y θ hStopped hθActual ω hStay).2,hA T (hθT ▸ le_rfl)⟩
+    exact ⟨hEq, (ginibreHamiltonianOUSublevelStopped_eq_reference_of_stays
+      n α z B R T Y θ hStopped hθActual ω hStay).2, hA T (hθT ▸ le_rfl)⟩
 
 #print axioms ginibreActualOU_sublevel_canonical_whole_path_law_exists
 end

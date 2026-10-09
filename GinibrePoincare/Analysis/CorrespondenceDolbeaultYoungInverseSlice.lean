@@ -25,21 +25,21 @@ theorem dolbeaultSlice_dbar {n : ℕ} (j : Fin n) (w : Configuration n)
   have hd := ((hθ.differentiable (by norm_num)).differentiableAt.hasFDerivAt).comp y hs
   unfold planarDbar dbarComponent
   have he : (fun a : ℂ => θ (w+Pi.single j a)) = θ ∘ (fun a : ℂ => w+Pi.single j a) := rfl
-  rw [he,hd.fderiv]
+  rw [he, hd.fderiv]
   have hl (v : ℂ) : (ContinuousLinearMap.pi (Pi.single j (ContinuousLinearMap.id ℝ ℂ))) v =
       coordinateDirection j v := by
     ext k
     by_cases hk : k=j
     · subst k
       simp [coordinateDirection]
-    · simp [coordinateDirection,hk]
-  simp only [ContinuousLinearMap.comp_apply,hl]
+    · simp [coordinateDirection, hk]
+  simp only [ContinuousLinearMap.comp_apply, hl]
   rfl
 
 theorem dolbeaultSlice_compact {n : ℕ} (j : Fin n) (w : Configuration n)
     (θ : Configuration n → ℂ) (hc : HasCompactSupport θ) :
     HasCompactSupport (fun y : ℂ => θ (w+Pi.single j y)) := by
-  obtain ⟨M,hM⟩ := hc.isBounded.exists_norm_le
+  obtain ⟨M, hM⟩ := hc.isBounded.exists_norm_le
   apply HasCompactSupport.intro (isCompact_closedBall (0 : ℂ) (M+‖w‖))
   intro y hy
   by_contra hn
@@ -51,7 +51,7 @@ theorem dolbeaultSlice_compact {n : ℕ} (j : Fin n) (w : Configuration n)
       _ ≤ ‖(w+Pi.single j y : Configuration n) j‖+‖w j‖ := norm_sub_le _ _
       _ ≤ _ := add_le_add (norm_le_pi_norm _ j) (norm_le_pi_norm _ j)
   apply hy
-  simp only [Metric.mem_closedBall,dist_zero_right]
+  simp only [Metric.mem_closedBall, dist_zero_right]
   exact hl.trans (add_le_add hb le_rfl)
 
 /-- Actual coordinate fundamental solution, with the other coordinates fixed. -/
@@ -64,7 +64,7 @@ theorem dolbeaultSlice_fundamental {n : ℕ} (j : Fin n) (w : Configuration n)
   have h := cauchyGreenKernel_fundamental_identity φ hφ hφc
   change (∫ y : ℂ, cauchyGreenKernel y * planarDbar φ y) = -φ 0 at h
   dsimp only [φ] at h
-  simpa only [dolbeaultSlice_dbar j w θ hθ,Pi.single_zero,add_zero] using h
+  simpa only [dolbeaultSlice_dbar j w θ hθ, Pi.single_zero, add_zero] using h
 
 #print axioms dolbeaultSlice_fundamental
 end

@@ -12,15 +12,15 @@ variable {P : Type*} [NormedAddCommGroup P] [NormedSpace ℝ P]
 
 theorem finiteComplexDbar_last_slice (F : P × ℂ → ℂ)
     (hF : ContDiff ℝ ∞ F) (p : P) (z : ℂ) :
-    finiteComplexDbar (0,1) (0,Complex.I) F (p,z) =
-      planarDbar (fun w => F (p,w)) z := by
-  have h := (hF.differentiable (by simp) (p,z)).hasFDerivAt.comp z
+    finiteComplexDbar (0, 1) (0, Complex.I) F (p, z) =
+      planarDbar (fun w => F (p, w)) z := by
+  have h := (hF.differentiable (by simp) (p, z)).hasFDerivAt.comp z
     ((hasFDerivAt_const p z).prodMk (hasFDerivAt_id z))
-  have h' : HasFDerivAt (fun w => F (p,w))
-      ((fderiv ℝ F (p,z)).comp
+  have h' : HasFDerivAt (fun w => F (p, w))
+      ((fderiv ℝ F (p, z)).comp
         ((0 : ℂ →L[ℝ] P).prod (ContinuousLinearMap.id ℝ ℂ))) z := by
     simpa only [Function.comp_def] using! h
-  simp only [finiteComplexDbar,planarDbar,h'.fderiv]
+  simp only [finiteComplexDbar, planarDbar, h'.fderiv]
   simp
 
 /-- The actual coordinate solver, with an ordinary smooth compactly
@@ -35,61 +35,61 @@ theorem localizedCauchyGreenPotential_contDiff (χ : ℂ → ℂ) (a : P → ℂ
   apply parametricCauchyGreenPotential_contDiff _
     ((hχ.comp contDiff_snd).mul ha) (tsupport χ) hc
   intro p z hz
-  rw [image_eq_zero_of_notMem_tsupport hz,zero_mul]
+  rw [image_eq_zero_of_notMem_tsupport hz, zero_mul]
 
 theorem localizedCauchyGreenPotential_solves (χ : ℂ → ℂ) (a : P → ℂ → ℂ)
     (hχ : ContDiff ℝ ∞ χ) (hc : HasCompactSupport χ)
     (ha : ContDiff ℝ ∞ (Function.uncurry a)) (p : P) (z : ℂ) :
-    finiteComplexDbar (0,1) (0,Complex.I) (localizedCauchyGreenPotential χ a) (p,z) =
+    finiteComplexDbar (0, 1) (0, Complex.I) (localizedCauchyGreenPotential χ a) (p, z) =
       χ z * a p z := by
   rw [finiteComplexDbar_last_slice _
     (localizedCauchyGreenPotential_contDiff χ a hχ hc ha)]
   exact parametricCauchyGreenPotential_last_dbar _
     ((hχ.comp contDiff_snd).mul ha) (tsupport χ) hc
-    (fun p z hz => by rw [image_eq_zero_of_notMem_tsupport hz,zero_mul]) p z
+    (fun p z hz => by rw [image_eq_zero_of_notMem_tsupport hz, zero_mul]) p z
 
 theorem localizedCauchyGreenPotential_transverse_CR_on_support (χ : ℂ → ℂ)
     (a : P → ℂ → ℂ) (hχ : ContDiff ℝ ∞ χ) (hc : HasCompactSupport χ)
     (ha : ContDiff ℝ ∞ (Function.uncurry a)) (v w : P) (q : P × ℂ)
     (hCR : ∀ z ∈ tsupport χ,
-      finiteComplexDbar (v,0) (w,0) (Function.uncurry a) (q.1,z) = 0) :
-    finiteComplexDbar (v,0) (w,0) (localizedCauchyGreenPotential χ a) q = 0 := by
+      finiteComplexDbar (v, 0) (w, 0) (Function.uncurry a) (q.1, z) = 0) :
+    finiteComplexDbar (v, 0) (w, 0) (localizedCauchyGreenPotential χ a) q = 0 := by
   have hd (z : ℂ) (b : P) :
-      fderiv ℝ (fun x : P × ℂ => χ x.2 * a x.1 x.2) (q.1,z) (b,0) =
-        χ z * fderiv ℝ (Function.uncurry a) (q.1,z) (b,0) := by
-    have hx := (hχ.differentiable (by simp) z).hasFDerivAt.comp (q.1,z)
+      fderiv ℝ (fun x : P × ℂ => χ x.2 * a x.1 x.2) (q.1, z) (b, 0) =
+        χ z * fderiv ℝ (Function.uncurry a) (q.1, z) (b, 0) := by
+    have hx := (hχ.differentiable (by simp) z).hasFDerivAt.comp (q.1, z)
       (ContinuousLinearMap.snd ℝ P ℂ).hasFDerivAt
-    have hm := hx.mul (ha.differentiable (by simp) (q.1,z)).hasFDerivAt
+    have hm := hx.mul (ha.differentiable (by simp) (q.1, z)).hasFDerivAt
     have hm' : HasFDerivAt (fun x : P × ℂ => χ x.2 * a x.1 x.2)
-        (χ z • fderiv ℝ (Function.uncurry a) (q.1,z) +
-          a q.1 z • ((fderiv ℝ χ z).comp (ContinuousLinearMap.snd ℝ P ℂ))) (q.1,z) := by
-      simpa only [Function.comp_def,Pi.mul_apply,Function.uncurry,
+        (χ z • fderiv ℝ (Function.uncurry a) (q.1, z) +
+          a q.1 z • ((fderiv ℝ χ z).comp (ContinuousLinearMap.snd ℝ P ℂ))) (q.1, z) := by
+      simpa only [Function.comp_def, Pi.mul_apply, Function.uncurry,
         ContinuousLinearMap.coe_snd] using! hm
     rw [hm'.fderiv]
     simp
   have h := parametricCauchyGreenPotential_transverse_CR_at
     (fun p z => χ z * a p z) ((hχ.comp contDiff_snd).mul ha)
-    (tsupport χ) hc (fun p z hz => by rw [image_eq_zero_of_notMem_tsupport hz,zero_mul])
+    (tsupport χ) hc (fun p z hz => by rw [image_eq_zero_of_notMem_tsupport hz, zero_mul])
     v w q (fun z => by
-      change fderiv ℝ (fun x : P × ℂ => χ x.2 * a x.1 x.2) (q.1,z) (v,0) +
-        Complex.I * fderiv ℝ (fun x : P × ℂ => χ x.2 * a x.1 x.2) (q.1,z) (w,0) = 0
-      rw [hd z v,hd z w]
+      change fderiv ℝ (fun x : P × ℂ => χ x.2 * a x.1 x.2) (q.1, z) (v, 0) +
+        Complex.I * fderiv ℝ (fun x : P × ℂ => χ x.2 * a x.1 x.2) (q.1, z) (w, 0) = 0
+      rw [hd z v, hd z w]
       by_cases hzs : z ∈ tsupport χ
       · have hz := hCR z hzs
         simp only [finiteComplexDbar] at hz
-        have hz' : fderiv ℝ (Function.uncurry a) (q.1,z) (v,0) +
-            Complex.I * fderiv ℝ (Function.uncurry a) (q.1,z) (w,0) = 0 := by
+        have hz' : fderiv ℝ (Function.uncurry a) (q.1, z) (v, 0) +
+            Complex.I * fderiv ℝ (Function.uncurry a) (q.1, z) (w, 0) = 0 := by
           exact (mul_eq_zero.mp hz).resolve_left (by norm_num)
         linear_combination χ z * hz'
-      · simp only [image_eq_zero_of_notMem_tsupport hzs,zero_mul,mul_zero,add_zero])
-  simpa only [finiteComplexDbar,localizedCauchyGreenPotential,mul_zero] using!
+      · simp only [image_eq_zero_of_notMem_tsupport hzs, zero_mul, mul_zero, add_zero])
+  simpa only [finiteComplexDbar, localizedCauchyGreenPotential, mul_zero] using!
     congrArg (fun b : ℂ => (1/2 : ℂ)*b) h
 
 theorem localizedCauchyGreenPotential_transverse_CR (χ : ℂ → ℂ)
     (a : P → ℂ → ℂ) (hχ : ContDiff ℝ ∞ χ) (hc : HasCompactSupport χ)
     (ha : ContDiff ℝ ∞ (Function.uncurry a)) (v w : P) (q : P × ℂ)
-    (hCR : ∀ z, finiteComplexDbar (v,0) (w,0) (Function.uncurry a) (q.1,z) = 0) :
-    finiteComplexDbar (v,0) (w,0) (localizedCauchyGreenPotential χ a) q = 0 :=
+    (hCR : ∀ z, finiteComplexDbar (v, 0) (w, 0) (Function.uncurry a) (q.1, z) = 0) :
+    finiteComplexDbar (v, 0) (w, 0) (localizedCauchyGreenPotential χ a) q = 0 :=
   localizedCauchyGreenPotential_transverse_CR_on_support χ a hχ hc ha v w q (fun z _ => hCR z)
 
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
@@ -97,7 +97,7 @@ variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 theorem finiteComplexDbar_congr_of_eventuallyEq {f g : E → ℂ}
     {x v w : E} (h : f =ᶠ[𝓝 x] g) :
     finiteComplexDbar v w f x = finiteComplexDbar v w g x := by
-  simp only [finiteComplexDbar,h.fderiv_eq (𝕜 := ℝ)]
+  simp only [finiteComplexDbar, h.fderiv_eq (𝕜 := ℝ)]
 
 /-- The residual is holomorphic in the solved direction using only a
 local solution identity. No globally closed extension is required. -/
@@ -110,7 +110,7 @@ theorem localDolbeault_smooth_residual_CR_local (f g u : E → ℂ)
   rw [finiteComplexDbar_sub g _ (hg.differentiable (by simp))
     ((finiteComplexDbar_contDiff u hu a b).differentiable (by simp)),
     finiteComplexDbar_commute u hu v w a b x,
-    finiteComplexDbar_congr_of_eventuallyEq hsolve,← hclosed,sub_self]
+    finiteComplexDbar_congr_of_eventuallyEq hsolve,← hclosed, sub_self]
 
 #print axioms finiteComplexDbar_last_slice
 #print axioms localizedCauchyGreenPotential_contDiff

@@ -47,9 +47,9 @@ theorem bakryEmeryGibbs_full_reverse_of_killed_reversals (n : ℕ) (T : ℝ≥0)
   have hEq : (μ.map e).restrict (⋃ k, S k) = μ.restrict (⋃ k, S k) := by
     apply Measure.restrict_iUnion_congr.mpr
     intro k
-    rw [e.restrict_map,hpre]
+    rw [e.restrict_map, hpre]
     exact hKilled k
-  rw [hCov,Measure.restrict_univ,Measure.restrict_univ] at hEq
+  rw [hCov, Measure.restrict_univ, Measure.restrict_univ] at hEq
   exact hEq
 
 #print axioms bakryEmeryGibbs_full_reverse_of_killed_reversals

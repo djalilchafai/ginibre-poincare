@@ -11,7 +11,7 @@ noncomputable section
 open ComplexHermite
 
 private def zeroContraction {n : ℕ} (p q : Fin n → ℕ) :
-    TensorHermiteContraction p q := fun j => ⟨0,by omega⟩
+    TensorHermiteContraction p q := fun j => ⟨0, by omega⟩
 
 private def degreeHermiteFamily (n : ℕ) (hn : 0 < n) (i : DegreeHermiteIndex n) :=
   multivariateNormalizedL2 n hn i.val.1 i.val.2
@@ -23,7 +23,7 @@ private theorem contraction_degree_lt {n : ℕ} (p q : Fin n → ℕ)
     (k : TensorHermiteContraction p q) (hk : k ≠ zeroContraction p q)
     (a b : Fin n → ℕ) (ha : ∀ j, a j ≤ p j-(k j).val)
     (hb : ∀ j, b j ≤ q j-(k j).val) :
-    hermiteTotalDegree (a,b) < hermiteTotalDegree (p,q) := by
+    hermiteTotalDegree (a, b) < hermiteTotalDegree (p, q) := by
   have hsome : ∃ j, (k j).val ≠ 0 := by
     by_contra h
     apply hk
@@ -31,14 +31,14 @@ private theorem contraction_degree_lt {n : ℕ} (p q : Fin n → ℕ)
     apply Fin.ext
     simp only [zeroContraction]
     simpa using (not_exists.mp h j)
-  obtain ⟨j,hj⟩ := hsome
+  obtain ⟨j, hj⟩ := hsome
   have hle (i : Fin n) : a i ≤ p i := (ha i).trans (Nat.sub_le _ _)
   have hlt : a j < p j := by
     have hkbound := (k j).isLt
     have haj := ha j
     omega
   have hp : ∑ i, a i < ∑ i, p i :=
-    Finset.sum_lt_sum (fun i _ => hle i) ⟨j,Finset.mem_univ j,hlt⟩
+    Finset.sum_lt_sum (fun i _ => hle i) ⟨j, Finset.mem_univ j, hlt⟩
   have hq : ∑ i, b i ≤ ∑ i, q i :=
     Finset.sum_le_sum (fun i _ => (hb i).trans (Nat.sub_le _ _))
   exact Nat.add_lt_add_of_lt_of_le hp hq
@@ -61,8 +61,8 @@ private theorem degreeMonomial_triangular (n : ℕ) (hn : 0 < n)
     apply Submodule.smul_mem
     apply Submodule.span_mono _ (multivariateMixedMonomialL2_mem_hermite_rectangle n hn
       (fun j => p j-(k j).val) (fun j => q j-(k j).val))
-    rintro v ⟨a,b,ha,hb,rfl⟩
-    refine ⟨⟨(a,b)⟩,?_,rfl⟩
+    rintro v ⟨a, b, ha, hb, rfl⟩
+    refine ⟨⟨(a, b)⟩,?_, rfl⟩
     apply degreeHermite_lt_of_degree_lt
     exact contraction_degree_lt p q k (Finset.mem_erase.mp hk).1 a b ha hb
   have hg : degreeHermiteFamily n hn i = (tensorHermiteScale n p q : ℂ) •
@@ -71,12 +71,12 @@ private theorem degreeMonomial_triangular (n : ℕ) (hn : 0 < n)
     rw [multivariateNormalizedL2_tensor_expansion]
     congr 1
     rw [← Finset.add_sum_erase _ _ (Finset.mem_univ (zeroContraction p q))]
-    simp [tensorHermiteScalar,zeroContraction,degreeMonomialFamily,rest,p,q]
+    simp [tensorHermiteScalar, zeroContraction, degreeMonomialFamily, rest, p, q]
   have he : degreeMonomialFamily n hn i - ((tensorHermiteScale n p q : ℂ)⁻¹) •
       degreeHermiteFamily n hn i = -rest := by
-    rw [hg,smul_smul]
+    rw [hg, smul_smul]
     simp only [inv_mul_cancel₀ (Complex.ofReal_ne_zero.mpr
-      (tensorHermiteScale_pos n hn p q).ne'),one_smul]
+      (tensorHermiteScale_pos n hn p q).ne'), one_smul]
     abel
   rw [he]
   exact Submodule.neg_mem _ hrest

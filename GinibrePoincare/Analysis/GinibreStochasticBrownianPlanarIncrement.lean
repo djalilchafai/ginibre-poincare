@@ -39,7 +39,7 @@ theorem ginibreBrownian_planar_increment_independent_past {Ω : Type*}
   have hi : HasLaw (fun ω => Bi (s+t) ω-Bi s ω) (gaussianReal 0 t) P := by
     simpa only [add_tsub_cancel_left] using ginibreBrownian_increment_hasLaw Bi P hBi.toIsPreBrownianReal s (s+t)
       (le_add_of_nonneg_right (show (0 : ℝ≥0) ≤ t from bot_le))
-  exact ginibre_independent_blocks_recombine P hr ⟨hmBr.aemeasurable,rfl⟩ hi ⟨hmBi.aemeasurable,rfl⟩
+  exact ginibre_independent_blocks_recombine P hr ⟨hmBr.aemeasurable, rfl⟩ hi ⟨hmBi.aemeasurable, rfl⟩
     (ginibreBrownian_increment_whole_past_independent Br P hBr.toIsPreBrownianReal s t)
     (ginibreBrownian_increment_whole_past_independent Bi P hBi.toIsPreBrownianReal s t) hblocks
 

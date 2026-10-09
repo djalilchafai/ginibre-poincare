@@ -35,7 +35,11 @@ with tempfile.TemporaryDirectory(prefix="ginibre-palomar-") as directory:
     target.write_text(json.dumps(config, indent=2) + "\n")
     environment = os.environ.copy()
     environment["LEAN_NUM_THREADS"] = "1"
-    if Path("/home").is_symlink() and "COMPARATOR_BWRAP" not in environment:
+    home = Path("/home")
+    packages = ROOT / ".lake" / "packages"
+    hidden_dependency_store = (packages.is_symlink() and
+        packages.resolve(strict=True).is_relative_to(home.resolve(strict=True)))
+    if (home.is_symlink() or hidden_dependency_store) and "COMPARATOR_BWRAP" not in environment:
         environment["COMPARATOR_BWRAP"] = str(ROOT / "scripts" / "canonical_home_bwrap.py")
         print("Comparator sandbox: canonicalize symlink mount paths; hide canonical home; "
               "restore existing dependency store read-only.", flush=True)

@@ -14,13 +14,13 @@ theorem dholComponent_eq_complex_fderiv {n : ℕ} {f : Configuration n → ℂ}
     ComplexHermite.dholComponent f j z = fderiv ℂ f z (realCoordinateDirection j) := by
   have hi : imaginaryCoordinateDirection j = Complex.I • realCoordinateDirection j := by
     funext k
-    simp [imaginaryCoordinateDirection,realCoordinateDirection,coordinateDirection,Pi.smul_apply]
+    simp [imaginaryCoordinateDirection, realCoordinateDirection, coordinateDirection, Pi.smul_apply]
   unfold ComplexHermite.dholComponent
   rw [hf.fderiv_restrictScalars (𝕜 := ℝ)]
   change (1/2 : ℂ)*((fderiv ℂ f z) (realCoordinateDirection j) -
     Complex.I * (fderiv ℂ f z) (imaginaryCoordinateDirection j)) = _
-  rw [hi,map_smul]
-  simp only [smul_eq_mul,← mul_assoc,Complex.I_mul_I,neg_one_mul]
+  rw [hi, map_smul]
+  simp only [smul_eq_mul,← mul_assoc, Complex.I_mul_I, neg_one_mul]
   ring
 
 theorem fderiv_holomorphicHermite_coordinate (n : ℕ) (hn : 0 < n)

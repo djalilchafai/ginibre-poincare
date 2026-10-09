@@ -17,45 +17,45 @@ identity. All integrability follows from the actual bounded orbit values. -/
 theorem boundedDuhamel_laplace_core (a b : ℝ → ℝ)
     (ha : Continuous a) (hb : Continuous b) (A B : ℝ)
     (hA : ∀ t≥0, ‖a t‖≤A) (hB : ∀ t≥0, ‖b t‖≤B)
-    (hEq : ∀ t≥0, a t=a 0+∫ s in (0:ℝ)..t, b s) :
-    ∫ t in Ioi (0:ℝ), Real.exp (-t)*(a t-b t)=a 0 := by
+    (hEq : ∀ t≥0, a t=a 0+∫ s in (0 : ℝ)..t, b s) :
+    ∫ t in Ioi (0 : ℝ), Real.exp (-t)*(a t-b t)=a 0 := by
   let d := fun t => Real.exp (-t)*(b t-a t)
   have heint : IntegrableOn (fun t : ℝ => Real.exp (-t)) (Ioi 0) := by
-    simpa only [neg_one_mul] using exp_neg_integrableOn_Ioi (0:ℝ) (b := 1) zero_lt_one
+    simpa only [neg_one_mul] using exp_neg_integrableOn_Ioi (0 : ℝ) (b := 1) zero_lt_one
   have hdint : IntegrableOn d (Ioi 0) := by
     apply (heint.const_mul (B+A)).mono' ((Real.continuous_exp.comp continuous_neg).mul (hb.sub ha)).aestronglyMeasurable
     filter_upwards [ae_restrict_mem measurableSet_Ioi] with t ht
     change ‖Real.exp (-t)*(b t-a t)‖≤(B+A)*Real.exp (-t)
-    rw [norm_mul,Real.norm_eq_abs,abs_of_pos (Real.exp_pos _)]
+    rw [norm_mul, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
     calc
       Real.exp (-t)*‖b t-a t‖≤Real.exp (-t)*(‖b t‖+‖a t‖) :=
         mul_le_mul_of_nonneg_left (norm_sub_le _ _) (Real.exp_pos _).le
       _≤Real.exp (-t)*(B+A) := mul_le_mul_of_nonneg_left (add_le_add (hB t ht.le) (hA t ht.le)) (Real.exp_pos _).le
       _=(B+A)*Real.exp (-t) := mul_comm _ _
-  have hderiv (t : ℝ) (ht : t∈Ioi (0:ℝ)) :
+  have hderiv (t : ℝ) (ht : t∈Ioi (0 : ℝ)) :
       HasDerivAt (fun s => Real.exp (-s)*a s) (d t) t := by
     have hda : HasDerivAt a (b t) t := by
       have hp := (intervalIntegral.integral_hasDerivAt_right (hb.intervalIntegrable 0 t)
         hb.aestronglyMeasurable.stronglyMeasurableAtFilter hb.continuousAt).const_add (a 0)
       apply hp.congr_of_eventuallyEq
-      filter_upwards [eventually_gt_nhds (show (0:ℝ)<t from ht)] with s hs
+      filter_upwards [eventually_gt_nhds (show (0 : ℝ)<t from ht)] with s hs
       exact hEq s hs.le
     change HasDerivAt (fun s => Real.exp (-s)*a s) (Real.exp (-t)*(b t-a t)) t
     have hExp : HasDerivAt (fun s : ℝ => Real.exp (-s)) (-Real.exp (-t)) t := by
-      simpa only [Pi.neg_apply,id_eq,mul_neg,one_mul,mul_one] using ((hasDerivAt_id t).neg.exp)
+      simpa only [Pi.neg_apply, id_eq, mul_neg, one_mul, mul_one] using ((hasDerivAt_id t).neg.exp)
     exact (hExp.mul hda).congr_deriv (by ring)
   have hDecay : Tendsto (fun t : ℝ => Real.exp (-t)*a t) atTop (𝓝 0) := by
     apply squeeze_zero_norm' (a := fun t => Real.exp (-t)*A)
-    · filter_upwards [eventually_ge_atTop (0:ℝ)] with t ht
-      rw [norm_mul,Real.norm_eq_abs,abs_of_pos (Real.exp_pos _)]
+    · filter_upwards [eventually_ge_atTop (0 : ℝ)] with t ht
+      rw [norm_mul, Real.norm_eq_abs, abs_of_pos (Real.exp_pos _)]
       exact mul_le_mul_of_nonneg_left (hA t ht) (Real.exp_pos _).le
-    · simpa only [zero_mul,Function.comp_apply] using
+    · simpa only [zero_mul, Function.comp_apply] using
         (Real.tendsto_exp_atBot.comp tendsto_neg_atTop_atBot).mul_const A
   have hFTC := integral_Ioi_of_hasDerivAt_of_tendsto
     (((Real.continuous_exp.comp continuous_neg).mul ha).continuousWithinAt)
     hderiv hdint hDecay
   have hNeg : (fun t => Real.exp (-t)*(a t-b t))=fun t => -d t := by funext t; dsimp [d]; ring
-  rw [hNeg,integral_neg,hFTC]
+  rw [hNeg, integral_neg, hFTC]
   simp
 
 /-- True pointwise compact-core resolvent equation of the actual original
@@ -67,17 +67,17 @@ theorem ginibreBrownian_core_transition_laplace_identity {Ω : Type*}
     [IsProbabilityMeasure P] [P.IsComplete] (hB : ∀ i, IsBrownianReal (B i) P)
     (hind : iIndepFun (fun i ω t => B i t ω) P)
     (f : Configuration n → ℝ) (hf : IsTheoremOneNineCore f) :
-    (∫ t in Ioi (0:ℝ), Real.exp (-t)*
+    (∫ t in Ioi (0 : ℝ), Real.exp (-t)*
       ((∫ ω, f (ginibreBrownianMaximalProcess n α z B t.toNNReal ω) ∂P)-
        (∫ ω, ginibreRealPaperSpeedGenerator n α f
          (ginibreBrownianMaximalProcess n α z B t.toNNReal ω) ∂P)))=f z := by
   let L := ginibreRealPaperSpeedGenerator n α f
   have hLc : Continuous L := (continuous_ginibrePregenerator_of_core hf).const_mul _
   have hLs : HasCompactSupport L := by
-    change HasCompactSupport ((fun _ => (α:ℝ)/(n:ℝ))*ginibrePregenerator n f)
+    change HasCompactSupport ((fun _ => (α : ℝ)/(n : ℝ))*ginibrePregenerator n f)
     exact (hasCompactSupport_ginibrePregenerator hf.2.1).mul_left
-  obtain ⟨C,hC⟩ := hf.2.1.exists_bound_of_continuous hf.1.continuous
-  obtain ⟨D,hD⟩ := hLs.exists_bound_of_continuous hLc
+  obtain ⟨C, hC⟩ := hf.2.1.exists_bound_of_continuous hf.1.continuous
+  obtain ⟨D, hD⟩ := hLs.exists_bound_of_continuous hLc
   let a := fun t : ℝ => ∫ ω, f (ginibreBrownianMaximalProcess n α z B t.toNNReal ω) ∂P
   let b := fun t : ℝ => ∫ ω, L (ginibreBrownianMaximalProcess n α z B t.toNNReal ω) ∂P
   have ha := ginibreBrownian_bounded_continuous_transition_mean_continuous hn α z hz B P hB hind f hf.1.continuous C hC
@@ -90,9 +90,9 @@ theorem ginibreBrownian_core_transition_laplace_identity {Ω : Type*}
     simpa [b] using norm_integral_le_of_norm_le_const (μ := P) (ae_of_all P (fun ω => hD _))
   have hA0 : a 0=f z := by
     simpa [a] using ginibreBrownian_core_test_transition_duhamel hn α z hz B P hB hind 0 f hf
-  have he : ∀ t≥0, a t=a 0+∫ s in (0:ℝ)..t, b s := by
+  have he : ∀ t≥0, a t=a 0+∫ s in (0 : ℝ)..t, b s := by
     intro t ht
-    simpa only [a,b,hA0,Real.coe_toNNReal t ht] using
+    simpa only [a, b, hA0, Real.coe_toNNReal t ht] using
       ginibreBrownian_core_test_transition_duhamel hn α z hz B P hB hind t.toNNReal f hf
   exact (boundedDuhamel_laplace_core a b ha hb C D hAm hBm he).trans hA0
 

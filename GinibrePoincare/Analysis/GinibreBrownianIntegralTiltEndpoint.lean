@@ -31,7 +31,7 @@ theorem brownianVectorExponentialIntegralDensity_corrected_endpoint_gaussian
       (fun n => brownianUniformLeftSum (B i) (F i) T (n+1)) atTop (I i))
     (i : ι) :
     HasLaw (fun ω => B i T ω-B i 0 ω-
-      ∫ s in (0:ℝ)..(T:ℝ), F i (Real.toNNReal s) ω)
+      ∫ s in (0 : ℝ)..(T : ℝ), F i (Real.toNNReal s) ω)
       (gaussianReal 0 T)
       (P.withDensity (fun ω => ENNReal.ofReal (brownianVectorExponentialIntegralDensity F T I ω))) := by
   classical
@@ -39,14 +39,14 @@ theorem brownianVectorExponentialIntegralDensity_corrected_endpoint_gaussian
   let h := fun n k ω j => F j (τ n k) ω
   let D := fun n => brownianPredictableVectorGaussianDensity B (h n) (τ n) (n+1)
   let X := fun n => brownianGirsanovCorrectedPrefix B (h n) (τ n) i (n+1)
-  let x := fun ω => B i T ω-B i 0 ω-∫ s in (0:ℝ)..(T:ℝ), F i (Real.toNNReal s) ω
+  let x := fun ω => B i T ω-B i 0 ω-∫ s in (0 : ℝ)..(T : ℝ), F i (Real.toNNReal s) ω
   have hh (n k : ℕ) : @Measurable Ω (ι→ℝ)
       (ginibreBrownianAugmentedFiltration B P hB (τ n k)) _ (h n k) := by
     letI : MeasurableSpace Ω := ginibreBrownianAugmentedFiltration B P hB (τ n k)
     exact Measurable.of_eval (fun j => hF j _)
   have hzero (n : ℕ) : τ n 0=0 := by
     change (itoUniformTime T (n+1) 0).toNNReal=0
-    simp only [itoUniformTime,Nat.cast_zero,mul_zero,zero_div,Real.toNNReal_zero]
+    simp only [itoUniformTime, Nat.cast_zero, mul_zero, zero_div, Real.toNNReal_zero]
   have hdm (n : ℕ) : Measurable (D n) :=
     (brownianPredictableVectorGaussianDensity_measurable_at B P hB (h n) (τ n)
       (itoUniformNNTime_mono _ _) (hh n) (n+1)).mono
@@ -57,9 +57,9 @@ theorem brownianVectorExponentialIntegralDensity_corrected_endpoint_gaussian
     brownianPredictableVectorGaussianDensity_lintegral B P hB hind (h n) (τ n)
       (itoUniformNNTime_mono _ _) (hh n) (n+1)
   have hdi (n : ℕ) : Integrable (D n) P :=
-    ⟨(hdm n).aestronglyMeasurable,(hasFiniteIntegral_iff_ofReal (hdp n)).mpr (by rw [hdli]; simp)⟩
+    ⟨(hdm n).aestronglyMeasurable, (hasFiniteIntegral_iff_ofReal (hdp n)).mpr (by rw [hdli]; simp)⟩
   have hdn (n : ℕ) : (∫ ω, D n ω ∂P)=1 := by
-    rw [integral_eq_lintegral_of_nonneg_ae (hdp n) (hdm n).aestronglyMeasurable,hdli]
+    rw [integral_eq_lintegral_of_nonneg_ae (hdp n) (hdm n).aestronglyMeasurable, hdli]
     simp
   have hxmeas (n : ℕ) : Measurable (X n) := by
     unfold X brownianGirsanovCorrectedPrefix
@@ -71,32 +71,32 @@ theorem brownianVectorExponentialIntegralDensity_corrected_endpoint_gaussian
         ((ginibreBrownianAugmentedFiltration B P hB).le _) le_rfl)).sub
       (((hF i _).mono ((ginibreBrownianAugmentedFiltration B P hB).le _) le_rfl).mul_const _)
   have heq (n : ℕ) (ω : Ω) : X n ω = B i T ω-B i 0 ω-
-      ∑ k : Fin (n+1), F i (ginibreUniformBrownianTime T n k) ω*((T:ℝ)/((n:ℝ)+1)) := by
+      ∑ k : Fin (n+1), F i (ginibreUniformBrownianTime T n k) ω*((T : ℝ)/((n : ℝ)+1)) := by
     dsimp only [X]
     rw [brownianGirsanovCorrectedPrefix_eq]
-    simp only [τ,h,itoUniformNNTime_end T (n+1) (Nat.succ_pos n),hzero]
-    simp_rw [itoUniformNNTime_increment_sub_coe,itoUniformNNTime_eq_ginibreUniformBrownianTime]
-    rw [Fin.sum_univ_eq_sum_range (fun k : ℕ => F i (ginibreUniformBrownianTime T n k) ω*((T:ℝ)/((n:ℝ)+1))) (n+1)]
-    simp only [Nat.cast_add,Nat.cast_one]
+    simp only [τ, h, itoUniformNNTime_end T (n+1) (Nat.succ_pos n), hzero]
+    simp_rw [itoUniformNNTime_increment_sub_coe, itoUniformNNTime_eq_ginibreUniformBrownianTime]
+    rw [Fin.sum_univ_eq_sum_range (fun k : ℕ => F i (ginibreUniformBrownianTime T n k) ω*((T : ℝ)/((n : ℝ)+1))) (n+1)]
+    simp only [Nat.cast_add, Nat.cast_one]
   have hae : ∀ᵐ ω ∂P, Tendsto (fun n => X n ω) atTop (𝓝 (x ω)) := by
     filter_upwards [hc i] with ω hω
-    have hf : ContinuousOn (fun s : ℝ => F i (Real.toNNReal s) ω) (Set.Icc 0 (T:ℝ)) :=
+    have hf : ContinuousOn (fun s : ℝ => F i (Real.toNNReal s) ω) (Set.Icc 0 (T : ℝ)) :=
       hω.comp continuous_real_toNNReal.continuousOn (by
         intro s hs
-        exact ⟨by positivity,by simpa only [Real.toNNReal_coe] using Real.toNNReal_le_toNNReal hs.2⟩)
+        exact ⟨by positivity, by simpa only [Real.toNNReal_coe] using Real.toNNReal_le_toNNReal hs.2⟩)
     have ht := itoContinuousScalarRiemann_fin_tendsto (fun s : ℝ => F i (Real.toNNReal s) ω) T hf
-    simpa only [heq,Real.toNNReal_coe,x] using tendsto_const_nhds.sub ht
+    simpa only [heq, Real.toNNReal_coe, x] using tendsto_const_nhds.sub ht
   have hxl := tendstoInMeasure_of_tendsto_ae (fun n => (hxmeas n).aestronglyMeasurable) hae
   have hx : AEMeasurable x P := hxl.aemeasurable (fun n => (hxmeas n).aemeasurable)
   have hd := brownianVectorExponentialIntegralDensity_normalized B P hB hind F hF C hC hb T hc hs I hI
   apply actualVaryingDensity_constantLaw_limit P D _ hdi hd.1 hdp hd.2.1 hdn hd.2.2.1
-    (by simpa only [D,h,τ,brownianPredictableVectorGaussianDensity_uniform_eq] using hd.2.2.2)
+    (by simpa only [D, h, τ, brownianPredictableVectorGaussianDensity_uniform_eq] using hd.2.2.2)
     X x (fun n => (hxmeas n).aemeasurable) hx hxl (gaussianReal 0 T)
   intro n
   have hl := brownianGirsanovCorrectedPrefix_gaussian B P hB hind (h n) (τ n)
     (itoUniformNNTime_mono _ _) (hh n) i (n+1) (n+1) le_rfl
   have hend : τ n (n+1)=T := itoUniformNNTime_end T (n+1) (Nat.succ_pos n)
-  rw [monotoneGrid_duration_sum (τ n) (itoUniformNNTime_mono _ _) (hzero n),hend] at hl
+  rw [monotoneGrid_duration_sum (τ n) (itoUniformNNTime_mono _ _) (hzero n), hend] at hl
   exact hl
 
 /-- Actual bounded continuous adapted fields have stochastic integrals whose
@@ -122,13 +122,13 @@ theorem brownianBoundedVector_exponential_integral_exists_gaussian_endpoints {Ω
       Integrable (brownianVectorExponentialIntegralDensity F T (fun i => M i T)) P ∧
       (∫ ω, brownianVectorExponentialIntegralDensity F T (fun i => M i T) ω ∂P)=1 ∧
       ∀ i, HasLaw (fun ω => B i T ω-B i 0 ω-
-        ∫ s in (0:ℝ)..(T:ℝ), F i (Real.toNNReal s) ω) (gaussianReal 0 T)
+        ∫ s in (0 : ℝ)..(T : ℝ), F i (Real.toNNReal s) ω) (gaussianReal 0 T)
         (P.withDensity (fun ω => ENNReal.ofReal
           (brownianVectorExponentialIntegralDensity F T (fun i => M i T) ω))) := by
   classical
-  obtain ⟨M,hM,hi,hn,hL⟩ := brownianBoundedVector_exponential_integral_exists_normalized
+  obtain ⟨M, hM, hi, hn, hL⟩ := brownianBoundedVector_exponential_integral_exists_normalized
     B P hB hind F hF C hC hb T hc
-  refine ⟨M,hM,hi,hn,?_⟩
+  refine ⟨M, hM, hi, hn,?_⟩
   have hFi (i : ι) (t : ℝ≥0) : MemLp (F i t) 2 P := by
     apply MemLp.of_bound
       ((hF i t).mono ((ginibreBrownianAugmentedFiltration B P

@@ -25,10 +25,10 @@ theorem realMartingaleHorizonCap_martingale
   · intro s t hst
     by_cases hs : s ≤ T
     · have hh := hM.2 s (min t T) (le_min hst hs)
-      simpa only [realMartingaleHorizonCap,min_eq_left hs] using hh
+      simpa only [realMartingaleHorizonCap, min_eq_left hs] using hh
     · have hTs : T ≤ s := (not_le.mp hs).le
       have hTt : T ≤ t := hTs.trans hst
-      simp only [realMartingaleHorizonCap,min_eq_right hTs,min_eq_right hTt]
+      simp only [realMartingaleHorizonCap, min_eq_right hTs, min_eq_right hTt]
       rw [condExp_of_stronglyMeasurable (F.le s)
         ((hM.1 T).mono (F.mono hTs)) ((hML T).integrable (by norm_num))]
 
@@ -44,11 +44,11 @@ theorem realMartingaleHorizonCap_memLp
 
 @[simp] theorem realMartingaleHorizonCap_eq_before {Ω : Type*}
     (M : ℝ≥0 → Ω → ℝ) (T t : ℝ≥0) (ht : t ≤ T) :
-    realMartingaleHorizonCap M T t = M t := by simp [realMartingaleHorizonCap,ht]
+    realMartingaleHorizonCap M T t = M t := by simp [realMartingaleHorizonCap, ht]
 
 @[simp] theorem realMartingaleHorizonCap_eq_after {Ω : Type*}
     (M : ℝ≥0 → Ω → ℝ) (T t : ℝ≥0) (ht : T ≤ t) :
-    realMartingaleHorizonCap M T t = M T := by simp [realMartingaleHorizonCap,ht]
+    realMartingaleHorizonCap M T t = M T := by simp [realMartingaleHorizonCap, ht]
 
 #print axioms realMartingaleHorizonCap_martingale
 #print axioms realMartingaleHorizonCap_continuous

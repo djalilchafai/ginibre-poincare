@@ -23,7 +23,7 @@ theorem correspondence_ginibre_random_time_continuity
   intro s t hs
   have hc := hω.1.comp NNReal.continuous_coe
   have ht := hc.continuousAt.tendsto.comp hs
-  simpa only [Real.toNNReal_coe,Function.comp_def] using ht
+  simpa only [Real.toNNReal_coe, Function.comp_def] using ht
 
 /-- The original diffusion has continuous paths (hence right continuity and
 quasi-left continuity), and the full strong Markov conditional law at every
@@ -39,14 +39,14 @@ theorem correspondence_ginibre_continuous_strongMarkov
       (hτ : IsStoppingTime (ginibreBrownianAugmentedFiltration B P
         (fun i => (hB i).toIsPreBrownianReal)) (fun ω => (τ ω : WithTop ℝ≥0)))
       (t : ℝ≥0) (Y : Ω → A) (hY : @Measurable Ω A hτ.measurableSpace _ Y),
-      P.map (fun ω => (Y ω,ginibreBrownianStateProcess α z B (τ ω+t) ω)) =
-        ((P.map (fun ω => (Y ω,ginibreBrownianStateProcess α z B (τ ω) ω))).prod
+      P.map (fun ω => (Y ω, ginibreBrownianStateProcess α z B (τ ω+t) ω)) =
+        ((P.map (fun ω => (Y ω, ginibreBrownianStateProcess α z B (τ ω) ω))).prod
           (P.map (ginibreBrownianFullContinuousNoise n B α))).map
-            (fun p => (p.1.1,ginibreCanonicalStateValue α t (p.1.2,p.2))) := by
+            (fun p => (p.1.1, ginibreCanonicalStateValue α t (p.1.2, p.2))) := by
   constructor
   · filter_upwards [(ginibreBrownianMaximalProcess_global_original_solution hn α z.val z.property B P hB hind).2]
       with ω hω
-    simpa only [Real.toNNReal_coe,Function.comp_def] using hω.1.comp NNReal.continuous_coe
+    simpa only [Real.toNNReal_coe, Function.comp_def] using hω.1.comp NNReal.continuous_coe
   · exact fun τ hτ t Y hY => correspondence_ginibre_stopping_future_past_joint_law
       hn α z B P hB hind τ hτ t Y hY
 

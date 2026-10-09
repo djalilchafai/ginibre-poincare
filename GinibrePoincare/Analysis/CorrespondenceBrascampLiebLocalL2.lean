@@ -32,7 +32,7 @@ def CorrespondenceBrascampLiebLocallyL2 (f : E → ℝ) : Prop :=
   exact ae_of_all volume fun x => by
     by_cases hx : x ∈ tsupport η
     · simp [Set.indicator_of_mem hx]
-    · simp [Set.indicator_of_notMem hx,image_eq_zero_of_notMem_tsupport hx]
+    · simp [Set.indicator_of_notMem hx, image_eq_zero_of_notMem_tsupport hx]
 
 #print axioms correspondenceBrascampLieb_localL2_compact_multiplier
 end

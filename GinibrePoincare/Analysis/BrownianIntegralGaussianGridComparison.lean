@@ -41,7 +41,7 @@ theorem brownianActualLeftGridSum_difference_tendsto_meanSquare
         brownianActualLeftGridSum (B j) F (c n) (M n) ω)^2 ∂P) atTop (𝓝 0) := by
   classical
   let κ := fun n => Fin (N n) × Fin (M n)
-  letI : ∀ n, Nonempty (κ n) := fun n => ⟨(⟨0,hN n⟩,⟨0,hM n⟩)⟩
+  letI : ∀ n, Nonempty (κ n) := fun n => ⟨(⟨0, hN n⟩, ⟨0, hM n⟩)⟩
   let s : (n : ℕ) → κ n → ℝ≥0 := fun n k => max (a n k.1) (c n k.2)
   let e : (n : ℕ) → κ n → ℝ≥0 := fun n k => max (s n k)
     (min (a n (k.1.val+1)) (c n (k.2.val+1)))
@@ -56,25 +56,25 @@ theorem brownianActualLeftGridSum_difference_tendsto_meanSquare
   have hpast : ∀ n k, A n k ≤ s n k ∧ D n k ≤ s n k := by
     intro n k
     by_cases hz : d n k=0
-    · simp [A,D,hz]
-    · exact ⟨by simpa only [A,if_neg hz,s] using (le_max_left (a n k.1) (c n k.2)),
-        by simpa only [D,if_neg hz,s] using (le_max_right (a n k.1) (c n k.2))⟩
+    · simp [A, D, hz]
+    · exact ⟨by simpa only [A, if_neg hz, s] using (le_max_left (a n k.1) (c n k.2)),
+        by simpa only [D, if_neg hz, s] using (le_max_right (a n k.1) (c n k.2))⟩
   have hAs : ∀ n k, A n k ∈ Set.Icc 0 H := by
     intro n k
     by_cases hz : d n k=0
-    · simp [A,hz]
+    · simp [A, hz]
     · refine ⟨bot_le,?_⟩
-      simpa only [A,if_neg hz,haN n] using ha n k.1.is_lt.le
+      simpa only [A, if_neg hz, haN n] using ha n k.1.is_lt.le
   have hDs : ∀ n k, D n k ∈ Set.Icc 0 H := by
     intro n k
     by_cases hz : d n k=0
-    · simp [D,hz]
+    · simp [D, hz]
     · refine ⟨bot_le,?_⟩
-      simpa only [D,if_neg hz,hcM n] using hc n k.2.is_lt.le
+      simpa only [D, if_neg hz, hcM n] using hc n k.2.is_lt.le
   have hdisj : ∀ n i k, i≠k → d n i≠0 → d n k≠0 →
       s n i+d n i ≤ s n k ∨ s n k+d n k ≤ s n i := by
     intro n i k hik hdi hdk
-    have hn : (i.1.val,i.2.val) ≠ (k.1.val,k.2.val) := by
+    have hn : (i.1.val, i.2.val) ≠ (k.1.val, k.2.val) := by
       intro hh
       apply hik
       apply Prod.ext <;> apply Fin.ext
@@ -82,7 +82,7 @@ theorem brownianActualLeftGridSum_difference_tendsto_meanSquare
       · exact congrArg Prod.snd hh
     have hh := itoGridIntersections_disjoint (a n) (c n) (ha n) (hc n) i.1 i.2 k.1 k.2 hn
     have hl : min (e n i) (e n k) ≤ max (s n i) (s n k) := Set.Ioc_disjoint_Ioc.mp hh
-    rw [hsd,hsd]
+    rw [hsd, hsd]
     rcases le_total (s n i) (s n k) with h | h
     · rw [max_eq_right h] at hl
       exact Or.inl ((min_le_iff.mp hl).resolve_right (not_le.mpr (hdpos n k hdk)))
@@ -100,7 +100,7 @@ theorem brownianActualLeftGridSum_difference_tendsto_meanSquare
   have hdist : ∀ n k, dist (A n k) (D n k) ≤ ma n+mc n := by
     intro n k
     by_cases hz : d n k=0
-    · simpa [A,D,hz] using add_nonneg (hmap n) (hmcp n)
+    · simpa [A, D, hz] using add_nonneg (hmap n) (hmcp n)
     · have he := itoIntersection_end_eq_of_positive _ _ _ _ (hdpos n k hz)
       have hcb : c n k.2 ≤ a n (k.1.val+1) :=
         (le_max_right _ _).trans ((hdpos n k hz).le.trans (he.le.trans (min_le_left _ _)))
@@ -110,7 +110,7 @@ theorem brownianActualLeftGridSum_difference_tendsto_meanSquare
       have hadR : (a n k.1 : ℝ) ≤ c n (k.2.val+1) := had
       have hAstep := hstepA n k.1 k.1.is_lt
       have hCstep := hstepC n k.2 k.2.is_lt
-      simp only [A,D,if_neg hz,NNReal.dist_eq]
+      simp only [A, D, if_neg hz, NNReal.dist_eq]
       rcases le_total (a n k.1 : ℝ) (c n k.2 : ℝ) with h | h
       · rw [abs_of_nonpos (sub_nonpos.mpr h)]
         have := hmcp n
@@ -138,13 +138,13 @@ theorem brownianActualLeftGridSum_difference_tendsto_meanSquare
   intro i hi
   apply Finset.sum_congr rfl
   intro k hk
-  by_cases hz : d n (i,k)=0
-  · have heq : e n (i,k)=s n (i,k) := by simpa [hz] using (hsd n (i,k)).symm
-    change (F (a n i) ω-F (c n k) ω)*(B j (e n (i,k)) ω-B j (s n (i,k)) ω) = _
+  by_cases hz : d n (i, k)=0
+  · have heq : e n (i, k)=s n (i, k) := by simpa [hz] using (hsd n (i, k)).symm
+    change (F (a n i) ω-F (c n k) ω)*(B j (e n (i, k)) ω-B j (s n (i, k)) ω) = _
     rw [heq]
-    simp [A,D,hz]
-  · change (F (a n i) ω-F (c n k) ω)*(B j (e n (i,k)) ω-B j (s n (i,k)) ω) = _
-    simp only [A,D,if_neg hz,hsd]
+    simp [A, D, hz]
+  · change (F (a n i) ω-F (c n k) ω)*(B j (e n (i, k)) ω-B j (s n (i, k)) ω) = _
+    simp only [A, D, if_neg hz, hsd]
 
 end
 end GinibrePoincare

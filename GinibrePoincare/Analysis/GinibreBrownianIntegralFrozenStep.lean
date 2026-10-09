@@ -30,7 +30,7 @@ theorem brownianFrozenStep_stronglyAdapted {Ω ι : Type*}
   · have hta : t ≤ a := (le_of_not_ge hat)
     have hz : brownianFrozenStep (B j) F a b t = fun _ => 0 := by
       funext ω
-      simp only [brownianFrozenStep, max_eq_left ((min_le_left _ _).trans hta),sub_self,mul_zero]
+      simp only [brownianFrozenStep, max_eq_left ((min_le_left _ _).trans hta), sub_self, mul_zero]
     rw [hz]
     exact stronglyMeasurable_const
 

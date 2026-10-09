@@ -14,7 +14,7 @@ set_option backward.isDefEq.respectTransparency false
 Vandermonde ground state `U1`, including its actual measure normalization. -/
 theorem slater_canonical_ground_eq_normalized {n : ℕ} (hn : 0 < n)
     (z : Configuration n) :
-    slaterDeterminant hn ((fun i : Fin n => i.val),0) z =
+    slaterDeterminant hn ((fun i : Fin n => i.val), 0) z =
       normalizedVandermondeTransform n (fun _ => 1) z := by
   let c : ℝ := (Real.sqrt (slaterMultiplicity n))⁻¹ *
     ∏ i : Fin n, ComplexHermite.oneDimNormalization n i.val
@@ -31,14 +31,14 @@ theorem slater_canonical_ground_eq_normalized {n : ℕ} (hn : 0 < n)
     exact ENNReal.toReal_pos (ginibreMassEvaluation n hn).1.ne'
       (ginibreMassEvaluation n hn).2.ne
   have hpoint (w : Configuration n) :
-      slaterDeterminant hn ((fun i : Fin n => i.val),0) w = (c : ℂ)*vandermonde w := by
+      slaterDeterminant hn ((fun i : Fin n => i.val), 0) w = (c : ℂ)*vandermonde w := by
     rw [slater_canonical_ground_determinant]
     simp [c, Complex.ofReal_mul, Complex.ofReal_prod, Complex.ofReal_inv]
-  have heq : slaterL2 hn ((fun i : Fin n => i.val),0) =
+  have heq : slaterL2 hn ((fun i : Fin n => i.val), 0) =
       ((c * groundStateNormalization n : ℝ) : ℂ) •
         normalizedVandermondeGroundStateL2 n hn := by
     apply Lp.ext
-    filter_upwards [slaterL2_ae hn ((fun i : Fin n => i.val),0),
+    filter_upwards [slaterL2_ae hn ((fun i : Fin n => i.val), 0),
       Lp.coeFn_smul ((c * groundStateNormalization n : ℝ) : ℂ)
         (normalizedVandermondeGroundStateL2 n hn),
       normalizedVandermondeGroundStateL2_coeFn n hn] with w hs hmul hv
@@ -51,7 +51,7 @@ theorem slater_canonical_ground_eq_normalized {n : ℕ} (hn : 0 < n)
   have hd : SlaterDistinct ((fun i : Fin n => i.val), (0 : Fin n → ℕ)) := by
     intro i j h
     exact Fin.val_injective (congrArg Prod.fst h)
-  have hnorm := slaterL2_norm_eq_one hn ((fun i : Fin n => i.val),0) hd
+  have hnorm := slaterL2_norm_eq_one hn ((fun i : Fin n => i.val), 0) hd
   have hgnorm : ‖normalizedVandermondeGroundStateL2 n hn‖ = 1 := by
     have h := normalizedVandermondeGroundState_norm_sq n hn
     nlinarith [norm_nonneg (normalizedVandermondeGroundStateL2 n hn)]
@@ -70,8 +70,8 @@ theorem slater_canonical_ground_eq_normalized {n : ℕ} (hn : 0 < n)
 permutation sign. -/
 theorem slater_holomorphic_labels_permute {n : ℕ} (hn : 0 < n)
     (p : Fin n → ℕ) (σ : ParticlePermutation n) (z : Configuration n) :
-    slaterDeterminant hn (p ∘ σ,0) z =
-      permutationSign σ * slaterDeterminant hn (p,0) z := by
+    slaterDeterminant hn (p ∘ σ, 0) z =
+      permutationSign σ * slaterDeterminant hn (p, 0) z := by
   unfold slaterDeterminant
   let M := Matrix.of (fun i j : Fin n =>
     ComplexHermite.normalizedEval n hn (p i) 0 (z j))
@@ -87,22 +87,22 @@ theorem slater_minimal_ground_eq_signed_normalized {n : ℕ} (hn : 0 < n)
     (p : Fin n → ℕ) (hp : Function.Injective p)
     (hdegree : (∑ i, p i) = n * (n - 1) / 2) :
     ∃ σ : ParticlePermutation n, (∀ i, p i = (σ i).val) ∧
-      ∀ z : Configuration n, slaterDeterminant hn (p,0) z =
+      ∀ z : Configuration n, slaterDeterminant hn (p, 0) z =
         permutationSign σ * normalizedVandermondeTransform n (fun _ => 1) z := by
   classical
   have hrange := (slater_minimal_degree_iff p hp).mp hdegree
   have hlt (i : Fin n) : p i < n := by
-    have hmem : p i ∈ Finset.univ.image p := Finset.mem_image.mpr ⟨i,Finset.mem_univ i,rfl⟩
+    have hmem : p i ∈ Finset.univ.image p := Finset.mem_image.mpr ⟨i, Finset.mem_univ i, rfl⟩
     rw [hrange] at hmem
     exact Finset.mem_range.mp hmem
-  let f : Fin n → Fin n := fun i => ⟨p i,hlt i⟩
+  let f : Fin n → Fin n := fun i => ⟨p i, hlt i⟩
   have hf : Function.Injective f := by
     intro i j h
     apply hp
     exact congrArg Fin.val h
   let σ : ParticlePermutation n := Equiv.ofBijective f
     ⟨hf, (Finite.surjective_of_injective hf)⟩
-  refine ⟨σ,fun i => rfl,?_⟩
+  refine ⟨σ, fun i => rfl,?_⟩
   intro z
   have hlabel : p = Fin.val ∘ σ := rfl
   rw [hlabel, slater_holomorphic_labels_permute,

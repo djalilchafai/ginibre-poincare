@@ -19,7 +19,7 @@ theorem ginibreCenterCIR_noise_coordinate_all {n : ℕ} (hn : 0 < n)
       Real.sqrt ((8*α/(n : ℝ))*ginibreCenterSquared n z)*ginibreCenterRadialDirection n e z i := by
   by_cases hz : ginibreCenterSquared n z=0
   · have hs : coordinateSum z=0 := Complex.normSq_eq_zero.mp hz
-    simp [hz,ginibre_fderiv_centerSquared,hs]
+    simp [hz, ginibre_fderiv_centerSquared, hs]
   · exact ginibreCenterCIR_noise_coordinate hn α hα z hz e i
 
 theorem ginibreConfigurationBrownianGradientSum_centerSquared {Ω : Type*} {n : ℕ}
@@ -32,14 +32,14 @@ theorem ginibreConfigurationBrownianGradientSum_centerSquared {Ω : Type*} {n : 
         (fun s ω => Real.sqrt ((8*α/(n : ℝ))*(ginibreCenterSquared n) (X s ω))*
           ginibreCenterRadialDirection n e (X s ω) i) T (k+1) ω := by
   classical
-  rw [ginibreConfigurationBrownianGradientSum_eq,Finset.mul_sum]
+  rw [ginibreConfigurationBrownianGradientSum_eq, Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro i hi
   unfold brownianUniformLeftSum
   rw [Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro j hj
-  rw [← mul_assoc,ginibreCenterCIR_noise_coordinate_all (by omega) α hα _ e i]
+  rw [← mul_assoc, ginibreCenterCIR_noise_coordinate_all (by omega) α hα _ e i]
 
 end
 end GinibrePoincare

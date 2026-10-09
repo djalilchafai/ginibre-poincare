@@ -6,8 +6,8 @@ open MeasureTheory Set Filter
 open scoped Topology NNReal
 namespace GinibrePoincare
 noncomputable section
-local instance : MeasurableSpace C(Icc (0:ℝ) 1,ℝ) := borel _
-local instance : BorelSpace C(Icc (0:ℝ) 1,ℝ) := ⟨rfl⟩
+local instance : MeasurableSpace C(Icc (0 : ℝ) 1, ℝ) := borel _
+local instance : BorelSpace C(Icc (0 : ℝ) 1, ℝ) := ⟨rfl⟩
 
 abbrev BakryBrownianGlobalSample := ℕ → BakryBrownianDyadicCompletedSample
 
@@ -18,7 +18,7 @@ instance : IsProbabilityMeasure bakryBrownianGlobalMeasure := by
   unfold bakryBrownianGlobalMeasure
   infer_instance
 
-def bakryBrownianUnitClamp (r : ℝ) : Icc (0:ℝ) 1 :=
+def bakryBrownianUnitClamp (r : ℝ) : Icc (0 : ℝ) 1 :=
   ⟨min 1 (max 0 r), by constructor <;> simp⟩
 
 lemma bakryBrownianUnitClamp_continuous : Continuous bakryBrownianUnitClamp := by
@@ -26,9 +26,9 @@ lemma bakryBrownianUnitClamp_continuous : Continuous bakryBrownianUnitClamp := b
   fun_prop
 
 @[simp] lemma bakryBrownianUnitClamp_zero_of_nonpos (r : ℝ) (hr : r ≤ 0) :
-    bakryBrownianUnitClamp r = ⟨0,by norm_num,by norm_num⟩ := by
+    bakryBrownianUnitClamp r = ⟨0, by norm_num, by norm_num⟩ := by
   apply Subtype.ext
-  simp [bakryBrownianUnitClamp,max_eq_left hr]
+  simp [bakryBrownianUnitClamp, max_eq_left hr]
 
 /-- Actual all-time stitched path, adding each independent unit block up to
 its clipped elapsed time. Every bounded time interval uses finitely many blocks. -/
@@ -42,8 +42,8 @@ lemma bakryBrownianGlobalPath_eq_finite (ω : BakryBrownianGlobalSample)
         (bakryBrownianUnitClamp (t-n)) := by
   apply tsum_eq_sum
   intro n hn
-  have hNn : N ≤ n := by simpa only [Finset.mem_range,not_lt] using hn
-  have hn' : (N:ℝ) ≤ n := by exact_mod_cast hNn
+  have hNn : N ≤ n := by simpa only [Finset.mem_range, not_lt] using hn
+  have hn' : (N : ℝ) ≤ n := by exact_mod_cast hNn
   rw [bakryBrownianUnitClamp_zero_of_nonpos _ (by linarith)]
   exact (bakryBrownianDyadicPath_endpoints (ω n)).1
 
@@ -51,7 +51,7 @@ lemma bakryBrownianGlobalPath_continuous (ω : BakryBrownianGlobalSample) :
     Continuous (bakryBrownianGlobalPath ω) := by
   rw [continuous_iff_continuousAt]
   intro t
-  obtain ⟨N,hN⟩ := exists_nat_gt t
+  obtain ⟨N, hN⟩ := exists_nat_gt t
   have hc : Continuous (fun r : ℝ => ∑ n ∈ Finset.range N,
       bakryBrownianDyadicCompletedPath (ω n) (bakryBrownianUnitClamp (r-n))) := by
     apply continuous_finsetSum
@@ -69,7 +69,7 @@ lemma bakryBrownianGlobalPath_continuous (ω : BakryBrownianGlobalSample) :
 
 lemma bakryBrownianGlobalPath_eval_measurable (t : ℝ) :
     Measurable (fun ω : BakryBrownianGlobalSample => bakryBrownianGlobalPath ω t) := by
-  obtain ⟨N,hN⟩ := exists_nat_gt t
+  obtain ⟨N, hN⟩ := exists_nat_gt t
   have he : (fun ω : BakryBrownianGlobalSample => bakryBrownianGlobalPath ω t) =
       (fun ω => ∑ n ∈ Finset.range N, bakryBrownianDyadicCompletedPath (ω n)
         (bakryBrownianUnitClamp (t-n))) := by
@@ -91,12 +91,12 @@ lemma bakryBrownianGlobalProcess_continuous (ω : BakryBrownianGlobalSample) :
 lemma bakryBrownianUnitClamp_telescope (r : ℝ) :
     (bakryBrownianUnitClamp r : ℝ) = max 0 r-max 0 (r-1) := by
   by_cases h0 : r ≤ 0
-  · simp [bakryBrownianUnitClamp,max_eq_left h0,max_eq_left (show r-1 ≤ 0 by linarith)]
+  · simp [bakryBrownianUnitClamp, max_eq_left h0, max_eq_left (show r-1 ≤ 0 by linarith)]
   · by_cases h1 : 1 ≤ r
-    · simp [bakryBrownianUnitClamp,max_eq_right (by linarith : 0 ≤ r),
-        max_eq_right (by linarith : 0 ≤ r-1),min_eq_left h1]
-    · simp [bakryBrownianUnitClamp,max_eq_right (by linarith : 0 ≤ r),
-        max_eq_left (by linarith : r-1 ≤ 0),min_eq_right (by linarith : r ≤ 1)]
+    · simp [bakryBrownianUnitClamp, max_eq_right (by linarith : 0 ≤ r),
+        max_eq_right (by linarith : 0 ≤ r-1), min_eq_left h1]
+    · simp [bakryBrownianUnitClamp, max_eq_right (by linarith : 0 ≤ r),
+        max_eq_left (by linarith : r-1 ≤ 0), min_eq_right (by linarith : r ≤ 1)]
 
 lemma bakryBrownianUnitClamp_sum (N : ℕ) (t : ℝ) :
     ∑ n ∈ Finset.range N, (bakryBrownianUnitClamp (t-n) : ℝ) =
@@ -104,9 +104,9 @@ lemma bakryBrownianUnitClamp_sum (N : ℕ) (t : ℝ) :
   induction N with
   | zero => simp
   | succ N hN =>
-    rw [Finset.sum_range_succ,hN,bakryBrownianUnitClamp_telescope]
-    simp only [Nat.cast_add,Nat.cast_one]
-    rw [show t-((N:ℝ)+1)=t-N-1 by ring]
+    rw [Finset.sum_range_succ, hN, bakryBrownianUnitClamp_telescope]
+    simp only [Nat.cast_add, Nat.cast_one]
+    rw [show t-((N : ℝ)+1)=t-N-1 by ring]
     ring
 
 lemma bakryBrownianUnitClamp_sum_min (N : ℕ) (s t : ℝ)
@@ -120,8 +120,8 @@ lemma bakryBrownianUnitClamp_sum_min (N : ℕ) (s t : ℝ)
       (bakryBrownianUnitClamp (t-n) : ℝ) :=
     min_le_min le_rfl (max_le_max le_rfl (sub_le_sub_right hst _))
   simp_rw [min_eq_left (hh _)]
-  rw [bakryBrownianUnitClamp_sum,max_eq_right hs,max_eq_left (by linarith : s-N ≤ 0),
-    sub_zero,min_eq_left hst]
+  rw [bakryBrownianUnitClamp_sum, max_eq_right hs, max_eq_left (by linarith : s-N ≤ 0),
+    sub_zero, min_eq_left hst]
 
 #print axioms bakryBrownianUnitClamp_telescope
 #print axioms bakryBrownianUnitClamp_sum

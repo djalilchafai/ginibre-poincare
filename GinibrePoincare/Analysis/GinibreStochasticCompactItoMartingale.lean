@@ -5,7 +5,18 @@ public import GinibrePoincare.Analysis.GinibreStochasticItoUntilStopping
 
 @[expose] public section
 
-/-! Actual local Itô identities hold simultaneously through an actual bounded stopping time. -/
+/-! # Compact Volterra paths have an Itô martingale compensator
+
+The adapted continuous path `X` remains in a compact subset `K` of the open
+C² domain `U`. The Volterra equation is assumed only until the measurable
+bounded time `θ`. The continuous gradient-integral construction supplies a
+square-integrable martingale `J` and its partition limits on all horizons.
+
+The stopping-time identity theorem then identifies the test compensator
+with `J` simultaneously up to `θ`. The proof uses the integral's continuity
+to pass from deterministic-time limits to an event supporting every time.
+Here `θ` is only required measurable and bounded; the theorem's martingale
+construction does not assume a stopping-time property for `θ`. -/
 open Set MeasureTheory ProbabilityTheory Filter
 open scoped Topology NNReal
 namespace GinibrePoincare
@@ -34,9 +45,9 @@ theorem ginibreCompactVolterra_continuous_ito_martingale_exists
       Martingale J (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)) P ∧
       (∀ ω, Continuous (fun t => J t ω)) ∧ (∀ t, MemLp (J t) 2 P) ∧ J 0 =ᵐ[P] (fun _ => 0) ∧
       ∀ᵐ ω ∂P, ∀ t ≤ θ ω, ginibreConfigurationTestCompensator n α X f b t ω=J t ω := by
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hPartial,hLimit⟩ := ginibreCompactProcess_continuous_gradient_integral_all_horizons
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hPartial, hLimit⟩ := ginibreCompactProcess_continuous_gradient_integral_all_horizons
     n B P hB hind α X hX hCont f U K hU hf hK hKU hRange T
-  refine ⟨J,hJM,hJC,hJL,hJ0,?_⟩
+  refine ⟨J, hJM, hJC, hJL, hJ0,?_⟩
   exact ginibreCompactVolterra_compensator_eq_gradient_process_until n B P hB hind α X hX hCont
     f U K hU hf hK hKU hRange T b hb M hM hbound θ hθ hθT hVolterra
     J (Filter.Eventually.of_forall hJC) hLimit

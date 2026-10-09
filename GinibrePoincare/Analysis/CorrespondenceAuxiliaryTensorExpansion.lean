@@ -34,7 +34,7 @@ theorem multivariateNormalized_tensor_expansion (n : ℕ) (hn : 0 < n)
       ∑ k : TensorHermiteContraction p q, tensorHermiteScalar p q k *
         ∏ j, z j^(p j-(k j).val) * conj (z j)^(q j-(k j).val) := by
   classical
-  simp only [multivariateNormalized,normalizedEval_eq_sum]
+  simp only [multivariateNormalized, normalizedEval_eq_sum]
   rw [Finset.prod_mul_distrib]
   have hsum (j : Fin n) :
       (∑ k ∈ Finset.range (min (p j) (q j)+1),
@@ -78,7 +78,7 @@ theorem multivariateNormalizedL2_tensor_expansion (n : ℕ) (hn : 0 < n)
       (memLp_two_multivariateMixedMonomial n hn (fun j => p j-(k j).val)
         (fun j => q j-(k j).val)).coeFn_toLp] with z h1 h2
     rw [h1]
-    simp only [Pi.smul_apply,smul_eq_mul]
+    simp only [Pi.smul_apply, smul_eq_mul]
     change tensorHermiteScalar p q k * (memLp_two_multivariateMixedMonomial n hn
       (fun j => p j-(k j).val) (fun j => q j-(k j).val)).toLp _ z = _
     rw [h2]
@@ -89,10 +89,10 @@ theorem multivariateNormalizedL2_tensor_expansion (n : ℕ) (hn : 0 < n)
           (fun j => q j-(k j).val)),
     Lp.coeFn_fun_finsetSum Finset.univ (fun k : TensorHermiteContraction p q =>
       tensorHermiteScalar p q k • multivariateMixedMonomialL2 n hn
-        (fun j => p j-(k j).val) (fun j => q j-(k j).val)),hall]
+        (fun j => p j-(k j).val) (fun j => q j-(k j).val)), hall]
     with z hF hs hsum hall
-  rw [hF,hs]
-  simp only [Pi.smul_apply,smul_eq_mul,hsum]
+  rw [hF, hs]
+  simp only [Pi.smul_apply, smul_eq_mul, hsum]
   simp_rw [hall]
   exact multivariateNormalized_tensor_expansion n hn p q z
 

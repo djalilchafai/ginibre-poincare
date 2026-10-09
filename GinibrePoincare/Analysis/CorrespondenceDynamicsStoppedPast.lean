@@ -41,7 +41,7 @@ set_option backward.isDefEq.respectTransparency false
     convert measurable_stoppedValue (hU k) hτ using 1
     funext ω
     change U k (τ ω) ω = U k (WithTop.untopA (τ ω : WithTop ℝ≥0)) ω
-    rw [WithTop.untopA_eq_untop WithTop.coe_ne_top,WithTop.untop_coe]
+    rw [WithTop.untopA_eq_untop WithTop.coe_ne_top, WithTop.untop_coe]
   have hl : ∀ᵐ ω ∂P, Tendsto (fun k => g k ω) atTop
       (𝓝 (ginibreBrownianMaximalProcess n α z B (τ ω) ω)) := by
     filter_upwards [ginibreBrownianHamiltonianBoundedStop_exhausts_ae hn α z hz B P hB hind]

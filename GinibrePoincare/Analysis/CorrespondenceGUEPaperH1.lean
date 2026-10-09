@@ -11,8 +11,8 @@ set_option maxHeartbeats 600000
 /-- Paper Section 1.1's smooth compact symmetric value/ordinary-gradient core,
 for the actual real GUE density of Section 1.2. -/
 def guePaperSmoothPairs (n : ℕ) : Set (GUEFullSobolevPair n) :=
-  {p | ∃f : EuclideanSpace ℝ (Fin n) → ℝ,ContDiff ℝ ∞ f ∧ HasCompactSupport f ∧
-    (∀σ x,f (guePermute n σ x)=f x) ∧
+  {p | ∃f : EuclideanSpace ℝ (Fin n) → ℝ, ContDiff ℝ ∞ f ∧ HasCompactSupport f ∧
+    (∀σ x, f (guePermute n σ x)=f x) ∧
     (p.1 : EuclideanSpace ℝ (Fin n) → ℝ)=ᵐ[gueFullMeasure n]f ∧
     (p.2 : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (Fin n))=ᵐ[gueFullMeasure n]gradient f}
 
@@ -20,26 +20,26 @@ def guePaperH1Completion (n : ℕ) : Set (GUEFullSobolevPair n) := closure (gueP
 
 theorem guePaperH1Completion_subset (n : ℕ) : guePaperH1Completion n⊆gueSymmetricH1Completion n := by
   apply closure_mono
-  rintro p ⟨f,hf,hc,hs,hv,hg⟩
-  exact ⟨f,hf.of_le (by simp),hc,hs,hv,hg⟩
+  rintro p ⟨f, hf, hc, hs, hv, hg⟩
+  exact ⟨f, hf.of_le (by simp), hc, hs, hv, hg⟩
 
 theorem guePaperH1Completion_poincare {n : ℕ} (hn : 0<n)
     (p : GUEFullSobolevPair n) (hp : p∈guePaperH1Completion n) :
-    (∫x,p.1 x^2 ∂gueFullMeasure n)-(∫x,p.1 x ∂gueFullMeasure n)^2≤(1/(n:ℝ))*‖p.2‖^2 :=
+    (∫x, p.1 x^2 ∂gueFullMeasure n)-(∫x, p.1 x ∂gueFullMeasure n)^2≤(1/(n : ℝ))*‖p.2‖^2 :=
   gueSymmetricH1Completion_poincare hn p (guePaperH1Completion_subset n hp)
 
 theorem guePaperH1Completion_square_lsi {n : ℕ} (hn : 0<n)
     (p : GUEFullSobolevPair n) (hp : p∈guePaperH1Completion n) :
     Integrable (fun x => p.1 x^2*Real.log (p.1 x^2)) (gueFullMeasure n) ∧
-      squareEntropy (gueFullMeasure n) p.1≤(2/(n:ℝ))*‖p.2‖^2 :=
+      squareEntropy (gueFullMeasure n) p.1≤(2/(n : ℝ))*‖p.2‖^2 :=
   gueSymmetricH1Completion_square_lsi hn p (guePaperH1Completion_subset n hp)
 
 theorem gueSymmetric_smooth_pair_mem_paperH1 {n : ℕ} (hn : 0<n)
     (f : EuclideanSpace ℝ (Fin n) → ℝ) (hf : ContDiff ℝ ∞ f)
-    (hs : ∀σ x,f (guePermute n σ x)=f x)
+    (hs : ∀σ x, f (guePermute n σ x)=f x)
     (hv : MemLp f 2 (gueFullMeasure n))
     (hg : MemLp (gradient f) 2 (gueFullMeasure n)) :
-    (hv.toLp f,hg.toLp (gradient f))∈guePaperH1Completion n := by
+    (hv.toLp f, hg.toLp (gradient f))∈guePaperH1Completion n := by
   have hf1 : ContDiff ℝ 1 f := hf.of_le (by simp)
   letI := gueFullMeasure_probability hn
   let μ := gueFullMeasure n
@@ -67,15 +67,15 @@ theorem gueSymmetric_smooth_pair_mem_paperH1 {n : ℕ} (hn : 0<n)
     exact (h.sub (hD i)).integrable_sq
   have htV : Tendsto (fun k => (hFV k).toLp (F k)) atTop (nhds (hv.toLp f)) := by
     apply tendsto_iff_dist_tendsto_zero.mpr
-    simp_rw [gueL2_toLp_dist_eq_sqrt,Real.norm_eq_abs,sq_abs]
+    simp_rw [gueL2_toLp_dist_eq_sqrt, Real.norm_eq_abs, sq_abs]
     simpa [F] using (gueSymmetricSpatialTruncation_L2_errors n μ f hf1 hv 0 (by simp)).1.sqrt
   have htG : Tendsto (fun k => (hFG k).toLp (gradient (F k))) atTop (nhds (hg.toLp (gradient f))) := by
     apply tendsto_iff_dist_tendsto_zero.mpr
     simp_rw [gueL2_toLp_dist_eq_sqrt]
-    have he k : (∫x,‖gradient (F k) x-gradient f x‖^2 ∂μ)=
-        ∑i,∫x,(fderiv ℝ (F k) x (EuclideanSpace.basisFun (Fin n) ℝ i)-
+    have he k : (∫x, ‖gradient (F k) x-gradient f x‖^2 ∂μ)=
+        ∑i,∫x, (fderiv ℝ (F k) x (EuclideanSpace.basisFun (Fin n) ℝ i)-
           fderiv ℝ f x (EuclideanSpace.basisFun (Fin n) ℝ i))^2 ∂μ := by
-      simp only [EuclideanSpace.real_norm_sq_eq,PiLp.sub_apply,gue_gradient_coordinate]
+      simp only [EuclideanSpace.real_norm_sq_eq, PiLp.sub_apply, gue_gradient_coordinate]
       exact integral_finsetSum _ (fun i hi => hDE k i)
     simp_rw [he]
     have ht := tendsto_finsetSum Finset.univ (fun i hi =>
@@ -88,10 +88,10 @@ theorem gueSymmetric_smooth_pair_mem_paperH1 {n : ℕ} (hn : 0<n)
   have hFinf : ContDiff ℝ ∞ (F k) := by
     unfold F gueSymmetricSpatialTruncation
     exact (gueSymmetricSpatialCutoff_smooth n k).mul hf
-  refine ⟨F k,hFinf,hFS k,?_,(hFV k).coeFn_toLp,(hFG k).coeFn_toLp⟩
+  refine ⟨F k, hFinf, hFS k,?_, (hFV k).coeFn_toLp, (hFG k).coeFn_toLp⟩
   intro σ x
   unfold F gueSymmetricSpatialTruncation
-  rw [gueSymmetricSpatialCutoff_symmetric,hs]
+  rw [gueSymmetricSpatialCutoff_symmetric, hs]
 
 
 theorem guePaper_center_witness_mem_H1 {n : ℕ} (hn : 0<n) :
@@ -108,40 +108,40 @@ theorem guePaper_lsi_witness_mem_H1 {n : ℕ} (hn : 0<n) :
 
 theorem guePaper_poincare_constant_optimal {n : ℕ} (hn : 0<n) (c : ℝ)
     (hc : ∀p∈guePaperH1Completion n,
-      (∫x,p.1 x^2 ∂gueFullMeasure n)-(∫x,p.1 x ∂gueFullMeasure n)^2≤c*‖p.2‖^2) :
-    1/(n:ℝ)≤c := by
+      (∫x, p.1 x^2 ∂gueFullMeasure n)-(∫x, p.1 x ∂gueFullMeasure n)^2≤c*‖p.2‖^2) :
+    1/(n : ℝ)≤c := by
   letI := gueFullMeasure_probability hn
   let hv := gueCenterCoordinate_memLp hn
   let hg := gueCenterCoordinate_gradient_memLp hn
-  have h := hc (hv.toLp (gueCenterCoordinate n),hg.toLp (gradient (gueCenterCoordinate n)))
+  have h := hc (hv.toLp (gueCenterCoordinate n), hg.toLp (gradient (gueCenterCoordinate n)))
     (guePaper_center_witness_mem_H1 hn)
   have he : ‖hg.toLp (gradient (gueCenterCoordinate n))‖^2=
-      (∫x,‖gradient (gueCenterCoordinate n) x‖^2 ∂gueFullMeasure n) := by
+      (∫x, ‖gradient (gueCenterCoordinate n) x‖^2 ∂gueFullMeasure n) := by
     rw [← integral_norm_sq_eq_L2_norm_sq]
     exact integral_congr_ae (hg.coeFn_toLp.fun_comp (fun y => ‖y‖^2))
-  have hsq : (∫x,(hv.toLp (gueCenterCoordinate n)) x^2 ∂gueFullMeasure n)=
-      (∫x,gueCenterCoordinate n x^2 ∂gueFullMeasure n) := by
+  have hsq : (∫x, (hv.toLp (gueCenterCoordinate n)) x^2 ∂gueFullMeasure n)=
+      (∫x, gueCenterCoordinate n x^2 ∂gueFullMeasure n) := by
     apply integral_congr_ae
     filter_upwards [hv.coeFn_toLp] with x hx
     rw [hx]
-  rw [hsq,integral_congr_ae hv.coeFn_toLp,he,gueCenterCoordinate_poincare_equality hn] at h
-  simpa only [gueCenterCoordinate_gradient,gueCenterUnit_norm hn,one_pow,integral_const,
-    probReal_univ,smul_eq_mul,mul_one] using h
+  rw [hsq, integral_congr_ae hv.coeFn_toLp, he, gueCenterCoordinate_poincare_equality hn] at h
+  simpa only [gueCenterCoordinate_gradient, gueCenterUnit_norm hn, one_pow, integral_const,
+    probReal_univ, smul_eq_mul, mul_one] using h
 
 theorem guePaper_lsi_constant_optimal {n : ℕ} (hn : 0<n) (c : ℝ)
-    (hc : ∀p∈guePaperH1Completion n,squareEntropy (gueFullMeasure n) p.1≤c*‖p.2‖^2) :
-    2/(n:ℝ)≤c := by
+    (hc : ∀p∈guePaperH1Completion n, squareEntropy (gueFullMeasure n) p.1≤c*‖p.2‖^2) :
+    2/(n : ℝ)≤c := by
   let hv := gueLSIWitness_memLp hn
   let hg := gueLSIWitness_gradient_memLp hn
-  have h := hc (hv.toLp (gueLSIWitness n),hg.toLp (gradient (gueLSIWitness n)))
+  have h := hc (hv.toLp (gueLSIWitness n), hg.toLp (gradient (gueLSIWitness n)))
     (guePaper_lsi_witness_mem_H1 hn)
   have he : ‖hg.toLp (gradient (gueLSIWitness n))‖^2=
-      (∫x,‖gradient (gueLSIWitness n) x‖^2 ∂gueFullMeasure n) := by
+      (∫x, ‖gradient (gueLSIWitness n) x‖^2 ∂gueFullMeasure n) := by
     rw [← integral_norm_sq_eq_L2_norm_sq]
     exact integral_congr_ae (hg.coeFn_toLp.fun_comp (fun y => ‖y‖^2))
-  rw [squareEntropy_congr_ae _ hv.coeFn_toLp,he,gueLSIWitness_lsi_equality hn,
+  rw [squareEntropy_congr_ae _ hv.coeFn_toLp, he, gueLSIWitness_lsi_equality hn,
     gueLSIWitness_gradient_energy hn] at h
-  exact (mul_le_mul_iff_left₀ (by positivity : 0<(1/4:ℝ)*Real.exp ((gueCenterVariance n:ℝ)/2))).mp h
+  exact (mul_le_mul_iff_left₀ (by positivity : 0<(1/4 : ℝ)*Real.exp ((gueCenterVariance n : ℝ)/2))).mp h
 
 #print axioms guePaper_poincare_constant_optimal
 #print axioms guePaper_lsi_constant_optimal

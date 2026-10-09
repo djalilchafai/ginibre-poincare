@@ -58,7 +58,7 @@ theorem correspondenceCollisionCutoff_compact_rates {n : ℕ} (hn : 0 < n)
   have hc := correspondenceCollisionCutoff_smooth p.val.1 p.val.2 ε
   have hm2 := hr (2*ε) (by positivity)
   have hbval (z : Configuration n) : |1-correspondenceCollisionCutoff p.val.1 p.val.2 ε z|^2 ≤ 1 := by
-    obtain ⟨h0,h1⟩ := correspondenceCollisionCutoff_mem_unit p.val.1 p.val.2 ε z
+    obtain ⟨h0, h1⟩ := correspondenceCollisionCutoff_mem_unit p.val.1 p.val.2 ε z
     rw [sq_abs]
     nlinarith
   have hiv : IntegrableOn (fun z => |1-correspondenceCollisionCutoff p.val.1 p.val.2 ε z|^2)

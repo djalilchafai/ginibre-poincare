@@ -25,9 +25,9 @@ theorem ginibreLocalRegularity_weighted_resolvent_cutoff_gradient
         (∫ z, θ z*g k z) = -(∫ z, fderiv ℝ θ z (ginibreCoordinateDirection k)*(η z*u z)) := by
   classical
   let ρ := ginibreLebesgueDensityReal n
-  obtain ⟨G,hGm,hGw⟩ := ginibreLocalRegularity_weighted_resolvent_density_cutoff_gradient
+  obtain ⟨G, hGm, hGw⟩ := ginibreLocalRegularity_weighted_resolvent_density_cutoff_gradient
     n hn ℓ u f hu hf heq K hK hs η hη hc hηK
-  obtain ⟨χ,hχ,hχc,hχs,hχone⟩ := ginibreLocalRegularity_exists_compact_interior_cutoff n hn
+  obtain ⟨χ, hχ, hχc, hχs, hχone⟩ := ginibreLocalRegularity_exists_compact_interior_cutoff n hn
     (tsupport η) hc (hηK.trans hs)
   let q := fun z => χ z/ρ z
   have hqe : q = (fun z => ρ z*(χ z/ρ z^2)) := by
@@ -43,7 +43,7 @@ theorem ginibreLocalRegularity_weighted_resolvent_cutoff_gradient
   have hqc : HasCompactSupport q := by
     have he : q = χ*(fun z => (ρ z)⁻¹) := by
       funext z
-      simp only [q,Pi.mul_apply,div_eq_mul_inv]
+      simp only [q, Pi.mul_apply, div_eq_mul_inv]
     rw [he]
     exact hχc.mul_right
   have hw : MemLp (fun z => η z*(ρ z*u z)) 2 (volume : Measure (Configuration n)) := by
@@ -70,7 +70,7 @@ theorem ginibreLocalRegularity_weighted_resolvent_cutoff_gradient
   let g := fun k z => q z*G k z+(η z*(ρ z*u z))*fderiv ℝ q z (ginibreCoordinateDirection k)
   have hg (k) := ginibreLocalRegularity_scalar_weak_product (fun z => η z*(ρ z*u z)) (G k) q hw
     (hGm k) (ginibreCoordinateDirection k) hq hqc (hGw k)
-  refine ⟨g,fun k => (hg k).1,?_⟩
+  refine ⟨g, fun k => (hg k).1,?_⟩
   intro k θ hθ hθc
   simpa only [hsource] using (hg k).2 θ hθ hθc
 

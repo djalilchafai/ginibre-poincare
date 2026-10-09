@@ -19,7 +19,7 @@ theorem ginibreConfigurationBrownianNoise_real_martingale {Ω : Type*} [Measurab
     (hind : iIndepFun (fun i ω t => B i t ω) P) (α : ℝ) (j : Fin n) :
     Martingale (fun (t : ℝ≥0) ω => (ginibreConfigurationBrownianNoise n B α ω t j).re)
       (ginibreBrownianFamilyFiltration B P hB) P := by
-  have h := (ginibreBrownianFamilyFiltration_coordinate_martingale B P hB hind (j,0)).smul
+  have h := (ginibreBrownianFamilyFiltration_coordinate_martingale B P hB hind (j, 0)).smul
     (Real.sqrt (2*α/(n : ℝ)^2))
   convert! h using 1
   funext t ω
@@ -31,7 +31,7 @@ theorem ginibreConfigurationBrownianNoise_imag_martingale {Ω : Type*} [Measurab
     (hind : iIndepFun (fun i ω t => B i t ω) P) (α : ℝ) (j : Fin n) :
     Martingale (fun (t : ℝ≥0) ω => (ginibreConfigurationBrownianNoise n B α ω t j).im)
       (ginibreBrownianFamilyFiltration B P hB) P := by
-  have h := (ginibreBrownianFamilyFiltration_coordinate_martingale B P hB hind (j,1)).smul
+  have h := (ginibreBrownianFamilyFiltration_coordinate_martingale B P hB hind (j, 1)).smul
     (Real.sqrt (2*α/(n : ℝ)^2))
   convert! h using 1
   funext t ω

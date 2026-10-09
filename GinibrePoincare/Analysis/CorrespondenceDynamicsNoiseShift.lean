@@ -43,8 +43,8 @@ theorem correspondenceNoiseShift_actual {Ω : Type*} [MeasurableSpace Ω]
   have hh := ginibreConfigurationBrownianNoise_shift_nonneg n B α s ω (max t 0) (le_max_right _ _)
   rw [← hh]
   change (fun j => Real.sqrt (2*α/(n : ℝ)^2) •
-      ((brownianFamilyShift B s (j,0) (max t 0).toNNReal ω : ℂ) + Complex.I *
-        (brownianFamilyShift B s (j,1) (max t 0).toNNReal ω : ℂ))) = _
+      ((brownianFamilyShift B s (j, 0) (max t 0).toNNReal ω : ℂ) + Complex.I *
+        (brownianFamilyShift B s (j, 1) (max t 0).toNNReal ω : ℂ))) = _
   have ht : (max t 0).toNNReal = t.toNNReal := by
     apply Subtype.ext
     simp [Real.toNNReal, max_assoc]

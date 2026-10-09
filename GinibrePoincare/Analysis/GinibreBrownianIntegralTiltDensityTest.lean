@@ -36,7 +36,7 @@ theorem actualVaryingDensity_continuous_test_tendsto {Ω E : Type*} [MeasurableS
     funext ω
     simp only [Pi.sub_apply]
     ring
-  simpa only [he,zero_add] using herr.add hfixed
+  simpa only [he, zero_add] using herr.add hfixed
 
 end
 end GinibrePoincare

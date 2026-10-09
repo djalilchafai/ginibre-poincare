@@ -29,9 +29,9 @@ theorem smoothDolbeaultPrimitive_solves_and_residual {n : ℕ}
     constructor
     · simp
     · intro k hk
-      simp [smoothDolbeaultPrimitive,smoothDolbeaultBoundaryComposition,dbarComponent]
+      simp [smoothDolbeaultPrimitive, smoothDolbeaultBoundaryComposition, dbarComponent]
   | cons j l ih =>
-    obtain ⟨hjl,hln⟩ := List.nodup_cons.mp hl
+    obtain ⟨hjl, hln⟩ := List.nodup_cons.mp hl
     have ih' := ih hln
     let u := smoothDolbeaultPrimitive χ α l
     have hu : ContDiff ℝ ∞ u := smoothDolbeaultPrimitive_contDiff χ hχ hc α hα l
@@ -43,7 +43,7 @@ theorem smoothDolbeaultPrimitive_solves_and_residual {n : ℕ}
         dbarComponent (β k) t p = dbarComponent (β t) k p := by
       rw [smooth_dbarComponent_sub _ _ (hα k) (smooth_dbarComponent_contDiff u hu k),
         smooth_dbarComponent_sub _ _ (hα t) (smooth_dbarComponent_contDiff u hu t),
-        hclosed k t p hp,smooth_dbarComponent_commute u hu k t p]
+        hclosed k t p hp, smooth_dbarComponent_commute u hu k t p]
     have hβrep (p : Configuration n)
         (hp : p ∈ dolbeaultCylinder W Finset.univ ∩ dolbeaultCylinder V l.toFinset)
         (k : Fin n) (hk : k ∉ l) : β k p = smoothDolbeaultBoundaryComposition χ l (α k) p :=
@@ -52,7 +52,7 @@ theorem smoothDolbeaultPrimitive_solves_and_residual {n : ℕ}
         (hp : p ∈ dolbeaultCylinder W Finset.univ ∩ dolbeaultCylinder V l.toFinset)
         (k : Fin n) (hk : k ∈ l) : β k p = 0 := by
       change α k p - dbarComponent u k p = 0
-      rw [(ih' p hp).1 k hk,sub_self]
+      rw [(ih' p hp).1 k hk, sub_self]
     let v := configurationCauchyGreenPotential j (χ j)
       (smoothDolbeaultBoundaryComposition χ l (α j))
     let vβ := configurationCauchyGreenPotential j (χ j) (β j)
@@ -80,28 +80,28 @@ theorem smoothDolbeaultPrimitive_solves_and_residual {n : ℕ}
     constructor
     · intro k hk
       change dbarComponent (u+v) k p = _
-      rw [smooth_dbarComponent_add u v hu hv,hdmatch]
+      rw [smooth_dbarComponent_add u v hu hv, hdmatch]
       rcases List.mem_cons.mp hk with hkj | hkl
       · subst k
         have hd := configurationCauchyGreenPotential_solves j (χ j) (β j)
           (hχ j) (hc j) (hβ j) p
-        rw [hχp,one_mul] at hd
+        rw [hχp, one_mul] at hd
         rw [hd]
         change dbarComponent u j p + (α j p - dbarComponent u j p) = α j p
         ring
       · have hkj : k ≠ j := by intro he; subst k; exact hjl hkl
         have hCR (z : ℂ) (hz : z ∈ tsupport (χ j)) :
-            dbarComponent (β j) k (dolbeaultReplaceCoordinate j (p,z)) = 0 := by
+            dbarComponent (β j) k (dolbeaultReplaceCoordinate j (p, z)) = 0 := by
           have hq := dolbeaultCylinder_replace W V l.toFinset j hjfs p hps z (hχW j hz)
           rw [hβclosed j k _ hq.1]
-          have hzβ : β k =ᶠ[𝓝 (dolbeaultReplaceCoordinate j (p,z))] (fun _ => 0) := by
+          have hzβ : β k =ᶠ[𝓝 (dolbeaultReplaceCoordinate j (p, z))] (fun _ => 0) := by
             filter_upwards [((dolbeaultCylinder_isOpen W hW Finset.univ).inter
               (dolbeaultCylinder_isOpen V hV l.toFinset)).mem_nhds hq] with q hqq
             exact hβzero q hqq k hkl
           exact dbarComponent_zero_of_eventuallyZero hzβ j
         have hzv := configurationCauchyGreenPotential_preserves_CR_on_support j k hkj
           (χ j) (β j) (hχ j) (hc j) (hβ j) p hCR
-        rw [hzv,add_zero,(ih' p hps).1 k hkl]
+        rw [hzv, add_zero, (ih' p hps).1 k hkl]
     · intro k hk
       have hkj : k ≠ j := fun h => hk (by simp [h])
       have hkl : k ∉ l := fun h => hk (List.mem_cons_of_mem j h)
@@ -118,9 +118,9 @@ theorem smoothDolbeaultPrimitive_solves_and_residual {n : ℕ}
         exact hβrep _ (dolbeaultCylinder_replace W V l.toFinset j hjfs p hps z
           (hχW j (planarDbar_tsupport_subset _ hz))) k hkl
       change α k p - dbarComponent (u+v) k p = _
-      rw [smooth_dbarComponent_add u v hu hv,hdmatch,hd,hχp,one_mul,hbmatch]
+      rw [smooth_dbarComponent_add u v hu hv, hdmatch, hd, hχp, one_mul, hbmatch]
       change α k p - (dbarComponent u k p + (β k p - _)) = _
-      simp only [β,Pi.sub_apply,smoothDolbeaultBoundaryComposition]
+      simp only [β, Pi.sub_apply, smoothDolbeaultBoundaryComposition]
       ring
 
 #print axioms smoothDolbeaultPrimitive_solves_and_residual

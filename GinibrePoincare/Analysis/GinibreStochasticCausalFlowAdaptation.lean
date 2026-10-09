@@ -16,9 +16,9 @@ set_option backward.isDefEq.respectTransparency false
 theorem ginibreBrownian_causal_flow_stronglyAdapted {Ω : Type*} [mAmbient : MeasurableSpace Ω]
     (n : ℕ) (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (P : Measure Ω) [P.IsComplete]
     (hB : ∀ i, IsBrownianReal (B i) P) (α τ : ℝ) (hτ : 0 < τ)
-    (Φ : C(Icc (-1 : ℝ) 1,Configuration n) → C(Icc 0 τ,Configuration n))
-    (hMeas : @Measurable _ _ (borel C(Icc (-1 : ℝ) 1,Configuration n))
-      (borel C(Icc 0 τ,Configuration n)) Φ)
+    (Φ : C(Icc (-1 : ℝ) 1, Configuration n) → C(Icc 0 τ, Configuration n))
+    (hMeas : @Measurable _ _ (borel C(Icc (-1 : ℝ) 1, Configuration n))
+      (borel C(Icc 0 τ, Configuration n)) Φ)
     (hCausal : ∀ N Q (t : Icc 0 τ),
       (∀ u ∈ Icc 0 (t : ℝ), N (Set.projIcc (-1 : ℝ) 1 (by norm_num) u) =
         Q (Set.projIcc (-1 : ℝ) 1 (by norm_num) u)) → Φ N t = Φ Q t) :
@@ -38,9 +38,9 @@ theorem ginibreBrownian_causal_flow_stronglyAdapted {Ω : Type*} [mAmbient : Mea
   have hAug := ginibreNullAugmentation_le (mAmbient := mAmbient) P mPast hm
   let μ := P.trim hAug
   haveI : μ.IsComplete := ginibreNullAugmentation_trim_complete (mAmbient := mAmbient) P mPast hm
-  letI : MeasurableSpace C(Icc 0 τ,Configuration n) := borel _
-  letI : BorelSpace C(Icc 0 τ,Configuration n) := ⟨rfl⟩
-  have hEval : @Measurable C(Icc 0 τ,Configuration n) (Configuration n) (borel _) _ (fun f => f t) :=
+  letI : MeasurableSpace C(Icc 0 τ, Configuration n) := borel _
+  letI : BorelSpace C(Icc 0 τ, Configuration n) := ⟨rfl⟩
+  have hEval : @Measurable C(Icc 0 τ, Configuration n) (Configuration n) (borel _) _ (fun f => f t) :=
     (continuous_eval_const t).measurable
   have hSelectedPast : @Measurable Ω (Configuration n) mAug _
       (fun ω => Φ (ginibreConfigurationBrownianPastContinuousPath n B α s ω) t) :=
@@ -51,7 +51,7 @@ theorem ginibreBrownian_causal_flow_stronglyAdapted {Ω : Type*} [mAmbient : Mea
     filter_upwards [hAE] with ω hω
     apply hCausal
     intro u hu
-    rw [hω.2 _,hω.1 _]
+    rw [hω.2 _, hω.1 _]
     have hcu : ((Set.projIcc (-1 : ℝ) 1 (by norm_num) u) : ℝ) ≤ (s : ℝ) := by
       rw [Set.coe_projIcc]
       exact (max_le (by linarith [hu.1]) (min_le_right _ _)).trans (hu.2.trans hts)

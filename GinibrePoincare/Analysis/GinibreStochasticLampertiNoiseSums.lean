@@ -26,11 +26,11 @@ theorem ginibreConfigurationBrownianGradientSum_squareRootRadius_full_direction
         t (k+1) ω := by
   classical
   dsimp only
-  rw [ginibreConfigurationBrownianGradientSum_eq,Finset.mul_sum,Finset.mul_sum]
+  rw [ginibreConfigurationBrownianGradientSum_eq, Finset.mul_sum, Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro i hi
   unfold brownianUniformLeftSum
-  rw [Finset.mul_sum,Finset.mul_sum]
+  rw [Finset.mul_sum, Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro j hj
   dsimp only
@@ -43,6 +43,6 @@ theorem ginibreConfigurationBrownianGradientSum_squareRootRadius_full_direction
     rw [min_eq_left (hjT.trans ht)]
   have hCF := (ginibreBrownianHamiltonianStoppedProcess_range (by omega) α z hz B R hR T
     (itoUniformNNTime t (k+1) j) ω).1
-  rw [← mul_assoc,ginibre_squareRootRadius_noise_coordinate hn α hα _ hCF e i,he,mul_assoc]
+  rw [← mul_assoc, ginibre_squareRootRadius_noise_coordinate hn α hα _ hCF e i, he, mul_assoc]
 end
 end GinibrePoincare

@@ -5,6 +5,18 @@ public import GinibrePoincare.Analysis.MatrixVolumeSimpleSpectrum
 
 @[expose] public section
 
+/-! # Global integration from disjoint Schur atlas pieces
+
+A countable flag atlas is partitioned into measurable angular pieces whose
+Schur images are disjoint. Sorted Schur decomposition covers the simple-spectrum
+locus, and the remaining matrices form a volume-null set. Summing the local
+product-integral formulas therefore gives the full matrix integral. Since each
+piece has the same triangular integral, it factors out of the sum, leaving one
+angular constant independent of the unitary-invariant observable. The final
+theorem constructs the chart and countable cover internally.
+-/
+
+
 open Matrix NormedSpace MeasureTheory Filter Set
 open scoped Matrix Matrix.Norms.Operator Topology ENNReal
 namespace GinibrePoincare
@@ -55,38 +67,38 @@ theorem matrixSchur_global_integral_of_atlas {n : ℕ}
           g (schurUpperCombination y) := by
   letI : BorelSpace (Matrix (Fin n) (Fin n) ℂ) :=
     inferInstanceAs (BorelSpace (Fin n → Fin n → ℂ))
-  let P := fun k => matrixSchurAtlasAngularPiece V C k
-  let S := fun k => matrixSchurAtlasChart (C k) '' (P k ×ˢ matrixSchurSortedUpperDomain n)
-  have hP : ∀ k, MeasurableSet (P k) :=
+  let angularPiece := fun k => matrixSchurAtlasAngularPiece V C k
+  let matrixPiece := fun k => matrixSchurAtlasChart (C k) '' (angularPiece k ×ˢ matrixSchurSortedUpperDomain n)
+  have hangularPiece_measurable : ∀ k, MeasurableSet (angularPiece k) :=
     fun k => measurableSet_matrixSchurAtlasAngularPiece V hV C hopen k
   have hi : ∀ k, InjOn (matrixSchurFrameChart (matrixSchurExponentialFrame n) 0)
-      (P k ×ˢ matrixSchurSortedUpperDomain n) := by
+      (angularPiece k ×ˢ matrixSchurSortedUpperDomain n) := by
     intro k
     apply hinj.mono
     intro p hp
     exact ⟨hp.1.1, hp.2⟩
-  have hS : ∀ k, MeasurableSet (S k) := by
+  have hmatrixPiece_measurable : ∀ k, MeasurableSet (matrixPiece k) := by
     intro k
-    exact ((hP k).prod (measurableSet_matrixSchurSortedUpperDomain n)).image_of_continuousOn_injOn
+    exact ((hangularPiece_measurable k).prod (measurableSet_matrixSchurSortedUpperDomain n)).image_of_continuousOn_injOn
       (@matrixSchurAtlasChart_continuous n (C k)).continuousOn
-      (@matrixSchurAtlasChart_injOn n (C k) (P k ×ˢ matrixSchurSortedUpperDomain n) (hi k))
-  have hcover : (⋃ k, S k) =ᵐ[volume] (Set.univ : Set (Matrix (Fin n) (Fin n) ℂ)) := by
+      (@matrixSchurAtlasChart_injOn n (C k) (angularPiece k ×ˢ matrixSchurSortedUpperDomain n) (hi k))
+  have hcover_ae : (⋃ k, matrixPiece k) =ᵐ[volume] (Set.univ : Set (Matrix (Fin n) (Fin n) ℂ)) := by
     filter_upwards [matrixVolume_charpoly_separable_ae n] with G hG
     obtain ⟨k, p, hp, he⟩ := matrixSchurAtlas_partition_cover V C hC G hG
-    change (Matrix.of G ∈ ⋃ k, S k) = True
+    change (Matrix.of G ∈ ⋃ k, matrixPiece k) = True
     apply propext
     exact iff_true_intro (Set.mem_iUnion.mpr ⟨k, ⟨p, hp, he.symm⟩⟩)
-  have hc := setLIntegral_congr hcover (f := g)
+  have hc := setLIntegral_congr hcover_ae (f := g)
   rw [setLIntegral_univ] at hc
-  rw [← hc, lintegral_iUnion hS (matrixSchurAtlas_partition_pairwise_disjoint V C)]
-  have ht : (∑' k, ∫⁻ A in S k, g A) =
-      ∑' k, (∫⁻ x in P k, ENNReal.ofReal (matrixSchurAngularDensity n x)) *
+  rw [← hc, lintegral_iUnion hmatrixPiece_measurable (matrixSchurAtlas_partition_pairwise_disjoint V C)]
+  have ht : (∑' k, ∫⁻ A in matrixPiece k, g A) =
+      ∑' k, (∫⁻ x in angularPiece k, ENNReal.ofReal (matrixSchurAngularDensity n x)) *
         ∫⁻ y in matrixSchurSortedUpperDomain n,
           ENNReal.ofReal (vandermondeWeight (fun i => schurUpperCombination y i i)) *
             g (schurUpperCombination y) := by
     apply tsum_congr
     intro k
-    exact matrixSchurAtlas_product_integral (C k) (P k) (hP k) (hi k) g hg hInv
+    exact matrixSchurAtlas_product_integral (C k) (angularPiece k) (hangularPiece_measurable k) (hi k) g hg hInv
   rw [ht, ENNReal.tsum_mul_right]
 
 

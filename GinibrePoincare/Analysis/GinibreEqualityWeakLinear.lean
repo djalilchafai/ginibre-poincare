@@ -19,13 +19,13 @@ def ginibreFullWeakEqualitySpace (n : ℕ) (hn : 0 < n) : Submodule ℝ (ginibre
     intro p r hp hr q
     change (1 / (n : ℝ)) * inner ℝ (p.val.2+r.val.2) q.val.2 =
       2 * inner ℝ (ginibreFullCenter n hn (p.val.1+r.val.1)) (ginibreFullCenter n hn q.val.1)
-    rw [map_add,inner_add_left,inner_add_left]
-    linarith [hp q,hr q]
+    rw [map_add, inner_add_left, inner_add_left]
+    linarith [hp q, hr q]
   smul_mem' := by
     intro c p hp q
     change (1 / (n : ℝ)) * inner ℝ (c • p.val.2) q.val.2 =
       2 * inner ℝ (ginibreFullCenter n hn (c • p.val.1)) (ginibreFullCenter n hn q.val.1)
-    rw [map_smul,real_inner_smul_left,real_inner_smul_left]
+    rw [map_smul, real_inner_smul_left, real_inner_smul_left]
     calc
       _ = c * ((1 / (n : ℝ)) * inner ℝ p.val.2 q.val.2) := by ring
       _ = c * (2 * inner ℝ (ginibreFullCenter n hn p.val.1) (ginibreFullCenter n hn q.val.1)) :=

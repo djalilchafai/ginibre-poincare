@@ -11,11 +11,11 @@ namespace GinibrePoincare
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1000000
-local instance (n : ℕ) (T : ℝ≥0) : MeasurableSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := borel _
-local instance (n : ℕ) (T : ℝ≥0) : BorelSpace C(Icc (0:ℝ) (T:ℝ),Configuration n) := ⟨rfl⟩
+local instance (n : ℕ) (T : ℝ≥0) : MeasurableSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := borel _
+local instance (n : ℕ) (T : ℝ≥0) : BorelSpace C(Icc (0 : ℝ) (T : ℝ), Configuration n) := ⟨rfl⟩
 
-local instance (n : ℕ) : MeasurableSpace C(ℝ,Configuration n) := borel _
-local instance (n : ℕ) : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
+local instance (n : ℕ) : MeasurableSpace C(ℝ, Configuration n) := borel _
+local instance (n : ℕ) : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
 
 /-- Exact pairing on the literal Ginibre-initial-law times Brownian product. -/
 theorem ginibreOriginalStochasticL2Operator_product_pairing {Ω : Type*} [MeasurableSpace Ω]
@@ -29,13 +29,13 @@ theorem ginibreOriginalStochasticL2Operator_product_pairing {Ω : Type*} [Measur
   have hz₀ := (ginibreCollisionFreeDefault n).property
   rw [ginibreOriginalStochasticL2Operator_pairing,
     ginibreOriginalEquilibriumPathLaw_product hn α P B hB T z₀ hz₀]
-  have hm : Measurable (fun x : C(Icc (0:ℝ) (T:ℝ),Configuration n) =>
-      f (x ⟨0,⟨le_rfl,T.property⟩⟩)*g (x ⟨T,⟨T.property,le_rfl⟩⟩)) :=
+  have hm : Measurable (fun x : C(Icc (0 : ℝ) (T : ℝ), Configuration n) =>
+      f (x ⟨0, ⟨le_rfl, T.property⟩⟩)*g (x ⟨T, ⟨T.property, le_rfl⟩⟩)) :=
     ((Lp.stronglyMeasurable f).measurable.comp (continuous_eval_const _).measurable).mul
       ((Lp.stronglyMeasurable g).measurable.comp (continuous_eval_const _).measurable)
   have hp : Measurable (fun p : Configuration n × Ω =>
     (ginibreEquilibriumPath α z₀ hz₀ B p).comp
-      (⟨Subtype.val,continuous_subtype_val⟩ : C(Icc (0:ℝ) (T:ℝ),ℝ))) :=
+      (⟨Subtype.val, continuous_subtype_val⟩ : C(Icc (0 : ℝ) (T : ℝ), ℝ))) :=
     (ContinuousMap.continuous_precomp _).measurable.comp
       (ginibreEquilibriumPath_measurable hn α z₀ hz₀ B P hB)
   rw [integral_map hp.aemeasurable hm.aestronglyMeasurable]
@@ -43,13 +43,13 @@ theorem ginibreOriginalStochasticL2Operator_product_pairing {Ω : Type*} [Measur
   have hCF : ∀ᵐ p : Configuration n × Ω ∂(ginibreMeasure n).prod P, CollisionFree p.1 := by
     apply (Measure.ae_prod_iff_ae_ae ((isOpen_collisionFree n).measurableSet.preimage measurable_fst)).mpr
     exact (ginibre_ae_collisionFree n hn).mono fun z hz => Eventually.of_forall fun _ => hz
-  filter_upwards [hCF,ginibre_equilibrium_path_eq_original hn α z₀ hz₀ B P hB hiB] with p hCF hE
+  filter_upwards [hCF, ginibre_equilibrium_path_eq_original hn α z₀ hz₀ B P hB hiB] with p hCF hE
   have h0 : ginibreEquilibriumPath α z₀ hz₀ B p 0=p.1 := by
-    have h := ginibreCanonicalJointHorizonPath_initial (α:ℝ) T
-      (ginibreFreeInitialVersion z₀ hz₀ p.1,ginibreBrownianFullContinuousNoise n B α p.2)
-    simpa [ginibreCanonicalJointHorizonPath,ginibreEquilibriumPath,ginibreFreeInitialVersion,hCF] using h
-  simp only [ContinuousMap.comp_apply,ContinuousMap.coe_mk]
-  rw [h0,hE (T:ℝ),Real.toNNReal_coe]
+    have h := ginibreCanonicalJointHorizonPath_initial (α : ℝ) T
+      (ginibreFreeInitialVersion z₀ hz₀ p.1, ginibreBrownianFullContinuousNoise n B α p.2)
+    simpa [ginibreCanonicalJointHorizonPath, ginibreEquilibriumPath, ginibreFreeInitialVersion, hCF] using h
+  simp only [ContinuousMap.comp_apply, ContinuousMap.coe_mk]
+  rw [h0, hE (T : ℝ), Real.toNNReal_coe]
 
 theorem ginibreBrownian_original_joint_aemeasurable {Ω : Type*} [MeasurableSpace Ω]
     {n : ℕ} (hn : 0<n) (α : ℝ≥0) (P : Measure Ω) [IsProbabilityMeasure P] [P.IsComplete]
@@ -64,7 +64,7 @@ theorem ginibreBrownian_original_joint_aemeasurable {Ω : Type*} [MeasurableSpac
     apply (Measure.ae_prod_iff_ae_ae ((isOpen_collisionFree n).measurableSet.preimage measurable_fst)).mpr
     exact (ginibre_ae_collisionFree n hn).mono fun z hz => Eventually.of_forall fun _ => hz
   filter_upwards [hCF] with p hp
-  simp only [Function.comp_apply,ginibreInitialCollisionNormalize_of_free p.1 hp,
+  simp only [Function.comp_apply, ginibreInitialCollisionNormalize_of_free p.1 hp,
     ginibreBrownianMaximalProcess]
 
 theorem ginibreOriginalStochasticL2Operator_representative_pairing {Ω : Type*} [MeasurableSpace Ω]

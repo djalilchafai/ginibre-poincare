@@ -6,6 +6,16 @@ public import GinibrePoincare.Analysis.GaussianEntireHilbertIdentification
 
 @[expose] public section
 
+/-! # Reconstructing an entire representative of the zero mode
+
+The representative is the holomorphic Hermite series with coefficients taken
+from the original Gaussian L² vector. `GaussianEntireHilbertIdentification`
+identifies this series with the zero-mode projection almost everywhere;
+`GaussianEntireDifferentiability` supplies genuine entire differentiability.
+The endpoint packages both facts in `IsGaussianEntireRepresentative`.
+-/
+
+
 open MeasureTheory
 namespace GinibrePoincare
 noncomputable section

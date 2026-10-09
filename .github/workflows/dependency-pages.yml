@@ -7,6 +7,8 @@ on:
       - 'formal-dependencies.html'
       - 'diagrams/**'
       - '*.md'
+      - 'docs/**'
+      - 'verification/**'
       - '.github/workflows/dependency-pages.yml'
   workflow_dispatch:
 
@@ -36,6 +38,8 @@ jobs:
           cp formal-dependencies.html _site/formal_dependencies.html
           cp diagrams/*.svg diagrams/*.dot diagrams/*.json _site/diagrams/
           cp *.md _site/
+          cp -r docs verification _site/
+          cp lean-source-counts.json subprojects.json _site/
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -31,7 +31,7 @@ theorem gueStrictChamber_convex (n : ℕ) : Convex ℝ (gueStrictChamber n) := b
     · exact add_pos_of_pos_of_nonneg (mul_pos h (sub_pos.mpr (hx i j hij))) hby
     · have hb' : 0<b := by linarith
       exact add_pos_of_nonneg_of_pos hax (mul_pos hb' (sub_pos.mpr (hy i j hij)))
-  simp only [PiLp.add_apply,PiLp.smul_apply,smul_eq_mul]
+  simp only [PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
   linarith
 
 /-- The ordered GUE density is n-strongly log-concave: subtracting the
@@ -42,7 +42,7 @@ theorem gueEnergy_strong_convexity (n : ℕ) :
       (fun x => ∑ p ∈ guePairs n, -2*Real.log (x p.2-x p.1)) := by
     refine ⟨gueStrictChamber_convex n,?_⟩
     intro x hx y hy a b ha hb hab
-    simp only [smul_eq_mul,Finset.mul_sum]
+    simp only [smul_eq_mul, Finset.mul_sum]
     rw [← Finset.sum_add_distrib]
     apply Finset.sum_le_sum
     intro p hp
@@ -52,7 +52,7 @@ theorem gueEnergy_strong_convexity (n : ℕ) :
     simp only [smul_eq_mul] at hlog
     have he : (a • x+b • y) p.2-(a • x+b • y) p.1 =
         a*(x p.2-x p.1)+b*(y p.2-y p.1) := by
-      simp only [PiLp.add_apply,PiLp.smul_apply,smul_eq_mul]
+      simp only [PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
       ring
     rw [he]
     nlinarith
@@ -75,7 +75,7 @@ theorem gueRawDensity_eq_exp_energy (n : ℕ) (x : EuclideanSpace ℝ (Fin n))
     intro p hp
     ring
   unfold gueEnergy
-  rw [neg_add,hsum,Real.exp_add,Real.exp_sum]
+  rw [neg_add, hsum, Real.exp_add, Real.exp_sum]
   unfold gueRawDensity
   rw [EuclideanSpace.real_norm_sq_eq]
   congr 1
@@ -84,7 +84,7 @@ theorem gueRawDensity_eq_exp_energy (n : ℕ) (x : EuclideanSpace ℝ (Fin n))
   · apply Finset.prod_congr rfl
     intro p hp
     have hpos := sub_pos.mpr (hx _ _ (Finset.mem_filter.mp hp).2)
-    rw [Real.exp_add,Real.exp_log hpos]
+    rw [Real.exp_add, Real.exp_log hpos]
     ring
 
 #print axioms gueEnergy_strongConvexOn

@@ -11,11 +11,11 @@ set_option backward.isDefEq.respectTransparency false
 theorem dolbeaultWholeCylinder_replace {n : ℕ} (W : Fin n → Set ℂ)
     (j : Fin n) (p : Configuration n) (hp : p ∈ dolbeaultCylinder W Finset.univ)
     (z : ℂ) (hz : z ∈ W j) :
-    dolbeaultReplaceCoordinate j (p,z) ∈ dolbeaultCylinder W Finset.univ := by
+    dolbeaultReplaceCoordinate j (p, z) ∈ dolbeaultCylinder W Finset.univ := by
   intro k _
   by_cases hk : k = j
   · subst k; simpa [dolbeaultReplaceCoordinate_apply] using hz
-  · simpa only [dolbeaultReplaceCoordinate_apply,if_neg hk] using hp k (Finset.mem_univ k)
+  · simpa only [dolbeaultReplaceCoordinate_apply, if_neg hk] using hp k (Finset.mem_univ k)
 
 theorem truncatedDolbeaultBoundaryComposition_eq_on {n : ℕ} (R : ℝ)
     (W : Fin n → Set ℂ) (χ : Fin n → ℂ → ℂ)
@@ -46,7 +46,7 @@ theorem truncatedDolbeaultPrimitive_eq_on {n : ℕ} (R : ℝ)
   | cons j l ih =>
     change truncatedDolbeaultPrimitive R χ α l p + dolbeaultTruncatedCutoff j R (χ j) _ p =
       smoothDolbeaultPrimitive χ α l p + configurationCauchyGreenPotential j (χ j) _ p
-    rw [ih,dolbeaultTruncatedCutoff_eq j R _ _ p (hR j p hp)]
+    rw [ih, dolbeaultTruncatedCutoff_eq j R _ _ p (hR j p hp)]
     congr 1
     apply configurationCauchyGreenPotential_congr_on_support
     intro z hz

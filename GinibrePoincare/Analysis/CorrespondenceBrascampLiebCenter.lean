@@ -32,11 +32,11 @@ variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
     memLp_one_iff_integrable.mp (hg.mono_exponent (by norm_num))
   have hm : (correspondenceBrascampLiebMeasure W).real Set.univ =
       ∫ x, bakryEmeryGibbsWeight W x := by
-    rw [Measure.real,correspondenceBrascampLieb_mass W hi,
+    rw [Measure.real, correspondenceBrascampLieb_mass W hi,
       ENNReal.toReal_ofReal (correspondenceBrascampLieb_positive_mass W hi).le]
   unfold correspondenceBrascampLiebCenter
-  rw [integral_sub hig (integrable_const _),integral_const,hm]
-  simp only [smul_eq_mul,correspondenceBrascampLiebMean]
+  rw [integral_sub hig (integrable_const _), integral_const, hm]
+  simp only [smul_eq_mul, correspondenceBrascampLiebMean]
   field_simp [(correspondenceBrascampLieb_positive_mass W hi).ne']
   ring
 

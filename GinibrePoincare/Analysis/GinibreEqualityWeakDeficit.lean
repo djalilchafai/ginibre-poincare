@@ -5,6 +5,17 @@ public import GinibrePoincare.Analysis.GinibreEqualityWeakHolomorphic
 
 @[expose] public section
 
+/-! # Passing the Hermite deficit to the full weak domain
+
+Approximate a symmetric distributional value-gradient pair by smooth
+collision-free core pairs. Variance and holomorphic projection norms are
+continuous in the value, so the core Pythagorean and zero-mode identities pass
+to the limit. The lowering/energy results identify the weighted positive modes;
+the scalar series identity then gives the first deficit without a polynomial
+or smoothness hypothesis. This module supplies the weak-domain input to the
+subsequent generator-domain square completion.
+-/
+
 noncomputable section
 namespace GinibrePoincare
 open MeasureTheory Filter ComplexHermite
@@ -39,10 +50,10 @@ lemma ginibreFullCenteredValue_norm_sq {n : ℕ} (hn : 0 < n) (u : GinibreFullVa
 /-- Continuous holomorphic/remainder geometry extends to the actual full weak domain. -/
 theorem ginibreFullWeak_holomorphic_geometry {n : ℕ} (hn : 0 < n)
     (u : GinibreFullValueL2 n) (g : GinibreFullGradientL2 n)
-    (hu : IsGinibreDistributionalGradient n u g) (hs : IsGinibreSymmetricWeakPair (u,g)) :
+    (hu : IsGinibreDistributionalGradient n u g) (hs : IsGinibreSymmetricWeakPair (u, g)) :
     ginibreL2Variance n hn u = 2 * ‖ginibreFullHolomorphicPart n hn u‖ ^ 2 +
       ‖ginibreFullHolomorphicRemainder n hn u‖ ^ 2 := by
-  obtain ⟨q,hq,hlim⟩ := ginibreSymmetricWeakPair_exists_core_sequence hn u g hu hs
+  obtain ⟨q, hq, hlim⟩ := ginibreSymmetricWeakPair_exists_core_sequence hn u g hu hs
   let L := fun p : GinibreFullValueL2 n × GinibreFullGradientL2 n => ginibreL2Variance n hn p.1
   let R := fun p : GinibreFullValueL2 n × GinibreFullGradientL2 n =>
     2 * ‖ginibreFullHolomorphicPart n hn p.1‖ ^ 2 + ‖ginibreFullHolomorphicRemainder n hn p.1‖ ^ 2
@@ -53,22 +64,22 @@ theorem ginibreFullWeak_holomorphic_geometry {n : ℕ} (hn : 0 < n)
   have hc : IsClosed {p | L p = R p} := isClosed_eq hL hR
   have hmem : ∀ m, q m ∈ {p | L p = R p} := by
     intro m
-    obtain ⟨f,hf,hv,hg⟩ := hq m
+    obtain ⟨f, hf, hv, hg⟩ := hq m
     have he := (centeredHolomorphicRemainderGeometry hn f hf).2.2.2
     have hval := ginibreFullCenteredValue_core hn f hf (q m).1 hv
     change ginibreL2Variance n hn (q m).1 = _
     rw [← ginibreFullCenteredValue_norm_sq, hval, norm_sq_centeredObservableL2]
-    simpa only [R, ginibreFullHolomorphicPart,ginibreFullHolomorphicRemainder,hval] using he
-  have htarget : (u,g) ∈ {p | L p = R p} := hc.mem_of_tendsto hlim (Eventually.of_forall hmem)
+    simpa only [R, ginibreFullHolomorphicPart, ginibreFullHolomorphicRemainder, hval] using he
+  have htarget : (u, g) ∈ {p | L p = R p} := hc.mem_of_tendsto hlim (Eventually.of_forall hmem)
   exact htarget
 
 /-- The actual Gaussian zero mode has precisely the holomorphic projection norm. -/
 theorem ginibreFullWeak_zero_mode_norm {n : ℕ} (hn : 0 < n)
     (u : GinibreFullValueL2 n) (g : GinibreFullGradientL2 n)
-    (hu : IsGinibreDistributionalGradient n u g) (hs : IsGinibreSymmetricWeakPair (u,g)) :
+    (hu : IsGinibreDistributionalGradient n u g) (hs : IsGinibreSymmetricWeakPair (u, g)) :
     ‖gaussianHermiteMode hn 0 (ginibreFullCenteredTransform n hn u)‖ ^ 2 =
       ‖ginibreFullHolomorphicPart n hn u‖ ^ 2 := by
-  obtain ⟨q,hq,hlim⟩ := ginibreSymmetricWeakPair_exists_core_sequence hn u g hu hs
+  obtain ⟨q, hq, hlim⟩ := ginibreSymmetricWeakPair_exists_core_sequence hn u g hu hs
   let L := fun p : GinibreFullValueL2 n × GinibreFullGradientL2 n =>
     ‖gaussianHermiteMode hn 0 (ginibreFullCenteredTransform n hn p.1)‖ ^ 2
   let R := fun p : GinibreFullValueL2 n × GinibreFullGradientL2 n =>
@@ -83,19 +94,19 @@ theorem ginibreFullWeak_zero_mode_norm {n : ℕ} (hn : 0 < n)
   have hc : IsClosed {p | L p = R p} := isClosed_eq hL hR
   have hmem : ∀ m, q m ∈ {p | L p = R p} := by
     intro m
-    obtain ⟨f,hf,hv,hg⟩ := hq m
+    obtain ⟨f, hf, hv, hg⟩ := hq m
     change ‖gaussianHermiteMode hn 0 (ginibreFullCenteredTransform n hn (q m).1)‖ ^ 2 = _
     rw [ginibreFullCenteredTransform_core hn f hf _ hv]
-    simpa only [R,ginibreFullHolomorphicPart,ginibreFullCenteredValue_core hn f hf _ hv] using
+    simpa only [R, ginibreFullHolomorphicPart, ginibreFullCenteredValue_core hn f hf _ hv] using
       concreteZeroMode_norm_sq_eq_holomorphicProjection hn f hf
-  have htarget : (u,g) ∈ {p | L p = R p} := hc.mem_of_tendsto hlim (Eventually.of_forall hmem)
+  have htarget : (u, g) ∈ {p | L p = R p} := hc.mem_of_tendsto hlim (Eventually.of_forall hmem)
   exact htarget
 
 /-- The exact first Poincaré deficit identity on the entire actual symmetric
 ordinary weak domain, including convergence of the weighted Hermite tail. -/
 theorem ginibreFullWeak_first_deficit_identity {n : ℕ} (hn : 0 < n)
     (u : GinibreFullValueL2 n) (g : GinibreFullGradientL2 n)
-    (hu : IsGinibreDistributionalGradient n u g) (hs : IsGinibreSymmetricWeakPair (u,g)) :
+    (hu : IsGinibreDistributionalGradient n u g) (hs : IsGinibreSymmetricWeakPair (u, g)) :
     Summable (fun k : ℕ => (k : ℝ) *
       positiveHermiteModeMass hn (ginibreFullCenteredTransform n hn u) k) ∧
     ginibreWeakEnergy n g - 2 * ginibreL2Variance n hn u =
@@ -112,7 +123,7 @@ theorem ginibreFullWeak_first_deficit_identity {n : ℕ} (hn : 0 < n)
     ring
   have henergy : ginibreWeakEnergy n g = 4 * modeEnergy a := by
     unfold modeEnergy
-    simp only [a,Nat.cast_add,Nat.cast_one]
+    simp only [a, Nat.cast_add, Nat.cast_one]
     rw [he.tsum_eq]
     ring
   have hp : ginibreL2Variance n hn u =
@@ -122,16 +133,16 @@ theorem ginibreFullWeak_first_deficit_identity {n : ℕ} (hn : 0 < n)
     have hnorm : ‖ginibreFullCenteredTransform n hn u‖ =
         ‖ginibreFullComplexOfReal n (ginibreFullCenter n hn u)‖ :=
       (normalizedVandermondeL2 n hn).norm_map _
-    rw [hnorm,ginibreFullCenteredValue_norm_sq,
+    rw [hnorm, ginibreFullCenteredValue_norm_sq,
       ginibreFullWeak_zero_mode_norm hn u g hu hs] at hp
     exact hp
-  exact ⟨ht,infinite_deficit_identity a ha ht _ _ _ _ hp
+  exact ⟨ht, infinite_deficit_identity a ha ht _ _ _ _ hp
     (ginibreFullWeak_holomorphic_geometry hn u g hu hs) henergy⟩
 
 /-- Exhaustive spectral equality criterion on the actual full weak domain. -/
 theorem ginibreEquality_full_weak_spectral_iff {n : ℕ} (hn : 0 < n)
     (u : GinibreFullValueL2 n) (g : GinibreFullGradientL2 n)
-    (hu : IsGinibreDistributionalGradient n u g) (hs : IsGinibreSymmetricWeakPair (u,g)) :
+    (hu : IsGinibreDistributionalGradient n u g) (hs : IsGinibreSymmetricWeakPair (u, g)) :
     ginibreWeakEnergy n g = 2 * ginibreL2Variance n hn u ↔
       ginibreFullHolomorphicRemainder n hn u = 0 ∧
         ∀ k : ℕ, 0 < k → ginibreFullHigherMode n hn k u = 0 := by
@@ -139,16 +150,16 @@ theorem ginibreEquality_full_weak_spectral_iff {n : ℕ} (hn : 0 < n)
   · intro he
     exact ⟨ginibreEquality_weak_holomorphic_remainder_zero hn u g hu hs he,
       ginibreEquality_weak_higher_modes_vanish hn u g hu hs he⟩
-  · rintro ⟨hr,hm⟩
-    obtain ⟨ht,hi⟩ := ginibreFullWeak_first_deficit_identity hn u g hu hs
+  · rintro ⟨hr, hm⟩
+    obtain ⟨ht, hi⟩ := ginibreFullWeak_first_deficit_identity hn u g hu hs
     have hz : modeTail (positiveHermiteModeMass hn (ginibreFullCenteredTransform n hn u)) = 0 := by
       apply (ginibreEquality_modeTail_eq_zero_iff _ (fun k => sq_nonneg _) ht).mpr
       intro k hk
       have hmode := hm k hk
       change hermiteAntiDegreeProjection n hn (k+1) (ginibreFullCenteredTransform n hn u) = 0 at hmode
       simp only [
-        gaussianHermiteMode_eq_antiDegreeProjection,hmode,norm_zero,zero_pow (by decide : 2≠0)]
-    rw [hr,norm_zero,zero_pow (by decide : 2≠0),hz] at hi
+        gaussianHermiteMode_eq_antiDegreeProjection, hmode, norm_zero, zero_pow (by decide : 2≠0)]
+    rw [hr, norm_zero, zero_pow (by decide : 2≠0), hz] at hi
     linarith
 
 end GinibrePoincare

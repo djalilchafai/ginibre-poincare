@@ -10,7 +10,7 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 
 def ordinaryDolbeaultMollify {n : ℕ} (φ U : Configuration n → ℂ) : Configuration n → ℂ :=
-  φ ⋆[ContinuousLinearMap.mul ℝ ℂ,volume] U
+  φ ⋆[ContinuousLinearMap.mul ℝ ℂ, volume] U
 
 theorem ordinaryDolbeaultMollify_contDiff {n : ℕ} (φ U : Configuration n → ℂ)
     (hφ : ContDiff ℝ ∞ φ) (hc : HasCompactSupport φ) (hu : LocallyIntegrable U volume) :
@@ -25,12 +25,12 @@ theorem ordinaryDolbeaultMollify_directional {n : ℕ} (φ U : Configuration n �
   have hd := hc.hasFDerivAt_convolution_left (ContinuousLinearMap.mul ℝ ℂ)
     (hφ.of_le (by simp)) hu x
   rw [show ordinaryDolbeaultMollify φ U =
-    φ ⋆[ContinuousLinearMap.mul ℝ ℂ,volume] U from rfl,hd.fderiv,convolution_eq_swap]
+    φ ⋆[ContinuousLinearMap.mul ℝ ℂ, volume] U from rfl, hd.fderiv, convolution_eq_swap]
   have hi := ((hc.fderiv ℝ).convolutionExists_left
     ((ContinuousLinearMap.mul ℝ ℂ).precompL (Configuration n))
       (hφ.continuous_fderiv (by simp)) hu x).integrable_swap
   rw [ContinuousLinearMap.integral_apply hi v]
-  simp only [ContinuousLinearMap.precompL_apply,ContinuousLinearMap.mul_apply']
+  simp only [ContinuousLinearMap.precompL_apply, ContinuousLinearMap.mul_apply']
 
 theorem ordinaryDolbeaultMollify_dbar {n : ℕ} (φ U : Configuration n → ℂ)
     (hφ : ContDiff ℝ ∞ φ) (hc : HasCompactSupport φ) (hu : LocallyIntegrable U volume)
@@ -44,14 +44,14 @@ theorem ordinaryDolbeaultMollify_dbar {n : ℕ} (φ U : Configuration n → ℂ)
       ((hφ.continuous_fderiv (by simp)).clm_apply continuous_const).comp
         (continuous_const.sub continuous_id)
     simpa only [smul_eq_mul] using hu.integrable_smul_left_of_hasCompactSupport hd hdc
-  simp only [dbarComponent,ordinaryDolbeaultMollify_directional φ U hφ hc hu]
+  simp only [dbarComponent, ordinaryDolbeaultMollify_directional φ U hφ hc hu]
   have he : (fun y => (1/2 : ℂ)*(fderiv ℝ φ (x-y) (realCoordinateDirection j) +
       Complex.I*fderiv ℝ φ (x-y) (imaginaryCoordinateDirection j)) * U y) =
       (fun y => (1/2 : ℂ)*(fderiv ℝ φ (x-y) (realCoordinateDirection j) * U y +
         Complex.I*(fderiv ℝ φ (x-y) (imaginaryCoordinateDirection j)*U y))) := by
     funext y
     ring
-  rw [he,integral_const_mul,integral_add (hi _) ((hi _).const_mul Complex.I),integral_const_mul]
+  rw [he, integral_const_mul, integral_add (hi _) ((hi _).const_mul Complex.I), integral_const_mul]
 
 /-- Ordinary distributional closedness passes to the actual smooth
 convolution at every point whose translated kernel support stays in Ω. -/
@@ -71,15 +71,15 @@ theorem ordinaryDolbeaultMollify_closed_on {n : ℕ}
   have hd (y : Configuration n) : fderiv ℝ θ y = -fderiv ℝ φ (x-y) := by
     have hh := (hφ.differentiable (by simp) (x-y)).hasFDerivAt.comp y
       ((hasFDerivAt_const x y).sub (hasFDerivAt_id y))
-    rw [show θ = φ ∘ (fun y : Configuration n => x-y) from rfl,hh.fderiv]
+    rw [show θ = φ ∘ (fun y : Configuration n => x-y) from rfl, hh.fderiv]
     ext v
     simp
   have hdb (l : Fin n) (y : Configuration n) :
       dbarComponent θ l y = -dbarComponent φ l (x-y) := by
-    simp only [dbarComponent,hd,ContinuousLinearMap.neg_apply]
+    simp only [dbarComponent, hd, ContinuousLinearMap.neg_apply]
     ring
   have he := hclosed θ hθ hcθ hx j k
-  simp_rw [hdb,neg_mul,integral_neg] at he
+  simp_rw [hdb, neg_mul, integral_neg] at he
   rw [ordinaryDolbeaultMollify_dbar φ (α j) hφ hc (hα j),
     ordinaryDolbeaultMollify_dbar φ (α k) hφ hc (hα k)]
   exact neg_injective he

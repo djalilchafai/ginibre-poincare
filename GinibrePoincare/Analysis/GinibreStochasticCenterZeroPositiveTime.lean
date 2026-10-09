@@ -21,7 +21,7 @@ theorem ginibreOUVariance_pos {rate t : ℝ≥0} (hr : 0 < rate) (ht : 0 < t) :
   have htR : 0 < (t : ℝ) := ht
   have hd : ginibreOUDecay rate t < 1 := Real.exp_lt_one_iff.mpr (by nlinarith)
   have hdp := ginibreOUDecay_nonneg rate t
-  rw [← NNReal.coe_pos,ginibreOUVariance_coe]
+  rw [← NNReal.coe_pos, ginibreOUVariance_coe]
   nlinarith
 
 theorem ginibreBrownian_center_planar_hasLaw
@@ -70,12 +70,12 @@ theorem ginibreBrownian_center_positive_time_nonzero
   have ha : ∀ᵐ x ∂ginibreOUTransition (ginibreCenterOURate n α) t (coordinateSum z).re, x ≠ 0 := by
     exact ae_iff.mpr (by simp)
   have hs := (hl.ae_iff (measurableSet_setOfPred.mp ((measurableSet_singleton (0 : ℝ)).compl))).mpr ha
-  filter_upwards [hs,ginibreBrownian_center_real_OU hn α z hz B P hB hind] with ω hs he
+  filter_upwards [hs, ginibreBrownian_center_real_OU hn α z hz B P hB hind] with ω hs he
   intro hzero
   have hz0 : coordinateSum (ginibreBrownianMaximalProcess n α z B t ω)=0 :=
     Complex.normSq_eq_zero.mp hzero
   apply hs
-  rw [← he t,hz0]
+  rw [← he t, hz0]
   rfl
 
 #print axioms ginibreBrownian_center_planar_hasLaw

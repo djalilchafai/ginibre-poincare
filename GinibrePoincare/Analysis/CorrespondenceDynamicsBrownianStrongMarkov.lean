@@ -23,7 +23,7 @@ theorem correspondenceNoiseShift_countable_actual {Ω : Type*} [MeasurableSpace 
         ginibreBrownianFullContinuousNoise n (brownianFamilyShift B s) α ω :=
     ae_all_iff.mpr (fun s => correspondenceNoiseShift_actual n B P hB hind α s)
   filter_upwards [hh] with ω hω
-  exact hω ⟨τ ω,mem_range_self ω⟩
+  exact hω ⟨τ ω, mem_range_self ω⟩
 
 /-- Genuine Brownian strong Markov noise law at every finite stopping time,
 conditionally on every event in the stopped sigma algebra. -/
@@ -58,8 +58,8 @@ theorem correspondenceBrownian_stopping_fresh_noise {Ω : Type*} [MeasurableSpac
     (correspondenceNoiseShift_continuous n).measurable.comp (htm.prodMk hN)
   have hc (m : ℕ) : (range (q m)).Countable := by
     apply (Set.countable_range (fun k : ℕ => (k : ℝ≥0)/((m+1 : ℕ) : ℝ≥0))).mono
-    rintro t ⟨ω,rfl⟩
-    exact ⟨Nat.ceil (((m+1 : ℕ) : ℝ≥0)*τ ω),rfl⟩
+    rintro t ⟨ω, rfl⟩
+    exact ⟨Nat.ceil (((m+1 : ℕ) : ℝ≥0)*τ ω), rfl⟩
   have hle (m : ℕ) : (fun ω => (τ ω : WithTop ℝ≥0)) ≤ fun ω => (q m ω : WithTop ℝ≥0) := by
     intro ω
     apply WithTop.coe_le_coe.mpr
@@ -67,15 +67,15 @@ theorem correspondenceBrownian_stopping_fresh_noise {Ω : Type*} [MeasurableSpac
     simpa only [mul_comm] using (Nat.le_ceil (((m+1 : ℕ) : ℝ≥0)*τ ω))
   have hlaw (m : ℕ) : (P.restrict A).map (X m) = (P A) • P.map N := by
     ext C hC
-    rw [Measure.map_apply (hX m) hC,Measure.restrict_apply ((hX m) hC),Measure.smul_apply]
+    rw [Measure.map_apply (hX m) hC, Measure.restrict_apply ((hX m) hC), Measure.smul_apply]
     have he := correspondenceNoiseShift_countable_actual n B P hB hind α (q m) (hc m)
     have he' : P ((X m) ⁻¹' C ∩ A) =
         P ({ω | ginibreBrownianFullContinuousNoise n (brownianFamilyShift B (q m ω)) α ω ∈ C} ∩ A) := by
       apply measure_congr
       filter_upwards [he] with ω hω
-      simp only [mem_inter_iff,mem_preimage,mem_setOf_eq,X,N,hω]
+      simp only [mem_inter_iff, mem_preimage, mem_setOf_eq, X, N, hω]
     rw [he']
-    simpa only [N,smul_eq_mul,mul_comm] using correspondenceBrownian_countable_stopping_fresh_noise n B P hB hind α
+    simpa only [N, smul_eq_mul, mul_comm] using correspondenceBrownian_countable_stopping_fresh_noise n B P hB hind α
       (q m) (range (q m)) (hc m) (fun ω => mem_range_self ω) (hq m) A
       (hτ.measurableSpace_mono (hq m) (hle m) A hA) C hC
   have hl : ∀ᵐ ω ∂P.restrict A, Tendsto (fun m => X m ω) atTop (𝓝 (x ω)) := by

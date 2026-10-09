@@ -17,13 +17,13 @@ theorem bakryEmeryEuclideanLift_boundedLipschitz_square_lsi
     (f : EuclideanSpace ℝ (Fin d × Fin 2) → ℝ)
     {K : ℝ≥0} (hf : LipschitzWith K f) (C : ℝ) (hC : ∀ x, ‖f x‖ ≤ C) :
     squareEntropy (bakryEmeryNormalizedGibbs volume (bakryEmeryEuclideanLiftPotential n V)) f ≤
-      (2/((n:ℝ)*ρ)) * ∫ x, ‖gradient f x‖^2 ∂bakryEmeryNormalizedGibbs volume
+      (2/((n : ℝ)*ρ)) * ∫ x, ‖gradient f x‖^2 ∂bakryEmeryNormalizedGibbs volume
         (bakryEmeryEuclideanLiftPotential n V) := by
   let E := EuclideanSpace ℝ (Fin d × Fin 2)
   let μ := bakryEmeryNormalizedGibbs (volume : Measure E) (bakryEmeryEuclideanLiftPotential n V)
   letI : IsProbabilityMeasure μ := bakryEmeryEuclideanLift_gibbs_probability n hn ρ hρ V hV.continuous hrot hc
   exact bakryEmery_boundedLipschitz_gradient_lsi_of_compact E volume μ
-    (bakryEmeryEuclideanLift_gibbs_absolutelyContinuous n V) (2/((n:ℝ)*ρ))
+    (bakryEmeryEuclideanLift_gibbs_absolutelyContinuous n V) (2/((n : ℝ)*ρ))
     (fun g hg hgs => bakryEmeryEuclideanLift_square_lsi n d hn hd ρ hρ V hV hrot hc g hg hgs)
     f hf C hC
 

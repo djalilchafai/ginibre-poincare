@@ -20,7 +20,7 @@ set_option backward.isDefEq.respectTransparency false
  def ginibreConfigurationBrownianNoise {Ω : Type*} (n : ℕ)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (α : ℝ) (ω : Ω) (t : ℝ) : Configuration n :=
   fun j => Real.sqrt (2*α/(n : ℝ)^2) •
-    ((B (j,0) t.toNNReal ω : ℂ)+Complex.I*(B (j,1) t.toNNReal ω : ℂ))
+    ((B (j, 0) t.toNNReal ω : ℂ)+Complex.I*(B (j, 1) t.toNNReal ω : ℂ))
 
  theorem ginibreConfigurationBrownianNoise_actual {Ω : Type*} [MeasurableSpace Ω]
     (n : ℕ) (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (P : Measure Ω)
@@ -35,9 +35,9 @@ set_option backward.isDefEq.respectTransparency false
   constructor
   · apply continuous_pi
     intro j
-    exact ((Complex.continuous_ofReal.comp ((hc (j,0)).comp continuous_real_toNNReal)).add
+    exact ((Complex.continuous_ofReal.comp ((hc (j, 0)).comp continuous_real_toNNReal)).add
       (continuous_const.mul (Complex.continuous_ofReal.comp
-        ((hc (j,1)).comp continuous_real_toNNReal)))).const_smul (Real.sqrt (2*α/(n : ℝ)^2))
+        ((hc (j, 1)).comp continuous_real_toNNReal)))).const_smul (Real.sqrt (2*α/(n : ℝ)^2))
   · ext j
     simp [ginibreConfigurationBrownianNoise, hz]
 

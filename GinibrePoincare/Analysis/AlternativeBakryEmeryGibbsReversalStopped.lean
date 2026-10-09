@@ -50,14 +50,14 @@ theorem bakryEmeryGibbsOU_reference_compact_stopped_exists {Ω : Type*} [mAmbien
   have hθT (ω : Ω) : θ ω ≤ T := hittingBtwn_le ω
   have hθpos (ω : Ω) : 0 < θ ω :=
     drivenContinuous_closed_hitting_pos V _ (isClosed_le continuous_const continuous_norm) T hT ω
-      (hVC ω) (by simpa [V,U,ginibreHamiltonianOUReferenceProcess_zero] using not_le_of_gt hr)
+      (hVC ω) (by simpa [V, U, ginibreHamiltonianOUReferenceProcess_zero] using not_le_of_gt hr)
   let Y : ℝ≥0 → Ω → Configuration n := fun t ω => U (min t (θ ω)) ω
   have hYC (ω : Ω) : Continuous (fun t => Y t ω) := (hUC ω).comp (continuous_id.min continuous_const)
   have hYR (t : ℝ≥0) (ω : Ω) : Y t ω ∈ K := by
     apply Metric.mem_closedBall.mpr
     rw [dist_eq_norm]
     exact drivenContinuous_norm_le_until_hitting V r T ω (hVC ω)
-      (by simp [V,U,ginibreHamiltonianOUReferenceProcess_zero,hr.le]) _ (min_le_right t (θ ω))
+      (by simp [V, U, ginibreHamiltonianOUReferenceProcess_zero, hr.le]) _ (min_le_right t (θ ω))
   have hYA : StronglyAdapted (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)) Y := by
     let F := ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)
     intro s
@@ -68,16 +68,16 @@ theorem bakryEmeryGibbsOU_reference_compact_stopped_exists {Ω : Type*} [mAmbien
     rw [tendsto_pi_nhds]
     intro ω
     exact (hUC ω).continuousAt.tendsto.comp (tendsto_const_nhds.min (stoppingUpperGrid_tendsto (θ ω)))
-  refine ⟨K,rfl,isCompact_closedBall z r,Y,hYC,hYR,?_,hYA,θ,hStop,
-    fun ω => ⟨hθpos ω,hθT ω⟩,fun t ω => rfl,rfl,?_⟩
+  refine ⟨K, rfl, isCompact_closedBall z r, Y, hYC, hYR,?_, hYA, θ, hStop,
+    fun ω => ⟨hθpos ω, hθT ω⟩, fun t ω => rfl, rfl,?_⟩
   · intro ω
-    simp [Y,U,ginibreHamiltonianOUReferenceProcess_zero]
+    simp [Y, U, ginibreHamiltonianOUReferenceProcess_zero]
   · filter_upwards [ginibreHamiltonianOUReferenceProcess_original_equation n α z B P hB] with ω hω
     intro t ht
     change U (min t (θ ω)) ω = _
     have huEq : U t ω = z+ginibreConfigurationBrownianNoise n B α ω t+
         ∫ s in (0 : ℝ)..t, (-2*α/(n : ℝ)) • U s.toNNReal ω := hω t
-    rw [min_eq_left ht,huEq]
+    rw [min_eq_left ht, huEq]
     congr 1
     apply intervalIntegral.integral_congr
     intro s hs
@@ -126,17 +126,17 @@ theorem bakryEmeryGibbsOU_relative_ito_exists {Ω : Type*} [MeasurableSpace Ω]
   have hα : (α : ℝ) = (n : ℝ)^2 := by simp [α]
   have hn0 : (n : ℝ) ≠ 0 := by exact_mod_cast hn.ne'
   have hcoef : -2*(α : ℝ)/(n : ℝ) = -2*(n : ℝ) := by rw [hα]; field_simp
-  obtain ⟨K,hKeq,hK,Y,hYC,hYR,hY0,hAdapt,θ,hStop,hθ,hStopped,hExit,hEq⟩ :=
+  obtain ⟨K, hKeq, hK, Y, hYC, hYR, hY0, hAdapt, θ, hStop, hθ, hStopped, hExit, hEq⟩ :=
     bakryEmeryGibbsOU_reference_compact_stopped_exists n B P hB α z r hr T hT
   let b : ℝ → Ω → Configuration n := fun s sample => (-2*(n : ℝ)) • Y s.toNNReal sample
   have hb (sample : Ω) : Continuous (fun s => b s sample) :=
     ((hYC sample).comp continuous_real_toNNReal).const_smul (-2*(n : ℝ))
-  obtain ⟨R,hR,hRB⟩ := hK.isBounded.exists_pos_norm_le
+  obtain ⟨R, hR, hRB⟩ := hK.isBounded.exists_pos_norm_le
   let M := |(-2*(n : ℝ))| * R
   have hM : 0 ≤ M := mul_nonneg (abs_nonneg _) hR.le
   have hbound : ∀ s ∈ Icc (0 : ℝ) T, ∀ sample, ‖b s sample‖ ≤ M := by
     intro s hs sample
-    rw [norm_smul,Real.norm_eq_abs]
+    rw [norm_smul, Real.norm_eq_abs]
     exact mul_le_mul_of_nonneg_left (hRB _ (hYR _ _)) (abs_nonneg _)
   have hS : ContDiff ℝ 2 (bakryEmeryGibbsRelativePotential W) :=
     hW.sub (contDiff_const.mul (contDiff_configurationNormSq.of_le (by simp)))
@@ -151,11 +151,11 @@ theorem bakryEmeryGibbsOU_relative_ito_exists {Ω : Type*} [MeasurableSpace Ω]
     intro t ht
     rw [hY0, hnz.2, sub_zero]
     simpa only [hcoef] using hs t ht
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hLimit,hIto⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hLimit, hIto⟩ :=
     ginibreCompactVolterra_continuous_ito_integral_exists n B P hB hind α Y hAdapt hYC
       (bakryEmeryGibbsRelativePotential W) univ K isOpen_univ hS.contDiffOn hK
       (subset_univ _) hYR T b hb M hM hbound θ hθm (fun sample => (hθ sample).2) hVol
-  refine ⟨Y,hYC,?_,hY0,hAdapt,θ,hStop,hθ,?_,?_,J,hJM,hJC,hJL,hJ0,hLimit,?_⟩
+  refine ⟨Y, hYC,?_, hY0, hAdapt, θ, hStop, hθ,?_,?_, J, hJM, hJC, hJL, hJ0, hLimit,?_⟩
   · simpa [hKeq] using hYR
   · simpa only [hα] using hStopped
   · simpa only [hα] using hExit
@@ -188,8 +188,8 @@ theorem bakryEmeryGibbsPotentialTilt_compact_bound (n : ℕ) (α : ℝ) (S : Con
   have hc : ContinuousOn (fun z => ∑ i, (bakryEmeryGibbsPotentialTilt n α S z i)^2) K :=
     continuousOn_finset_sum _ (fun i _ =>
       ((bakryEmeryGibbsPotentialTilt_continuous n α S hS i).continuousOn).pow 2)
-  obtain ⟨R,hR,hb⟩ := (hK.image_of_continuousOn hc).isBounded.exists_pos_norm_le
-  refine ⟨R+1,by linarith,?_⟩
+  obtain ⟨R, hR, hb⟩ := (hK.image_of_continuousOn hc).isBounded.exists_pos_norm_le
+  refine ⟨R+1, by linarith,?_⟩
   intro z hz
   have hh := hb _ (mem_image_of_mem _ hz)
   rw [Real.norm_eq_abs] at hh
@@ -201,14 +201,14 @@ theorem bakryEmeryGibbsPotentialTilt_energy (n : ℕ) (α : ℝ) (hα : 0 ≤ α
     (∑ i, (bakryEmeryGibbsPotentialTilt n α S z i)^2) =
       (α/(2*(n : ℝ)^2))*bakryEmeryGibbsConfigurationGradientSq S z := by
   unfold bakryEmeryGibbsPotentialTilt bakryEmeryGibbsConfigurationGradientSq
-  simp only [Fintype.sum_prod_type,Fin.sum_univ_two,ginibreCoordinateDirection,
+  simp only [Fintype.sum_prod_type, Fin.sum_univ_two, ginibreCoordinateDirection,
     if_pos rfl, if_neg (by decide : (1 : Fin 2) ≠ 0)]
   rw [Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro j hj
   have hs : (Real.sqrt (2*α/(n : ℝ)^2))^2 = 2*α/(n : ℝ)^2 :=
     Real.sq_sqrt (div_nonneg (by linarith) (sq_nonneg _))
-  simp only [mul_pow,neg_sq,div_pow,hs,ite_true]
+  simp only [mul_pow, neg_sq, div_pow, hs, ite_true]
   ring
 
 /-- The actual interaction drift tilt has genuine normalized coordinate
@@ -234,7 +234,7 @@ theorem bakryEmeryGibbsPotentialTilt_exponential_exists {Ω : Type*} [Measurable
         (fun i r ω => bakryEmeryGibbsPotentialTilt n α S (Y r ω) i) T (fun i => M i T)) P ∧
       (∫ ω, brownianVectorExponentialIntegralDensity
         (fun i r ω => bakryEmeryGibbsPotentialTilt n α S (Y r ω) i) T (fun i => M i T) ω ∂P)=1 := by
-  obtain ⟨C,hC,hb⟩ := bakryEmeryGibbsPotentialTilt_compact_bound n α S hS K hK
+  obtain ⟨C, hC, hb⟩ := bakryEmeryGibbsPotentialTilt_compact_bound n α S hS K hK
   have hF (i : Fin n × Fin 2) (r : ℝ≥0) :
       @Measurable Ω ℝ (ginibreBrownianAugmentedFiltration B P
         (fun i => (hB i).toIsPreBrownianReal) r) _
@@ -244,10 +244,10 @@ theorem bakryEmeryGibbsPotentialTilt_exponential_exists {Ω : Type*} [Measurable
       ContinuousOn (fun r => bakryEmeryGibbsPotentialTilt n α S (Y r ω) i) (Icc 0 T) :=
     ae_of_all P (fun ω => ((bakryEmeryGibbsPotentialTilt_continuous n α S hS i).comp
       (hYC ω)).continuousOn)
-  obtain ⟨M,hM,hDi,hD1,hLimit⟩ := brownianBoundedVector_exponential_integral_exists_normalized
+  obtain ⟨M, hM, hDi, hD1, hLimit⟩ := brownianBoundedVector_exponential_integral_exists_normalized
     B P hB hind (fun i r ω => bakryEmeryGibbsPotentialTilt n α S (Y r ω) i)
       hF C hC (fun r ω => hb _ (hRange r ω)) T hc
-  exact ⟨M,hM,hDi,hD1⟩
+  exact ⟨M, hM, hDi, hD1⟩
 
 theorem bakryEmeryGibbsPotentialTilt_leftSums {Ω : Type*} (n : ℕ) (S : Configuration n → ℝ)
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (α : ℝ)
@@ -259,7 +259,7 @@ theorem bakryEmeryGibbsPotentialTilt_leftSums {Ω : Type*} (n : ℕ) (S : Config
   unfold brownianUniformLeftSum bakryEmeryGibbsPotentialTilt
   have hc (a : ℝ) : -(Real.sqrt (2*α/(n : ℝ)^2)*a)/2 =
       -(Real.sqrt (2*α/(n : ℝ)^2)/2)*a := by ring
-  rw [hc,Finset.mul_sum]
+  rw [hc, Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro i hi
   rw [Finset.mul_sum]
@@ -286,7 +286,7 @@ theorem bakryEmeryGibbsPotentialTilt_integrals_eq_gradient {Ω : Type*} [Measura
         (fun r ω => bakryEmeryGibbsPotentialTilt n α S (Y r ω) i) t (k+1)) atTop (M i t)) :
     ∀ᵐ ω ∂P, ∀ t ≤ T, (∑ i, M i t ω) = -J t ω/2 := by
   classical
-  obtain ⟨C,hC,hb⟩ := bakryEmeryGibbsPotentialTilt_compact_bound n α S hS K hK
+  obtain ⟨C, hC, hb⟩ := bakryEmeryGibbsPotentialTilt_compact_bound n α S hS K hK
   let F := fun (i : Fin n × Fin 2) r ω => bakryEmeryGibbsPotentialTilt n α S (Y r ω) i
   have hF (i : Fin n × Fin 2) (r : ℝ≥0) :
       @Measurable Ω ℝ (ginibreBrownianAugmentedFiltration B P
@@ -362,7 +362,7 @@ theorem bakryEmeryGibbsPotentialTilt_girsanov_exists {Ω : Type*} [MeasurableSpa
       ∀ i, ∀ᵐ sample ∂Q, ContinuousOn
         (fun t : ℝ≥0 => B i t sample - B i 0 sample -
           ∫ s in (0 : ℝ)..(t : ℝ), F i (Real.toNNReal s) sample) (Icc 0 T) := by
-  obtain ⟨C,hC,hb⟩ := bakryEmeryGibbsPotentialTilt_compact_bound n α S hS K hK
+  obtain ⟨C, hC, hb⟩ := bakryEmeryGibbsPotentialTilt_compact_bound n α S hS K hK
   have hF (i : Fin n × Fin 2) (t : ℝ≥0) : @Measurable Ω ℝ
       (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal) t) _
       (fun sample => bakryEmeryGibbsPotentialTilt n α S (Y t sample) i) :=
@@ -430,19 +430,19 @@ theorem bakryEmeryGibbsOU_relative_action_density_exists {Ω : Type*} [Measurabl
   let α : ℝ≥0 := (n : ℝ≥0)^2
   have hα : (α : ℝ) = (n : ℝ)^2 := by simp [α]
   have hn0 : (n : ℝ) ≠ 0 := by exact_mod_cast hn.ne'
-  obtain ⟨Y,hYC,hYR,hY0,hY,θ,hStop,hθ,hStopped,hExit,J,hJM,hJC,hJL,hJ0,hLimit,hIto⟩ :=
+  obtain ⟨Y, hYC, hYR, hY0, hY, θ, hStop, hθ, hStopped, hExit, J, hJM, hJC, hJL, hJ0, hLimit, hIto⟩ :=
     bakryEmeryGibbsOU_relative_ito_exists hn W hW B P hB hind z r hr T hT
-  obtain ⟨M,hM,hDi,hD1,hLaw⟩ := bakryEmeryGibbsPotentialTilt_girsanov_exists
+  obtain ⟨M, hM, hDi, hD1, hLaw⟩ := bakryEmeryGibbsPotentialTilt_girsanov_exists
     n S hS B P hB hind α Y hY hYC (Metric.closedBall z r) (isCompact_closedBall _ _) hYR T hT
   have hSum := bakryEmeryGibbsPotentialTilt_integrals_eq_gradient n S hS B P hB hind α Y hY
     (Metric.closedBall z r) (isCompact_closedBall _ _) hYR T J hJC hLimit M
     (fun i => (hM i).2.1) (fun i => (hM i).2.2.2.2)
-  refine ⟨Y,hYC,hYR,hY0,hY,θ,hStop,hθ,hStopped,hExit,M,?_,?_,?_,?_,?_⟩
+  refine ⟨Y, hYC, hYR, hY0, hY, θ, hStop, hθ, hStopped, hExit, M,?_,?_,?_,?_,?_⟩
   · simpa only [hα] using hM
   · simpa only [hα] using hDi
   · simpa only [hα] using hD1
   · simpa only [hα] using hLaw.2.2.1
-  · filter_upwards [hSum,hIto] with sample hSumSample hItoSample
+  · filter_upwards [hSum, hIto] with sample hSumSample hItoSample
     intro t ht
     have hMt := hSumSample t (ht.trans (hθ sample).2)
     have hIt := hItoSample t ht
@@ -539,7 +539,7 @@ theorem bakryEmeryGibbsConfigurationTilt_eq_drift {n : ℕ} (hn : 0 < n)
   ext j
   apply Complex.ext
   · have ht := bakryEmeryGibbsPotentialTilt_noise_drift n ((n : ℝ)^2) (sq_nonneg _)
-      (bakryEmeryGibbsRelativePotential W) z (j,0)
+      (bakryEmeryGibbsRelativePotential W) z (j, 0)
     rw [he, neg_one_mul, hS] at ht
     simp only [ginibreCoordinateDirection, ite_true, realCoordinateDirection] at ht
     rw [fderiv_configurationNormSq_coordinate] at ht
@@ -547,7 +547,7 @@ theorem bakryEmeryGibbsConfigurationTilt_eq_drift {n : ℕ} (hn : 0 < n)
       bakryEmeryGibbsConfigurationDrift, realCoordinateDirection, Complex.smul_re,
       smul_eq_mul, Pi.sub_apply, Pi.smul_apply] <;> ring
   · have ht := bakryEmeryGibbsPotentialTilt_noise_drift n ((n : ℝ)^2) (sq_nonneg _)
-      (bakryEmeryGibbsRelativePotential W) z (j,1)
+      (bakryEmeryGibbsRelativePotential W) z (j, 1)
     rw [he, neg_one_mul, hS] at ht
     simp only [ginibreCoordinateDirection, if_neg (by decide : (1 : Fin 2) ≠ 0), imaginaryCoordinateDirection] at ht
     rw [fderiv_configurationNormSq_coordinate] at ht

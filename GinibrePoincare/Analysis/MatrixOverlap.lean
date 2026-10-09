@@ -13,6 +13,21 @@ public import Mathlib.Data.Complex.BigOperators
 The overlap convention is exactly `O j k = Tr (P k * (P j)ᴴ)`.
 These results are unconditional finite-dimensional algebra; they do not assert
 the Ginibre spectral pushforward or eigenvalue differentiability.
+
+
+# Projector Gram matrices and overlap energy
+
+Flatten the entries of each spectral projector into a column. The overlap matrix
+is the Gram matrix of these columns, which proves positive semidefiniteness.
+Its quadratic form is the Hilbert–Schmidt squared norm of the corresponding
+projector combination. The real matrix gradient energy is computed from that
+same combination, linking spectral derivatives to overlap weights.
+
+The remaining identities track permutation of labels, rescaling of eigenvectors,
+and rank-one projectors constructed from biorthogonal left and right eigenvectors.
+For orthonormal eigenvectors the Gram matrix reduces to the identity. These are
+finite matrix algebra results; simple-spectrum and analytic hypotheses enter
+in the downstream modules that identify these projectors with eigenvalue derivatives.
 -/
 
 open scoped BigOperators ComplexOrder

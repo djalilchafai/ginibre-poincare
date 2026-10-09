@@ -17,14 +17,14 @@ def ginibrePointwiseGamma (n : ℕ) (f g : Configuration n → ℝ) (z : Configu
 
 /-- The actual iterated carré du champ, with its differential cross term. -/
 def ginibrePointwiseGammaTwo (n : ℕ) (f : Configuration n → ℝ) (z : Configuration n) : ℝ :=
- ginibrePregenerator n (fun y => (1/(n:ℝ))*∑ i:Fin n×Fin 2,
+ ginibrePregenerator n (fun y => (1/(n : ℝ))*∑ i : Fin n×Fin 2,
    (bochnerDirectionalDerivative (ginibreBochnerDirection i) f y)^2) z/2-
- (1/(n:ℝ))*∑ i:Fin n×Fin 2, bochnerDirectionalDerivative (ginibreBochnerDirection i) f z*
+ (1/(n : ℝ))*∑ i : Fin n×Fin 2, bochnerDirectionalDerivative (ginibreBochnerDirection i) f z*
    bochnerDirectionalDerivative (ginibreBochnerDirection i) (ginibrePregenerator n f) z
 
 theorem ginibrePointwiseGamma_eq {n : ℕ} (hn : 0<n) (f g : Configuration n → ℝ)
  (hf : ContDiff ℝ ∞ f) (hg : ContDiff ℝ ∞ g) (z : Configuration n) (hz : CollisionFree z) :
- ginibrePointwiseGamma n f g z=(1/(n:ℝ))*∑ i:Fin n×Fin 2,
+ ginibrePointwiseGamma n f g z=(1/(n : ℝ))*∑ i : Fin n×Fin 2,
    bochnerDirectionalDerivative (ginibreBochnerDirection i) f z*bochnerDirectionalDerivative (ginibreBochnerDirection i) g z := by
  unfold ginibrePointwiseGamma
  simp_rw [ginibrePregenerator_eq_bochnerCoordinateOperator hn _ z hz]
@@ -33,7 +33,7 @@ theorem ginibrePointwiseGamma_eq {n : ℕ} (hn : 0<n) (f g : Configuration n →
 theorem ginibrePointwiseGamma_eq_at {n : ℕ} (hn : 0<n) (f g : Configuration n → ℝ)
  (z : Configuration n) (hz : CollisionFree z)
  (hf : ContDiffAt ℝ ∞ f z) (hg : ContDiffAt ℝ ∞ g z) :
- ginibrePointwiseGamma n f g z=(1/(n:ℝ))*∑ i:Fin n×Fin 2,
+ ginibrePointwiseGamma n f g z=(1/(n : ℝ))*∑ i : Fin n×Fin 2,
    bochnerDirectionalDerivative (ginibreBochnerDirection i) f z*bochnerDirectionalDerivative (ginibreBochnerDirection i) g z := by
  unfold ginibrePointwiseGamma
  simp_rw [ginibrePregenerator_eq_bochnerCoordinateOperator hn _ z hz]
@@ -44,16 +44,16 @@ theorem ginibrePregenerator_contDiffAt_of_contDiff {n : ℕ} (hn : 0<n)
  (f : Configuration n → ℝ) (hf : ContDiff ℝ ∞ f) (z : Configuration n) (hz : CollisionFree z) :
  ContDiffAt ℝ ∞ (ginibrePregenerator n f) z := by
  have he : ginibrePregenerator n f =ᶠ[𝓝 z]
-      bochnerCoordinateOperator ginibreBochnerDirection (1/(n:ℝ)) (ginibreBochnerDrift n) f := by
+      bochnerCoordinateOperator ginibreBochnerDirection (1/(n : ℝ)) (ginibreBochnerDrift n) f := by
   filter_upwards [(isOpen_collisionFree n).mem_nhds hz] with y hy
   exact ginibrePregenerator_eq_bochnerCoordinateOperator hn f y hy
  apply ContDiffAt.congr_of_eventuallyEq _ he
  unfold bochnerCoordinateOperator
- have hs1 : ContDiffAt ℝ ∞ (fun y => ∑ i:Fin n×Fin 2, bochnerDirectionalDerivative (ginibreBochnerDirection i)
+ have hs1 : ContDiffAt ℝ ∞ (fun y => ∑ i : Fin n×Fin 2, bochnerDirectionalDerivative (ginibreBochnerDirection i)
     (bochnerDirectionalDerivative (ginibreBochnerDirection i) f) y) z := by
   exact ContDiffAt.sum (fun i _ => (bochnerDirectionalDerivative_contDiff _ _
     (bochnerDirectionalDerivative_contDiff _ f hf)).contDiffAt)
- have hs2 : ContDiffAt ℝ ∞ (fun y => ∑ i:Fin n×Fin 2, ginibreBochnerDrift n i y*
+ have hs2 : ContDiffAt ℝ ∞ (fun y => ∑ i : Fin n×Fin 2, ginibreBochnerDrift n i y*
     bochnerDirectionalDerivative (ginibreBochnerDirection i) f y) z := by
   refine ContDiffAt.sum (fun i _ => ?_)
   exact (contDiffAt_const.mul (bochnerDirectionalDerivative_contDiffAt _ _ z (ginibreHamiltonian_contDiffAt n z hz))).mul
@@ -66,12 +66,12 @@ theorem ginibrePointwiseGammaTwo_eq_iterated {n : ℕ} (hn : 0<n)
  ginibrePointwiseGammaTwo n f z=
  ginibrePregenerator n (ginibrePointwiseGamma n f f) z/2-
  ginibrePointwiseGamma n f (ginibrePregenerator n f) z := by
- have he : ginibrePointwiseGamma n f f =ᶠ[𝓝 z] (fun y => (1/(n:ℝ))*∑ i:Fin n×Fin 2,
+ have he : ginibrePointwiseGamma n f f =ᶠ[𝓝 z] (fun y => (1/(n : ℝ))*∑ i : Fin n×Fin 2,
    (bochnerDirectionalDerivative (ginibreBochnerDirection i) f y)^2) := by
   filter_upwards [(isOpen_collisionFree n).mem_nhds hz] with y hy
   simpa only [pow_two] using ginibrePointwiseGamma_eq hn f f hf hf y hy
  have he' : ginibrePregenerator n (ginibrePointwiseGamma n f f) z=
-  ginibrePregenerator n (fun y => (1/(n:ℝ))*∑ i:Fin n×Fin 2,
+  ginibrePregenerator n (fun y => (1/(n : ℝ))*∑ i : Fin n×Fin 2,
    (bochnerDirectionalDerivative (ginibreBochnerDirection i) f y)^2) z := by
   simp_rw [ginibrePregenerator_eq_bochnerCoordinateOperator hn _ z hz]
   unfold bochnerCoordinateOperator bochnerDirectionalDerivative
@@ -81,7 +81,7 @@ theorem ginibrePointwiseGammaTwo_eq_iterated {n : ℕ} (hn : 0<n)
   apply Finset.sum_congr rfl
   intro i hi
   have hd : (fun y => fderiv ℝ (ginibrePointwiseGamma n f f) y (ginibreBochnerDirection i)) =ᶠ[𝓝 z]
-    (fun y => fderiv ℝ (fun y => (1/(n:ℝ))*∑ i:Fin n×Fin 2,
+    (fun y => fderiv ℝ (fun y => (1/(n : ℝ))*∑ i : Fin n×Fin 2,
        (bochnerDirectionalDerivative (ginibreBochnerDirection i) f y)^2) y (ginibreBochnerDirection i)) := by
     filter_upwards [he.fderiv (𝕜 := ℝ)] with y hy
     exact congrArg (fun a : Configuration n →L[ℝ] ℝ => a (ginibreBochnerDirection i)) hy
@@ -93,19 +93,19 @@ theorem ginibrePointwiseGammaTwo_eq_iterated {n : ℕ} (hn : 0<n)
 /-- Pointwise Bochner formula: the true Hessian square plus the true Hamiltonian Hessian contraction. -/
 theorem ginibrePointwiseGammaTwo_bochner {n : ℕ} (hn : 0<n)
  (f : Configuration n → ℝ) (hf : ContDiff ℝ ∞ f) (z : Configuration n) (hz : CollisionFree z) :
- ginibrePointwiseGammaTwo n f z=(1/(n:ℝ))^2*((∑ i:Fin n×Fin 2, ∑ j:Fin n×Fin 2,
+ ginibrePointwiseGammaTwo n f z=(1/(n : ℝ))^2*((∑ i : Fin n×Fin 2, ∑ j : Fin n×Fin 2,
    (fderiv ℝ (fderiv ℝ f) z (ginibreBochnerDirection j) (ginibreBochnerDirection i))^2)+
- (∑ i:Fin n×Fin 2, ∑ j:Fin n×Fin 2,
+ (∑ i : Fin n×Fin 2, ∑ j : Fin n×Fin 2,
    bochnerDirectionalDerivative (ginibreBochnerDirection i) f z*
    fderiv ℝ (fderiv ℝ (ginibreHamiltonian n)) z (ginibreBochnerDirection i) (ginibreBochnerDirection j)*
    bochnerDirectionalDerivative (ginibreBochnerDirection j) f z)) := by
  have he : ginibrePregenerator n f =ᶠ[𝓝 z]
-      bochnerCoordinateOperator ginibreBochnerDirection (1/(n:ℝ)) (ginibreBochnerDrift n) f := by
+      bochnerCoordinateOperator ginibreBochnerDirection (1/(n : ℝ)) (ginibreBochnerDrift n) f := by
   filter_upwards [(isOpen_collisionFree n).mem_nhds hz] with y hy
   exact ginibrePregenerator_eq_bochnerCoordinateOperator hn f y hy
  have hder i : bochnerDirectionalDerivative (ginibreBochnerDirection i) (ginibrePregenerator n f) z=
    bochnerDirectionalDerivative (ginibreBochnerDirection i)
-     (bochnerCoordinateOperator ginibreBochnerDirection (1/(n:ℝ)) (ginibreBochnerDrift n) f) z := by
+     (bochnerCoordinateOperator ginibreBochnerDirection (1/(n : ℝ)) (ginibreBochnerDrift n) f) z := by
   unfold bochnerDirectionalDerivative
   rw [he.fderiv_eq]
  unfold ginibrePointwiseGammaTwo
@@ -114,7 +114,7 @@ theorem ginibrePointwiseGammaTwo_bochner {n : ℕ} (hn : 0<n)
  change bochnerGammaTwo _ _ _ f z=_
  rw [bochnerGammaTwo_eq _ _ _ f z hf (fun i => ginibreBochnerDrift_differentiableAt i z hz)]
  have hb i j : bochnerDirectionalDerivative (ginibreBochnerDirection i) (ginibreBochnerDrift n j) z=
-  (1/(n:ℝ))*fderiv ℝ (fderiv ℝ (ginibreHamiltonian n)) z (ginibreBochnerDirection i) (ginibreBochnerDirection j) := by
+  (1/(n : ℝ))*fderiv ℝ (fderiv ℝ (ginibreHamiltonian n)) z (ginibreBochnerDirection i) (ginibreBochnerDirection j) := by
   unfold ginibreBochnerDrift
   rw [bochnerDirectionalDerivative_const_mul _ _ _ _
     ((bochnerDirectionalDerivative_contDiffAt _ _ _ (ginibreHamiltonian_contDiffAt n z hz)).differentiableAt (by simp)),
@@ -127,19 +127,19 @@ theorem ginibrePointwiseGammaTwo_bochner {n : ℕ} (hn : 0<n)
 
 /-- The genuine Euclidean gradient expanded in the orthonormal real coordinate basis. -/
 def ginibreBochnerGradient {n : ℕ} (f : Configuration n → ℝ) (z : Configuration n) : Configuration n :=
- ∑ i:Fin n×Fin 2, bochnerDirectionalDerivative (ginibreBochnerDirection i) f z • ginibreBochnerDirection i
+ ∑ i : Fin n×Fin 2, bochnerDirectionalDerivative (ginibreBochnerDirection i) f z • ginibreBochnerDirection i
 
 def ginibreBochnerHessianSquare {n : ℕ} (f : Configuration n → ℝ) (z : Configuration n) : ℝ :=
- ∑ i:Fin n×Fin 2, ∑ j:Fin n×Fin 2,
+ ∑ i : Fin n×Fin 2, ∑ j : Fin n×Fin 2,
    (fderiv ℝ (fderiv ℝ f) z (ginibreBochnerDirection j) (ginibreBochnerDirection i))^2
 
 /-- The paper's pointwise Bochner formula as a bilinear Hessian contraction. -/
 theorem ginibrePointwiseGammaTwo_bochner_bilinear {n : ℕ} (hn : 0<n)
  (f : Configuration n → ℝ) (hf : ContDiff ℝ ∞ f) (z : Configuration n) (hz : CollisionFree z) :
- (n:ℝ)^2*ginibrePointwiseGammaTwo n f z=ginibreBochnerHessianSquare f z+
+ (n : ℝ)^2*ginibrePointwiseGammaTwo n f z=ginibreBochnerHessianSquare f z+
  fderiv ℝ (fderiv ℝ (ginibreHamiltonian n)) z (ginibreBochnerGradient f z) (ginibreBochnerGradient f z) := by
  have hcon : fderiv ℝ (fderiv ℝ (ginibreHamiltonian n)) z (ginibreBochnerGradient f z) (ginibreBochnerGradient f z)=
-   ∑ i:Fin n×Fin 2, ∑ j:Fin n×Fin 2,
+   ∑ i : Fin n×Fin 2, ∑ j : Fin n×Fin 2,
    bochnerDirectionalDerivative (ginibreBochnerDirection i) f z*
    fderiv ℝ (fderiv ℝ (ginibreHamiltonian n)) z (ginibreBochnerDirection i) (ginibreBochnerDirection j)*
    bochnerDirectionalDerivative (ginibreBochnerDirection j) f z := by
@@ -149,11 +149,11 @@ theorem ginibrePointwiseGammaTwo_bochner_bilinear {n : ℕ} (hn : 0<n)
   intro i hi
   apply Finset.sum_congr rfl
   intro j hj
-  rw [((ginibreHamiltonian_contDiffAt n z hz).isSymmSndFDerivAt (by simpa using (WithTop.coe_le_coe.mpr (show (2:ℕ∞)≤⊤ from le_top)))).eq (ginibreBochnerDirection j) (ginibreBochnerDirection i)]
+  rw [((ginibreHamiltonian_contDiffAt n z hz).isSymmSndFDerivAt (by simpa using (WithTop.coe_le_coe.mpr (show (2 : ℕ∞)≤⊤ from le_top)))).eq (ginibreBochnerDirection j) (ginibreBochnerDirection i)]
   ring
  rw [ginibrePointwiseGammaTwo_bochner hn f hf z hz, hcon]
  unfold ginibreBochnerHessianSquare
- have hn' : (n:ℝ)≠0 := by exact_mod_cast (Nat.ne_of_gt hn)
+ have hn' : (n : ℝ)≠0 := by exact_mod_cast (Nat.ne_of_gt hn)
  field_simp
 
 #print axioms ginibrePointwiseGammaTwo_bochner_bilinear

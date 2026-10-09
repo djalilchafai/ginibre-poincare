@@ -8,17 +8,17 @@ set_option backward.isDefEq.respectTransparency false
 
 theorem gueCenterCoordinate_split_symm (n : ℕ) (hn : 0<n) (t : ℝ)
     (y : (gueCenterLine n)ᗮ) :
-    gueCenterCoordinate n ((gueCenterSplitEquiv n hn).symm (t,y))=t := by
+    gueCenterCoordinate n ((gueCenterSplitEquiv n hn).symm (t, y))=t := by
   rw [gueCenterSplitEquiv_symm_apply]
   unfold gueCenterCoordinate
-  rw [inner_add_right,real_inner_smul_right,real_inner_self_eq_norm_sq,
-    gueCenterUnit_norm hn,gueCenter_orthogonal]
+  rw [inner_add_right, real_inner_smul_right, real_inner_self_eq_norm_sq,
+    gueCenterUnit_norm hn, gueCenter_orthogonal]
   simp
 
 theorem gueRawDensity_center_integral_split {n : ℕ} (hn : 0<n) (f : ℝ→ℝ) :
-    (∫x,gueRawDensity n x*f (gueCenterCoordinate n x))=
-      (∫t,Real.exp (-(n:ℝ)/2*t^2)*f t)*
-        (∫y : (gueCenterLine n)ᗮ,gueRawDensity n y) := by
+    (∫x, gueRawDensity n x*f (gueCenterCoordinate n x))=
+      (∫t, Real.exp (-(n : ℝ)/2*t^2)*f t)*
+        (∫y : (gueCenterLine n)ᗮ, gueRawDensity n y) := by
   have hs := ((gueCenterSplit_volume_preserving n hn).symm (gueCenterSplitEquiv n hn)).integral_comp
     (gueCenterSplitEquiv n hn).symm.measurableEmbedding
     (fun x => gueRawDensity n x*f (gueCenterCoordinate n x))
@@ -26,26 +26,26 @@ theorem gueRawDensity_center_integral_split {n : ℕ} (hn : 0<n) (f : ℝ→ℝ)
   have he (p : ℝ×(gueCenterLine n)ᗮ) :
       gueRawDensity n ((gueCenterSplitEquiv n hn).symm p)*
         f (gueCenterCoordinate n ((gueCenterSplitEquiv n hn).symm p))=
-      (Real.exp (-(n:ℝ)/2*p.1^2)*f p.1)*gueRawDensity n p.2 := by
-    rw [gueCenterCoordinate_split_symm,gueCenterSplitEquiv_symm_apply,
+      (Real.exp (-(n : ℝ)/2*p.1^2)*f p.1)*gueRawDensity n p.2 := by
+    rw [gueCenterCoordinate_split_symm, gueCenterSplitEquiv_symm_apply,
       gueRawDensity_center_factorization hn _ _ (gueCenter_orthogonal n p.2)]
     ring
   simp_rw [he]
-  exact integral_prod_mul (fun t : ℝ => Real.exp (-(n:ℝ)/2*t^2)*f t)
+  exact integral_prod_mul (fun t : ℝ => Real.exp (-(n : ℝ)/2*t^2)*f t)
     (fun y : (gueCenterLine n)ᗮ => gueRawDensity n y)
 
 theorem gueCenteredDensity_partition_ne_zero {n : ℕ} (hn : 0<n) :
-    (∫y : (gueCenterLine n)ᗮ,gueRawDensity n y)≠0 := by
+    (∫y : (gueCenterLine n)ᗮ, gueRawDensity n y)≠0 := by
   have hp := gueRawDensity_center_integral_split hn (fun _ => 1)
   simp only [mul_one] at hp
   intro hz
-  rw [hz,mul_zero] at hp
+  rw [hz, mul_zero] at hp
   exact (ne_of_gt (gueRawDensity_partition_pos hn)) hp
 
 theorem gueFullMeasure_center_integral {n : ℕ} (hn : 0<n) (f : ℝ→ℝ) :
-    (∫x,f (gueCenterCoordinate n x) ∂gueFullMeasure n)=
-      (∫t,Real.exp (-(n:ℝ)/2*t^2)*f t)/(∫t : ℝ,Real.exp (-(n:ℝ)/2*t^2)) := by
-  rw [gueFullMeasure_integral,gueRawDensity_center_integral_split hn]
+    (∫x, f (gueCenterCoordinate n x) ∂gueFullMeasure n)=
+      (∫t, Real.exp (-(n : ℝ)/2*t^2)*f t)/(∫t : ℝ, Real.exp (-(n : ℝ)/2*t^2)) := by
+  rw [gueFullMeasure_integral, gueRawDensity_center_integral_split hn]
   have hp := gueRawDensity_center_integral_split hn (fun _ => 1)
   simp only [mul_one] at hp
   rw [hp]

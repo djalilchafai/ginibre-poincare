@@ -5,7 +5,16 @@ public import Mathlib.MeasureTheory.SpecificCodomains.WithLp
 
 @[expose] public section
 
-/-! # Full actual Gaussian matrix weak-Sobolev completion through entry coordinates -/
+/-! # Full actual Gaussian matrix weak-Sobolev completion through entry coordinates
+
+The positive-density theorem first places an ordinary weak entry-gradient pair
+in the closure of compact smooth entry-coordinate pairs. Gaussian density
+transport then maps this closure into the actual matrix H¹ completion, with
+real coordinate indices reindexed explicitly. Applying the matrix closure LSI
+provides both entropy integrability and the sharp energy inequality.
+The compact-test derivative equations in the hypotheses use ordinary volume;
+the L² value and gradient norms use the Gaussian measure.
+-/
 open MeasureTheory Matrix
 open scoped ContDiff
 namespace GinibrePoincare

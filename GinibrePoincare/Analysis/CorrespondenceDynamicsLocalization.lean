@@ -23,14 +23,14 @@ theorem correspondence_tendstoInMeasure_of_exhaustion
   · intro a ha
     exact Eventually.of_forall (fun _ => ha.trans_le measureReal_nonneg)
   · intro b hb
-    obtain ⟨k,hk⟩ := (hE.eventually (gt_mem_nhds (half_pos hb))).exists
+    obtain ⟨k, hk⟩ := (hE.eventually (gt_mem_nhds (half_pos hb))).exists
     have hl := (tendstoInMeasure_iff_measureReal_norm.mp (hlocal k)) ε hε
     filter_upwards [hl.eventually (gt_mem_nhds (half_pos hb))] with j hj
     have hsub : {ω | ε ≤ ‖f j ω-g ω‖} ⊆
         (E k)ᶜ ∪ {ω | ε ≤ ‖(E k).indicator (f j) ω-(E k).indicator g ω‖} := by
       intro ω hω
       by_cases he : ω ∈ E k
-      · exact Or.inr (by simpa only [Set.mem_ofPred_eq,indicator_of_mem he] using hω)
+      · exact Or.inr (by simpa only [Set.mem_ofPred_eq, indicator_of_mem he] using hω)
       · exact Or.inl he
     have hh := (measureReal_mono (μ := P) hsub).trans (measureReal_union_le (μ := P) _ _)
     linarith
@@ -50,14 +50,14 @@ theorem correspondence_measure_compl_of_ae_exhaustion
     filter_upwards [hex] with ω hω
     apply tendsto_const_nhds.congr'
     filter_upwards [hω] with k hk
-    simp [f,hk]
+    simp [f, hk]
   have hp := tendstoInMeasure_of_tendsto_ae hf hlim
   have hh := tendstoInMeasure_iff_measureReal_norm.mp hp 1 (by norm_num)
   convert hh using 1
   funext k
   congr 1
   ext ω
-  by_cases hω : ω ∈ E k <;> simp [f,hω]
+  by_cases hω : ω ∈ E k <;> simp [f, hω]
 
 #print axioms correspondence_measure_compl_of_ae_exhaustion
 #print axioms correspondence_tendstoInMeasure_of_exhaustion

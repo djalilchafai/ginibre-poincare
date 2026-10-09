@@ -59,7 +59,7 @@ theorem brownianAggregateUniformSum_meanSquare_of_horizon_limit
       ∫ ω, (∑ i, (brownianUniformLeftSum (B i) (F i) T (k+1) ω-M i T ω))^2 ∂P := by
     apply integral_congr_ae
     filter_upwards [he] with ω hω
-    rw [← hω,Finset.sum_sub_distrib]
+    rw [← hω, Finset.sum_sub_distrib]
   simp_rw [hEq]
   exact hh
 
@@ -95,7 +95,7 @@ theorem brownianUnitIntegral_bounded_substitution_of_horizon_limits
   have hProd := brownianAggregateUniformSum_meanSquare_of_horizon_limit B P hB hind
     (fun i r ω => A r ω*u r ω i) (fun i r => (hA r).mul (hum i r)) T
     (fun i => by
-      filter_upwards [hc,huc] with ω hω hωu
+      filter_upwards [hc, huc] with ω hω hωu
       exact hω.mul (((PiLp.continuous_apply 2 (fun _ : ι => ℝ) i).comp hωu).continuousOn))
     C hC (fun i r ω => by
       change ‖A r ω*u r ω i‖ ≤ C

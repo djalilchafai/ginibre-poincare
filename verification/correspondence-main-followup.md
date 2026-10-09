@@ -1,5 +1,11 @@
 # Independent follow-up correspondence review: main proof and Appendices A–B
 
+> Revision context (2026-10-09): this document preserves its original dated
+> mathematical source-review findings and snapshots. The later readability
+> revision has a separate [semantic diff review](readability-semantic-review.md)
+> and [build/axiom verification record](readability-final-check.txt); it is not a
+> new review against the paper. See [STATUS](../STATUS.md) for current evidence.
+
 Reviewed on 2026-10-08 against working-tree additions above commit `eb57b0df96825a6b84fc514396d1a342888e46a4`. This is a statement and definition review, not a fresh full-project build or human certification. The authoritative source is [arXiv:2608.19358v2](https://arxiv.org/html/2608.19358v2), read from its cached versioned HTML `/tmp/correspondence-v2.html`; local TeX was not used. The earlier [main review](correspondence-main.md) remains historical evidence for its named snapshot. Its unreviewed assertions are not silently converted into completion claims here.
 
 This agent independently read the new statements and their actual measure, function-space and operator definitions. Author descriptions and compilation were not used as proof of statement correspondence. `MATCH` records a matching domain and conclusion. `REPRESENTATION` records a mathematical encoding with its precise qualification. `UNREVIEWED` means no inspected matching endpoint, not a proof that none exists anywhere. Root work on quantitative collision rates was still active during this review.

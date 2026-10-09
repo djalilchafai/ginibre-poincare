@@ -50,7 +50,7 @@ lemma bakryBrownianCoordinate_independent :
         MeasurableSpace.pi MeasurableSpace.pi id := measurable_id
     refine ⟨hId.nullMeasurable.measurable',?_⟩
     have he := ginibre_map_completion μ id hId
-    simpa only [id_eq,Measure.map_id,bakryBrownianCoordinateMeasure,μ] using he
+    simpa only [id_eq, Measure.map_id, bakryBrownianCoordinateMeasure, μ] using he
   have hm : Measurable (fun ω : BakryBrownianGlobalSample => fun t => bakryBrownianGlobalProcess t ω) :=
     Measurable.of_eval (fun t => bakryBrownianGlobalPath_eval_measurable t)
   exact ginibre_iIndepFun_precompose_measurePreserving _ μ _ hp

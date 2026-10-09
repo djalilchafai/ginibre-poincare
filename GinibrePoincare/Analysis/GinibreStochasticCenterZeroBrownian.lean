@@ -19,7 +19,7 @@ theorem ginibreBrownianMaximalProcess_center_unrestricted_Brownian_exists
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (P : Measure Ω)
     [IsProbabilityMeasure P] [P.IsComplete] (hB : ∀ i, IsBrownianReal (B i) P)
     (hind : iIndepFun (fun i ω t => B i t ω) P) :
-    let e : EuclideanSpace ℝ (Fin n × Fin 2) := EuclideanSpace.single (⟨0,by omega⟩,0) 1
+    let e : EuclideanSpace ℝ (Fin n × Fin 2) := EuclideanSpace.single (⟨0, by omega⟩, 0) 1
     let u := fun t ω => ginibreCenterRadialDirection n e
       (ginibreBrownianMaximalProcess n α z B t ω)
     ∃ β : ℝ≥0 → Ω → ℝ,
@@ -34,10 +34,10 @@ theorem ginibreBrownianMaximalProcess_center_unrestricted_Brownian_exists
         @Measurable Ω ℝ (ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal) s) _ Y →
         IndepFun Y (fun ω => β (s+t) ω-β s ω) P) := by
   classical
-  let i₀ : Fin n × Fin 2 := (⟨0,by omega⟩,0)
+  let i₀ : Fin n × Fin 2 := (⟨0, by omega⟩, 0)
   let e : EuclideanSpace ℝ (Fin n × Fin 2) := EuclideanSpace.single i₀ 1
-  have he : ‖e‖=1 := by simp [e,PiLp.norm_single]
-  obtain ⟨hu,hunit,hc⟩ := ginibreBrownianMaximalProcess_centerDirection_punctured_properties
+  have he : ‖e‖=1 := by simp [e, PiLp.norm_single]
+  obtain ⟨hu, hunit, hc⟩ := ginibreBrownianMaximalProcess_centerDirection_punctured_properties
     hn α hα z hz B P hB hind e he
   exact ginibrePuncturedUnitField_Brownian_exists B P hB hind _ hu hunit hc i₀
 #print axioms ginibreBrownianMaximalProcess_center_unrestricted_Brownian_exists

@@ -5,7 +5,15 @@ public import Mathlib.Analysis.Calculus.LineDeriv.IntegrationByParts
 
 @[expose] public section
 
-/-! # Ordinary weak gradients of actual smooth Ginibre L² pairs -/
+/-! # Ordinary weak gradients of actual smooth Ginibre L² pairs
+
+The first theorem uses Lebesgue integration by parts with compact tests away
+from collisions, after transferring almost-everywhere representatives from
+Ginibre measure to volume. It therefore verifies the ordinary distributional
+gradient identity rather than defining it by closure. The finite-energy
+Poincaré theorem then inserts these classical value-gradient representatives
+into the proved symmetric weak-domain inequality.
+-/
 open MeasureTheory Filter
 open scoped Topology ContDiff
 namespace GinibrePoincare

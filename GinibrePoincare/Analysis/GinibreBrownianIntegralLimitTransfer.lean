@@ -25,7 +25,7 @@ theorem actualMeanSquareLimit_transfer {Ω : Type*} [MeasurableSpace Ω]
         ((((hS n).sub (hR n)).integrable_sq.const_mul 2).add
           (((hS n).sub hI).integrable_sq.const_mul 2))
       intro ω
-      dsimp only [Pi.add_apply,Pi.sub_apply]
+      dsimp only [Pi.add_apply, Pi.sub_apply]
       nlinarith [sq_nonneg (S n ω-R n ω + (S n ω-I ω))]
     · exact (((hS n).sub (hR n)).integrable_sq.const_mul 2)
     · exact (((hS n).sub hI).integrable_sq.const_mul 2)

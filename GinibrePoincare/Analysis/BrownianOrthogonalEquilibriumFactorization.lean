@@ -10,10 +10,10 @@ namespace GinibrePoincare
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1000000
-local instance (n : ℕ) : MeasurableSpace C(ℝ,Configuration n) := borel _
-local instance (n : ℕ) : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
-local instance : MeasurableSpace C(ℝ,ℂ) := borel _
-local instance : BorelSpace C(ℝ,ℂ) := ⟨rfl⟩
+local instance (n : ℕ) : MeasurableSpace C(ℝ, Configuration n) := borel _
+local instance (n : ℕ) : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
+local instance : MeasurableSpace C(ℝ, ℂ) := borel _
+local instance : BorelSpace C(ℝ, ℂ) := ⟨rfl⟩
 
 /-- Almost sure center factorization for the actual equilibrium-initialized path. -/
 theorem ginibre_equilibrium_path_center {Ω : Type*} [MeasurableSpace Ω]
@@ -24,7 +24,7 @@ theorem ginibre_equilibrium_path_center {Ω : Type*} [MeasurableSpace Ω]
     (fun p : Configuration n × Ω => ginibrePathCenter n (ginibreEquilibriumPath α z₀ hz₀ B p))
       =ᵐ[(ginibreMeasure n).prod P]
       (fun p => ginibreOUPathElement n α
-        (coordinateSum p.1,ginibreContinuousNoiseCenter n (ginibreBrownianFullContinuousNoise n B α p.2))) := by
+        (coordinateSum p.1, ginibreContinuousNoiseCenter n (ginibreBrownianFullContinuousNoise n B α p.2))) := by
   classical
   letI := ginibreMeasure_isProbabilityMeasure hn
   have hS := (ginibrePathCenter_measurable n).comp
@@ -35,9 +35,9 @@ theorem ginibre_equilibrium_path_center {Ω : Type*} [MeasurableSpace Ω]
         (ginibreBrownianFullContinuousNoise_measurable n B P hB α)).comp measurable_snd))
   apply (Measure.ae_prod_iff_ae_ae (measurableSet_eq_fun hS hU)).mpr
   filter_upwards [ginibre_ae_collisionFree n hn] with z hz
-  have hv : ginibreFreeInitialVersion z₀ hz₀ z = ⟨z,hz⟩ := by
-    simp [ginibreFreeInitialVersion,hz]
-  simpa only [Function.comp_def,ginibreEquilibriumPath,hv] using
+  have hv : ginibreFreeInitialVersion z₀ hz₀ z = ⟨z, hz⟩ := by
+    simp [ginibreFreeInitialVersion, hz]
+  simpa only [Function.comp_def, ginibreEquilibriumPath, hv] using
     ginibreBrownian_global_path_center hn α z hz B P hB hind
 
 /-- Almost sure relative factorization for the actual equilibrium-initialized path. -/
@@ -55,12 +55,12 @@ theorem ginibre_equilibrium_path_recenter {Ω : Type*} [MeasurableSpace Ω]
   have hU := ginibreRelativeEquilibriumPath_measurable hn α z₀ hz₀ B P hB
   apply (Measure.ae_prod_iff_ae_ae (measurableSet_eq_fun hS hU)).mpr
   filter_upwards [ginibre_ae_collisionFree n hn] with z hz
-  have hv : ginibreFreeInitialVersion z₀ hz₀ z = ⟨z,hz⟩ := by
-    simp [ginibreFreeInitialVersion,hz]
+  have hv : ginibreFreeInitialVersion z₀ hz₀ z = ⟨z, hz⟩ := by
+    simp [ginibreFreeInitialVersion, hz]
   have hw : ginibreFreeInitialVersion (recenteredConfiguration n z₀) (collisionFree_recentered hz₀)
-      (recenteredConfiguration n z) = ⟨recenteredConfiguration n z,collisionFree_recentered hz⟩ := by
-    simp [ginibreFreeInitialVersion,collisionFree_recentered hz]
-  simpa only [Function.comp_def,ginibreEquilibriumPath,ginibreRelativeEquilibriumPath,hv,hw] using
+      (recenteredConfiguration n z) = ⟨recenteredConfiguration n z, collisionFree_recentered hz⟩ := by
+    simp [ginibreFreeInitialVersion, collisionFree_recentered hz]
+  simpa only [Function.comp_def, ginibreEquilibriumPath, ginibreRelativeEquilibriumPath, hv, hw] using
     ginibreBrownian_global_path_recenter hn α z hz B P hB hind
 
 /-- Independence of the entire center and relative paths initialized from the

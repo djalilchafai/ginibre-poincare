@@ -54,8 +54,8 @@ theorem correspondence_gaussian_strict_plurisubharmonic (n : ℕ) (hn : 0<n)
     · intro k hk hkj
       simp [Ne.symm hkj]
     · simp
-  simp_rw [he,Complex.re_sum,Complex.mul_re,Complex.ofReal_re,Complex.ofReal_im,
-    Complex.natCast_re,Complex.natCast_im,mul_zero,sub_zero]
+  simp_rw [he, Complex.re_sum, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im,
+    Complex.natCast_re, Complex.natCast_im, mul_zero, sub_zero]
   rw [← Finset.mul_sum]
   apply mul_pos (Nat.cast_pos.mpr hn)
   have hex : ∃j : Fin n, v j≠0 := by
@@ -63,8 +63,8 @@ theorem correspondence_gaussian_strict_plurisubharmonic (n : ℕ) (hn : 0<n)
     apply hv
     ext j
     simpa using not_exists.mp h j
-  obtain ⟨j,hj⟩ := hex
-  exact Finset.sum_pos' (fun k hk => Complex.normSq_nonneg _) ⟨j,Finset.mem_univ _,Complex.normSq_pos.mpr hj⟩
+  obtain ⟨j, hj⟩ := hex
+  exact Finset.sum_pos' (fun k hk => Complex.normSq_nonneg _) ⟨j, Finset.mem_univ _, Complex.normSq_pos.mpr hj⟩
 
 end
 end GinibrePoincare

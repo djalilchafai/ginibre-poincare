@@ -16,12 +16,12 @@ theorem continuousMap_law_eq_of_whole_domain_path_law_eq {Ω D E : Type*}
     [MeasurableSpace Ω] [TopologicalSpace D] [TopologicalSpace.SeparableSpace D] [Nonempty D]
     [TopologicalSpace E] [SecondCountableTopology E] [T2Space E]
     [MeasurableSpace E] [BorelSpace E]
-    [MeasurableSpace C(D,E)] [BorelSpace C(D,E)] [PolishSpace C(D,E)]
-    (P : Measure Ω) (X Y : Ω → C(D,E)) (hX : Measurable X) (hY : Measurable Y)
+    [MeasurableSpace C(D, E)] [BorelSpace C(D, E)] [PolishSpace C(D, E)]
+    (P : Measure Ω) (X Y : Ω → C(D, E)) (hX : Measurable X) (hY : Measurable Y)
     (hlaw : P.map (fun ω t => X ω t) = P.map (fun ω t => Y ω t)) :
     P.map X = P.map Y := by
   let d := TopologicalSpace.denseSeq D
-  let f : C(D,E) → ℕ → E := fun x k => x (d k)
+  let f : C(D, E) → ℕ → E := fun x k => x (d k)
   have hf : MeasurableEmbedding f :=
     (continuous_pi (fun k => continuous_eval_const (d k))).measurableEmbedding (by
       intro x y h
@@ -34,13 +34,13 @@ theorem continuousMap_law_eq_of_whole_domain_path_law_eq {Ω D E : Type*}
   let R : (D → E) → ℕ → E := fun x k => x (d k)
   have hR : Measurable R := Measurable.of_eval (fun k => measurable_pi_apply (d k))
   apply hf.map_injective
-  rw [Measure.map_map hf.measurable hX,Measure.map_map hf.measurable hY]
+  rw [Measure.map_map hf.measurable hX, Measure.map_map hf.measurable hY]
   have hh := congrArg (Measure.map R) hlaw
-  rw [Measure.map_map hR hXm,Measure.map_map hR hYm] at hh
+  rw [Measure.map_map hR hXm, Measure.map_map hR hYm] at hh
   exact hh
 
 def ginibreBrownianOUHorizonPath {Ω : Type*} (B : ℝ≥0 → Ω → ℝ)
-    (Z : Ω → ℝ) (rate T : ℝ≥0) (ω : Ω) : C(Icc (0 : ℝ≥0) T,ℝ) :=
+    (Z : Ω → ℝ) (rate T : ℝ≥0) (ω : Ω) : C(Icc (0 : ℝ≥0) T, ℝ) :=
   ContinuousMap.mkD (fun t => ginibreBrownianOU B rate (Real.sqrt (rate : ℝ)) (Z ω) t.val ω) 0
 
 theorem ginibreBrownianOUHorizonPath_ae {Ω : Type*} [MeasurableSpace Ω]
@@ -57,14 +57,14 @@ theorem ginibreBrownianOUHorizonPath_ae {Ω : Type*} [MeasurableSpace Ω]
     (drivenOUPath_continuous rate (Z ω) _ hN).comp
       (NNReal.continuous_coe.comp continuous_subtype_val)
   intro t
-  simp [ginibreBrownianOUHorizonPath,ContinuousMap.mkD,hc]
+  simp [ginibreBrownianOUHorizonPath, ContinuousMap.mkD, hc]
 
-local instance (T : ℝ≥0) : MeasurableSpace C(Icc (0 : ℝ≥0) T,ℝ) := borel _
-local instance (T : ℝ≥0) : BorelSpace C(Icc (0 : ℝ≥0) T,ℝ) := ⟨rfl⟩
-local instance (T : ℝ≥0) : Nonempty (Icc (0 : ℝ≥0) T) := ⟨⟨0,⟨le_rfl,zero_le⟩⟩⟩
+local instance (T : ℝ≥0) : MeasurableSpace C(Icc (0 : ℝ≥0) T, ℝ) := borel _
+local instance (T : ℝ≥0) : BorelSpace C(Icc (0 : ℝ≥0) T, ℝ) := ⟨rfl⟩
+local instance (T : ℝ≥0) : Nonempty (Icc (0 : ℝ≥0) T) := ⟨⟨0, ⟨le_rfl, zero_le⟩⟩⟩
 
-def ginibreOUHorizonReverseTime (T : ℝ≥0) : C(Icc (0 : ℝ≥0) T,Icc (0 : ℝ≥0) T) :=
-  ⟨fun t => ⟨T-t.val,⟨zero_le,tsub_le_self⟩⟩,by fun_prop⟩
+def ginibreOUHorizonReverseTime (T : ℝ≥0) : C(Icc (0 : ℝ≥0) T, Icc (0 : ℝ≥0) T) :=
+  ⟨fun t => ⟨T-t.val, ⟨zero_le, tsub_le_self⟩⟩, by fun_prop⟩
 
 theorem ginibreBrownianOUHorizonPath_measurable {Ω : Type*} [MeasurableSpace Ω]
     (B : ℝ≥0 → Ω → ℝ) (P : Measure Ω) [IsProbabilityMeasure P] [P.IsComplete]
@@ -102,7 +102,7 @@ theorem ginibreBrownianOU_stationary_continuous_horizon_law_reversal
     filter_upwards [ginibreBrownianOUHorizonPath_ae B P hB Z rate T] with ω hω
     funext t
     exact hω (ginibreOUHorizonReverseTime T t)
-  rw [Measure.map_congr hx,Measure.map_congr hy]
+  rw [Measure.map_congr hx, Measure.map_congr hy]
   exact ginibreBrownianOU_stationary_whole_horizon_law_reversal B P hB Z hZ hind rate T
 
 end

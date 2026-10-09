@@ -52,13 +52,13 @@ theorem ginibreBrownianMaximalProcess_local_center_Lamperti_identity
     have hh := ginibreCenterSquared_ge_until_small_hitting X C (2*δ) T t ω hBound
       ((contDiff_ginibreCenterSquared n).continuous.comp
         (ginibreBrownianHamiltonianStoppedProcess_continuous (by omega) α z hz B R hR T ω))
-      (by simpa [X,ginibreBrownianHamiltonianStoppedProcess_initial n α z hz B R T ω] using hδz)
+      (by simpa [X, ginibreBrownianHamiltonianStoppedProcess_initial n α z hz B R T ω] using hδz)
       (ht.trans (min_le_right _ _))
     linarith
   have hf : ContDiffOn ℝ 2 (ginibreCenterSquareRootRegularized n δ) {x | CollisionFree x} :=
     ((contDiff_ginibreCenterSquareRootRegularized n hδ).of_le
       (by exact WithTop.coe_le_coe.mpr (show (2 : ENat) ≤ ⊤ from le_top))).contDiffOn
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hJS,hIto,hEnd⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hJS, hIto, hEnd⟩ :=
     ginibreBrownianMaximalProcess_local_test_ito_integral_exists (by omega) α z hz B P hB hind
       R hR T (ginibreCenterSquareRootRegularized n δ) hf
   have heq : ∀ᵐ ω ∂P, ∀ t ≤ θ ω,
@@ -74,11 +74,11 @@ theorem ginibreBrownianMaximalProcess_local_center_Lamperti_identity
       (fun t ht => ginibre_tendstoInMeasure_const_mul P _ _ c (hβLim t))
     intro t ht k ω hts
     classical
-    rw [ginibreConfigurationBrownianGradientSum_eq,Finset.mul_sum,Finset.mul_sum]
+    rw [ginibreConfigurationBrownianGradientSum_eq, Finset.mul_sum, Finset.mul_sum]
     apply Finset.sum_congr rfl
     intro i hi
     unfold brownianUniformLeftSum
-    rw [Finset.mul_sum,Finset.mul_sum]
+    rw [Finset.mul_sum, Finset.mul_sum]
     apply Finset.sum_congr rfl
     intro j hj
     dsimp only
@@ -89,13 +89,13 @@ theorem ginibreBrownianMaximalProcess_local_center_Lamperti_identity
         ginibreBrownianMaximalProcess n α z B (itoUniformNNTime t (k+1) j) ω := by
       change ginibreBrownianMaximalProcess n α z B (min _ _) ω = _
       rw [min_eq_left ((hjt.trans hts).trans (hθσ ω))]
-    rw [← mul_assoc,(ginibreCenterSquareRootRegularized_eventuallyEq hδ _ hlj).fderiv_eq]
-    rw [ginibre_squareRootCenter_noise_coordinate hn α α.coe_nonneg _ (hδ.trans hlj) e i,he,mul_assoc]
-  filter_upwards [heq,hIto] with ω hω hItoω
+    rw [← mul_assoc, (ginibreCenterSquareRootRegularized_eventuallyEq hδ _ hlj).fderiv_eq]
+    rw [ginibre_squareRootCenter_noise_coordinate hn α α.coe_nonneg _ (hδ.trans hlj) e i, he, mul_assoc]
+  filter_upwards [heq, hIto] with ω hω hItoω
   intro t ht
   have hh := hItoω t (ht.trans (hθσ ω))
   rw [ginibreCenterSquareRootRegularized_eq hδ _ (hlow ω t ht).le,
-    ginibreCenterSquareRootRegularized_eq hδ z (by linarith),hω t ht] at hh
+    ginibreCenterSquareRootRegularized_eq hδ z (by linarith), hω t ht] at hh
   have hi : (∫ s in (0 : ℝ)..t, ginibreRealPaperSpeedGenerator n α
       (ginibreCenterSquareRootRegularized n δ) (X s.toNNReal ω)) =
       ∫ s in (0 : ℝ)..t, ginibreLampertiCenterDrift n α (ginibreCenterSquared n (X s.toNNReal ω)) := by

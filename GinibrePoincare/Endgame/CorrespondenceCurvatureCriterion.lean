@@ -12,7 +12,7 @@ theorem correspondence_integrated_pointwise_curvature {n : ℕ} (hn : 0<n)
     (f : Configuration n → ℝ) (hf : IsTheoremOneNineCore f) :
     2 * ginibreWeakEnergy n (ginibreFullCoreGradient hn f hf) ≤
       ∫ z, ginibrePointwiseGammaTwo n f z ∂ginibreMeasure n := by
-  obtain ⟨g,hg,hfirst,hsecond⟩ := fullTheoremOneNinePointwiseGamma hn f hf
+  obtain ⟨g, hg, hfirst, hsecond⟩ := fullTheoremOneNinePointwiseGamma hn f hf
   have hgg : g = ginibreFullCoreGradient hn f hf :=
     ginibre_distributional_gradient_unique n hn _ _ _ hg
       (ginibreFullCorePair hn f hf).property.1
@@ -31,7 +31,7 @@ identities; this is not a universal external Bakry–Émery equivalence theorem.
 theorem correspondence_poincare_iff_integrated_pointwise_curvature
     {n : ℕ} (hn : 0<n) :
     (∀ (u : GinibreFullValueL2 n) (g : GinibreFullGradientL2 n),
-      IsGinibreDistributionalGradient n u g → IsGinibreSymmetricWeakPair (u,g) →
+      IsGinibreDistributionalGradient n u g → IsGinibreSymmetricWeakPair (u, g) →
       ginibreL2Variance n hn u ≤ ginibreWeakEnergy n g / 2) ↔
     (∀ (f : Configuration n → ℝ) (hf : IsTheoremOneNineCore f),
       2 * ginibreWeakEnergy n (ginibreFullCoreGradient hn f hf) ≤

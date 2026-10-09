@@ -28,7 +28,7 @@ theorem brownianPredictableVectorGaussianDensity_succ {Ω ι : Type*} [Fintype �
         gaussianVectorExponentialTilt (h N ω) (τ (N+1)-τ N)
           (fun i => B i (τ (N+1)) ω-B i (τ N) ω) := by
   classical
-  simp only [brownianPredictableVectorGaussianDensity,Finset.sum_range_succ,Real.exp_add,
+  simp only [brownianPredictableVectorGaussianDensity, Finset.sum_range_succ, Real.exp_add,
     gaussianVectorExponentialTilt_eq_exp]
 
 theorem brownianPredictableVectorGaussianDensity_measurable_at
@@ -72,7 +72,7 @@ theorem brownianPredictableVectorGaussianDensity_lintegral
   induction N with
   | zero => simp [brownianPredictableVectorGaussianDensity]
   | succ N ih =>
-    let Y := fun ω => (h N ω,brownianPredictableVectorGaussianDensity B h τ N ω)
+    let Y := fun ω => (h N ω, brownianPredictableVectorGaussianDensity B h τ N ω)
     have hY : @Measurable Ω ((ι→ℝ)×ℝ) (ginibreBrownianAugmentedFiltration B P hB (τ N)) _ Y :=
       (hh N).prodMk (brownianPredictableVectorGaussianDensity_measurable_at B P hB h τ hτ hh N)
     have hYa := hY.mono ((ginibreBrownianAugmentedFiltration B P hB).le (τ N)) le_rfl
@@ -87,7 +87,7 @@ theorem brownianPredictableVectorGaussianDensity_lintegral
     have he := gaussianVectorPredictableTilt_lintegral P Y X hYa.aemeasurable
       (τ (N+1)-τ N) hX hi Prod.fst (fun y : (ι→ℝ)×ℝ => ENNReal.ofReal y.2)
       measurable_fst (ENNReal.measurable_ofReal.comp measurable_snd)
-    simp only [Y,Prod.fst,Prod.snd,X] at he
+    simp only [Y, Prod.fst, Prod.snd, X] at he
     simp_rw [brownianPredictableVectorGaussianDensity_succ,
       ENNReal.ofReal_mul (brownianPredictableVectorGaussianDensity_pos B h τ N _).le]
     exact he.trans ih

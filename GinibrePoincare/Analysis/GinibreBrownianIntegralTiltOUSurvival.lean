@@ -24,7 +24,7 @@ theorem ginibreOU_canonical_prefix_eq_reference_on_survival {Ω : Type*}
       ginibreHamiltonianOUSublevelDomain n R) :
     ∀ t ≤ T, ginibreDrivenMaximalValue n α (N ω) z t=
       ginibreHamiltonianOUReferenceProcess n α z B t ω := by
-  obtain ⟨hθ,hY⟩ := ginibreHamiltonianOUSublevelStopped_eq_reference_of_stays
+  obtain ⟨hθ, hY⟩ := ginibreHamiltonianOUSublevelStopped_eq_reference_of_stays
     n α z B R T Y θ hStopped hActual ω hStay
   intro t ht
   exact (hCanonical t (hθ ▸ ht)).trans (hY t ht)
@@ -49,9 +49,9 @@ theorem ginibreOU_canonical_survival_iff_reference_survival {Ω : Type*}
       n α z B R T ω hNot
     have hEq : ginibreDrivenMaximalValue n α (N ω) z (θ ω)=
         ginibreHamiltonianOUReferenceProcess n α z B (θ ω) ω := by
-      rw [hCanonical _ le_rfl,hStopped,min_self]
+      rw [hCanonical _ le_rfl, hStopped, min_self]
     have hMem := hStay (θ ω) hθ
-    rw [hEq,hActual ω] at hMem
+    rw [hEq, hActual ω] at hMem
     exact hExit hMem
   · intro hStay t ht
     rw [ginibreOU_canonical_prefix_eq_reference_on_survival n α z B R T Y θ
@@ -75,8 +75,8 @@ theorem ginibreActualOU_sublevel_killed_coupling_exists {Ω : Type*} [Measurable
         (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) T (fun i => M i T) ω ∂P)=1 ∧
       let Q := P.withDensity (fun ω => ENNReal.ofReal (brownianVectorExponentialIntegralDensity
         (fun i r ω => ginibreInteractionBrownianTilt n α (Y r ω) i) T (fun i => M i T) ω))
-      Q.map (fun ω (t : Icc (0:ℝ≥0) T) i => ginibreInteractionCorrectedBrownian n α B Y i t.val ω)=
-        P.map (fun ω (t : Icc (0:ℝ≥0) T) i => B i t.val ω-B i 0 ω) ∧
+      Q.map (fun ω (t : Icc (0 : ℝ≥0) T) i => ginibreInteractionCorrectedBrownian n α B Y i t.val ω)=
+        P.map (fun ω (t : Icc (0 : ℝ≥0) T) i => B i t.val ω-B i 0 ω) ∧
       ∀ᵐ ω ∂Q,
         let N := ginibreConfigurationBrownianNoise n (ginibreInteractionCorrectedBrownian n α B Y) α ω
         ((∀ t≤T, ginibreDrivenMaximalValue n α N z t ∈ ginibreHamiltonianOUSublevelDomain n R) ↔
@@ -88,10 +88,10 @@ theorem ginibreActualOU_sublevel_killed_coupling_exists {Ω : Type*} [Measurable
             Real.exp (ginibreInteractionPotential n z)*
               (ginibreHamiltonianGradientPathWeight n α T (fun s => Y s.toNNReal ω)/
                 ginibreQuadraticGradientPathWeight n α T (fun s => Y s.toNNReal ω))) := by
-  obtain ⟨Y,hYC,hCF,hY0,θ,hStop,hθ,hStopped,hActual,M,hM,hDi,hD1,hLaw,hCan,hAction⟩ :=
+  obtain ⟨Y, hYC, hCF, hY0, θ, hStop, hθ, hStopped, hActual, M, hM, hDi, hD1, hLaw, hCan, hAction⟩ :=
     ginibreActualOU_sublevel_tilted_canonical_prefix_exists hn B P hB hind α z hz R hR T hT
-  refine ⟨Y,M,hDi,hD1,hLaw,?_⟩
-  filter_upwards [hCan,hAction] with ω hC hA
+  refine ⟨Y, M, hDi, hD1, hLaw,?_⟩
+  filter_upwards [hCan, hAction] with ω hC hA
   refine ⟨ginibreOU_canonical_survival_iff_reference_survival n α z B R T Y θ
     hStopped hActual _ ω (hθ ω).2 hC,?_⟩
   intro hStay
@@ -99,7 +99,7 @@ theorem ginibreActualOU_sublevel_killed_coupling_exists {Ω : Type*} [Measurable
     hStopped hActual _ ω hC hStay
   have hθT : θ ω=T := (hActual ω).trans
     (ginibreHamiltonianOUSublevelStop_eq_horizon_of_stays n α z B R T ω hStay)
-  exact ⟨hEq,hA T (hθT ▸ le_rfl)⟩
+  exact ⟨hEq, hA T (hθT ▸ le_rfl)⟩
 
 #print axioms ginibreActualOU_sublevel_killed_coupling_exists
 #print axioms ginibreOU_canonical_survival_iff_reference_survival

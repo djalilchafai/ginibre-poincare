@@ -36,7 +36,7 @@ theorem ginibreBrownianFamilyFiltration_cross_conditional {Ω ι : Type*}
     (p.1 (i, ⟨s, by change s ≤ s; exact le_rfl⟩)+p.2 i)*
       (p.1 (j, ⟨s, by change s ≤ s; exact le_rfl⟩)+p.2 j)
   have hG : Measurable G := by fun_prop
-  have hEq : (fun ω => G (Past ω,Z ω)) =ᵐ[P] (fun ω => B i t ω*B j t ω) :=
+  have hEq : (fun ω => G (Past ω, Z ω)) =ᵐ[P] (fun ω => B i t ω*B j t ω) :=
     Filter.Eventually.of_forall fun ω => by dsimp [G, Past, Z]; ring
   have hProd : Integrable (fun ω => B i t ω*B j t ω) P :=
     ((hB i).isGaussianProcess.hasGaussianLaw_eval t).memLp_two.integrable_mul

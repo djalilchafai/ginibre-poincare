@@ -19,12 +19,12 @@ theorem ginibreLocalRegularity_exists_compact_cutoff
     (K : Set E) (hK : IsCompact K) :
     ∃ χ : E → ℝ, ContDiff ℝ ∞ χ ∧ HasCompactSupport χ ∧
       ∀ x ∈ K, χ =ᶠ[𝓝 x] 1 := by
-  obtain ⟨R,hR,hbound⟩ := hK.isBounded.exists_pos_norm_le
-  let χ : ContDiffBump (0 : E) := ⟨R+1,R+2,by linarith,by linarith⟩
-  refine ⟨χ,χ.contDiff,χ.hasCompactSupport,?_⟩
+  obtain ⟨R, hR, hbound⟩ := hK.isBounded.exists_pos_norm_le
+  let χ : ContDiffBump (0 : E) := ⟨R+1, R+2, by linarith, by linarith⟩
+  refine ⟨χ, χ.contDiff, χ.hasCompactSupport,?_⟩
   intro x hx
   apply χ.eventuallyEq_one_of_mem_ball
-  rw [Metric.mem_ball,dist_zero_right]
+  rw [Metric.mem_ball, dist_zero_right]
   exact (hbound x hx).trans_lt (by dsimp [χ]; linarith)
 
 theorem ginibreLocalRegularity_compact_equation_all_smooth_tests
@@ -40,13 +40,13 @@ theorem ginibreLocalRegularity_compact_equation_all_smooth_tests
   classical
   let K := tsupport u ∪ tsupport h ∪ ⋃ i, tsupport (F i)
   have hK : IsCompact K := (hu.union hh).union (isCompact_iUnion hF)
-  obtain ⟨χ,hχ,hχc,hχone⟩ := ginibreLocalRegularity_exists_compact_cutoff K hK
+  obtain ⟨χ, hχ, hχc, hχone⟩ := ginibreLocalRegularity_exists_compact_cutoff K hK
   let ψ : E → ℂ := fun x => (χ x : ℂ)*θ x
   have hψ : ContDiff ℝ ∞ ψ := (Complex.ofRealCLM.contDiff.comp hχ).mul hθ
   have hψc : HasCompactSupport ψ := (hχc.comp_left Complex.ofReal_zero).mul_right
   have hnear (x : E) (hx : x ∈ K) : ψ =ᶠ[𝓝 x] θ := by
     filter_upwards [hχone x hx] with y hy
-    simp [ψ,hy]
+    simp [ψ, hy]
   have hder (x : E) (hx : x ∈ K) (i : ι) :
       fderiv ℝ ψ x (v i)=fderiv ℝ θ x (v i) := by rw [(hnear x hx).fderiv_eq]
   have hder2 (x : E) (hx : x ∈ K) (i : ι) :
@@ -82,10 +82,10 @@ theorem ginibreLocalRegularity_compact_equation_all_smooth_tests
     intro x
     dsimp only
     by_cases hx : x ∈ tsupport (F i)
-    · rw [hder x (Or.inr (Set.mem_iUnion.mpr ⟨i,hx⟩)) i]
+    · rw [hder x (Or.inr (Set.mem_iUnion.mpr ⟨i, hx⟩)) i]
     · simp [image_eq_zero_of_notMem_tsupport hx]
   have he := heq ψ hψ hψc
-  rw [hleft,hvalue] at he
+  rw [hleft, hvalue] at he
   simpa only [hright] using he
 
 #print axioms ginibreLocalRegularity_compact_equation_all_smooth_tests

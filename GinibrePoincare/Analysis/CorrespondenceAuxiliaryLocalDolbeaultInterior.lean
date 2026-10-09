@@ -12,7 +12,7 @@ set_option backward.isDefEq.respectTransparency false
 theorem dbarComponent_zero_of_notMem_tsupport {n : ℕ}
     (θ : Configuration n → ℂ) (j : Fin n) (y : Configuration n)
     (hy : y ∉ tsupport θ) : dbarComponent θ j y = 0 := by
-  simp [dbarComponent,fderiv_of_notMem_tsupport ℝ hy]
+  simp [dbarComponent, fderiv_of_notMem_tsupport ℝ hy]
 
 theorem dolbeaultBump_translated_tsupport {n : ℕ}
     (φ : ContDiffBump (0 : ℂ)) (p : Configuration n) :
@@ -23,10 +23,10 @@ theorem dolbeaultBump_translated_tsupport {n : ℕ}
   have hnon : piPlanarBump n φ (p-y) ≠ 0 := by
     intro hzero
     apply hy
-    simp only [hzero,Complex.ofReal_zero]
+    simp only [hzero, Complex.ofReal_zero]
   have h := piPlanarBump_support_ball n φ (p-y) hnon
   apply ball_subset_closedBall
-  simpa only [mem_ball,dist_eq_norm,sub_zero,norm_sub_rev] using h
+  simpa only [mem_ball, dist_eq_norm, sub_zero, norm_sub_rev] using h
 
 theorem dolbeaultBump_translated_tsupport_interior {n : ℕ}
     (φ : ContDiffBump (0 : ℂ)) (x p : Configuration n) (R : ℝ)
@@ -52,7 +52,7 @@ theorem localDolbeault_indicator_closed {n : ℕ}
     by_cases hy : y ∈ closedBall x R
     · rw [indicator_of_mem hy]
     · have hys : y ∉ tsupport θ := fun h => hy (ball_subset_closedBall (hsθ h))
-      rw [dbarComponent_zero_of_notMem_tsupport θ s y hys,zero_mul,zero_mul]
+      rw [dbarComponent_zero_of_notMem_tsupport θ s y hys, zero_mul, zero_mul]
   simp_rw [he]
   exact hclosed θ hθ hcθ (hsθ.trans (ball_subset_closedBall.trans hball)) j k
 

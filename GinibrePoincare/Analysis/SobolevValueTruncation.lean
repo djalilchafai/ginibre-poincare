@@ -52,7 +52,7 @@ theorem sobolevValueTruncation_bounded (m : ℕ) (x : ℝ) :
 /-- Uniform actual derivative bound; it is derived from the fixed bump. -/
 theorem sobolevValueTruncation_deriv_bound : ∃ B : ℝ, 0 ≤ B ∧ ∀ m x,
     ‖deriv (sobolevValueTruncation m) x‖ ≤ B := by
-  obtain ⟨M,hM0,hM⟩ := sobolevCutoff_deriv_bound
+  obtain ⟨M, hM0, hM⟩ := sobolevCutoff_deriv_bound
   refine ⟨2 * M + 1, by positivity, ?_⟩
   intro m x
   have hc : ‖sobolevCutoff m x‖ ≤ 1 := by

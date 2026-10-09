@@ -63,17 +63,17 @@ theorem drivenContinuousNoise_lipschitz_uniform_local {E : Type*}
   let X := fun t => Y t+N t
   have hXc : ContinuousOn X (Icc 0 (ε : ℝ)) := hYc.add hN.continuousOn
   refine ⟨X, hXc, ?_, ?_⟩
-  · dsimp [X]; rw [hY0,hN0,add_zero]
+  · dsimp [X]; rw [hY0, hN0, add_zero]
   · intro t ht
     have hbc : ContinuousOn (fun s => b (X s)) (Icc 0 t) :=
-      (hb.continuous.comp_continuousOn hXc).mono (fun s hs => ⟨hs.1,hs.2.trans ht.2⟩)
+      (hb.continuous.comp_continuousOn hXc).mono (fun s hs => ⟨hs.1, hs.2.trans ht.2⟩)
     have hFTC := intervalIntegral.integral_eq_sub_of_hasDeriv_right_of_le ht.1
-      (hYc.mono (fun s hs => ⟨hs.1,hs.2.trans ht.2⟩))
+      (hYc.mono (fun s hs => ⟨hs.1, hs.2.trans ht.2⟩))
       (fun s hs => (hY s ⟨by linarith [hs.1], hs.2.le.trans ht.2⟩).hasDerivAt
         (Icc_mem_nhds (by linarith [hs.1]) (hs.2.trans_le ht.2)) |>.hasDerivWithinAt)
       (hbc.intervalIntegrable_of_Icc ht.1)
     dsimp [X]
-    rw [hFTC,hY0]
+    rw [hFTC, hY0]
     abel
 
 end

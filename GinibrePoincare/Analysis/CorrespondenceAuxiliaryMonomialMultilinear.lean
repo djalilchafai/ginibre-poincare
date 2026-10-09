@@ -19,7 +19,7 @@ def coordinateWordMultilinear {n k : ℕ} (word : Fin k → Fin n) :
 @[simp] theorem coordinateWordMultilinear_apply {n k : ℕ} (word : Fin k → Fin n)
     (v : Fin k → Configuration n) :
     coordinateWordMultilinear word v = ∏ i, v i (word i) := by
-  simp [coordinateWordMultilinear,ContinuousMultilinearMap.mkPiAlgebraFin_apply,
+  simp [coordinateWordMultilinear, ContinuousMultilinearMap.mkPiAlgebraFin_apply,
     List.prod_ofFn]
 
 /-- Uniform operator bound needed to construct the genuine multivariate
@@ -28,7 +28,7 @@ theorem coordinateWordMultilinear_norm_le {n k : ℕ} (word : Fin k → Fin n) :
     ‖coordinateWordMultilinear word‖ ≤ 1 := by
   apply ContinuousMultilinearMap.opNorm_le_bound (by norm_num)
   intro v
-  rw [coordinateWordMultilinear_apply,norm_prod,one_mul]
+  rw [coordinateWordMultilinear_apply, norm_prod, one_mul]
   gcongr with i
   exact norm_le_pi_norm (v i) (word i)
 
@@ -46,7 +46,7 @@ def holomorphicMonomialMultilinear {n : ℕ} (p : Fin n → ℕ) :
 @[simp] theorem holomorphicMonomialMultilinear_diagonal {n : ℕ}
     (p : Fin n → ℕ) (z : Configuration n) :
     holomorphicMonomialMultilinear p (fun _ => z) = ∏ i, z i ^ p i := by
-  rw [holomorphicMonomialMultilinear,coordinateWordMultilinear_apply]
+  rw [holomorphicMonomialMultilinear, coordinateWordMultilinear_apply]
   let e := Fintype.equivFinOfCardEq
     (show Fintype.card (Σ i : Fin n, Fin (p i)) = ∑ i, p i by simp)
   change (∏ j : Fin (∑ i, p i), z (e.symm j).1) = _

@@ -7,7 +7,16 @@ public import Mathlib.Analysis.Calculus.FDeriv.RestrictScalars
 
 @[expose] public section
 
-/-! # The Vandermonde ground-state transform and `∂̄` -/
+/-! # The Vandermonde ground-state transform and `∂̄`
+
+Complex differentiability makes the coordinate dbar derivative of the
+Vandermonde vanish. The product rule therefore differentiates only the
+observable in the normalized ground-state transform. Squaring, summing and
+integrating gives the factor-four Dirichlet identity. Compact support and
+Gaussian integrability also establish admissibility of the transformed
+centered observable; these are the two analytic inputs used by the original
+smooth-core Poincaré proof.
+-/
 
 open MeasureTheory
 open scoped BigOperators ComplexConjugate ContDiff

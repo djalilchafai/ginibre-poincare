@@ -37,13 +37,13 @@ theorem correspondence_ginibre_restart_all_times
         ginibreConfigurationBrownianNoise n B α ω s := by
       change (ginibreBrownianFullContinuousNoise n B α ω).val ((s : ℝ)+max t 0) -
         (ginibreBrownianFullContinuousNoise n B α ω).val s = _
-      rw [max_eq_left ht,hNoise,hNoise]
+      rw [max_eq_left ht, hNoise, hNoise]
     rw [heq]
     exact hShift.2 t ht
   have h := ginibreDrivenPath_canonical_global
     (hω.1.comp (continuous_const.add continuous_id))
     (fun t ht => hω.2.2.1 (s+t) (add_nonneg s.property ht)) he
-  simpa only [X,N,Function.comp_def,Pi.add_apply,id_eq,add_zero,Real.toNNReal_coe,
+  simpa only [X, N, Function.comp_def, Pi.add_apply, id_eq, add_zero, Real.toNNReal_coe,
     ← NNReal.coe_add] using h
 
 #print axioms correspondence_ginibre_restart_all_times

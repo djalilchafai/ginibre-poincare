@@ -6,14 +6,19 @@ public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 
 @[expose] public section
 
-/-! # Pathwise splitting of the actual additive-noise Ginibre equation
+/-! # Pathwise splitting of the additive-noise equation
 
-Summation and recentering commute with the time integral of the actual drift.
-Thus any solution of the additive-noise integral equation splits into the
-center OU equation and the autonomous recentered equation. Brownian laws,
-well-posedness, stochastic independence and semigroup factorization are not
-asserted by these deterministic pathwise results.
--/
+`IsGinibreDrivenPath` records integrability of the concrete Langevin drift
+and its Volterra equation with cumulative noise `N`. The maps
+`coordinateSumCLM` and `recenteredCLM` commute with interval integration.
+Applying them to the equation and using the drift identities produces the
+center OU equation and the autonomous recentered equation.
+
+These results are deterministic: they apply to any driven solution on
+nonnegative times. Brownian projection and independence enter later through
+`GinibreBrownianProjection`; global path versions and stochastic
+factorization are assembled in `BrownianOrthogonalGlobalPathFactorization`
+and `BrownianOrthogonalIndependentInitial`. -/
 
 open MeasureTheory
 open scoped Topology

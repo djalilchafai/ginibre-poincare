@@ -5650,6 +5650,7 @@ edge [arrowsize=0.7, fontname="sans-serif", fontsize=9];
 "GinibrePoincare.Analysis.GinibreStochasticCIRNoiseSums" -> "GinibrePoincare.Subprojects.StochasticDynamics" [color="#64748b", tooltip="import"];
 "GinibrePoincare.Analysis.GinibreStochasticCIRRealization" -> "AllLocalAxiomAudit" [color="#64748b", tooltip="import"];
 "GinibrePoincare.Analysis.GinibreStochasticCIRRealization" -> "GinibrePoincare.Analysis.CorrespondenceDynamicsGlobalCIR" [color="#64748b", tooltip="import"];
+"GinibrePoincare.Analysis.GinibreStochasticCIRRealization" -> "GinibrePoincare.Analysis.DynamicalFactorization" [color="#64748b", tooltip="import"];
 "GinibrePoincare.Analysis.GinibreStochasticCIRRealization" -> "GinibrePoincare.Subprojects.StochasticDynamics" [color="#64748b", tooltip="import"];
 "GinibrePoincare.Analysis.GinibreStochasticCIRTransition" -> "AllLocalAxiomAudit" [color="#64748b", tooltip="import"];
 "GinibrePoincare.Analysis.GinibreStochasticCIRTransition" -> "GinibrePoincare.Analysis.GinibreStochasticCIRMoments" [color="#64748b", tooltip="import"];

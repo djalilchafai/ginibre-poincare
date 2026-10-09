@@ -12,7 +12,7 @@ actual symmetric L² value. No gradient symmetry assumption is needed. -/
 theorem ginibreFullSymmetricValue_distributional_pair_symmetric {n : ℕ} (hn : 0 < n)
     (u : ginibreFullSymmetricValues n) (g : GinibreFullGradientL2 n)
     (hu : IsGinibreDistributionalGradient n u.val g) :
-    IsGinibreSymmetricWeakPair (u.val,g) := by
+    IsGinibreSymmetricWeakPair (u.val, g) := by
   intro σ
   refine ⟨u.property σ,?_⟩
   have hp := ginibreDistributionalGradient_permute hn σ u.val g hu

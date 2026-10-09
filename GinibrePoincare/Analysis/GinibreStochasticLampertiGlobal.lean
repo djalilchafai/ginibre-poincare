@@ -38,7 +38,7 @@ theorem ginibreBrownianMaximalProcess_global_Lamperti_identity
     ginibreBrownianHamiltonianBoundedStop_exhausts_ae (by omega) α z hz B P hB hind]
     with ω hω hExhaust
   intro t
-  obtain ⟨k,hkt⟩ := (hExhaust t).exists
+  obtain ⟨k, hkt⟩ := (hExhaust t).exists
   have hh := hω k t hkt
   have hXt : ginibreBrownianHamiltonianStoppedProcess n α z B (ginibreHamiltonian n z+k) k t ω =
       ginibreBrownianMaximalProcess n α z B t ω := by
@@ -52,7 +52,7 @@ theorem ginibreBrownianMaximalProcess_global_Lamperti_identity
     intro s hs
     rw [uIcc_of_le t.coe_nonneg] at hs
     have hst : s.toNNReal ≤ t := by
-      rw [← NNReal.coe_le_coe,Real.coe_toNNReal _ hs.1]
+      rw [← NNReal.coe_le_coe, Real.coe_toNNReal _ hs.1]
       exact hs.2
     have hCF := (ginibreBrownianHamiltonianStoppedProcess_range (by omega) α z hz B
       (ginibreHamiltonian n z+k) (hR k) k s.toNNReal ω).1
@@ -61,7 +61,7 @@ theorem ginibreBrownianMaximalProcess_global_Lamperti_identity
     change ginibreLampertiRadialDrift n α (pairwiseRadius
       (ginibreBrownianMaximalProcess n α z B (min s.toNNReal _) ω)) = _
     rw [min_eq_left (hst.trans hkt)]
-  rw [hXt,hInt] at hh
+  rw [hXt, hInt] at hh
   exact hh
 end
 end GinibrePoincare

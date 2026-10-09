@@ -4,8 +4,18 @@ public import GinibrePoincare.Analysis.GinibreStochasticCIRCoefficientProcess
 
 @[expose] public section
 
-/-! Before the actual Hamiltonian stopping time, finite CIR noise sums use
-the radial direction of the original global solution itself. -/
+/-! # Radius sums use the full-process radial direction before stopping
+
+The existing radius gradient identity expresses each finite Brownian sum
+through the CIR amplitude and the stopped process's radial direction.
+Every left endpoint in a partition of `[0, t]` is at most `t`. If `t` is
+before the Hamiltonian stop, the stopped and maximal configurations agree
+at all those endpoints, so the direction can be replaced by that of the
+full process term by term.
+
+This finite-sum identity connects the stopped Itô formula to the global
+scalar radial Brownian driver in `GinibreStochasticCIRDrivenLocal`. It is
+pathwise and requires no limiting or probabilistic argument. -/
 open scoped Topology NNReal
 namespace GinibrePoincare
 noncomputable section

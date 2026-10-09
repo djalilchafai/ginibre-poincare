@@ -30,22 +30,22 @@ theorem actualConstantLaw_independent_of_limit
   have hV : Measurable V := hφ.comp hY
   let ν := P.map V
   letI : IsProbabilityMeasure ν := (by infer_instance)
-  have hVlaw : HasLaw V ν P := ⟨hV.aemeasurable,rfl⟩
+  have hVlaw : HasLaw V ν P := ⟨hV.aemeasurable, rfl⟩
   have hi : ∀ n, IndepFun V (S n) P := by
     intro n
     exact (hInd n).comp hφ measurable_id
-  have hp : TendstoInMeasure P (fun n ω => (V ω,S n ω)) atTop (fun ω => (V ω,L ω)) := by
+  have hp : TendstoInMeasure P (fun n ω => (V ω, S n ω)) atTop (fun ω => (V ω, L ω)) := by
     intro ε hε
-    simpa only [Prod.edist_eq,edist_self,zero_max] using hL ε hε
+    simpa only [Prod.edist_eq, edist_self, zero_max] using hL ε hε
   have hj := actualConstantLaw_of_tendstoInMeasure P (ν.prod μ)
-    (fun n ω => (V ω,S n ω)) (fun n => IndepFun.hasLaw_prod hVlaw (hS n) (hi n))
-    (fun ω => (V ω,L ω)) hp
+    (fun n ω => (V ω, S n ω)) (fun n => IndepFun.hasLaw_prod hVlaw (hS n) (hi n))
+    (fun ω => (V ω, L ω)) hp
   have hiL : IndepFun V L P := by
     apply (indepFun_iff_map_prod_eq_prod_map_map hV.aemeasurable hlaw.aemeasurable).mpr
-    rw [hj.map_eq,hlaw.map_eq]
+    rw [hj.map_eq, hlaw.map_eq]
   have he : V ⁻¹' ({1} : Set ℝ) = Y ⁻¹' Aset := by
     ext ω
-    by_cases hω : Y ω ∈ Aset <;> simp [V,φ,hω]
+    by_cases hω : Y ω ∈ Aset <;> simp [V, φ, hω]
   have hh := hiL.measure_inter_preimage_eq_mul ({1} : Set ℝ) C (measurableSet_singleton 1) hC
   rwa [he] at hh
 

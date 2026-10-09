@@ -26,7 +26,7 @@ theorem ginibreConfigurationBrownianGradientField_sum_eq {Ω : Type*} (n : ℕ) 
       (fun u ω => ginibreConfigurationBrownianGradientField n α X f u ω i) t (k+1) ω) =
       ginibreConfigurationBrownianGradientSum n B α X f t k ω := by
   rw [ginibreConfigurationBrownianGradientSum_eq]
-  simp only [ginibreConfigurationBrownianGradientField,PiLp.toLp_apply,brownianUniformLeftSum]
+  simp only [ginibreConfigurationBrownianGradientField, PiLp.toLp_apply, brownianUniformLeftSum]
   simp_rw [mul_assoc,← Finset.mul_sum]
 
  theorem ginibreCompactGradient_shifted_probability_limit
@@ -45,7 +45,7 @@ theorem ginibreConfigurationBrownianGradientField_sum_eq {Ω : Type*} (n : ℕ) 
     TendstoInMeasure P (fun k => brownianUnitShiftedUniformSum B
       (ginibreConfigurationBrownianGradientField n α X f) a r (k+1)) atTop
       (fun ω => J (a+r) ω-J a ω) := by
-  obtain ⟨C,hC,hG,hH⟩ := ginibreCompactProcess_test_coefficients n _ X hX hCont f U K hU hf hK hKU hRange
+  obtain ⟨C, hC, hG, hH⟩ := ginibreCompactProcess_test_coefficients n _ X hX hCont f U K hU hf hK hKU hRange
   let d := Real.sqrt (2*α/(n : ℝ)^2)
   let u := ginibreConfigurationBrownianGradientField n α X f
   have hum (t : ℝ≥0) : @Measurable Ω (EuclideanSpace ℝ (Fin n × Fin 2))
@@ -70,7 +70,7 @@ theorem ginibreConfigurationBrownianGradientField_sum_eq {Ω : Type*} (n : ℕ) 
     exact continuous_const.mul ((hG i).2.1 ω)
   have hb (t ω i) : ‖u t ω i‖ ≤ |d| * C := by
     change ‖d*fderiv ℝ f (X t ω) (ginibreCoordinateDirection i)‖ ≤ _
-    rw [norm_mul,Real.norm_eq_abs]
+    rw [norm_mul, Real.norm_eq_abs]
     exact mul_le_mul_of_nonneg_left ((hG i).2.2 t ω) (abs_nonneg d)
   apply brownianUnitShiftedUniformSum_punctured_tendstoInMeasure_of_horizon_limits B P hB hind u hum hui huc
     (|d| * C) (mul_nonneg (abs_nonneg _) hC) hb a r _ _

@@ -50,29 +50,29 @@ theorem ginibreOriginalSymmetricStochasticL2Operator_zero {Ω : Type*} [Measurab
     (hiB : iIndepFun (fun i ω t => B i t ω) P) (u : ginibreFullSymmetricValues n) :
     ginibreOriginalSymmetricStochasticL2Operator hn α P B hB hiB 0 u=u := by
   apply Subtype.ext
-  rw [ginibreOriginalSymmetricStochasticL2Operator_val,ginibreOriginalStochasticL2Operator_zero]
+  rw [ginibreOriginalSymmetricStochasticL2Operator_val, ginibreOriginalStochasticL2Operator_zero]
   rfl
 
 theorem ginibreOriginalSymmetricStochasticL2Operator_laplace {Ω : Type*} [MeasurableSpace Ω]
-    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α:ℝ)) (P : Measure Ω)
+    {n : ℕ} (hn : 0<n) (α : ℝ≥0) (hα : 0<(α : ℝ)) (P : Measure Ω)
     [IsProbabilityMeasure P] [P.IsComplete]
     (B : (Fin n × Fin 2) → ℝ≥0 → Ω → ℝ) (hB : ∀ i, IsBrownianReal (B i) P)
     (hiB : iIndepFun (fun i ω t => B i t ω) P) (u : ginibreFullSymmetricValues n) :
-    (∫ s in Ioi (0:ℝ), (((α:ℝ)/(n:ℝ))*Real.exp (-((α:ℝ)/(n:ℝ))*s)) •
+    (∫ s in Ioi (0 : ℝ), (((α : ℝ)/(n : ℝ))*Real.exp (-((α : ℝ)/(n : ℝ))*s)) •
       ginibreOriginalSymmetricStochasticL2Operator hn α P B hB hiB s.toNNReal u)=
       ginibreFullSymmetricResolvent n hn u := by
-  have hc : 0<(α:ℝ)/(n:ℝ) := div_pos hα (Nat.cast_pos.mpr hn)
+  have hc : 0<(α : ℝ)/(n : ℝ) := div_pos hα (Nat.cast_pos.mpr hn)
   have hI := actualContractionLaplace_integrable
     (ginibreOriginalSymmetricStochasticL2Operator hn α P B hB hiB)
     (ginibreOriginalSymmetricStochasticL2Operator_continuous hn α P B hB hiB)
     (ginibreOriginalSymmetricStochasticL2Operator_norm_le hn α P B hB hiB)
-    ((α:ℝ)/(n:ℝ)) hc u
+    ((α : ℝ)/(n : ℝ)) hc u
   apply Subtype.ext
   change (ginibreFullSymmetricValues n).subtypeL
-    (∫ s in Ioi (0:ℝ), (((α:ℝ)/(n:ℝ))*Real.exp (-((α:ℝ)/(n:ℝ))*s)) •
+    (∫ s in Ioi (0 : ℝ), (((α : ℝ)/(n : ℝ))*Real.exp (-((α : ℝ)/(n : ℝ))*s)) •
       ginibreOriginalSymmetricStochasticL2Operator hn α P B hB hiB s.toNNReal u)=_
   rw [← (ginibreFullSymmetricValues n).subtypeL.integral_comp_comm hI]
-  change ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α:ℝ)/(n:ℝ)) u.val=_
+  change ginibreOriginalStochasticL2Resolvent hn α P B hB hiB ((α : ℝ)/(n : ℝ)) u.val=_
   exact ginibreOriginalStochasticL2Resolvent_eq_analytic hn α hα P B hB hiB u
 
 #print axioms ginibreOriginalSymmetricStochasticL2Operator_laplace

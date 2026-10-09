@@ -19,7 +19,7 @@ def ginibreLinearStatistic (n : ℕ) (g : ℂ → ℂ) (z : Configuration n) : �
 /-- Exact planar Euclidean gradient norm of a real linear functional. -/
 theorem complexRealDual_norm_sq (L : ℂ →L[ℝ] ℝ) :
     ‖L‖^2=(L 1)^2+(L Complex.I)^2 := by
-  simpa only [Complex.coe_orthonormalBasisOneI,Fin.sum_univ_two,Matrix.cons_val_zero,Matrix.cons_val_one]
+  simpa only [Complex.coe_orthonormalBasisOneI, Fin.sum_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one]
     using Complex.orthonormalBasisOneI.norm_dual L
 
 theorem ginibreLinearStatistic_contDiff {n : ℕ} (g : ℂ → ℂ) (hg : ContDiff ℝ 1 g) :
@@ -36,14 +36,14 @@ theorem ginibreLinearStatistic_fderiv_direction {n : ℕ} (g : ℂ → ℂ)
       ∑ i : Fin n, (fderiv ℝ g (z i)).comp (ContinuousLinearMap.proj i) := by
     have he : ginibreLinearStatistic n g=∑ i : Fin n, g ∘ (ContinuousLinearMap.proj i : Configuration n →L[ℝ] ℂ) := by
       funext z
-      simp [ginibreLinearStatistic,Finset.sum_apply]
-    rw [he,fderiv_sum (fun i hi => (hgd (z i)).comp z (ContinuousLinearMap.proj i : Configuration n →L[ℝ] ℂ).differentiableAt)]
+      simp [ginibreLinearStatistic, Finset.sum_apply]
+    rw [he, fderiv_sum (fun i hi => (hgd (z i)).comp z (ContinuousLinearMap.proj i : Configuration n →L[ℝ] ℂ).differentiableAt)]
     apply Finset.sum_congr rfl
     intro i hi
-    rw [fderiv_comp z (hgd (z i)) (ContinuousLinearMap.proj i : Configuration n →L[ℝ] ℂ).differentiableAt,ContinuousLinearMap.fderiv]
+    rw [fderiv_comp z (hgd (z i)) (ContinuousLinearMap.proj i : Configuration n →L[ℝ] ℂ).differentiableAt, ContinuousLinearMap.fderiv]
     rfl
-  rw [hG,ContinuousLinearMap.sum_apply]
-  simp only [ContinuousLinearMap.comp_apply,ContinuousLinearMap.proj_apply,coordinateDirection]
+  rw [hG, ContinuousLinearMap.sum_apply]
+  simp only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.proj_apply, coordinateDirection]
   rw [Finset.sum_eq_single j]
   · simp
   · intro i hi hij
@@ -59,7 +59,7 @@ theorem ginibreLinearStatistic_chain_direction {n : ℕ} (g : ℂ → ℂ)
   change fderiv ℝ (F ∘ ginibreLinearStatistic n g) z (coordinateDirection j a)=_
   rw [fderiv_comp z ((hF.differentiable (by norm_num)) _)
     (((ginibreLinearStatistic_contDiff g hg).differentiable (by norm_num)) z),
-    ContinuousLinearMap.comp_apply,ginibreLinearStatistic_fderiv_direction g hg]
+    ContinuousLinearMap.comp_apply, ginibreLinearStatistic_fderiv_direction g hg]
 
 /-- The genuine pointwise gradient bound, with the sharp factor n. -/
 theorem ginibreLinearStatistic_gradient_bound {n : ℕ} (g : ℂ → ℂ)
@@ -73,7 +73,7 @@ theorem ginibreLinearStatistic_gradient_bound {n : ℕ} (g : ℂ → ℂ)
       (fderiv ℝ (fun z => F (ginibreLinearStatistic n g z)) z (imaginaryCoordinateDirection j))^2 ≤
         (K : ℝ)^2*‖fderiv ℝ F (ginibreLinearStatistic n g z)‖^2 := by
     let L := (fderiv ℝ F (ginibreLinearStatistic n g z)).comp (fderiv ℝ g (z j))
-    have hb : ‖L‖≤‖fderiv ℝ F (ginibreLinearStatistic n g z)‖*(K:ℝ) :=
+    have hb : ‖L‖≤‖fderiv ℝ F (ginibreLinearStatistic n g z)‖*(K : ℝ) :=
       (ContinuousLinearMap.opNorm_comp_le _ _).trans
         (mul_le_mul_of_nonneg_left (norm_fderiv_le_of_lipschitz ℝ hLip) (norm_nonneg _))
     rw [show realCoordinateDirection j=coordinateDirection j 1 from rfl,
@@ -82,9 +82,9 @@ theorem ginibreLinearStatistic_gradient_bound {n : ℕ} (g : ℂ → ℂ)
       ginibreLinearStatistic_chain_direction g hg F hF]
     change (L 1)^2+(L Complex.I)^2≤_
     rw [← complexRealDual_norm_sq]
-    nlinarith [norm_nonneg L,norm_nonneg (fderiv ℝ F (ginibreLinearStatistic n g z)),K.coe_nonneg]
+    nlinarith [norm_nonneg L, norm_nonneg (fderiv ℝ F (ginibreLinearStatistic n g z)), K.coe_nonneg]
   have hh := Finset.sum_le_sum (s := Finset.univ) (fun j hj => hpair j)
-  simpa only [Finset.sum_const,Finset.card_univ,Fintype.card_fin,nsmul_eq_mul,mul_assoc] using hh
+  simpa only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, mul_assoc] using hh
 
 #print axioms ginibreLinearStatistic_gradient_bound
 end

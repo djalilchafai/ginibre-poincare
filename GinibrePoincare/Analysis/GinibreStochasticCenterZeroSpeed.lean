@@ -35,8 +35,8 @@ theorem ginibreBrownianMaximalProcess_zero_speed_constant
     simp [ginibreLangevinDrift]
   have hinit : ginibreBrownianMaximalProcess n 0 z B 0 ω = z := by
     simpa only [NNReal.coe_zero] using hω.2.1
-  simp only [NNReal.coe_zero,Real.toNNReal_zero,Real.toNNReal_coe] at hh
-  rw [hinit,hN,hd] at hh
+  simp only [NNReal.coe_zero, Real.toNNReal_zero, Real.toNNReal_coe] at hh
+  rw [hinit, hN, hd] at hh
   change ginibreBrownianMaximalProcess n 0 z B t ω = z + 0 +
     ∫ s in (0 : ℝ)..(t : ℝ), (0 : Configuration n) at hh
   simpa using hh
@@ -56,13 +56,13 @@ theorem ginibreBrownian_zero_speed_independent_radius_drivers
       (∀ᵐ ω ∂P, ∀ t : ℝ≥0,
         ginibreCenterSquared n (ginibreBrownianMaximalProcess n 0 z B t ω) = ginibreCenterSquared n z ∧
         pairwiseRadius (ginibreBrownianMaximalProcess n 0 z B t ω) = pairwiseRadius z) := by
-  let j : Fin n := ⟨0,hn⟩
-  refine ⟨B (j,0),B (j,1),hB _,hB _,hind.indepFun (by simp),?_⟩
+  let j : Fin n := ⟨0, hn⟩
+  refine ⟨B (j, 0), B (j, 1), hB _, hB _, hind.indepFun (by simp),?_⟩
   filter_upwards [ginibreBrownianMaximalProcess_zero_speed_constant hn z hz B P hB hind]
     with ω hω
   intro t
   rw [hω t]
-  exact ⟨rfl,rfl⟩
+  exact ⟨rfl, rfl⟩
 
 theorem ginibreBrownian_zero_speed_two_radius_CIR_realization
     {Ω : Type*} [MeasurableSpace Ω] {n : ℕ} (hn : 0 < n)
@@ -91,11 +91,11 @@ theorem ginibreBrownian_zero_speed_two_radius_CIR_realization
             (pairwiseRadius (X t ω)-pairwiseRadius z = JR t ω+
               ∫ s in (0 : ℝ)..t, (4*(0 : ℝ)/(n : ℝ))*
                 ((recenteredGammaShape n : ℝ)-pairwiseRadius (X s.toNNReal ω))) := by
-  let j : Fin n := ⟨0,hn⟩
-  refine ⟨B (j,0),B (j,1),hB _,hB _,hind.indepFun (by simp),?_⟩
+  let j : Fin n := ⟨0, hn⟩
+  refine ⟨B (j, 0), B (j, 1), hB _, hB _, hind.indepFun (by simp),?_⟩
   intro R hR T
-  refine ⟨(fun _ _ => 0),(fun _ _ => 0),martingale_const _ P 0,martingale_const _ P 0,
-    (fun _ => continuous_const),(fun _ => continuous_const),?_,?_,?_⟩
+  refine ⟨(fun _ _ => 0), (fun _ _ => 0), martingale_const _ P 0, martingale_const _ P 0,
+    (fun _ => continuous_const), (fun _ => continuous_const),?_,?_,?_⟩
   · intro t ht
     simp [brownianUniformLeftSum]
   · intro t ht

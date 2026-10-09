@@ -26,7 +26,7 @@ theorem ginibreBrownian_transition_tested_past
         ginibreBrownianStateTransitionKernel α B P t (ginibreBrownianStateProcess α z B s ω) a else 0 ∂P := by
   classical
   let F := ginibreBrownianAugmentedFiltration B P (fun i => (hB i).toIsPreBrownianReal)
-  let Z := fun ω => (Y ω,ginibreBrownianStateProcess α z B s ω)
+  let Z := fun ω => (Y ω, ginibreBrownianStateProcess α z B s ω)
   let μ := P.map (ginibreBrownianFullContinuousNoise n B α)
   have hm := ginibreBrownianFullContinuousNoise_measurable n B P hB α
   letI : IsProbabilityMeasure μ := (by infer_instance)
@@ -36,7 +36,7 @@ theorem ginibreBrownian_transition_tested_past
   have hXa : Measurable (ginibreBrownianStateProcess α z B (s+t)) :=
     (ginibreBrownianStateProcess_adapted hn α z B P hB (s+t)).mono (F.le (s+t)) le_rfl
   let g := fun p : (A × {z : Configuration n // CollisionFree z}) × GinibreContinuousNoise n =>
-    (p.1.1,ginibreCanonicalStateValue α t (p.1.2,p.2))
+    (p.1.1, ginibreCanonicalStateValue α t (p.1.2, p.2))
   have hg : Measurable g := (measurable_fst.comp measurable_fst).prodMk
     ((ginibreCanonicalStateValue_measurable hn α t).comp
       ((measurable_snd.comp measurable_fst).prodMk measurable_snd))
@@ -44,32 +44,32 @@ theorem ginibreBrownian_transition_tested_past
       if y.1 ∈ b then ginibreBrownianStateTransitionKernel α B P t y.2 a else 0) :=
     (((ginibreBrownianStateTransitionKernel α B P t).measurable_coe ha).comp measurable_snd).ite
       (hb.preimage measurable_fst) measurable_const
-  change P ((fun ω => (Y ω,ginibreBrownianStateProcess α z B (s+t) ω)) ⁻¹' (b ×ˢ a)) = _
+  change P ((fun ω => (Y ω, ginibreBrownianStateProcess α z B (s+t) ω)) ⁻¹' (b ×ˢ a)) = _
   rw [← Measure.map_apply (hYamb.prodMk hXa) (hb.prod ha),
     ginibreBrownian_future_past_joint_law hn α z B P hB hind s t Y hY,
-    Measure.map_apply hg (hb.prod ha),Measure.prod_apply (hg (hb.prod ha))]
+    Measure.map_apply hg (hb.prod ha), Measure.prod_apply (hg (hb.prod ha))]
   rw [← lintegral_map hK hZa]
   apply lintegral_congr
   intro y
   change μ (Prod.mk y ⁻¹' (g ⁻¹' (b ×ˢ a))) = _
   by_cases hy : y.1 ∈ b
-  · simp only [hy,ite_true]
+  · simp only [hy, ite_true]
     have he : Prod.mk y ⁻¹' (g ⁻¹' (b ×ˢ a)) =
-        (fun N => ginibreCanonicalStateValue (α : ℝ) t (y.2,N)) ⁻¹' a := by
+        (fun N => ginibreCanonicalStateValue (α : ℝ) t (y.2, N)) ⁻¹' a := by
       ext N
-      simp [g,hy]
+      simp [g, hy]
     rw [he]
-    change μ ((fun N => ginibreCanonicalStateValue (α : ℝ) t (y.2,N)) ⁻¹' a) =
+    change μ ((fun N => ginibreCanonicalStateValue (α : ℝ) t (y.2, N)) ⁻¹' a) =
       ginibreCanonicalStateTransitionKernel (α : ℝ) t μ y.2 a
     rw [ginibreCanonicalStateTransitionKernel_apply hn]
-    have hf : Measurable (fun N => ginibreCanonicalStateValue (α : ℝ) t (y.2,N)) :=
+    have hf : Measurable (fun N => ginibreCanonicalStateValue (α : ℝ) t (y.2, N)) :=
       (ginibreCanonicalStateValue_measurable hn α t).comp (measurable_const.prodMk measurable_id)
     exact (Measure.map_apply hf ha).symm
-  · simp only [hy,ite_false]
+  · simp only [hy, ite_false]
     have he : Prod.mk y ⁻¹' (g ⁻¹' (b ×ˢ a)) = ∅ := by
       ext N
-      simp [g,hy]
-    rw [he,measure_empty]
+      simp [g, hy]
+    rw [he, measure_empty]
 
 end
 end GinibrePoincare

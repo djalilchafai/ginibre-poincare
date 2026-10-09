@@ -45,7 +45,7 @@ theorem dolbeaultPiBump_convolution_ae (n : ℕ) (φ : ContDiffBump (0 : ℂ))
   calc
     _ = ∫ x, (piL2BumpAverage n φ (hf.toLp f)) x*Θ x := by
       apply integral_congr_ae
-      exact ae_of_all _ (fun x => by simp [Θ,Complex.real_smul,mul_comm])
+      exact ae_of_all _ (fun x => by simp [Θ, Complex.real_smul, mul_comm])
     _ = ∫ a, (piPlanarBump n φ a : ℂ)*(∫ x, (hf.toLp f) (x-a)*Θ x) :=
       dolbeaultPiBump_average_test n φ (hf.toLp f) Θ hΘ hcΘ
     _ = ∫ a, (piPlanarBump n φ a : ℂ)*(∫ x, f (x-a)*Θ x) := by simp_rw [he]
@@ -53,7 +53,7 @@ theorem dolbeaultPiBump_convolution_ae (n : ℕ) (φ : ContDiffBump (0 : ℂ))
       (dolbeaultPiBump_convolution_test n φ f Θ hfi hΘ hcΘ).symm
     _ = _ := by
       apply integral_congr_ae
-      exact ae_of_all _ (fun x => by simp [Θ,Complex.real_smul,mul_comm])
+      exact ae_of_all _ (fun x => by simp [Θ, Complex.real_smul, mul_comm])
 
 theorem dolbeaultPiBump_convolution_tendsto (n : ℕ) (φ : ℕ → ContDiffBump (0 : ℂ))
     (hφ : Tendsto (fun m => (φ m).rOut) atTop (𝓝 0))

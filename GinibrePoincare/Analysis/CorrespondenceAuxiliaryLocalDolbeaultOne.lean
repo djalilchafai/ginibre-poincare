@@ -29,7 +29,7 @@ theorem gaussianLp_memLp_local_volume {n : ℕ} (hn : 0 < n)
     (u : Lp ℂ 2 (complexGaussianMeasure n)) (K : Set (Configuration n))
     (hK : IsCompact K) : MemLp u 2 (volume.restrict K) := by
   by_cases hne : K.Nonempty
-  · obtain ⟨z,hz,hmin⟩ := hK.exists_isMinOn hne
+  · obtain ⟨z, hz, hmin⟩ := hK.exists_isMinOn hne
       (contDiff_gaussianLebesgueDensityReal n).continuous.continuousOn
     let f : Configuration n → ℂ := u
     have hu : MemLp f 2 (complexGaussianMeasure n) := Lp.memLp u
@@ -53,7 +53,7 @@ theorem localDolbeault_one_locallyL2 (Ω : Set (Configuration 1)) (hΩ : IsOpen 
         ∀ θ : Configuration 1 → ℂ, ContDiff ℝ 1 θ → HasCompactSupport θ →
           tsupport θ ⊆ U →
           (∫ z, θ z*a z) = -(∫ z, u z*dbarComponent θ 0 z) := by
-  obtain ⟨r,hr,hball⟩ := Metric.isOpen_iff.mp hΩ x hx
+  obtain ⟨r, hr, hball⟩ := Metric.isOpen_iff.mp hΩ x hx
   let K := closedBall x (r/2)
   let U := ball x (r/2)
   have hK : IsCompact K := isCompact_closedBall _ _
@@ -73,21 +73,21 @@ theorem localDolbeault_one_locallyL2 (Ω : Set (Configuration 1)) (hΩ : IsOpen 
     intro j k θ hθ hc
     have hjk : j = k := Subsingleton.elim _ _
     rw [hjk]
-  obtain ⟨u,_,hdu⟩ := gaussianVolumeClosedFormSolvability (by decide) (fun _ => A) hclosed
+  obtain ⟨u, _, hdu⟩ := gaussianVolumeClosedFormSolvability (by decide) (fun _ => A) hclosed
   have hAC : volume ≪ complexGaussianMeasure 1 := by
     rw [complexGaussianMeasure_eq_real_withDensity (by decide)]
     apply withDensity_absolutelyContinuous'
       (contDiff_gaussianLebesgueDensityReal 1).continuous.measurable.ennreal_ofReal.aemeasurable
     exact Filter.Eventually.of_forall (fun z =>
       (ENNReal.ofReal_pos.mpr (gaussianLebesgueDensityReal_pos (by decide) z)).ne')
-  refine ⟨U,isOpen_ball,mem_ball_self (by linarith),hU,u,
-    gaussianLp_memLp_local_volume (by decide) u,(hdu 0).1,?_⟩
+  refine ⟨U, isOpen_ball, mem_ball_self (by linarith), hU, u,
+    gaussianLp_memLp_local_volume (by decide) u, (hdu 0).1,?_⟩
   intro θ hθ hc hs
   have he : (∫ z, θ z*a z) = ∫ z, θ z*A z := by
     apply integral_congr_ae
     filter_upwards [hAC.ae_le hm.coeFn_toLp] with z hA
     by_cases hz : z ∈ tsupport θ
-    · rw [hA,indicator_of_mem (ball_subset_closedBall (hs hz))]
+    · rw [hA, indicator_of_mem (ball_subset_closedBall (hs hz))]
     · simp [image_eq_zero_of_notMem_tsupport hz]
   rw [he]
   exact (hdu 0).2.2 θ hθ hc

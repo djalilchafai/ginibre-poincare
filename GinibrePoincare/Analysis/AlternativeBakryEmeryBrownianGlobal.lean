@@ -19,7 +19,7 @@ theorem bakryBrownianGlobalProcess_isBrownian :
   refine ⟨hG.isPreBrownianReal_of_covariance
     (bakryBrownianGlobalProcess_mean_of_unit hL hM) ?_,?_⟩
   · intro s t hst
-    rw [bakryBrownianGlobalProcess_covariance_of_unit hL hC,min_eq_left]
+    rw [bakryBrownianGlobalProcess_covariance_of_unit hL hC, min_eq_left]
     exact_mod_cast hst
   · exact ae_of_all _ bakryBrownianGlobalProcess_continuous
 

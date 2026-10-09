@@ -20,7 +20,7 @@ theorem brownianInitialTimeCutoff_zero {Ω : Type*} (F : ℝ≥0 → Ω → ℝ)
     {ε : ℝ} (hε : 0 < ε) (t : ℝ≥0) (ω : Ω) (ht : (t : ℝ) ≤ ε) :
     brownianInitialTimeCutoff F ε t ω=0 := by
   unfold brownianInitialTimeCutoff
-  rw [Real.smoothTransition.zero_of_nonpos ((div_le_one hε).mpr ht |> sub_nonpos.mpr),zero_mul]
+  rw [Real.smoothTransition.zero_of_nonpos ((div_le_one hε).mpr ht |> sub_nonpos.mpr), zero_mul]
 
 theorem brownianInitialTimeCutoff_eq {Ω : Type*} (F : ℝ≥0 → Ω → ℝ)
     {ε : ℝ} (hε : 0 < ε) (t : ℝ≥0) (ω : Ω) (ht : 2*ε ≤ (t : ℝ)) :
@@ -29,7 +29,7 @@ theorem brownianInitialTimeCutoff_eq {Ω : Type*} (F : ℝ≥0 → Ω → ℝ)
   have hh : 1 ≤ (t : ℝ)/ε-1 := by
     have h := (le_div_iff₀ hε).mpr ht
     linarith
-  rw [Real.smoothTransition.one_of_one_le hh,one_mul]
+  rw [Real.smoothTransition.one_of_one_le hh, one_mul]
 
 theorem brownianInitialTimeCutoff_continuous {Ω : Type*} (F : ℝ≥0 → Ω → ℝ)
     {ε : ℝ} (hε : 0 < ε) (ω : Ω)
@@ -54,7 +54,7 @@ theorem brownianInitialTimeCutoff_difference_bound {Ω : Type*}
     ‖F t ω-brownianInitialTimeCutoff F ε t ω‖ ≤ C := by
   have hlo := Real.smoothTransition.nonneg ((t : ℝ)/ε-1)
   have hhi := Real.smoothTransition.le_one ((t : ℝ)/ε-1)
-  rw [brownianInitialTimeCutoff,← one_sub_mul,norm_mul,Real.norm_eq_abs,
+  rw [brownianInitialTimeCutoff,← one_sub_mul, norm_mul, Real.norm_eq_abs,
     abs_of_nonneg (sub_nonneg.mpr hhi)]
   exact (mul_le_mul_of_nonneg_right (show 1-Real.smoothTransition ((t : ℝ)/ε-1) ≤ 1 by linarith)
     (norm_nonneg _)).trans (by simpa using hb t ω)
@@ -69,7 +69,7 @@ theorem brownianInitialTimeCutoff_adapted {Ω : Type*} [MeasurableSpace Ω]
 theorem brownianInitialTimeCutoff_bound {Ω : Type*}
     (F : ℝ≥0 → Ω → ℝ) (ε C : ℝ) (hb : ∀ t ω, ‖F t ω‖ ≤ C) (t : ℝ≥0) (ω : Ω) :
     ‖brownianInitialTimeCutoff F ε t ω‖ ≤ C := by
-  rw [brownianInitialTimeCutoff,norm_mul,Real.norm_eq_abs,
+  rw [brownianInitialTimeCutoff, norm_mul, Real.norm_eq_abs,
     abs_of_nonneg (Real.smoothTransition.nonneg _)]
   exact (mul_le_mul_of_nonneg_right (Real.smoothTransition.le_one _) (norm_nonneg _)).trans
     (by simpa using hb t ω)
@@ -91,12 +91,12 @@ theorem brownianUniformLeftSum_initial_cutoff_error_bound {Ω ι : Type*}
   have hbound := brownianUniformLeftSum_initial_interval_secondMoment_le B P hB hind j A hA
     C (2*ε) hC (by positivity)
     (fun t ω => brownianInitialTimeCutoff_difference_bound F ε C hb t ω)
-    (fun t ω ht => by dsimp only [A]; rw [brownianInitialTimeCutoff_eq F hε t ω ht,sub_self])
+    (fun t ω ht => by dsimp only [A]; rw [brownianInitialTimeCutoff_eq F hε t ω ht, sub_self])
     T hT N hN
   have he (ω : Ω) : brownianUniformLeftSum (B j) A T N ω =
       brownianUniformLeftSum (B j) F T N ω-
         brownianUniformLeftSum (B j) (brownianInitialTimeCutoff F ε) T N ω := by
-    simp only [brownianUniformLeftSum,A,sub_mul,Finset.sum_sub_distrib]
+    simp only [brownianUniformLeftSum, A, sub_mul, Finset.sum_sub_distrib]
   simpa only [he] using hbound
 
 #print axioms brownianUniformLeftSum_initial_cutoff_error_bound

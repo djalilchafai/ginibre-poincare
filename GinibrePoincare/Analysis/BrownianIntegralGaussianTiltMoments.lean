@@ -49,7 +49,7 @@ theorem gaussianExponentialTilt_integral_sq (h : ℝ) (v : ℝ≥0) :
     (∫ x, (gaussianExponentialTilt h v x)^2 ∂gaussianReal 0 v)=Real.exp (h^2*(v : ℝ)) := by
   have he (x : ℝ) : (gaussianExponentialTilt h v x)^2 =
       Real.exp (2*(h*x-h^2*(v : ℝ)/2)) := by
-    rw [gaussianExponentialTilt,pow_two,← Real.exp_add]
+    rw [gaussianExponentialTilt, pow_two,← Real.exp_add]
     congr 1
     ring
   simp_rw [he]

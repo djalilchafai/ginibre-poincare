@@ -47,7 +47,7 @@ theorem ginibreBrownian_augmented_mixed_sum_secondMoment_le {Ω ι : Type*}
         have h := integral_mono_ae (hFi i).integrable_sq (integrable_const (C^2))
           (Eventually.of_forall (fun ω => show (F i ω)^2 ≤ C^2 from by
             have hh := pow_le_pow_left₀ (norm_nonneg (F i ω)) (hbound i ω) 2
-            simpa only [Real.norm_eq_abs,sq_abs] using hh))
+            simpa only [Real.norm_eq_abs, sq_abs] using hh))
         simpa using h
       nlinarith [mul_le_mul_of_nonneg_left hI (show 0 ≤ (t i : ℝ)^2 by positivity)]
     _ = _ := by rw [Finset.mul_sum]

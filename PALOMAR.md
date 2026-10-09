@@ -17,10 +17,10 @@ These requirements can change; recheck them before submitting an immutable snaps
 
 Palomar accepted submission **`7fh68vzqfjeu`**. Official mechanical verification passed. Later recorded editorial readiness and
 accepted registration consent supersede the initial awaiting-review checkpoint.
-The earlier authenticated status returned HTTP 500; a subsequent GET at
-`2026-10-08T12:42:55Z` returned HTTP 403, with no cause inferred. Public publication
-is not confirmed: latest public search at 2026-10-08 16:11:40 UTC, HTTP 200 has no Ginibre entries and the
-canonical repository record is HTTP 404. See [2026-10-08 evidence](verification/registry-publication-check.md).
+The earlier HTTP 500/403 and empty-search observations are superseded by the
+confirmed [public v1 entry](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-09-000001&version=1),
+registered at `2026-10-09T00:48:41Z`. See the
+[updated publication evidence](verification/registry-publication-check.md).
 
 | Submission field | Recorded value |
 | --- | --- |
@@ -32,7 +32,7 @@ canonical repository record is HTTP 404. See [2026-10-08 evidence](verification/
 | Required full mechanical preflight | [Passed](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37679215651), with no errors or warnings; [committed report](palomar-preflight-report.json) |
 | Official verification | [Palomar Actions run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37681934359) — passed; [report](palomar-verification-report.json) |
 | Ownership proof | Agent tag-and-secret-gist protocol; both temporary artifacts deleted after verification |
-| Registration | Consent previously requested and accepted; completed publication not confirmed |
+| Registration | Published as PALOMAR-2026-10-09-000001 v1 on 2026-10-09 |
 
 This submission compares Theorem 1.1 and its equality classification. The wider
 project coverage is documented in [REPORT.md](REPORT.md) and [STATUS.md](STATUS.md).
@@ -44,17 +44,31 @@ They are omitted from this public report, as is any unpublished editorial review
 | Full-project dashboard | Current evidence / next work |
 | --- | --- |
 | Verified scope | Recorded builds and axiom audits certify the exported Lean statements; current item-specific correspondence and resolved historical findings are recorded in [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md); the official full preflight passed for the submitted snapshot |
-| Open work | Live registry publication confirmation; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
-| Latest progress | New correspondence proofs and affirmative independent main/auxiliary and extension/dynamics follow-ups; latest public registry search empty, canonical record HTTP 404; authenticated GET HTTP 403 |
-| Lean source counts | 185,400 project lines in 1,727 files; 1,256,051 transitively imported Mathlib lines in 3,813 modules; combined 1,441,451 lines |
-| Build / audit evidence | Current single-thread make check: 5,814 jobs; 6,865 public queries; 14,499 all-local declarations; standard axioms only; offline structural preflight: 1,727 Lean files, zero blockers |
-| Next step | Recheck restored authenticated service and verify a versioned public entry and source-preservation receipt |
+| Open work | New-commit registry revision verification and registration; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
+| Latest progress | Verified readability revision and refreshed diagrams; public v1 registration confirmed |
+| Lean source counts | 186,672 project lines in 1,727 files; 1,256,051 transitively imported Mathlib lines in 3,813 modules; combined 1,442,723 lines |
+| Build / audit evidence | Current single-thread make check: 5,814 jobs; 6,920 public queries; 14,592 all-local declarations; standard axioms only; offline structural preflight: 1,727 Lean files, zero blockers |
+| Next step | Push the verified revision, run exact-commit full preflight and submit an ordinary version using the existing Palomar ID |
 
 Source counts are refreshed with `python3 scripts/count_lean_sources.py`.
 Comments and blank lines are included; imported Mathlib modules are counted
 once in full. The correspondence follow-up adds concrete Lean proofs; the final
 full-tree verification and refreshed counts are recorded in STATUS.md separately
 from the immutable submitted-snapshot evidence.
+
+## Current revision — 2026-10-09
+
+The readability revision preserves existing theorem signatures and includes the
+full build and public/private audits recorded in [STATUS.md](STATUS.md).
+It refreshes all 32 endpoint views and twelve thematic diagrams. The historical
+Comparator and official verification below apply to the submitted v1 commit.
+A fresh local Comparator attempt could not complete. The symlinked dependency
+store mount was corrected conservatively; Bubblewrap then failed to create its
+network-namespace socket (`Operation not permitted`). Isolation flags remain
+intact. This is a host verification failure, not a fresh Comparator pass. The exact
+GitHub snapshot must pass the official reusable full preflight before a new
+submission. Revision intake uses `existing_id: PALOMAR-2026-10-09-000001` and a
+new full commit SHA; it cannot modify the source of published v1.
 
 ## Completed upgrade and local verification
 
@@ -84,12 +98,11 @@ names while preserving the exact mathematical statement. Concrete definitions
 remaining in its closure are recursively compared. Challenge is 173 lines / 9,781
 bytes; Solution is 87 lines / 3,892 bytes.
 
-On this host `/home` is a symlink and the existing dependency store is outside the
-project. The optional [sandbox mount wrapper](scripts/canonical_home_bwrap.py)
+The existing dependency store is symlinked outside the project under `/home`. The optional [sandbox mount wrapper](scripts/canonical_home_bwrap.py)
 canonicalizes mount path operands, still hides the canonical home, and grants
 read-only access only to that existing dependency store. Isolation and network
-flags are preserved. Hosts with an ordinary `/home` use Comparator’s default
-sandbox; an explicit `COMPARATOR_BWRAP` override is respected.
+flags are preserved. The wrapper is selected for a symlinked `/home` or a symlinked dependency store
+inside the hidden home; an explicit `COMPARATOR_BWRAP` override is respected.
 
 Palomar also requires `module` headers throughout the submitted repository,
 including unused regular Lean sources outside `.git` and `.lake`. Porting must

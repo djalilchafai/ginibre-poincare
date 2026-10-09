@@ -1,0 +1,58 @@
+Human readability revision — final verification, 2026-10-09
+Baseline Git commit: 432ef2f47484cc279f19f621efcc9cab3e3cc6dd
+Existing mathematical endpoints and hypotheses retained.
+
+LEAN_NUM_THREADS=1 make check: PASS (exit 0).
+Full build: 5,814 jobs.
+Source audit: 1,719 library modules, all publicly imported; seven root Lean files.
+Public axiom queries: 6,920.
+All-local axiom audit: 14,592 declarations, including private helpers.
+Only propext, Classical.choice and Quot.sound.
+Independent Challenge statement hole remains excluded from library/Solution closure.
+TestImport.lean: PASS (exit 0).
+make readability: PASS; 17 formatter regressions, 1,706 eligible files, one syntax skip.
+Source signature comparison: 3,490 existing declarations in 896 edited Lean files;
+no changed or removed signatures after ignoring comments and whitespace.
+Independent semantic diff review: all 15 files with code changes beyond
+comments/whitespace; no changed mathematical meaning found.
+
+Readability scope: 82 modules with revised explanations; punctuation spacing
+applied to 844 modules; seven named records and five proved result adapters.
+Detailed editorial review focused on the main reading routes.
+
+Fresh compiled export: 14,592 local declarations,
+12,588 theorems (including generated declarations),
+1,721 compiled local modules,
+1,246,759 direct reference pairs.
+Source graph: 1,726 nodes, 6,443 edges; acyclic.
+Views: 32 selected endpoints and 12 thematic diagrams; offline explorer refreshed.
+Generated graph check: PASS (exit 0).
+All ten compiled proof-route independence checks: PASS (exit 0).
+Explorer JavaScript syntax and embedded data/shortcut integrity: PASS.
+Browser rendering smoke: unavailable; Chromium crash-handler socket setup
+is blocked by the sandbox. No browser interaction pass is claimed.
+Online explorer was not redeployed.
+
+Physical Lean lines, comments and blanks included:
+Project: 186,672 lines in 1,727 files.
+Imported Mathlib: 1,256,051 lines in 3,813 modules, each counted once in full.
+Combined: 1,442,723 lines.
+
+Full-check log SHA-256: 9e65eac568749ba02d0ea64cf887ec29d6d44b57be859d1084d7e96251adf340
+Compiled export SHA-256: c3439cab8e7711c3f9309e63f577858245e5a27e883a7e483241ec3d53a700e8
+Project Lean source digest: 9abd125ae10acb5539a036da9c15028e9f696a1804acc5710b24310855df33b7
+Source digest recipe: sorted relative paths, NUL, file bytes, NUL;
+includes roots/generated facades/Lean tooling and isolated Challenge, excludes Mathlib.
+
+Mathematical correspondence findings remain the recorded 2026-10-08 reviews.
+Open Problems 1.11, 1.15, 1.16 and Appendix C keep their existing exclusions.
+Registry publication remains unconfirmed; no publication action was taken.
+
+Publication preparation 2026-10-09:
+- All current Markdown and historical review annotations reconciled.
+- Fresh graph export digest unchanged; all 32 endpoint + 12 thematic SVG/DOT pairs validated.
+- Offline JavaScript/data and Node DOM/API initialization checks pass; Chromium rendering blocked by sandbox sockets.
+- Existing Palomar v1 public receipt confirmed; registry-publication-check.json records immutable source.
+- Fresh offline Palomar structure: 1727 Lean files, zero blockers.
+- Comparator host symlink mount corrected with isolation intact; actual retry blocked by NETLINK_ROUTE socket restriction. Official exact-commit CI required.
+- GitHub Pages assembly includes topic guides and verification documentation.

@@ -9,8 +9,8 @@ open MeasureTheory ProbabilityTheory
 open scoped NNReal
 namespace GinibrePoincare
 noncomputable section
-local instance : MeasurableSpace C(ℝ,ℂ) := borel _
-local instance : BorelSpace C(ℝ,ℂ) := ⟨rfl⟩
+local instance : MeasurableSpace C(ℝ, ℂ) := borel _
+local instance : BorelSpace C(ℝ, ℂ) := ⟨rfl⟩
 
 /-- The actual Ginibre initial center and its Brownian noise are independent of
  the actual initial relative configuration and its entire relative noise path. -/

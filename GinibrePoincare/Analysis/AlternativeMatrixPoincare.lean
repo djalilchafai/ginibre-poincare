@@ -14,6 +14,17 @@ public import GinibrePoincare.Analysis.MatrixSpectralSobolevWeakDomain
 Theorem 1.13: spectral pushforward, actual Gaussian matrix Poincaré inequality,
 and the exact entry-gradient/overlap identity. The Ginibre Poincaré inequality
 and the overlap lower-bound comparison are not invoked.
+
+
+The first endpoint starts from a Gaussian H¹ pair, transports its variance to
+Ginibre eigenvalues, and converts its entry-gradient energy to four times the
+overlap energy. The Gaussian constant `1 / (2 * n)` therefore becomes `2 / n`.
+The subsequent endpoints construct the H¹ pair internally: ordinary weak entry
+derivatives enter the smooth graph closure through positive-density approximation.
+For finite overlap energy, the continuous spectral extension across collisions
+supplies those weak equations by the coordinate-line removability argument.
+This distinction separates the initial H¹ interface from the completed
+finite-overlap interface at the end of the module.
 -/
 open Matrix MeasureTheory Filter Set
 open scoped Matrix Matrix.Norms.Operator ENNReal ContDiff
@@ -33,9 +44,9 @@ theorem matrixSpectralLift_H1_gaussian_poincare {n : ℕ} (hn : 0 < n)
     (hd : ∀ i, (p.2 i : MatrixRealSpace n → ℝ) =ᵐ[matrixGaussianMeasure n]
       (fun A => fderiv ℝ (matrixSymmetricLift n F) A (matrixRealCoordinates n (Pi.single i 1)))) :
     smoothGinibreVariance n F ≤
-      (2/(n:ℝ))*∫ A, matrixSpectralOverlapEnergy n F A ∂matrixGaussianMeasure n := by
-  have hpi := matrixGaussianH1Completion_poincare n hn p hp
-  have hvar : matrixGaussianL2Variance n p.1 = smoothGinibreVariance n F := by
+      (2/(n : ℝ))*∫ A, matrixSpectralOverlapEnergy n F A ∂matrixGaussianMeasure n := by
+  have hgaussianPoincare := matrixGaussianH1Completion_poincare n hn p hp
+  have hvarianceTransport : matrixGaussianL2Variance n p.1 = smoothGinibreVariance n F := by
     rw [matrixGaussianL2Variance_integral]
     have hv2 : (fun A => p.1 A^2) =ᵐ[matrixGaussianMeasure n]
         (fun A => matrixSymmetricLift n F A^2) := hv.mono fun _ h => congrArg (fun v : ℝ => v^2) h
@@ -59,8 +70,8 @@ theorem matrixSpectralLift_H1_gaussian_poincare {n : ℕ} (hn : 0 < n)
       integral_sub hFL.integrable_sq (hi.const_mul _), integral_const_mul, integral_const]
     simp only [measureReal_def, measure_univ, ENNReal.toReal_one, smul_eq_mul, one_mul]
     ring
-  rw [hvar, matrixSpectralLift_H1_energy F hF hsym p hd] at hpi
-  convert hpi using 1 <;> ring
+  rw [hvarianceTransport, matrixSpectralLift_H1_energy F hF hsym p hd] at hgaussianPoincare
+  convert hgaussianPoincare using 1 <;> ring
 
 /-- An actual ordinary weak pair for a spectral lift gives the matrix Gaussian
 route, with graph membership derived from the ordinary derivative equations. -/
@@ -77,12 +88,12 @@ theorem matrixSpectralLift_ordinary_weak_gaussian_poincare {n m : ℕ} (hn : 0 <
       ContDiff ℝ ∞ θ → HasCompactSupport θ →
       (∫ x, g x i * θ x) = -(∫ x, u x * fderiv ℝ θ x (ginibreCoordinateDirection i))) :
     smoothGinibreVariance n F ≤
-      (2/(n:ℝ))*∫ A, matrixSpectralOverlapEnergy n F A ∂matrixGaussianMeasure n := by
+      (2/(n : ℝ))*∫ A, matrixSpectralOverlapEnergy n F A ∂matrixGaussianMeasure n := by
   let q : MatrixGaussianSobolevPair n := (matrixEntryL2ToMatrix hn e u,
     fun i => matrixEntryL2ToMatrix hn e
       ((configurationGradientComponent m ((matrixEntryRealIndexEquiv e).symm i)).compLpL
         2 (matrixEntryGaussianMeasure e) g))
-  have hq : q ∈ matrixGaussianH1Completion n := matrixEntry_full_weak_pair_mem_H1Completion hn e u g hweak
+  have hpairInCompletion : q ∈ matrixGaussianH1Completion n := matrixEntry_full_weak_pair_mem_H1Completion hn e u g hweak
   have hpres := (matrixComplexEntryEquiv_gaussian_preserving hn e).symm (matrixEntryMeasurableEquiv e)
   have hv : (q.1 : MatrixRealSpace n → ℝ) =ᵐ[matrixGaussianMeasure n] matrixSymmetricLift n F := by
     filter_upwards [matrixEntryL2ToMatrix_ae hn e u, hpres.quasiMeasurePreserving.ae hu] with A hA hB
@@ -109,7 +120,7 @@ theorem matrixSpectralLift_ordinary_weak_gaussian_poincare {n m : ℕ} (hn : 0 <
       (matrixComplexEntryEquiv e ((matrixComplexEntryEquiv e).symm A))
       (matrixRealCoordinates n (Pi.single (matrixEntryRealIndexEquiv e j) 1)) = _
     rw [ContinuousLinearEquiv.apply_symm_apply, Equiv.apply_symm_apply]
-  exact matrixSpectralLift_H1_gaussian_poincare hn F hF hsym q hq hv hd
+  exact matrixSpectralLift_H1_gaussian_poincare hn F hF hsym q hpairInCompletion hv hd
 
 /-- Finite actual overlap energy supplies the original matrix H¹ domain. -/
 theorem matrixSpectralLift_finite_overlap_gaussian_poincare_of_entries {n d : ℕ} (hn : 0 < n)
@@ -118,7 +129,7 @@ theorem matrixSpectralLift_finite_overlap_gaussian_poincare_of_entries {n d : �
     (hFL2 : MemLp F 2 (ginibreMeasure n))
     (hE : Integrable (matrixSpectralOverlapEnergy n F) (matrixGaussianMeasure n)) :
     smoothGinibreVariance n F ≤
-      (2/(n:ℝ))*∫ A, matrixSpectralOverlapEnergy n F A ∂matrixGaussianMeasure n := by
+      (2/(n : ℝ))*∫ A, matrixSpectralOverlapEnergy n F A ∂matrixGaussianMeasure n := by
   let V := fun x : Configuration (d+1) => matrixSymmetricLift n F (matrixComplexEntryEquiv e x)
   have hV : MemLp V 2 (matrixEntryGaussianMeasure e) :=
     matrixEntryIntrinsicSpectralValue_memLp hn e F hF.continuous.measurable hsym hFL2
@@ -129,13 +140,13 @@ theorem matrixSpectralLift_finite_overlap_gaussian_poincare_of_entries {n d : �
   have hu : (u : Configuration (d+1) → ℝ) =ᵐ[matrixEntryGaussianMeasure e] V := hV.coeFn_toLp
   have hg : (g : Configuration (d+1) → EuclideanSpace ℝ (Fin (d+1) × Fin 2))
       =ᵐ[matrixEntryGaussianMeasure e] matrixEntryIntrinsicSpectralGradient e F := hG.coeFn_toLp
-  have hFull : matrixEntryFullSpectralLift e F =ᵐ[matrixEntryGaussianMeasure e] V := by
+  have hfullLift_ae : matrixEntryFullSpectralLift e F =ᵐ[matrixEntryGaussianMeasure e] V := by
     filter_upwards [(matrixComplexEntryEquiv_gaussian_preserving hn e).quasiMeasurePreserving.ae
       (matrixFullSymmetricSpectralLift_eq_ae n F hsym)] with x hx
     exact hx
-  have huFull := hu.trans hFull.symm
-  have huVol : (u : Configuration (d+1) → ℝ) =ᵐ[volume] matrixEntryFullSpectralLift e F :=
-    (matrixEntryGaussian_ae_iff_volume hn e _).mp huFull
+  have hvalue_fullLift := hu.trans hfullLift_ae.symm
+  have hvalue_volume : (u : Configuration (d+1) → ℝ) =ᵐ[volume] matrixEntryFullSpectralLift e F :=
+    (matrixEntryGaussian_ae_iff_volume hn e _).mp hvalue_fullLift
   have hweak : ∀ i : Fin (d+1) × Fin 2, ∀ θ : Configuration (d+1) → ℝ,
       ContDiff ℝ ∞ θ → HasCompactSupport θ →
       (∫ x, g x i * θ x) = -(∫ x, u x * fderiv ℝ θ x (ginibreCoordinateDirection i)) := by
@@ -145,7 +156,7 @@ theorem matrixSpectralLift_finite_overlap_gaussian_poincare_of_entries {n d : �
       filter_upwards [hg] with x hx
       exact congrArg (fun v : EuclideanSpace ℝ (Fin (d+1) × Fin 2) => v i) hx
     have hder := matrixEntryFullSpectralLift_derivative_ae hn e F hF hsym i
-    have hgVol : (fun x => g x i) =ᵐ[volume]
+    have hgradient_volume : (fun x => g x i) =ᵐ[volume]
         (fun x => fderiv ℝ (matrixEntryFullSpectralLift e F) x (ginibreCoordinateDirection i)) :=
       (matrixEntryGaussian_ae_iff_volume hn e _).mp (hgScalar.trans hder.symm)
     have ht := matrixFullSpectralLift_coordinate_weak_test n d e F hF hsym i
@@ -153,13 +164,13 @@ theorem matrixSpectralLift_finite_overlap_gaussian_poincare_of_entries {n d : �
     calc
       _ = ∫ x, fderiv ℝ (matrixEntryFullSpectralLift e F) x (ginibreCoordinateDirection i) * θ x := by
         apply integral_congr_ae
-        filter_upwards [hgVol] with x hx
+        filter_upwards [hgradient_volume] with x hx
         exact congrArg (fun v : ℝ => v * θ x) hx
       _ = -(∫ x, matrixEntryFullSpectralLift e F x * fderiv ℝ θ x (ginibreCoordinateDirection i)) := ht
       _ = _ := by
         congr 1
         apply integral_congr_ae
-        filter_upwards [huVol] with x hx
+        filter_upwards [hvalue_volume] with x hx
         exact congrArg (fun v : ℝ => v * fderiv ℝ θ x (ginibreCoordinateDirection i)) hx.symm
   exact matrixSpectralLift_ordinary_weak_gaussian_poincare hn e F hF hsym u g hu hg hweak
 
@@ -170,7 +181,7 @@ theorem matrixSpectralLift_finite_overlap_gaussian_poincare {n : ℕ} (hn : 0 < 
     (hFL2 : MemLp F 2 (ginibreMeasure n))
     (hE : Integrable (matrixSpectralOverlapEnergy n F) (matrixGaussianMeasure n)) :
     smoothGinibreVariance n F ≤
-      (2/(n:ℝ))*∫ A, matrixSpectralOverlapEnergy n F A ∂matrixGaussianMeasure n := by
+      (2/(n : ℝ))*∫ A, matrixSpectralOverlapEnergy n F A ∂matrixGaussianMeasure n := by
   let d := n*n-1
   have hm : 1 ≤ n*n := Nat.succ_le_of_lt (Nat.mul_pos hn hn)
   let e : Fin (d+1) ≃ Fin n × Fin n := Fintype.equivOfCardEq (by

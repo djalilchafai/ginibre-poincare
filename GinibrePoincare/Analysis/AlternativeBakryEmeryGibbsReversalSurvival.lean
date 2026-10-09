@@ -16,7 +16,7 @@ def bakryEmeryGibbsCompactSurvival (n : ℕ) (T : ℝ≥0) (R : ℝ) :
 theorem bakryEmeryGibbsCompactSurvival_mem (n : ℕ) (T : ℝ≥0) (R : ℝ)
     (x : C(Icc (0 : ℝ) (T : ℝ), Configuration n)) :
     x ∈ bakryEmeryGibbsCompactSurvival n T R ↔ ∀ t, ‖x t‖ < R := by
-  letI : Nonempty (Icc (0 : ℝ) (T : ℝ)) := ⟨⟨0,⟨le_rfl,T.property⟩⟩⟩
+  letI : Nonempty (Icc (0 : ℝ) (T : ℝ)) := ⟨⟨0, ⟨le_rfl, T.property⟩⟩⟩
   exact x.norm_lt_iff_of_nonempty
 
 theorem bakryEmeryGibbsCompactSurvival_measurableSet (n : ℕ) (T : ℝ≥0) (R : ℝ) :
@@ -27,8 +27,8 @@ theorem bakryEmeryGibbsCompactSurvival_exhaustion (n : ℕ) (T : ℝ≥0) :
     (⋃ k : ℕ, bakryEmeryGibbsCompactSurvival n T (k : ℝ)) = univ := by
   apply eq_univ_of_forall
   intro x
-  obtain ⟨k,hk⟩ := exists_nat_gt ‖x‖
-  exact mem_iUnion.mpr ⟨k,hk⟩
+  obtain ⟨k, hk⟩ := exists_nat_gt ‖x‖
+  exact mem_iUnion.mpr ⟨k, hk⟩
 
 
 theorem bakryEmeryGibbsCompactSurvival_reverse (n : ℕ) (T : ℝ≥0) (R : ℝ)
@@ -79,7 +79,7 @@ theorem bakryEmeryGibbs_closed_exit_survival {E : Type*} [NormedAddCommGroup E]
   have hθ : θ ≤ T := hittingBtwn_le ()
   have hNoHit (h : ∀ t ≤ T, ‖U t-z‖ < r) :
       ¬ ∃ t ∈ Icc 0 T, V t () ∈ {v | r ≤ ‖v‖} := by
-    rintro ⟨t,ht,hmem⟩
+    rintro ⟨t, ht, hmem⟩
     exact (not_le_of_gt (h t ht.2)) hmem
   have hEnd (h : ∀ t ≤ T, ‖U t-z‖ < r) : θ = T := by
     unfold θ hittingBtwn
@@ -88,8 +88,8 @@ theorem bakryEmeryGibbs_closed_exit_survival {E : Type*} [NormedAddCommGroup E]
   · intro hX
     by_contra h
     push_neg at h
-    obtain ⟨t,ht,hh⟩ := h
-    have hHit : ∃ t ∈ Icc 0 T, V t () ∈ {v | r ≤ ‖v‖} := ⟨t,⟨bot_le,ht⟩,hh⟩
+    obtain ⟨t, ht, hh⟩ := h
+    have hHit : ∃ t ∈ Icc 0 T, V t () ∈ {v | r ≤ ‖v‖} := ⟨t, ⟨bot_le, ht⟩, hh⟩
     have hm := drivenContinuous_closed_hitting_mem V {v | r ≤ ‖v‖}
       (isClosed_le continuous_const continuous_norm) T () (hU.sub continuous_const) hHit
     have he := hEq θ le_rfl
@@ -111,7 +111,7 @@ theorem bakryEmeryGibbs_closed_exit_domain_survival {E : Type*} [NormedAddCommGr
       hittingBtwn (fun s (_ : Unit) => U s-z) {v | r ≤ ‖v‖} 0 T () = T := by
     unfold hittingBtwn
     rw [if_neg]
-    rintro ⟨t,ht,hh⟩
+    rintro ⟨t, ht, hh⟩
     exact (not_le_of_gt (h t ht.2)) hh
   constructor
   · intro hX

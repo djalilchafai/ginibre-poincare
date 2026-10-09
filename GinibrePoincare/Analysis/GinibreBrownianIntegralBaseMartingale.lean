@@ -30,7 +30,7 @@ theorem ginibreBrownian_augmented_coordinate_martingale {Ω ι : Type*}
   simp only [Pi.sub_def] at hSub
   have hZero := ginibreBrownian_augmented_increment_condExp_zero B P hB hind s (t-s) i
   simp only [add_tsub_cancel_of_le hst] at hZero
-  filter_upwards [hSub,hZero] with ω hω hz
+  filter_upwards [hSub, hZero] with ω hω hz
   change _ = 0 at hz
   linarith
 

@@ -29,7 +29,7 @@ theorem brownianPredictableVectorGaussianDensity_past_lintegral
   induction N, hmN using Nat.le_induction with
   | base => rfl
   | succ N hmN ih =>
-    let S := fun ω => (h N ω,(brownianPredictableVectorGaussianDensity B h τ N ω,Z ω))
+    let S := fun ω => (h N ω, (brownianPredictableVectorGaussianDensity B h τ N ω, Z ω))
     have hZN := hZ.mono ((ginibreBrownianAugmentedFiltration B P hB).mono (hτ hmN)) le_rfl
     have hS : @Measurable Ω ((ι→ℝ)×(ℝ×ℝ≥0∞))
         (ginibreBrownianAugmentedFiltration B P hB (τ N)) _ S :=
@@ -49,10 +49,10 @@ theorem brownianPredictableVectorGaussianDensity_past_lintegral
       (fun s : (ι→ℝ)×(ℝ×ℝ≥0∞) => ENNReal.ofReal s.2.1*s.2.2)
       measurable_fst ((ENNReal.measurable_ofReal.comp
         (measurable_fst.comp measurable_snd)).mul (measurable_snd.comp measurable_snd))
-    simp only [S,Prod.fst,Prod.snd,X] at he
+    simp only [S, Prod.fst, Prod.snd, X] at he
     simp_rw [brownianPredictableVectorGaussianDensity_succ,
       ENNReal.ofReal_mul (brownianPredictableVectorGaussianDensity_pos B h τ N _).le]
-    simpa only [mul_assoc,mul_left_comm,mul_comm] using he.trans ih
+    simpa only [mul_assoc, mul_left_comm, mul_comm] using he.trans ih
 
 /-- The terminal likelihood has exactly the same past pushforward as the
 likelihood stopped at that past time. -/
@@ -73,8 +73,8 @@ theorem brownianPredictableVectorGaussianDensity_past_map
   classical
   have hYa := hY.mono ((ginibreBrownianAugmentedFiltration B P hB).le (τ m)) le_rfl
   ext s hs
-  rw [Measure.map_apply hYa hs,Measure.map_apply hYa hs,
-    withDensity_apply _ (hYa hs),withDensity_apply _ (hYa hs)]
+  rw [Measure.map_apply hYa hs, Measure.map_apply hYa hs,
+    withDensity_apply _ (hYa hs), withDensity_apply _ (hYa hs)]
   have he := brownianPredictableVectorGaussianDensity_past_lintegral B P hB hind h τ hτ hh
     m N hmN ((Y ⁻¹' s).indicator (fun _ => 1)) (measurable_const.indicator (hY hs))
   have hp (K : ℕ) : (fun ω => ENNReal.ofReal
@@ -83,8 +83,8 @@ theorem brownianPredictableVectorGaussianDensity_past_map
     (Y ⁻¹' s).indicator (fun ω => ENNReal.ofReal
       (brownianPredictableVectorGaussianDensity B h τ K ω)) := by
     funext ω
-    by_cases hw : Y ω∈s <;> simp [Set.indicator,hw]
-  rw [hp N,hp m,lintegral_indicator (hYa hs),lintegral_indicator (hYa hs)] at he
+    by_cases hw : Y ω∈s <;> simp [Set.indicator, hw]
+  rw [hp N, hp m, lintegral_indicator (hYa hs), lintegral_indicator (hYa hs)] at he
   exact he
 
 end

@@ -26,7 +26,7 @@ theorem productComplexDbar_compact (v w : ℂ × ℂ) (f : ℂ × ℂ → ℂ)
 
 theorem productSeparated_fderiv (φ ψ : ℂ → ℂ) (hφ : Differentiable ℝ φ)
     (hψ : Differentiable ℝ ψ) (x : ℂ × ℂ) (u v : ℂ) :
-    fderiv ℝ (fun p : ℂ × ℂ => φ p.1 * ψ p.2) x (u,v) =
+    fderiv ℝ (fun p : ℂ × ℂ => φ p.1 * ψ p.2) x (u, v) =
       fderiv ℝ φ x.1 u * ψ x.2 + φ x.1 * fderiv ℝ ψ x.2 v := by
   have h1 := (hφ x.1).hasFDerivAt.comp x (hasFDerivAt_fst (𝕜 := ℝ) (p := x))
   have h2 := (hψ x.2).hasFDerivAt.comp x (hasFDerivAt_snd (𝕜 := ℝ) (p := x))

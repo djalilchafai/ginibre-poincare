@@ -46,7 +46,7 @@ theorem brownianFamily_whole_path_law_eq {Ω ι : Type*}
     P.map (fun ω i t => B i t ω) = P.map (fun ω i t => C i t ω) := by
   have hmB (i : ι) : AEMeasurable (fun ω t => B i t ω) P := (brownianScalar_whole_path_measurable P (B i) (hB i)).aemeasurable
   have hmC (i : ι) : AEMeasurable (fun ω t => C i t ω) P := (brownianScalar_whole_path_measurable P (C i) (hC i)).aemeasurable
-  rw [hindB.map_fun_eq_pi_map hmB,hindC.map_fun_eq_pi_map hmC]
+  rw [hindB.map_fun_eq_pi_map hmB, hindC.map_fun_eq_pi_map hmC]
   congr 1
   funext i
   exact brownianScalar_whole_path_law_eq P (B i) (C i) (hB i) (hC i)

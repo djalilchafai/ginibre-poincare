@@ -13,21 +13,21 @@ variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
 
 def correspondenceWeightedEllipticGenerator {ι : Type*} [Fintype ι]
     (b : OrthonormalBasis ι ℝ E) (ρ θ : E→ℝ) (x : E) : ℝ :=
-  ∑i,(fderiv ℝ (fun y=>fderiv ℝ θ y (b i)) x (b i)+
+  ∑i, (fderiv ℝ (fun y=>fderiv ℝ θ y (b i)) x (b i)+
     (ρ x)⁻¹*fderiv ℝ ρ x (b i)*fderiv ℝ θ x (b i))
 
 /-- A literal weighted-generator annihilator satisfies the actual local
 constant-principal-part elliptic divergence equation. -/
 theorem correspondenceWeightedElliptic_annihilator_equation
     {ι : Type*} [Fintype ι] (b : OrthonormalBasis ι ℝ E)
-    (ρ : E→ℝ) (hρ : ContDiff ℝ 1 ρ) (hp : ∀x,0<ρ x)
+    (ρ : E→ℝ) (hρ : ContDiff ℝ 1 ρ) (hp : ∀x, 0<ρ x)
     [IsFiniteMeasure (correspondenceWeightedEllipticMeasure ρ)]
     (u : E→ℝ) (hu : MemLp u 2 (correspondenceWeightedEllipticMeasure ρ))
-    (hA : ∀θ : E→ℝ,ContDiff ℝ ∞ θ→HasCompactSupport θ→
-      (∫x,u x*correspondenceWeightedEllipticGenerator b ρ θ x∂correspondenceWeightedEllipticMeasure ρ)=0)
+    (hA : ∀θ : E→ℝ, ContDiff ℝ ∞ θ→HasCompactSupport θ→
+      (∫x, u x*correspondenceWeightedEllipticGenerator b ρ θ x∂correspondenceWeightedEllipticMeasure ρ)=0)
     (θ : E→ℝ) (hθ : ContDiff ℝ ∞ θ) (hc : HasCompactSupport θ) :
-    (∫x,(ρ x*u x)*(∑i,fderiv ℝ (fun y=>fderiv ℝ θ y (b i)) x (b i)))=
-      -(∑i,∫x,(u x*fderiv ℝ ρ x (b i))*fderiv ℝ θ x (b i)) := by
+    (∫x, (ρ x*u x)*(∑i, fderiv ℝ (fun y=>fderiv ℝ θ y (b i)) x (b i)))=
+      -(∑i,∫x, (u x*fderiv ℝ ρ x (b i))*fderiv ℝ θ x (b i)) := by
   classical
   have hul := correspondenceWeightedElliptic_locallyIntegrable ρ hρ.continuous hp u hu
   let D := fun i x=>fderiv ℝ θ x (b i)
@@ -48,28 +48,28 @@ theorem correspondenceWeightedElliptic_annihilator_equation
   have he := hA θ hθ hc
   rw [correspondenceWeightedElliptic_integral_density ρ _ hρ.continuous hp] at he
   have hpt (x) : ρ x*(u x*correspondenceWeightedEllipticGenerator b ρ θ x)=
-      (∑i,u x*(ρ x*DD i x))+(∑i,u x*(fderiv ℝ ρ x (b i)*D i x)) := by
+      (∑i, u x*(ρ x*DD i x))+(∑i, u x*(fderiv ℝ ρ x (b i)*D i x)) := by
     unfold correspondenceWeightedEllipticGenerator
-    rw [Finset.mul_sum,Finset.mul_sum,← Finset.sum_add_distrib]
+    rw [Finset.mul_sum, Finset.mul_sum,← Finset.sum_add_distrib]
     apply Finset.sum_congr rfl
     intro i hi
-    dsimp [DD,D]
+    dsimp [DD, D]
     field_simp [(hp x).ne']
   simp_rw [hpt] at he
-  rw [integral_add hs1 hs2,integral_finsetSum _ (fun i _=>hi1 i),
+  rw [integral_add hs1 hs2, integral_finsetSum _ (fun i _=>hi1 i),
     integral_finsetSum _ (fun i _=>hi2 i)] at he
-  have hleft : (∫x,(ρ x*u x)*(∑i,DD i x))=∑i,∫x,u x*(ρ x*DD i x) := by
+  have hleft : (∫x, (ρ x*u x)*(∑i, DD i x))=∑i,∫x, u x*(ρ x*DD i x) := by
     rw [← integral_finsetSum _ (fun i _=>hi1 i)]
     apply integral_congr_ae
     exact ae_of_all volume fun x=>by simp [Finset.mul_sum]; ring
-  have hright : (∑i,∫x,(u x*fderiv ℝ ρ x (b i))*D i x)=
-      ∑i,∫x,u x*(fderiv ℝ ρ x (b i)*D i x) := by
+  have hright : (∑i,∫x, (u x*fderiv ℝ ρ x (b i))*D i x)=
+      ∑i,∫x, u x*(fderiv ℝ ρ x (b i)*D i x) := by
     apply Finset.sum_congr rfl
     intro i hi
     apply integral_congr_ae
     exact ae_of_all volume fun x=>mul_assoc _ _ _
-  change (∫x,(ρ x*u x)*(∑i,DD i x))= -(∑i,∫x,(u x*fderiv ℝ ρ x (b i))*D i x)
-  rw [hleft,hright]
+  change (∫x, (ρ x*u x)*(∑i, DD i x))= -(∑i,∫x, (u x*fderiv ℝ ρ x (b i))*D i x)
+  rw [hleft, hright]
   linarith
 #print axioms correspondenceWeightedElliptic_annihilator_equation
 end

@@ -24,8 +24,8 @@ theorem vectorSpectralMeasure_zero_atom (R : H →L[ℂ] H) (hR : IsSelfAdjoint 
       μ K ≤ ENNReal.ofReal ((inner ℂ u (u-resolventCfcEvolution R t u)).re) := by
     let f : ℝ → ℝ := fun r => 1-resolventEvolutionMultiplier (t : ℝ) r
     have hf : Continuous f := continuous_const.sub (resolventEvolutionMultiplier_continuous _)
-    let φ : C_c(spectrum ℝ R,ℝ) :=
-      ⟨⟨fun r => f r.val,hf.comp continuous_subtype_val⟩,
+    let φ : C_c(spectrum ℝ R, ℝ) :=
+      ⟨⟨fun r => f r.val, hf.comp continuous_subtype_val⟩,
         HasCompactSupport.of_compactSpace _⟩
     have hφ : ∀ r : spectrum ℝ R, 0 ≤ φ r := by
       intro r
@@ -36,7 +36,7 @@ theorem vectorSpectralMeasure_zero_atom (R : H →L[ℂ] H) (hR : IsSelfAdjoint 
       intro r hr
       change 1-resolventEvolutionMultiplier (t : ℝ) r.val = 1
       change r.val = 0 at hr
-      rw [hr,resolventEvolutionMultiplier_nonpositive (by exact_mod_cast ht) le_rfl,sub_zero]
+      rw [hr, resolventEvolutionMultiplier_nonpositive (by exact_mod_cast ht) le_rfl, sub_zero]
     have hb := RealRMK.rieszMeasure_le_of_eq_one
       (vectorSpectralPositiveFunctional R hR u) hφ hK hφK
     have hcfc : (cfcHom hR) φ.toContinuousMap = 1-resolventCfcEvolution R t := by
@@ -51,12 +51,12 @@ theorem vectorSpectralMeasure_zero_atom (R : H →L[ℂ] H) (hR : IsSelfAdjoint 
     change μ K ≤ ENNReal.ofReal
       ((inner ℂ u (((cfcHom hR) φ.toContinuousMap) u)).re) at hb
     rw [hcfc] at hb
-    simpa only [ContinuousLinearMap.sub_apply,ContinuousLinearMap.one_apply] using hb
+    simpa only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.one_apply] using hb
   let t : ℕ → ℝ≥0 := fun m => 1 / ((m : ℝ≥0)+1)
   have ht : Tendsto t atTop (𝓝 0) := tendsto_one_div_add_atTop_nhds_zero_nat
   have he : Tendsto (fun m => resolventCfcEvolution R (t m) u) atTop (𝓝 u) := by
     have hh := (continuous_resolventCfcEvolution R hR hSpec hDense u).tendsto 0 |>.comp ht
-    simpa only [resolventCfcEvolution_zero R hR,ContinuousLinearMap.one_apply,Function.comp_def] using hh
+    simpa only [resolventCfcEvolution_zero R hR, ContinuousLinearMap.one_apply, Function.comp_def] using hh
   have hy : Tendsto (fun m => (inner ℂ u (u-resolventCfcEvolution R (t m) u)).re)
       atTop (𝓝 0) := by
     have h : Continuous (fun v : H => inner ℂ u (u-v)) :=
@@ -65,7 +65,7 @@ theorem vectorSpectralMeasure_zero_atom (R : H →L[ℂ] H) (hR : IsSelfAdjoint 
     simpa [Function.comp_def] using hh
   have hlim : Tendsto (fun m => ENNReal.ofReal
       ((inner ℂ u (u-resolventCfcEvolution R (t m) u)).re)) atTop (𝓝 0) := by
-    simpa only [Function.comp_def,ENNReal.ofReal_zero] using ENNReal.continuous_ofReal.tendsto 0 |>.comp hy
+    simpa only [Function.comp_def, ENNReal.ofReal_zero] using ENNReal.continuous_ofReal.tendsto 0 |>.comp hy
   have hz : μ K ≤ 0 := ge_of_tendsto' hlim (fun m => hbound (t m) (by dsimp [t]; positivity))
   exact le_antisymm hz bot_le
 

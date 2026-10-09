@@ -18,17 +18,17 @@ theorem ginibreLocalRegularity_exists_compact_interior_cutoff
     ∃ η : Configuration n → ℝ, ContDiff ℝ ∞ η ∧ HasCompactSupport η ∧
       tsupport η ⊆ {z | CollisionFree z} ∧ ∀ z ∈ K, η =ᶠ[𝓝 z] 1 := by
   let e := configurationEuclideanEquiv n
-  obtain ⟨χ₀,hχ₀,hχ₀c,hχ₀one⟩ := ginibreLocalRegularity_exists_compact_cutoff (e '' K) (hK.image e.continuous)
+  obtain ⟨χ₀, hχ₀, hχ₀c, hχ₀one⟩ := ginibreLocalRegularity_exists_compact_cutoff (e '' K) (hK.image e.continuous)
   let χ := χ₀ ∘ e
   have hχ : ContDiff ℝ ∞ χ := hχ₀.comp e.contDiff
   have hχc : HasCompactSupport χ := hχ₀c.comp_homeomorph e.toHomeomorph
   have hχone (z) (hz : z ∈ K) : χ =ᶠ[𝓝 z] 1 :=
-    (hχ₀one (e z) ⟨z,hz,rfl⟩).comp_tendsto e.continuous.continuousAt
-  obtain ⟨ψ,hψ,hψs,hψone⟩ := exists_ginibreInteriorCutoff n hn K hK hs
-  refine ⟨χ*ψ,hχ.mul hψ,hχc.mul_right,tsupport_mul_subset_right.trans hψs,?_⟩
+    (hχ₀one (e z) ⟨z, hz, rfl⟩).comp_tendsto e.continuous.continuousAt
+  obtain ⟨ψ, hψ, hψs, hψone⟩ := exists_ginibreInteriorCutoff n hn K hK hs
+  refine ⟨χ*ψ, hχ.mul hψ, hχc.mul_right, tsupport_mul_subset_right.trans hψs,?_⟩
   intro z hz
-  filter_upwards [hχone z hz,hψone z hz] with x hx hy
-  simp [hx,hy]
+  filter_upwards [hχone z hz, hψone z hz] with x hx hy
+  simp [hx, hy]
 
 #print axioms ginibreLocalRegularity_exists_compact_interior_cutoff
 end

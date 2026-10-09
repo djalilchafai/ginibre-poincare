@@ -15,7 +15,7 @@ variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   change HasFDerivAt (bakryEmeryGibbsWeight W) _ x at hd
   unfold bakryEmeryGibbsDirectional
   rw [hd.fderiv]
-  simp [bakryEmeryGibbsWeight,mul_comm]
+  simp [bakryEmeryGibbsWeight, mul_comm]
 
  theorem correspondenceBrascampLieb_density_generator
     {ι : Type*} [Fintype ι] (W f : E → ℝ) (b : ι → E)

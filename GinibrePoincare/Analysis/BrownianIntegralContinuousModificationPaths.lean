@@ -12,10 +12,10 @@ noncomputable section
 /-- Turn the actual restriction of a continuous sample path into a continuous
 map on the compact time interval; use the zero path on exceptional samples. -/
 def continuousIntervalPathVersion {Ω : Type*} (F : ℝ≥0 → Ω → ℝ)
-    (T : ℝ≥0) (ω : Ω) : C(Set.Icc 0 T,ℝ) := by
+    (T : ℝ≥0) (ω : Ω) : C(Set.Icc 0 T, ℝ) := by
   classical
   exact if h : ContinuousOn (fun t => F t ω) (Set.Icc 0 T) then
-    ⟨fun t => F t ω,h.domRestrict⟩ else 0
+    ⟨fun t => F t ω, h.domRestrict⟩ else 0
 
 theorem continuousIntervalPathVersion_eq_ae {Ω : Type*} [MeasurableSpace Ω]
     (P : Measure Ω) (F : ℝ≥0 → Ω → ℝ) (T : ℝ≥0)
@@ -23,7 +23,7 @@ theorem continuousIntervalPathVersion_eq_ae {Ω : Type*} [MeasurableSpace Ω]
     ∀ᵐ ω ∂P, ∀ t : Set.Icc 0 T, continuousIntervalPathVersion F T ω t = F t ω := by
   filter_upwards [hc] with ω hω
   intro t
-  simp only [continuousIntervalPathVersion,dif_pos hω]
+  simp only [continuousIntervalPathVersion, dif_pos hω]
   rfl
 
 /-- Genuine continuous martingales with terminal mean-square Cauchy estimates
@@ -40,7 +40,7 @@ theorem continuousIntervalPathVersion_probability_cauchy
       ε < |continuousIntervalPathVersion (F q.2) T ω t -
         continuousIntervalPathVersion (F q.1) T ω t|}) atTop (𝓝 0) := by
   intro ε hε
-  let e : ℝ≥0 := ⟨ε,hε.le⟩
+  let e : ℝ≥0 := ⟨ε, hε.le⟩
   have he : 0 < e := hε
   have ht := realMartingale_uniform_probability_cauchy P ℱ
     (fun q : ℕ × ℕ => F q.2) (fun q : ℕ × ℕ => F q.1)
@@ -56,14 +56,14 @@ theorem continuousIntervalPathVersion_probability_cauchy
     (∃ t ∈ Set.Icc 0 T, (e : ℝ) < ‖F q.2 t ω - F q.1 t ω‖)
   apply propext
   constructor
-  · rintro ⟨t,ht⟩
-    refine ⟨t,t.property,?_⟩
+  · rintro ⟨t, ht⟩
+    refine ⟨t, t.property,?_⟩
     change ε < ‖F q.2 t ω - F q.1 t ω‖
-    simpa [h2 t,h1 t,Real.norm_eq_abs,e,NNReal.coe_mk] using ht
-  · rintro ⟨t,ht,hh⟩
-    refine ⟨⟨t,ht⟩,?_⟩
+    simpa [h2 t, h1 t, Real.norm_eq_abs, e, NNReal.coe_mk] using ht
+  · rintro ⟨t, ht, hh⟩
+    refine ⟨⟨t, ht⟩,?_⟩
     change ε < ‖F q.2 t ω - F q.1 t ω‖ at hh
-    simpa [h2 ⟨t,ht⟩,h1 ⟨t,ht⟩,Real.norm_eq_abs,e,NNReal.coe_mk] using hh
+    simpa [h2 ⟨t, ht⟩, h1 ⟨t, ht⟩, Real.norm_eq_abs, e, NNReal.coe_mk] using hh
 
 /-- The path adapters match the original processes simultaneously at every
 index and every time, outside one null set. -/

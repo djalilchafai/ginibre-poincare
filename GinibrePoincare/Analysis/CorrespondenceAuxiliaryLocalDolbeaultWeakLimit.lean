@@ -28,7 +28,7 @@ theorem dolbeault_weak_identity_of_strong_limit {n : ℕ} {ι : Type*}
   have hdc := dbarComponent_compact_support θ hc j
   have ha' := ((dolbeaultCompactPairing θ hθ.continuous hc).continuous.tendsto _).comp ha
   have hu' := ((dolbeaultCompactPairing (fun p => dbarComponent θ j p) hd hdc).continuous.tendsto _).comp hu
-  simp only [Function.comp_def,dolbeaultCompactPairing_eq_integral] at ha' hu'
+  simp only [Function.comp_def, dolbeaultCompactPairing_eq_integral] at ha' hu'
   have heq : (fun i => ∫ p, θ p*a i p) =
       (fun i => -∫ p, dbarComponent θ j p*u i p) := funext he
   rw [heq] at ha'
@@ -45,7 +45,7 @@ theorem dolbeault_weak_identity_of_eventual_strong_limit {n : ℕ} {ι : Type*}
   have hdc := dbarComponent_compact_support θ hc j
   have ha' := ((dolbeaultCompactPairing θ hθ.continuous hc).continuous.tendsto _).comp ha
   have hu' := ((dolbeaultCompactPairing (fun p => dbarComponent θ j p) hd hdc).continuous.tendsto _).comp hu
-  simp only [Function.comp_def,dolbeaultCompactPairing_eq_integral] at ha' hu'
+  simp only [Function.comp_def, dolbeaultCompactPairing_eq_integral] at ha' hu'
   have he' : (fun i => ∫ p, θ p*a i p) =ᶠ[f]
       (fun i => -∫ p, dbarComponent θ j p*u i p) := he
   exact tendsto_nhds_unique ha' (hu'.neg.congr' he'.symm)

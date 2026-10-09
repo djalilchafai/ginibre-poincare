@@ -31,7 +31,7 @@ theorem secondDirectionalDerivative_scalar_comp {n : ℕ}
       (fun y => deriv φ (f y)*fderiv ℝ f y v) := by
     have hfn := hf.eventually (by norm_num)
     have hφn := hf.continuousAt.eventually (hφ.eventually (by norm_num))
-    filter_upwards [hfn,hφn] with y hy hφy
+    filter_upwards [hfn, hφn] with y hy hφy
     have he := ((hφy.differentiableAt (by norm_num)).hasDerivAt.comp_hasFDerivAt y
       (hy.differentiableAt (by norm_num)).hasFDerivAt).fderiv
     exact congrArg (fun L => L v) he
@@ -44,7 +44,7 @@ theorem secondDirectionalDerivative_scalar_comp {n : ℕ}
   have hfirst := (hφ'd.hasDerivAt.comp_hasFDerivAt x hfd.hasFDerivAt).fderiv
   change fderiv ℝ (fun y => deriv φ (f y)) x = deriv (deriv φ) (f x) • fderiv ℝ f x at hfirst
   rw [hfirst]
-  simp only [ContinuousLinearMap.add_apply,ContinuousLinearMap.smul_apply,smul_eq_mul]
+  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply, smul_eq_mul]
   ring
 
 
@@ -90,7 +90,7 @@ theorem ginibreRealPaperSpeedGenerator_scalar_comp {n : ℕ}
         (α/(n : ℝ)^2)*deriv (deriv φ) (f x)*realGradientNormSq f x := by
   unfold ginibreRealPaperSpeedGenerator
   rw [ginibrePregenerator_scalar_comp f φ x hf hφ]
-  simp only [div_eq_mul_inv,inv_pow]
+  simp only [div_eq_mul_inv, inv_pow]
   ring
 
 end

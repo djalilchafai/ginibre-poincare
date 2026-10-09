@@ -21,9 +21,9 @@ theorem gaussianVectorExponentialTilt_product_lintegral {α ι : Type*}
   rw [lintegral_prod]
   · congr 1
     funext a
-    simp only [Prod.fst,Prod.snd]
+    simp only [Prod.fst, Prod.snd]
     rw [lintegral_const_mul _ (by unfold gaussianVectorExponentialTilt gaussianExponentialTilt; fun_prop),
-      gaussianVectorExponentialTilt_lintegral,mul_one]
+      gaussianVectorExponentialTilt_lintegral, mul_one]
   · unfold gaussianVectorExponentialTilt gaussianExponentialTilt
     fun_prop
 
@@ -37,7 +37,7 @@ theorem gaussianVectorExponentialTilt_product_lintegral_sq {α ι : Type*}
   rw [lintegral_prod]
   · congr 1
     funext a
-    simp only [Prod.fst,Prod.snd]
+    simp only [Prod.fst, Prod.snd]
     rw [lintegral_const_mul _ (by unfold gaussianVectorExponentialTilt gaussianExponentialTilt; fun_prop),
       gaussianVectorExponentialTilt_lintegral_sq]
   · unfold gaussianVectorExponentialTilt gaussianExponentialTilt
@@ -54,14 +54,14 @@ theorem gaussianVectorPredictableTilt_lintegral {Ω α ι : Type*}
       ∫⁻ ω, Z (Y ω) ∂P := by
   classical
   let μ := P.map Y
-  have hYL : HasLaw Y μ P := ⟨hY,rfl⟩
+  have hYL : HasLaw Y μ P := ⟨hY, rfl⟩
   have hpair := IndepFun.hasLaw_prod hYL hX hind
   have hm : Measurable (fun z : α×(ι→ℝ) => Z z.1*
       ENNReal.ofReal (gaussianVectorExponentialTilt (H z.1) v z.2)) := by
     unfold gaussianVectorExponentialTilt gaussianExponentialTilt
     fun_prop
   have hh := hpair.lintegral_comp hm.aemeasurable
-  simp only [Prod.fst,Prod.snd] at hh
+  simp only [Prod.fst, Prod.snd] at hh
   rw [gaussianVectorExponentialTilt_product_lintegral μ H Z hH hZ v] at hh
   exact hh.trans (hYL.lintegral_comp hZ.aemeasurable).symm
 
@@ -76,14 +76,14 @@ theorem gaussianVectorPredictableTilt_lintegral_sq {Ω α ι : Type*}
       ∫⁻ ω, Z (Y ω)*ENNReal.ofReal (Real.exp ((∑ i, (H (Y ω) i)^2)*(v : ℝ))) ∂P := by
   classical
   let μ := P.map Y
-  have hYL : HasLaw Y μ P := ⟨hY,rfl⟩
+  have hYL : HasLaw Y μ P := ⟨hY, rfl⟩
   have hpair := IndepFun.hasLaw_prod hYL hX hind
   have hm : Measurable (fun z : α×(ι→ℝ) => Z z.1*
       ENNReal.ofReal (gaussianVectorExponentialTilt (H z.1) v z.2)^2) := by
     unfold gaussianVectorExponentialTilt gaussianExponentialTilt
     fun_prop
   have hh := hpair.lintegral_comp hm.aemeasurable
-  simp only [Prod.fst,Prod.snd] at hh
+  simp only [Prod.fst, Prod.snd] at hh
   rw [gaussianVectorExponentialTilt_product_lintegral_sq μ H Z hH hZ v] at hh
   exact hh.trans (hYL.lintegral_comp (by fun_prop)).symm
 

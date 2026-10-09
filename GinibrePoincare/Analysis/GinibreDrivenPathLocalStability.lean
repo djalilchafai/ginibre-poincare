@@ -30,21 +30,21 @@ theorem drivenVolterra_lipschitz_stability_on (b : E → E) (L : ℝ≥0) (hb : 
     intro s hs
     rw [uIcc_of_le ht.1] at hs
     dsimp only
-    rw [hpe s ⟨hs.1,hs.2.trans ht.2⟩]
+    rw [hpe s ⟨hs.1, hs.2.trans ht.2⟩]
   have hEqXc (t : ℝ) (ht : t ∈ Icc 0 T) :
       (X ∘ p) t = x+N t+∫ s in (0 : ℝ)..t, b ((X ∘ p) s) := by
     dsimp only [Function.comp_apply]
-    rw [hpe t ht,hInt X t ht]
+    rw [hpe t ht, hInt X t ht]
     exact hEqX t ht
   have hEqYc (t : ℝ) (ht : t ∈ Icc 0 T) :
       (Y ∘ p) t = x+M t+∫ s in (0 : ℝ)..t, b ((Y ∘ p) s) := by
     dsimp only [Function.comp_apply]
-    rw [hpe t ht,hInt Y t ht]
+    rw [hpe t ht, hInt Y t ht]
     exact hEqY t ht
   have h := drivenVolterra_lipschitz_stability_exp b L hb x N M (X ∘ p) (Y ∘ p)
     (hX.comp_continuous hp hpr) (hY.comp_continuous hp hpr) T δ hT hδ hEqXc hEqYc hNoise
   intro t ht
-  simpa only [Function.comp_apply,hpe t ht] using h t ht
+  simpa only [Function.comp_apply, hpe t ht] using h t ht
 
 end
 end GinibrePoincare

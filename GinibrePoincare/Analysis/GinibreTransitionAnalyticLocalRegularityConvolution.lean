@@ -24,11 +24,11 @@ theorem ginibreLocalRegularity_fderiv_convolution_kernel
       ((fun y => fderiv ℝ φ y v) ⋆[lsmul ℝ ℝ, μ] u) x := by
   have hder := hc.hasFDerivAt_convolution_left (lsmul ℝ ℝ)
     (hφ.of_le (by simp)) hu x
-  rw [hder.fderiv,convolution_eq_swap]
+  rw [hder.fderiv, convolution_eq_swap]
   have hi := ((hc.fderiv ℝ).convolutionExists_left
     ((lsmul ℝ ℝ).precompL E) (hφ.continuous_fderiv (by simp)) hu x).integrable_swap
-  rw [ContinuousLinearMap.integral_apply hi v,convolution_lsmul_swap]
-  simp only [precompL_apply,lsmul_apply,smul_eq_mul]
+  rw [ContinuousLinearMap.integral_apply hi v, convolution_lsmul_swap]
+  simp only [precompL_apply, lsmul_apply, smul_eq_mul]
 
 theorem ginibreLocalRegularity_second_convolution_kernel
     (u φ : E → ℝ) (v x : E) (hu : LocallyIntegrable u μ)
@@ -65,7 +65,7 @@ theorem ginibreLocalRegularity_reflected_second
   change fderiv ℝ (-(fun z => fderiv ℝ φ (x-z) v)) y v = _
   rw [fderiv_neg]
   simp only [ContinuousLinearMap.neg_apply]
-  rw [ginibreLocalRegularity_reflected_fderiv _ hD x y v,neg_neg]
+  rw [ginibreLocalRegularity_reflected_fderiv _ hD x y v, neg_neg]
 
 #print axioms ginibreLocalRegularity_second_convolution_kernel
 #print axioms ginibreLocalRegularity_reflected_second

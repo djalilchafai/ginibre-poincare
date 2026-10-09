@@ -5,6 +5,19 @@ public import Mathlib.Topology.MetricSpace.Thickening
 
 @[expose] public section
 
+/-! # C² Taylor control on an open domain
+
+The segment versions of the Taylor formula and Hessian-oscillation bound
+require C² regularity only along `x + t • h`, for `0 ≤ t ≤ 1`. They therefore
+apply to functions defined smoothly away from a singular set.
+
+For a compact subset `K` of an open domain `U`, choose a positive closed
+thickening of `K` still contained in `U`. Properness makes this thickening
+compact, so the Hessian is uniformly continuous there. Taking increments
+shorter than both the thickening radius and the continuity threshold keeps
+the entire segment in `U` and gives a uniform quadratic remainder estimate.
+The domain and `K` need not be convex in this local version. -/
+
 open MeasureTheory Metric
 namespace GinibrePoincare
 noncomputable section

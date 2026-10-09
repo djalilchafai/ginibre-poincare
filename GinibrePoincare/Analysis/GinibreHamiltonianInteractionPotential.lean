@@ -24,11 +24,11 @@ theorem ginibreInteractionPotential_contDiffAt (n : ℕ) (z : Configuration n)
 
 theorem vandermondeWeight_real_smul (n : ℕ) (t : ℝ) (z : Configuration n) :
     vandermondeWeight (t • z) = t^(2*vandermondeDegree n)*vandermondeWeight z := by
-  have he : t • z = globalPhase (t : ℂ) z := by ext i; simp [globalPhase,Complex.real_smul]
+  have he : t • z = globalPhase (t : ℂ) z := by ext i; simp [globalPhase, Complex.real_smul]
   rw [he]
   unfold vandermondeWeight
   rw [vandermonde_globalPhase, ← vandermondeDegree_eq_sum_Ioi_card,
-    map_mul,map_pow,Complex.normSq_ofReal]
+    map_mul, map_pow, Complex.normSq_ofReal]
   rw [← pow_two, ← pow_mul]
 
 theorem fderiv_vandermondeWeight_radial (n : ℕ) (z : Configuration n) :
@@ -67,7 +67,7 @@ theorem fderiv_ginibreInteractionPotential_coordinate {n : ℕ} (z : Configurati
     ((contDiff_vandermondeWeight n).differentiable (by simp)).differentiableAt
   unfold ginibreInteractionPotential
   rw [fderiv_fun_neg, fderiv.log hv (ne_of_gt (vandermondeWeight_pos_of_collisionFree z hz))]
-  simp only [ContinuousLinearMap.neg_apply,ContinuousLinearMap.smul_apply,smul_eq_mul]
+  simp only [ContinuousLinearMap.neg_apply, ContinuousLinearMap.smul_apply, smul_eq_mul]
   rw [fderiv_vandermondeWeight_apply_coordinateDirection z hz j w]
   field_simp [ne_of_gt (vandermondeWeight_pos_of_collisionFree z hz)]
   <;> ring
@@ -92,7 +92,7 @@ theorem ginibreInteractionPotential_coordinate_hessian {n : ℕ} (z v : Configur
     exact Complex.reCLM.differentiableAt.comp z
       ((differentiableAt_reciprocal_difference z j k hne).const_mul w)
   rw [fderiv_const_mul (DifferentiableAt.fun_sum h2), fderiv_fun_sum h2]
-  simp only [smul_apply,smul_eq_mul,sum_apply]
+  simp only [smul_apply, smul_eq_mul, sum_apply]
   have hsum : (∑ k ∈ Finset.univ.erase j,
       fderiv ℝ (fun x : Configuration n => (w*(x j-x k)⁻¹).re) z v) =
       -(∑ k ∈ Finset.univ.erase j, (w*(z j-z k)⁻¹*(v j-v k)*(z j-z k)⁻¹).re) := by
@@ -101,7 +101,7 @@ theorem ginibreInteractionPotential_coordinate_hessian {n : ℕ} (z v : Configur
     intro k hk
     rw [fderiv_re_mul_reciprocal_difference z v j k w
       (fun h => (Finset.mem_erase.mp hk).1 (hz (sub_eq_zero.mp h)).symm)]
-    simp only [mul_neg,neg_mul,Complex.neg_re,mul_assoc]
+    simp only [mul_neg, neg_mul, Complex.neg_re, mul_assoc]
   rw [hsum]
   ring
 
@@ -155,7 +155,7 @@ theorem ginibreInteractionPotential_ou_generator {n : ℕ} (α : ℝ)
     (2*α/(n : ℝ)) * (2*vandermondeDegree n : ℕ) := by
   rw [map_smul, fderiv_ginibreInteractionPotential_radial n z hz,
     ginibreInteractionPotential_laplacian z hz]
-  simp only [smul_eq_mul,mul_zero,add_zero]
+  simp only [smul_eq_mul, mul_zero, add_zero]
   ring
 
 theorem fderiv_ginibreInteractionPotential_realCoordinate {n : ℕ}
@@ -188,7 +188,7 @@ theorem ginibreInteractionPotential_originalDrift_real {n : ℕ} (α : ℝ)
       -(α/(n : ℝ)^2)*fderiv ℝ (ginibreInteractionPotential n) z (realCoordinateDirection j) := by
   rw [fderiv_ginibreInteractionPotential_realCoordinate z hz j]
   unfold ginibreLangevinDrift
-  simp only [Complex.add_re,Complex.smul_re,smul_eq_mul]
+  simp only [Complex.add_re, Complex.smul_re, smul_eq_mul]
   ring
 
 theorem ginibreInteractionPotential_originalDrift_imaginary {n : ℕ} (α : ℝ)
@@ -197,7 +197,7 @@ theorem ginibreInteractionPotential_originalDrift_imaginary {n : ℕ} (α : ℝ)
       -(α/(n : ℝ)^2)*fderiv ℝ (ginibreInteractionPotential n) z (imaginaryCoordinateDirection j) := by
   rw [fderiv_ginibreInteractionPotential_imaginaryCoordinate z hz j]
   unfold ginibreLangevinDrift
-  simp only [Complex.add_im,Complex.smul_im,smul_eq_mul]
+  simp only [Complex.add_im, Complex.smul_im, smul_eq_mul]
   ring
 
 #print axioms ginibreInteractionPotential_originalDrift_real

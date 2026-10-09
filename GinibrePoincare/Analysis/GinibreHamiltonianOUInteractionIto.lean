@@ -39,7 +39,7 @@ theorem ginibreHamiltonianOU_interaction_ito_exists {Ω : Type*} [MeasurableSpac
       ∀ᵐ ω ∂P, ∀ t ≤ θ ω,
         ginibreInteractionPotential n (Y t ω)-ginibreInteractionPotential n z-
           ((2*(α : ℝ)/(n : ℝ))*(2*vandermondeDegree n : ℕ))*(t : ℝ) = J t ω := by
-  obtain ⟨τ,hτ,K,hK,hKCF,X,θ,hXmeas,hX0,hRange,hAdapt,hStop,hθ,hEq⟩ :=
+  obtain ⟨τ, hτ, K, hK, hKCF, X, θ, hXmeas, hX0, hRange, hAdapt, hStop, hθ, hEq⟩ :=
     ginibreHamiltonianOU_compact_stopped_local_solution_selection n B P hB α z hz
   let T : ℝ≥0 := τ.toNNReal
   let Y : ℝ≥0 → Ω → Configuration n := fun t ω => X ω (projIcc 0 τ hτ.le (t : ℝ))
@@ -53,12 +53,12 @@ theorem ginibreHamiltonianOU_interaction_ito_exists {Ω : Type*} [MeasurableSpac
   let b : ℝ → Ω → Configuration n := fun s ω => (-2*(α : ℝ)/(n : ℝ)) • Y s.toNNReal ω
   have hb (ω : Ω) : Continuous (fun s => b s ω) := by
     exact ((hYC ω).comp continuous_real_toNNReal).const_smul (-2*(α : ℝ)/(n : ℝ))
-  obtain ⟨R,hR,hRB⟩ := hK.isBounded.exists_pos_norm_le
+  obtain ⟨R, hR, hRB⟩ := hK.isBounded.exists_pos_norm_le
   let M := |(-2*(α : ℝ)/(n : ℝ))| * R
   have hM : 0 ≤ M := mul_nonneg (abs_nonneg _) hR.le
   have hbound : ∀ s ∈ Icc (0 : ℝ) T, ∀ ω, ‖b s ω‖ ≤ M := by
     intro s hs ω
-    rw [norm_smul,Real.norm_eq_abs]
+    rw [norm_smul, Real.norm_eq_abs]
     exact mul_le_mul_of_nonneg_left (hRB _ (hYR _ _)) (abs_nonneg _)
   have hV : ContDiffOn ℝ 2 (ginibreInteractionPotential n) {x | CollisionFree x} :=
     fun x hx => ((ginibreInteractionPotential_contDiffAt n x hx).of_le
@@ -72,11 +72,11 @@ theorem ginibreHamiltonianOU_interaction_ito_exists {Ω : Type*} [MeasurableSpac
     filter_upwards [hEq] with ω hω
     intro t ht
     have htτ : (t : ℝ) ≤ τ := (show (t : ℝ) ≤ (θ ω : ℝ) by exact_mod_cast ht).trans (hθ ω).2
-    have h := hω ⟨(t : ℝ),⟨t.property,htτ⟩⟩ (by exact_mod_cast ht)
-    have heval : Y t ω = X ω ⟨(t : ℝ),⟨t.property,htτ⟩⟩ := by
+    have h := hω ⟨(t : ℝ), ⟨t.property, htτ⟩⟩ (by exact_mod_cast ht)
+    have heval : Y t ω = X ω ⟨(t : ℝ), ⟨t.property, htτ⟩⟩ := by
       apply congrArg (X ω)
       apply Subtype.ext
-      simp [Y,projIcc,max_eq_right t.property,min_eq_right htτ]
+      simp [Y, projIcc, max_eq_right t.property, min_eq_right htτ]
     rw [heval]
     calc
       _ = z+ginibreConfigurationBrownianNoise n B α ω t+
@@ -88,21 +88,21 @@ theorem ginibreHamiltonianOU_interaction_ito_exists {Ω : Type*} [MeasurableSpac
         have hs0 : 0 ≤ s := by
           have hh : s ∈ Icc (0 : ℝ) (t : ℝ) := by simpa only [uIcc_of_le (show (0 : ℝ) ≤ (t : ℝ) from t.property)] using hs
           exact hh.1
-        dsimp [b,Y]
+        dsimp [b, Y]
         rw [max_eq_left hs0]
   have hVol : ∀ᵐ ω ∂P, ∀ t ≤ θ ω, Y t ω = Y 0 ω+
       (ginibreConfigurationBrownianNoise n B α ω t-ginibreConfigurationBrownianNoise n B α ω 0)+
       ∫ s in (0 : ℝ)..t, b s ω := by
-    filter_upwards [hVEq,ginibreConfigurationBrownianNoise_actual n B P hB α] with ω hω hNoise
+    filter_upwards [hVEq, ginibreConfigurationBrownianNoise_actual n B P hB α] with ω hω hNoise
     intro t ht
-    rw [hY0,hNoise.2,sub_zero]
+    rw [hY0, hNoise.2, sub_zero]
     exact hω t ht
-  obtain ⟨J,hJM,hJC,hJL,hJ0,hLimit,hIto⟩ :=
+  obtain ⟨J, hJM, hJC, hJL, hJ0, hLimit, hIto⟩ :=
     ginibreCompactVolterra_continuous_ito_integral_exists n B P hB hind α Y hAdapt hYC
       (ginibreInteractionPotential n) {x | CollisionFree x} K (isOpen_collisionFree n) hV hK hKCF hYR
       T b hb M hM hbound θ hθm hθT hVol
-  refine ⟨T,Real.toNNReal_pos.mpr hτ,K,hK,hKCF,Y,hYC,hYR,hY0,hAdapt,θ,hStop,
-    fun ω => ⟨(hθ ω).1,hθT ω⟩,hVEq,J,hJM,hJC,hJL,hJ0,hLimit,?_⟩
+  refine ⟨T, Real.toNNReal_pos.mpr hτ, K, hK, hKCF, Y, hYC, hYR, hY0, hAdapt, θ, hStop,
+    fun ω => ⟨(hθ ω).1, hθT ω⟩, hVEq, J, hJM, hJC, hJL, hJ0, hLimit,?_⟩
   filter_upwards [hIto] with ω hω
   intro t ht
   have h := hω t ht
@@ -115,12 +115,12 @@ theorem ginibreHamiltonianOU_interaction_ito_exists {Ω : Type*} [MeasurableSpac
     have he (s : ℝ) : fderiv ℝ (ginibreInteractionPotential n) (Y s.toNNReal ω) (b s ω) =
         ((2*(α : ℝ)/(n : ℝ))*(2*vandermondeDegree n : ℕ)) := by
       have hg := ginibreInteractionPotential_ou_generator (α : ℝ) (Y s.toNNReal ω) (hKCF _ (hYR _ _))
-      rw [ginibreInteractionPotential_laplacian _ (hKCF _ (hYR _ _)),mul_zero,add_zero] at hg
+      rw [ginibreInteractionPotential_laplacian _ (hKCF _ (hYR _ _)), mul_zero, add_zero] at hg
       exact hg
     simp_rw [he]
-    simp only [intervalIntegral.integral_const,sub_zero,smul_eq_mul]
+    simp only [intervalIntegral.integral_const, sub_zero, smul_eq_mul]
     ring
-  simpa [hY0,hL,hD] using h
+  simpa [hY0, hL, hD] using h
 
 #print axioms ginibreHamiltonianOU_interaction_ito_exists
 end

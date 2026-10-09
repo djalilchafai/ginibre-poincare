@@ -10,7 +10,7 @@ set_option maxHeartbeats 1000000
 
 /-- The unscaled tent on the kth dyadic cell. -/
 def bakryBrownianDyadicTent (n : ℕ) (k : Fin (2^n)) : C(Icc (0 : ℝ) 1, ℝ) :=
-  ⟨fun t => max 0 (min ((2:ℝ)^n*t-k.val) ((k.val+1:ℕ)-(2:ℝ)^n*t)), by fun_prop⟩
+  ⟨fun t => max 0 (min ((2 : ℝ)^n*t-k.val) ((k.val+1 : ℕ)-(2 : ℝ)^n*t)), by fun_prop⟩
 
 theorem bakryBrownianDyadicTent_nonneg (n : ℕ) (k : Fin (2^n)) (t : Icc (0 : ℝ) 1) :
     0 ≤ bakryBrownianDyadicTent n k t := le_max_left _ _
@@ -19,9 +19,9 @@ theorem bakryBrownianDyadicTent_le_half (n : ℕ) (k : Fin (2^n)) (t : Icc (0 : 
     bakryBrownianDyadicTent n k t ≤ 1/2 := by
   change max 0 (min _ _) ≤ _
   apply max_le (by norm_num)
-  have h₁ := min_le_left ((2:ℝ)^n*t-k.val) (((k.val+1:ℕ):ℝ)-(2:ℝ)^n*t)
-  have h₂ := min_le_right ((2:ℝ)^n*t-k.val) (((k.val+1:ℕ):ℝ)-(2:ℝ)^n*t)
-  simp only [Nat.cast_add,Nat.cast_one] at h₁ h₂ ⊢
+  have h₁ := min_le_left ((2 : ℝ)^n*t-k.val) (((k.val+1 : ℕ) : ℝ)-(2 : ℝ)^n*t)
+  have h₂ := min_le_right ((2 : ℝ)^n*t-k.val) (((k.val+1 : ℕ) : ℝ)-(2 : ℝ)^n*t)
+  simp only [Nat.cast_add, Nat.cast_one] at h₁ h₂ ⊢
   linarith
 
 /-- Distinct dyadic cells have disjoint open tent supports. -/
@@ -40,11 +40,11 @@ theorem bakryBrownianDyadicTent_disjoint (n : ℕ) (j k : Fin (2^n)) (hjk : j �
   have hk' := lt_min_iff.mp (hk.resolve_left (lt_irrefl _))
   have hne : j.val ≠ k.val := fun he => hjk (Fin.ext he)
   rcases lt_or_gt_of_ne hne with hh | hh
-  · have hh' : (j.val:ℝ)+1 ≤ k.val := by exact_mod_cast hh
-    simp only [Nat.cast_add,Nat.cast_one] at hj' hk'
+  · have hh' : (j.val : ℝ)+1 ≤ k.val := by exact_mod_cast hh
+    simp only [Nat.cast_add, Nat.cast_one] at hj' hk'
     linarith
-  · have hh' : (k.val:ℝ)+1 ≤ j.val := by exact_mod_cast hh
-    simp only [Nat.cast_add,Nat.cast_one] at hj' hk'
+  · have hh' : (k.val : ℝ)+1 ≤ j.val := by exact_mod_cast hh
+    simp only [Nat.cast_add, Nat.cast_one] at hj' hk'
     linarith
 
 /-- A level of the actual Faber–Schauder series; its amplitude is 2^(-n/2). -/
@@ -59,12 +59,12 @@ theorem bakryBrownianDyadicLevel_norm_le (n : ℕ) (x : Fin (2^n) → ℝ)
   simp only [bakryBrownianDyadicLevel, ContinuousMap.smul_apply,
     ContinuousMap.sum_apply, smul_eq_mul]
   change ‖(1 / Real.sqrt 2)^n * ∑ k, x k * bakryBrownianDyadicTent n k t‖ ≤ _
-  rw [norm_mul,Real.norm_eq_abs,abs_of_nonneg (by positivity)]
+  rw [norm_mul, Real.norm_eq_abs, abs_of_nonneg (by positivity)]
   have hs : |∑ k, x k * bakryBrownianDyadicTent n k t| ≤ A/2 := by
     by_cases he : ∃ k, bakryBrownianDyadicTent n k t ≠ 0
-    · obtain ⟨k,hk⟩ := he
+    · obtain ⟨k, hk⟩ := he
       rw [Finset.sum_eq_single k]
-      · rw [abs_mul,abs_of_nonneg (bakryBrownianDyadicTent_nonneg n k t)]
+      · rw [abs_mul, abs_of_nonneg (bakryBrownianDyadicTent_nonneg n k t)]
         calc
           |x k| * bakryBrownianDyadicTent n k t ≤ A * bakryBrownianDyadicTent n k t :=
             mul_le_mul_of_nonneg_right (hx k) (bakryBrownianDyadicTent_nonneg n k t)
@@ -76,7 +76,7 @@ theorem bakryBrownianDyadicLevel_norm_le (n : ℕ) (x : Fin (2^n) → ℝ)
         · exact (hk hz).elim
       · simp
     · push_neg at he
-      simp only [he,mul_zero,Finset.sum_const_zero,abs_zero]
+      simp only [he, mul_zero, Finset.sum_const_zero, abs_zero]
       positivity
   calc
     (1 / Real.sqrt 2)^n * ‖∑ k, x k * bakryBrownianDyadicTent n k t‖ ≤

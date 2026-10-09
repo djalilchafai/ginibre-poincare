@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Keep Comparator's sandbox intact on hosts whose /home is a symlink.
+"""Keep Comparator's sandbox intact with symlinked home or dependency paths.
 
 Bubblewrap refuses mount destinations that are symlinks. Resolve only mount
 path operands, including the home tmpfs cover, so the actual canonical home is
@@ -32,7 +32,7 @@ def sandbox_arguments(arguments):
             i += 1
     home = Path("/home")
     packages = ROOT / ".lake" / "packages"
-    if home.is_symlink() and packages.is_symlink():
+    if packages.is_symlink():
         canonical = packages.resolve(strict=True)
         if canonical.is_relative_to(home.resolve(strict=True)):
             if not canonical.is_dir():

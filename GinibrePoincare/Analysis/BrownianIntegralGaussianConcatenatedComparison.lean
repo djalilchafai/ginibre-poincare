@@ -24,19 +24,19 @@ theorem brownianUniformLeftSum_concatenated_difference_tendsto_meanSquare
           ((n+1)+(n+1)) ω)^2 ∂P) atTop (𝓝 0) := by
   have hm : Tendsto (fun n : ℕ => ((s+t : ℝ≥0) : ℝ)/(n+1)) atTop (𝓝 0) := by
     have h0 := tendsto_one_div_add_atTop_nhds_zero_nat (𝕜 := ℝ)
-    simpa only [mul_zero,mul_one_div] using h0.const_mul ((s+t : ℝ≥0) : ℝ)
+    simpa only [mul_zero, mul_one_div] using h0.const_mul ((s+t : ℝ≥0) : ℝ)
   exact brownianActualLeftGridSum_difference_tendsto_meanSquare B P hB hind j F hF hFi
     (s+t) (fun n => itoUniformNNTime (s+t) (n+1))
     (fun n => itoConcatenatedGrid s t (n+1)) (fun n => n+1) (fun n => (n+1)+(n+1))
     (fun n => by omega) (fun n => by omega)
     (fun n => itoUniformNNTime_mono _ _) (fun n => itoConcatenatedGrid_monotone _ _ _ (by omega))
-    (fun n => by simp [itoUniformNNTime,itoUniformTime])
+    (fun n => by simp [itoUniformNNTime, itoUniformTime])
     (fun n => itoConcatenatedGrid_zero _ _ _)
     (fun n => itoUniformNNTime_end _ _ (by omega))
     (fun n => itoConcatenatedGrid_end _ _ _ (by omega))
     _ _ hm hm (fun n => by positivity) (fun n => by positivity)
-    (fun n k hk => by simpa only [Nat.cast_add,Nat.cast_one] using (itoUniformNNTime_increment_coe (s+t) (n+1) k).le)
-    (fun n k hk => by simpa only [Nat.cast_add,Nat.cast_one] using itoConcatenatedGrid_step s t (n+1) k (Nat.succ_pos n)) hcont C hC hbound
+    (fun n k hk => by simpa only [Nat.cast_add, Nat.cast_one] using (itoUniformNNTime_increment_coe (s+t) (n+1) k).le)
+    (fun n k hk => by simpa only [Nat.cast_add, Nat.cast_one] using itoConcatenatedGrid_step s t (n+1) k (Nat.succ_pos n)) hcont C hC hbound
 
 end
 end GinibrePoincare

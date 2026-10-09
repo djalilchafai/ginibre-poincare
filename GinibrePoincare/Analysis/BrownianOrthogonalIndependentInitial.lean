@@ -4,18 +4,36 @@ public import GinibrePoincare.Analysis.BrownianOrthogonalEquilibriumOriginal
 
 @[expose] public section
 
-/-! Original center and relative whole-process independence for any
-collision-free independent-projection initial probability law. -/
+/-! # Whole-path independence for independent initial projections
+
+The initial probability law `ν` is collision-free almost everywhere, and
+its center and relative projections are assumed independent. The sampling
+measure is `ν.prod P`, so initial state and original Brownian noise are
+independent as well. Gaussian orthogonality gives independence of the
+center and relative noise paths.
+
+First combine these facts into independence of the two input pairs:
+(initial center, center noise) and (initial relative state, relative noise).
+Compose with the measurable OU and relative solution maps. The next two
+lemmas identify these functionals almost everywhere with the projected
+original path; independence transfers through those equalities. A further
+identity compares the continuous path version with the maximal process on
+one full-measure event for every time.
+
+Names containing `EquilibriumPath` designate the shared path constructor;
+the main results here allow any `ν` satisfying the stated projection and
+collision conditions. The fixed free state `z₀` defines that constructor
+on exceptional initial states and does not restrict `ν` to equilibrium. -/
 open Set Filter MeasureTheory ProbabilityTheory
 open scoped NNReal ENNReal
 namespace GinibrePoincare
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1800000
-local instance independentInitialConfigurationPathSpace (n : ℕ) : MeasurableSpace C(ℝ,Configuration n) := borel _
-local instance independentInitialConfigurationPathBorel (n : ℕ) : BorelSpace C(ℝ,Configuration n) := ⟨rfl⟩
-local instance independentInitialCenterPathSpace : MeasurableSpace C(ℝ,ℂ) := borel _
-local instance independentInitialCenterPathBorel : BorelSpace C(ℝ,ℂ) := ⟨rfl⟩
+local instance independentInitialConfigurationPathSpace (n : ℕ) : MeasurableSpace C(ℝ, Configuration n) := borel _
+local instance independentInitialConfigurationPathBorel (n : ℕ) : BorelSpace C(ℝ, Configuration n) := ⟨rfl⟩
+local instance independentInitialCenterPathSpace : MeasurableSpace C(ℝ, ℂ) := borel _
+local instance independentInitialCenterPathBorel : BorelSpace C(ℝ, ℂ) := ⟨rfl⟩
 
 /-- The actual Ginibre initial center and its Brownian noise are independent of
  the actual initial relative configuration and its entire relative noise path. -/
@@ -58,11 +76,11 @@ theorem ginibre_independentInitial_OU_relative_functionals_independent {Ω : Typ
     [IsProbabilityMeasure P] [P.IsComplete] (hB : ∀ i, IsBrownianReal (B i) P)
     (hind : iIndepFun (fun i ω t => B i t ω) P) :
     IndepFun (fun p : Configuration n × Ω => ginibreOUPathElement n α
-      (coordinateSum p.1,ginibreContinuousNoiseCenter n (ginibreBrownianFullContinuousNoise n B α p.2)))
+      (coordinateSum p.1, ginibreContinuousNoiseCenter n (ginibreBrownianFullContinuousNoise n B α p.2)))
       (ginibreRelativeEquilibriumPath α z₀ hz₀ B) (ν.prod P) := by
   have hrel : Measurable (fun p : Configuration n × GinibreContinuousNoise n =>
       ginibreDrivenGlobalPathElement α
-        (ginibreFreeInitialVersion (recenteredConfiguration n z₀) (collisionFree_recentered hz₀) p.1,p.2)) :=
+        (ginibreFreeInitialVersion (recenteredConfiguration n z₀) (collisionFree_recentered hz₀) p.1, p.2)) :=
     (ginibreDrivenGlobalPathElement_measurable hn α).comp
       (((ginibreFreeInitialVersion_measurable _ _).comp measurable_fst).prodMk measurable_snd)
   exact (ginibre_independentInitial_center_relative_inputs_independent hn ν hν hνind B P hB hind α).comp
@@ -79,7 +97,7 @@ theorem ginibre_independentInitial_path_center {Ω : Type*} [MeasurableSpace Ω]
     (fun p : Configuration n × Ω => ginibrePathCenter n (ginibreEquilibriumPath α z₀ hz₀ B p))
       =ᵐ[ν.prod P]
       (fun p => ginibreOUPathElement n α
-        (coordinateSum p.1,ginibreContinuousNoiseCenter n (ginibreBrownianFullContinuousNoise n B α p.2))) := by
+        (coordinateSum p.1, ginibreContinuousNoiseCenter n (ginibreBrownianFullContinuousNoise n B α p.2))) := by
   classical
   
   have hS := (ginibrePathCenter_measurable n).comp
@@ -90,9 +108,9 @@ theorem ginibre_independentInitial_path_center {Ω : Type*} [MeasurableSpace Ω]
         (ginibreBrownianFullContinuousNoise_measurable n B P hB α)).comp measurable_snd))
   apply (Measure.ae_prod_iff_ae_ae (measurableSet_eq_fun hS hU)).mpr
   filter_upwards [hν] with z hz
-  have hv : ginibreFreeInitialVersion z₀ hz₀ z = ⟨z,hz⟩ := by
-    simp [ginibreFreeInitialVersion,hz]
-  simpa only [Function.comp_def,ginibreEquilibriumPath,hv] using
+  have hv : ginibreFreeInitialVersion z₀ hz₀ z = ⟨z, hz⟩ := by
+    simp [ginibreFreeInitialVersion, hz]
+  simpa only [Function.comp_def, ginibreEquilibriumPath, hv] using
     ginibreBrownian_global_path_center hn α z hz B P hB hind
 
 /-- Almost sure relative factorization for the actual equilibrium-initialized path. -/
@@ -112,12 +130,12 @@ theorem ginibre_independentInitial_path_recenter {Ω : Type*} [MeasurableSpace �
   have hU := ginibreRelativeEquilibriumPath_measurable hn α z₀ hz₀ B P hB
   apply (Measure.ae_prod_iff_ae_ae (measurableSet_eq_fun hS hU)).mpr
   filter_upwards [hν] with z hz
-  have hv : ginibreFreeInitialVersion z₀ hz₀ z = ⟨z,hz⟩ := by
-    simp [ginibreFreeInitialVersion,hz]
+  have hv : ginibreFreeInitialVersion z₀ hz₀ z = ⟨z, hz⟩ := by
+    simp [ginibreFreeInitialVersion, hz]
   have hw : ginibreFreeInitialVersion (recenteredConfiguration n z₀) (collisionFree_recentered hz₀)
-      (recenteredConfiguration n z) = ⟨recenteredConfiguration n z,collisionFree_recentered hz⟩ := by
-    simp [ginibreFreeInitialVersion,collisionFree_recentered hz]
-  simpa only [Function.comp_def,ginibreEquilibriumPath,ginibreRelativeEquilibriumPath,hv,hw] using
+      (recenteredConfiguration n z) = ⟨recenteredConfiguration n z, collisionFree_recentered hz⟩ := by
+    simp [ginibreFreeInitialVersion, collisionFree_recentered hz]
+  simpa only [Function.comp_def, ginibreEquilibriumPath, ginibreRelativeEquilibriumPath, hv, hw] using
     ginibreBrownian_global_path_recenter hn α z hz B P hB hind
 
 /-- Independence of the entire center and relative paths initialized from the
@@ -151,7 +169,7 @@ theorem ginibre_independentInitial_path_eq_original {Ω : Type*} [MeasurableSpac
   classical
   
   have hm : Measurable (fun p : Configuration n × Ω =>
-      (ginibreFreeInitialVersion z₀ hz₀ p.1,ginibreBrownianFullContinuousNoise n B α p.2)) :=
+      (ginibreFreeInitialVersion z₀ hz₀ p.1, ginibreBrownianFullContinuousNoise n B α p.2)) :=
     ((ginibreFreeInitialVersion_measurable z₀ hz₀).comp measurable_fst).prodMk
       ((ginibreBrownianFullContinuousNoise_measurable n B P hB α).comp measurable_snd)
   have hL : ∀ᵐ p : Configuration n × Ω ∂ν.prod P,
@@ -163,14 +181,14 @@ theorem ginibre_independentInitial_path_eq_original {Ω : Type*} [MeasurableSpac
   have hC : ∀ᵐ p : Configuration n × Ω ∂ν.prod P, CollisionFree p.1 := by
     apply (Measure.ae_prod_iff_ae_ae ((isOpen_collisionFree n).measurableSet.preimage measurable_fst)).mpr
     exact (hν).mono fun z hz => Eventually.of_forall fun _ => hz
-  filter_upwards [hL,hC] with p hL hC
+  filter_upwards [hL, hC] with p hL hC
   intro t
-  have hv : ginibreFreeInitialVersion z₀ hz₀ p.1 = ⟨p.1,hC⟩ := by
-    simp [ginibreFreeInitialVersion,hC]
+  have hv : ginibreFreeInitialVersion z₀ hz₀ p.1 = ⟨p.1, hC⟩ := by
+    simp [ginibreFreeInitialVersion, hC]
   have hL' : ginibreDrivenMaximalLifetime n α (ginibreBrownianFullContinuousNoise n B α p.2).val p.1 = ⊤ := by
     simpa only [hv] using hL
-  simp only [ginibreEquilibriumPath,ginibreDrivenGlobalPathElement,hv,dif_pos hL',
-    ContinuousMap.coe_mk,ginibreBrownianMaximalProcess]
+  simp only [ginibreEquilibriumPath, ginibreDrivenGlobalPathElement, hv, dif_pos hL',
+    ContinuousMap.coe_mk, ginibreBrownianMaximalProcess]
 
 /-- Actual original Brownian whole-process independence with initial law exactly
  Ginibre; no assumption of stationarity or stochastic factorization is used. -/
@@ -186,24 +204,24 @@ theorem ginibreBrownian_independentInitial_center_relative_processes_independent
       coordinateSum (ginibreBrownianMaximalProcess n α p.1 B t p.2))
       (fun p => fun t : ℝ≥0 => recenteredConfiguration n
         (ginibreBrownianMaximalProcess n α p.1 B t p.2)) (ν.prod P) := by
-  have hS : Measurable (fun X : C(ℝ,ℂ) => fun t : ℝ≥0 => X (t:ℝ)) := by
+  have hS : Measurable (fun X : C(ℝ, ℂ) => fun t : ℝ≥0 => X (t : ℝ)) := by
     apply measurable_pi_lambda
     intro t
-    exact (continuous_eval_const (t:ℝ)).measurable
-  have hW : Measurable (fun X : C(ℝ,Configuration n) => fun t : ℝ≥0 => X (t:ℝ)) := by
+    exact (continuous_eval_const (t : ℝ)).measurable
+  have hW : Measurable (fun X : C(ℝ, Configuration n) => fun t : ℝ≥0 => X (t : ℝ)) := by
     apply measurable_pi_lambda
     intro t
-    exact (continuous_eval_const (t:ℝ)).measurable
+    exact (continuous_eval_const (t : ℝ)).measurable
   have h := (ginibre_independentInitial_center_relative_paths_independent hn ν hν hνind α z₀ hz₀ B P hB hind).comp hS hW
   apply h.congr
   · filter_upwards [ginibre_independentInitial_path_eq_original hn ν hν hνind α z₀ hz₀ B P hB hind] with p hp
     funext t
-    simpa only [Function.comp_def,ginibrePathCenter,ContinuousMap.comp_apply,ContinuousMap.coe_mk,
-      coordinateSumCLM_apply,hp,Real.toNNReal_coe]
+    simpa only [Function.comp_def, ginibrePathCenter, ContinuousMap.comp_apply, ContinuousMap.coe_mk,
+      coordinateSumCLM_apply, hp, Real.toNNReal_coe]
   · filter_upwards [ginibre_independentInitial_path_eq_original hn ν hν hνind α z₀ hz₀ B P hB hind] with p hp
     funext t
-    simpa only [Function.comp_def,ginibrePathRecenter,ContinuousMap.comp_apply,ContinuousMap.coe_mk,
-      recenteredCLM_apply,hp,Real.toNNReal_coe]
+    simpa only [Function.comp_def, ginibrePathRecenter, ContinuousMap.comp_apply, ContinuousMap.coe_mk,
+      recenteredCLM_apply, hp, Real.toNNReal_coe]
 
 
 #print axioms ginibre_independentInitial_center_relative_inputs_independent

@@ -25,7 +25,7 @@ theorem brownianActualLeftGridSum_memLp_two
   have he : brownianFrozenStep (B j) (F (a k)) (a k) (a (k+1)) (a (k+1)) =
       (fun ω => F (a k) ω*(B j (a (k+1)) ω-B j (a k) ω)) := by
     funext ω
-    simp [brownianFrozenStep,max_eq_right (ha (Nat.le_succ k))]
+    simp [brownianFrozenStep, max_eq_right (ha (Nat.le_succ k))]
   rw [he] at hh
   exact hh
 

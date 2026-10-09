@@ -32,17 +32,17 @@ theorem metropolisReversibleKernel_lintegral_invariant {E : Type*} [MeasurableSp
     simp only [Prod.snd_swap]
     simp_rw [mul_comm (metropolisAcceptedFlux q x _) (φ x)]
     exact lintegral_const_mul (φ x) (hsm x)
-  simp_rw [metropolisReversibleKernel_apply μ q hq,lintegral_add_measure,
-    lintegral_withDensity_eq_lintegral_mul μ (hsm _) hφ,lintegral_smul_measure,
-    lintegral_dirac' _ hφ,smul_eq_mul]
+  simp_rw [metropolisReversibleKernel_apply μ q hq, lintegral_add_measure,
+    lintegral_withDensity_eq_lintegral_mul μ (hsm _) hφ, lintegral_smul_measure,
+    lintegral_dirac' _ hφ, smul_eq_mul]
   simp only [Pi.mul_apply]
-  rw [lintegral_add_left (hs.mul (hφ.comp measurable_snd)).lintegral_prod_right,hflux]
+  rw [lintegral_add_left (hs.mul (hφ.comp measurable_snd)).lintegral_prod_right, hflux]
   have hp : Measurable (fun x => φ x*(∫⁻ y, metropolisAcceptedFlux q x y ∂μ)) :=
     hφ.mul hs.lintegral_prod_right
   rw [← lintegral_add_left hp]
   apply lintegral_congr
   intro x
-  rw [metropolisRejectionMass,mul_comm _ (φ x),← mul_add]
+  rw [metropolisRejectionMass, mul_comm _ (φ x),← mul_add]
   congr 1
   rw [add_tsub_cancel_of_le]
   · simp

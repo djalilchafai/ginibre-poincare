@@ -44,7 +44,7 @@ theorem gueRegularizedPotential_strongConvexOn (n : ℕ) {ε : ℝ} (hε : 0<ε)
       (mem_univ (y p.2-y p.1)) ha hb hab
     simp only [smul_eq_mul] at hh
     have he : (a • x+b • y) p.2-(a • x+b • y) p.1 = a*(x p.2-x p.1)+b*(y p.2-y p.1) := by
-      simp only [PiLp.add_apply,PiLp.smul_apply,smul_eq_mul]
+      simp only [PiLp.add_apply, PiLp.smul_apply, smul_eq_mul]
       ring
     rw [he]
     nlinarith
@@ -64,7 +64,7 @@ theorem gueLogBarrier_exp_bound {ε u : ℝ} (hε : 0<ε) (hu : u≤ε) :
     linarith
   calc
     _ ≤ Real.exp (2*Real.log ε) := Real.exp_le_exp.mpr (by linarith)
-    _ = ε^2 := by rw [two_mul,Real.exp_add,Real.exp_log hε]; ring
+    _ = ε^2 := by rw [two_mul, Real.exp_add, Real.exp_log hε]; ring
 
 /-- Every regularized pair factor is bounded by a fixed polynomial majorant. -/
 theorem gueLogBarrier_exp_polynomial_bound {ε u : ℝ} (hε : 0<ε) (hε1 : ε≤1) :
@@ -78,7 +78,7 @@ theorem gueLogBarrier_exp_polynomial_bound {ε u : ℝ} (hε : 0<ε) (hε1 : ε�
     unfold gueLogBarrier
     rw [ite_eq_right hu]
     have he : -2 * -Real.log u = Real.log u+Real.log u := by ring
-    rw [he,Real.exp_add,Real.exp_log hpos]
+    rw [he, Real.exp_add, Real.exp_log hpos]
     rw [abs_of_pos hpos]
     nlinarith
 

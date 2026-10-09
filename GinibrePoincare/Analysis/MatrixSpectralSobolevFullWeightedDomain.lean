@@ -6,7 +6,16 @@ public import GinibrePoincare.Analysis.MatrixSpectralSobolevWeakMultiplier
 
 @[expose] public section
 
-/-! # Full ordinary weak Sobolev domain equals the smooth weighted graph closure -/
+/-! # Full ordinary weak Sobolev domain equals the smooth weighted graph closure
+
+Multiply the weak value by an expanding spatial cutoff. The product-rule
+gradient is `χ • g + u • gradient χ`; both components remain in weighted L²
+and have compact support. Positivity and continuity of the density give local
+volume integrability, allowing the ordinary weak product rule to be applied.
+The compact weighted-domain approximation theorem places each truncated pair
+in the smooth graph closure. Their value and gradient converge in weighted L²,
+so closedness gives membership for the original unrestricted weak pair.
+-/
 open MeasureTheory Filter
 open scoped Topology ENNReal ContDiff
 namespace GinibrePoincare
