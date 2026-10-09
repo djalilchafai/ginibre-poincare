@@ -14,8 +14,9 @@ The fresh export contains 14,592 declarations and 12,588 theorems (including
 generated declarations); 32 endpoint views and the twelve thematic views are
 refreshed, with named-interface shortcuts in the offline explorer. JavaScript
 syntax and embedded-data checks pass; browser rendering could not be checked
-because the sandbox blocks Chromium's crash-handler socket setup. The online
-explorer was not redeployed. See the [verification record](verification/readability-final-check.txt).
+because the sandbox blocks Chromium's crash-handler socket setup. The [online explorer](https://djalilchafai.github.io/ginibre-poincare/) is redeployed
+by GitHub Actions run 37899888461; its live HTML and a topic guide match the
+published source byte for byte. See the [verification record](verification/readability-final-check.txt).
 The earlier mathematical correspondence and verification evidence below is the
 2026-10-08 checkpoint.
 
@@ -123,8 +124,11 @@ The current source requires an ordinary new immutable revision, its own full
 mechanical verification and review, and registration using the same Palomar ID.
 The local fresh Comparator attempt is blocked by the execution sandbox's
 network-namespace socket restriction; the earlier official pass remains
-historical evidence. The next step is exact-commit official verification after
-publishing the refreshed repository and website.
+historical evidence. The repository and website are published at commit
+`1aa5b15b96ae26bce6c610a891053e8849c71160`. Exact-commit
+[official preflight](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37899888359)
+is running before revision intake. See the
+[publication record](verification/readability-publication.json).
 
 ## Historical checkpoints (superseded)
 

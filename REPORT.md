@@ -180,8 +180,8 @@ The [official v2 proof section](https://arxiv.org/html/2608.19358v2#S2) was used
 
 No remaining concrete mathematical conclusion gap was located in the combined
 independent follow-up inventory. Full-tree verification and publication have
-separate evidence in STATUS.md and PALOMAR.md. Public registry publication
-remains unconfirmed. The open research Problems and numerical experiments retain
+separate evidence in STATUS.md and PALOMAR.md. Palomar v1 is publicly registered for the earlier Theorem 1.1 snapshot; the
+current revision requires its own exact-commit verification. The open research Problems and numerical experiments retain
 the exclusions stated above.
 
 ## Proof-route correspondence remarks

@@ -6,8 +6,7 @@ Independent main/auxiliary and extension/dynamics follow-ups resolve the
 historical mathematical correspondence findings, including matrix H¹, pointwise
 Γ₂, unrestricted operators and the classical locally Lipschitz Brascamp–Lieb
 domain. Final full-tree verification passes 5,814 build jobs, 6,920 public axiom
-queries and 14,592 all-local declarations; details are in STATUS.md. Registry publication
-remains unconfirmed. These diagrams show compiled references, not source
+queries and 14,592 all-local declarations; details are in STATUS.md. Palomar v1 publication is confirmed for the earlier Theorem 1.1 snapshot. These diagrams show compiled references, not source
 correspondence or a publication receipt. The matrix preset selects the literal matrix H¹ theorem; the earlier finite-overlap
 endpoint remains a separately searchable declaration.
 
@@ -173,4 +172,4 @@ produced compiled export. The HTML embeds its declaration data and works offline
 
 The graph is a navigation aid, not a replacement for axiom audits or independent
 review of correspondence with the paper. [STATUS.md](STATUS.md) records verified
-scope, resolved correspondence findings, precise domain qualifications and unconfirmed registry publication.
+scope, resolved correspondence findings, precise domain qualifications and the versioned Palomar publication receipt.

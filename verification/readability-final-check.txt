@@ -56,3 +56,5 @@ Publication preparation 2026-10-09:
 - Fresh offline Palomar structure: 1727 Lean files, zero blockers.
 - Comparator host symlink mount corrected with isolation intact; actual retry blocked by NETLINK_ROUTE socket restriction. Official exact-commit CI required.
 - GitHub Pages assembly includes topic guides and verification documentation.
+
+GitHub publication: 1aa5b15b96ae26bce6c610a891053e8849c71160 pushed; Pages run37899888461 succeeded. Live HTML and topic-guide byte comparisons pass. Exact-commit Palomar full preflight37899888359 running; see readability-publication.json for latest status.

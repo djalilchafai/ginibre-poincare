@@ -1,0 +1,15 @@
+{
+  "published_source_commit": "1aa5b15b96ae26bce6c610a891053e8849c71160",
+  "github_repository": "https://github.com/djalilchafai/ginibre-poincare",
+  "pages_url": "https://djalilchafai.github.io/ginibre-poincare/",
+  "pages_workflow_run": 37899888461,
+  "pages_workflow_conclusion": "success",
+  "live_explorer_sha256": "ca54f97fc83f68815b82194b660aad50d0f95ab08ed5c08814af077d6fba6110",
+  "live_explorer_matches_local": true,
+  "topic_guide_matches_local": true,
+  "palomar_full_preflight_run": 37899888359,
+  "palomar_full_preflight_status": "in_progress",
+  "palomar_existing_id": "PALOMAR-2026-10-09-000001",
+  "palomar_revision_status": "waiting_for_exact_commit_preflight",
+  "checked_at_utc": "2026-10-09T07:36:55.627134+00:00"
+}

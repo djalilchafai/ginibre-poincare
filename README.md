@@ -47,8 +47,8 @@ The [formal Lean dependency graph](FORMAL_DEPENDENCIES.md) additionally extracts
 constant references from compiled theorem statements and proof/definition bodies,
 with static SVGs, a [live interactive explorer](https://djalilchafai.github.io/ginibre-poincare/formal_dependencies.html),
 and an [offline copy](formal-dependencies.html). The local 2026-10-09 export
-includes the new named interfaces; the live explorer remains the previously
-published version until redeployment is confirmed.
+includes the new named interfaces; the live explorer is successfully redeployed,
+with its HTML and topic guide matching the published files byte for byte.
 
 The development includes sharp symmetric weak-H¹ Poincaré and exhaustive
 affine equality, both literal Theorem 1.9 deficits, differential deficits,

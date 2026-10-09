@@ -58,6 +58,15 @@ from the immutable submitted-snapshot evidence.
 
 ## Current revision — 2026-10-09
 
+The refreshed repository is pushed at
+[`1aa5b15b96ae26bce6c610a891053e8849c71160`](https://github.com/djalilchafai/ginibre-poincare/tree/1aa5b15b96ae26bce6c610a891053e8849c71160).
+The [dependency website](https://djalilchafai.github.io/ginibre-poincare/) is
+successfully redeployed, with matching live content. Exact-commit
+[official full mechanical preflight](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37899888359)
+is running before ordinary revision intake. The existing registry ID is
+`PALOMAR-2026-10-09-000001`; v1 remains unchanged.
+
+
 The readability revision preserves existing theorem signatures and includes the
 full build and public/private audits recorded in [STATUS.md](STATUS.md).
 It refreshes all 32 endpoint views and twelve thematic diagrams. The historical
@@ -177,5 +186,6 @@ The project is public at https://github.com/djalilchafai/ginibre-poincare.
 GitHub authentication and publication succeeded. The pinned official full
 mechanical preflight is configured in `.github/workflows/palomar-preflight.yml`;
 the full report passed and agent intake accepted submission `7fh68vzqfjeu`.
-Registration consent has already been accepted. Live publication remains
-unconfirmed; do not repeat the registration request to resolve a status-service failure.
+Registration consent was accepted and v1 is now publicly registered.
+Updated source is an ordinary new-version submission using the existing registry
+ID, rather than another registration request for the old immutable snapshot.
