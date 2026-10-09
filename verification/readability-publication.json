@@ -1,20 +1,12 @@
 {
-  "published_source_commit": "1aa5b15b96ae26bce6c610a891053e8849c71160",
   "github_repository": "https://github.com/djalilchafai/ginibre-poincare",
   "pages_url": "https://djalilchafai.github.io/ginibre-poincare/",
-  "pages_workflow_run": 37899888461,
-  "pages_workflow_conclusion": "success",
-  "live_explorer_sha256": "ca54f97fc83f68815b82194b660aad50d0f95ab08ed5c08814af077d6fba6110",
-  "live_explorer_matches_local": true,
-  "topic_guide_matches_local": true,
   "palomar_full_preflight_run": 37900274102,
   "palomar_full_preflight_status": "completed",
   "palomar_existing_id": "PALOMAR-2026-10-09-000001",
   "palomar_revision_status": "mechanically_verified_review_status_unavailable",
   "checked_at_utc": "2026-10-09T08:08:26.577376+00:00",
   "revision_source_commit": "8cc0d9b7fbbf2b5452f116e9066372db51a9a1ec",
-  "pages_latest_workflow_run": 37900262583,
-  "pages_latest_workflow_conclusion": "success",
   "superseded_preflight_run": 37899888359,
   "superseded_preflight_conclusion": "cancelled",
   "palomar_full_preflight_conclusion": "success",
@@ -32,5 +24,14 @@
     1
   ],
   "public_versions_url": "https://data.palomar-registry.org/versions/PALOMAR-2026-10-09-000001.json",
-  "last_revision_service_check_utc": "2026-10-09T08:10:39.431529+00:00"
+  "last_revision_service_check_utc": "2026-10-09T08:10:39.431529+00:00",
+  "initial_live_explorer_sha256": "ca54f97fc83f68815b82194b660aad50d0f95ab08ed5c08814af077d6fba6110",
+  "initial_live_explorer_matches_local": true,
+  "initial_topic_guide_matches_local": true,
+  "latest_explorer_expected_sha256": "7297a3308607ced024513d6872eb7f81383d01b8b0a93721ec88028378111721",
+  "initial_published_source_commit": "1aa5b15b96ae26bce6c610a891053e8849c71160",
+  "initial_pages_workflow_run": 37899888461,
+  "initial_pages_workflow_conclusion": "success",
+  "documentation_checkpoint_workflow_run": 37900262583,
+  "documentation_checkpoint_workflow_conclusion": "success"
 }
