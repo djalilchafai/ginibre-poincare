@@ -47,7 +47,7 @@ See [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md) and
 | General real Brascamp–Lieb | C² potential with everywhere positive-definite actual Hessian and finite Gibbs mass; locally Lipschitz or ordinary local L² weak gradients, value globally L², finite inverse-Hessian energy; no uniform-curvature/global-gradient-L² assumption |
 | Appendices A–B | Actual weak closure/core/norm equivalence and positive-speed collision capacity; O(ε⁴) cutoff-square and O(ε²) gradient rates; literal leading coefficients, tensor expansion, normalized Gram–Schmidt and Slater ground state |
 | Problems 1.11, 1.15, 1.16; Appendix C | Open research questions and numerical experiments; not solved or theorem-certified |
-| Publication | Palomar Theorem 1.1 comparison published as PALOMAR-2026-10-09-000001 v1; current-source revision requires new verification |
+| Publication | Palomar v1 published; revision `9nfa8zoiz8te` independently verified; new registration awaits review/status service recovery |
 
 ## Latest progress and domain qualifications
 
@@ -120,14 +120,21 @@ research Problems and Appendix C retain their exclusions above.
 Palomar [version 1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-09-000001&version=1)
 is publicly registered for the earlier Theorem 1.1 comparison snapshot.
 See the [public receipt](verification/registry-publication-check.md).
-The current source requires an ordinary new immutable revision, its own full
-mechanical verification and review, and registration using the same Palomar ID.
+The current source has been submitted as an ordinary immutable revision under
+the same Palomar ID. Mechanical verification passes; review readiness and new
+registration remain unavailable.
 The local fresh Comparator attempt is blocked by the execution sandbox's
-network-namespace socket restriction; the earlier official pass remains
-historical evidence. The repository and website are published at commit
-`1aa5b15b96ae26bce6c610a891053e8849c71160`. Exact-commit
-[official preflight](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37899888359)
-is running before revision intake. See the
+network-namespace socket restriction; the fresh official checks below pass
+for the selected comparison despite that local host limitation. The first website deployment was at commit
+`1aa5b15b96ae26bce6c610a891053e8849c71160`, followed by the final submitted source
+`8cc0d9b7fbbf2b5452f116e9066372db51a9a1ec`. Exact-commit
+[official full preflight](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37900274102)
+passed. Revision submission `9nfa8zoiz8te` is accepted and its own
+[official verification](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37901827671)
+passes with zero errors or warnings and the required kernels. Status and review
+GETs repeatedly return HTTP 500; review readiness and new registration cannot
+be confirmed. The remaining external step is retrieving the review and
+completing the new-version registration process when the service recovers. See the
 [publication record](verification/readability-publication.json).
 
 ## Historical checkpoints (superseded)

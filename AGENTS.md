@@ -31,6 +31,11 @@ Use REPORT.md for numbered coverage and STATUS.md for current verification evide
 Palomar v1 is published as PALOMAR-2026-10-09-000001 at the immutable
 `fb58b4fd765f19a65c46cb82fb647fb0d94e28ca` snapshot. Updated source must use
 an ordinary new submission with that existing registry ID; preserve v1 evidence.
+Revision `9nfa8zoiz8te` at `8cc0d9b7fbbf2b5452f116e9066372db51a9a1ec` passes
+preflight 37900274102 and official verification 37901827671. Its status/review
+service currently returns HTTP 500. Preserve accepted intake and private
+credentials; do not duplicate the submission. Registration requires the new
+review digest when the review becomes available.
 
 ## Soundness requirements
 

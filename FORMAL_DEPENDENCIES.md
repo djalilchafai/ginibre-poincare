@@ -6,7 +6,9 @@ Independent main/auxiliary and extension/dynamics follow-ups resolve the
 historical mathematical correspondence findings, including matrix H¹, pointwise
 Γ₂, unrestricted operators and the classical locally Lipschitz Brascamp–Lieb
 domain. Final full-tree verification passes 5,814 build jobs, 6,920 public axiom
-queries and 14,592 all-local declarations; details are in STATUS.md. Palomar v1 publication is confirmed for the earlier Theorem 1.1 snapshot. These diagrams show compiled references, not source
+queries and 14,592 all-local declarations; details are in STATUS.md. Palomar v1 publication is confirmed for the earlier Theorem 1.1 snapshot; the
+current revision passes official verification and awaits review and registration
+while the status service returns HTTP 500. These diagrams show compiled references, not source
 correspondence or a publication receipt. The matrix preset selects the literal matrix H¹ theorem; the earlier finite-overlap
 endpoint remains a separately searchable declaration.
 

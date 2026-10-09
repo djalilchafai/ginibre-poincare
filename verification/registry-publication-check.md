@@ -15,8 +15,25 @@ The unsuccessful 2026-10-08 search and authenticated observations are retained
 as historical observations in the [sanitized evidence](registry-publication-check.json).
 They are superseded by the public receipt; their earlier failure causes remain unknown.
 
-Revised source requires a new verified and reviewed immutable submission using
+Each source revision requires a new verified and reviewed immutable submission using
 `existing_id: PALOMAR-2026-10-09-000001`, according to the
 [official agent protocol](https://submit.palomar-registry.org/llms.txt).
 Version 1 and its source remain preserved. See [Palomar history](../PALOMAR.md)
 and the separate [correspondence review](../CORRESPONDENCE_REVIEW.md).
+
+## Revision submission — 2026-10-09
+
+Ordinary revision `9nfa8zoiz8te` is accepted under the same registry ID at
+source `8cc0d9b7fbbf2b5452f116e9066372db51a9a1ec`. Both the
+[exact-commit full preflight](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37900274102)
+and [official verification](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37901827671)
+pass with zero errors or warnings and the required kernels. Their reports are
+[preflight](../palomar-readability-preflight-report.json) and
+[verification](../palomar-readability-verification-report.json).
+
+The authenticated status and review endpoints repeatedly return HTTP 500,
+including after verification completed. The cause is unknown. The review cannot
+be retrieved and new-version registration is not confirmed; v1 remains the
+confirmed public version. No duplicate submission or registration request was
+made. Ownership-proof artifacts are deleted; credentials and private responses
+remain outside the repository.

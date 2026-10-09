@@ -13,9 +13,16 @@ and inspected snapshots. The public registry now confirms
 [PALOMAR-2026-10-09-000001 v1](https://data.palomar-registry.org/entries/PALOMAR-2026-10-09-000001-v1.json),
 registered at `2026-10-09T00:48:41Z` for source snapshot
 `fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`. This is the historical Theorem 1.1
-submission, distinct from publication of the later full-paper/readability
-revision. [The registry record](verification/registry-publication-check.md)
-retains the receipt and dated earlier observations.
+submission. The later source revision
+`8cc0d9b7fbbf2b5452f116e9066372db51a9a1ec` is accepted as `9nfa8zoiz8te`.
+Its [exact-commit full preflight](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37900274102)
+and [official Palomar verification](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37901827671)
+pass with no errors or warnings and all three kernels. Editorial review and
+registration of this revision remain pending: authenticated submission/review
+endpoints repeatedly return HTTP 500, and the private page supplies no review.
+These mechanical results do not constitute an editorial verdict or a revised
+public receipt. [The registry record](verification/registry-publication-check.md)
+retains version 1 and the dated service observations.
 
 ## Independent mathematical follow-up — 2026-10-08: reviewed inventory resolved
 

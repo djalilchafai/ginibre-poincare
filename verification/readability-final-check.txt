@@ -58,3 +58,7 @@ Publication preparation 2026-10-09:
 - GitHub Pages assembly includes topic guides and verification documentation.
 
 GitHub publication: 1aa5b15b96ae26bce6c610a891053e8849c71160 pushed; Pages run37899888461 succeeded. Live HTML and topic-guide byte comparisons pass. Exact-commit Palomar full preflight37899888359 running; see readability-publication.json for latest status.
+
+Final source8cc0d9b7fbbf2b5452f116e9066372db51a9a1ec: official full preflight37900274102 passed with zero errors. Revision9nfa8zoiz8te accepted under existing registry ID; verification37901827671 queued. Original preflight37899888359 cancelled as superseded.
+
+Official registry verification37901827671: PASS, errors[], warnings[], nanoda and con-ron alongside Lean default kernel. Report committed separately from v1 evidence. Status and review API GETs repeatedlyHTTP500 after successful verification; new registration unconfirmed, v1 preserved.

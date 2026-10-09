@@ -44,11 +44,11 @@ They are omitted from this public report, as is any unpublished editorial review
 | Full-project dashboard | Current evidence / next work |
 | --- | --- |
 | Verified scope | Recorded builds and axiom audits certify the exported Lean statements; current item-specific correspondence and resolved historical findings are recorded in [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md); the official full preflight passed for the submitted snapshot |
-| Open work | New-commit registry revision verification and registration; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
-| Latest progress | Verified readability revision and refreshed diagrams; public v1 registration confirmed |
+| Open work | New-version editorial review and registration; Problems 1.11, 1.15 and 1.16 remain paper research questions, and Appendix C numerical experiments are not certified |
+| Latest progress | Verified readability revision, refreshed diagrams and live website; public v1 confirmed; revision `9nfa8zoiz8te` passes official verification, status/review service HTTP 500 |
 | Lean source counts | 186,672 project lines in 1,727 files; 1,256,051 transitively imported Mathlib lines in 3,813 modules; combined 1,442,723 lines |
 | Build / audit evidence | Current single-thread make check: 5,814 jobs; 6,920 public queries; 14,592 all-local declarations; standard axioms only; offline structural preflight: 1,727 Lean files, zero blockers |
-| Next step | Push the verified revision, run exact-commit full preflight and submit an ordinary version using the existing Palomar ID |
+| Next step | Retrieve the new review when the status service recovers, then complete the version-specific registration process |
 
 Source counts are refreshed with `python3 scripts/count_lean_sources.py`.
 Comments and blank lines are included; imported Mathlib modules are counted
@@ -58,14 +58,22 @@ from the immutable submitted-snapshot evidence.
 
 ## Current revision — 2026-10-09
 
-The refreshed repository is pushed at
-[`1aa5b15b96ae26bce6c610a891053e8849c71160`](https://github.com/djalilchafai/ginibre-poincare/tree/1aa5b15b96ae26bce6c610a891053e8849c71160).
+The submitted revision source is pushed at
+[`8cc0d9b7fbbf2b5452f116e9066372db51a9a1ec`](https://github.com/djalilchafai/ginibre-poincare/tree/8cc0d9b7fbbf2b5452f116e9066372db51a9a1ec).
 The [dependency website](https://djalilchafai.github.io/ginibre-poincare/) is
 successfully redeployed, with matching live content. Exact-commit
-[official full mechanical preflight](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37899888359)
-is running before ordinary revision intake. The existing registry ID is
-`PALOMAR-2026-10-09-000001`; v1 remains unchanged.
-
+[official full mechanical preflight](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37900274102)
+passed for final commit `8cc0d9b7fbbf2b5452f116e9066372db51a9a1ec`; the
+[passing report](palomar-readability-preflight-report.json) is committed. Ordinary
+revision submission `9nfa8zoiz8te` is accepted under the existing ID and its own
+[verification run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37901827671)
+passed with zero errors or warnings; see the
+[official report](palomar-readability-verification-report.json). Temporary
+ownership tag and secret gist are deleted. Authenticated status and review
+GETs repeatedly return HTTP 500 even after verification passes. No review is
+available for inspection, and revision registration remains unconfirmed.
+The cause of the service failure is unknown. The existing registry ID is
+`PALOMAR-2026-10-09-000001`; v1 remains publicly registered and unchanged.
 
 The readability revision preserves existing theorem signatures and includes the
 full build and public/private audits recorded in [STATUS.md](STATUS.md).
@@ -75,8 +83,9 @@ A fresh local Comparator attempt could not complete. The symlinked dependency
 store mount was corrected conservatively; Bubblewrap then failed to create its
 network-namespace socket (`Operation not permitted`). Isolation flags remain
 intact. This is a host verification failure, not a fresh Comparator pass. The exact
-GitHub snapshot must pass the official reusable full preflight before a new
-submission. Revision intake uses `existing_id: PALOMAR-2026-10-09-000001` and a
+GitHub snapshot has now passed the official reusable full preflight and the
+registry's own independent verification; these supersede the local host limitation
+for the selected comparison. Revision intake uses `existing_id: PALOMAR-2026-10-09-000001` and a
 new full commit SHA; it cannot modify the source of published v1.
 
 ## Completed upgrade and local verification

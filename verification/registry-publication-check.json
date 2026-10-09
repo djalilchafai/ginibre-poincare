@@ -43,5 +43,18 @@
     "The registered comparison covers Theorem 1.1 and exhaustive affine equality only.",
     "Current source requires a new ordinary revision using existing_id; v1 remains immutable.",
     "Credentials and unpublished review payloads are excluded."
-  ]
+  ],
+  "revision": {
+    "submission_id": "9nfa8zoiz8te",
+    "source_commit": "8cc0d9b7fbbf2b5452f116e9066372db51a9a1ec",
+    "verification_run": 37901827671,
+    "verification_conclusion": "success",
+    "verification_errors": 0,
+    "verification_warnings": 0,
+    "registration_confirmed": false,
+    "status_http_status": 500,
+    "review_http_status": 500,
+    "checked_at_utc": "2026-10-09T08:08:26.577376+00:00"
+  },
+  "last_revision_service_check_utc": "2026-10-09T08:10:39.431804+00:00"
 }

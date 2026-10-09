@@ -26,8 +26,16 @@ follow-up findings and exact domain qualifications are in
 [PALOMAR-2026-10-09-000001 v1](https://data.palomar-registry.org/entries/PALOMAR-2026-10-09-000001-v1.json),
 registered at `2026-10-09T00:48:41Z` for the submitted Theorem 1.1 snapshot
 `fb58b4fd765f19a65c46cb82fb647fb0d94e28ca`. This receipt concerns that immutable
-snapshot; the later full-paper/readability revision has separate local verification.
-See [registry evidence](verification/registry-publication-check.md).
+snapshot. The later source revision
+`8cc0d9b7fbbf2b5452f116e9066372db51a9a1ec` is accepted as submission
+`9nfa8zoiz8te`; its
+[exact-commit full preflight](https://github.com/djalilchafai/ginibre-poincare/actions/runs/37900274102)
+and [official Palomar verification](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37901827671)
+pass with no errors or warnings and all three kernels. Editorial review and
+registration of that revision remain pending: authenticated submission/review
+endpoints repeatedly return HTTP 500, and the private page supplies no review.
+Version 1 remains the confirmed public entry. See
+[registry evidence](verification/registry-publication-check.md).
 
 For mathematical reading, start with [the human reading guide](HUMAN_READABILITY.md).
 It gives ordered routes from definitions through the central lemmas to each
@@ -94,5 +102,7 @@ make palomar-structure  # offline layout, source, metadata and configuration che
 make palomar            # readiness checks, then actual Comparator with independent kernels
 ```
 
-Palomar currently requires Lean ≥ 4.35.0-rc2. The user authorized this upgrade and a deliberate proof hole only in the independent Challenge theorem; the Solution and proof library remain subject to the full soundness policy. The supported-toolchain full build, public/private axiom audits and actual Comparator with all three kernels pass. The dependency manifest is included in the final Git snapshot. The public v1 receipt confirms the submitted immutable snapshot. Publishing a
-later source revision is a separate registry update; see [PALOMAR.md](PALOMAR.md).
+Palomar currently requires Lean ≥ 4.35.0-rc2. The user authorized this upgrade and a deliberate proof hole only in the independent Challenge theorem; the Solution and proof library remain subject to the full soundness policy. The supported-toolchain full build, public/private axiom audits and actual Comparator with all three kernels pass. The dependency manifest is included in the final Git snapshot. The public v1 receipt confirms its submitted immutable snapshot. The accepted
+revision also passes official verification; its editorial review and registration
+remain pending while the authenticated status services return HTTP 500. See
+[PALOMAR.md](PALOMAR.md) for separate evidence and next steps.
