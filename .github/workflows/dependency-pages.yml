@@ -39,7 +39,7 @@ jobs:
           cp diagrams/*.svg diagrams/*.dot diagrams/*.json _site/diagrams/
           cp *.md _site/
           cp -r docs verification _site/
-          cp lean-source-counts.json subprojects.json _site/
+          cp *.json formalization.yaml LICENSE _site/
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
