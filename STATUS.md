@@ -1,5 +1,45 @@
 # Ginibre Poincaré formalization — current status
 
+## Lean Pool proposal — 2026-10-12
+
+[Repository proposal #644](https://github.com/LeanPool/lean-pool/issues/644)
+is open in the current upstream repository, `LeanPool/lean-pool`. It links the
+paper, numbered coverage, build/axiom evidence, provenance and Palomar status.
+Acceptance and import are pending; this repository remains the primary
+development location. Toolchain and quality-gate adaptation has not yet been
+performed. Next step: await maintainer guidance on import scope and integration.
+
+This documentation update preserves the mathematical scope and domain
+qualifications in the dashboard below. The latest full build/audit evidence
+remains the 2026-10-09 checkpoint; no Lean build was rerun for this update.
+Source counts were refreshed with `python3 scripts/count_lean_sources.py`;
+the totals in the dashboard's source-count table remain unchanged.
+
+## Palomar status refresh — 2026-10-12
+
+The live public versions projection still lists only registered version 1 of
+`PALOMAR-2026-10-09-000001`. Revision `9nfa8zoiz8te` has a successful
+official mechanical verification (run 37901827671), but new-version publication
+is not confirmed. The last recorded authenticated status/review checks, on
+2026-10-09, returned HTTP 500; those authenticated checks were not repeated in
+this refresh. Next step: retrieve the revision review and its new digest, then
+complete version-specific registration under the existing ID.
+
+A further live public-results check on 2026-10-12 confirms `version: 1`
+and `versions: 1` for this registry ID. There is no immediate maintainer action
+established by the public check; the next publication step remains obtaining
+the revision review/digest and completing registration. Authenticated revision
+status was not rechecked, so the current health of that service is unknown.
+
+The full-project dashboard below remains applicable: mathematical scope and
+domain qualifications are unchanged, and the latest full build/audit evidence
+remains the 2026-10-09 readability checkpoint. No build was rerun for this
+publication status check. Source counts were refreshed with
+`python3 scripts/count_lean_sources.py`: 186,672 project Lean lines in 1,727
+files; 1,442,723 lines including 1,256,051 lines in 3,813 transitively imported
+Mathlib modules. Comments and blank lines are included; each imported module
+is counted once in full.
+
 ## Readability revision — 2026-10-09
 
 The [reading guides](HUMAN_READABILITY.md), proof explanations in 82 modules,
@@ -47,7 +87,7 @@ See [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md) and
 | General real Brascamp–Lieb | C² potential with everywhere positive-definite actual Hessian and finite Gibbs mass; locally Lipschitz or ordinary local L² weak gradients, value globally L², finite inverse-Hessian energy; no uniform-curvature/global-gradient-L² assumption |
 | Appendices A–B | Actual weak closure/core/norm equivalence and positive-speed collision capacity; O(ε⁴) cutoff-square and O(ε²) gradient rates; literal leading coefficients, tensor expansion, normalized Gram–Schmidt and Slater ground state |
 | Problems 1.11, 1.15, 1.16; Appendix C | Open research questions and numerical experiments; not solved or theorem-certified |
-| Publication | Palomar v1 published; revision `9nfa8zoiz8te` independently verified; new registration awaits review/status service recovery |
+| Publication | Palomar v1 published; revision `9nfa8zoiz8te` independently verified; new registration awaits review/status service recovery. Lean Pool proposal [#644](https://github.com/LeanPool/lean-pool/issues/644) open; acceptance/import pending |
 
 ## Latest progress and domain qualifications
 

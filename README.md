@@ -37,6 +37,12 @@ endpoints repeatedly return HTTP 500, and the private page supplies no review.
 Version 1 remains the confirmed public entry. See
 [registry evidence](verification/registry-publication-check.md).
 
+The project has been proposed for inclusion in Lean Pool through
+[repository proposal #644](https://github.com/LeanPool/lean-pool/issues/644)
+on 2026-10-12. The proposal is open; acceptance and import are pending.
+This repository remains the primary development location. Adaptation to Lean
+Pool's current toolchain and quality gates has not yet been performed.
+
 For mathematical reading, start with [the human reading guide](HUMAN_READABILITY.md).
 It gives ordered routes from definitions through the central lemmas to each
 numbered theorem, explains weak domains and generator graphs, and distinguishes
