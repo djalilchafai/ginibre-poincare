@@ -1,5 +1,36 @@
 # Ginibre Poincaré formalization — current status
 
+## Paper-result Comparator check — 2026-10-17
+
+The fresh independent Theorem 1.1 comparison **passes** con-ron, nanoda and
+Lean's default kernel. The initial restricted-host attempt could not create
+Comparator's network namespace; the approved host execution succeeded with
+Comparator's own sandbox still enabled. This supersedes the earlier local-host
+blocker below, without changing the registry submission or publication status.
+
+The user requested paper results only. The selected-result run uses
+[41 explicit endpoints](verification/paper-comparator-targets.json) for the nine
+numbered theorems, Corollary 1.5, eight numbered lemmas, and exported alternative
+proof routes. Internal helper targets, remarks, open Problems and Appendix C
+are excluded. Dependencies of the selected proofs remain checked.
+The run is an explicitly labelled **library self-comparison**, because only
+Theorem 1.1 has an independently authored Challenge. It adds kernel/axiom
+evidence, not independent paper-statement correspondence. The selected run
+**passes** all three kernels (exit 0), with con-ron accepting 82,312 declarations
+in the selected proof dependency closure. Both single-thread 5,810-job library
+builds pass. The target list does not certify every alternative argument in
+the paper independently. See the [selected-run evidence](verification/comparator-paper-20261017.json),
+[independent-run evidence](verification/comparator-independent-20261017.json)
+and [reusable runner](scripts/verify_paper_comparator.py).
+
+The full-project dashboard below retains its mathematical scope and domain
+qualifications. The latest full `make check` and public/all-local audits remain
+the 2026-10-09 evidence; they have not been rerun here. Source counts refreshed
+with `python3 scripts/count_lean_sources.py` remain 186,672 project Lean lines
+and 1,442,723 lines with 3,813 transitively imported Mathlib modules counted
+once in full; comments and blank lines are included. Independent comparison
+of other paper statements and the existing publication steps remain open.
+
 ## Lean Pool proposal — 2026-10-12
 
 [Repository proposal #644](https://github.com/LeanPool/lean-pool/issues/644)
@@ -71,6 +102,11 @@ See [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md) and
 
 ## Full-project dashboard
 
+Refreshed 2026-10-17. Mathematical scope and domain qualifications retain the
+previous correspondence/audit checkpoint. The fresh Comparator evidence above
+is a separate verification layer; it does not expand the independently stated
+Challenge beyond Theorem 1.1.
+
 | Workstream | Verified scope and domain |
 | --- | --- |
 | Gaussian/Hermite and Ginibre geometry | Explicit measures and normalized Vandermonde isometry/inverse; complete tensor basis, Parseval, lowering, entire division and projection distances |
@@ -90,6 +126,12 @@ See [CORRESPONDENCE_REVIEW.md](CORRESPONDENCE_REVIEW.md) and
 | Publication | Palomar v1 published; revision `9nfa8zoiz8te` independently verified; new registration awaits review/status service recovery. Lean Pool proposal [#644](https://github.com/LeanPool/lean-pool/issues/644) open; acceptance/import pending |
 
 ## Latest progress and domain qualifications
+
+Latest verification progress, 2026-10-17: the selected 41 paper-result/route
+endpoints pass the actual three-kernel Comparator as a self-comparison; the
+separate independently stated Theorem 1.1 comparison also passes. No Lean
+proof or statement changed. Full public/all-local axiom evidence remains the
+2026-10-09 checkpoint below; no new exhaustive correspondence review is claimed.
 
 Agents completed the formerly missing matrix H¹ derivative bridge, unrestricted
 pointwise Γ₂ identity, full ordinary operator/square-root domains, unstopped CIR,

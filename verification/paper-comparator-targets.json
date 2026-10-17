@@ -1,0 +1,173 @@
+{
+  "scope": "Selected paper numbered theorems, corollary, lemmas and exported alternative-proof endpoints; internal helper targets, open Problems, numerical Appendix C and unnumbered remark claims excluded.",
+  "comparison": "Library self-comparison with three kernels. Independent statement comparison remains limited to Theorem 1.1 in comparator.json.",
+  "source_inventory": "REPORT.md; prior correspondence findings remain separate evidence.",
+  "results": [
+    {
+      "paper_result": "Theorem 1.1",
+      "theorem_names": [
+        "GinibrePoincare.ginibre_symmetric_weak_poincare",
+        "GinibrePoincare.ginibreEquality_full_weak_affine_iff"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.2",
+      "theorem_names": [
+        "GinibrePoincare.equilibrium_probability_factorization",
+        "GinibrePoincare.equilibrium_jointLaw",
+        "GinibrePoincare.coordinateSum_ginibre_gaussian",
+        "GinibrePoincare.coordinateSum_recentered_indepFun",
+        "GinibrePoincare.hyperplaneRadius_ginibre_gamma"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.3",
+      "theorem_names": [
+        "GinibrePoincare.ginibreBrownian_full_two_radius_independent_CIR_realization",
+        "GinibrePoincare.correspondence_ginibre_global_independent_CIR_equations"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.4",
+      "theorem_names": [
+        "GinibrePoincare.polynomialEigenfunction_eigenvalue_equation_atSpeed",
+        "GinibrePoincare.polynomialEigenfunction_unique_finite_expansion",
+        "GinibrePoincare.polynomialEigenfunction_equilibrium_orthogonal"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.9",
+      "theorem_names": [
+        "GinibrePoincare.fullTheoremOneNine",
+        "GinibrePoincare.fullTheoremOneNinePointwiseGamma"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.10",
+      "theorem_names": [
+        "GinibrePoincare.fullTheoremOneTen",
+        "GinibrePoincare.fullTheoremOneTenSchwartz"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.12",
+      "theorem_names": [
+        "GinibrePoincare.logSobolevInequality_instance",
+        "GinibrePoincare.radial_sobolev_lsi"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.13",
+      "theorem_names": [
+        "GinibrePoincare.correspondenceMatrix_theorem_1_13"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.14",
+      "theorem_names": [
+        "GinibrePoincare.fullNonQuadraticPotentialTheorem"
+      ]
+    },
+    {
+      "paper_result": "Corollary 1.5",
+      "theorem_names": [
+        "GinibrePoincare.ginibreFullGeneratorAtSpeed_all_positive_n_spectrum_containment"
+      ]
+    },
+    {
+      "paper_result": "Lemma 1.7",
+      "theorem_names": [
+        "GinibrePoincare.ginibre_pointwise_bakry_emery_curvature_unbounded_below"
+      ]
+    },
+    {
+      "paper_result": "Lemma 2.1",
+      "theorem_names": [
+        "GinibrePoincare.groundStateEnergyIdentity"
+      ]
+    },
+    {
+      "paper_result": "Lemma 2.2",
+      "theorem_names": [
+        "GinibrePoincare.gaussianDbarEstimateStatement"
+      ]
+    },
+    {
+      "paper_result": "Lemma 2.6",
+      "theorem_names": [
+        "GinibrePoincare.entire_alternating_vandermonde_factorization"
+      ]
+    },
+    {
+      "paper_result": "Lemma 2.7",
+      "theorem_names": [
+        "GinibrePoincare.ginibreDivisibleEntire_real_centered_geometry",
+        "GinibrePoincare.ginibreDivisibleEntire_two_projection_bound"
+      ]
+    },
+    {
+      "paper_result": "Lemma A.1",
+      "theorem_names": [
+        "GinibrePoincare.ginibre_weak_gradient_unique",
+        "GinibrePoincare.isClosed_ginibre_weak_gradient_pairs",
+        "GinibrePoincare.ginibreWeakPair_mem_closure_interiorSmooth"
+      ]
+    },
+    {
+      "paper_result": "Lemma A.2",
+      "theorem_names": [
+        "GinibrePoincare.ginibre_gradient_graph_norm_equivalence",
+        "GinibrePoincare.ginibreRealInteriorCore_closure_eq_distributional",
+        "GinibrePoincare.ginibreComplexSmoothCore_closure_equivalence"
+      ]
+    },
+    {
+      "paper_result": "Lemma A.3",
+      "theorem_names": [
+        "GinibrePoincare.ginibreCollisionSet_capacity_zero"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.1 original analytic route",
+      "theorem_names": [
+        "GinibrePoincare.fullMainAnalyticProof"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.1 spectral route",
+      "theorem_names": [
+        "GinibrePoincare.spectral_ginibre_symmetric_weak_poincare"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.1 Slater route",
+      "theorem_names": [
+        "GinibrePoincare.slater_ginibre_symmetric_weak_poincare"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.10 Bochner-Kodaira route",
+      "theorem_names": [
+        "GinibrePoincare.bochnerKodairaTheoremOneTen"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.13 Gaussian matrix Poincare route",
+      "theorem_names": [
+        "GinibrePoincare.matrixSpectralLift_finite_overlap_gaussian_poincare"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.14 Bakry-Emery route",
+      "theorem_names": [
+        "GinibrePoincare.bakryEmery_potential_smooth_radial_lsi"
+      ]
+    },
+    {
+      "paper_result": "Theorem 1.14 quantile transport route",
+      "theorem_names": [
+        "GinibrePoincare.rhoConvex_potential_smooth_radial_lsi"
+      ]
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 # Ginibre Poincaré formalization report
 
-Updated on 2026-10-09 with the human readability revision; mathematical
-correspondence findings below remain the 2026-10-08 review.
+Verification evidence updated on 2026-10-17 with the selected paper-result
+Comparator run. The human readability revision is dated 2026-10-09;
+mathematical correspondence findings below remain the 2026-10-08 review.
 
 Paper authority: Djalil Chafaï, *An optimal Poincaré inequality for the complex
 Ginibre log-gas*, [arXiv:2608.19358v2](https://arxiv.org/html/2608.19358v2).
@@ -19,6 +20,26 @@ and [STATUS.md](STATUS.md) for precise verification evidence.
 Problems 1.11, 1.15 and 1.16 remain open research questions; Appendix C numerical
 experiments are outside theorem certification. No overall completion percentage
 is assigned.
+
+## Selected paper-result Comparator check — 2026-10-17
+
+Actual Comparator passes con-ron, nanoda and Lean's default kernel for
+[41 selected endpoints](verification/paper-comparator-targets.json) covering the
+nine numbered theorems, Corollary 1.5, eight numbered lemmas and exported
+alternative-proof endpoints. Internal helper targets and unnumbered remarks
+are excluded; dependencies of the selected proofs are checked. Con-ron accepts
+82,312 declarations in that closure. Both single-thread library builds pass
+5,810 jobs. See the [run evidence](verification/comparator-paper-20261017.json).
+
+This run uses the same library on both sides: it is a mechanical
+**self-comparison**, not an independent restatement of the paper or an exhaustive
+proof-route correspondence review. The separately rerun independent Challenge
+comparison for Theorem 1.1 and affine equality also passes all three kernels;
+see its [evidence](verification/comparator-independent-20261017.json).
+Independent Challenge counterparts for the remaining paper statements are
+still absent. No proof, statement, toolchain, dependency or registry record was
+changed by these runs. The existing result-specific route qualifications below
+remain applicable.
 
 ## Human readability revision
 

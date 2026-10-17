@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-17",
+  "source_commit": "f050de0cab03ecbf6ac6649024374f61348c6205",
+  "project_lean_source_sha256": "a7cde0ee7c5e99ecd2b277c23509a3aa561b3204fb72c11b2fcf4f239f63c026",
+  "source_digest_recipe": "All project .lean paths (roots, GinibrePoincare/**, scripts/**), sorted by POSIX relative path; path bytes, NUL, file bytes, NUL. Mathlib excluded.",
+  "command": "python3 scripts/verify_paper_comparator.py",
+  "comparison": "Library self-comparison; both challenge_module and solution_module are GinibrePoincare. No new independent paper-statement or exhaustive proof-route correspondence claim.",
+  "scope": "Selected paper numbered theorems, corollary, lemmas and exported alternative-proof endpoints; internal helper targets, open Problems, numerical Appendix C and unnumbered remark claims excluded.",
+  "manifest": "verification/paper-comparator-targets.json",
+  "manifest_sha256": "e0d71f6a7351601ac65341023bd6b17bbce6362ac3520912a05176f8c1af5b3f",
+  "target_theorems": 41,
+  "result_route_groups": 25,
+  "exit_code": 0,
+  "kernels": {
+    "con-ron": "passed",
+    "nanoda": "passed",
+    "Lean default": "passed"
+  },
+  "con_ron_declarations": 82312,
+  "library_build_jobs": 5810,
+  "LEAN_NUM_THREADS": "1",
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "sandbox": "Comparator sandbox enabled; approved outer-host execution after restricted execution failed to create NETLINK_ROUTE socket.",
+  "challenge_export_sha256": "4921e9904b83ceaa3f583726424178e35c917ef40870a24c87fc87395038798f",
+  "solution_export_sha256": "4921e9904b83ceaa3f583726424178e35c917ef40870a24c87fc87395038798f",
+  "export_bytes_each": 780200751,
+  "export_ndjson_records_each": 14417509,
+  "full_log_path": "/tmp/ginibre-paper-comparator-20261017-escalated.log",
+  "full_log_sha256": "14207e99754b8a340b6efe70d71aee6fa48f3e190b1d068106b33203c8ad90a1",
+  "publication": "No submission or registration performed; existing evidence preserved."
+}

@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-17",
+  "source_commit": "f050de0cab03ecbf6ac6649024374f61348c6205",
+  "project_lean_source_sha256": "a7cde0ee7c5e99ecd2b277c23509a3aa561b3204fb72c11b2fcf4f239f63c026",
+  "source_digest_recipe": "All project .lean paths (roots, GinibrePoincare/**, scripts/**), sorted by POSIX relative path; path bytes, NUL, file bytes, NUL. Mathlib excluded.",
+  "command": "python3 scripts/verify_palomar.py",
+  "scope": "Independent Challenge/Solution comparison of full symmetric weak-H1 Theorem 1.1 and affine equality only",
+  "exit_code": 0,
+  "kernels": {
+    "con-ron": "passed",
+    "nanoda": "passed",
+    "Lean default": "passed"
+  },
+  "con_ron_declarations": 61907,
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "sandbox": "Comparator sandbox enabled; approved outer-host execution after restricted execution failed to create NETLINK_ROUTE socket.",
+  "full_log_path": "/tmp/ginibre-comparator-20261017-escalated.log",
+  "full_log_sha256": "44e2f3a05c47e1bfe8047973f3df59b6f9801c910e7eba510850539d69fbbfa4",
+  "publication": "No submission or registration performed; existing evidence preserved."
+}
