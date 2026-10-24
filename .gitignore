@@ -4,13 +4,16 @@
 
 # Development logs remain local; retain current verification evidence.
 *.log
+*.log.gz
 !ginibre-status-refresh-check.log
+!ginibre-status-refresh-check.log.gz
 !ginibre-status-refresh-compatibility.log
 !ginibre-status-refresh-drafts.log
 __pycache__/
 
 # Evidence for the final supported-toolchain snapshot.
 !ginibre-upgrade-verified-check.log
+!ginibre-upgrade-verified-check.log.gz
 !ginibre-upgrade-comparator.log
 !ginibre-upgrade-preflight.log
 !ginibre-upgrade-compatibility.log
