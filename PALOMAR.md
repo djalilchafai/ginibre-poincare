@@ -106,8 +106,8 @@ historical evidence, superseded for the current proof library by the 5,814-job
 checkpoint in [STATUS.md](STATUS.md). Both public/private axiom audits and root
 compatibility checks pass; offline preflight reports zero blockers and the
 metadata validates against the official v0.4 schema. Actual Comparator succeeds
-with con-ron, nanoda and Lean’s default kernel. See the committed
-[Comparator evidence](ginibre-upgrade-comparator.log) and [full check evidence](ginibre-upgrade-verified-check.log).
+with con-ron, nanoda and Lean’s default kernel. See the tagged
+[Comparator evidence](https://github.com/djalilchafai/ginibre-poincare/blob/palomar-v1/ginibre-upgrade-comparator.log) and [full check evidence](https://github.com/djalilchafai/ginibre-poincare/blob/palomar-v1/ginibre-upgrade-verified-check.log).
 
 `definition_names` is intentionally empty: no concrete definition is treated as
 a definition hole. The theorem explicitly spells out the ordinary distributional
