@@ -12,6 +12,10 @@ on:
       - 'LICENSE'
       - 'docs/**'
       - 'verification/**'
+      - 'GinibrePoincare/**'
+      - 'GinibrePoincare.lean'
+      - 'AxiomAudit.lean'
+      - 'scripts/build_html.py'
       - '.github/workflows/dependency-pages.yml'
   workflow_dispatch:
 
@@ -33,6 +37,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build documentation
+        run: |
+          sudo apt-get install -y pandoc
+          pip install 'pygments>=2.18'
+          python scripts/build_html.py
       - name: Assemble static website
         run: |
           mkdir -p _site/diagrams
@@ -43,6 +55,7 @@ jobs:
           cp *.md _site/
           cp -r docs verification _site/
           cp *.json formalization.yaml LICENSE _site/
+          cp documentation.html _site/
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
